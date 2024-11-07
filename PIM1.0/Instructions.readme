@@ -8,6 +8,7 @@ the configuration is located in the customdata.
 
 new in update 1.1a:
 
+ - add Prototech Components Support (Contact Update 1.205)
  - rewrite of the refinery control, for the IndustrialOverhaul Mod
  - refining overview on LCDs is possible, name of the LCDs must contain '(sms,refining)'.
  - autocraftingconfig now via LCD Display, place a LCD and add '(sms,autocrafting)' to the name.
