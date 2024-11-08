@@ -29,7 +29,7 @@ namespace IngameScript
         bool firstRun = true;
         static Dictionary<string, float> inventar = new Dictionary<string, float>();
         static bool changeAutoCraftingSettings = true;
-        static List<storageInventory> storageinvs = new List<storageInventory>();
+        static List<StorageInventory> storageinvs = new List<StorageInventory>();
         List<IMyRefinery> raff = new List<IMyRefinery>();
         List<IMyAssembler> ass = new List<IMyAssembler>();
         static List<Assembler> AssemblerList = new List<Assembler>();
@@ -303,7 +303,7 @@ namespace IngameScript
             }
         }
         static AmmoDefs getAmmoDefs(string name) { if (!ammoDefs.ContainsKey(name)) ammoDefs.Add(name, new AmmoDefs(name)); return ammoDefs[name]; }
-        abstract class storageInventory
+        abstract class StorageInventory
         {
             public IMyInventory inv = null;
             public Dictionary<string, float> items = new Dictionary<string, float>();
@@ -855,13 +855,27 @@ namespace IngameScript
             }
             return DebugText;
         }
+
+        string Debug_Guns()
+        {
+            var DebugText = "Guns\n";
+            foreach (var gun in guns)
+            {
+                DebugText += " * " + gun.gun.CustomName + " / " + gun.CurrentAmmo + "\n";
+                foreach (var item in gun.ammomax)
+                {
+                    DebugText += "   - " + item.Key + " / " + item.Value + "\n";
+                }
+            }
+            return DebugText;
+        }
         void debug()
         {
             var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
             if (panel == null) return;
             if (panel.CubeGrid != Me.CubeGrid) return;
             var s = "";
-            s += Debug_InventoryManagerList();
+            s += Debug_Guns();
             panel.WriteText(s + "\n" + debugString);
             debugString = "";
         }
@@ -1836,7 +1850,7 @@ namespace IngameScript
             }
             return false;
         }
-        class StorageCargo : storageInventory
+        class StorageCargo : StorageInventory
         {
             public IMyCargoContainer container = null;
             string oldCustomdata = "";
@@ -1902,12 +1916,12 @@ namespace IngameScript
                 storageinvs.Remove(this);
             }
         }
-        class Gun : storageInventory
+        class Gun : StorageInventory
         {
             public IMyUserControllableGun gun = null;
-            public string CurrentAmmo = "";
             public string gunType = "";
-            List<AmmoDefs> ammoTypesDefinition = new List<AmmoDefs>();
+            public string CurrentAmmo = "";
+            public List<AmmoDefs> ammoTypesDefinition = new List<AmmoDefs>();
             public Dictionary<string, int> ammomax = new Dictionary<string, int>();
             public Gun(IMyUserControllableGun g)
             {
@@ -1961,19 +1975,21 @@ namespace IngameScript
                 AddToInventory(inv);
                 var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
                 if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor)) gun.ApplyAction(X_UseConveyor);
-                CurrentAmmo = GetAmmoPrio();
+                CurrentAmmo = GetCurrentAmmo();
             }
-            string GetAmmoPrio()
+            string GetCurrentAmmo()
             {
+                if (ammomax.Count == 0) return "";
+                else if (ammomax.Count == 1) return ammomax.Keys.First();
                 var currentAmmunition = "";
-                var currentAmmunitionValue = 0;
+                var currentAmmunitionPrio = 0;
                 foreach (var a in ammomax)
                 {
                     var prio = getAmmoDefs(a.Key).GetAmmoPriority(gunType);
-                    if (prio > currentAmmunitionValue && inventar.ContainsKey(a.Key) && inventar[a.Key] > 0)
+                    if (prio > currentAmmunitionPrio && inventar.ContainsKey(a.Key) && inventar[a.Key] > 0)
                     {
                         currentAmmunition = a.Key;
-                        currentAmmunitionValue = prio;
+                        currentAmmunitionPrio = prio;
                     }
                 }
                 return currentAmmunition;

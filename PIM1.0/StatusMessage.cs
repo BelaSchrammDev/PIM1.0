@@ -29,6 +29,7 @@ namespace IngameScript
                 type = itype;
                 SecondsToLive = sec;
             }
+            public void SetSecondsToLive(int sec) { SecondsToLive = sec; }
             public virtual StringBuilderExtended GetInfoText() { return InfoString; }
             public bool IsOver() { if (SecondsToLive == -1) return false; if ((DateTime.Now - burn).TotalSeconds > SecondsToLive) return true; return false; }
             public void SetOver() { SecondsToLive = 0; }
@@ -44,21 +45,26 @@ namespace IngameScript
         class Warning : View
         {
             public enum ID { NONE, CARGOUSEHEAVY, CARGOUSEFULL, CARGOMISSING, CARGORECOMMENDED, REFINERYNOTSUPPORTED }
-            public ID w_ID = ID.NONE;
+            public ID WarningID = ID.NONE;
             public string subType = "";
-
 
             public Warning(ID warn_ID, string isubtype = "") : base(ViewType.WARNING)
             {
-                w_ID = warn_ID;
+                WarningID = warn_ID;
                 subType = isubtype;
                 SetInfoString(isubtype);
+            }
+
+            public override StringBuilderExtended GetInfoText()
+            {
+                if (IsOver()) return null;
+                return InfoString;
             }
 
 
             void SetInfoString(string subType)
             {
-                switch (w_ID)
+                switch (WarningID)
                 {
                     case ID.REFINERYNOTSUPPORTED:
                         InfoString.SetText("! refinery '", subType, "' not supported.");
@@ -69,11 +75,11 @@ namespace IngameScript
                     case ID.CARGOMISSING:
                         InfoString.SetText("!! please define cargo for ", subType, ". name container like ...(sms,", subType.ToLower(), ")");
                         break;
-                    case ID.CARGOUSEHEAVY:
-                        InfoString.SetText("!!! cargo with ", subType, " is heavy.");
-                        break;
                     case ID.CARGOUSEFULL:
                         InfoString.SetText("!!!! cargo with ", subType, " is full !!!!!");
+                        break;
+                    case ID.CARGOUSEHEAVY:
+                        InfoString.SetText("!!! cargo with ", subType, " is heavy.");
                         break;
                 }
             }
@@ -153,7 +159,7 @@ namespace IngameScript
             {
                 if (!(v is Warning)) continue;
                 var w = v as Warning;
-                if ((w.w_ID == warnID) && w.subType == subtype) return w;
+                if ((w.WarningID == warnID) && w.subType == subtype) return w;
             }
             return null;
         }
