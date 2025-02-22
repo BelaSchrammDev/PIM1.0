@@ -235,6 +235,63 @@ namespace IngameScript
                 A("Position0140_LargeRailgunAmmo");
             }
 
+            curmod = M_SigmaDraconisCore;
+            // TradeGoods
+            C("Composting", "Compost");
+            C("CrateofTomatoes", "CrateTomato");
+            C("BottleWater", "DrinkingWater");
+            C("ToSmallArms", "SmallArms");
+            C("ToHeavyArms", "HeavyArms");
+            C("ToTools", "ToolPack");
+            C("ToAmmo", "AmmoCache");
+            C("ToMedicalCache", "MedicalCache");
+            C("ToRepairCache", "RepairCache");
+            // NPTradeGoods
+            C("toMachinePart", "UpgradedBelterComponent");
+            C("toUpgradedBelterComp", "UpgradedBelterComponent");
+            C("toOPAExpComponent", "OPAExpComponent");
+            C("IcetoNPTradeGoods", "IceBox");
+            C("RawMaterialsCraft", "RawMaterials");
+            C("RawMaterialsUse", "InnerComponent");
+            C("ComponentCreationTycho", "TychoComponent");
+            C("ComponentCreationCeres", "CeresComponent");
+            C("ComponentCreationVesta", "VestaComponent");
+            C("ComponentCreationMedina", "MedinaComponent");
+            C("PassengerCreationTycho", "CeresPassenger");
+            C("PassengerCreationCeres", "TychoPassenger");
+            C("PassengerCreationVesta", "CeresPassenger");
+            C("PassengerCreationGanymede", "CeresPassenger");
+            C("PassengerCreationMedina", "CeresPassenger");
+            C("SurviviorConsume", "CeresPassenger");
+            C("WelWalaConsume", "CeresPassenger");
+            C("toInnerComp", "InnerComponent");
+            C("toMCRNComponent", "MCRNComponent");
+            C("toMCRNAdvComponent", "MCRNAdvComponent");
+            C("toMCRNExpComponent", "MCRNExpComponent");
+            C("toUNNComponent", "UNNComponent");
+            C("toUNNAdvComponent", "UNNAdvComponent");
+            C("toUNNExpComponent", "UNNExpComponent");
+            // AdminComponents
+            C("ToLithiumPowerCell", "LithiumCell");
+            C("toResearchInnerUNN", "Research");
+            C("toResearchInnerMCRN", "Research");
+            C("toResearchBelter", "Research");
+            // NPFuelGoods
+            C("Fuel_Processing", "Fuel_Tank");
+            // BulkPackaging
+            C("BulkTungsten", "BulkTungstenCrate");
+            C("BulkCopper", "BulkCopperCrate");
+            C("BulkLead", "BulkLeadCrate");
+            C("BulkTitanium", "BulkTitaniumCrate");
+            C("BulkIron", "BulkIronCrate");
+            C("BulkNickel", "BulkNickelCrate");
+            C("BulkCobalt", "BulkCobaltCrate");
+            C("BulkMagnesium", "BulkMagnesiumCrate");
+            C("BulkSilicon", "BulkSiliconCrate");
+            C("BulkSilver", "BulkSilverCrate");
+            C("BulkGold", "BulkGoldCrate");
+            C("BulkUranium", "BulkUraniumCrate");
+
 
             /* DailyNeedsSurvivalMod */
             curmod = M_DailyNeedsSurvival;

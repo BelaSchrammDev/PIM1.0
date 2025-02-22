@@ -110,6 +110,23 @@ namespace IngameScript
             AddRefineryBlueprintOreToIngot("Silicon");
             AddRefineryBlueprintOreToIngot("Uranium");
 
+            if (usedMods[M_SigmaDraconisCore])
+            {
+                // Ingots
+                AddRefineryBlueprint("TungstenToIngot", "Ore Tungsten", "Ingot TungstenIngot");
+                AddRefineryBlueprint("CopperToIngot", "Ore Copper", "Ingot CopperIngot");
+                AddRefineryBlueprint("LeadToIngot", "Ore Lead", "Ingot LeadIngot");
+                AddRefineryBlueprint("TitaniumToIngot", "Ore Titanium", "Ingot TitaniumIngot");
+                AddRefineryBlueprint("GraphiteOreToIngot", "Ore Graphite", "Ingot Carbon");
+                // AdminIngots
+                AddRefineryBlueprint("LithiumToIngot", "Ore Lithium", "Ingot LithiumIngot");
+                // CommonMetals
+                AddRefineryBlueprint("TungstenToIngot", "Ore Tungsten", "Ingot TungstenIngot");
+                AddRefineryBlueprint("CopperToIngot", "Ore Copper", "Ingot CopperIngot");
+                AddRefineryBlueprint("LeadToIngot", "Ore Lead", "Ingot LeadIngot");
+                AddRefineryBlueprint("GraphiteOreToIngot", "Ore Graphite", "Ingot Carbon");
+            }
+
             if (usedMods[M_DeuteriumReactor])
             {
                 AddRefineryBlueprint("StonetoDeuterium", Ore.Stone, Ingot.DeuteriumContainer);

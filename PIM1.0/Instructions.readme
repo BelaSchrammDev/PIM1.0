@@ -1,27 +1,12 @@
-﻿Production Inventory Manager v1.1a
-c BelaOkuma 2017-2024
+﻿Production Inventory Manager v1.1b
+c BelaOkuma 2017-2025
 only compatible with SMS v1.4!
 
 ### developed with MDK2 ###
 
 the configuration is located in the customdata.
 
-new in update 1.1a:
+new in update 1.1b:
 
- - add Prototech Components Support (Contact Update 1.205)
- - rewrite of the refinery control, for the IndustrialOverhaul Mod
- - refining overview on LCDs is possible, name of the LCDs must contain '(sms,refining)'.
- - autocraftingconfig now via LCD Display, place a LCD and add '(sms,autocrafting)' to the name.
-     follow the instructions, multiple autocrafting lcds are possible
- - ammoprioconfig of multiammoguns now via LCD, place a LCD and add '(sms,ammoprio)' to the name.
- - configuration of the orepriority for all refinerytypes now via a LCD,
-     name of the LCD must contain '(sms,oreprio)', multiple orepriority lcds are possible.
  - add Modsupport
-     Eat, Drink, Sleep and Repeat Mod
-     Plant and Cook Mod
-     Aryx Epstein Drive Mod
-     NorthWind Weapons Mod
-     HSR Mod
- - updated Modsupport
-     Industrial Overhaul Mod
-
+	Sigma Draconis Core Mod
