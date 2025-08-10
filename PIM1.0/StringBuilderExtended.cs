@@ -9,6 +9,15 @@ namespace IngameScript
             private StringBuilder sb;
             public StringBuilderExtended(int size) { sb = new StringBuilder(size); }
             public StringBuilder GetSB() { return sb; }
+            public bool Equal(string s)
+            {
+                if (s.Length != sb.Length) return false;
+                for (int i = 0; i < sb.Length; i++)
+                {
+                    if (sb[i] != s[i]) return false;
+                }
+                return true;
+            }
             public override string ToString() { return sb.ToString(); }
             public void Trim()
             {
@@ -41,10 +50,14 @@ namespace IngameScript
                 for (int i = startindex; i <= endindex; i++) targetSB.Append(sb[i]);
             }
             public bool IsEmpty() { return sb.Length == 0; }
+            public void Insert(int index, string text) { sb.Insert(index, text); }
             public void Append(string text) { sb.Append(text); }
+            public void Append(StringBuilderExtended text) { sb.Append(text.sb); }
             public void Append(char c) { sb.Append(c); }
             public void AppendLF(string text) { Append(text + "\n"); }
+            public void AppendLF(StringBuilderExtended text) { AppendLF(text.ToString()); }
             public void AppendLFifNotEmpty(string text) { if (text.Length > 0) AppendLF(text); }
+            public void AppendLFifNotEmpty(StringBuilderExtended text) { if (text.sb.Length > 0) AppendLF(text.ToString()); }
             public void Clear() { sb.Clear(); }
             public void SetText(string text) { Clear(); Append(text); }
             public void SetText(char c) { Clear(); Append(c); }
