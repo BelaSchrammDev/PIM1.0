@@ -67,19 +67,19 @@ namespace IngameScript
                 switch (WarningID)
                 {
                     case ID.REFINERYNOTSUPPORTED:
-                        InfoString.SetText($"! refinery '{subType}' not supported.");
+                        InfoString.SetText("! refinery '", subType, "' not supported.");
                         break;
                     case ID.CARGORECOMMENDED:
-                        InfoString.SetText($"   - {subType} found. you can define cargo for it with ...(sms,{subType.ToLower()})");
+                        InfoString.SetText("   - ", subType, " found. you can define cargo for it with ...(sms,", subType.ToLower(), ")");
                         break;
                     case ID.CARGOMISSING:
-                        InfoString.SetText($"!! please define cargo for {subType}. name container like ...(sms,{subType.ToLower()})");
+                        InfoString.SetText("!! please define cargo for ", subType, ". name container like ...(sms,", subType.ToLower(), ")");
                         break;
                     case ID.CARGOUSEFULL:
-                        InfoString.SetText($"! refinery '{subType}' not supported.");
+                        InfoString.SetText("!!!! cargo with ", subType, " is full !!!!!");
                         break;
                     case ID.CARGOUSEHEAVY:
-                        InfoString.SetText($"! refinery '{subType}' not supported.");
+                        InfoString.SetText("!!! cargo with ", subType, " is heavy.");
                         break;
                 }
             }
@@ -91,7 +91,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 if (guns.Count == 0) return null;
-                InfoString.SetText($"AmmonitionManager: {guns.Count.ToString()} weapons.");
+                InfoString.SetText("AmmonitionManager: ", guns.Count.ToString(), " weapons.");
                 return InfoString;
             }
         }
@@ -102,7 +102,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 if (storageCargos.Count == 0) return null;
-                InfoString.SetText($"AmmonitionManager: {storageCargos.Count.ToString()} weapons.");
+                InfoString.SetText("StorageManager: ", storageCargos.Count.ToString(), " containers.");
                 return InfoString;
             }
         }
