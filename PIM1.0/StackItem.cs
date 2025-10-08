@@ -10,6 +10,19 @@ namespace IngameScript
 {
     partial class Program
     {
+        void new_stackcount(IMyInventory quelle, string ti)
+        {
+            var von = new List<MyInventoryItem>();
+            quelle.GetItems(von);
+            foreach (var i in von)
+            {
+                if (i.Type.TypeId.Contains(ti) && !InventoryManagerList.ContainsKey(GetPIMItemID(i.Type)))
+                {
+                    GetStackItem(i.Type).AddStack(quelle, i.Amount);
+                }
+            }
+        }
+
         StackItem GetStackItem(MyItemType t) { foreach (var s in StackItemList) if (s.type == t) return s; var nt = new StackItem(t); StackItemList.Add(nt); return nt; }
         static string GetPIMItemID(MyItemType type) { return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId; }
 

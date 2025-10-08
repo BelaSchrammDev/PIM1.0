@@ -1,5 +1,4 @@
-﻿using Sandbox.Game.Gui;
-using Sandbox.ModAPI.Ingame;
+﻿using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
@@ -185,7 +184,7 @@ namespace IngameScript
                 var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
                 if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor))
                 {
-                    TerminalActionExtensions.ApplyAction(gun, X_UseConveyor);
+                    gun.ApplyAction(X_UseConveyor);
                 }
 
                 CurrentAmmo = GetCurrentAmmo();
@@ -224,7 +223,7 @@ namespace IngameScript
                 var p = gun.GetProperty(X_UseConveyor);
                 if (p != null && !gun.GetValue<bool>(X_UseConveyor))
                 {
-                    TerminalActionExtensions.ApplyAction(gun, X_UseConveyor);
+                    gun.ApplyAction(X_UseConveyor);
                 }
             }
         }

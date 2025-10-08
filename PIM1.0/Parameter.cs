@@ -1,9 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IngameScript
 {
     partial class Program
     {
+        static string ToArgStr(string qstr)
+        {
+            var zstr = "";
+            var tc = true;
+            foreach (var ctr in qstr)
+            {
+                if (tc)
+                {
+                    tc = false;
+                    zstr += Char.ToUpper(ctr);
+                    continue;
+                }
+                if (ctr == ' ' | ctr == ',' | ctr == '-' | ctr == '_' | ctr == '&' | ctr == ':')
+                {
+                    tc = true;
+                    zstr += ctr;
+                    continue;
+                }
+                zstr += Char.ToLower(ctr);
+            }
+            return zstr;
+        }
+
         public class Parameter
         {
             public Dictionary<string, string> ParameterList = new Dictionary<string, string>();

@@ -13,7 +13,7 @@ namespace IngameScript
             DateTime ls = DateTime.Now;
             int sec;
             public StopWatch(int isec = 5) { sec = isec; }
-            public bool IfTimeSpanReady(bool rs = true)
+            public bool IfDone(bool rs = true)
             {
                 if (sec == 0) return false;
                 if ((DateTime.Now - ls).TotalSeconds > sec)

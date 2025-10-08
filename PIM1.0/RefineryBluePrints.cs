@@ -9,6 +9,47 @@ namespace IngameScript
 {
     partial class Program
     {
+        static Dictionary<string, string> ResourcesNameCastList = new Dictionary<string, string>
+            {
+                { Ore.Stone, Resources.RStone },
+                { Ingot.Magnesium, Ingot.Magnesiumpowder },
+                { Ingot.Stone, "Gravel" },
+                { Ingot.DeuteriumContainer, Resources.RDeuterium },
+                { Ore.Ice, "Ice"},
+                { Ingot.Carbon, Resources.RCarbon },
+            };
+        static Dictionary<string, string> ResourcesNameCastListIOMod = new Dictionary<string, string>
+            {
+                { Ore.Coal, Resources.RCoal },
+                { Ore.Bauxite, Resources.RBauxite },
+                { Ore.Niter, Resources.RNiter },
+                { Ingot.Lithium, Resources.RLithium + " Paste" },
+                { Ingot.Sulfur, Resources.RSulfur },
+                { Ingot.Niter, Resources.RPotassium + " Nitrate" },
+                { Ore.Magnesium, "Crushed Niter" },
+                { Ingot.Magnesium, Ingot.Gunpowder},
+            };
+
+        static string GetTimeStringFromHours(double h)
+        {
+            if (h < 1)
+            {
+                if ((h * 60) > 1) return Math.Round(h * 60, 0) + " min.";
+                else return Math.Round(h * 60 * 60, 0) + " s";
+            }
+            if (h < 24)
+            {
+                return Math.Round(h, 1) + " h";
+            }
+            double tage = Math.Round(h / 24, 1);
+            if (tage > 365)
+            {
+                return Math.Round(tage / 365, 1) + " years";
+            }
+            if (tage < 1.1) return tage + " day";
+            else return tage + " days";
+        }
+
         // to be removed ---------------------------------------------------------------------------------
         void addPrio(string reftype, RefineryBlueprint type, int prio)
         {
@@ -17,6 +58,15 @@ namespace IngameScript
             {
                 IPrio.GetBlueprintPrio(ingotprio[reftype], type, true).setPrio(prio);
             }
+        }
+
+        static string CastResourceName(string name)
+        {
+            if (usedMods[M_IndustrialOverhaulMod] && ResourcesNameCastListIOMod.ContainsKey(name)) return ResourcesNameCastListIOMod[name];
+            if (ResourcesNameCastList.ContainsKey(name)) return ResourcesNameCastList[name];
+            if (name.StartsWith("Ore Crushed")) return "Crushed " + name.Substring(11);
+            if (name.StartsWith("Ore Purified")) return "Purified " + name.Substring(12);
+            return name;
         }
 
         static Dictionary<string, List<IPrio>> ingotprio = new Dictionary<string, List<IPrio>>();
