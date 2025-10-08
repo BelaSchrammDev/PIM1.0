@@ -17,28 +17,38 @@ namespace IngameScript
             bool IsSurvivalKit = false;
             bool RemoveItemMode = false;
 
-
-
             public Assembler(IMyAssembler a)
             {
                 AssemblerBlock = a;
                 IsSurvivalKit = a.BlockDefinition.TypeIdString == "SurvivalKit";
             }
 
-            public bool BlockRemoved() { return AssemblerBlock.Closed; }
-
+            public bool BlockRemoved()
+            {
+                return AssemblerBlock.Closed;
+            }
 
             public int CompareTo(Assembler other)
             {
-                if (other.BlueprintCount < BlueprintCount) return 1;
-                else if (other.BlueprintCount > BlueprintCount) return -1;
+                if (other.BlueprintCount < BlueprintCount)
+                {
+                    return 1;
+                }
+                else if (other.BlueprintCount > BlueprintCount)
+                {
+                    return -1;
+                }
+
                 return 0;
             }
 
-
             public void AddValidBlueprint(AssemblerBluePrint bluePrint)
             {
-                if (BlockRemoved()) return;
+                if (BlockRemoved())
+                {
+                    return;
+                }
+
                 if (parameter.ControledByPIM() && AssemblerBlock.CanUseBlueprint(bluePrint.definition_id))
                 {
                     bluePrint.o.Add(this);
@@ -48,23 +58,31 @@ namespace IngameScript
                 }
             }
 
-
             public bool AddBlueprintToQueue(AssemblerBluePrint bluePrint)
             {
-                if (BlockRemoved()) return false;
-                if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly) return false;
+                if (BlockRemoved() || AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
+                {
+                    return false;
+                }
+
                 var ret = false;
                 var bpmg = (bluePrint.MaximumItemAmount - bluePrint.CurrentItemAmount - bluePrint.AssemblyAmount);
                 var mg = bpmg / bluePrint.NumBluePrintToAssembler;
+
                 if (bpmg < 100)
                 {
                     mg = bpmg;
                     ret = true;
                 }
+
                 AssemblerBlock.Repeating = false;
+
                 try
                 {
-                    if (bluePrint.valid) AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)mg);
+                    if (bluePrint.valid)
+                    {
+                        AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)mg);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -72,7 +90,6 @@ namespace IngameScript
                 }
                 return ret;
             }
-
 
             public void GetErrorInfo(StringBuilderExtended errString)
             {
@@ -88,12 +105,16 @@ namespace IngameScript
                 }
             }
 
-
             public void Refresh()
             {
-                if (BlockRemoved()) return;
+                if (BlockRemoved())
+                {
+                    return;
+                }
+
                 var proditem_list = new List<MyProductionItem>();
                 var bprint_list = new List<AssemblerBluePrint>();
+
                 if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
                 {
                     var outInventory = AssemblerBlock.GetInventory(1);
@@ -109,25 +130,42 @@ namespace IngameScript
                         }
                     }
                 }
-                else ClearInventory(AssemblerBlock.GetInventory(0));
-                if (!parameter.ParseArgs(AssemblerBlock.CustomName, true)) return;
+                else
+                {
+                    ClearInventory(AssemblerBlock.GetInventory(0));
+                }
+
+                if (!parameter.ParseArgs(AssemblerBlock.CustomName, true))
+                {
+                    return;
+                }
+
                 BlueprintList.Clear();
+
                 BlueprintCount = 0;
+
                 if (AssemblerBlock.IsFunctional)
                 {
                     if (AssemblerBlock.IsQueueEmpty)
                     {
                         if (!IsSurvivalKit)
                         {
-                            if (!assemblers_off || parameter.IsParameter("Nooff")) AssemblerBlock.Enabled = true;
-                            else AssemblerBlock.Enabled = false;
+                            AssemblerBlock.Enabled = !assemblers_off || parameter.IsParameter("Nooff");
                         }
-                        if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly) ClearInventory(AssemblerBlock.GetInventory(1));
-                        else ClearInventory(AssemblerBlock.GetInventory(0));
+
+                        if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
+                        {
+                            ClearInventory(AssemblerBlock.GetInventory(1));
+                        }
+                        else
+                        {
+                            ClearInventory(AssemblerBlock.GetInventory(0));
+                        }
                     }
                     else
                     {
                         AssemblerBlock.Enabled = true;
+
                         if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
                         {
                             if (RemoveItemMode)

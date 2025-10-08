@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.ModAPI.Ingame;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,6 +9,25 @@ namespace IngameScript
 {
     partial class Program
     {
+        static AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
+        {
+            var bprint = GetBluePrintByProductionItem(pi);
+            if (bprint != null) bprint.AssemblyAmount += pi.Amount.ToIntSafe();
+            return bprint;
+        }
+        static AssemblerBluePrint GetBluePrintByItemName(string itemName)
+        {
+            foreach (var b in bprints.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in bprints_pool.Values) if (b.ItemName == itemName) return b;
+            return null;
+        }
+        static AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
+        {
+            foreach (var b in bprints.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in bprints_pool.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            return null;
+        }
+
         void addBluePrint(string typeID, string subtypeID, string itemName, string alternativItemName)
         {
             if (curmod != "Vanilla" && (usedMods.ContainsKey(curmod) ? !usedMods[curmod] : true)) return;
@@ -25,6 +45,7 @@ namespace IngameScript
         void O(string s, string astr = "", string astn = "") { addBluePrint(IG_OBottles, s, astr, astn); }
         void H(string s, string astr = "", string astn = "") { addBluePrint(IG_HBottles, s, astr, astn); }
         void D(string s, string astr = "", string astn = "") { addBluePrint(IG_Datas, s, astr, astn); }
+        void S(string s, string astr = "", string astn = "") { addBluePrint(IG_Seeds, s, astr, astn); }
         void I(string blueprintNmae, string itemName = "", string alternativeItemName = "") { addBluePrint(IG_I, blueprintNmae, itemName, alternativeItemName); }
         void E(string s, string astr = "", string astn = "") { addBluePrint("Ore", s, astr, astn); }
         public class AssemblerBluePrint : IComparable<AssemblerBluePrint>
@@ -74,6 +95,7 @@ namespace IngameScript
             {
                 AutoCraftingType = type;
                 if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = AC_ToolsAndGuns;
+                else if (seed_cast.Contains(ItemName)) AutoCraftingType = "Seeds";
                 else if (food_cast.Contains(ItemName)) AutoCraftingType = IG_Food;
                 else if (subtype == Refinery.BluePrint_SpentFuelReprocessing) AutoCraftingType = Refinery.BluePrint_SpentFuelReprocessing;
                 else if (subtype.Contains("Deuterium")) AutoCraftingType = "Deuterium";
@@ -84,12 +106,14 @@ namespace IngameScript
                 }
                 AutoCraftingName = ItemName.Split(' ')[1];
                 if (AutoCraftingName.StartsWith("Position")) AutoCraftingName = AutoCraftingName.Substring(AutoCraftingName.IndexOf('_') + 1);
-                if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
+                else if (AutoCraftingName.StartsWith("MealPack")) AutoCraftingName = AutoCraftingName.Substring(9);
+                else if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
                 else if (AutoCraftingName.Contains(AutomaticRifleGun_Mag_))
                 {
                     if (AutoCraftingName.StartsWith(AutomaticRifleGun_Mag_)) AutoCraftingName = "AutoRifleGunMagazine";
                     else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(AutomaticRifleGun_Mag_)) + "RifleGunMagazine";
                 }
+                else if (type == IG_Seeds) AutoCraftingName += " Seeds";
                 else if (type == IG_Tools && ModName == M_Vanilla)
                 {
                     string[] Tools = { "HandDrill", "Grinder", "Welder" };
@@ -233,6 +257,32 @@ namespace IngameScript
                 A("Position0120_LargeCalibreAmmo");
                 A("Position0130_SmallRailgunAmmo");
                 A("Position0140_LargeRailgunAmmo");
+                // FoodProcessorRations
+                K("Position0010_CookMammalMeat", "MammalMeatCooked");
+                K("Position0020_CookSpiderMeat", "InsectMeatCooked");
+                K("Position0030_MealPack_KelpCrisp");
+                K("Position0040_MealPack_FruitBar");
+                K("Position0050_MealPack_GardenSlaw");
+                K("Position0060_MealPack_RedPellets");
+                K("Position0070_MealPack_Chili");
+                K("Position0080_MealPack_Flatbread");
+                K("Position0090_MealPack_Ramen");
+                K("Position0100_MealPack_FruitPastry");
+                K("Position0110_MealPack_VeggieBurger");
+                K("Position0120_MealPack_Curry");
+                K("Position0130_MealPack_GreenPellets");
+                K("Position0140_MealPack_Dumplings");
+                K("Position0150_MealPack_Spaghetti");
+                K("Position0160_MealPack_Lasagna");
+                K("Position0170_MealPack_Burrito");
+                K("Position0180_MealPack_FrontierStew");
+                K("Position0190_MealPack_SearedSabiroid");
+                K("Position0200_MealPack_SteakDinner");
+                // FoodProcessorSeeds
+                S("Position0010_Seeds_Fruit", "Fruit");
+                S("Position0020_Seeds_Grain", "Grain");
+                S("Position0030_Seeds_Vegetables", "Vegetables");
+                S("Position0040_Spores_Mushrooms", "Mushrooms");
             }
 
             curmod = M_SigmaDraconisCore;

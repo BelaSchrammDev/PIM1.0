@@ -45,517 +45,14 @@ namespace IngameScript
         static Dictionary<string, AssemblerBluePrint> bprints = new Dictionary<string, AssemblerBluePrint>();
         static Dictionary<string, AssemblerBluePrint> bprints_pool = new Dictionary<string, AssemblerBluePrint>();
         double currentCycleInSec = 0f; int m0 = 1; int m1, m2 = 0; List<string> s0; static IMyGridProgramRuntimeInfo rti; IMyProgrammableBlock master;
-        const string SI1 = "PIM v1.1", SI2 = "a (c) BelaOkuma\n", SMS = "SMS v1.4", X_StorageTag = "(sms,storage)";
+        const string SI1 = "PIM v1.1", SI2 = "c (c) BelaOkuma\n", SMS = "SMS v1.4", X_StorageTag = "(sms,storage)";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_Line = "  / =================================\n", X_UseConveyor = "UseConveyor";
         const string X_Autocrafting_treshold = "Autocrafting_threshold";
         const string M_Vanilla = "Vanilla", M_SigmaDraconisCore = "SigmaDraconisCoreMod", M_HSR = "HSR_Mod", M_NorthWindWeapons = "NorthWindWeaponsMod", M_AryxEpsteinDrive = "AryxEpsteinDriveMod", M_PlantCook = "PlantAndCookMod", M_EatDrinkSleep = "EatDrinkSleepRepeatMod", M_IndustrialOverhaulLLMod = "IndustrialOverhaulLockLoadMod", M_IndustrialOverhaulWaterMod = "IndustrialOverhaulWaterMod", M_IndustrialOverhaulMod = "IndustrialOverhaulMod", M_DailyNeedsSurvival = "DailyNeedsSurvivalMod", M_AzimuthThruster = "AzimuthThrusterMod", M_SG_Gates = "StarGateMod_Gates", M_SG_Ores = "StarGateMod_Ores", M_PaintGun = "PaintGunMod", M_DeuteriumReactor = "DeuteriumReactorMod", M_Shield = "DefenseShieldMod", M_RailGun = "MCRN_RailGunMod", M_HomingWeaponry = "MWI_HomingWeaponryMod";
-        const string AC_ToolsAndGuns = "Tools&Guns", IG_Food = "Food", IG_Component = "Component", IG_I = "Ingot", IG_Ingot = IG_I + " ", IG_Com = IG_Component + " ", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_Cash = "PhysicalObject", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_";
+        const string AC_ToolsAndGuns = "Tools&Guns", IG_Food = "Food", IG_Component = "Component", IG_I = "Ingot", IG_Ingot = IG_I + " ", IG_Com = IG_Component + " ", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_K = IG_Kits + " " , IG_Phys = "PhysicalObject", IG_P = IG_Phys + " ", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_", IG_Seeds = "SeedItem", IG_S = IG_Seeds + " ";
         static Dictionary<string, AmmoDefs> ammoDefs = new Dictionary<string, AmmoDefs>();
         static Dictionary<string, DisplayBox> DisplayBoxList = new Dictionary<string, DisplayBox>();
-        static DisplayBox getDisplayBox(string boxID, float width)
-        {
-            if (!DisplayBoxList.ContainsKey(boxID))
-            {
-                var newDisplayBox = new DisplayBox(width);
-                DisplayBoxList.Add(boxID, newDisplayBox);
-            }
-            return DisplayBoxList[boxID];
-        }
-        static string getDisplayBoxString(string text, float amount, float width)
-        {
-            var amountStr = amount == 0 ? "  " : DisplayBox.GetMassString(amount);
-            return getDisplayBox("@@@" + text, width).Get2StringWithSpaces(text, amountStr);
-        }
-        static string getDisplayBoxString(int amount, float width, bool left = false)
-        {
-            var displaytext = amount == 0 ? "  " : amount.ToString();
-            return getDisplayBox(displaytext + width.ToString(), width).GetStringWithSpaces(displaytext, left);
-        }
-        static string getDisplayBoxString(float amount, float width, bool left = false)
-        {
-            var amountStr = amount == 0 ? "  " : DisplayBox.GetMassString(amount);
-            return getDisplayBox(amountStr + width.ToString(), width).GetStringWithSpaces(amountStr, left);
-        }
-        static string getDisplayBoxStringDisplayNull(int amount, float width, bool left = false)
-        {
-            var displaytext = amount.ToString();
-            return getDisplayBox("###" + displaytext + width.ToString() + left.ToString(), width).GetStringWithSpaces(displaytext, left);
-        }
-        static string getDisplayBoxString(string displaytext, float width, bool left = false)
-        {
-            return getDisplayBox(displaytext + width.ToString() + left.ToString(), width).GetStringWithSpaces(displaytext, left);
-        }
-        class DisplayBox
-        {
-            const char HSS = '\u00AD';
-            static List<SP> SpacePoolList = new List<SP>();
-            static Dictionary<char, float> CharWidthList = new Dictionary<char, float>();
-            class SP
-            {
-                static int SpacePoolLiveCycle = 700;
-                int LiveCycle = 5;
-                public float Width = 0;
-                string FillString = "";
-                public SP(float iw)
-                {
-                    Width = iw;
-                    if (Width < 0.6f) return;
-                    int spnum = (int)(Width / 1.29166f);
-                    int hsnum = (int)((Width - (spnum * 1.29166f)) / 0.287035f);
-                    if (hsnum >= spnum)
-                    {
-                        spnum += 1;
-                        hsnum = 0;
-                    }
-                    else spnum -= hsnum;
-                    FillString += new String(' ', spnum);
-                    FillString += new String(HSS, hsnum);
-                }
-                public string GetFillString()
-                {
-                    LiveCycle = 5;
-                    RefreshSpacePoolList();
-                    return FillString;
-                }
-                static void RefreshSpacePoolList()
-                {
-                    if (--SpacePoolLiveCycle < 1)
-                    {
-                        for (int i = SpacePoolList.Count - 1; i > 0; i--)
-                        {
-                            SP osp = SpacePoolList[i];
-                            if (--osp.LiveCycle < 0) SpacePoolList.Remove(osp);
-                        }
-                        SpacePoolLiveCycle = 500;
-                    }
-                }
-            }
-            string LeftText = "", RightText = "", BoxText = "", SpaceString = "";
-            float Width = 0;
-            public DisplayBox(float iwidth)
-            {
-                Width = iwidth;
-            }
-            public string Get2StringWithSpaces(string arg1, string arg2)
-            {
-                if (arg1 != LeftText || arg2 != RightText)
-                {
-                    var strLength2 = GetStringWidth(arg2);
-                    arg1 = TrimStringByWidth(arg1, Width - 2.6f - strLength2);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(arg1) - strLength2);
-                    LeftText = arg1;
-                    RightText = arg2;
-                }
-                BoxText = LeftText + SpaceString + RightText;
-                return BoxText;
-            }
-            public string GetStringWithSpaces(string arg, bool leftAlignment = false)
-            {
-                if (arg != LeftText)
-                {
-                    arg = TrimStringByWidth(arg, Width - 2.6f);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(arg));
-                    LeftText = arg;
-                }
-                if (leftAlignment) BoxText = LeftText + SpaceString;
-                else BoxText = SpaceString + LeftText;
-                return BoxText;
-            }
-            string TrimStringByWidth(string arg, float cutLength)
-            {
-                var strLength = GetStringWidth(arg);
-                if (strLength > cutLength)
-                {
-                    var charDiff = (int)((strLength - cutLength - 5f) / 1.5f);
-                    if (charDiff > 0 && charDiff < arg.Length - 1)
-                    {
-                        var lastString = arg.Substring(charDiff);
-                        return arg[0] + "..." + lastString;
-                    }
-                }
-                return arg;
-            }
-            static SP fspm(float with) { foreach (SP osp in SpacePoolList) { if (osp.Width == with) return osp; } SP nsp = new SP(with); SpacePoolList.Add(nsp); return nsp; }
-            static string GetSpaceStringByWidth(float with) { return fspm(with).GetFillString(); }
-            static void InitCharWidthList() { SetCharWidth("\n", 0f); SetCharWidth("'|ÎÏ", 1f); SetCharWidth(" !`Iiîïjl", 1.29166f); SetCharWidth("(),.:;[]{}1ft", 1.43076f); SetCharWidth("\"-r", 1.57627f); SetCharWidth("*", 1.72222f); SetCharWidth("\\", 1.86f); SetCharWidth("/", 2.16279f); SetCharWidth("«»Lvx_ƒ", 2.325f); SetCharWidth("?7Jcçz", 2.44736f); SetCharWidth("3FKTaäàâbdeèéêëghknoöôpqsuüùûßyÿ", 2.58333f); SetCharWidth("+<>=^~EÈÉÊË", 2.73529f); SetCharWidth("#0245689CÇXZ", 2.90625f); SetCharWidth("$&GHPUÜÙÛVYŸ", 3f); SetCharWidth("AÄÀÂBDNOÖÔQRS", 3.20689f); SetCharWidth("%", 3.57692f); SetCharWidth("@", 3.72f); SetCharWidth("M", 3.875f); SetCharWidth("æœmw", 4.04347f); SetCharWidth("WÆŒ", 4.65f); CharWidthList.Add(HSS, 1.578695f); }
-            static void SetCharWidth(string s, float z) { foreach (var c in s) CharWidthList.Add(c, z); }
-            static float GetStringWidth(string strData)
-            {
-                if (CharWidthList.Count == 0) InitCharWidthList();
-                float fltTotal = 0;
-                foreach (var c in strData) fltTotal += CharWidthList.ContainsKey(c) ? CharWidthList[c] : 2f;
-                return fltTotal;
-            }
-            public static string GetMassString(double d) { return GetStringFromDoubleWithSuffixMask(d, pM); }
-            public static string GetIntString(double d) { return GetStringFromDoubleWithSuffixMask(d, pD); }
-            static string[]
-                pD = new string[] { " 0.# m ", " 0.#   ", " 0.# k", " 0.# M" },
-                pM = new string[] { " 0.0 g  ", " 0.0 kg", " 0.0 T  ", " 0.0 kT" };
-            static string GetStringFromDoubleWithSuffixMask(double a, string[] p) { if (a > 900000.0f) return (a / 1000000).ToString(p[3]); else if (a > 900.0f) return (a / 1000).ToString(p[2]); else if (a < 1.0f) (a * 1000).ToString(p[0]); return a.ToString(p[1]); }
-        }
-        class AmmoDefs : IComparable<AmmoDefs>
-        {
-            static string CurrentSortGuntype = "";
-            static public void SetCurrentSortGuntype(string type) { CurrentSortGuntype = type; }
-            string Name = "";
-            string PrioDefName = "";
-            public string type = "";
-            Dictionary<string, int> gunAmmoPrio = new Dictionary<string, int>();
-            AssemblerBluePrint ammoBluePrint;
-            public float ratio = 1, maxOfVolume = 0;
-            public List<Gun> guns = new List<Gun>();
-            public int CompareTo(AmmoDefs other)
-            {
-                var prio = GetAmmoPriority(CurrentSortGuntype);
-                var otherprio = other.GetAmmoPriority(CurrentSortGuntype);
-                if (prio == otherprio) return 0;
-                if (otherprio > prio) return 1;
-                return -1;
-            }
-            public AmmoDefs(string iname)
-            {
-                Name = iname;
-                ammoBluePrint = GetBluePrintByItemName(iname);
-                type = Name.Substring(Name.IndexOf(' ') + 1);
-                if (ammoBluePrint == null) PrioDefName = type;
-                else PrioDefName = ammoBluePrint.AutoCraftingName;
-            }
-            public void SetAmmoPriority(string iType, int iPrio)
-            {
-                if (iPrio < 0) iPrio = 0;
-                else if (iPrio > 10) iPrio = 10;
-                if (!gunAmmoPrio.ContainsKey(iType)) gunAmmoPrio.Add(iType, iPrio);
-                else gunAmmoPrio[iType] = iPrio;
-            }
-            public int GetAmmoPriority(string gunType)
-            {
-                if (gunAmmoPrio.ContainsKey(gunType)) return gunAmmoPrio[gunType];
-                else return 0;
-            }
-            public string GetAmmoBluePrintAutocraftingName()
-            {
-                return PrioDefName;
-            }
-            public void CalcAmmoInventoryRatio()
-            {
-                if (inventar.ContainsKey(Name))
-                {
-                    ratio = inventar[Name] / maxOfVolume;
-                    if (ratio > 1) ratio = 1;
-                }
-                else ratio = 1;
-            }
-        }
-        class MultiAmmoGuns
-        {
-            public string DisplayName = "";
-            public string MultiAmmoGuntype = "";
-            List<Gun> MultiAmmoGunList = new List<Gun>();
-            public List<AmmoDefs> ammoDefs = new List<AmmoDefs>();
-            public MultiAmmoGuns(string type, string dName)
-            {
-                MultiAmmoGuntype = type;
-                DisplayName = dName;
-            }
-            public void addAmmoDef(AmmoDefs aDef)
-            {
-                if (!ammoDefs.Contains(aDef))
-                {
-                    ammoDefs.Add(aDef);
-                    aDef.SetAmmoPriority(MultiAmmoGuntype, ammoDefs.Count);
-                }
-            }
-            public void addGun(Gun mGun)
-            {
-                if (!MultiAmmoGunList.Contains(mGun)) MultiAmmoGunList.Add(mGun);
-            }
-            public void removeGun(Gun mGun)
-            {
-                if (MultiAmmoGunList.Contains(mGun)) MultiAmmoGunList.Remove(mGun);
-            }
-            public bool if_GunListEmpty()
-            {
-                return MultiAmmoGunList.Count == 0;
-            }
-            public AmmoDefs GetAmmoDefs(string _type)
-            {
-                return ammoDefs.Find(a => a.type == _type);
-            }
-        }
-        static Dictionary<string, MultiAmmoGuns> multiAmmoGuns = new Dictionary<string, MultiAmmoGuns>();
-        static MultiAmmoGuns getNewMultiAmmoGun(Gun mGun)
-        {
-            if (!multiAmmoGuns.ContainsKey(mGun.gunType))
-            {
-                multiAmmoGuns.Add(mGun.gunType, new MultiAmmoGuns(mGun.gunType, mGun.gun.DefinitionDisplayNameText));
-                multiAmmoGuns[mGun.gunType].addGun(mGun);
-                return multiAmmoGuns[mGun.gunType];
-            }
-            multiAmmoGuns[mGun.gunType].addGun(mGun);
-            return null;
-        }
-        static void clearMultiAmmoGunsList() // ToDo: wird das noch gebraucht oder kann das weg???
-        {
-            var keyList = multiAmmoGuns.Keys.ToArray();
-            for (int i = keyList.Length - 1; i >= 0; i--)
-            {
-                if (multiAmmoGuns[keyList[i]].if_GunListEmpty()) multiAmmoGuns.Remove(keyList[i]);
-            }
-        }
-        static AmmoDefs getAmmoDefs(string name) { if (!ammoDefs.ContainsKey(name)) ammoDefs.Add(name, new AmmoDefs(name)); return ammoDefs[name]; }
-        abstract class StorageInventory
-        {
-            public IMyInventory inv = null;
-            public Dictionary<string, float> items = new Dictionary<string, float>();
-            abstract public bool checkItems();
-            public void reloadItems()
-            {
-                if (!checkItems()) return;
-                var invList = new List<MyInventoryItem>();
-                var succlist = new List<string>();
-                var einleiten = new Dictionary<string, float>();
-                inv.GetItems(invList);
-                for (int i = invList.Count - 1; i >= 0; i--)
-                {
-                    var iList = new List<MyInventoryItem>();
-                    inv.GetItems(iList, v => v.Type == invList[i].Type);
-                    if (iList.Count > 1)
-                    {
-                        inv.TransferItemTo(inv, iList[iList.Count - 1]);
-                    }
-                }
-                invList.Clear();
-                inv.GetItems(invList);
-                for (int i = invList.Count - 1; i >= 0; i--)
-                {
-                    var iItem = invList[i];
-                    var iType = GetPIMItemID(iItem.Type);
-                    if (!items.ContainsKey(iType)) clearItemByType(inv, iType, iItem);
-                    else
-                    {
-                        var adiff = items[iType] - (float)iItem.Amount;
-                        if (adiff < 0)
-                        {
-                            clearItemByType(inv, iType, iItem, Math.Abs(adiff));
-                            succlist.Add(iType);
-                        }
-                        else if (adiff == 0) succlist.Add(iType);
-                        else einleiten.Add(iType, adiff);
-                    }
-                }
-                foreach (var i in items.Keys)
-                {
-                    if (succlist.Contains(i)) continue;
-                    SendItemByType(i, (einleiten.ContainsKey(i) ? einleiten[i] : items[i]), inv);
-                }
-            }
-        }
-        static AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
-        {
-            var bprint = GetBluePrintByProductionItem(pi);
-            if (bprint != null) bprint.AssemblyAmount += pi.Amount.ToIntSafe();
-            return bprint;
-        }
-        StackItem GetStackItem(MyItemType t) { foreach (var s in StackItemList) if (s.type == t) return s; var nt = new StackItem(t); StackItemList.Add(nt); return nt; }
-        static string GetPIMItemID(MyItemType type) { return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId; }
-        static AssemblerBluePrint GetBluePrintByItemName(string itemName)
-        {
-            foreach (var b in bprints.Values) if (b.ItemName == itemName) return b;
-            foreach (var b in bprints_pool.Values) if (b.ItemName == itemName) return b;
-            return null;
-        }
-        static AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
-        {
-            foreach (var b in bprints.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
-            foreach (var b in bprints_pool.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
-            return null;
-        }
-        class CargoUse
-        {
-            public string type = "";
-            public double Current = 0, Maximum = 0;
-            public CargoUse(string s) { type = s; }
-            public void AddCurrentAndMaxCargocapacity(double c, double m) { Current += c; Maximum += m; }
-            public int GetCarcocapacityUseRatio() { return (int)(Current * 100 / Maximum); }
-        }
-        class StackItem : IComparable<StackItem>
-        {
-            public enum StackingType { Stack, Volume, VolumeBack, }
-            static public StackingType CurrentStackingType = StackingType.Stack;
-            public enum StackingSort { Stack, Amount, AmountBack, Delta, ItemsBack, VolumeFree, VolumeFreeBack, }
-            static public StackingSort CurrentStackingSorttype = StackingSort.Stack;
-            static IMyInventory big = null;
-            static IMyInventory free = null;
-            static public void ClearStackInventory() { big = null; free = null; }
-            static public void CalculateFreeInventory(IMyInventory inv) { if (big == null || (big.MaxVolume < inv.MaxVolume)) big = inv; if (free == null || (free.MaxVolume - free.CurrentVolume < inv.MaxVolume - inv.CurrentVolume)) free = inv; }
-            class Stack : IComparable<Stack>
-            {
-                public int items = 0;
-                public float amount = 0;
-                public float volume_free = 0;
-                public IMyInventory inv = null;
-                public Stack(IMyInventory i, MyFixedPoint a) { amount = (float)a; inv = i; refresh(); }
-                public void refresh() { items = inv.ItemCount; volume_free = (float)(inv.MaxVolume - inv.CurrentVolume); }
-                public float GetMaxVolume() { return (float)inv.MaxVolume; }
-                public int CompareTo(Stack other)
-                {
-                    if (CurrentStackingSorttype == StackingSort.Amount) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.AmountBack) { if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.Delta) { if (items == 1 && other.items == 1) return 0; else if (items == 1) return 1; if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.ItemsBack) { if (other.items == items) return 0; return other.items < items ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.VolumeFree) { if (other.volume_free == volume_free) return 0; return other.volume_free > volume_free ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.VolumeFreeBack) { if (other.volume_free == volume_free) return 0; return other.volume_free < volume_free ? 1 : -1; }
-                    return 0;
-                }
-            }
-
-            public MyItemType type;
-            float typevolume = 1;
-            int stacks = 0;
-            public int Stackcount { get { return stacks; } }
-            float amount = 0;
-            float volume = 0;
-            List<Stack> invs = new List<Stack>();
-            IMyInventory quelle = null, ziel = null;
-            public StackItem(MyItemType itype) { type = itype; typevolume = type.GetItemInfo().Volume; }
-            void refreshInvs() { foreach (var i in invs) i.refresh(); }
-            public void AddStack(IMyInventory inv, MyFixedPoint am) { stacks++; amount += (float)am; volume = amount * typevolume; invs.Add(new Stack(inv, am)); }
-            public int CompareTo(StackItem other)
-            {
-                if (CurrentStackingType == StackingType.Stack) { if (other.stacks == stacks) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; } return other.stacks > stacks ? 1 : -1; }
-                else if (CurrentStackingType == StackingType.Volume) { if (other.volume == volume) return 0; return other.volume > volume ? 1 : -1; }
-                else if (CurrentStackingType == StackingType.VolumeBack) { if (other.volume == volume) return 0; return other.volume < volume ? 1 : -1; }
-                return 0;
-            }
-            public bool check_stacking_gamma()
-            {
-                if (stacks == 2)
-                {
-                    if (invs[0].GetMaxVolume() > volume)
-                    {
-                        quelle = invs[1].inv;
-                        ziel = invs[0].inv;
-                        return true;
-                    }
-                    else if (invs[1].GetMaxVolume() > volume)
-                    {
-                        quelle = invs[0].inv;
-                        ziel = invs[1].inv;
-                        return true;
-                    }
-                }
-                return false;
-            }
-            public bool stacking_gamma()
-            {
-                var von = new List<MyInventoryItem>();
-                ziel.GetItems(von);
-                bool zielleer = true;
-                for (int x = von.Count - 1; x >= 0; x--)
-                {
-                    var i = von[x];
-                    if (i.Type != type)
-                    {
-                        if (!quelle.TransferItemFrom(ziel, i, null)) zielleer = false;
-                    }
-                }
-                var item = quelle.FindItem(type);
-                if (item != null) quelle.TransferItemTo(ziel, (MyInventoryItem)item, null);
-                return (zielleer && item == null);
-            }
-            public bool stacking_beta()
-            {
-                if (stacks < 2) return true;
-                if (((float)(free.MaxVolume - free.CurrentVolume)) < volume) return false;
-                foreach (var i in invs)
-                {
-                    if (i.inv != free)
-                    {
-                        var item = i.inv.FindItem(type);
-                        if (item != null)
-                        {
-                            free.TransferItemFrom(i.inv, (MyInventoryItem)item, null);
-                        }
-                    }
-                }
-                return true;
-            }
-            public void stacking_delta()
-            {
-                if (stacks > 1)
-                {
-                    refreshInvs();
-                    CurrentStackingSorttype = StackingSort.Delta;
-                    invs.Sort();
-                    int x = 0;
-                    int y = invs.Count - 1;
-                    for (; x < y; y--)
-                    {
-                        var item = invs[y].inv.FindItem(type);
-                        if (item != null)
-                        {
-                            if (invs[x].inv.TransferItemFrom(invs[y].inv, (MyInventoryItem)item, null)) x++;
-                        }
-                    }
-                }
-            }
-            public void stacking_alpha()
-            {
-                if (stacks < 2) return;
-                refreshInvs();
-                CurrentStackingSorttype = StackingSort.VolumeFree;
-                invs.Sort();
-                if (invs[0].volume_free < volume)
-                {
-                    var ziel = invs[0].inv;
-                    CurrentStackingSorttype = StackingSort.AmountBack;
-                    invs.Sort();
-                    foreach (var st in invs)
-                    {
-                        if (st.inv != ziel)
-                        {
-                            var item = st.inv.FindItem(type);
-                            if (item != null)
-                            {
-                                ziel.TransferItemFrom(st.inv, (MyInventoryItem)item, null);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    for (int x = 1; x < invs.Count - 1; x++)
-                    {
-                        var i = invs[x].inv;
-                        var item = i.FindItem(type);
-                        if (item != null)
-                        {
-                            invs[0].inv.TransferItemFrom(i, (MyInventoryItem)item, null);
-                        }
-                    }
-                }
-            }
-            public void stacking_single()
-            {
-                if (stacks < 2) return;
-                for (int x = invs.Count - 1; x > 0; x--)
-                {
-                    var i = invs[x].inv;
-                    for (int y = x - 1; y >= 0; y--)
-                    {
-                        if (i == invs[y].inv)
-                        {
-                            var vv = new List<MyInventoryItem>();
-                            i.GetItems(vv, ooo => ooo.Type == type);
-                            if (vv.Count > 1)
-                            {
-                                i.TransferItemFrom(i, vv[vv.Count - 1], vv[vv.Count - 1].Amount);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
         DateTime StackingCounter = DateTime.Now;
         static List<StackItem> StackItemList = new List<StackItem>();
         int stack_mode = 0;
@@ -563,94 +60,6 @@ namespace IngameScript
         int cur_stack_type = 0;
         static string[] stack_types = new string[] { "Component", "Ore", "Ingot" };
         bool if_true(string str) { return Convert.ToBoolean(str); }
-        void writeConfig()
-        {
-            var configstr = "  / attention!!!\n  / autocraftingconfig now via LCD Display,\n  / place a LCD and add '..(sms,autocrafting) to the name.\n  / follow the instructions, multiple lcds are possible'\n\n" + X_Config + "\n\n" + X_Line + "  / options set to 'True' or 'False'.\n  / to activate changes, please restart script\n"
-            + X_Line + "\n  / show info on programmable blocks LCD\n"
-            + "ShowInfoPBLcd=" + ShowInfoPBLcd.ToString() + "\n\n"
-            + "  / delete item from the production list (Assemblers)\n  / when the maximum value is reached.\n"
-            + "delete_queueItem_if_max=" + delete_queueItem_if_max.ToString() + "\n\n"
-            + "  / always recycle grey water on the Water Recycling System Block\n  / (only Daily Needs Survival Mod)\n"
-            + "always_recycle_greywater=" + always_recycle_greywater.ToString() + "\n\n"
-            + "  / turn all assemblers off when production queue is empty\n"
-            + "assemblers_off=" + assemblers_off.ToString() + "\n\n"
-            + "  / turn all refinerys off when inbound inventory is empty\n"
-            + "refinerys_off=" + refinerys_off.ToString() + "\n\n"
-            + "  / collect all ore\n"
-            + "collect_all_Ore=" + collect_all_Ore.ToString() + "\n\n"
-            + "  / collect all ingot\n"
-            + "collect_all_Ingot=" + collect_all_Ingot.ToString() + "\n\n"
-            + "  / collect all component\n"
-            + "collect_all_Component=" + collect_all_Component.ToString() + "\n\n"
-            + "  / stackingcycle in seconds, 0 = stacking off\n"
-            + "stacking_cycle=" + stacking_cycle.ToString() + "\n\n"
-            + "  / group of PIM controlled Weapons\n  / Control of WeaponCore Turrets is not necessary\n  / and should remain switched off.\n"
-            + "PIM_controlled_Weapons=" + gungroupName + "\n\n"
-            + X_Line + "  / mods that can be used.\n  /     is there a mod missing? \n  /           write it in the comments of SMS or PIM\n\n";
-            foreach (var mod in usedMods.Keys) configstr += mod + "=" + usedMods[mod].ToString() + "\n";
-            configstr += "\n" + X_Config_end + "\n";
-            Me.CustomData = configstr;
-        }
-        void LoadConfig()
-        {
-
-            string[] modInitList =
-            {
-                M_DailyNeedsSurvival,
-                M_AzimuthThruster,
-                M_SG_Gates,
-                M_SG_Ores,
-                M_PaintGun,
-                M_DeuteriumReactor,
-                M_Shield,
-                M_RailGun,
-                M_HomingWeaponry,
-                M_IndustrialOverhaulMod,
-                M_IndustrialOverhaulLLMod,
-                M_IndustrialOverhaulWaterMod,
-                M_EatDrinkSleep,
-                M_PlantCook,
-                M_AryxEpsteinDrive,
-                M_NorthWindWeapons,
-                M_HSR,
-                M_SigmaDraconisCore,
-            };
-            foreach (var m in modInitList) usedMods.Add(m, false);
-
-            bool config = false;
-            foreach (var s1 in Me.CustomData.Split('\n'))
-            {
-                var s = s1.Trim();
-                if (s.Length == 0 || s[0] == '/') continue;
-                else if (s == X_Config)
-                {
-                    config = true;
-                    continue;
-                }
-                else if (s == X_Config_end) break;
-                if (config)
-                {
-                    var cs = s.Split('=');
-                    if (cs.Length < 2) continue;
-                    switch (cs[0])
-                    {
-                        case "ShowInfoPBLcd": ShowInfoPBLcd = if_true(cs[1]); break;
-                        case "delete_queueItem_if_max": delete_queueItem_if_max = if_true(cs[1]); break;
-                        case "always_recycle_greywater": always_recycle_greywater = if_true(cs[1]); break;
-                        case "assemblers_off": assemblers_off = if_true(cs[1]); break;
-                        case "refinerys_off": refinerys_off = if_true(cs[1]); break;
-                        case "collect_all_Ore": collect_all_Ore = if_true(cs[1]); break;
-                        case "collect_all_Ingot": collect_all_Ingot = if_true(cs[1]); break;
-                        case "collect_all_Component": collect_all_Component = if_true(cs[1]); break;
-                        case "stacking_cycle": int.TryParse(cs[1], out stacking_cycle); break;
-                        case "PIM_controlled_Weapons": gungroupName = cs[1]; break;
-                        default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = if_true(cs[1]); break;
-                    }
-                    continue;
-                }
-            }
-            writeConfig();
-        }
         List<string> autocrafting_Types = new List<string>();
         void InitAutoCraftingTypes()
         {
@@ -705,7 +114,10 @@ namespace IngameScript
                 foreach (var t in autocrafting_Types) acString += t + ",";
                 acString += "\n" + AutoCraftingTypeStringName + "=" + ac_Types;
                 acString += "\n\n/                           Item            |     current    ­|       max      ­|   assembly\n";
-                var ac_TypesList = ac_Types.Split(',');
+                var ac_TypesList = ac_Types.Split(',')
+                    .Select(s => s.Trim())
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .ToArray();
                 foreach (var actype in ac_TypesList)
                 {
                     acString += line2pur + "\n Type : " + actype + " = ";
@@ -720,18 +132,18 @@ namespace IngameScript
                         filter.SetFilterToAll();
                     }
                     acString += line2;
-                    var bpList = bprints.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.ifFilter(b.AutoCraftingName));
+                    var bpList = bprints.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName));
                     bpList.Sort((x, y) => x.AutoCraftingName.CompareTo(y.AutoCraftingName));
                     foreach (var bp in bpList)
                     {
                         acString += " "
-                            + getDisplayBoxString(bp.AutoCraftingName, 60)
+                            + GetDisplayBoxString(bp.AutoCraftingName, 60)
                             + " | "
-                            + getDisplayBoxString(bp.CurrentItemAmount, 25)
+                            + GetDisplayBoxString(bp.CurrentItemAmount, 25)
                             + " | "
-                            + getDisplayBoxString(bp.MaximumItemAmount, 25)
+                            + GetDisplayBoxString(bp.MaximumItemAmount, 25)
                             + " | "
-                            + getDisplayBoxString((bp.AssemblyAmount > 0 ? bp.AssemblyAmount : (bp.RefineryAmount > 0 ? bp.RefineryAmount : 0)), 25)
+                            + GetDisplayBoxString((bp.AssemblyAmount > 0 ? bp.AssemblyAmount : (bp.RefineryAmount > 0 ? bp.RefineryAmount : 0)), 25)
                             + bigSpaces
                             + "|"
                             + bp.BlueprintID
@@ -743,34 +155,7 @@ namespace IngameScript
                 lcd.WriteText(acString);
             }
         }
-        class Filter
-        {
-            List<string> FilterWhiteList = new List<string>();
-            List<string> FilterBlackList = new List<string>();
-            public void SetFilterToAll()
-            {
-                FilterBlackList.Clear();
-                FilterWhiteList.Clear();
-                FilterWhiteList.Add("*");
-            }
-            public void InitFilter(string filterString)
-            {
-                FilterBlackList.Clear();
-                FilterWhiteList.Clear();
-                foreach (var s in filterString.Split(','))
-                {
-                    var filterStringTrimmed = s.Trim();
-                    if (filterStringTrimmed.Length > 0 && filterStringTrimmed[0] == '-') FilterBlackList.Add(filterStringTrimmed.Substring(1));
-                    else FilterWhiteList.Add(filterStringTrimmed);
-                }
-            }
-            public bool ifFilter(string testName)
-            {
-                foreach (string s in FilterBlackList) if (testName.Contains(s)) return false;
-                foreach (string s in FilterWhiteList) if (s == "*" || testName.Contains(s)) return true;
-                return false;
-            }
-        }
+        
         void writeInfo()
         {
             var s = SI1 + SI2 + getRunningSign() + (master == null ? (" Running / " + MAXIC + " inst. per run\ncurrent cycle: " + currentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + master.CustomName);
@@ -800,85 +185,6 @@ namespace IngameScript
             if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
             if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
             stack_type = stack_types[0];
-        }
-        string Debug_RefineryBPs()
-        {
-            string DebugText = "Accepted BluePrints by Refinerysubtype\n";
-            foreach (string refSubType in Refinery.refineryTypesAcceptedBlueprintsList.Keys)
-            {
-                DebugText += "SubType:" + refSubType + "\n";
-                foreach (var refBP in Refinery.refineryTypesAcceptedBlueprintsList[refSubType])
-                {
-                    DebugText += "bprint -> " + refBP.Name + "\n";
-                }
-            }
-            return DebugText;
-        }
-        string Debug_AddIPrioLists()
-        {
-            var DebugText = "";
-            foreach (var IPrioListKey in ingotprio.Keys)
-            {
-                DebugText += "IPrioList:" + IPrioListKey + "\n";
-                foreach (var ip in ingotprio[IPrioListKey])
-                {
-                    DebugText += "\t- " + ip.refineryBP.Definition_id + " % " + ip.prio + "\n";
-                }
-            }
-            return DebugText;
-        }
-        string Debug_ComponentPrio()
-        {
-            var DebugText = "";
-            foreach (var item in bprints.Values)
-            {
-                DebugText += " # " + item.AutoCraftingName + " -> " + item.ItemPriority + "\n";
-            }
-            return DebugText;
-        }
-
-        string Debug_RefineryRecipes()
-        {
-            string DebugText = "Refineryrecipes\n";
-            foreach (var refRecipe in RefineryBlueprints)
-            {
-                DebugText += refRecipe.Name + " : " + refRecipe.InputIDName + " -> " + refRecipe.OutputIDName + "\n";
-            }
-            return DebugText;
-        }
-
-        string Debug_InventoryManagerList()
-        {
-            var DebugText = "InventoryManagerList:\n";
-            foreach (var inventoryKey in InventoryManagerList.Keys)
-            {
-                DebugText += " - Key: " + inventoryKey + " / " + InventoryManagerList[inventoryKey].Count + " Inventorys\n";
-            }
-            return DebugText;
-        }
-
-        string Debug_Guns()
-        {
-            var DebugText = "Guns\n";
-            foreach (var gun in guns)
-            {
-                DebugText += " * " + gun.gun.CustomName + " / " + gun.CurrentAmmo + "\n";
-                foreach (var item in gun.ammomax)
-                {
-                    DebugText += "   - " + item.Key + " / " + item.Value + "\n";
-                }
-            }
-            return DebugText;
-        }
-        void debug()
-        {
-            var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
-            if (panel == null) return;
-            if (panel.CubeGrid != Me.CubeGrid) return;
-            var s = "";
-            s += Debug_Guns();
-            panel.WriteText(s + "\n" + debugString);
-            debugString = "";
         }
         bool maxInstructions() { return rti.CurrentInstructionCount > MAXIC; }
         DateTime lastStart = DateTime.Now;
@@ -968,7 +274,7 @@ namespace IngameScript
                     case 3:
                         if (!Slave()) { writeInfo(); return; }
                         loadAutocratingDefinitions();
-                        debug();
+                        DebugPrint();
                         ClearInventoryList(inventar);
                         InventoryList_SMSflagged.Clear();
                         InventoryList_nonSMSflagged.Clear();
@@ -1643,82 +949,120 @@ namespace IngameScript
             return master == null;
         }
 
-        static string[] waste_cast = new string[]{
+        static string[] seed_cast = new string[]
+        {
+            IG_S + "Fruit",
+            IG_S + "Grain",
+            IG_S + "Vegetables",
+            IG_S + "Mushrooms",
+        };
+
+        static string[] waste_cast = new string[]
+        {
                 Ore.Organic,
-                Ingot.GreyWater};
+                Ingot.GreyWater
+        };
 
         static string[] food_cast = new string[]
         {
-                // Daily Needs Survival
-                Ingot.WaterFood,
-                Ingot.CleanWater,
-                Ingot.SubFresh,
-                Ingot.Nutrients,
-                IG_Ingot + "ArtificialFood",
-                IG_Ingot + "LuxuryMeal",
-                IG_Ingot + "SabiroidSteak",
-                IG_Ingot + "VeganFood",
-                IG_Ingot + "WolfSteak",
-                IG_Ingot + "WolfBouillon",
-                IG_Ingot + "SabiroidBouillon",
-                IG_Ingot + "CoffeeFood",
-                IG_Ingot + "Potatoes",
-                IG_Ingot + "Tomatoes",
-                IG_Ingot + "Carrots",
-                IG_Ingot + "Cucumbers",
-                IG_Ingot + "PotatoSeeds",
-                IG_Ingot + "TomatoSeeds",
-                IG_Ingot + "CarrotSeeds",
-                IG_Ingot + "CucumberSeeds",
-                IG_Ingot + "Ketchup",
-                IG_Ingot + "MartianSpecial",
-                "Ore WolfMeat",
-                "Ore SabiroidMeat",
-                IG_Ingot + "Fertilizer",
-                IG_Ingot + "NotBeefBurger",
-                IG_Ingot + "ToFurkey",
-                IG_Ingot + "SpaceMealBar",
-                IG_Ingot + "HotChocolate",
-                IG_Ingot + "SpacersBreakfast",
-                IG_Ingot + "ProteinShake",
-                IG_Ingot + "EmergencyFood",
-                // Eat, Drink, Sleep & Repeat
-                IG_Kits + " SparklingWater",
-                IG_Kits + " Emergency_Ration",
-                IG_Kits + " AppleJuice",
-                IG_Kits + " ApplePie",
-                IG_Kits + " Tofu",
-                IG_Kits + " MeatRoasted",
-                IG_Kits + " ShroomSteak",
-                IG_Kits + " Bread",
-                IG_Kits + " Burger",
-                IG_Kits + " Soup",
-                IG_Kits + " MushroomSoup",
-                IG_Kits + " TofuSoup",
-                IG_Kits + " EuropaTea",
-                IG_Kits + " Mushrooms",
-                IG_Kits + " Apple",
-                IG_Kits + " PrlnglesChips",
-                IG_Kits + " LaysChips",
-                IG_Kits + " InterBeer",
-                IG_Kits + " CosmicCoffee",
-                IG_Kits + " ClangCola",
-                IG_Kits + " Meat",
-                IG_Kits + " MeatRoasted",
-                IG_Ingot + "Soya",
-                IG_Ingot + "Herbs",
-                IG_Ingot + "Wheat",
-                IG_Ingot + "Pumpkin",
-                IG_Ingot + "Cabbage",
+            // Vanilla
+            IG_K + "MammalMeatCooked",
+            IG_K + "InsectMeatCooked",
+            IG_K + "MealPack_KelpCrisp",
+            IG_K + "MealPack_FruitBar",
+            IG_K + "MealPack_GardenSlaw",
+            IG_K + "MealPack_RedPellets",
+            IG_K + "MealPack_Chili",
+            IG_K + "MealPack_Flatbread",
+            IG_K + "MealPack_Ramen",
+            IG_K + "MealPack_FruitPastry",
+            IG_K + "MealPack_VeggieBurger",
+            IG_K + "MealPack_Curry",
+            IG_K + "MealPack_GreenPellets",
+            IG_K + "MealPack_Dumplings",
+            IG_K + "MealPack_Spaghetti",
+            IG_K + "MealPack_Lasagna",
+            IG_K + "MealPack_Burrito",
+            IG_K + "MealPack_FrontierStew",
+            IG_K + "MealPack_SearedSabiroid",
+            IG_K + "MealPack_SteakDinner",
+            IG_K + "Fruit",
+            IG_P + "Grain",
+            IG_K + "Vegetables",
+            IG_K + "Mushrooms",
+
+            // Daily Needs Survival
+            Ingot.WaterFood,
+            Ingot.CleanWater,
+            Ingot.SubFresh,
+            Ingot.Nutrients,
+            IG_Ingot + "ArtificialFood",
+            IG_Ingot + "LuxuryMeal",
+            IG_Ingot + "SabiroidSteak",
+            IG_Ingot + "VeganFood",
+            IG_Ingot + "WolfSteak",
+            IG_Ingot + "WolfBouillon",
+            IG_Ingot + "SabiroidBouillon",
+            IG_Ingot + "CoffeeFood",
+            IG_Ingot + "Potatoes",
+            IG_Ingot + "Tomatoes",
+            IG_Ingot + "Carrots",
+            IG_Ingot + "Cucumbers",
+            IG_Ingot + "PotatoSeeds",
+            IG_Ingot + "TomatoSeeds",
+            IG_Ingot + "CarrotSeeds",
+            IG_Ingot + "CucumberSeeds",
+            IG_Ingot + "Ketchup",
+            IG_Ingot + "MartianSpecial",
+            "Ore WolfMeat",
+            "Ore SabiroidMeat",
+            IG_Ingot + "Fertilizer",
+            IG_Ingot + "NotBeefBurger",
+            IG_Ingot + "ToFurkey",
+            IG_Ingot + "SpaceMealBar",
+            IG_Ingot + "HotChocolate",
+            IG_Ingot + "SpacersBreakfast",
+            IG_Ingot + "ProteinShake",
+            IG_Ingot + "EmergencyFood",
+            // Eat, Drink, Sleep & Repeat
+            IG_K + "SparklingWater",
+            IG_K + "Emergency_Ration",
+            IG_K + "AppleJuice",
+            IG_K + "ApplePie",
+            IG_K + "Tofu",
+            IG_K + "MeatRoasted",
+            IG_K + "ShroomSteak",
+            IG_K + "Bread",
+            IG_K + "Burger",
+            IG_K + "Soup",
+            IG_K + "MushroomSoup",
+            IG_K + "TofuSoup",
+            IG_K + "EuropaTea",
+            IG_K + "Mushrooms",
+            IG_K + "Apple",
+            IG_K + "PrlnglesChips",
+            IG_K + "LaysChips",
+            IG_K + "InterBeer",
+            IG_K + "CosmicCoffee",
+            IG_K + "ClangCola",
+            IG_K + "Meat",
+            IG_K + "MeatRoasted",
+            IG_Ingot + "Soya",
+            IG_Ingot + "Herbs",
+            IG_Ingot + "Wheat",
+            IG_Ingot + "Pumpkin",
+            IG_Ingot + "Cabbage",
         };
 
         static string TypeCast(string t)
         {
             if (t.Contains("RifleItem") || t.Contains(IG_Ammo) || t.Contains("PistolItem") || t.Contains("LauncherItem")) return "Armory";
+            if (seed_cast.Contains(t)) return "Seeds";
             if (food_cast.Contains(t)) return "Food";
             if (waste_cast.Contains(t)) return "Waste";
             return "";
         }
+
         static void ClearInventory(IMyInventory quelle, List<string> typeID_l = null)
         {
             var von = new List<MyInventoryItem>();
@@ -1746,7 +1090,7 @@ namespace IngameScript
                 var atype = TypeCast(fullid);
                 if (InventoryManagerList.ContainsKey(fullid)) success = SendItemByNum(quelle, j, InventoryManagerList[fullid]);
                 if (!success && atype != "" && InventoryManagerList.ContainsKey(atype)) success = SendItemByNum(quelle, j, InventoryManagerList[atype]);
-                if (!success && InventoryManagerList.ContainsKey(idstr)) success = SendItemByNum(quelle, j, InventoryManagerList[idstr]);
+                if (!success && InventoryManagerList.ContainsKey(idstr)) SendItemByNum(quelle, j, InventoryManagerList[idstr]);
 
                 var idstrPIM = Ingame2Tag(idstr);
                 if (InventoryManagerList.ContainsKey(idstr)) ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
@@ -1851,185 +1195,7 @@ namespace IngameScript
             }
             return false;
         }
-        class StorageCargo : StorageInventory
-        {
-            public IMyCargoContainer container = null;
-            string oldCustomdata = "";
-            public StorageCargo(IMyTerminalBlock cargoContainer)
-            {
-                container = cargoContainer as IMyCargoContainer;
-                inv = container.GetInventory();
-                storageinvs.Add(this);
-            }
-            const string X_ItemDef = "StorageItemDefinition", X_ItemDefBegin = "### " + X_ItemDef + "_begin ###", X_ItemDefEnd = "### " + X_ItemDef + "_end ###", X_AddToList = "add_to_list:";
-            public override bool checkItems()
-            {
-                if (container.CustomData != "" && container.CustomData == oldCustomdata) return true;
-                bool itemsdef = false;
-                var searchstring = "";
-                items.Clear();
-                foreach (var s in container.CustomData.Split('\n'))
-                {
-                    var trims = s.Trim();
-                    if (trims.StartsWith("/")) continue;
-                    else if (trims.Contains(X_ItemDefBegin)) itemsdef = true;
-                    else if (trims.Contains(X_ItemDefEnd)) itemsdef = false;
-                    else if (!itemsdef && trims.StartsWith(X_AddToList)) searchstring = trims;
-                    else if (itemsdef)
-                    {
-                        var def = trims.Split(';');
-                        if (def.Length > 1)
-                        {
-                            int amount = 0;
-                            if (inventar.ContainsKey(def[1]) && int.TryParse(def[0], out amount))
-                            {
-                                if (amount != 0) items.Add(def[1], amount);
-                            }
-                        }
-                    }
-                }
-                if (searchstring != "")
-                {
-                    var search = searchstring.Split(',', ':');
-                    for (int i = 1; i < search.Length; i++)
-                    {
-                        var setr = search[i].Trim().ToLower();
-                        if (setr == "") continue;
-                        foreach (var t in inventar.Keys)
-                        {
-                            if (t.ToLower().Contains(setr) && !items.ContainsKey(t))
-                            {
-                                items.Add(t, 1);
-                            }
-                        }
-                    }
-                }
-                var cdata = "  / Itemdefinitionen:\n  / amount and type of items to be stored in the container\n  /\n  / add items to the list:\n  / write search terms after the '" + X_AddToList + "', like 'steel' or 'tube'.\n  / close the window, after a few seconds you will find\n  / relevant items in the list below.\n" + X_AddToList + "\n" + X_Line;
-                cdata += "  / List of items, delete the lines that are no longer needed,\n  / or set the value to 0.\n  / please change only the value before the semicolon\n" + X_ItemDefBegin + "\n";
-                foreach (var i in items) { cdata += i.Value + ";" + i.Key + "\n"; }
-                cdata += X_ItemDefEnd + "\n";
-                container.CustomData = cdata;
-                oldCustomdata = cdata;
-                return true;
-            }
-            public void Remove()
-            {
-                storageinvs.Remove(this);
-            }
-        }
-        class Gun : StorageInventory
-        {
-            public IMyUserControllableGun gun = null;
-            public string gunType = "";
-            public string CurrentAmmo = "";
-            public List<AmmoDefs> ammoTypesDefinition = new List<AmmoDefs>();
-            public Dictionary<string, int> ammomax = new Dictionary<string, int>();
-            public Gun(IMyUserControllableGun g)
-            {
-                gun = g;
-                gunType = gun.BlockDefinition.SubtypeId;
-                inv = g.GetInventory();
-                List<MyItemType> ammotypes = new List<MyItemType>();
-                inv.GetAcceptedItems(ammotypes);
-                var ammoTypesCount = 0;
-                MultiAmmoGuns newMultiAmmoGun = null;
-                foreach (var a in ammotypes) if (a.TypeId.EndsWith(IG_Ammo) && a.SubtypeId != "Energy") ammoTypesCount++;
-                if ((ammoTypesCount > 1) && !(gun is IMyLargeInteriorTurret))
-                {
-                    newMultiAmmoGun = getNewMultiAmmoGun(this);
-                }
-                var multiAmmo = (ammoTypesCount > 1) && !(gun is IMyLargeInteriorTurret) ? true : false;
-                foreach (var a in ammotypes)
-                {
-                    if (a.TypeId.EndsWith(IG_Ammo) && a.SubtypeId != "Energy")
-                    {
-                        var mtype = IG_Ammo + ' ' + a.SubtypeId;
-                        var newadef = getAmmoDefs(mtype);
-                        newadef.guns.Add(this);
-                        ammoTypesDefinition.Add(newadef);
-                        var amax = (int)((float)inv.MaxVolume / a.GetItemInfo().Volume);
-                        newadef.maxOfVolume += amax;
-                        ammomax.Add(mtype, amax);
-                        if (newMultiAmmoGun != null) newMultiAmmoGun.addAmmoDef(newadef);
-                    }
-                }
-                storageinvs.Add(this);
-            }
-            public override bool checkItems()
-            {
-                if (gun is IMyLargeInteriorTurret) return false;
-                // zum testen..................
-                if (CurrentAmmo == "") return false;
-                int aamount = (int)(ammomax[CurrentAmmo] * ammoDefs[CurrentAmmo].ratio);
-                if (aamount < 1) aamount = 1;
-                if (items.Count == 0) items.Add(CurrentAmmo, aamount);
-                else if (!items.ContainsKey(CurrentAmmo))
-                {
-                    items.Clear();
-                    items.Add(CurrentAmmo, aamount);
-                }
-                else items[CurrentAmmo] = aamount;
-                return true;
-            }
-            public void Refresh()
-            {
-                AddToInventory(inv);
-                var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
-                if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor)) gun.ApplyAction(X_UseConveyor);
-                CurrentAmmo = GetCurrentAmmo();
-            }
-            string GetCurrentAmmo()
-            {
-                if (ammomax.Count == 0) return "";
-                else if (ammomax.Count == 1) return ammomax.Keys.First();
-                var currentAmmunition = "";
-                var currentAmmunitionPrio = 0;
-                foreach (var a in ammomax)
-                {
-                    var prio = getAmmoDefs(a.Key).GetAmmoPriority(gunType);
-                    if (prio > currentAmmunitionPrio && inventar.ContainsKey(a.Key) && inventar[a.Key] > 0)
-                    {
-                        currentAmmunition = a.Key;
-                        currentAmmunitionPrio = prio;
-                    }
-                }
-                return currentAmmunition;
-            }
-            public void Remove()
-            {
-                var keyList = ammoDefs.Keys.ToArray();
-                for (int i = ammoDefs.Count - 1; i >= 0; i--)
-                {
-                    if (ammoDefs[keyList[i]].guns.Contains(this))
-                    {
-                        ammoDefs[keyList[i]].guns.Remove(this);
-                        if (ammoDefs[keyList[i]].guns.Count == 0) ammoDefs.Remove(keyList[i]);
-                        else ammoDefs[keyList[i]].maxOfVolume -= ammomax[keyList[i]];
-                        break;
-                    }
-                }
-                if (storageinvs.Contains(this)) storageinvs.Remove(this);
-                var p = gun.GetProperty(X_UseConveyor);
-                if (p != null && !gun.GetValue<bool>(X_UseConveyor)) gun.ApplyAction(X_UseConveyor);
-            }
-        }
-        //ST
-        public class StopWatch
-        {
-            DateTime ls = DateTime.Now;
-            int sec;
-            public StopWatch(int isec = 5) { sec = isec; }
-            public bool IfTimeSpanReady(bool rs = true)
-            {
-                if (sec == 0) return false;
-                if ((DateTime.Now - ls).TotalSeconds > sec)
-                {
-                    if (rs) ls = DateTime.Now;
-                    return true;
-                }
-                return false;
-            }
-        }
+        
 
         static string GetTimeStringFromHours(double h)
         {
@@ -2164,7 +1330,7 @@ namespace IngameScript
                 {
                     if (!OrePrioConfig.ContainsKey(key)) OrePrioConfig.Add(key, new Dictionary<RefineryBlueprint, int>());
                     var blueprintList = Refinery.refineryTypesAcceptedBlueprintsList[key].FindAll(o => !o.IsScrap);
-                    if (blueprintList.Count < 2 || !filter.ifFilter(key)) continue;
+                    if (blueprintList.Count < 2 || !filter.IfFilter(key)) continue;
                     priolist += linepur + "\n RefineryType: " + key + line;
                     var curIngotPrioList = ingotprio[key];
                     blueprintList.Sort((x, y) => x.InputIDName.CompareTo(y.InputIDName));
@@ -2175,10 +1341,10 @@ namespace IngameScript
                         if (OrePrioConfig[key].ContainsKey(bp)) priostr = OrePrioConfig[key][bp].ToString();
                         else OrePrioConfig[key].Add(bp, -1);
                         priolist += " "
-                            + (getDisplayBoxString(bp.Name, 65, true))
+                            + (GetDisplayBoxString(bp.Name, 65, true))
                             + " | "
-                            + getDisplayBoxString((priostr == "-1" ? "  |  " : priostr + "  |  "), 23)
-                            + ((curPrio != null && curPrio.initp > 0) ? getDisplayBoxString(curPrio.initp.ToString(), 23) + "  " : "")
+                            + GetDisplayBoxString((priostr == "-1" ? "  |  " : priostr + "  |  "), 23)
+                            + ((curPrio != null && curPrio.initp > 0) ? GetDisplayBoxString(curPrio.initp.ToString(), 23) + "  " : "")
                             + bigSpaces
                             + "|OrePrio:"
                             + bp.Name
@@ -2219,7 +1385,7 @@ namespace IngameScript
                 }
                 // Prio schreiben...
                 var ammoprioString = "/ Ammopriodefinitions:\n/ the prio only affects weapons that can use\n/ different ammunition types. this determines\n/ which one is loaded into the inventory first.\n/ 0 means that the ammunition is not used\n";
-                var headerString = "\n" + getDisplayBoxString("Priority", 25) + " | Ammotyp\n";
+                var headerString = "\n" + GetDisplayBoxString("Priority", 25) + " | Ammotyp\n";
                 foreach (var mAmmoGuns in multiAmmoGuns)
                 {
                     ammoprioString += linepur + "\nGunType: " + mAmmoGuns.Value.DisplayName + bigSpaces + "|" + mAmmoGuns.Value.MultiAmmoGuntype + headerString;
@@ -2227,7 +1393,7 @@ namespace IngameScript
                     mAmmoGuns.Value.ammoDefs.Sort();
                     foreach (var aDef in mAmmoGuns.Value.ammoDefs)
                     {
-                        ammoprioString += getDisplayBoxStringDisplayNull(aDef.GetAmmoPriority(mAmmoGuns.Key), 25) + " | " + getDisplayBoxString(aDef.GetAmmoBluePrintAutocraftingName(), 60, true) + bigSpaces + " | " + aDef.type + "\n";
+                        ammoprioString += GetDisplayBoxStringDisplayNull(aDef.GetAmmoPriority(mAmmoGuns.Key), 25) + " | " + GetDisplayBoxString(aDef.GetAmmoBluePrintAutocraftingName(), 60, true) + bigSpaces + " | " + aDef.type + "\n";
                     }
                 }
                 lcd.Alignment = TextAlignment.LEFT;
@@ -2248,14 +1414,14 @@ namespace IngameScript
                     if (bluePrint.RefineryCount > 0)
                     {
                         oresList
-                            += getDisplayBoxString(bluePrint.Name, 70, true)
+                            += GetDisplayBoxString(bluePrint.Name, 70, true)
                             + " | "
-                            + getDisplayBoxString(bluePrint.InputIDName, bluePrint.InputAmount, 70)
+                            + GetDisplayBoxString(bluePrint.InputIDName, bluePrint.InputAmount, 70)
                             + "\n"
-                            + getDisplayBoxString(bluePrint.RefineryCount.ToString() + " Refinerys.", 30, true)
-                            + getDisplayBoxString("-> " + bluePrint.ETA_String, 40, true)
+                            + GetDisplayBoxString(bluePrint.RefineryCount.ToString() + " Refinerys.", 30, true)
+                            + GetDisplayBoxString("-> " + bluePrint.ETA_String, 40, true)
                             + " | "
-                            + getDisplayBoxString(bluePrint.OutputIDName, bluePrint.OutputAmount, 70)
+                            + GetDisplayBoxString(bluePrint.OutputIDName, bluePrint.OutputAmount, 70)
                             + "\n"
                             + line2lineonly
                             + "\n";
@@ -2371,7 +1537,7 @@ namespace IngameScript
             { "Gravel",  Ingot.Stone},
             { "Tools",  IG_Tools},
             { "Kits",  IG_Kits},
-            { "Cash",  IG_Cash},
+            { "Cash",  IG_Phys},
             { "Datapads",  IG_Datas},
             { "H-Bottles",  IG_HBottles},
             { "O-Bottles",  IG_OBottles},
@@ -2380,6 +1546,7 @@ namespace IngameScript
             { "Greywater",  Ingot.GreyWater},
             { "Deuterium",  Ingot.DeuteriumContainer},
             { "Organic", Ore.Organic },
+            { "Seeds", IG_Seeds }
         };
 
         static string Ingame2Tag(string ingame)

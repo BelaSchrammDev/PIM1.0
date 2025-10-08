@@ -1,4 +1,4 @@
-﻿Production Inventory Manager v1.1b
+﻿Production Inventory Manager v1.1c
 c BelaOkuma 2017-2025
 only compatible with SMS v1.4!
 
@@ -10,3 +10,8 @@ new in update 1.1b:
 
  - add Modsupport
 	Sigma Draconis Core Mod
+
+new in update 1.1c:
+ - add support for Apex items, add (sms,food) to containers
+
+----------------------------------------------------------------------------------------------------------------
