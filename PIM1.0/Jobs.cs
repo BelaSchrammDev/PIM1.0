@@ -85,12 +85,17 @@ namespace IngameScript
 
                     case JobStatus.Running:
                         if (RunJob() == RunJobResult.Continue)
+                        {
+                            // Job is in progress, continue running
                             return ScheduleResult.InProgress;
-
-                        // Job finished for now, start cooldown
-                        _status = JobStatus.Cooling;
-                        _lastRunEnd = DateTime.Now;
-                        return ScheduleResult.Done;
+                        }
+                        else
+                        {
+                            // Job finished for now, start cooldown
+                            _status = JobStatus.Cooling;
+                            _lastRunEnd = DateTime.Now;
+                            return ScheduleResult.Done;
+                        }
 
                     case JobStatus.Cooling:
                         // Check if cooldown has elapsed

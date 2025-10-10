@@ -11,33 +11,43 @@ namespace IngameScript
     partial class Program
     {
 
-        public class OldMainLoopJob : Job
-        {
-            // old propertys
-            private int m0 = 0;
-            private int m1 = 0;
-            private int m2 = 0;
-            private List<string> s0 = new List<string>();
-            DateTime lastStart = DateTime.Now;
-            double currentCycleInSec = 0;
+        // Index of the currently running job
+        private int _currentJobIndex;
 
-            public OldMainLoopJob(Program program) : base(program, "OldMainLoop")
+        public class OldMainLoopInitJob : Job
+        {
+            public OldMainLoopInitJob(Program program) : base(program, "OldMainLoop")
             {
+            }
+
+            public override RunJobResult RunJob()
+            {
+                Propertys.currentCycleInSec = (DateTime.Now - Propertys.lastStart).TotalSeconds;
+                Propertys.lastStart = DateTime.Now;
+                return RunJobResult.Finished;
             }
         }
 
-        public void OldMainLoop()
+        public void OldMainLoop(UpdateType updateSource)
         {
             do
             {
                 switch (m0)
                 {
-                    case 0:
-                        if (MainLoopTimeSpan.IfDone()) m0++;  // ToDo: deswegen nur alle 5 sec. cyclus???
-                        else return;
-                        currentCycleInSec = (DateTime.Now - lastStart).TotalSeconds;
-                        lastStart = DateTime.Now;
+                    case -1:
+                        if (_jobs[_currentJobIndex].Schedule() == Job.ScheduleResult.Done)
+                        {
+                            // Move to the next job, wrapping around if necessary
+                            _currentJobIndex++;
+
+                            if (_currentJobIndex >= _jobs.Length)
+                            {
+                                _currentJobIndex = 0;
+                                m0 = 1;
+                            }
+                        }
                         break;
+
                     case 1:
                         if (!changeAutoCraftingSettings)
                         {
@@ -60,6 +70,7 @@ namespace IngameScript
                         m0++;
                         changeAutoCraftingSettings = false;
                         break;
+
                     case 2:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
@@ -94,6 +105,7 @@ namespace IngameScript
                         InitAutoCraftingTypes();
                         m0++;
                         break;
+
                     case 3:
                         if (!Slave()) return;
                         loadAutocratingDefinitions();
@@ -106,11 +118,13 @@ namespace IngameScript
                         InventoryManagerList.Clear();
                         m0++;
                         break;
+
                     case 4:
                         GridTerminalSystem.GetBlocksOfType<IMyCargoContainer>(tbl, block => block.IsSameConstructAs(Me));
                         m1 = 0;
                         m0++;
                         break;
+
                     case 5:
                         for (int i = m1; i < tbl.Count; i++, m1++)
                         {
@@ -119,11 +133,13 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 6:
                         GridTerminalSystem.GetBlocksOfType<IMyShipConnector>(tbl, block => block.IsSameConstructAs(Me));
                         m1 = 0;
                         m0++;
                         break;
+
                     case 7:
                         for (int i = m1; i < tbl.Count; i++, m1++)
                         {
@@ -132,11 +148,13 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 8:
                         GridTerminalSystem.GetBlocksOfType<IMyShipController>(tbl, block => block.IsSameConstructAs(Me));
                         m1 = 0;
                         m0++;
                         break;
+
                     case 9:
                         for (int i = m1; i < tbl.Count; i++, m1++)
                         {
@@ -145,6 +163,7 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 10:
                         var group = GridTerminalSystem.GetBlockGroupWithName(gungroupName);
                         if (group == null)
@@ -172,6 +191,7 @@ namespace IngameScript
                         m1 = ugun.Count - 1;
                         m0++;
                         break;
+
                     case 11:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
@@ -180,10 +200,12 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 12:
                         m1 = 0;
                         m0++;
                         break;
+
                     case 13:
                         for (int i = m1; i < guns.Count; i++, m1++)
                         {
@@ -192,6 +214,7 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 14:
                         GridTerminalSystem.GetBlocksOfType<IMyCargoContainer>(tbl, cargo => (cargo.CustomName.Contains(X_StorageTag)));
                         for (int i = storageCargos.Count - 1; i >= 0; i--)
@@ -207,6 +230,7 @@ namespace IngameScript
                         m1 = tbl.Count - 1;
                         m0++;
                         break;
+
                     case 15:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
@@ -634,7 +658,7 @@ namespace IngameScript
                         }
                         CalcutateInfos();
                         firstRun = false;
-                        m0 = 0;
+                        m0 = -1;
                         break;
                 }
             }

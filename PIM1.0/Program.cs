@@ -55,7 +55,7 @@ namespace IngameScript
         List<string> mods = new List<string>(); string curmod = M_Vanilla;
         static Dictionary<string, AssemblerBluePrint> bprints = new Dictionary<string, AssemblerBluePrint>();
         static Dictionary<string, AssemblerBluePrint> bprints_pool = new Dictionary<string, AssemblerBluePrint>();
-        double currentCycleInSec = 0f; int m0 = 1; int m1, m2 = 0; List<string> s0; static IMyGridProgramRuntimeInfo rti; IMyProgrammableBlock master;
+        int m0 = -1; int m1, m2 = 0; List<string> s0; static IMyGridProgramRuntimeInfo rti; IMyProgrammableBlock master;
         const string SI1 = "PIM v1.1", SI2 = "c (c) BelaOkuma\n", SMS = "SMS v1.4", X_StorageTag = "(sms,storage)";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_Line = "  / =================================\n", X_UseConveyor = "UseConveyor";
         const string X_Autocrafting_treshold = "Autocrafting_threshold";
@@ -85,7 +85,7 @@ namespace IngameScript
         
         void writeInfo()
         {
-            var s = SI1 + SI2 + getRunningSign() + (master == null ? (" Running / " + MAXIC + " inst. per run\ncurrent cycle: " + currentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + master.CustomName);
+            var s = SI1 + SI2 + getRunningSign() + (master == null ? (" Running / " + MAXIC + " inst. per run\ncurrent cycle: " + Propertys.currentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + master.CustomName);
             Echo(s);
             if (ShowInfoPBLcd)
             {
@@ -113,6 +113,11 @@ namespace IngameScript
             if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
             if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
             stack_type = stack_types[0];
+
+            _jobs = new Job[]
+            {
+                new OldMainLoopInitJob(this),
+            };
         }
 
         bool maxInstructions()
@@ -120,7 +125,6 @@ namespace IngameScript
             return rti.CurrentInstructionCount > MAXIC; 
         }
 
-        DateTime lastStart = DateTime.Now;
         void Main(string argument, UpdateType updateSource)
         {
             if (argument != "")
@@ -129,7 +133,7 @@ namespace IngameScript
                 return;
             }
 
-            OldMainLoop();
+            OldMainLoop(updateSource);
 
             writeInfo();
         }
@@ -145,8 +149,8 @@ namespace IngameScript
             else
             {
                 rti.UpdateFrequency = UpdateFrequency.Update10; // ToDo: Zeitspanne regulieren!
-                if (currentCycleInSec < 3.5) MAXIC -= 100;
-                else if (currentCycleInSec > 4.5) MAXIC += 100;
+                if (Propertys.currentCycleInSec < 3.5) MAXIC -= 100;
+                else if (Propertys.currentCycleInSec > 4.5) MAXIC += 100;
                 if (MAXIC < minIC) MAXIC = minIC;
                 else if (MAXIC > maxIC) MAXIC = maxIC;
             }
