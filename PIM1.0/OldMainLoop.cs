@@ -11,6 +11,21 @@ namespace IngameScript
     partial class Program
     {
 
+        public class OldMainLoopJob : Job
+        {
+            // old propertys
+            private int m0 = 0;
+            private int m1 = 0;
+            private int m2 = 0;
+            private List<string> s0 = new List<string>();
+            DateTime lastStart = DateTime.Now;
+            double currentCycleInSec = 0;
+
+            public OldMainLoopJob(Program program) : base(program, "OldMainLoop")
+            {
+            }
+        }
+
         public void OldMainLoop()
         {
             do

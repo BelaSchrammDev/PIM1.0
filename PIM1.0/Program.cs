@@ -13,6 +13,17 @@ namespace IngameScript
 {
     partial class Program : MyGridProgram
     {
+        // Array of jobs to execute in sequence
+        private readonly Job[] _jobs;
+
+        // Inventory dictionary: maps item types to their total quantities
+        private readonly Dictionary<MyItemType, float> _inventory = new Dictionary<MyItemType, float>();
+
+        // Expose inventory to jobs
+        public Dictionary<MyItemType, float> Inventory => _inventory;
+
+
+
         bool ShowInfoPBLcd = true;
         static bool delete_queueItem_if_max = true;
         static bool always_recycle_greywater = true;
@@ -70,7 +81,6 @@ namespace IngameScript
         string bigSpaces = new string(' ', 85);
         const string AutoCraftingTypeStringName = "AutocraftingTypes";
 
-        Filter filter = new Filter(); // two times used, Program and LcdManager
         
         
         void writeInfo()

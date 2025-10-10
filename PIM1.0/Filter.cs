@@ -8,6 +8,8 @@ namespace IngameScript
 {
     partial class Program
     {
+        Filter filter = new Filter(); // two times used, Program and LcdManager
+
         class Filter
         {
             List<string> FilterWhiteList = new List<string>();
