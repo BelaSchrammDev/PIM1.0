@@ -5,26 +5,86 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VRage;
 
 namespace IngameScript
 {
     partial class Program
     {
 
-        // Index of the currently running job
-        private int _currentJobIndex;
-
-        public class OldMainLoopInitJob : Job
+        public class Loop
         {
-            public OldMainLoopInitJob(Program program) : base(program, "OldMainLoop")
+            // Index of the currently running job
+            public static int CurrentJobIndex = 0;
+        }
+
+        public class LoopManager : Job
+        {
+            public static IMyProgrammableBlock Master = null, MySelf = null;
+            public static IMyGridProgramRuntimeInfo rti = null;
+
+            public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
+            public static int CurrentInstructionAmount = 1000;
+            public static bool firstRun = true;
+
+            public LoopManager(Program program) : base(program, "OldMainLoop")
             {
             }
 
             public override RunJobResult RunJob()
             {
-                Propertys.currentCycleInSec = (DateTime.Now - Propertys.lastStart).TotalSeconds;
-                Propertys.lastStart = DateTime.Now;
-                return RunJobResult.Finished;
+                Propertys.CurrentCycleInSec = (DateTime.Now - Propertys.LastStart).TotalSeconds;
+                Propertys.LastStart = DateTime.Now;
+                Program.GridTerminalSystem.GetBlocksOfType(Lists.ProgrammableBlocks, block => block.IsSameConstructAs(Program.Me));
+
+                if (IfMeIsMaster())
+                {
+                    SetMasterBehavior();
+                    return RunJobResult.Finished;
+                }
+                else
+                {
+                    SetSlaveBehavior();
+                    return RunJobResult.Continue;
+                }
+            }
+
+            public static void LoopInit(Program prg)
+            {
+                rti = prg.Runtime;
+                CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
+                rti.UpdateFrequency = UpdateFrequency.Update10;
+                SetMasterBehavior();
+            }
+
+            private static void SetMasterBehavior()
+            {
+                rti.UpdateFrequency = UpdateFrequency.Update10;
+                if (Propertys.CurrentCycleInSec < 3.5) CurrentInstructionAmount -= 100;
+                else if (Propertys.CurrentCycleInSec > 4.5) CurrentInstructionAmount += 100;
+                if (CurrentInstructionAmount < INSTRUCTION_MIN) CurrentInstructionAmount = INSTRUCTION_MIN;
+                else if (CurrentInstructionAmount > INSTRUCTION_MAX) CurrentInstructionAmount = INSTRUCTION_MAX;
+            }
+
+            private static void SetSlaveBehavior()
+            {
+                rti.UpdateFrequency = UpdateFrequency.Update100;
+                CurrentInstructionAmount = INSTRUCTION_MIN;
+            }
+
+            private static bool IfMeIsMaster() {
+                Master = null;
+                foreach (var p in Lists.ProgrammableBlocks)
+                {
+                    if (p.Enabled && p.DetailedInfo.StartsWith(SI1))
+                    {
+                        if (MySelf.EntityId <= p.EntityId)
+                        {
+                            Master = p;
+                        }
+                    }
+                }
+                return Master == MySelf;
             }
         }
 
@@ -35,79 +95,21 @@ namespace IngameScript
                 switch (m0)
                 {
                     case -1:
-                        if (_jobs[_currentJobIndex].Schedule() == Job.ScheduleResult.Done)
+                        if (_jobs[Loop.CurrentJobIndex].Schedule() == Job.ScheduleResult.Done)
                         {
                             // Move to the next job, wrapping around if necessary
-                            _currentJobIndex++;
+                            Loop.CurrentJobIndex++;
 
-                            if (_currentJobIndex >= _jobs.Length)
+                            if (Loop.CurrentJobIndex >= _jobs.Length)
                             {
-                                _currentJobIndex = 0;
-                                m0 = 1;
+                                Loop.CurrentJobIndex = 0;
+                                m0 = 3;
                             }
                         }
-                        break;
-
-                    case 1:
-                        if (!changeAutoCraftingSettings)
-                        {
-                            debugString += "kein calc_ACDef\n";
-                            m0 += 2;
-                            break;
-                        }
-                        debugString += "calc_ACDef\n";
-                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(ass, block => block.CubeGrid == Me.CubeGrid);
-                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(raff, block => block.CubeGrid == Me.CubeGrid);
-                        s0 = new List<string>(bprints.Keys);
-                        for (int i = s0.Count - 1; i >= 0; i--)
-                        {
-                            var b = bprints[s0[i]];
-                            bprints_pool.Add(s0[i], b);
-                            bprints.Remove(s0[i]);
-                        }
-                        s0 = new List<string>(bprints_pool.Keys);
-                        m1 = s0.Count - 1;
-                        m0++;
-                        changeAutoCraftingSettings = false;
-                        break;
-
-                    case 2:
-                        for (int i = m1; i >= 0; i--, m1--)
-                        {
-                            if (maxInstructions()) return;
-                            var b = bprints_pool[s0[i]];
-                            if (s0[i] == Ingot.SubFresh || s0[i] == (Refinery.BluePrintID_SpentFuelReprocessing))
-                            {
-                                foreach (var r in raff)
-                                {
-                                    var subTypeName = r.BlockDefinition.SubtypeId;
-                                    if (r.CustomName.Contains("(sms") && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
-                                    {
-                                        bprints.Add(s0[i], b);
-                                        bprints_pool.Remove(s0[i]);
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                foreach (var a in ass)
-                                {
-                                    if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(b.definition_id))
-                                    {
-                                        bprints.Add(s0[i], b);
-                                        bprints_pool.Remove(s0[i]);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        InitAutoCraftingTypes();
-                        m0++;
                         break;
 
                     case 3:
-                        if (!Slave()) return;
+                        Slave();
                         loadAutocratingDefinitions();
                         DebugPrint();
                         ClearInventoryList(inventar);
@@ -429,49 +431,49 @@ namespace IngameScript
                         m0++;
                         break;
                     case 33:
-                        foreach (var b in bprints.Values) b.AssemblyAmount = 0;
-                        foreach (var b in bprints_pool.Values) b.AssemblyAmount = 0;
-                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(raff, block => block.CubeGrid == Me.CubeGrid);
+                        foreach (var b in Lists.BluePrints_Active.Values) b.AssemblyAmount = 0;
+                        foreach (var b in Lists.BluePrints_Inactive.Values) b.AssemblyAmount = 0;
+                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Refinerys, block => block.CubeGrid == Me.CubeGrid);
                         for (int i = RefineryList.Count - 1; i >= 0; i--)
                         {
-                            if (raff.Contains(RefineryList[i].RefineryBlock)) raff.Remove(RefineryList[i].RefineryBlock);
+                            if (Lists.Refinerys.Contains(RefineryList[i].RefineryBlock)) Lists.Refinerys.Remove(RefineryList[i].RefineryBlock);
                             else
                             {
-                                changeAutoCraftingSettings = true;
+                                Propertys.changeAutoCraftingSettings = true;
                                 RefineryList.Remove(RefineryList[i]);
                             }
                         }
                         Refinery.priobt = "";
-                        m1 = raff.Count - 1;
+                        m1 = Lists.Refinerys.Count - 1;
                         m0++;
                         break;
                     case 34:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
                             if (maxInstructions()) return;
-                            RefineryList.Add(new Refinery(raff[i]));
+                            RefineryList.Add(new Refinery(Lists.Refinerys[i]));
                         }
                         m0++;
                         break;
                     case 35:
-                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(ass, block => block.CubeGrid == Me.CubeGrid);
+                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Assemblers, block => block.CubeGrid == Me.CubeGrid);
                         for (int i = AssemblerList.Count - 1; i >= 0; i--)
                         {
-                            if (ass.Contains(AssemblerList[i].AssemblerBlock)) ass.Remove(AssemblerList[i].AssemblerBlock);
+                            if (Lists.Assemblers.Contains(AssemblerList[i].AssemblerBlock)) Lists.Assemblers.Remove(AssemblerList[i].AssemblerBlock);
                             else
                             {
-                                changeAutoCraftingSettings = true;
+                                Propertys.changeAutoCraftingSettings = true;
                                 AssemblerList.Remove(AssemblerList[i]);
                             }
                         }
-                        m1 = ass.Count - 1;
+                        m1 = Lists.Assemblers.Count - 1;
                         m0++;
                         break;
                     case 36:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
                             if (maxInstructions()) return;
-                            AssemblerList.Add(new Assembler(ass[i]));
+                            AssemblerList.Add(new Assembler(Lists.Assemblers[i]));
                         }
                         m0++;
                         break;
@@ -554,7 +556,7 @@ namespace IngameScript
                         m0++;
                         break;
                     case 49:
-                        s0 = new List<string>(bprints.Keys);
+                        s0 = new List<string>(Lists.BluePrints_Active.Keys);
                         m1 = 0;
                         m0++;
                         break;
@@ -562,7 +564,7 @@ namespace IngameScript
                         for (int i = m1; i < s0.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            var b = bprints[s0[i]];
+                            var b = Lists.BluePrints_Active[s0[i]];
                             b.SetCurrentAmount((int)inventar.GetValueOrDefault(b.ItemName, 0));
                             b.CalcPriority();
                             if (b.NeedsAssembling())
@@ -576,7 +578,7 @@ namespace IngameScript
                         m0++;
                         break;
                     case 51:
-                        s0 = new List<string>(bprints_pool.Keys);
+                        s0 = new List<string>(Lists.BluePrints_Inactive.Keys);
                         m1 = 0;
                         m0++;
                         break;
@@ -584,7 +586,7 @@ namespace IngameScript
                         for (int i = m1; i < s0.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            var b = bprints_pool[s0[i]];
+                            var b = Lists.BluePrints_Inactive[s0[i]];
                             if (inventar.ContainsKey(b.ItemName)) b.SetCurrentAmount((int)inventar[b.ItemName]);
                         }
                         m0++;
@@ -657,7 +659,7 @@ namespace IngameScript
                             }
                         }
                         CalcutateInfos();
-                        firstRun = false;
+                        LoopManager.firstRun = false;
                         m0 = -1;
                         break;
                 }

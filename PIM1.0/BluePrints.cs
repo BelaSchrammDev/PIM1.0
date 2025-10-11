@@ -8,10 +8,9 @@ namespace IngameScript
 {
     partial class Program
     {
-        public static class Propertys
+        public class BluePrints
         {
-            public static double currentCycleInSec = 0;
-            public static DateTime lastStart = DateTime.Now;
+            
         }
     }
 }

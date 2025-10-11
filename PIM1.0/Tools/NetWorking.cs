@@ -9,24 +9,13 @@ namespace IngameScript
 {
     partial class Program
     {
-        const string AssemblerQueueNameSemikolon = "@ASSEMBLERQUEUE;";
-        const string ItemMaxNameSemikolon = "@ITEMMAX;";
-        bool Slave()
+        void Slave()
         {
             var comp = new List<IMyProgrammableBlock>();
             GridTerminalSystem.GetBlocksOfType<IMyProgrammableBlock>(comp, block => block.IsSameConstructAs(Me));
-            master = null;
             foreach (var p in comp)
             {
-                if (p.Enabled && p.DetailedInfo.StartsWith(SI1))
-                {
-                    if (Me.EntityId < p.EntityId)
-                    {
-                        master = p;
-                        break;
-                    }
-                }
-                else if (p.Enabled && p.DetailedInfo.StartsWith(SMS) && !firstRun)
+                if (p.Enabled && p.DetailedInfo.StartsWith(SMS) && !LoopManager.firstRun)
                 {
                     var s = "";
                     bool configteil = false;
@@ -44,25 +33,21 @@ namespace IngameScript
                         foreach (var i in ingotprio[sx]) if (i.initp > 0) s += "@INGOTPRIO;" + i.refineryBP.OutputIDName + ";" + i.initp + "\n";
                     }
                     foreach (var c in CargoUseList.Values) s += "@CARGOUSE;" + c.type + ";" + c.Current + ";" + c.Maximum + "\n";
-                    foreach (var b in bprints.Values)
+                    foreach (var b in Lists.BluePrints_Active.Values)
                     {
-                        if (b.MaximumItemAmount > 0) s += ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
-                        if (b.AssemblyAmount > 0) s += AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
-                        else if (b.RefineryAmount > 0) s += AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
+                        if (b.MaximumItemAmount > 0) s += Constants.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
+                        if (b.AssemblyAmount > 0) s += Constants.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
+                        else if (b.RefineryAmount > 0) s += Constants.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
                     }
-                    foreach (var b in bprints_pool.Values)
+                    foreach (var b in Lists.BluePrints_Inactive.Values)
                     {
-                        if (b.MaximumItemAmount > 0) s += ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
-                        if (b.AssemblyAmount > 0) s += AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
-                        else if (b.RefineryAmount > 0) s += AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
+                        if (b.MaximumItemAmount > 0) s += Constants.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
+                        if (b.AssemblyAmount > 0) s += Constants.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
+                        else if (b.RefineryAmount > 0) s += Constants.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
                     }
                     p.CustomData = s;
                 }
             }
-
-            CalculateMaxIC();
-
-            return master == null;
         }
     }
 }

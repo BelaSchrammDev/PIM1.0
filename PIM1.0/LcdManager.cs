@@ -43,7 +43,7 @@ namespace IngameScript
                     }
                     else if (acLines.Count() == 6)
                     {
-                        if (bprints.ContainsKey(acLines[4])) bprints[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
+                        if (Lists.BluePrints_Active.ContainsKey(acLines[4])) Lists.BluePrints_Active[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
                     }
                 }
                 if (act_new) AssemblerBluePrint.SetAutocraftingThresholdNew();
@@ -73,7 +73,7 @@ namespace IngameScript
                         filter.SetFilterToAll();
                     }
                     acString += line2;
-                    var bpList = bprints.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName));
+                    var bpList = Lists.BluePrints_Active.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName));
                     bpList.Sort((x, y) => x.AutoCraftingName.CompareTo(y.AutoCraftingName));
                     foreach (var bp in bpList)
                     {

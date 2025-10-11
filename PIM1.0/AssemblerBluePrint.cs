@@ -17,14 +17,14 @@ namespace IngameScript
         }
         static AssemblerBluePrint GetBluePrintByItemName(string itemName)
         {
-            foreach (var b in bprints.Values) if (b.ItemName == itemName) return b;
-            foreach (var b in bprints_pool.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in Lists.BluePrints_Active.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in Lists.BluePrints_Inactive.Values) if (b.ItemName == itemName) return b;
             return null;
         }
         static AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
         {
-            foreach (var b in bprints.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
-            foreach (var b in bprints_pool.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.BluePrints_Active.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.BluePrints_Inactive.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
             return null;
         }
 
@@ -36,7 +36,7 @@ namespace IngameScript
             if (subtypeID.StartsWith("Position0")) subtypeID = subtypeID.Substring(subtypeID.IndexOf('_') + 1);
             if (!mods.Contains(curmod)) mods.Add(curmod);
             var bpi = typeID + " " + subtypeID;
-            if (!bprints_pool.ContainsKey(bpi)) bprints_pool.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
+            if (!Lists.BluePrints_Inactive.ContainsKey(bpi)) Lists.BluePrints_Inactive.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
         }
         void C(string s, string astr = "", string astn = "") { addBluePrint("Component", s, astr, astn); }
         void A(string s, string astr = "", string astn = "") { addBluePrint(IG_Ammo, s, astr, astn); }
@@ -71,7 +71,7 @@ namespace IngameScript
             string subtypename = "";
             static public void SetAutocraftingThresholdNew()
             {
-                foreach (var bp in bprints.Values) bp.CalcMinimumAmount();
+                foreach (var bp in Lists.BluePrints_Active.Values) bp.CalcMinimumAmount();
             }
             static string BluePrintNameToItemName(string t, string s)
             {

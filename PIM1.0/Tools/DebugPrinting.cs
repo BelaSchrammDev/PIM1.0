@@ -26,12 +26,12 @@ namespace IngameScript
         string Debug_AssemblerBPs()
         {
             string DebugText = "Accepted BluePrints by Assemblersubtype\nPool:\n";
-            foreach (var bluePrint in bprints_pool)
+            foreach (var bluePrint in Lists.BluePrints_Inactive)
             {
                 DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.AutoCraftingName + " / " + bluePrint.Value.definition_id + "\n";
             }
             DebugText += "Active:\n";
-            foreach (var bluePrint in bprints)
+            foreach (var bluePrint in Lists.BluePrints_Active)
             {
                 DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.AutoCraftingName + " / " + bluePrint.Value.definition_id + "\n";
             }
@@ -55,7 +55,7 @@ namespace IngameScript
         string Debug_ComponentPrio()
         {
             var DebugText = "";
-            foreach (var item in bprints.Values)
+            foreach (var item in Lists.BluePrints_Active.Values)
             {
                 DebugText += " # " + item.AutoCraftingName + " -> " + item.ItemPriority + "\n";
             }

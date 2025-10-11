@@ -36,13 +36,9 @@ namespace IngameScript
         StopWatch MainLoopTimeSpan = new StopWatch(3);
         static int AutocraftingThreshold = 80;
         static string debugString = "";
-        const int minIC = 300, maxIC = 5000;
-        bool firstRun = true;
         static Dictionary<string, float> inventar = new Dictionary<string, float>();
-        static bool changeAutoCraftingSettings = true;
         static List<StorageInventory> storageinvs = new List<StorageInventory>();
-        List<IMyRefinery> raff = new List<IMyRefinery>();
-        List<IMyAssembler> ass = new List<IMyAssembler>();
+        
         static List<Assembler> AssemblerList = new List<Assembler>();
         List<IMyUserControllableGun> ugun = new List<IMyUserControllableGun>();
         List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
@@ -53,9 +49,7 @@ namespace IngameScript
         Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
         static Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
         List<string> mods = new List<string>(); string curmod = M_Vanilla;
-        static Dictionary<string, AssemblerBluePrint> bprints = new Dictionary<string, AssemblerBluePrint>();
-        static Dictionary<string, AssemblerBluePrint> bprints_pool = new Dictionary<string, AssemblerBluePrint>();
-        int m0 = -1; int m1, m2 = 0; List<string> s0; static IMyGridProgramRuntimeInfo rti; IMyProgrammableBlock master;
+        int m0 = -1; int m1, m2 = 0; List<string> s0;
         const string SI1 = "PIM v1.1", SI2 = "c (c) BelaOkuma\n", SMS = "SMS v1.4", X_StorageTag = "(sms,storage)";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_Line = "  / =================================\n", X_UseConveyor = "UseConveyor";
         const string X_Autocrafting_treshold = "Autocrafting_threshold";
@@ -74,7 +68,7 @@ namespace IngameScript
         List<string> autocrafting_Types = new List<string>();
         void InitAutoCraftingTypes()
         {
-            foreach (var bpType in bprints.Values)
+            foreach (var bpType in Lists.BluePrints_Active.Values)
                 if (!autocrafting_Types.Contains(bpType.AutoCraftingType))
                     autocrafting_Types.Add(bpType.AutoCraftingType);
         }
@@ -85,7 +79,7 @@ namespace IngameScript
         
         void writeInfo()
         {
-            var s = SI1 + SI2 + getRunningSign() + (master == null ? (" Running / " + MAXIC + " inst. per run\ncurrent cycle: " + Propertys.currentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + master.CustomName);
+            var s = SI1 + SI2 + getRunningSign() + (LoopManager.Master == null ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + LoopManager.Master.CustomName);
             Echo(s);
             if (ShowInfoPBLcd)
             {
@@ -105,10 +99,7 @@ namespace IngameScript
             LoadConfig();
             InitAssemblerBluePrints();
             InitRefineryBlueprints();
-            MAXIC = minIC;
-            rti = Runtime;
-            Slave();
-            rti.UpdateFrequency = UpdateFrequency.Update10;
+            LoopManager.LoopInit(this);
             if (collect_all_Ore) collectAll_List.Add(IG_ + "Ore");
             if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
             if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
@@ -116,13 +107,14 @@ namespace IngameScript
 
             _jobs = new Job[]
             {
-                new OldMainLoopInitJob(this),
+                new LoopManager(this),
+                new ChangeAutoCraftingSettingsJob(this),
             };
         }
 
         bool maxInstructions()
         {
-            return rti.CurrentInstructionCount > MAXIC; 
+            return LoopManager.rti.CurrentInstructionCount > LoopManager.CurrentInstructionAmount; 
         }
 
         void Main(string argument, UpdateType updateSource)
@@ -138,23 +130,22 @@ namespace IngameScript
             writeInfo();
         }
 
-        int MAXIC;
-        void CalculateMaxIC()
-        {
-            if (master != null)
-            {
-                rti.UpdateFrequency = UpdateFrequency.Update100;
-                MAXIC = minIC;
-            }
-            else
-            {
-                rti.UpdateFrequency = UpdateFrequency.Update10; // ToDo: Zeitspanne regulieren!
-                if (Propertys.currentCycleInSec < 3.5) MAXIC -= 100;
-                else if (Propertys.currentCycleInSec > 4.5) MAXIC += 100;
-                if (MAXIC < minIC) MAXIC = minIC;
-                else if (MAXIC > maxIC) MAXIC = maxIC;
-            }
-        }
+        //void CalculateMaxIC()
+        //{
+        //    if (LoopManager.Master != null)
+        //    {
+        //        rti.UpdateFrequency = UpdateFrequency.Update100;
+        //        MAXIC = minIC;
+        //    }
+        //    else
+        //    {
+        //        rti.UpdateFrequency = UpdateFrequency.Update10; // ToDo: Zeitspanne regulieren!
+        //        if (Propertys.currentCycleInSec < 3.5) MAXIC -= 100;
+        //        else if (Propertys.currentCycleInSec > 4.5) MAXIC += 100;
+        //        if (MAXIC < minIC) MAXIC = minIC;
+        //        else if (MAXIC > maxIC) MAXIC = maxIC;
+        //    }
+        //}
 
         void CalcIngotPrio()
         {
