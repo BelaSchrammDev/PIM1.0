@@ -310,6 +310,7 @@ namespace IngameScript
             var keys = invList.Keys.ToArray();
             for (int i = 0; i < keys.Length; i++) invList[keys[i]] = 0;
         }
+
         static void AddToInventory(IMyInventory box, Dictionary<string, float> ilist = null)
         {
             var boxl = new List<MyInventoryItem>();

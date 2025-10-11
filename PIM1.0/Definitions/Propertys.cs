@@ -9,6 +9,12 @@ namespace IngameScript
 {
     partial class Program
     {
+        public class Loop
+        {
+            // Index of the currently running job
+            public static int CurrentJobIndex = 0;
+        }
+
         public static class Lists 
         {
             public static List<IMyRefinery> Refinerys = new List<IMyRefinery>();

@@ -30,6 +30,8 @@ namespace IngameScript
 
         public class Parameter
         {
+            // TODO: parameter as boolean
+
             public Dictionary<string, string> ParameterList = new Dictionary<string, string>();
             StringBuilderExtended LastCustomName = new StringBuilderExtended(150);
             public StringBuilderExtended Name = new StringBuilderExtended(150);

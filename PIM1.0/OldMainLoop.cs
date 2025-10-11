@@ -6,85 +6,66 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VRage;
+using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
     partial class Program
     {
-
-        public class Loop
+        public class GridInventoryScanningJob : CountingJob
         {
-            // Index of the currently running job
-            public static int CurrentJobIndex = 0;
-        }
+            private readonly List<IMyInventoryOwner> _inventoryOwners = new List<IMyInventoryOwner>();
 
-        public class LoopManager : Job
-        {
-            public static IMyProgrammableBlock Master = null, MySelf = null;
-            public static IMyGridProgramRuntimeInfo rti = null;
-
-            public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
-            public static int CurrentInstructionAmount = 1000;
-            public static bool firstRun = true;
-
-            public LoopManager(Program program) : base(program, "OldMainLoop")
+            public GridInventoryScanningJob(Program program, string name, int cooldownSeconds = 0) : base(program, name, cooldownSeconds)
             {
             }
 
-            public override RunJobResult RunJob()
+            protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                Propertys.CurrentCycleInSec = (DateTime.Now - Propertys.LastStart).TotalSeconds;
-                Propertys.LastStart = DateTime.Now;
-                Program.GridTerminalSystem.GetBlocksOfType(Lists.ProgrammableBlocks, block => block.IsSameConstructAs(Program.Me));
+                Program.GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(_inventoryOwners,b => (b as IMyTerminalBlock).IsSameConstructAs(Program.Me));
+                startIndex = 0;
+                endIndex = _inventoryOwners.Count - 1;
+            }
 
-                if (IfMeIsMaster())
+            protected override void ProcessingIndex(int index)
+            {
+                var owner = _inventoryOwners[index];
+                ProcessingTerminalBlock(owner as IMyTerminalBlock);
+            }
+
+            protected void ProcessingTerminalBlock(IMyTerminalBlock inventoryOwner)
+            {
+                Parameter pm = new Parameter();
+                bool isStorage = inventoryOwner.CustomName.Contains(X_StorageTag)
+                    , isSmsBlock = false
+                    , isNoKeep = false
+                    , isNoLcd = false
+                    , isContainerOrConnector = false;
+
+                if (pm.ParseArgs(inventoryOwner.CustomName))
                 {
-                    SetMasterBehavior();
-                    return RunJobResult.Finished;
+                    isSmsBlock = true;
+                    isNoKeep = !pm.IsParameter("Keep");
+                    isNoLcd = !pm.IsParameter("Infolcd");
                 }
-                else
+
+                isContainerOrConnector = inventoryOwner.BlockDefinition.SubtypeId.Contains("Container") || inventoryOwner.BlockDefinition.SubtypeId.Contains("Connector");
+
+                for (int i = 0; i < inventoryOwner.InventoryCount; i++)
                 {
-                    SetSlaveBehavior();
-                    return RunJobResult.Continue;
-                }
-            }
+                    var inv = inventoryOwner.GetInventory(i);
+                    AddToInventory(inv);
 
-            public static void LoopInit(Program prg)
-            {
-                rti = prg.Runtime;
-                CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
-                rti.UpdateFrequency = UpdateFrequency.Update10;
-                SetMasterBehavior();
-            }
+                    if(isStorage) continue;
 
-            private static void SetMasterBehavior()
-            {
-                rti.UpdateFrequency = UpdateFrequency.Update10;
-                if (Propertys.CurrentCycleInSec < 3.5) CurrentInstructionAmount -= 100;
-                else if (Propertys.CurrentCycleInSec > 4.5) CurrentInstructionAmount += 100;
-                if (CurrentInstructionAmount < INSTRUCTION_MIN) CurrentInstructionAmount = INSTRUCTION_MIN;
-                else if (CurrentInstructionAmount > INSTRUCTION_MAX) CurrentInstructionAmount = INSTRUCTION_MAX;
-            }
-
-            private static void SetSlaveBehavior()
-            {
-                rti.UpdateFrequency = UpdateFrequency.Update100;
-                CurrentInstructionAmount = INSTRUCTION_MIN;
-            }
-
-            private static bool IfMeIsMaster() {
-                Master = null;
-                foreach (var p in Lists.ProgrammableBlocks)
-                {
-                    if (p.Enabled && p.DetailedInfo.StartsWith(SI1))
+                    if (isSmsBlock)
                     {
-                        if (MySelf.EntityId <= p.EntityId)
-                        {
-                            Master = p;
-                        }
+                        if (isNoKeep) InventoryList_SMSflagged.Add(inv);
+                        if (isNoLcd) Program.addToInventoryList(inv, pm.ParameterList);
                     }
+                    else if (isContainerOrConnector) InventoryList_SMSflagged.Add(inv);
+                    else InventoryList_nonSMSflagged.Add(inv);
                 }
-                return Master == MySelf;
             }
         }
 
@@ -103,69 +84,13 @@ namespace IngameScript
                             if (Loop.CurrentJobIndex >= _jobs.Length)
                             {
                                 Loop.CurrentJobIndex = 0;
-                                m0 = 3;
+                                m0 = 10;
                             }
                         }
                         break;
 
-                    case 3:
-                        Slave();
-                        loadAutocratingDefinitions();
-                        DebugPrint();
-                        ClearInventoryList(inventar);
-                        InventoryList_SMSflagged.Clear();
-                        InventoryList_nonSMSflagged.Clear();
-                        CargoUseList.Clear();
-                        foreach (var ivl in InventoryManagerList.Values) ivl.Clear();
-                        InventoryManagerList.Clear();
-                        m0++;
-                        break;
 
-                    case 4:
-                        GridTerminalSystem.GetBlocksOfType<IMyCargoContainer>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
-                        m0++;
-                        break;
-
-                    case 5:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            pushTerminalBlock(tbl[i]);
-                        }
-                        m0++;
-                        break;
-
-                    case 6:
-                        GridTerminalSystem.GetBlocksOfType<IMyShipConnector>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
-                        m0++;
-                        break;
-
-                    case 7:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            pushTerminalBlock(tbl[i]);
-                        }
-                        m0++;
-                        break;
-
-                    case 8:
-                        GridTerminalSystem.GetBlocksOfType<IMyShipController>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
-                        m0++;
-                        break;
-
-                    case 9:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            pushTerminalBlock(tbl[i]);
-                        }
-                        m0++;
-                        break;
-
+                    // Ammomanager -----------------------------------------------------------------------------------------------------------------
                     case 10:
                         var group = GridTerminalSystem.GetBlockGroupWithName(gungroupName);
                         if (group == null)
@@ -217,6 +142,7 @@ namespace IngameScript
                         m0++;
                         break;
 
+                    // StorageCargo -----------------------------------------------------------------------------------------------------------------
                     case 14:
                         GridTerminalSystem.GetBlocksOfType<IMyCargoContainer>(tbl, cargo => (cargo.CustomName.Contains(X_StorageTag)));
                         for (int i = storageCargos.Count - 1; i >= 0; i--)
@@ -253,6 +179,9 @@ namespace IngameScript
                     case 21: m0++; break;
                     case 22: m0++; break;
                     case 23: m0++; break;
+
+
+                    // Counting WelderBlocks, if working do nothing ------------------------------------------------------------------------------------------------
                     case 24:
                         GridTerminalSystem.GetBlocksOfType<IMyShipWelder>(tbl, block => block.IsSameConstructAs(Me));
                         m1 = 0;
@@ -275,32 +204,21 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
                     case 26:
-                        GridTerminalSystem.GetBlocksOfType<IMyShipGrinder>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
                         m0++;
                         break;
                     case 27:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            pushTerminalBlock(tbl[i]);
-                        }
                         m0++;
                         break;
                     case 28:
-                        GridTerminalSystem.GetBlocksOfType<IMyShipDrill>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
                         m0++;
                         break;
                     case 29:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            pushTerminalBlock(tbl[i]);
-                        }
                         m0++;
                         break;
+
+                    // Stacking --------------------------------------------------------------------------------------------------------------------------------
                     case 30:
                         m1 = 0;
                         if (stacking_cycle == 0 || (DateTime.Now - StackingCounter).TotalSeconds < stacking_cycle) m0 += 2;
@@ -430,6 +348,8 @@ namespace IngameScript
                     case 32:
                         m0++;
                         break;
+
+
                     case 33:
                         foreach (var b in Lists.BluePrints_Active.Values) b.AssemblyAmount = 0;
                         foreach (var b in Lists.BluePrints_Inactive.Values) b.AssemblyAmount = 0;
@@ -660,6 +580,7 @@ namespace IngameScript
                         }
                         CalcutateInfos();
                         LoopManager.firstRun = false;
+                        SendInfosToSMS();
                         m0 = -1;
                         break;
                 }

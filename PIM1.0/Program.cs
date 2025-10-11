@@ -96,10 +96,12 @@ namespace IngameScript
             viewList.Add(new StorageManagerInfo());
             viewList.Add(new RefineryManagerInfo());
             viewList.Add(new AssemblerManagerInfo());
+
             LoadConfig();
             InitAssemblerBluePrints();
             InitRefineryBlueprints();
-            LoopManager.LoopInit(this);
+            LoopManager.Init(this);
+
             if (collect_all_Ore) collectAll_List.Add(IG_ + "Ore");
             if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
             if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
@@ -109,9 +111,12 @@ namespace IngameScript
             {
                 new LoopManager(this),
                 new ChangeAutoCraftingSettingsJob(this),
+                new ClearJob(this),
+                new GridInventoryScanningJob(this, "GridInventoryScanningJob"),
+
             };
         }
-
+        
         bool maxInstructions()
         {
             return LoopManager.rti.CurrentInstructionCount > LoopManager.CurrentInstructionAmount; 
@@ -129,23 +134,6 @@ namespace IngameScript
 
             writeInfo();
         }
-
-        //void CalculateMaxIC()
-        //{
-        //    if (LoopManager.Master != null)
-        //    {
-        //        rti.UpdateFrequency = UpdateFrequency.Update100;
-        //        MAXIC = minIC;
-        //    }
-        //    else
-        //    {
-        //        rti.UpdateFrequency = UpdateFrequency.Update10; // ToDo: Zeitspanne regulieren!
-        //        if (Propertys.currentCycleInSec < 3.5) MAXIC -= 100;
-        //        else if (Propertys.currentCycleInSec > 4.5) MAXIC += 100;
-        //        if (MAXIC < minIC) MAXIC = minIC;
-        //        else if (MAXIC > maxIC) MAXIC = maxIC;
-        //    }
-        //}
 
         void CalcIngotPrio()
         {

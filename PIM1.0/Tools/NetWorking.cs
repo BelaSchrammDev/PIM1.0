@@ -9,7 +9,7 @@ namespace IngameScript
 {
     partial class Program
     {
-        void Slave()
+        void SendInfosToSMS()
         {
             var comp = new List<IMyProgrammableBlock>();
             GridTerminalSystem.GetBlocksOfType<IMyProgrammableBlock>(comp, block => block.IsSameConstructAs(Me));
