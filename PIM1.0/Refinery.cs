@@ -268,9 +268,9 @@ namespace IngameScript
             {
                 if (BlockRemoved()) return;
                 ClearInventoryList(InputInventoryItems);
-                AddToInventory(InputInventory, InputInventoryItems);
+                CountItemsToDictionary(InputInventory, InputInventoryItems);
                 AddRefineryCount();
-                AddToInventory(OutputInventory);
+                CountItemsToDictionary(OutputInventory);
                 ClearInventory(OutputInventory);
                 SetErrorByCondition(RefError.OutputNotEmpty, OutputInventory.CurrentVolume > 0);
                 if (!parameter.ParseArgs(RefineryBlock.CustomName, true)) return;

@@ -180,7 +180,7 @@ namespace IngameScript
             }
             public void Refresh()
             {
-                AddToInventory(inv);
+                CountItemsToDictionary(inv);
                 var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
                 if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor))
                 {

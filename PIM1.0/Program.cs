@@ -112,7 +112,7 @@ namespace IngameScript
                 new LoopManager(this),
                 new ChangeAutoCraftingSettingsJob(this),
                 new ClearJob(this),
-                new GridInventoryScanningJob(this, "GridInventoryScanningJob"),
+                new GridScanningJob(this),
 
             };
         }

@@ -12,60 +12,46 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class GridInventoryScanningJob : CountingJob
+        public class GridScanningJob : ProcessingBlockListBase<IMyInventoryOwner>
         {
-            private readonly List<IMyInventoryOwner> _inventoryOwners = new List<IMyInventoryOwner>();
-
-            public GridInventoryScanningJob(Program program, string name, int cooldownSeconds = 0) : base(program, name, cooldownSeconds)
+            public GridScanningJob(Program program) : base(program, "GridScanningJob")
             {
             }
 
-            protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
+            protected override void ProcessingTerminalBlock(IMyTerminalBlock t)
             {
-                Program.GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(_inventoryOwners,b => (b as IMyTerminalBlock).IsSameConstructAs(Program.Me));
-                startIndex = 0;
-                endIndex = _inventoryOwners.Count - 1;
-            }
+                var inventoryOwner = t as IMyInventoryOwner;
 
-            protected override void ProcessingIndex(int index)
-            {
-                var owner = _inventoryOwners[index];
-                ProcessingTerminalBlock(owner as IMyTerminalBlock);
-            }
+                if(inventoryOwner == null) return;
 
-            protected void ProcessingTerminalBlock(IMyTerminalBlock inventoryOwner)
-            {
                 Parameter pm = new Parameter();
-                bool isStorage = inventoryOwner.CustomName.Contains(X_StorageTag)
+                bool isStorage = t.CustomName.Contains(X_StorageTag)
                     , isSmsBlock = false
                     , isNoKeep = false
-                    , isNoLcd = false
-                    , isContainerOrConnector = false;
+                    , isContainerOrConnector = t.BlockDefinition.SubtypeId.Contains("Container") || t.BlockDefinition.SubtypeId.Contains("Connector");
 
-                if (pm.ParseArgs(inventoryOwner.CustomName))
+                if (pm.ParseArgs(t.CustomName))
                 {
                     isSmsBlock = true;
                     isNoKeep = !pm.IsParameter("Keep");
-                    isNoLcd = !pm.IsParameter("Infolcd");
                 }
-
-                isContainerOrConnector = inventoryOwner.BlockDefinition.SubtypeId.Contains("Container") || inventoryOwner.BlockDefinition.SubtypeId.Contains("Connector");
 
                 for (int i = 0; i < inventoryOwner.InventoryCount; i++)
                 {
                     var inv = inventoryOwner.GetInventory(i);
-                    AddToInventory(inv);
+                    CountItemsToDictionary(inv);
 
-                    if(isStorage) continue;
+                    if (isStorage) continue;
 
                     if (isSmsBlock)
                     {
-                        if (isNoKeep) InventoryList_SMSflagged.Add(inv);
-                        if (isNoLcd) Program.addToInventoryList(inv, pm.ParameterList);
+                        if (isNoKeep) NonSmsFlagedInventoryList.Add(inv);
+                        Program.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
-                    else if (isContainerOrConnector) InventoryList_SMSflagged.Add(inv);
-                    else InventoryList_nonSMSflagged.Add(inv);
+                    else if (isContainerOrConnector) NonSmsFlagedInventoryList.Add(inv);
+                    else SmsFlagedInventoryList.Add(inv);
                 }
+
             }
         }
 
@@ -402,10 +388,10 @@ namespace IngameScript
                         m0++;
                         break;
                     case 38:
-                        for (int i = m1; i < InventoryList_SMSflagged.Count; i++, m1++)
+                        for (int i = m1; i < NonSmsFlagedInventoryList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            ClearInventory(InventoryList_SMSflagged[i]);
+                            ClearInventory(NonSmsFlagedInventoryList[i]);
                         }
                         m0++;
                         break;
@@ -414,10 +400,10 @@ namespace IngameScript
                         m0++;
                         break;
                     case 40:
-                        for (int i = m1; i < InventoryList_nonSMSflagged.Count; i++, m1++)
+                        for (int i = m1; i < SmsFlagedInventoryList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            ClearInventory(InventoryList_nonSMSflagged[i], collectAll_List);
+                            ClearInventory(SmsFlagedInventoryList[i], collectAll_List);
                         }
                         m0++;
                         break;
