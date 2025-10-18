@@ -30,7 +30,7 @@ namespace IngameScript
             + "  / stackingcycle in seconds, 0 = stacking off\n"
             + "stacking_cycle=" + stacking_cycle.ToString() + "\n\n"
             + "  / group of PIM controlled Weapons\n  / Control of WeaponCore Turrets is not necessary\n  / and should remain switched off.\n"
-            + "PIM_controlled_Weapons=" + gungroupName + "\n\n"
+            + "PIM_controlled_Weapons=" + Propertys.Data.CurrentGunGroupName + "\n\n"
             + X_Line + "  / mods that can be used.\n  /     is there a mod missing? \n  /           write it in the comments of SMS or PIM\n\n";
 
             foreach (var mod in usedMods.Keys)
@@ -110,7 +110,7 @@ namespace IngameScript
                         case "collect_all_Ingot": collect_all_Ingot = if_true(cs[1]); break;
                         case "collect_all_Component": collect_all_Component = if_true(cs[1]); break;
                         case "stacking_cycle": int.TryParse(cs[1], out stacking_cycle); break;
-                        case "PIM_controlled_Weapons": gungroupName = cs[1]; break;
+                        case "PIM_controlled_Weapons": Propertys.Data.CurrentGunGroupName = cs[1]; break;
                         default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = if_true(cs[1]); break;
                     }
 

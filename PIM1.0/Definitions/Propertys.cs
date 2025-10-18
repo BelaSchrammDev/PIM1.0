@@ -1,6 +1,7 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,31 +12,75 @@ namespace IngameScript
     {
         public class Loop
         {
+            private static Loop _data = null;
+            public static Loop Data
+            {
+                get
+                {
+                    if (_data == null)
+                    {
+                        _data = new Loop();
+                    }
+                    return _data;
+                }
+            }
+
             // Index of the currently running job
-            public static int CurrentJobIndex = 0;
+            public int CurrentJobIndex = 0;
         }
 
-        public static class Lists 
+        public class Lists
         {
-            public static List<IMyRefinery> Refinerys = new List<IMyRefinery>();
-            public static List<IMyAssembler> Assemblers = new List<IMyAssembler>();
-            public static List<IMyProgrammableBlock> ProgrammableBlocks = new List<IMyProgrammableBlock>();
+            private static Lists _data = null;
+            public static Lists Data
+            {
+                get { 
+                    if (_data == null) 
+                    { 
+                        _data = new Lists(); 
+                    }
 
-            public static Dictionary<string, AssemblerBluePrint> BluePrints_Active = new Dictionary<string, AssemblerBluePrint>();
-            public static Dictionary<string, AssemblerBluePrint> BluePrints_Inactive = new Dictionary<string, AssemblerBluePrint>();
+                    return _data;
+                }
+            }
+
+            public List<IMyRefinery> Refinerys = new List<IMyRefinery>();
+            public List<IMyAssembler> Assemblers = new List<IMyAssembler>();
+            public List<IMyProgrammableBlock> ProgrammableBlocks = new List<IMyProgrammableBlock>();
+            public List<StorageCargo> StorageCargos = new List<StorageCargo>();
+            public List<Gun> guns = new List<Gun>();
+
+            public Dictionary<string, AssemblerBluePrint> BluePrints_Active = new Dictionary<string, AssemblerBluePrint>();
+            public Dictionary<string, AssemblerBluePrint> BluePrints_Inactive = new Dictionary<string, AssemblerBluePrint>();
         }
 
-        public static class Propertys
+        public class Propertys
         {
-            public static double CurrentCycleInSec = 0;
-            public static DateTime LastStart = DateTime.Now;
-            public static bool changeAutoCraftingSettings = true;
+            private static Propertys _data = null;
+            public static Propertys Data
+            {
+                get
+                {
+                    if (_data == null)
+                    {
+                        _data = new Propertys();
+                    }
+                    return _data;
+                }
+            }
+            
+            public double CurrentCycleInSec = 0;
+            public DateTime LastStart = DateTime.Now;
+            public bool changeAutoCraftingSettings = true;
+            public string CurrentGunGroupName = Constants.DefaultGunGroupName;
         }
 
-        public static class Constants 
+        public class Constants 
         {
             public const string AssemblerQueueNameSemikolon = "@ASSEMBLERQUEUE;";
             public const string ItemMaxNameSemikolon = "@ITEMMAX;";
+            public const string DefaultGunGroupName = "PIM controlled Guns";
+
         }
     }
 

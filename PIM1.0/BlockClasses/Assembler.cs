@@ -123,7 +123,7 @@ namespace IngameScript
                     AssemblerBlock.GetQueue(proditem_list);
                     for (int i = proditem_list.Count - 1; i >= 0; i--)
                     {
-                        var bprint = AddProductionAmount(proditem_list[i]);
+                        var bprint = Program.Instance.AddProductionAmount(proditem_list[i]);
                         if (bprint != null)
                         {
                             bprint_list.Add(bprint);
@@ -193,12 +193,12 @@ namespace IngameScript
                             else
                             {
                                 RemoveItemMode = true;
-                                AssemblerBluePrint firstBlueprint = proditem_list.Count > 1 ? GetBluePrintByProductionItem(proditem_list[0]) : null;
+                                AssemblerBluePrint firstBlueprint = proditem_list.Count > 1 ? Program.Instance.GetBluePrintByProductionItem(proditem_list[0]) : null;
                                 if (firstBlueprint != null)
                                 {
                                     for (int i = proditem_list.Count - 1; i > 0; i--)
                                     {
-                                        var productionItemBlueprint = GetBluePrintByProductionItem(proditem_list[i]);
+                                        var productionItemBlueprint = Program.Instance.GetBluePrintByProductionItem(proditem_list[i]);
                                         if (productionItemBlueprint != null
                                             && productionItemBlueprint.MaximumItemAmount != 0
                                             && productionItemBlueprint.ItemPriority > firstBlueprint.ItemPriority)

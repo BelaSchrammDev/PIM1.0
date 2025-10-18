@@ -90,8 +90,8 @@ namespace IngameScript
         {
             public override StringBuilderExtended GetInfoText()
             {
-                if (guns.Count == 0) return null;
-                InfoString.SetText("AmmonitionManager: ", guns.Count.ToString(), " weapons.");
+                if (Lists.Data.guns.Count == 0) return null;
+                InfoString.SetText("AmmonitionManager: ", Lists.Data.guns.Count.ToString(), " weapons.");
                 return InfoString;
             }
         }
@@ -101,8 +101,8 @@ namespace IngameScript
         {
             public override StringBuilderExtended GetInfoText()
             {
-                if (storageCargos.Count == 0) return null;
-                InfoString.SetText("StorageManager: ", storageCargos.Count.ToString(), " containers.");
+                if (Lists.Data.StorageCargos.Count == 0) return null;
+                InfoString.SetText("StorageManager: ", Lists.Data.StorageCargos.Count.ToString(), " containers.");
                 return InfoString;
             }
         }

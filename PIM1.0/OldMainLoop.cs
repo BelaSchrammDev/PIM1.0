@@ -1,207 +1,35 @@
 ﻿using Sandbox.ModAPI.Ingame;
-using Sandbox.ModAPI.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using VRage;
-using VRage.Game.ModAPI.Ingame;
+using VRage.Game;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public class GridScanningJob : ProcessingBlockListBase<IMyInventoryOwner>
-        {
-            public GridScanningJob(Program program) : base(program, "GridScanningJob")
-            {
-            }
 
-            protected override void ProcessingTerminalBlock(IMyTerminalBlock t)
-            {
-                var inventoryOwner = t as IMyInventoryOwner;
-
-                if(inventoryOwner == null) return;
-
-                Parameter pm = new Parameter();
-                bool isStorage = t.CustomName.Contains(X_StorageTag)
-                    , isSmsBlock = false
-                    , isNoKeep = false
-                    , isContainerOrConnector = t.BlockDefinition.SubtypeId.Contains("Container") || t.BlockDefinition.SubtypeId.Contains("Connector");
-
-                if (pm.ParseArgs(t.CustomName))
-                {
-                    isSmsBlock = true;
-                    isNoKeep = !pm.IsParameter("Keep");
-                }
-
-                for (int i = 0; i < inventoryOwner.InventoryCount; i++)
-                {
-                    var inv = inventoryOwner.GetInventory(i);
-                    CountItemsToDictionary(inv);
-
-                    if (isStorage) continue;
-
-                    if (isSmsBlock)
-                    {
-                        if (isNoKeep) NonSmsFlagedInventoryList.Add(inv);
-                        Program.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
-                    }
-                    else if (isContainerOrConnector) NonSmsFlagedInventoryList.Add(inv);
-                    else SmsFlagedInventoryList.Add(inv);
-                }
-
-            }
-        }
-
-        public void OldMainLoop(UpdateType updateSource)
+        void OldMainLoop(UpdateType updateSource)
         {
             do
             {
                 switch (m0)
                 {
                     case -1:
-                        if (_jobs[Loop.CurrentJobIndex].Schedule() == Job.ScheduleResult.Done)
+                        if (_jobs[Loop.Data.CurrentJobIndex].Schedule() == Job.ScheduleResult.Done)
                         {
                             // Move to the next job, wrapping around if necessary
-                            Loop.CurrentJobIndex++;
+                            Loop.Data.CurrentJobIndex++;
 
-                            if (Loop.CurrentJobIndex >= _jobs.Length)
+                            if (Loop.Data.CurrentJobIndex >= _jobs.Length)
                             {
-                                Loop.CurrentJobIndex = 0;
-                                m0 = 10;
+                                Loop.Data.CurrentJobIndex = 0;
+                                m0 = 30;
                             }
                         }
-                        break;
-
-
-                    // Ammomanager -----------------------------------------------------------------------------------------------------------------
-                    case 10:
-                        var group = GridTerminalSystem.GetBlockGroupWithName(gungroupName);
-                        if (group == null)
-                        {
-                            if (guns.Count > 0)
-                            {
-                                for (int i = guns.Count - 1; i >= 0; i--) guns[i].Remove();
-                                guns.Clear();
-                            }
-                            m0++;
-                            m0++;
-                            break;
-                        }
-                        else group.GetBlocksOfType<IMyUserControllableGun>(ugun, block => block.IsSameConstructAs(Me));
-                        for (int i = guns.Count - 1; i >= 0; i--)
-                        {
-                            if (ugun.Contains(guns[i].gun)) ugun.Remove(guns[i].gun);
-                            else
-                            {
-                                var gun = guns[i];
-                                gun.Remove();
-                                guns.Remove(gun);
-                            }
-                        }
-                        m1 = ugun.Count - 1;
-                        m0++;
-                        break;
-
-                    case 11:
-                        for (int i = m1; i >= 0; i--, m1--)
-                        {
-                            if (maxInstructions()) return;
-                            guns.Add(new Gun(ugun[i]));
-                        }
-                        m0++;
-                        break;
-
-                    case 12:
-                        m1 = 0;
-                        m0++;
-                        break;
-
-                    case 13:
-                        for (int i = m1; i < guns.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            guns[i].Refresh();
-                        }
-                        m0++;
-                        break;
-
-                    // StorageCargo -----------------------------------------------------------------------------------------------------------------
-                    case 14:
-                        GridTerminalSystem.GetBlocksOfType<IMyCargoContainer>(tbl, cargo => (cargo.CustomName.Contains(X_StorageTag)));
-                        for (int i = storageCargos.Count - 1; i >= 0; i--)
-                        {
-                            if (tbl.Contains(storageCargos[i].container)) tbl.Remove(storageCargos[i].container);
-                            else
-                            {
-                                var stor = storageCargos[i];
-                                stor.Remove();
-                                storageCargos.Remove(stor);
-                            }
-                        }
-                        m1 = tbl.Count - 1;
-                        m0++;
-                        break;
-
-                    case 15:
-                        for (int i = m1; i >= 0; i--, m1--)
-                        {
-                            if (maxInstructions()) return;
-                            storageCargos.Add(new StorageCargo(tbl[i]));
-                        }
-                        m0++;
-                        break;
-                    case 16:
-                        m0++;
-                        break;
-                    case 17:
-                        m0++;
-                        break;
-                    case 18: m0++; break;
-                    case 19: m0++; break;
-                    case 20: m0++; break;
-                    case 21: m0++; break;
-                    case 22: m0++; break;
-                    case 23: m0++; break;
-
-
-                    // Counting WelderBlocks, if working do nothing ------------------------------------------------------------------------------------------------
-                    case 24:
-                        GridTerminalSystem.GetBlocksOfType<IMyShipWelder>(tbl, block => block.IsSameConstructAs(Me));
-                        m1 = 0;
-                        m0++;
-                        break;
-                    case 25:
-                        for (int i = m1; i < tbl.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            var bd = tbl[i].BlockDefinition.SubtypeId.ToString();
-                            if (bd.Contains("ShipLaserMultitool"))
-                            {
-                                bool weld = true;
-                                var pp = tbl[i].GetProperty("ToolMode");
-                                if (pp != null && pp.TypeName == "Boolean") weld = tbl[i].GetValue<bool>("ToolMode");
-                                if (weld) { if (!(tbl[i] as IMyFunctionalBlock).Enabled) pushTerminalBlock(tbl[i]); }
-                                else pushTerminalBlock(tbl[i]);
-                            }
-                            else if (!(tbl[i] as IMyFunctionalBlock).Enabled) pushTerminalBlock(tbl[i]);
-                        }
-                        m0++;
-                        break;
-
-                    case 26:
-                        m0++;
-                        break;
-                    case 27:
-                        m0++;
-                        break;
-                    case 28:
-                        m0++;
-                        break;
-                    case 29:
-                        m0++;
                         break;
 
                     // Stacking --------------------------------------------------------------------------------------------------------------------------------
@@ -335,54 +163,58 @@ namespace IngameScript
                         m0++;
                         break;
 
-
+                    // Find Refinery Blocks -----------------------------------------------------------------------------------------------------------------
                     case 33:
-                        foreach (var b in Lists.BluePrints_Active.Values) b.AssemblyAmount = 0;
-                        foreach (var b in Lists.BluePrints_Inactive.Values) b.AssemblyAmount = 0;
-                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Refinerys, block => block.CubeGrid == Me.CubeGrid);
+                        foreach (var b in Lists.Data.BluePrints_Active.Values) b.AssemblyAmount = 0;
+                        foreach (var b in Lists.Data.BluePrints_Inactive.Values) b.AssemblyAmount = 0;
+                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Data.Refinerys, block => block.CubeGrid == Me.CubeGrid);
                         for (int i = RefineryList.Count - 1; i >= 0; i--)
                         {
-                            if (Lists.Refinerys.Contains(RefineryList[i].RefineryBlock)) Lists.Refinerys.Remove(RefineryList[i].RefineryBlock);
+                            if (Lists.Data.Refinerys.Contains(RefineryList[i].RefineryBlock)) Lists.Data.Refinerys.Remove(RefineryList[i].RefineryBlock);
                             else
                             {
-                                Propertys.changeAutoCraftingSettings = true;
+                                Propertys.Data.changeAutoCraftingSettings = true;
                                 RefineryList.Remove(RefineryList[i]);
                             }
                         }
                         Refinery.priobt = "";
-                        m1 = Lists.Refinerys.Count - 1;
+                        m1 = Lists.Data.Refinerys.Count - 1;
                         m0++;
                         break;
                     case 34:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
                             if (maxInstructions()) return;
-                            RefineryList.Add(new Refinery(Lists.Refinerys[i]));
+                            RefineryList.Add(new Refinery(Lists.Data.Refinerys[i]));
                         }
                         m0++;
                         break;
+
+                    // Find Assembler Blocks -----------------------------------------------------------------------------------------------------------------
                     case 35:
-                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Assemblers, block => block.CubeGrid == Me.CubeGrid);
+                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Data.Assemblers, block => block.CubeGrid == Me.CubeGrid);
                         for (int i = AssemblerList.Count - 1; i >= 0; i--)
                         {
-                            if (Lists.Assemblers.Contains(AssemblerList[i].AssemblerBlock)) Lists.Assemblers.Remove(AssemblerList[i].AssemblerBlock);
+                            if (Lists.Data.Assemblers.Contains(AssemblerList[i].AssemblerBlock)) Lists.Data.Assemblers.Remove(AssemblerList[i].AssemblerBlock);
                             else
                             {
-                                Propertys.changeAutoCraftingSettings = true;
+                                Propertys.Data.changeAutoCraftingSettings = true;
                                 AssemblerList.Remove(AssemblerList[i]);
                             }
                         }
-                        m1 = Lists.Assemblers.Count - 1;
+                        m1 = Lists.Data.Assemblers.Count - 1;
                         m0++;
                         break;
                     case 36:
                         for (int i = m1; i >= 0; i--, m1--)
                         {
                             if (maxInstructions()) return;
-                            AssemblerList.Add(new Assembler(Lists.Assemblers[i]));
+                            AssemblerList.Add(new Assembler(Lists.Data.Assemblers[i]));
                         }
                         m0++;
                         break;
+
+                    // Inventory Clearing -----------------------------------------------------------------------------------------------------------------
                     case 37:
                         m1 = 0;
                         m0++;
@@ -407,12 +239,15 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+                    // Storage Inventory Refresh -----------------------------------------------------------------------------------------------------------------
                     case 41:
                         m1 = 0;
                         foreach (var a in ammoDefs.Values) a.CalcAmmoInventoryRatio();
                         m0++;
                         break;
-                    case 42: // ItemTransfer
+
+                    case 42:
                         for (int i = m1; i < storageinvs.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
@@ -420,6 +255,9 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+
+                    // Refinery Refresh ----------------------------------------------------------------------------------------------------------------- 
                     case 43:
                         Refinery.cn = 0;
                         foreach (var b in RefineryBlueprints) b.RefineryCount = 0;
@@ -434,6 +272,8 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+                    // RefineryManager -----------------------------------------------------------------------------------------------------------------
                     case 45:
                         CalcIngotPrio();
                         RenderAmmoPrioLCDS();
@@ -449,6 +289,8 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+                    // Assembler Refresh -----------------------------------------------------------------------------------------------------------------
                     case 47:
                         m1 = 0;
                         m0++;
@@ -461,8 +303,10 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+                    // Assembler Manager -----------------------------------------------------------------------------------------------------------------
                     case 49:
-                        s0 = new List<string>(Lists.BluePrints_Active.Keys);
+                        s0 = new List<string>(Lists.Data.BluePrints_Active.Keys);
                         m1 = 0;
                         m0++;
                         break;
@@ -470,7 +314,7 @@ namespace IngameScript
                         for (int i = m1; i < s0.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            var b = Lists.BluePrints_Active[s0[i]];
+                            var b = Lists.Data.BluePrints_Active[s0[i]];
                             b.SetCurrentAmount((int)inventar.GetValueOrDefault(b.ItemName, 0));
                             b.CalcPriority();
                             if (b.NeedsAssembling())
@@ -483,8 +327,10 @@ namespace IngameScript
                         }
                         m0++;
                         break;
+
+                    // Set Amount of Inavtive BluePrints -----------------------------------------------------------------------------------------------------------------
                     case 51:
-                        s0 = new List<string>(Lists.BluePrints_Inactive.Keys);
+                        s0 = new List<string>(Lists.Data.BluePrints_Inactive.Keys);
                         m1 = 0;
                         m0++;
                         break;
@@ -492,11 +338,13 @@ namespace IngameScript
                         for (int i = m1; i < s0.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            var b = Lists.BluePrints_Inactive[s0[i]];
+                            var b = Lists.Data.BluePrints_Inactive[s0[i]];
                             if (inventar.ContainsKey(b.ItemName)) b.SetCurrentAmount((int)inventar[b.ItemName]);
                         }
                         m0++;
                         break;
+
+                    // AutoCrafting -----------------------------------------------------------------------------------------------------------------
                     case 53:
                         m1 = 0;
                         m2 = 0;
@@ -526,6 +374,7 @@ namespace IngameScript
                         if (m2 == 0) m0++;
                         else m0--;
                         break;
+
                     default:
                         for (int i = viewList.Count - 1; i >= 0; i--) { if (viewList[i].IsOver()) viewList.Remove(viewList[i]); }
                         // -----------------------
@@ -572,8 +421,6 @@ namespace IngameScript
                 }
             }
             while (!maxInstructions());
-
-
         }
     }
 }

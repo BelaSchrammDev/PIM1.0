@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
@@ -26,12 +27,12 @@ namespace IngameScript
         string Debug_AssemblerBPs()
         {
             string DebugText = "Accepted BluePrints by Assemblersubtype\nPool:\n";
-            foreach (var bluePrint in Lists.BluePrints_Inactive)
+            foreach (var bluePrint in Lists.Data.BluePrints_Inactive)
             {
                 DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.AutoCraftingName + " / " + bluePrint.Value.definition_id + "\n";
             }
             DebugText += "Active:\n";
-            foreach (var bluePrint in Lists.BluePrints_Active)
+            foreach (var bluePrint in Lists.Data.BluePrints_Active)
             {
                 DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.AutoCraftingName + " / " + bluePrint.Value.definition_id + "\n";
             }
@@ -55,7 +56,7 @@ namespace IngameScript
         string Debug_ComponentPrio()
         {
             var DebugText = "";
-            foreach (var item in Lists.BluePrints_Active.Values)
+            foreach (var item in Lists.Data.BluePrints_Active.Values)
             {
                 DebugText += " # " + item.AutoCraftingName + " -> " + item.ItemPriority + "\n";
             }
@@ -85,7 +86,7 @@ namespace IngameScript
         string Debug_Guns()
         {
             var DebugText = "Guns\n";
-            foreach (var gun in guns)
+            foreach (var gun in Lists.Data.guns)
             {
                 DebugText += " * " + gun.gun.CustomName + " / " + gun.CurrentAmmo + "\n";
                 foreach (var item in gun.ammomax)
@@ -96,13 +97,27 @@ namespace IngameScript
             return DebugText;
         }
 
+        string Debug_ListBlockTypes<T>()
+            where T : class
+        {
+            var DebugText = $"Blocks{nameof(T)}\n";
+            var list = new List<T>();
+            GridTerminalSystem.GetBlocksOfType(list, block => block as T != null);
+            foreach (var t in list)
+            {
+                var pBlock = t as IMyTerminalBlock;
+                DebugText += " * " + pBlock.CustomName + " / " + pBlock.BlockDefinition.ToString() + "\n";
+            }
+            return DebugText;
+        }
+
         void DebugPrint()
         {
             var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
             if (panel == null) return;
             if (panel.CubeGrid != Me.CubeGrid) return;
             var s = "";
-            s += Debug_InventoryManagerList();
+            s += Debug_ListBlockTypes<IMyInventoryOwner>();
             panel.WriteText(s + "\n" + debugString);
             debugString = "";
         }

@@ -6,8 +6,7 @@ namespace IngameScript
 {
     partial class Program
     {
-        public abstract class ProcessingBlockListBase<T> : CountingJob
-            where T : class
+        public abstract class ProcessingBlockListBase : CountingJob
         {
             protected List<IMyTerminalBlock> Blocks = new List<IMyTerminalBlock>();
 
@@ -29,17 +28,14 @@ namespace IngameScript
 
             protected override void ProcessingIndex(int index)
             {
-                if (IsValidBlock(Blocks[index])) 
-                {
-                    ProcessingTerminalBlock(Blocks[index]);
-                }
+                ProcessingTerminalBlock(Blocks[index]);
             }
 
             protected abstract void ProcessingTerminalBlock(IMyTerminalBlock t);
 
-            private bool IsValidBlock(IMyTerminalBlock t) 
+            protected virtual bool IsValidBlock(IMyTerminalBlock t) 
             {
-                return t != null && t as T != null && t.IsSameConstructAs(Program.Me);
+                return t.IsSameConstructAs(Program.Me);
             }
         }
     }

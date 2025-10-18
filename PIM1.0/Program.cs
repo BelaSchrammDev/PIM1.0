@@ -40,12 +40,8 @@ namespace IngameScript
         static List<StorageInventory> storageinvs = new List<StorageInventory>();
         
         static List<Assembler> AssemblerList = new List<Assembler>();
-        List<IMyUserControllableGun> ugun = new List<IMyUserControllableGun>();
         List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
         List<string> collectAll_List = new List<string>();
-        string gungroupName = "PIM controlled Guns";
-        static List<Gun> guns = new List<Gun>();
-        static List<StorageCargo> storageCargos = new List<StorageCargo>();
         Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
         static Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
         List<string> mods = new List<string>(); string curmod = M_Vanilla;
@@ -68,7 +64,7 @@ namespace IngameScript
         List<string> autocrafting_Types = new List<string>();
         void InitAutoCraftingTypes()
         {
-            foreach (var bpType in Lists.BluePrints_Active.Values)
+            foreach (var bpType in Lists.Data.BluePrints_Active.Values)
                 if (!autocrafting_Types.Contains(bpType.AutoCraftingType))
                     autocrafting_Types.Add(bpType.AutoCraftingType);
         }
@@ -79,7 +75,7 @@ namespace IngameScript
         
         void writeInfo()
         {
-            var s = SI1 + SI2 + getRunningSign() + (LoopManager.Master == null ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + LoopManager.Master.CustomName);
+            var s = SI1 + SI2 + getRunningSign() + (LoopManager.Master == null ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + LoopManager.Master.CustomName);
             Echo(s);
             if (ShowInfoPBLcd)
             {
@@ -90,8 +86,12 @@ namespace IngameScript
             }
         }
 
+        
+
         public Program()
         {
+            Instance = this;
+            
             viewList.Add(new AmmoManagerInfo());
             viewList.Add(new StorageManagerInfo());
             viewList.Add(new RefineryManagerInfo());
@@ -113,6 +113,8 @@ namespace IngameScript
                 new ChangeAutoCraftingSettingsJob(this),
                 new ClearJob(this),
                 new GridScanningJob(this),
+                new FindControllingGunJob(this),
+                new RefreshingControllingGunsJob(this),
 
             };
         }
@@ -181,9 +183,6 @@ namespace IngameScript
         int r = 0;
         int rc = 1;
         int mr = 7;
-
-        StringBuilderExtended runningSign = new StringBuilderExtended(10);
-
         StringBuilderExtended getRunningSign()
         {
             runningSign.SetText('|');
@@ -202,5 +201,9 @@ namespace IngameScript
             runningSign.Append("| ");
             return runningSign;
         }
+
+        StringBuilderExtended runningSign = new StringBuilderExtended(10);
+        // new property section
+        public static Program Instance;
     }
 }

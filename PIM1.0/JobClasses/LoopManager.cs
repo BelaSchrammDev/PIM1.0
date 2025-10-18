@@ -1,5 +1,6 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using System;
+using System.Collections.Generic;
 
 namespace IngameScript
 {
@@ -20,13 +21,13 @@ namespace IngameScript
 
             public override RunJobResult RunJob()
             {
-                Propertys.CurrentCycleInSec = (DateTime.Now - Propertys.LastStart).TotalSeconds;
-                Propertys.LastStart = DateTime.Now;
-                Program.GridTerminalSystem.GetBlocksOfType(Lists.ProgrammableBlocks, block => block.IsSameConstructAs(Program.Me));
+                Propertys.Data.CurrentCycleInSec = (DateTime.Now - Propertys.Data.LastStart).TotalSeconds;
+                Propertys.Data.LastStart = DateTime.Now;
+                Program.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsSameConstructAs(Program.Me));
 
-                if (IfMeIsMaster())
+                if (IfMeIsMaster(Lists.Data.ProgrammableBlocks))
                 {
-                    SetMasterBehavior();
+                    SetMasterBehavior(Propertys.Data.CurrentCycleInSec);
                     return RunJobResult.Finished;
                 }
                 else
@@ -44,11 +45,11 @@ namespace IngameScript
                 SetMasterBehavior();
             }
 
-            private static void SetMasterBehavior()
+            private static void SetMasterBehavior(double currentCycleInSec = 0.0)
             {
                 rti.UpdateFrequency = UpdateFrequency.Update10;
-                if (Propertys.CurrentCycleInSec < 3.5) CurrentInstructionAmount -= 100;
-                else if (Propertys.CurrentCycleInSec > 4.5) CurrentInstructionAmount += 100;
+                if (currentCycleInSec < 3.5) CurrentInstructionAmount -= 100;
+                else if (currentCycleInSec > 4.5) CurrentInstructionAmount += 100;
                 if (CurrentInstructionAmount < INSTRUCTION_MIN) CurrentInstructionAmount = INSTRUCTION_MIN;
                 else if (CurrentInstructionAmount > INSTRUCTION_MAX) CurrentInstructionAmount = INSTRUCTION_MAX;
             }
@@ -59,9 +60,9 @@ namespace IngameScript
                 CurrentInstructionAmount = INSTRUCTION_MIN;
             }
 
-            private static bool IfMeIsMaster() {
+            private static bool IfMeIsMaster(List<IMyProgrammableBlock> prgBlocks) {
                 Master = null;
-                foreach (var p in Lists.ProgrammableBlocks)
+                foreach (var p in prgBlocks)
                 {
                     if (p.Enabled && p.DetailedInfo.StartsWith(SI1))
                     {

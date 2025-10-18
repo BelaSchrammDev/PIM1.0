@@ -164,16 +164,16 @@ namespace IngameScript
                     switch (typeid.GetTypeID())
                     {
                         case RefreshType.WaterRecyclingSystem:
-                            if (Lists.BluePrints_Active.ContainsKey(Ingot.WaterFood) && !Lists.BluePrints_Active[Ingot.WaterFood].IfMax()) WaterRecyclingSystemManager();
+                            if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.WaterFood) && !Lists.Data.BluePrints_Active[Ingot.WaterFood].IfMax()) WaterRecyclingSystemManager();
                             else if (always_recycle_greywater && inventar.ContainsKey(Ingot.GreyWater) && inventar[Ingot.GreyWater] > 0) WaterRecyclingSystemManager(true);
                             else ClearInputInventoryIfControledByPIM();
                             break;
                         case RefreshType.HydroponicsFarm:
-                            if (Lists.BluePrints_Active.ContainsKey(Ingot.SubFresh) && !Lists.BluePrints_Active[Ingot.SubFresh].IfMax()) HydrophonicsManager();
+                            if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.SubFresh) && !Lists.Data.BluePrints_Active[Ingot.SubFresh].IfMax()) HydrophonicsManager();
                             else ClearInputInventoryIfControledByPIM();
                             break;
                         case RefreshType.Reprocessor:
-                            if (Lists.BluePrints_Active.ContainsKey(BluePrintID_SpentFuelReprocessing) && !Lists.BluePrints_Active[BluePrintID_SpentFuelReprocessing].IfMax()) ReprocessorManager();
+                            if (Lists.Data.BluePrints_Active.ContainsKey(BluePrintID_SpentFuelReprocessing) && !Lists.Data.BluePrints_Active[BluePrintID_SpentFuelReprocessing].IfMax()) ReprocessorManager();
                             else ClearInputInventoryIfControledByPIM();
                             break;
                         case RefreshType.VanillaRefinery:
@@ -347,9 +347,9 @@ namespace IngameScript
 
             void CalculateRefineryAmount(string bluePrintName)
             {
-                if (Lists.BluePrints_Active.ContainsKey(bluePrintName))
+                if (Lists.Data.BluePrints_Active.ContainsKey(bluePrintName))
                 {
-                    var b = Lists.BluePrints_Active[bluePrintName];
+                    var b = Lists.Data.BluePrints_Active[bluePrintName];
                     var u = b.MaximumItemAmount - b.CurrentItemAmount;
                     if (b.MaximumItemAmount > 0 && u > 0) b.RefineryAmount = u;
                     else b.RefineryAmount = 0;

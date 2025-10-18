@@ -43,10 +43,10 @@ namespace IngameScript
                     }
                     else if (acLines.Count() == 6)
                     {
-                        if (Lists.BluePrints_Active.ContainsKey(acLines[4])) Lists.BluePrints_Active[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
+                        if (Lists.Data.BluePrints_Active.ContainsKey(acLines[4])) Lists.Data.BluePrints_Active[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
                     }
                 }
-                if (act_new) AssemblerBluePrint.SetAutocraftingThresholdNew();
+                if (act_new) SetAutocraftingThresholdNew();
                 // write autocrafting config
                 var acString = "/ Autocraftingdefinition:\n";
                 acString += "/ add '...(sms)' to the name of assemblers to crafting their items,\n/ and set the max quantity as you want\n\n";
@@ -73,7 +73,7 @@ namespace IngameScript
                         filter.SetFilterToAll();
                     }
                     acString += line2;
-                    var bpList = Lists.BluePrints_Active.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName));
+                    var bpList = Lists.Data.BluePrints_Active.Values.ToList().FindAll(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName));
                     bpList.Sort((x, y) => x.AutoCraftingName.CompareTo(y.AutoCraftingName));
                     foreach (var bp in bpList)
                     {

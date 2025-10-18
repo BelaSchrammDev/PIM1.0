@@ -16,53 +16,53 @@ namespace IngameScript
 
             public override void InitJob()
             {
-                if (!Propertys.changeAutoCraftingSettings)
+                if (!Propertys.Data.changeAutoCraftingSettings)
                 {
                     debugString += "kein calc_ACDef\n";
                     schedule = false;
                     return;
                 }
                 debugString += "calc_ACDef\n";
-                Program.GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Assemblers, block => block.CubeGrid == Program.Me.CubeGrid);
-                Program.GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Refinerys, block => block.CubeGrid == Program.Me.CubeGrid);
-                BluePrintKeyList = new List<string>(Lists.BluePrints_Active.Keys);
+                Program.GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Data.Assemblers, block => block.CubeGrid == Program.Me.CubeGrid);
+                Program.GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Data.Refinerys, block => block.CubeGrid == Program.Me.CubeGrid);
+                BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Active.Keys);
                 for (int i = BluePrintKeyList.Count - 1; i >= 0; i--)
                 {
-                    var b = Lists.BluePrints_Active[BluePrintKeyList[i]];
-                    Lists.BluePrints_Inactive.Add(BluePrintKeyList[i], b);
-                    Lists.BluePrints_Active.Remove(BluePrintKeyList[i]);
+                    var b = Lists.Data.BluePrints_Active[BluePrintKeyList[i]];
+                    Lists.Data.BluePrints_Inactive.Add(BluePrintKeyList[i], b);
+                    Lists.Data.BluePrints_Active.Remove(BluePrintKeyList[i]);
                 }
-                BluePrintKeyList = new List<string>(Lists.BluePrints_Inactive.Keys);
+                BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Inactive.Keys);
                 Index = BluePrintKeyList.Count - 1;
-                Propertys.changeAutoCraftingSettings = false;
+                Propertys.Data.changeAutoCraftingSettings = false;
             }
 
             public override RunJobResult RunJob()
             {
                 if(!schedule) return RunJobResult.Finished;
 
-                var b = Lists.BluePrints_Inactive[BluePrintKeyList[Index]];
+                var b = Lists.Data.BluePrints_Inactive[BluePrintKeyList[Index]];
                 if (BluePrintKeyList[Index] == Ingot.SubFresh || BluePrintKeyList[Index] == (Refinery.BluePrintID_SpentFuelReprocessing))
                 {
-                    foreach (var r in Lists.Refinerys)
+                    foreach (var r in Lists.Data.Refinerys)
                     {
                         var subTypeName = r.BlockDefinition.SubtypeId;
                         if (r.CustomName.Contains("(sms") && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
                         {
-                            Lists.BluePrints_Active.Add(BluePrintKeyList[Index], b);
-                            Lists.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
+                            Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], b);
+                            Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
                             break;
                         }
                     }
                 }
                 else
                 {
-                    foreach (var a in Lists.Assemblers)
+                    foreach (var a in Lists.Data.Assemblers)
                     {
                         if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(b.definition_id))
                         {
-                            Lists.BluePrints_Active.Add(BluePrintKeyList[Index], b);
-                            Lists.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
+                            Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], b);
+                            Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
                             break;
                         }
                     }

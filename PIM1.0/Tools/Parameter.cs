@@ -62,7 +62,7 @@ namespace IngameScript
                                     else AddParameter(s);
                                 }
                             }
-                            if (canChangeAutocraftingStatus && PIMcontrolled == false) Propertys.changeAutoCraftingSettings = true;
+                            if (canChangeAutocraftingStatus && PIMcontrolled == false) Propertys.Data.changeAutoCraftingSettings = true;
                             PIMcontrolled = true;
                             return true;
                         }
@@ -70,7 +70,7 @@ namespace IngameScript
                 }
                 Name.Clear();
                 Name.Append(newCustomName.Trim());
-                if (canChangeAutocraftingStatus && PIMcontrolled == true) Propertys.changeAutoCraftingSettings = true;
+                if (canChangeAutocraftingStatus && PIMcontrolled == true) Propertys.Data.changeAutoCraftingSettings = true;
                 PIMcontrolled = false;
                 return false;
             }

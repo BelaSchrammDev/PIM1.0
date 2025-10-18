@@ -9,23 +9,28 @@ namespace IngameScript
 {
     partial class Program
     {
-        static AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
+        AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
         {
             var bprint = GetBluePrintByProductionItem(pi);
             if (bprint != null) bprint.AssemblyAmount += pi.Amount.ToIntSafe();
             return bprint;
         }
-        static AssemblerBluePrint GetBluePrintByItemName(string itemName)
+        AssemblerBluePrint GetBluePrintByItemName(string itemName)
         {
-            foreach (var b in Lists.BluePrints_Active.Values) if (b.ItemName == itemName) return b;
-            foreach (var b in Lists.BluePrints_Inactive.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.ItemName == itemName) return b;
             return null;
         }
-        static AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
+        AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
         {
-            foreach (var b in Lists.BluePrints_Active.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
-            foreach (var b in Lists.BluePrints_Inactive.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
             return null;
+        }
+
+        public void SetAutocraftingThresholdNew()
+        {
+            foreach (var bp in Lists.Data.BluePrints_Active.Values) bp.CalcMinimumAmount();
         }
 
         void addBluePrint(string typeID, string subtypeID, string itemName, string alternativItemName)
@@ -36,7 +41,7 @@ namespace IngameScript
             if (subtypeID.StartsWith("Position0")) subtypeID = subtypeID.Substring(subtypeID.IndexOf('_') + 1);
             if (!mods.Contains(curmod)) mods.Add(curmod);
             var bpi = typeID + " " + subtypeID;
-            if (!Lists.BluePrints_Inactive.ContainsKey(bpi)) Lists.BluePrints_Inactive.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
+            if (!Lists.Data.BluePrints_Inactive.ContainsKey(bpi)) Lists.Data.BluePrints_Inactive.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
         }
         void C(string s, string astr = "", string astn = "") { addBluePrint("Component", s, astr, astn); }
         void A(string s, string astr = "", string astn = "") { addBluePrint(IG_Ammo, s, astr, astn); }
@@ -69,10 +74,6 @@ namespace IngameScript
             string type = "";
             public string subtype = "";
             string subtypename = "";
-            static public void SetAutocraftingThresholdNew()
-            {
-                foreach (var bp in Lists.BluePrints_Active.Values) bp.CalcMinimumAmount();
-            }
             static string BluePrintNameToItemName(string t, string s)
             {
                 var cs = "Component";
@@ -157,7 +158,7 @@ namespace IngameScript
             public bool NeedsAssembling() { return (MinimumAmount > CurrentItemAmount + AssemblyAmount); }
             public bool IfMax() { return (MaximumItemAmount <= CurrentItemAmount); }
             public void SetMaximumAmount(int m) { MaximumItemAmount = m; CalcMinimumAmount(); }
-            void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
+            public void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
             public void SetCurrentAmount(int amount)
             {
                 NumBluePrintToAssembler = 0;

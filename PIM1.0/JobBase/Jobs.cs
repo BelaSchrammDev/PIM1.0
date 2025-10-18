@@ -176,7 +176,7 @@ namespace IngameScript
                 // Backward: end > start is invalid (e.g., start=3, end=5 but meant to go backward)
                 // Actually, we need to check if it's logically empty
                 // For now, check common empty cases like list.Count=0 → start=0, end=-1
-                return (start == 0 && end < 0) || (start < 0) || (end < 0 && start >= 0);
+                return (start == 0 && end < 0) || (start < 0) || (end < 0 && start >= 0) || start == end;
             }
 
             /// <summary>
@@ -205,7 +205,7 @@ namespace IngameScript
             protected bool IsEmpty => _step == 0;
         }
 
-        public class MultiJob : Job
+        class MultiJob : Job
         {
             // Sub-jobs to be executed in sequence
             private readonly Job[] _subJobs;
