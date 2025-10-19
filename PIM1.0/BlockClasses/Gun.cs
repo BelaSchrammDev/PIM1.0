@@ -9,12 +9,13 @@ namespace IngameScript
 {
     partial class Program
     {
+        //TODO: storage inventory list as static in StorageInventory
         public class Gun : StorageInventory
         {
+
             public IMyUserControllableGun gun = null;
             public string gunType = "";
             public string CurrentAmmo = "";
-            public List<AmmoDefs> ammoTypesDefinition = new List<AmmoDefs>();
             public Dictionary<string, int> ammomax = new Dictionary<string, int>();
             public Gun(IMyUserControllableGun g)
             {
@@ -23,35 +24,26 @@ namespace IngameScript
                 inv = g.GetInventory();
                 List<MyItemType> ammotypes = new List<MyItemType>();
                 inv.GetAcceptedItems(ammotypes);
-                var ammoTypesCount = 0;
-                MultiAmmoGuns newMultiAmmoGun = null;
-                foreach (var a in ammotypes) if (a.TypeId.EndsWith(IG_Ammo) && a.SubtypeId != "Energy") ammoTypesCount++;
-                if ((ammoTypesCount > 1) && !(gun is IMyLargeInteriorTurret))
-                {
-                    newMultiAmmoGun = getNewMultiAmmoGun(this);
-                }
-                var multiAmmo = (ammoTypesCount > 1) && !(gun is IMyLargeInteriorTurret) ? true : false;
+
                 foreach (var a in ammotypes)
                 {
                     if (a.TypeId.EndsWith(IG_Ammo) && a.SubtypeId != "Energy")
                     {
                         var mtype = IG_Ammo + ' ' + a.SubtypeId;
-                        var newadef = getAmmoDefs(mtype);
+                        var newadef = AmmoDefs.GetAmmoDefs(mtype);
                         newadef.guns.Add(this);
-                        ammoTypesDefinition.Add(newadef);
                         var amax = (int)((float)inv.MaxVolume / a.GetItemInfo().Volume);
                         newadef.maxOfVolume += amax;
                         ammomax.Add(mtype, amax);
-                        if (newMultiAmmoGun != null) newMultiAmmoGun.addAmmoDef(newadef);
                     }
                 }
+
                 storageinvs.Add(this);
             }
             public override bool checkItems()
             {
-                if (gun is IMyLargeInteriorTurret) return false;
-                // zum testen..................
-                if (CurrentAmmo == "") return false;
+                if (gun is IMyLargeInteriorTurret || CurrentAmmo == "") return false;
+
                 int aamount = (int)(ammomax[CurrentAmmo] * ammoDefs[CurrentAmmo].ratio);
                 if (aamount < 1) aamount = 1;
                 if (items.Count == 0) items.Add(CurrentAmmo, aamount);
@@ -63,9 +55,9 @@ namespace IngameScript
                 else items[CurrentAmmo] = aamount;
                 return true;
             }
+
             public void Refresh()
             {
-                CountItemsToDictionary(inv);
                 var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
                 if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor))
                 {
@@ -74,6 +66,7 @@ namespace IngameScript
 
                 CurrentAmmo = GetCurrentAmmo();
             }
+
             string GetCurrentAmmo()
             {
                 if (ammomax.Count == 0) return "";
@@ -82,7 +75,7 @@ namespace IngameScript
                 var currentAmmunitionPrio = 0;
                 foreach (var a in ammomax)
                 {
-                    var prio = getAmmoDefs(a.Key).GetAmmoPriority(gunType);
+                    var prio = AmmoDefs.GetAmmoDefs(a.Key).GetAmmoPriority(gunType);
                     if (prio > currentAmmunitionPrio && inventar.ContainsKey(a.Key) && inventar[a.Key] > 0)
                     {
                         currentAmmunition = a.Key;
@@ -91,6 +84,7 @@ namespace IngameScript
                 }
                 return currentAmmunition;
             }
+
             public void Remove()
             {
                 var keyList = ammoDefs.Keys.ToArray();

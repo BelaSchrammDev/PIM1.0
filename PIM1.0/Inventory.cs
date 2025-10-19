@@ -311,7 +311,7 @@ namespace IngameScript
             for (int i = 0; i < keys.Length; i++) invList[keys[i]] = 0;
         }
 
-        static void CountItemsToDictionary(IMyInventory box, Dictionary<string, float> ilist = null)
+        static void CountItemsToSummaryDictionary(IMyInventory box, Dictionary<string, float> ilist = null)
         {
             var boxl = new List<MyInventoryItem>();
             box.GetItems(boxl);
@@ -321,6 +321,22 @@ namespace IngameScript
                 var boxia = (float)boxi.Amount;
                 if (inventar.ContainsKey(index)) inventar[index] += boxia;
                 else inventar.Add(index, boxia);
+                if (ilist != null)
+                {
+                    if (ilist.ContainsKey(index)) ilist[index] += boxia;
+                    else ilist.Add(index, boxia);
+                }
+            }
+        }
+
+        static void CountItemsToDictionary(IMyInventory box, Dictionary<string, float> ilist = null)
+        {
+            var boxl = new List<MyInventoryItem>();
+            box.GetItems(boxl);
+            foreach (var boxi in boxl)
+            {
+                string index = GetPIMItemID(boxi.Type);
+                var boxia = (float)boxi.Amount;
                 if (ilist != null)
                 {
                     if (ilist.ContainsKey(index)) ilist[index] += boxia;
@@ -346,25 +362,5 @@ namespace IngameScript
         static Dictionary<string, List<IMyInventory>> InventoryManagerList = new Dictionary<string, List<IMyInventory>>();
         static List<IMyInventory> NonSmsFlagedInventoryList = new List<IMyInventory>();
         static List<IMyInventory> SmsFlagedInventoryList = new List<IMyInventory>();
-        void pushTerminalBlock(IMyTerminalBlock t)
-        {
-            if (t.HasInventory)
-            {
-                var inv = t.GetInventory(0);
-                CountItemsToDictionary(inv);
-                if (t.CustomName.Contains(X_StorageTag)) return;
-                Parameter pm = new Parameter();
-                if (pm.ParseArgs(t.CustomName))
-                {
-                    if (!pm.IsParameter("Keep")) NonSmsFlagedInventoryList.Add(inv);
-                    if (!pm.IsParameter("Infolcd")) AddInventoryToInventoryManagerList(inv, pm.ParameterList);
-                }
-                else if (t.BlockDefinition.SubtypeId.Contains("Container") || t.BlockDefinition.SubtypeId.Contains("Connector"))
-                {
-                    NonSmsFlagedInventoryList.Add(inv);
-                }
-                else SmsFlagedInventoryList.Add(inv);
-            }
-        }
     }
 }

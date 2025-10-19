@@ -208,51 +208,6 @@ namespace IngameScript
                 lcd.WriteText(priolist);
             }
         }
-        void RenderAmmoPrioLCDS()
-        {
-            var lcds = new List<IMyTextPanel>();
-            GridTerminalSystem.GetBlocksOfType<IMyTextPanel>(lcds, block => block.CustomName.Contains(AmmoPrioDefinition));
-            if (lcds.Count != 0)
-            {
-                var lcd = lcds[0];
-                string[] pstr = lcd.GetText().Split('\n');
-                MultiAmmoGuns currentMultiGun = null;
-                foreach (var s in pstr)
-                {
-                    var line = s.Split(':', '=', '|');
-                    for (int i = 0; i < line.Count(); i++) { line[i] = line[i].Trim(' ', '\u00AD'); }
-                    if (line.Length == 0 || line[0].Length == 0 || line[0][0] == '/') continue;
-                    if (line.Length >= 3 && line[0] == "GunType")
-                    {
-                        currentMultiGun = multiAmmoGuns.GetValueOrDefault(line[2], null);
-                    }
-                    else if (line.Length >= 3 && currentMultiGun != null)
-                    {
-                        var adef = currentMultiGun.GetAmmoDefs(line[2]);
-                        if (adef != null)
-                        {
-                            adef.SetAmmoPriority(currentMultiGun.MultiAmmoGuntype, int.Parse(line[0]));
-                        }
-                    }
-                }
-                // Prio schreiben...
-                var ammoprioString = "/ Ammopriodefinitions:\n/ the prio only affects weapons that can use\n/ different ammunition types. this determines\n/ which one is loaded into the inventory first.\n/ 0 means that the ammunition is not used\n";
-                var headerString = "\n" + GetDisplayBoxString("Priority", 25) + " | Ammotyp\n";
-                foreach (var mAmmoGuns in multiAmmoGuns)
-                {
-                    ammoprioString += linepur + "\nGunType: " + mAmmoGuns.Value.DisplayName + bigSpaces + "|" + mAmmoGuns.Value.MultiAmmoGuntype + headerString;
-                    AmmoDefs.SetCurrentSortGuntype(mAmmoGuns.Key);
-                    mAmmoGuns.Value.ammoDefs.Sort();
-                    foreach (var aDef in mAmmoGuns.Value.ammoDefs)
-                    {
-                        ammoprioString += GetDisplayBoxStringDisplayNull(aDef.GetAmmoPriority(mAmmoGuns.Key), 25) + " | " + GetDisplayBoxString(aDef.GetAmmoBluePrintAutocraftingName(), 60, true) + bigSpaces + " | " + aDef.type + "\n";
-                    }
-                }
-                lcd.Alignment = TextAlignment.LEFT;
-                lcd.ContentType = ContentType.TEXT_AND_IMAGE;
-                lcd.WriteText(ammoprioString);
-            }
-        }
         void RenderResourceProccesingLCD()
         {
             var lcds = new List<IMyTextPanel>();

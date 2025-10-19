@@ -50,7 +50,7 @@ namespace IngameScript
                 for (int i = 0; i < inventoryOwner.InventoryCount; i++)
                 {
                     var inv = inventoryOwner.GetInventory(i);
-                    CountItemsToDictionary(inv);
+                    CountItemsToSummaryDictionary(inv);
 
                     if (isStorage || !isProcessingValid) continue;
 

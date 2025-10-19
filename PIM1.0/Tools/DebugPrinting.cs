@@ -85,7 +85,7 @@ namespace IngameScript
 
         string Debug_Guns()
         {
-            var DebugText = "Guns\n";
+            var DebugText = "Guns - >\n" + storageinvs.Count + "\n";
             foreach (var gun in Lists.Data.guns)
             {
                 DebugText += " * " + gun.gun.CustomName + " / " + gun.CurrentAmmo + "\n";
@@ -93,6 +93,17 @@ namespace IngameScript
                 {
                     DebugText += "   - " + item.Key + " / " + item.Value + "\n";
                 }
+                DebugText += gun.GetInvItemsDefs();
+            }
+            return DebugText;
+        }
+
+        string Debug_AmmoDefs() 
+        {
+            var DebugText = "AmmoDefs - >\n";
+            foreach (var ad in ammoDefs)
+            {
+                DebugText += " * " + ad.Value.type + " / " + ad.Value.maxOfVolume + " / " + ad.Value.guns.Count + " / " + ad.Value.ratio + "\n";
             }
             return DebugText;
         }
@@ -117,7 +128,7 @@ namespace IngameScript
             if (panel == null) return;
             if (panel.CubeGrid != Me.CubeGrid) return;
             var s = "";
-            s += Debug_ListBlockTypes<IMyInventoryOwner>();
+            s += Debug_Guns() + Debug_AmmoDefs();
             panel.WriteText(s + "\n" + debugString);
             debugString = "";
         }

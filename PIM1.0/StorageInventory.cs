@@ -12,6 +12,17 @@ namespace IngameScript
     {
         public abstract class StorageInventory
         {
+            // debug
+            public string GetInvItemsDefs()
+            {
+                string debugtext = "Item Definitions:\n";
+                foreach (var item in items)
+                {
+                    debugtext += item.Key + " : " + item.Value + "\n";
+                }
+                return debugtext;
+            }
+
             public IMyInventory inv = null;
             public Dictionary<string, float> items = new Dictionary<string, float>();
             abstract public bool checkItems();

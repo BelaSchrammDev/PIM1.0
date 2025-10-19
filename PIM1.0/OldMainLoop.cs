@@ -276,7 +276,6 @@ namespace IngameScript
                     // RefineryManager -----------------------------------------------------------------------------------------------------------------
                     case 45:
                         CalcIngotPrio();
-                        RenderAmmoPrioLCDS();
                         RenderResourceProccesingLCD();
                         m1 = 0;
                         m0++;
