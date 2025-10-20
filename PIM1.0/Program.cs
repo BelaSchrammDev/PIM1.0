@@ -115,6 +115,7 @@ namespace IngameScript
                 new GridScanningJob(this),
                 new FindControllingGunJob(this),
                 new RefreshingControllingGunsJob(this),
+                new FindStorageContainersJob(this),
 
             };
         }

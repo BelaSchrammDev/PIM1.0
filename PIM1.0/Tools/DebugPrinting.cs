@@ -93,7 +93,6 @@ namespace IngameScript
                 {
                     DebugText += "   - " + item.Key + " / " + item.Value + "\n";
                 }
-                DebugText += gun.GetInvItemsDefs();
             }
             return DebugText;
         }

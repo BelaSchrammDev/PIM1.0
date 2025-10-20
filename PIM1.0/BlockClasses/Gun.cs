@@ -40,7 +40,7 @@ namespace IngameScript
 
                 storageinvs.Add(this);
             }
-            public override bool checkItems()
+            public override bool CheckItems()
             {
                 if (gun is IMyLargeInteriorTurret || CurrentAmmo == "") return false;
 

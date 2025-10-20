@@ -251,7 +251,7 @@ namespace IngameScript
                         for (int i = m1; i < storageinvs.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            storageinvs[i].reloadItems();
+                            storageinvs[i].ReloadItems();
                         }
                         m0++;
                         break;

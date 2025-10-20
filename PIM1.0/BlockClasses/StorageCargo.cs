@@ -1,74 +1,9 @@
 ﻿using Sandbox.ModAPI.Ingame;
-using Sandbox.ModAPI.Interfaces;
-using SpaceEngineers.Game.ModAPI.Ingame;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public abstract class StorageInventory
-        {
-            // debug
-            public string GetInvItemsDefs()
-            {
-                string debugtext = "Item Definitions:\n";
-                foreach (var item in items)
-                {
-                    debugtext += item.Key + " : " + item.Value + "\n";
-                }
-                return debugtext;
-            }
-
-            public IMyInventory inv = null;
-            public Dictionary<string, float> items = new Dictionary<string, float>();
-            abstract public bool checkItems();
-            public void reloadItems()
-            {
-                if (!checkItems()) return;
-                var invList = new List<MyInventoryItem>();
-                var succlist = new List<string>();
-                var einleiten = new Dictionary<string, float>();
-                inv.GetItems(invList);
-                for (int i = invList.Count - 1; i >= 0; i--)
-                {
-                    var iList = new List<MyInventoryItem>();
-                    inv.GetItems(iList, v => v.Type == invList[i].Type);
-                    if (iList.Count > 1)
-                    {
-                        inv.TransferItemTo(inv, iList[iList.Count - 1]);
-                    }
-                }
-                invList.Clear();
-                inv.GetItems(invList);
-                for (int i = invList.Count - 1; i >= 0; i--)
-                {
-                    var iItem = invList[i];
-                    var iType = GetPIMItemID(iItem.Type);
-                    if (!items.ContainsKey(iType)) clearItemByType(inv, iType, iItem);
-                    else
-                    {
-                        var adiff = items[iType] - (float)iItem.Amount;
-                        if (adiff < 0)
-                        {
-                            clearItemByType(inv, iType, iItem, Math.Abs(adiff));
-                            succlist.Add(iType);
-                        }
-                        else if (adiff == 0) succlist.Add(iType);
-                        else einleiten.Add(iType, adiff);
-                    }
-                }
-                foreach (var i in items.Keys)
-                {
-                    if (succlist.Contains(i)) continue;
-                    SendItemByType(i, (einleiten.ContainsKey(i) ? einleiten[i] : items[i]), inv);
-                }
-            }
-        }
-
         public class StorageCargo : StorageInventory
         {
             public IMyCargoContainer container = null;
@@ -80,7 +15,7 @@ namespace IngameScript
                 storageinvs.Add(this);
             }
             const string X_ItemDef = "StorageItemDefinition", X_ItemDefBegin = "### " + X_ItemDef + "_begin ###", X_ItemDefEnd = "### " + X_ItemDef + "_end ###", X_AddToList = "add_to_list:";
-            public override bool checkItems()
+            public override bool CheckItems()
             {
                 if (container.CustomData != "" && container.CustomData == oldCustomdata) return true;
                 bool itemsdef = false;
