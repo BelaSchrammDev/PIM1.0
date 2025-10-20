@@ -55,11 +55,7 @@ namespace IngameScript
         static Dictionary<string, DisplayBox> DisplayBoxList = new Dictionary<string, DisplayBox>();
         
         DateTime StackingCounter = DateTime.Now;
-        static List<StackItem> StackItemList = new List<StackItem>();
-        int stack_mode = 0;
-        string stack_type = "";
-        int cur_stack_type = 0;
-        static string[] stack_types = new string[] { "Component", "Ore", "Ingot" };
+        
         bool if_true(string str) { return Convert.ToBoolean(str); }
         List<string> autocrafting_Types = new List<string>();
         void InitAutoCraftingTypes()
@@ -105,7 +101,6 @@ namespace IngameScript
             if (collect_all_Ore) collectAll_List.Add(IG_ + "Ore");
             if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
             if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
-            stack_type = stack_types[0];
 
             _jobs = new Job[]
             {
@@ -116,6 +111,12 @@ namespace IngameScript
                 new FindControllingGunJob(this),
                 new RefreshingControllingGunsJob(this),
                 new FindStorageContainersJob(this),
+                new StackingJob(this, "StackingJob",
+                    new StackingSingleJob(this),
+                    new StackingAlphaJob(this),
+                    new StackingBetaJob(this),
+                    new StackingDeltaJob(this),
+                    new StackingGammaJob(this)),
 
             };
         }

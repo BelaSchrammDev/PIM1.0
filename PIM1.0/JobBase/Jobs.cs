@@ -1,5 +1,6 @@
 ﻿// Jobs.cs
 using System;
+using System.Linq;
 
 namespace IngameScript
 {
@@ -13,13 +14,26 @@ namespace IngameScript
             // Human-readable name of the job
             public string Name { get; }
 
+            // Cooldown period in seconds
+            public int CooldownSeconds
+            {
+                get
+                {
+                    return (int)_cooldown.TotalSeconds;
+                }
+                set
+                {
+                    _cooldown = TimeSpan.FromSeconds(value);
+                }
+            }
+
             // Cooldown period between job executions
-            private readonly TimeSpan _cooldown;
+            private TimeSpan _cooldown;
 
             // Timestamp when the last run ended
             private DateTime _lastRunEnd = DateTime.Now;
 
-            protected Job(Program program, string name) : this(program, name, 0) 
+            protected Job(Program program, string name) : this(program, name, 0)
             {
             }
 
@@ -205,7 +219,7 @@ namespace IngameScript
             protected bool IsEmpty => _step == 0;
         }
 
-        class MultiJob : Job
+        public class MultiJob : Job
         {
             // Sub-jobs to be executed in sequence
             private readonly Job[] _subJobs;
@@ -236,6 +250,44 @@ namespace IngameScript
                     if (_currentSubJobIndex >= _subJobs.Length)
                         return RunJobResult.Finished;
                 }
+                return RunJobResult.Continue;
+            }
+        }
+
+        public class SequentialJob : Job
+        {
+            private readonly Job[] _jobs;
+            private int _currentJobIndex = 0;
+            public SequentialJob(Program program, string name, params Job[] jobs) : base(program, name)
+            {
+                _jobs = jobs;
+            }
+
+            public bool NextJob()
+            {
+                _currentJobIndex++;
+                if (_currentJobIndex >= _jobs.Length)
+                {
+                    _currentJobIndex = 0;
+                    return false;
+                }
+                return true;
+            }
+
+            public override void InitJob()
+            {
+                NextJob();
+            }
+
+            public override RunJobResult RunJob()
+            {
+                var result = _jobs[_currentJobIndex].Schedule();
+
+                if (result == ScheduleResult.Done)
+                {
+                    return RunJobResult.Finished;
+                }
+
                 return RunJobResult.Continue;
             }
         }
