@@ -1,4 +1,5 @@
 ﻿// Jobs.cs
+using Sandbox.Game.WorldEnvironment;
 using System;
 using System.Linq;
 
@@ -13,6 +14,8 @@ namespace IngameScript
 
             // Human-readable name of the job
             public string Name { get; }
+
+            public bool Active { get; set; } = true;
 
             // Cooldown period in seconds
             public int CooldownSeconds
@@ -90,6 +93,11 @@ namespace IngameScript
             /// </summary>
             public ScheduleResult Schedule()
             {
+                if (!Active)
+                {
+                    return ScheduleResult.Done;
+                }
+
                 switch (_status)
                 {
                     case JobStatus.Init:
@@ -118,6 +126,7 @@ namespace IngameScript
                             _status = JobStatus.Init;
                             return ScheduleResult.InProgress;
                         }
+
                         return ScheduleResult.Done;
                 }
 
@@ -257,7 +266,7 @@ namespace IngameScript
         public class SequentialJob : Job
         {
             private readonly Job[] _jobs;
-            private int _currentJobIndex = 0;
+            private int? _currentJobIndex = null;
             public SequentialJob(Program program, string name, params Job[] jobs) : base(program, name)
             {
                 _jobs = jobs;
@@ -265,12 +274,24 @@ namespace IngameScript
 
             public bool NextJob()
             {
-                _currentJobIndex++;
-                if (_currentJobIndex >= _jobs.Length)
+                if(_currentJobIndex.HasValue)
                 {
-                    _currentJobIndex = 0;
+                    _currentJobIndex++;
+                    if (_currentJobIndex >= _jobs.Length)
+                    {
+                        _currentJobIndex = null;
+                        return false;
+                    }
+                }
+                else if (_jobs.Length == 0)
+                {
                     return false;
                 }
+                else
+                {
+                    _currentJobIndex = 0;
+                }
+
                 return true;
             }
 
@@ -281,9 +302,14 @@ namespace IngameScript
 
             public override RunJobResult RunJob()
             {
-                var result = _jobs[_currentJobIndex].Schedule();
+                if(!_currentJobIndex.HasValue)
+                {
+                    return RunJobResult.Finished;
+                }
 
-                if (result == ScheduleResult.Done)
+                var result = _jobs[_currentJobIndex.Value].Schedule();
+
+                if (result == ScheduleResult.Done && !NextJob())
                 {
                     return RunJobResult.Finished;
                 }
