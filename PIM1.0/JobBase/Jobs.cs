@@ -1,13 +1,32 @@
-﻿// Jobs.cs
-using Sandbox.Game.WorldEnvironment;
+﻿using Sandbox.ModAPI.Ingame;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public abstract class Job
+        public abstract class Tools 
+        {
+            public static bool BlockConstructMember(IMyTerminalBlock block) 
+            {
+                return block.IsSameConstructAs(Program.Instance.Me);
+            }
+
+            public static void AddToDebugString(string str)
+            {
+                Program.debugString += str;
+            }
+
+            public static int GetBlockList<T>(List<T> blockList)
+                where T : class, IMyTerminalBlock
+            {
+                Program.Instance.GridTerminalSystem.GetBlocksOfType<T>(blockList, block => BlockConstructMember(block));
+                return blockList.Count;
+            }
+        }
+
+        public abstract class Job : Tools
         {
             // Reference to the main Program instance
             protected readonly Program Program;
@@ -199,7 +218,7 @@ namespace IngameScript
                 // Backward: end > start is invalid (e.g., start=3, end=5 but meant to go backward)
                 // Actually, we need to check if it's logically empty
                 // For now, check common empty cases like list.Count=0 → start=0, end=-1
-                return (start == 0 && end < 0) || (start < 0) || (end < 0 && start >= 0) || start == end;
+                return (start == 0 && end < 0) || (start < 0) || (end < 0 && start >= 0);
             }
 
             /// <summary>

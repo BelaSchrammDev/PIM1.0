@@ -20,11 +20,11 @@ namespace IngameScript
                 if (group == null)
                 {
                     ClearGunList();
-                    startIndex = 0;
+                    startIndex = -1;
                 }
                 else
                 {
-                    group.GetBlocksOfType(_GroupGunList, block => block.IsSameConstructAs(Program.Me));
+                    group.GetBlocksOfType(_GroupGunList, block => BlockConstructMember(block));
                     RefreshGunBlockList();
                     startIndex = _GroupGunList.Count - 1;
                 }

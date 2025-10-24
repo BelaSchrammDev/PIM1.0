@@ -37,7 +37,7 @@ namespace IngameScript
                 Program.debugString += Name + "_Init " + StackItemList.Count + "\n";
 
                 startIndex = 0;
-                endIndex = InitStacking() ? StackItemList.Count - 1 : 0;
+                endIndex = InitStacking() ? StackItemList.Count - 1 : -1;
             }
 
             public abstract bool InitStacking();

@@ -9,7 +9,6 @@ namespace IngameScript
 {
     partial class Program
     {
-        static List<Refinery> RefineryList = new List<Refinery>();
 
         public class Refinery
         {
@@ -422,7 +421,7 @@ namespace IngameScript
                 else if (blueprint == NextWorkBluePrint) oamount = NexWorkOreAmount;
                 if (InputInventory.CurrentVolume.RawValue < 100)
                 {
-                    foreach (Refinery refinery in RefineryList)
+                    foreach (Refinery refinery in Lists.Data.RefineryList)
                     {
                         if (refinery.BlockRemoved()) continue;
                         int inum = 0;

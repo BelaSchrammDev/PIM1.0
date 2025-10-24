@@ -113,7 +113,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 InfoString.Clear();
-                foreach (var refinery in RefineryList) refinery.GetErrorInfo(InfoString);
+                foreach (var refinery in Lists.Data.RefineryList) refinery.GetErrorInfo(InfoString);
                 if (InfoString.IsEmpty()) return null;
                 InfoString.Insert(0, "--------------- RefineryManager ---------------\n");
                 return InfoString;
@@ -126,7 +126,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 InfoString.Clear();
-                foreach (var assembler in AssemblerList) assembler.GetErrorInfo(InfoString);
+                foreach (var assembler in Lists.Data.AssemblerList) assembler.GetErrorInfo(InfoString);
                 if (InfoString.IsEmpty()) return null;
                 InfoString.Insert(0, "--------------- AssemblerManager ----------------\n");
                 return InfoString;

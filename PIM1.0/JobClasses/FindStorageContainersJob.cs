@@ -41,7 +41,7 @@ namespace IngameScript
 
             private bool IsValidStorageContainer(IMyCargoContainer cargo)
             {
-                return cargo.IsSameConstructAs(Program.Me) && cargo.CustomName.Contains(X_StorageTag);
+                return BlockConstructMember(cargo) && cargo.CustomName.Contains(X_StorageTag);
             }
         }
     }

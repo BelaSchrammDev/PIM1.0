@@ -5,6 +5,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
@@ -44,8 +45,28 @@ namespace IngameScript
                 }
             }
 
+            public void ClearAllRefineryBlueprintAssemblyAmounts()
+            {
+                foreach (var bp in BluePrints_Active.Values)
+                {
+                    bp.AssemblyAmount = 0;
+                }
+                foreach (var bp in BluePrints_Inactive.Values)
+                {
+                    bp.AssemblyAmount = 0;
+                }
+            }
+
             public List<IMyRefinery> Refinerys = new List<IMyRefinery>();
+            public List<Refinery> RefineryList = new List<Refinery>();
             public List<IMyAssembler> Assemblers = new List<IMyAssembler>();
+            public List<Assembler> AssemblerList = new List<Assembler>();
+
+            public List<IMyInventory> NonSmsFlagedInventoryList = new List<IMyInventory>();
+            public List<IMyInventory> SmsFlagedInventoryList = new List<IMyInventory>();
+            public List<string> collectAll_List = new List<string>();
+
+
             public List<IMyProgrammableBlock> ProgrammableBlocks = new List<IMyProgrammableBlock>();
             public List<StorageCargo> StorageCargos = new List<StorageCargo>();
             public List<Gun> guns = new List<Gun>();

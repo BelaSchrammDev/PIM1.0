@@ -23,7 +23,7 @@ namespace IngameScript
             {
                 Propertys.Data.CurrentCycleInSec = (DateTime.Now - Propertys.Data.LastStart).TotalSeconds;
                 Propertys.Data.LastStart = DateTime.Now;
-                Program.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsSameConstructAs(Program.Me));
+                Program.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => BlockConstructMember(block));
 
                 if (IfMeIsMaster(Lists.Data.ProgrammableBlocks))
                 {

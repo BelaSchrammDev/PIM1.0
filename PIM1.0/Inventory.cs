@@ -360,7 +360,5 @@ namespace IngameScript
             }
         }
         static Dictionary<string, List<IMyInventory>> InventoryManagerList = new Dictionary<string, List<IMyInventory>>();
-        static List<IMyInventory> NonSmsFlagedInventoryList = new List<IMyInventory>();
-        static List<IMyInventory> SmsFlagedInventoryList = new List<IMyInventory>();
     }
 }

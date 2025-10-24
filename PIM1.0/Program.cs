@@ -39,9 +39,7 @@ namespace IngameScript
         static Dictionary<string, float> inventar = new Dictionary<string, float>();
         static List<StorageInventory> storageinvs = new List<StorageInventory>();
         
-        static List<Assembler> AssemblerList = new List<Assembler>();
         List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
-        List<string> collectAll_List = new List<string>();
         Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
         static Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
         List<string> mods = new List<string>(); string curmod = M_Vanilla;
@@ -98,9 +96,9 @@ namespace IngameScript
             InitRefineryBlueprints();
             LoopManager.Init(this);
 
-            if (collect_all_Ore) collectAll_List.Add(IG_ + "Ore");
-            if (collect_all_Ingot) collectAll_List.Add(IG_ + IG_I);
-            if (collect_all_Component) collectAll_List.Add(IG_ + IG_Component);
+            if (collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
+            if (collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
+            if (collect_all_Component) Lists.Data.collectAll_List.Add(IG_ + IG_Component);
 
             _jobs = new Job[]
             {
@@ -109,7 +107,7 @@ namespace IngameScript
                 new ClearJob(this),
                 new GridScanningJob(this),
                 new FindControllingGunJob(this),
-                new RefreshingControllingGunsJob(this),
+                new RefreshControllingGunsJob(this),
                 new FindStorageContainersJob(this),
                 new StackingJob(this, "StackingJob",
                     new StackingSingleJob(this),
@@ -117,7 +115,10 @@ namespace IngameScript
                     new StackingBetaJob(this),
                     new StackingDeltaJob(this),
                     new StackingGammaJob(this)),
-
+                new RefreshRefineryListJob(this),
+                new RefreshAssemblerListJob(this),
+                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.NonSmsFlagedInventoryList),
+                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.SmsFlagedInventoryList, Lists.Data.collectAll_List),
             };
         }
         

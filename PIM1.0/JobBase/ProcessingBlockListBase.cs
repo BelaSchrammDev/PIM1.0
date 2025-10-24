@@ -35,7 +35,7 @@ namespace IngameScript
 
             protected virtual bool IsValidBlock(IMyTerminalBlock t) 
             {
-                return t.IsSameConstructAs(Program.Me);
+                return BlockConstructMember(t);
             }
         }
     }

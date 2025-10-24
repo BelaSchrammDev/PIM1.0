@@ -14,8 +14,8 @@
                 Program.loadAutocratingDefinitions();
                 Program.DebugPrint();
                 ClearInventoryList(inventar);
-                NonSmsFlagedInventoryList.Clear();
-                SmsFlagedInventoryList.Clear();
+                Lists.Data.NonSmsFlagedInventoryList.Clear();
+                Lists.Data.SmsFlagedInventoryList.Clear();
                 Program.CargoUseList.Clear();
                 foreach (var ivl in InventoryManagerList.Values) ivl.Clear();
                 InventoryManagerList.Clear();

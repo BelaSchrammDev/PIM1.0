@@ -2,9 +2,9 @@
 {
     partial class Program
     {
-        public class RefreshingControllingGunsJob : CountingJob
+        public class RefreshControllingGunsJob : CountingJob
         {
-            public RefreshingControllingGunsJob(Program program) : base(program, "RefreshingControllingGunsJob")
+            public RefreshControllingGunsJob(Program program) : base(program, "RefreshingControllingGunsJob")
             {
             }
 

@@ -6,11 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 using VRage;
 using VRage.Game;
+using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
+    // TODO: Tools class implementing
+
     partial class Program
     {
+
+        public class InventoryClearingJob : CountingJob
+        {
+            private List<IMyInventory> _invList;
+            private List<string> _collectList;
+            public InventoryClearingJob(Program program, string name, List<IMyInventory> invList, List<string> collect = null) : base(program, name)
+            {
+                _invList = invList;
+                _collectList = collect;
+            }
+
+            protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
+            {
+                startIndex = 0;
+                endIndex = _invList.Count - 1;
+            }
+
+            protected override void ProcessingIndex(int index)
+            {
+                ClearInventory(_invList[index], _collectList);
+            }
+        }
 
         void OldMainLoop(UpdateType updateSource)
         {
@@ -27,87 +52,37 @@ namespace IngameScript
                             if (Loop.Data.CurrentJobIndex >= _jobs.Length)
                             {
                                 Loop.Data.CurrentJobIndex = 0;
-                                m0 = 33;
+                                m0 = 41;
                             }
                         }
                         break;
 
-                    // Find Refinery Blocks -----------------------------------------------------------------------------------------------------------------
-                    case 33:
-                        foreach (var b in Lists.Data.BluePrints_Active.Values) b.AssemblyAmount = 0;
-                        foreach (var b in Lists.Data.BluePrints_Inactive.Values) b.AssemblyAmount = 0;
-                        GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Data.Refinerys, block => block.CubeGrid == Me.CubeGrid);
-                        for (int i = RefineryList.Count - 1; i >= 0; i--)
-                        {
-                            if (Lists.Data.Refinerys.Contains(RefineryList[i].RefineryBlock)) Lists.Data.Refinerys.Remove(RefineryList[i].RefineryBlock);
-                            else
-                            {
-                                Propertys.Data.changeAutoCraftingSettings = true;
-                                RefineryList.Remove(RefineryList[i]);
-                            }
-                        }
-                        Refinery.priobt = "";
-                        m1 = Lists.Data.Refinerys.Count - 1;
-                        m0++;
-                        break;
-                    case 34:
-                        for (int i = m1; i >= 0; i--, m1--)
-                        {
-                            if (maxInstructions()) return;
-                            RefineryList.Add(new Refinery(Lists.Data.Refinerys[i]));
-                        }
-                        m0++;
-                        break;
-
-                    // Find Assembler Blocks -----------------------------------------------------------------------------------------------------------------
-                    case 35:
-                        GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Data.Assemblers, block => block.CubeGrid == Me.CubeGrid);
-                        for (int i = AssemblerList.Count - 1; i >= 0; i--)
-                        {
-                            if (Lists.Data.Assemblers.Contains(AssemblerList[i].AssemblerBlock)) Lists.Data.Assemblers.Remove(AssemblerList[i].AssemblerBlock);
-                            else
-                            {
-                                Propertys.Data.changeAutoCraftingSettings = true;
-                                AssemblerList.Remove(AssemblerList[i]);
-                            }
-                        }
-                        m1 = Lists.Data.Assemblers.Count - 1;
-                        m0++;
-                        break;
-                    case 36:
-                        for (int i = m1; i >= 0; i--, m1--)
-                        {
-                            if (maxInstructions()) return;
-                            AssemblerList.Add(new Assembler(Lists.Data.Assemblers[i]));
-                        }
-                        m0++;
-                        break;
 
                     // Inventory Clearing -----------------------------------------------------------------------------------------------------------------
-                    case 37:
-                        m1 = 0;
-                        m0++;
-                        break;
-                    case 38:
-                        for (int i = m1; i < NonSmsFlagedInventoryList.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            ClearInventory(NonSmsFlagedInventoryList[i]);
-                        }
-                        m0++;
-                        break;
-                    case 39:
-                        m1 = 0;
-                        m0++;
-                        break;
-                    case 40:
-                        for (int i = m1; i < SmsFlagedInventoryList.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            ClearInventory(SmsFlagedInventoryList[i], collectAll_List);
-                        }
-                        m0++;
-                        break;
+                    //case 37:
+                    //    m1 = 0;
+                    //    m0++;
+                    //    break;
+                    //case 38:
+                    //    for (int i = m1; i < NonSmsFlagedInventoryList.Count; i++, m1++)
+                    //    {
+                    //        if (maxInstructions()) return;
+                    //        ClearInventory(NonSmsFlagedInventoryList[i]);
+                    //    }
+                    //    m0++;
+                    //    break;
+                    //case 39:
+                    //    m1 = 0;
+                    //    m0++;
+                    //    break;
+                    //case 40:
+                    //    for (int i = m1; i < SmsFlagedInventoryList.Count; i++, m1++)
+                    //    {
+                    //        if (maxInstructions()) return;
+                    //        ClearInventory(SmsFlagedInventoryList[i], collectAll_List);
+                    //    }
+                    //    m0++;
+                    //    break;
 
                     // Storage Inventory Refresh -----------------------------------------------------------------------------------------------------------------
                     case 41:
@@ -134,10 +109,10 @@ namespace IngameScript
                         m0++;
                         break;
                     case 44:
-                        for (int i = m1; i < RefineryList.Count; i++, m1++)
+                        for (int i = m1; i < Lists.Data.RefineryList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            RefineryList[i].Refresh();
+                            Lists.Data.RefineryList[i].Refresh();
                         }
                         m0++;
                         break;
@@ -150,10 +125,10 @@ namespace IngameScript
                         m0++;
                         break;
                     case 46:
-                        for (int i = m1; i < RefineryList.Count; i++, m1++)
+                        for (int i = m1; i < Lists.Data.RefineryList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            RefineryList[i].RefineryManager();
+                            Lists.Data.RefineryList[i].RefineryManager();
                         }
                         m0++;
                         break;
@@ -164,10 +139,10 @@ namespace IngameScript
                         m0++;
                         break;
                     case 48:
-                        for (int i = m1; i < AssemblerList.Count; i++, m1++)
+                        for (int i = m1; i < Lists.Data.AssemblerList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            AssemblerList[i].Refresh();
+                            Lists.Data.AssemblerList[i].Refresh();
                         }
                         m0++;
                         break;
@@ -189,7 +164,7 @@ namespace IngameScript
                             {
                                 if (s0[i] != Ingot.SubFresh)
                                 {
-                                    foreach (var o in AssemblerList) o.AddValidBlueprint(b);
+                                    foreach (var o in Lists.Data.AssemblerList) o.AddValidBlueprint(b);
                                 }
                             }
                         }
@@ -216,14 +191,14 @@ namespace IngameScript
                     case 53:
                         m1 = 0;
                         m2 = 0;
-                        AssemblerList.Sort();
+                        Lists.Data.AssemblerList.Sort();
                         m0++;
                         break;
                     case 54:
-                        for (int i = m1; i < AssemblerList.Count; i++, m1++)
+                        for (int i = m1; i < Lists.Data.AssemblerList.Count; i++, m1++)
                         {
                             if (maxInstructions()) return;
-                            var o = AssemblerList[i];
+                            var o = Lists.Data.AssemblerList[i];
                             if (o.AssemblerBlock.CubeGrid == Me.CubeGrid && o.parameter.ControledByPIM())
                             {
                                 if (o.BlueprintList.Count > 0)

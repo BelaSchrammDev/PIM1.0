@@ -15,8 +15,8 @@ namespace IngameScript
                 switch (commandLine.ToLower())
                 {
                     case "flushrefinerys_all":
-                        foreach (var o in RefineryList) o.FlushAllInventorys();
-                        SetInfo("all (" + RefineryList.Count + ") refinerys flushed.");
+                        foreach (var o in Lists.Data.RefineryList) o.FlushAllInventorys();
+                        SetInfo("all (" + Lists.Data.RefineryList.Count + ") refinerys flushed.");
                         break;
 
                     default:
