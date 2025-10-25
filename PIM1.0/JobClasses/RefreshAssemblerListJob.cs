@@ -15,10 +15,13 @@
 
                 for (int i = Lists.Data.AssemblerList.Count - 1; i >= 0; i--)
                 {
-                    if (Lists.Data.Assemblers.Contains(Lists.Data.AssemblerList[i].AssemblerBlock)) Lists.Data.Assemblers.Remove(Lists.Data.AssemblerList[i].AssemblerBlock);
+                    if (Lists.Data.Assemblers.Contains(Lists.Data.AssemblerList[i].AssemblerBlock))
+                    {
+                        Lists.Data.Assemblers.Remove(Lists.Data.AssemblerList[i].AssemblerBlock);
+                    }
                     else
                     {
-                        Propertys.Data.changeAutoCraftingSettings = true;
+                        Propertys.Data.AutoCraftingSettingsInValid = true;
                         Lists.Data.AssemblerList.Remove(Lists.Data.AssemblerList[i]);
                     }
                 }

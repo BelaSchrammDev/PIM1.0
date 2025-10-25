@@ -6,36 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using VRage;
 using VRage.Game;
-using VRage.Game.ModAPI.Ingame;
+using static IngameScript.Program;
 
 namespace IngameScript
 {
     // TODO: Tools class implementing
+    // TODO: refactoring, refactoring, refactoring...
+    // TODO: detecting other PIM blocks
 
     partial class Program
     {
-
-        public class InventoryClearingJob : CountingJob
-        {
-            private List<IMyInventory> _invList;
-            private List<string> _collectList;
-            public InventoryClearingJob(Program program, string name, List<IMyInventory> invList, List<string> collect = null) : base(program, name)
-            {
-                _invList = invList;
-                _collectList = collect;
-            }
-
-            protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
-            {
-                startIndex = 0;
-                endIndex = _invList.Count - 1;
-            }
-
-            protected override void ProcessingIndex(int index)
-            {
-                ClearInventory(_invList[index], _collectList);
-            }
-        }
 
         void OldMainLoop(UpdateType updateSource)
         {
@@ -52,54 +32,10 @@ namespace IngameScript
                             if (Loop.Data.CurrentJobIndex >= _jobs.Length)
                             {
                                 Loop.Data.CurrentJobIndex = 0;
-                                m0 = 41;
+                                m0 = 43;
                             }
                         }
                         break;
-
-
-                    // Inventory Clearing -----------------------------------------------------------------------------------------------------------------
-                    //case 37:
-                    //    m1 = 0;
-                    //    m0++;
-                    //    break;
-                    //case 38:
-                    //    for (int i = m1; i < NonSmsFlagedInventoryList.Count; i++, m1++)
-                    //    {
-                    //        if (maxInstructions()) return;
-                    //        ClearInventory(NonSmsFlagedInventoryList[i]);
-                    //    }
-                    //    m0++;
-                    //    break;
-                    //case 39:
-                    //    m1 = 0;
-                    //    m0++;
-                    //    break;
-                    //case 40:
-                    //    for (int i = m1; i < SmsFlagedInventoryList.Count; i++, m1++)
-                    //    {
-                    //        if (maxInstructions()) return;
-                    //        ClearInventory(SmsFlagedInventoryList[i], collectAll_List);
-                    //    }
-                    //    m0++;
-                    //    break;
-
-                    // Storage Inventory Refresh -----------------------------------------------------------------------------------------------------------------
-                    case 41:
-                        m1 = 0;
-                        foreach (var a in ammoDefs.Values) a.CalcAmmoInventoryRatio();
-                        m0++;
-                        break;
-
-                    case 42:
-                        for (int i = m1; i < storageinvs.Count; i++, m1++)
-                        {
-                            if (maxInstructions()) return;
-                            storageinvs[i].ReloadItems();
-                        }
-                        m0++;
-                        break;
-
 
                     // Refinery Refresh ----------------------------------------------------------------------------------------------------------------- 
                     case 43:
@@ -233,13 +169,13 @@ namespace IngameScript
                         };
                         foreach (var item in recommendedItems)
                         {
-                            var condition = (inventar.ContainsKey(item.Key) && inventar[item.Key] > 0 && !InventoryManagerList.ContainsKey(item.Key));
+                            var condition = (inventar.ContainsKey(item.Key) && inventar[item.Key] > 0 && !Lists.Data.InventoryManagerList.ContainsKey(item.Key));
                             SetWarningByCondition(condition, Warning.ID.CARGORECOMMENDED, item.Value);
                         }
                         // -----------------------
-                        foreach (var c in CargoUseList.Keys)
+                        foreach (var c in Lists.Data.CargoUseList.Keys)
                         {
-                            var cargoUseRatio = CargoUseList[c].GetCarcocapacityUseRatio();
+                            var cargoUseRatio = Lists.Data.CargoUseList[c].GetCarcocapacityUseRatio();
                             if (cargoUseRatio >= 90)
                             {
                                 SetWarning(Warning.ID.CARGOUSEHEAVY, c);

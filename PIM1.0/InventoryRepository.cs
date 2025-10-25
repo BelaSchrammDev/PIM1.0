@@ -35,7 +35,7 @@ namespace IngameScript
             {
                 // Gather all inventory-owner blocks belonging to this grid
                 _inventoryOwners.Clear();
-                Program.GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(
+                GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(
                     _inventoryOwners,
                     b => (b as IMyTerminalBlock).IsSameConstructAs(Program.Me)
                 );

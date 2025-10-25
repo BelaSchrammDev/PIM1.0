@@ -12,13 +12,16 @@
             public override RunJobResult RunJob()
             {
                 Program.loadAutocratingDefinitions();
-                Program.DebugPrint();
+                Program.LCD_DebugPrint();
+
                 ClearInventoryList(inventar);
-                Lists.Data.NonSmsFlagedInventoryList.Clear();
+                Lists.Data.NoneSmsFlagedInventoryList.Clear();
                 Lists.Data.SmsFlagedInventoryList.Clear();
-                Program.CargoUseList.Clear();
-                foreach (var ivl in InventoryManagerList.Values) ivl.Clear();
-                InventoryManagerList.Clear();
+                Lists.Data.CargoUseList.Clear();
+
+                // TODO: must be do that
+                foreach (var ivl in Lists.Data.InventoryManagerList.Values) ivl.Clear();
+                Lists.Data.InventoryManagerList.Clear();
 
                 return RunJobResult.Finished;
             }

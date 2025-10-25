@@ -35,7 +35,7 @@ namespace IngameScript
                 if(inventoryOwner == null) return;
 
                 Parameter pm = new Parameter();
-                bool isStorage = t.CustomName.Contains(X_StorageTag)
+                bool isStorage = t.CustomName.Contains(Strings.SmsStorageTag)
                     , isProcessingValid = IsProcessingValid(t)
                     , isSmsBlock = false
                     , isNoKeep = false
@@ -56,11 +56,13 @@ namespace IngameScript
 
                     if (isSmsBlock)
                     {
-                        if (isNoKeep) Lists.Data.NonSmsFlagedInventoryList.Add(inv);
+                        if (isNoKeep) Lists.Data.SmsFlagedInventoryList.Add(inv);
                         Program.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
-                    else if (isContainerOrConnector) Lists.Data.NonSmsFlagedInventoryList.Add(inv);
-                    else Lists.Data.SmsFlagedInventoryList.Add(inv);
+                    else if (isContainerOrConnector)
+                    {
+                        Lists.Data.NoneSmsFlagedInventoryList.Add(inv);
+                    }
                 }
             }
         }

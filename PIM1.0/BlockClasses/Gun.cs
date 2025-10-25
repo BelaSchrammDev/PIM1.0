@@ -38,13 +38,13 @@ namespace IngameScript
                     }
                 }
 
-                storageinvs.Add(this);
+                Lists.Data.storageinvs.Add(this);
             }
             public override bool CheckItems()
             {
                 if (gun is IMyLargeInteriorTurret || CurrentAmmo == "") return false;
 
-                int aamount = (int)(ammomax[CurrentAmmo] * ammoDefs[CurrentAmmo].ratio);
+                int aamount = (int)(ammomax[CurrentAmmo] * Lists.Data.AmmoDefinitions[CurrentAmmo].ratio);
                 if (aamount < 1) aamount = 1;
                 if (items.Count == 0) items.Add(CurrentAmmo, aamount);
                 else if (!items.ContainsKey(CurrentAmmo))
@@ -58,10 +58,10 @@ namespace IngameScript
 
             public void Refresh()
             {
-                var propertyUseConveyor = gun.GetProperty(X_UseConveyor);
-                if (propertyUseConveyor != null && gun.GetValue<bool>(X_UseConveyor))
+                var propertyUseConveyor = gun.GetProperty(Strings.X_UseConveyor);
+                if (propertyUseConveyor != null && gun.GetValue<bool>(Strings.X_UseConveyor))
                 {
-                    gun.ApplyAction(X_UseConveyor);
+                    gun.ApplyAction(Strings.X_UseConveyor);
                 }
 
                 CurrentAmmo = GetCurrentAmmo();
@@ -87,22 +87,22 @@ namespace IngameScript
 
             public void Remove()
             {
-                var keyList = ammoDefs.Keys.ToArray();
-                for (int i = ammoDefs.Count - 1; i >= 0; i--)
+                var keyList = Lists.Data.AmmoDefinitions.Keys.ToArray();
+                for (int i = Lists.Data.AmmoDefinitions.Count - 1; i >= 0; i--)
                 {
-                    if (ammoDefs[keyList[i]].guns.Contains(this))
+                    if (Lists.Data.AmmoDefinitions[keyList[i]].guns.Contains(this))
                     {
-                        ammoDefs[keyList[i]].guns.Remove(this);
-                        if (ammoDefs[keyList[i]].guns.Count == 0) ammoDefs.Remove(keyList[i]);
-                        else ammoDefs[keyList[i]].maxOfVolume -= ammomax[keyList[i]];
+                        Lists.Data.AmmoDefinitions[keyList[i]].guns.Remove(this);
+                        if (Lists.Data.AmmoDefinitions[keyList[i]].guns.Count == 0) Lists.Data.AmmoDefinitions.Remove(keyList[i]);
+                        else Lists.Data.AmmoDefinitions[keyList[i]].maxOfVolume -= ammomax[keyList[i]];
                         break;
                     }
                 }
-                if (storageinvs.Contains(this)) storageinvs.Remove(this);
-                var p = gun.GetProperty(X_UseConveyor);
-                if (p != null && !gun.GetValue<bool>(X_UseConveyor))
+                if (Lists.Data.storageinvs.Contains(this)) Lists.Data.storageinvs.Remove(this);
+                var p = gun.GetProperty(Strings.X_UseConveyor);
+                if (p != null && !gun.GetValue<bool>(Strings.X_UseConveyor))
                 {
-                    gun.ApplyAction(X_UseConveyor);
+                    gun.ApplyAction(Strings.X_UseConveyor);
                 }
             }
         }

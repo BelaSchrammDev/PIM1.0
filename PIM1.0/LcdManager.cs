@@ -29,7 +29,7 @@ namespace IngameScript
                     {
                         if (acLines[1] != "") ac_Types = acLines[1];
                     }
-                    else if (acLines[0] == X_Autocrafting_treshold)
+                    else if (acLines[0] == Strings.X_Autocrafting_treshold)
                     {
                         // threshold loading
                         var oldacf = AutocraftingThreshold;
@@ -50,7 +50,7 @@ namespace IngameScript
                 // write autocrafting config
                 var acString = "/ Autocraftingdefinition:\n";
                 acString += "/ add '...(sms)' to the name of assemblers to crafting their items,\n/ and set the max quantity as you want\n\n";
-                acString += "/ if the quantity of items falls below this percentage value,\n/ then it will be increased to max.\n" + X_Autocrafting_treshold + " = " + AutocraftingThreshold + "%\n\n";
+                acString += "/ if the quantity of items falls below this percentage value,\n/ then it will be increased to max.\n" + Strings.X_Autocrafting_treshold + " = " + AutocraftingThreshold + "%\n\n";
                 acString += "/ possible autocrafting types, please add them separated by comma.\n/ ";
                 foreach (var t in autocrafting_Types) acString += t + ",";
                 acString += "\n" + AutoCraftingTypeStringName + "=" + ac_Types;

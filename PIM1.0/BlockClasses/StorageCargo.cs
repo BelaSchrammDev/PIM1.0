@@ -12,7 +12,7 @@ namespace IngameScript
             {
                 container = cargoContainer as IMyCargoContainer;
                 inv = container.GetInventory();
-                storageinvs.Add(this);
+                Lists.Data.storageinvs.Add(this);
             }
             const string X_ItemDef = "StorageItemDefinition", X_ItemDefBegin = "### " + X_ItemDef + "_begin ###", X_ItemDefEnd = "### " + X_ItemDef + "_end ###", X_AddToList = "add_to_list:";
             public override bool CheckItems()
@@ -57,7 +57,7 @@ namespace IngameScript
                         }
                     }
                 }
-                var cdata = "  / Itemdefinitionen:\n  / amount and type of items to be stored in the container\n  /\n  / add items to the list:\n  / write search terms after the '" + X_AddToList + "', like 'steel' or 'tube'.\n  / close the window, after a few seconds you will find\n  / relevant items in the list below.\n" + X_AddToList + "\n" + X_Line;
+                var cdata = "  / Itemdefinitionen:\n  / amount and type of items to be stored in the container\n  /\n  / add items to the list:\n  / write search terms after the '" + X_AddToList + "', like 'steel' or 'tube'.\n  / close the window, after a few seconds you will find\n  / relevant items in the list below.\n" + X_AddToList + "\n" + Strings.X_Line;
                 cdata += "  / List of items, delete the lines that are no longer needed,\n  / or set the value to 0.\n  / please change only the value before the semicolon\n" + X_ItemDefBegin + "\n";
                 foreach (var i in items) { cdata += i.Value + ";" + i.Key + "\n"; }
                 cdata += X_ItemDefEnd + "\n";
@@ -67,7 +67,7 @@ namespace IngameScript
             }
             public void Remove()
             {
-                storageinvs.Remove(this);
+                Lists.Data.storageinvs.Remove(this);
             }
         }
     }

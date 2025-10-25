@@ -1,30 +1,9 @@
-﻿using Sandbox.ModAPI.Ingame;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public abstract class Tools 
-        {
-            public static bool BlockConstructMember(IMyTerminalBlock block) 
-            {
-                return block.IsSameConstructAs(Program.Instance.Me);
-            }
-
-            public static void AddToDebugString(string str)
-            {
-                Program.debugString += str;
-            }
-
-            public static int GetBlockList<T>(List<T> blockList)
-                where T : class, IMyTerminalBlock
-            {
-                Program.Instance.GridTerminalSystem.GetBlocksOfType<T>(blockList, block => BlockConstructMember(block));
-                return blockList.Count;
-            }
-        }
 
         public abstract class Job : Tools
         {

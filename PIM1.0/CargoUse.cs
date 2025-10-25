@@ -8,7 +8,7 @@ namespace IngameScript
 {
     partial class Program
     {
-        class CargoUse
+        public class CargoUse
         {
             public string type = "";
             public double Current = 0, Maximum = 0;

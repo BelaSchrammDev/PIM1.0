@@ -16,25 +16,30 @@ namespace IngameScript
 
             public override void InitJob()
             {
-                if (!Propertys.Data.changeAutoCraftingSettings)
+                if (!Propertys.Data.AutoCraftingSettingsInValid)
                 {
-                    debugString += "kein calc_ACDef\n";
+                    LCD_DebugString += "kein calc_ACDef\n";
                     schedule = false;
                     return;
                 }
-                debugString += "calc_ACDef\n";
-                Program.GridTerminalSystem.GetBlocksOfType<IMyAssembler>(Lists.Data.Assemblers, block => block.CubeGrid == Program.Me.CubeGrid);
-                Program.GridTerminalSystem.GetBlocksOfType<IMyRefinery>(Lists.Data.Refinerys, block => block.CubeGrid == Program.Me.CubeGrid);
+
+                LCD_DebugString += "calc_ACDef\n";
+
+                GetBlockList(Lists.Data.Assemblers);
+                GetBlockList(Lists.Data.Refinerys);
+
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Active.Keys);
+
                 for (int i = BluePrintKeyList.Count - 1; i >= 0; i--)
                 {
                     var b = Lists.Data.BluePrints_Active[BluePrintKeyList[i]];
                     Lists.Data.BluePrints_Inactive.Add(BluePrintKeyList[i], b);
                     Lists.Data.BluePrints_Active.Remove(BluePrintKeyList[i]);
                 }
+
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Inactive.Keys);
                 Index = BluePrintKeyList.Count - 1;
-                Propertys.Data.changeAutoCraftingSettings = false;
+                Propertys.Data.AutoCraftingSettingsInValid = false;
             }
 
             public override RunJobResult RunJob()
@@ -68,10 +73,11 @@ namespace IngameScript
                     }
                 }
 
-
                 Index--;
+
                 // check finish
                 if (Index >= 0) return RunJobResult.Continue;
+
                 // finish
                 Program.InitAutoCraftingTypes();
                 return RunJobResult.Finished;

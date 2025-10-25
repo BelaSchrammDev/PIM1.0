@@ -62,7 +62,7 @@ namespace IngameScript
 
         static string CastResourceName(string name)
         {
-            if (usedMods[M_IndustrialOverhaulMod] && ResourcesNameCastListIOMod.ContainsKey(name)) return ResourcesNameCastListIOMod[name];
+            if (usedMods[Strings.M_IndustrialOverhaulMod] && ResourcesNameCastListIOMod.ContainsKey(name)) return ResourcesNameCastListIOMod[name];
             if (ResourcesNameCastList.ContainsKey(name)) return ResourcesNameCastList[name];
             if (name.StartsWith("Ore Crushed")) return "Crushed " + name.Substring(11);
             if (name.StartsWith("Ore Purified")) return "Purified " + name.Substring(12);
@@ -160,7 +160,7 @@ namespace IngameScript
             AddRefineryBlueprintOreToIngot("Silicon");
             AddRefineryBlueprintOreToIngot("Uranium");
 
-            if (usedMods[M_SigmaDraconisCore])
+            if (usedMods[Strings.M_SigmaDraconisCore])
             {
                 // Ingots
                 AddRefineryBlueprint("TungstenToIngot", "Ore Tungsten", "Ingot TungstenIngot");
@@ -177,7 +177,7 @@ namespace IngameScript
                 AddRefineryBlueprint("GraphiteOreToIngot", "Ore Graphite", "Ingot Carbon");
             }
 
-            if (usedMods[M_DeuteriumReactor])
+            if (usedMods[Strings.M_DeuteriumReactor])
             {
                 AddRefineryBlueprint("StonetoDeuterium", Ore.Stone, Ingot.DeuteriumContainer);
                 AddRefineryBlueprint("IcetoDeuterium", Ore.Ice, Ingot.DeuteriumContainer);
@@ -185,7 +185,7 @@ namespace IngameScript
             }
 
 
-            if (usedMods[M_DailyNeedsSurvival])
+            if (usedMods[Strings.M_DailyNeedsSurvival])
             {
                 AddRefineryBlueprintOreToIngot("Carbon");
                 AddRefineryBlueprintOreToIngot("Potassium");
@@ -193,7 +193,7 @@ namespace IngameScript
             }
 
 
-            if (usedMods[M_SG_Ores])
+            if (usedMods[Strings.M_SG_Ores])
             {
                 AddRefineryBlueprintOreToIngot("Naquadah");
                 AddRefineryBlueprintOreToIngot("Trinium");
@@ -201,7 +201,7 @@ namespace IngameScript
             }
 
 
-            if (!usedMods[M_IndustrialOverhaulMod])
+            if (!usedMods[Strings.M_IndustrialOverhaulMod])
             {
                 AddRefineryBlueprintOreToIngot("Magnesium");
             }

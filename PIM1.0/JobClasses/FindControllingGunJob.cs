@@ -16,7 +16,7 @@ namespace IngameScript
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                var group = Program.GridTerminalSystem.GetBlockGroupWithName(Propertys.Data.CurrentGunGroupName);
+                var group = GridTerminalSystem.GetBlockGroupWithName(Propertys.Data.CurrentGunGroupName);
                 if (group == null)
                 {
                     ClearGunList();

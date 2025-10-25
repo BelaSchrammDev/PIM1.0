@@ -16,7 +16,7 @@ namespace IngameScript
 
             protected void FillBlockList()
             {
-                Program.GridTerminalSystem.GetBlocksOfType(Blocks, block => IsValidBlock(block));
+                GridTerminalSystem.GetBlocksOfType(Blocks, block => IsValidBlock(block));
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)

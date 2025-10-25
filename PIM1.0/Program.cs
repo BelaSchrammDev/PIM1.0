@@ -22,7 +22,10 @@ namespace IngameScript
         // Expose inventory to jobs
         public Dictionary<MyItemType, float> Inventory => _inventory;
 
+        // singleton Program Instance
+        public static Program Instance;
 
+        // old property section ---------------------------------------------------------------------------------
 
         bool ShowInfoPBLcd = true;
         static bool delete_queueItem_if_max = true;
@@ -35,26 +38,21 @@ namespace IngameScript
         int stacking_cycle = 10;
         StopWatch MainLoopTimeSpan = new StopWatch(3);
         static int AutocraftingThreshold = 80;
-        static string debugString = "";
+
+        static string LCD_DebugString = "";
+
         static Dictionary<string, float> inventar = new Dictionary<string, float>();
-        static List<StorageInventory> storageinvs = new List<StorageInventory>();
-        
-        List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
-        Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
+         
         static Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
-        List<string> mods = new List<string>(); string curmod = M_Vanilla;
+        List<string> mods = new List<string>(); string curmod = Strings.M_Vanilla;
+
+        List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
         int m0 = -1; int m1, m2 = 0; List<string> s0;
-        const string SI1 = "PIM v1.1", SI2 = "c (c) BelaOkuma\n", SMS = "SMS v1.4", X_StorageTag = "(sms,storage)";
-        const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_Line = "  / =================================\n", X_UseConveyor = "UseConveyor";
-        const string X_Autocrafting_treshold = "Autocrafting_threshold";
-        const string M_Vanilla = "Vanilla", M_SigmaDraconisCore = "SigmaDraconisCoreMod", M_HSR = "HSR_Mod", M_NorthWindWeapons = "NorthWindWeaponsMod", M_AryxEpsteinDrive = "AryxEpsteinDriveMod", M_PlantCook = "PlantAndCookMod", M_EatDrinkSleep = "EatDrinkSleepRepeatMod", M_IndustrialOverhaulLLMod = "IndustrialOverhaulLockLoadMod", M_IndustrialOverhaulWaterMod = "IndustrialOverhaulWaterMod", M_IndustrialOverhaulMod = "IndustrialOverhaulMod", M_DailyNeedsSurvival = "DailyNeedsSurvivalMod", M_AzimuthThruster = "AzimuthThrusterMod", M_SG_Gates = "StarGateMod_Gates", M_SG_Ores = "StarGateMod_Ores", M_PaintGun = "PaintGunMod", M_DeuteriumReactor = "DeuteriumReactorMod", M_Shield = "DefenseShieldMod", M_RailGun = "MCRN_RailGunMod", M_HomingWeaponry = "MWI_HomingWeaponryMod";
-        const string AC_ToolsAndGuns = "Tools&Guns", IG_Food = "Food", IG_Component = "Component", IG_I = "Ingot", IG_Ingot = IG_I + " ", IG_Com = IG_Component + " ", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_K = IG_Kits + " " , IG_Phys = "PhysicalObject", IG_P = IG_Phys + " ", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_", IG_Seeds = "SeedItem", IG_S = IG_Seeds + " ";
-        static Dictionary<string, AmmoDefs> ammoDefs = new Dictionary<string, AmmoDefs>();
+
         static Dictionary<string, DisplayBox> DisplayBoxList = new Dictionary<string, DisplayBox>();
-        
-        DateTime StackingCounter = DateTime.Now;
-        
-        bool if_true(string str) { return Convert.ToBoolean(str); }
+
+        // old property section --------------------------------------------------------------------------------- END
+
         List<string> autocrafting_Types = new List<string>();
         void InitAutoCraftingTypes()
         {
@@ -69,7 +67,7 @@ namespace IngameScript
         
         void writeInfo()
         {
-            var s = SI1 + SI2 + getRunningSign() + (LoopManager.Master == null ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + LoopManager.Master.CustomName);
+            var s = Strings.PimVersion + Strings.PimCopyright + getRunningSign() + (LoopManager.IsMaster ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + Tools.MySelf.CustomName);
             Echo(s);
             if (ShowInfoPBLcd)
             {
@@ -91,10 +89,7 @@ namespace IngameScript
             viewList.Add(new RefineryManagerInfo());
             viewList.Add(new AssemblerManagerInfo());
 
-            LoadConfig();
-            InitAssemblerBluePrints();
-            InitRefineryBlueprints();
-            LoopManager.Init(this);
+            LoopManager.Init();
 
             if (collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
             if (collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
@@ -117,14 +112,15 @@ namespace IngameScript
                     new StackingGammaJob(this)),
                 new RefreshRefineryListJob(this),
                 new RefreshAssemblerListJob(this),
-                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.NonSmsFlagedInventoryList),
-                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.SmsFlagedInventoryList, Lists.Data.collectAll_List),
+                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.SmsFlagedInventoryList),
+                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
+                new StorageInventoryRefreshJob(this),
             };
         }
-        
+
         bool maxInstructions()
         {
-            return LoopManager.rti.CurrentInstructionCount > LoopManager.CurrentInstructionAmount; 
+            return LoopManager.RunTime.CurrentInstructionCount > LoopManager.CurrentInstructionAmount; 
         }
 
         void Main(string argument, UpdateType updateSource)
@@ -206,7 +202,5 @@ namespace IngameScript
         }
 
         StringBuilderExtended runningSign = new StringBuilderExtended(10);
-        // new property section
-        public static Program Instance;
     }
 }

@@ -95,7 +95,7 @@ namespace IngameScript
             void ConvertAutoCraftingName()
             {
                 AutoCraftingType = type;
-                if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = AC_ToolsAndGuns;
+                if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = Strings.AC_ToolsAndGuns;
                 else if (seed_cast.Contains(ItemName)) AutoCraftingType = "Seeds";
                 else if (food_cast.Contains(ItemName)) AutoCraftingType = IG_Food;
                 else if (subtype == Refinery.BluePrint_SpentFuelReprocessing) AutoCraftingType = Refinery.BluePrint_SpentFuelReprocessing;
@@ -115,7 +115,7 @@ namespace IngameScript
                     else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(AutomaticRifleGun_Mag_)) + "RifleGunMagazine";
                 }
                 else if (type == IG_Seeds) AutoCraftingName += " Seeds";
-                else if (type == IG_Tools && ModName == M_Vanilla)
+                else if (type == IG_Tools && ModName == Strings.M_Vanilla)
                 {
                     string[] Tools = { "HandDrill", "Grinder", "Welder" };
                     var isTool = false;
@@ -175,7 +175,7 @@ namespace IngameScript
 
         void InitAssemblerBluePrints()
         {
-            if (!usedMods[M_IndustrialOverhaulMod])
+            if (!usedMods[Strings.M_IndustrialOverhaulMod])
             {
                 // blueprint vanilla
                 // Components
@@ -286,7 +286,7 @@ namespace IngameScript
                 S("Position0040_Spores_Mushrooms", "Mushrooms");
             }
 
-            curmod = M_SigmaDraconisCore;
+            curmod = Strings.M_SigmaDraconisCore;
             // TradeGoods
             C("Composting", "Compost");
             C("CrateofTomatoes", "CrateTomato");
@@ -345,7 +345,7 @@ namespace IngameScript
 
 
             /* DailyNeedsSurvivalMod */
-            curmod = M_DailyNeedsSurvival;
+            curmod = Strings.M_DailyNeedsSurvival;
             I("SubFresh", "", "Algae-Soy Product");
             I("WaterFood", "", "Drinking Water Packet");
             I("OrganicToNutrients", "Nutrients", "Nutrients");
@@ -381,50 +381,50 @@ namespace IngameScript
             I("ProteinShake");
 
             /* AzimuthThrusterMod */
-            curmod = M_AzimuthThruster;
+            curmod = Strings.M_AzimuthThruster;
             C("AzimuthSuperchargerComponent", "AzimuthSupercharger");
 
             /* StargateMods */
-            curmod = M_SG_Ores;
+            curmod = Strings.M_SG_Ores;
             C("Naquadah", "", "Naquadah Bars");
             C("Trinium", "", "Trinium Plate");
             C("Neutronium", "", "Neutronium Crate");
 
-            if (!usedMods[M_SG_Ores])
+            if (!usedMods[Strings.M_SG_Ores])
             {
-                curmod = M_SG_Gates;
+                curmod = Strings.M_SG_Gates;
                 C("Naquadah", "", "Naquadah Bars");
             }
 
             /* PaintGunMod */
-            curmod = M_PaintGun;
+            curmod = Strings.M_PaintGun;
             T("Blueprint_PaintGun", "PhysicalPaintGun");
             A("Blueprint_PaintGunMag", "PaintGunMag");
 
             /* DeuteriumReactorMod */
-            curmod = M_DeuteriumReactor;
+            curmod = Strings.M_DeuteriumReactor;
             C("Magnetron_Component");
             I("DeuteriumOreToIngot", "DeuteriumContainer", "Deuterium");
             I("StonetoDeuterium", "DeuteriumContainer", "Deuterium (Stone)");
             I("IcetoDeuterium", "DeuteriumContainer", "Deuterium (Ice)");
 
             /* DefenseShieldMod */
-            curmod = M_Shield;
+            curmod = Strings.M_Shield;
             C("ShieldComponentBP", "ShieldComponent", "Field Emitter");
 
             /* MCRN RailGunMod */
-            curmod = M_RailGun;
+            curmod = Strings.M_RailGun;
             A("RailGunAmmoMag");
 
             /* MWI Homing Weaponry Mod */
-            curmod = M_HomingWeaponry;
+            curmod = Strings.M_HomingWeaponry;
             A("TorpedoMk1_Blueprint", "TorpedoMk1");
             A("SwarmMissileMk1_Blueprint", "SwarmMissile50mm");
             A("DestroyerMissileX_Blueprint", "DestroyerMissileX");
             A("DestroyerMissileMk1_Blueprint", "DestroyerMissileMk1");
 
             /* Industrial Overhaul Mod */
-            curmod = M_IndustrialOverhaulMod;
+            curmod = Strings.M_IndustrialOverhaulMod;
             // Reprocessor
             I(Refinery.BluePrint_SpentFuelReprocessing, "Uranium", "Nuclear Fuel");
             // AssemblingBenchComponents
@@ -543,12 +543,12 @@ namespace IngameScript
             T("POHandDrill4", "HandDrill4Item");
 
             // IndustrialOverhaulWater Mod
-            curmod = M_IndustrialOverhaulWaterMod;
+            curmod = Strings.M_IndustrialOverhaulWaterMod;
             C("Foam");
             C("BuoyancyTube");
 
             // IndustrialOverhaulLockLoad Mod
-            curmod = M_IndustrialOverhaulLLMod;
+            curmod = Strings.M_IndustrialOverhaulLLMod;
             // CompressedGravel
             A("GravelMag");
             A("GravelMagBig");
@@ -563,12 +563,12 @@ namespace IngameScript
             A("DUAPCoilgunShell");
             A("CLGGMag", "CLGG");
 
-            curmod = M_EatDrinkSleep;
+            curmod = Strings.M_EatDrinkSleep;
             // Emergency
             K("SparklingWater");
             K("Emergency_Ration");
 
-            curmod = M_PlantCook;
+            curmod = Strings.M_PlantCook;
             // Farming
             I("Soya");
             I("Herbs");
@@ -599,10 +599,10 @@ namespace IngameScript
             I("FarmedPumpkin", "Pumpkin");
             I("FarmedCabbage", "Cabbage");
 
-            curmod = M_AryxEpsteinDrive;
+            curmod = Strings.M_AryxEpsteinDrive;
             C("AryxLynxon_FusionComponentBP", "AryxLynxon_FusionComponent", "Fusion Coil");
 
-            curmod = M_HSR;
+            curmod = Strings.M_HSR;
             // Components
             C("K_HSR_Component_Rail_Vanilla", "K_HSR_RailComponents");
             A("K_HSR_Ammuntion_Recipe_Slug", "K_HSR_Slug");
@@ -626,7 +626,7 @@ namespace IngameScript
             I("K_HSR_Hexagol_Recipe", "K_HSR_Nanites_Hexagol");
             I("K_HSR_Chromium_Recipe", "K_HSR_Nanites_Chromium");
 
-            curmod = M_NorthWindWeapons;
+            curmod = Strings.M_NorthWindWeapons;
             // Ammo
             A("R75ammo", "", "75mm Railgun Ammo");
             A("R150ammo", "", "150mm Railgun Ammo");

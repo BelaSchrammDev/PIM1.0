@@ -26,15 +26,15 @@ namespace IngameScript
             {
                 StackItemList.Clear();
                 StackItem.ClearStackInventory();
-                if (InventoryManagerList.ContainsKey(StackingJob.StackType))
+                if (Lists.Data.InventoryManagerList.ContainsKey(StackingJob.StackType))
                 {
-                    foreach (var i in InventoryManagerList[StackingJob.StackType])
+                    foreach (var i in Lists.Data.InventoryManagerList[StackingJob.StackType])
                     {
                         NewStackCount(i, StackingJob.StackType);
                         StackItem.CalculateFreeInventory(i);
                     }
                 }
-                Program.debugString += Name + "_Init " + StackItemList.Count + "\n";
+                Program.LCD_DebugString += Name + "_Init " + StackItemList.Count + "\n";
 
                 startIndex = 0;
                 endIndex = InitStacking() ? StackItemList.Count - 1 : -1;
@@ -48,7 +48,7 @@ namespace IngameScript
                 quelle.GetItems(von);
                 foreach (var i in von)
                 {
-                    if (i.Type.TypeId.Contains(ti) && !InventoryManagerList.ContainsKey(GetPIMItemID(i.Type)))
+                    if (i.Type.TypeId.Contains(ti) && !Lists.Data.InventoryManagerList.ContainsKey(GetPIMItemID(i.Type)))
                     {
                         GetStackItem(i.Type).AddStack(quelle, i.Amount);
                     }

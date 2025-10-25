@@ -12,12 +12,12 @@ namespace IngameScript
         {
             public static AmmoDefs GetAmmoDefs(string name)
             {
-                if (!ammoDefs.ContainsKey(name))
+                if (!Lists.Data.AmmoDefinitions.ContainsKey(name))
                 {
-                    ammoDefs.Add(name, new AmmoDefs(name));
+                    Lists.Data.AmmoDefinitions.Add(name, new AmmoDefs(name));
                 }
 
-                return ammoDefs[name];
+                return Lists.Data.AmmoDefinitions[name];
             }
 
             private readonly string Name = "";

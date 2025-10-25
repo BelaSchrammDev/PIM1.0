@@ -76,16 +76,16 @@ namespace IngameScript
         string Debug_InventoryManagerList()
         {
             var DebugText = "InventoryManagerList:\n";
-            foreach (var inventoryKey in InventoryManagerList.Keys)
+            foreach (var inventoryKey in Lists.Data.InventoryManagerList.Keys)
             {
-                DebugText += " - Key: " + inventoryKey + " / " + InventoryManagerList[inventoryKey].Count + " Inventorys\n";
+                DebugText += " - Key: " + inventoryKey + " / " + Lists.Data.InventoryManagerList[inventoryKey].Count + " Inventorys\n";
             }
             return DebugText;
         }
 
         string Debug_Guns()
         {
-            var DebugText = "Guns - >\n" + storageinvs.Count + "\n";
+            var DebugText = "Guns - >\n" + Lists.Data.storageinvs.Count + "\n";
             foreach (var gun in Lists.Data.guns)
             {
                 DebugText += " * " + gun.gun.CustomName + " / " + gun.CurrentAmmo + "\n";
@@ -100,7 +100,7 @@ namespace IngameScript
         string Debug_AmmoDefs() 
         {
             var DebugText = "AmmoDefs - >\n";
-            foreach (var ad in ammoDefs)
+            foreach (var ad in Lists.Data.AmmoDefinitions)
             {
                 DebugText += " * " + ad.Value.type + " / " + ad.Value.maxOfVolume + " / " + ad.Value.guns.Count + " / " + ad.Value.ratio + "\n";
             }
@@ -121,15 +121,15 @@ namespace IngameScript
             return DebugText;
         }
 
-        void DebugPrint()
+        void LCD_DebugPrint()
         {
             var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
             if (panel == null) return;
             if (panel.CubeGrid != Me.CubeGrid) return;
             var s = "";
             s += Debug_Guns() + Debug_AmmoDefs();
-            panel.WriteText(s + "\n" + debugString);
-            debugString = "";
+            panel.WriteText(s + "\n" + LCD_DebugString);
+            LCD_DebugString = "";
         }
     }
 }

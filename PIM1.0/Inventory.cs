@@ -208,12 +208,12 @@ namespace IngameScript
                 var stype = vcon.SubtypeId.ToString();
                 var fullid = idstr + " " + stype;
                 var atype = TypeCast(fullid);
-                if (InventoryManagerList.ContainsKey(fullid)) success = SendItemByNum(quelle, j, InventoryManagerList[fullid]);
-                if (!success && atype != "" && InventoryManagerList.ContainsKey(atype)) success = SendItemByNum(quelle, j, InventoryManagerList[atype]);
-                if (!success && InventoryManagerList.ContainsKey(idstr)) SendItemByNum(quelle, j, InventoryManagerList[idstr]);
+                if (Lists.Data.InventoryManagerList.ContainsKey(fullid)) success = SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[fullid]);
+                if (!success && atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) success = SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[atype]);
+                if (!success && Lists.Data.InventoryManagerList.ContainsKey(idstr)) SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[idstr]);
 
                 var idstrPIM = Ingame2Tag(idstr);
-                if (InventoryManagerList.ContainsKey(idstr)) ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
+                if (Lists.Data.InventoryManagerList.ContainsKey(idstr)) ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
                 else SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
             }
         }
@@ -225,9 +225,9 @@ namespace IngameScript
             var atype = TypeCast(type);
             var trans = false;
             if (amount == 0) amount = (float)item.Amount;
-            if (InventoryManagerList.ContainsKey(type)) trans = SendItemByIItem(quelle, item, amount, InventoryManagerList[type]);
-            else if (atype != "" && InventoryManagerList.ContainsKey(atype)) trans = SendItemByIItem(quelle, item, amount, InventoryManagerList[atype]);
-            else if (InventoryManagerList.ContainsKey(typeID)) trans = SendItemByIItem(quelle, item, amount, InventoryManagerList[typeID]);
+            if (Lists.Data.InventoryManagerList.ContainsKey(type)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[type]);
+            else if (atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[atype]);
+            else if (Lists.Data.InventoryManagerList.ContainsKey(typeID)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[typeID]);
             return trans;
         }
         static bool SendItemByIItem(IMyInventory quelle, MyInventoryItem item, float amount, List<IMyInventory> ziele)
@@ -274,9 +274,9 @@ namespace IngameScript
             var idstr = itemType.Split('_')[1];
             var idstrPIM = Ingame2Tag(idstr);
             var atype = TypeCast(idstr[1] + " " + itemSubType);
-            if (InventoryManagerList.ContainsKey(idstr[1] + " " + itemSubType)) quellen = InventoryManagerList[idstr[1] + " " + itemSubType];
-            else if (atype != "" && InventoryManagerList.ContainsKey(atype)) quellen = InventoryManagerList[atype];
-            else if (InventoryManagerList.ContainsKey(idstr)) quellen = InventoryManagerList[idstr];
+            if (Lists.Data.InventoryManagerList.ContainsKey(idstr[1] + " " + itemSubType)) quellen = Lists.Data.InventoryManagerList[idstr[1] + " " + itemSubType];
+            else if (atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) quellen = Lists.Data.InventoryManagerList[atype];
+            else if (Lists.Data.InventoryManagerList.ContainsKey(idstr)) quellen = Lists.Data.InventoryManagerList[idstr];
             else
             {
                 SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
@@ -352,13 +352,12 @@ namespace IngameScript
                 var ingame = Tag2Ingame(tag);
                 if (ingame != "")
                 {
-                    if (!InventoryManagerList.ContainsKey(ingame)) InventoryManagerList.Add(ingame, new List<IMyInventory>());
-                    if (!InventoryManagerList[ingame].Contains(inv)) InventoryManagerList[ingame].Add(inv);
-                    if (!CargoUseList.ContainsKey(tag)) CargoUseList.Add(tag, new CargoUse(tag));
-                    CargoUseList[tag].AddCurrentAndMaxCargocapacity(inv.CurrentVolume.RawValue / 1000, inv.MaxVolume.RawValue / 1000);
+                    if (!Lists.Data.InventoryManagerList.ContainsKey(ingame)) Lists.Data.InventoryManagerList.Add(ingame, new List<IMyInventory>());
+                    if (!Lists.Data.InventoryManagerList[ingame].Contains(inv)) Lists.Data.InventoryManagerList[ingame].Add(inv);
+                    if (!Lists.Data.CargoUseList.ContainsKey(tag)) Lists.Data.CargoUseList.Add(tag, new CargoUse(tag));
+                    Lists.Data.CargoUseList[tag].AddCurrentAndMaxCargocapacity(inv.CurrentVolume.RawValue / 1000, inv.MaxVolume.RawValue / 1000);
                 }
             }
         }
-        static Dictionary<string, List<IMyInventory>> InventoryManagerList = new Dictionary<string, List<IMyInventory>>();
     }
 }

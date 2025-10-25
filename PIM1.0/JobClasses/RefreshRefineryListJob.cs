@@ -17,16 +17,18 @@ namespace IngameScript
 
                 for (int i = Lists.Data.RefineryList.Count - 1; i >= 0; i--)
                 {
-                    if (Lists.Data.Refinerys.Contains(Lists.Data.RefineryList[i].RefineryBlock)) Lists.Data.Refinerys.Remove(Lists.Data.RefineryList[i].RefineryBlock);
+                    if (Lists.Data.Refinerys.Contains(Lists.Data.RefineryList[i].RefineryBlock))
+                    {
+                        Lists.Data.Refinerys.Remove(Lists.Data.RefineryList[i].RefineryBlock);
+                    }
                     else
                     {
-                        Propertys.Data.changeAutoCraftingSettings = true;
+                        Propertys.Data.AutoCraftingSettingsInValid = true;
                         Lists.Data.RefineryList.Remove(Lists.Data.RefineryList[i]);
                     }
                 }
 
                 Refinery.priobt = "";
-
                 startIndex = Lists.Data.Refinerys.Count - 1;
                 endIndex = 0;
             }
