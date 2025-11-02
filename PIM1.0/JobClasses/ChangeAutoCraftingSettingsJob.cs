@@ -10,7 +10,7 @@ namespace IngameScript
             private bool schedule = true;
             private List<string> BluePrintKeyList = new List<string>();
             private int Index = 0;
-            public ChangeAutoCraftingSettingsJob(Program program) : base(program, "ChangeAutoCraftingSettings")
+            public ChangeAutoCraftingSettingsJob(Program program) : base(program)
             {
             }
 
@@ -27,6 +27,8 @@ namespace IngameScript
 
                 GetBlockList(Lists.Data.Assemblers);
                 GetBlockList(Lists.Data.Refinerys);
+
+                Assembler.AssemblerTypesAcceptedBluePrints.Clear();
 
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Active.Keys);
 
@@ -47,7 +49,7 @@ namespace IngameScript
                 if(!schedule) return RunJobResult.Finished;
 
                 var b = Lists.Data.BluePrints_Inactive[BluePrintKeyList[Index]];
-                if (BluePrintKeyList[Index] == Ingot.SubFresh || BluePrintKeyList[Index] == (Refinery.BluePrintID_SpentFuelReprocessing))
+                if (RefineryBluePrintAsAssemblerBP(BluePrintKeyList[Index]))
                 {
                     foreach (var r in Lists.Data.Refinerys)
                     {
@@ -66,6 +68,14 @@ namespace IngameScript
                     {
                         if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(b.definition_id))
                         {
+                            var subTypeId = a.BlockDefinition.SubtypeId;
+
+                            if (!Assembler.AssemblerTypesAcceptedBluePrints.ContainsKey(subTypeId))
+                            {
+                                Assembler.AssemblerTypesAcceptedBluePrints.Add(subTypeId, new List<AssemblerBluePrint>());
+                            }
+
+                            Assembler.AssemblerTypesAcceptedBluePrints[subTypeId].Add(b);
                             Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], b);
                             Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
                             break;
@@ -79,9 +89,23 @@ namespace IngameScript
                 if (Index >= 0) return RunJobResult.Continue;
 
                 // finish
-                Program.InitAutoCraftingTypes();
+                InitAutoCraftingTypes();
+
                 return RunJobResult.Finished;
             }
+
+            private bool RefineryBluePrintAsAssemblerBP(string definition)
+            {
+                return definition == Ingot.SubFresh || definition == (Refinery.BluePrintID_SpentFuelReprocessing);
+            }
+
+            private void InitAutoCraftingTypes()
+            {
+                foreach (var bpType in Lists.Data.BluePrints_Active.Values)
+                    if (!Lists.Data.autocrafting_Types.Contains(bpType.AutoCraftingType))
+                        Lists.Data.autocrafting_Types.Add(bpType.AutoCraftingType);
+            }
+
         }
     }
 }

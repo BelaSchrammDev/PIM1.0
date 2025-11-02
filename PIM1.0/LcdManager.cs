@@ -25,7 +25,7 @@ namespace IngameScript
                     var acLines = s1.Split('|', '=', '%', ':');
                     for (int i = 0; i < acLines.Count(); i++) acLines[i] = acLines[i].Trim(' ', '\u00AD');
                     if (acLines.Count() == 0 || acLines[0] == "" || acLines[0][0] == '/') continue;
-                    else if (acLines[0] == AutoCraftingTypeStringName && acLines.Count() > 1)
+                    else if (acLines[0] == Strings.AutoCraftingTypeStringName && acLines.Count() > 1)
                     {
                         if (acLines[1] != "") ac_Types = acLines[1];
                     }
@@ -43,7 +43,10 @@ namespace IngameScript
                     }
                     else if (acLines.Count() == 6)
                     {
-                        if (Lists.Data.BluePrints_Active.ContainsKey(acLines[4])) Lists.Data.BluePrints_Active[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
+                        if (Lists.Data.BluePrints_Active.ContainsKey(acLines[4]))
+                        {
+                            Lists.Data.BluePrints_Active[acLines[4]].SetMaximumAmount(getIntegerWithPräfix(acLines[2]));
+                        }
                     }
                 }
                 if (act_new) SetAutocraftingThresholdNew();
@@ -52,8 +55,8 @@ namespace IngameScript
                 acString += "/ add '...(sms)' to the name of assemblers to crafting their items,\n/ and set the max quantity as you want\n\n";
                 acString += "/ if the quantity of items falls below this percentage value,\n/ then it will be increased to max.\n" + Strings.X_Autocrafting_treshold + " = " + AutocraftingThreshold + "%\n\n";
                 acString += "/ possible autocrafting types, please add them separated by comma.\n/ ";
-                foreach (var t in autocrafting_Types) acString += t + ",";
-                acString += "\n" + AutoCraftingTypeStringName + "=" + ac_Types;
+                foreach (var t in Lists.Data.autocrafting_Types) acString += t + ",";
+                acString += "\n" + Strings.AutoCraftingTypeStringName + "=" + ac_Types;
                 acString += "\n\n/                           Item            |     current    ­|       max      ­|   assembly\n";
                 var ac_TypesList = ac_Types.Split(',')
                     .Select(s => s.Trim())

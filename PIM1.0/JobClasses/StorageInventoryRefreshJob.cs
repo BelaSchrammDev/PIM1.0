@@ -6,7 +6,7 @@
     {
         public class StorageInventoryRefreshJob : CountingJob
         {
-            public StorageInventoryRefreshJob(Program program) : base(program, "StorageRefreshing")
+            public StorageInventoryRefreshJob(Program program) : base(program)
             {
             }
 

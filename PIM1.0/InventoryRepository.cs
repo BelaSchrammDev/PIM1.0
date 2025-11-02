@@ -24,7 +24,7 @@ namespace IngameScript
             /// Constructs the InventoryCount job, injecting the Program and optional cooldown.
             /// </summary>
             public InventoryCount(Program program)
-                : base(program, "InventoryCount")
+                : base(program)
             {
             }
 

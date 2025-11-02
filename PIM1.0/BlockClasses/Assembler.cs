@@ -2,17 +2,21 @@
 using System;
 using System.Collections.Generic;
 using VRage;
+using VRage.Game;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public class Assembler : IComparable<Assembler>
+        public class Assembler
         {
-            int BlueprintCount = 0;
-            public List<AssemblerBluePrint> BlueprintList = new List<AssemblerBluePrint>();
+            public static Dictionary<string, List<AssemblerBluePrint>> AssemblerTypesAcceptedBluePrints = new Dictionary<string, List<AssemblerBluePrint>>();
+
+            public List<AssemblerBluePrint> OwnBlueprintList;
+            //public List<AssemblerBluePrint> BlueprintList = new List<AssemblerBluePrint>();
             public Parameter parameter = new Parameter();
             public IMyAssembler AssemblerBlock;
+            public string SubTypeName;
             bool outputInventoryNotEmpty = false;
             bool IsSurvivalKit = false;
             bool RemoveItemMode = false;
@@ -20,26 +24,19 @@ namespace IngameScript
             public Assembler(IMyAssembler a)
             {
                 AssemblerBlock = a;
+                SubTypeName = a.BlockDefinition.SubtypeName;
+
+                if (AssemblerTypesAcceptedBluePrints.ContainsKey(SubTypeName)) 
+                {
+                    OwnBlueprintList = AssemblerTypesAcceptedBluePrints[SubTypeName];
+                }
+
                 IsSurvivalKit = a.BlockDefinition.TypeIdString == "SurvivalKit";
             }
 
             public bool BlockRemoved()
             {
                 return AssemblerBlock.Closed;
-            }
-
-            public int CompareTo(Assembler other)
-            {
-                if (other.BlueprintCount < BlueprintCount)
-                {
-                    return 1;
-                }
-                else if (other.BlueprintCount > BlueprintCount)
-                {
-                    return -1;
-                }
-
-                return 0;
             }
 
             public void AddValidBlueprint(AssemblerBluePrint bluePrint)
@@ -51,44 +48,26 @@ namespace IngameScript
 
                 if (parameter.ControledByPIM() && AssemblerBlock.CanUseBlueprint(bluePrint.definition_id))
                 {
-                    bluePrint.o.Add(this);
+                    bluePrint.ValidAssemblers.Add(this);
                     bluePrint.NumBluePrintToAssembler++;
-                    BlueprintList.Add(bluePrint);
-                    BlueprintCount++;
                 }
             }
 
-            public bool AddBlueprintToQueue(AssemblerBluePrint bluePrint)
+            public bool AddQueueItemSave(AssemblerBluePrint bluePrint, MyFixedPoint amountPerAssembler)
             {
-                if (BlockRemoved() || AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
-                {
-                    return false;
-                }
-
-                var ret = false;
-                var bpmg = (bluePrint.MaximumItemAmount - bluePrint.CurrentItemAmount - bluePrint.AssemblyAmount);
-                var mg = bpmg / bluePrint.NumBluePrintToAssembler;
-
-                if (bpmg < 100)
-                {
-                    mg = bpmg;
-                    ret = true;
-                }
-
-                AssemblerBlock.Repeating = false;
-
                 try
                 {
                     if (bluePrint.valid)
                     {
-                        AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)mg);
+                        AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)amountPerAssembler);
+                        return true;
                     }
                 }
                 catch (Exception e)
                 {
                     bluePrint.valid = false;
                 }
-                return ret;
+                return false;
             }
 
             public void GetErrorInfo(StringBuilderExtended errString)
@@ -139,10 +118,6 @@ namespace IngameScript
                 {
                     return;
                 }
-
-                BlueprintList.Clear();
-
-                BlueprintCount = 0;
 
                 if (AssemblerBlock.IsFunctional)
                 {

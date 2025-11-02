@@ -10,7 +10,7 @@ namespace IngameScript
         {
             protected List<IMyTerminalBlock> Blocks = new List<IMyTerminalBlock>();
 
-            public ProcessingBlockListBase(Program program, string name) : base(program, name)
+            public ProcessingBlockListBase(Program program) : base(program)
             {
             }
 

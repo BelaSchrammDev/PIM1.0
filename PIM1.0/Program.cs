@@ -25,7 +25,7 @@ namespace IngameScript
         // singleton Program Instance
         public static Program Instance;
 
-        // old property section ---------------------------------------------------------------------------------
+        // old property section --------------------------------------------------------------------------------- START
 
         bool ShowInfoPBLcd = true;
         static bool delete_queueItem_if_max = true;
@@ -47,28 +47,25 @@ namespace IngameScript
         List<string> mods = new List<string>(); string curmod = Strings.M_Vanilla;
 
         List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
-        int m0 = -1; int m1, m2 = 0; List<string> s0;
+        int m0 = -1; int m1, m2 = 0;
 
         static Dictionary<string, DisplayBox> DisplayBoxList = new Dictionary<string, DisplayBox>();
 
+        string bigSpaces = new string(' ', 85);
+
         // old property section --------------------------------------------------------------------------------- END
 
-        List<string> autocrafting_Types = new List<string>();
-        void InitAutoCraftingTypes()
-        {
-            foreach (var bpType in Lists.Data.BluePrints_Active.Values)
-                if (!autocrafting_Types.Contains(bpType.AutoCraftingType))
-                    autocrafting_Types.Add(bpType.AutoCraftingType);
-        }
-        string bigSpaces = new string(' ', 85);
-        const string AutoCraftingTypeStringName = "AutocraftingTypes";
-
-        
-        
         void writeInfo()
         {
-            var s = Strings.PimVersion + Strings.PimCopyright + getRunningSign() + (LoopManager.IsMaster ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) : "Standby\nMaster: " + Tools.MySelf.CustomName);
+            var s = Strings.PimVersion 
+                + Strings.PimCopyright 
+                + getRunningSign() 
+                + (LoopManager.IsMaster 
+                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) 
+                    : "Standby\nMaster: " + Tools.MySelf.CustomName);
+
             Echo(s);
+
             if (ShowInfoPBLcd)
             {
                 var tp = Me.GetSurface(0);
@@ -104,7 +101,7 @@ namespace IngameScript
                 new FindControllingGunJob(this),
                 new RefreshControllingGunsJob(this),
                 new FindStorageContainersJob(this),
-                new StackingJob(this, "StackingJob",
+                new StackingJob(this,
                     new StackingSingleJob(this),
                     new StackingAlphaJob(this),
                     new StackingBetaJob(this),
@@ -115,12 +112,13 @@ namespace IngameScript
                 new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.SmsFlagedInventoryList),
                 new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
                 new StorageInventoryRefreshJob(this),
+                new FindingRefinerysJob(this),
+                new RefineryManagerJob(this),
+                new FindingAssemblersJob(this),
+                new AssemblerBluePrintManagerJob(this),
+                new CalculatingAmountOfInactiveBluePrintItemsJob(this),
+                new AutoCraftingJob(this),
             };
-        }
-
-        bool maxInstructions()
-        {
-            return LoopManager.RunTime.CurrentInstructionCount > LoopManager.CurrentInstructionAmount; 
         }
 
         void Main(string argument, UpdateType updateSource)

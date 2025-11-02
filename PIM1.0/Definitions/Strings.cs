@@ -17,6 +17,7 @@
                 X_UseConveyor = "UseConveyor",
                 AC_ToolsAndGuns = "Tools&Guns",
                 X_Autocrafting_treshold = "Autocrafting_threshold",
+                AutoCraftingTypeStringName = "AutocraftingTypes",
 
                 // configstrings
                 X_Config = "### Config ###", 

@@ -34,14 +34,14 @@ namespace IngameScript
             // Timestamp when the last run ended
             private DateTime _lastRunEnd = DateTime.Now;
 
-            protected Job(Program program, string name) : this(program, name, 0)
+            protected Job(Program program) : this(program, 0)
             {
             }
 
-            protected Job(Program program, string name, int cooldownSeconds)
+            protected Job(Program program, int cooldownSeconds)
             {
                 Program = program;
-                Name = name;
+                Name = this.GetType().Name;
                 _cooldown = TimeSpan.FromSeconds(cooldownSeconds);
             }
 
@@ -68,6 +68,11 @@ namespace IngameScript
             }
 
             private JobStatus _status = JobStatus.Init;
+
+            protected void ResetJob()
+            {
+                _status = JobStatus.Init;
+            }
 
             /// <summary>
             /// Called once when the job is first scheduled.
@@ -139,8 +144,8 @@ namespace IngameScript
             private int _endIndex;
             private int _step;
 
-            protected CountingJob(Program program, string name, int cooldownSeconds = 0)
-                : base(program, name, cooldownSeconds)
+            protected CountingJob(Program program, int cooldownSeconds = 0)
+                : base(program, cooldownSeconds)
             {
             }
 
@@ -235,7 +240,7 @@ namespace IngameScript
             private int _currentSubJobIndex;
 
             public MultiJob(Program program, string name, params Job[] subJobs)
-                : base(program, name)
+                : base(program)
             {
                 _subJobs = subJobs;
             }
@@ -265,7 +270,7 @@ namespace IngameScript
         {
             private readonly Job[] _jobs;
             private int? _currentJobIndex = null;
-            public SequentialJob(Program program, string name, params Job[] jobs) : base(program, name)
+            public SequentialJob(Program program, params Job[] jobs) : base(program)
             {
                 _jobs = jobs;
             }

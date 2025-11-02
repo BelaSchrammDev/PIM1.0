@@ -18,7 +18,7 @@ namespace IngameScript
                 Gamma
             }
 
-            protected StackingJobBase(Program program, string name, StackingMode mode) : base(program, name)
+            protected StackingJobBase(Program program, string name, StackingMode mode) : base(program)
             {
             }
 

@@ -24,6 +24,34 @@ namespace IngameScript
             return DebugText;
         }
 
+        string Debug_AssemblerBluePrintsDictionary()
+        {
+            string DebugText = "Accepted BluePrints by Assemblersubtype\n";
+            foreach (var bluePrint in Assembler.AssemblerTypesAcceptedBluePrints)
+            {
+                DebugText += bluePrint.Key + "\n";
+                foreach (var item in bluePrint.Value)
+                {
+                    DebugText += item.AutoCraftingType + " -> " + item.AutoCraftingName + " / " + item.definition_id + "\n";
+                }
+            }
+            return DebugText;
+        }
+
+        string Debug_AssemblerOwnBluePrintList()
+        {
+            string debugText = "OwnBluePrintList\n\n";
+            foreach (var item in Lists.Data.AssemblerList)
+            {
+                debugText += $"{item.AssemblerBlock.Name}\n---------------------------------------------\n";
+                foreach (var bp in item.OwnBlueprintList)
+                {
+                    debugText += bp.definition_id + "\n";
+                }
+            }
+            return debugText;
+        }
+
         string Debug_AssemblerBPs()
         {
             string DebugText = "Accepted BluePrints by Assemblersubtype\nPool:\n";
@@ -127,7 +155,7 @@ namespace IngameScript
             if (panel == null) return;
             if (panel.CubeGrid != Me.CubeGrid) return;
             var s = "";
-            s += Debug_Guns() + Debug_AmmoDefs();
+            s += Debug_AssemblerOwnBluePrintList();
             panel.WriteText(s + "\n" + LCD_DebugString);
             LCD_DebugString = "";
         }

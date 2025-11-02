@@ -1,22 +1,25 @@
 ﻿namespace IngameScript
 {
+
     partial class Program
     {
-        public class RefreshControllingGunsJob : CountingJob
+        public class FindingRefinerysJob : CountingJob
         {
-            public RefreshControllingGunsJob(Program program) : base(program)
+            public FindingRefinerysJob(Program program) : base(program)
             {
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
+                Refinery.cn = 0;
+                foreach (var b in RefineryBlueprints) b.RefineryCount = 0;
                 startIndex = 0;
-                endIndex = Lists.Data.guns.Count - 1;
+                endIndex = Lists.Data.RefineryList.Count - 1;
             }
 
             protected override void ProcessingIndex(int index)
             {
-                Lists.Data.guns[index].Refresh();
+                Lists.Data.RefineryList[index].Refresh();
             }
         }
     }

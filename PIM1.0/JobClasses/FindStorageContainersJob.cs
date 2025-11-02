@@ -8,7 +8,7 @@ namespace IngameScript
         public class FindStorageContainersJob : CountingJob
         {
             private List<IMyCargoContainer> _CargoContainerBlocks = new List<IMyCargoContainer>();
-            public FindStorageContainersJob(Program program) : base(program, "FindStorageContainersJob")
+            public FindStorageContainersJob(Program program) : base(program)
             {
             }
 

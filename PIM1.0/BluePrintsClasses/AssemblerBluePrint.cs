@@ -56,7 +56,7 @@ namespace IngameScript
         public class AssemblerBluePrint : IComparable<AssemblerBluePrint>
         {
             public long ItemPriority = 0;
-            public List<Assembler> o = new List<Assembler>();
+            public List<Assembler> ValidAssemblers = new List<Assembler>();
             public bool valid = true;
             public MyDefinitionId definition_id;
             public int NumBluePrintToAssembler = 0;

@@ -56,6 +56,9 @@ namespace IngameScript
 
             public Dictionary<string, AssemblerBluePrint> BluePrints_Active = new Dictionary<string, AssemblerBluePrint>();
             public Dictionary<string, AssemblerBluePrint> BluePrints_Inactive = new Dictionary<string, AssemblerBluePrint>();
+
+            public List<string> autocrafting_Types = new List<string>();
+
         }
     }
 }

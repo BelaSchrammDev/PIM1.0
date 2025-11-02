@@ -1,22 +1,23 @@
 ﻿namespace IngameScript
 {
+
     partial class Program
     {
-        public class RefreshControllingGunsJob : CountingJob
+        public class FindingAssemblersJob : CountingJob
         {
-            public RefreshControllingGunsJob(Program program) : base(program)
+            public FindingAssemblersJob(Program program) : base(program)
             {
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 startIndex = 0;
-                endIndex = Lists.Data.guns.Count - 1;
+                endIndex = Lists.Data.AssemblerList.Count - 1;
             }
 
             protected override void ProcessingIndex(int index)
             {
-                Lists.Data.guns[index].Refresh();
+                Lists.Data.AssemblerList[index].Refresh();
             }
         }
     }

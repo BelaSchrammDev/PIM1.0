@@ -6,7 +6,7 @@ namespace IngameScript
     {
         public class RefreshRefineryListJob : CountingJob
         {
-            public RefreshRefineryListJob(Program program) : base(program, "RefreshRefineryListJob")
+            public RefreshRefineryListJob(Program program) : base(program)
             {
             }
 

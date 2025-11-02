@@ -5,7 +5,7 @@
         public class ClearJob : Job
         {
             public ClearJob(Program program)
-                : base(program, "ClearJob")
+                : base(program)
             {
             }
 

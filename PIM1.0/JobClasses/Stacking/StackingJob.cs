@@ -9,7 +9,7 @@
             private int cur_stack_type;
             public static string StackType { get; private set; }
 
-            public StackingJob(Program program, string name, params Job[] jobs) : base(program, name, jobs)
+            public StackingJob(Program program, params Job[] jobs) : base(program, jobs)
             {
                 cur_stack_type = -1;
                 CooldownSeconds = program.stacking_cycle;

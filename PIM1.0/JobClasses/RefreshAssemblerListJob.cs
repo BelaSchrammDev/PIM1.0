@@ -5,7 +5,7 @@
     {
         public class RefreshAssemblerListJob : CountingJob
         {
-            public RefreshAssemblerListJob(Program program) : base(program, "RefreshAssemblerListJob")
+            public RefreshAssemblerListJob(Program program) : base(program)
             {
             }
 

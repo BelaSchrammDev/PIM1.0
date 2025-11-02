@@ -15,11 +15,16 @@ namespace IngameScript
                 get { return Master == MySelf; }
             }
 
+            public static bool IsMaxInstructionsArrived()
+            {
+                return RunTime.CurrentInstructionCount > CurrentInstructionAmount;
+            }
+
             public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
             public static int CurrentInstructionAmount = 1000;
             public static bool firstRun = true;
 
-            public LoopManager(Program program) : base(program, "OldMainLoop")
+            public LoopManager(Program program) : base(program)
             {
             }
 
@@ -70,7 +75,7 @@ namespace IngameScript
                 Master = MySelf;
                 return true;
 
-                // TODO: detecting other PIM PRGs
+                // TODO: detecting other PIM PRGs; with block.TryRun();
                 // ============================================================================
                 //Program.Instance.Echo("prg.count = " + Lists.Data.ProgrammableBlocks.Count);
                 //Program.Instance.Echo("myself.entityID = " + MySelf.EntityId);

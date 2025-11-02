@@ -9,7 +9,7 @@ namespace IngameScript
         {
             private List<IMyUserControllableGun> _GroupGunList;
 
-            public FindControllingGunJob(Program program) : base(program, "FindControllingGunJob")
+            public FindControllingGunJob(Program program) : base(program)
             {
                 _GroupGunList = new List<IMyUserControllableGun>();
             }

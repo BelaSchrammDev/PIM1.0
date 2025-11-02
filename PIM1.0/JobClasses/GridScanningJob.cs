@@ -9,7 +9,7 @@ namespace IngameScript
     {
         public class GridScanningJob : ProcessingBlockListBase
         {
-            public GridScanningJob(Program program) : base(program, "GridScanningJob")
+            public GridScanningJob(Program program) : base(program)
             {
             }
 
