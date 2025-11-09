@@ -8,9 +8,6 @@ namespace IngameScript
         public class FindStorageContainersJob : CountingJob
         {
             private List<IMyCargoContainer> _CargoContainerBlocks = new List<IMyCargoContainer>();
-            public FindStorageContainersJob(Program program) : base(program)
-            {
-            }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {

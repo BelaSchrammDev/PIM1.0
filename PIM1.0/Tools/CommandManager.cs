@@ -8,6 +8,7 @@ namespace IngameScript
 {
     partial class Program
     {
+        // TODO: implement separate classes for every command
         public static class CommandDispatcher
         {
             public static void Dispatch(string commandLine)

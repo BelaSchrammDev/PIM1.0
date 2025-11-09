@@ -1,5 +1,6 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using System.Collections.Generic;
+using VRage;
 
 namespace IngameScript
 {
@@ -10,9 +11,6 @@ namespace IngameScript
             private bool schedule = true;
             private List<string> BluePrintKeyList = new List<string>();
             private int Index = 0;
-            public ChangeAutoCraftingSettingsJob(Program program) : base(program)
-            {
-            }
 
             public override void InitJob()
             {
@@ -23,6 +21,7 @@ namespace IngameScript
                     return;
                 }
 
+                schedule = true;
                 LCD_DebugString += "calc_ACDef\n";
 
                 GetBlockList(Lists.Data.Assemblers);
@@ -32,11 +31,12 @@ namespace IngameScript
 
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Active.Keys);
 
-                for (int i = BluePrintKeyList.Count - 1; i >= 0; i--)
+                for (int index = BluePrintKeyList.Count - 1; index >= 0; index--)
                 {
-                    var b = Lists.Data.BluePrints_Active[BluePrintKeyList[i]];
-                    Lists.Data.BluePrints_Inactive.Add(BluePrintKeyList[i], b);
-                    Lists.Data.BluePrints_Active.Remove(BluePrintKeyList[i]);
+                    Lists.Data.BluePrints_Inactive.Add(
+                        BluePrintKeyList[index],
+                        Lists.Data.BluePrints_Active[BluePrintKeyList[index]]);
+                    Lists.Data.BluePrints_Active.Remove(BluePrintKeyList[index]);
                 }
 
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Inactive.Keys);
@@ -48,15 +48,16 @@ namespace IngameScript
             {
                 if(!schedule) return RunJobResult.Finished;
 
-                var b = Lists.Data.BluePrints_Inactive[BluePrintKeyList[Index]];
-                if (RefineryBluePrintAsAssemblerBP(BluePrintKeyList[Index]))
+                var bluePrint = Lists.Data.BluePrints_Inactive[BluePrintKeyList[Index]];
+
+                if (bluePrint.IfRefineryBluePrint())
                 {
-                    foreach (var r in Lists.Data.Refinerys)
+                    foreach (var ingameRefineryBlock in Lists.Data.Refinerys)
                     {
-                        var subTypeName = r.BlockDefinition.SubtypeId;
-                        if (r.CustomName.Contains("(sms") && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
+                        var subTypeName = ingameRefineryBlock.BlockDefinition.SubtypeId;
+                        if (ingameRefineryBlock.CustomName.Contains("(sms") && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
                         {
-                            Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], b);
+                            Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], bluePrint);
                             Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
                             break;
                         }
@@ -64,9 +65,11 @@ namespace IngameScript
                 }
                 else
                 {
+                    var bluePrintUseIsAllowed = false;
+
                     foreach (var a in Lists.Data.Assemblers)
                     {
-                        if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(b.definition_id))
+                        if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(bluePrint.definition_id))
                         {
                             var subTypeId = a.BlockDefinition.SubtypeId;
 
@@ -75,11 +78,15 @@ namespace IngameScript
                                 Assembler.AssemblerTypesAcceptedBluePrints.Add(subTypeId, new List<AssemblerBluePrint>());
                             }
 
-                            Assembler.AssemblerTypesAcceptedBluePrints[subTypeId].Add(b);
-                            Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], b);
-                            Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
-                            break;
+                            Assembler.AssemblerTypesAcceptedBluePrints[subTypeId].Add(bluePrint);
+                            bluePrintUseIsAllowed = true;
                         }
+                    }
+
+                    if ( bluePrintUseIsAllowed)
+                    {
+                        Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], bluePrint);
+                        Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
                     }
                 }
 

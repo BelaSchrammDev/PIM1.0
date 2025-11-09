@@ -21,14 +21,6 @@ namespace IngameScript
             private readonly List<MyInventoryItem> _itemsCache = new List<MyInventoryItem>();
 
             /// <summary>
-            /// Constructs the InventoryCount job, injecting the Program and optional cooldown.
-            /// </summary>
-            public InventoryCount(Program program)
-                : base(program)
-            {
-            }
-
-            /// <summary>
             /// Initializes the job: finds all inventory owners and resets cursors and counts.
             /// </summary>
             public override void InitJob()
@@ -37,7 +29,7 @@ namespace IngameScript
                 _inventoryOwners.Clear();
                 GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(
                     _inventoryOwners,
-                    b => (b as IMyTerminalBlock).IsSameConstructAs(Program.Me)
+                    b => (b as IMyTerminalBlock).IsSameConstructAs(ProgramInstance.Me)
                 );
 
                 // Reset cursors to start of list
@@ -45,9 +37,9 @@ namespace IngameScript
                 _slotIndex = 0;
 
                 // Reset all tracked inventory counts
-                foreach (var key in Program.Inventory.Keys.ToList())
+                foreach (var key in ProgramInstance.Inventory.Keys.ToList())
                 {
-                    Program.Inventory[key] = 0f;
+                    ProgramInstance.Inventory[key] = 0f;
                 }
             }
 
@@ -76,13 +68,13 @@ namespace IngameScript
                     // Tally up each item in this slot
                     foreach (var item in _itemsCache)
                     {
-                        if (Program.Inventory.ContainsKey(item.Type))
+                        if (ProgramInstance.Inventory.ContainsKey(item.Type))
                         {
-                            Program.Inventory[item.Type] += (float)item.Amount;
+                            ProgramInstance.Inventory[item.Type] += (float)item.Amount;
                         }
                         else
                         {
-                            Program.Inventory[item.Type] = (float)item.Amount;
+                            ProgramInstance.Inventory[item.Type] = (float)item.Amount;
                         }
                     }
                 }

@@ -145,10 +145,10 @@ namespace IngameScript
             { "Seeds", IG_Seeds }
         };
 
-        static string Ingame2Tag(string ingame)
+        static string TryToConvertFromIngame2Tag(string ingame)
         {
             foreach (var x in IngameToPIM) if (x.Value == ingame) return x.Key;
-            return ingame;
+            return null;
         }
 
         string Tag2Ingame(string ststr)
@@ -212,7 +212,8 @@ namespace IngameScript
                 if (!success && atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) success = SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[atype]);
                 if (!success && Lists.Data.InventoryManagerList.ContainsKey(idstr)) SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[idstr]);
 
-                var idstrPIM = Ingame2Tag(idstr);
+                var idstrPIM = TryToConvertFromIngame2Tag(idstr);
+                if(idstrPIM == null) idstrPIM = idstr;
                 if (Lists.Data.InventoryManagerList.ContainsKey(idstr)) ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
                 else SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
             }
@@ -230,6 +231,7 @@ namespace IngameScript
             else if (Lists.Data.InventoryManagerList.ContainsKey(typeID)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[typeID]);
             return trans;
         }
+
         static bool SendItemByIItem(IMyInventory quelle, MyInventoryItem item, float amount, List<IMyInventory> ziele)
         {
             var volume = (MyFixedPoint)amount * item.Type.GetItemInfo().Volume;
@@ -247,6 +249,7 @@ namespace IngameScript
             }
             return false;
         }
+
         static bool SendItemByNum(IMyInventory quelle, int itemnum, List<IMyInventory> ziele)
         {
             var trans = false;
@@ -264,25 +267,55 @@ namespace IngameScript
             }
             return trans;
         }
+
         static bool SendItemByType(string iType, float itemAmount, IMyInventory ziel, int? p = null)
         {
             return SendItemByTypeAndSubtype(IG_ + iType.Substring(0, iType.IndexOf(' ')), iType.Substring(iType.IndexOf(' ') + 1), itemAmount, ziel);
         }
-        static bool SendItemByTypeAndSubtype(string itemType, string itemSubType, float itemAmount, IMyInventory ziel, int? p = null)
+
+        static bool SendItemByTypeAndSubtype(string itemIngameType, string itemSubType, float itemAmount, IMyInventory ziel, int? p = null)
         {
-            List<IMyInventory> quellen = null;
-            var idstr = itemType.Split('_')[1];
-            var idstrPIM = Ingame2Tag(idstr);
-            var atype = TypeCast(idstr[1] + " " + itemSubType);
-            if (Lists.Data.InventoryManagerList.ContainsKey(idstr[1] + " " + itemSubType)) quellen = Lists.Data.InventoryManagerList[idstr[1] + " " + itemSubType];
-            else if (atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) quellen = Lists.Data.InventoryManagerList[atype];
-            else if (Lists.Data.InventoryManagerList.ContainsKey(idstr)) quellen = Lists.Data.InventoryManagerList[idstr];
+            List<IMyInventory> quellen = new List<IMyInventory>();
+            var itemType = itemIngameType.Split('_')[1];
+            var idstrPIM = TryToConvertFromIngame2Tag(itemType);
+            var castedType = TypeCast(itemType + " " + itemSubType);
+
+            if (Lists.Data.InventoryManagerList.ContainsKey(itemType + " " + itemSubType))
+            {
+                quellen.AddRange(Lists.Data.InventoryManagerList[itemType + " " + itemSubType]);
+            }
+
+            if (castedType != "" && Lists.Data.InventoryManagerList.ContainsKey(castedType))
+            {
+                quellen.AddRange(Lists.Data.InventoryManagerList[castedType]);
+            }
+
+            if (Lists.Data.InventoryManagerList.ContainsKey(itemType))
+            {
+                quellen.AddRange(Lists.Data.InventoryManagerList[itemType]);
+            }
+
+            if (idstrPIM != null)
+            {
+                if (Lists.Data.InventoryManagerList.ContainsKey(idstrPIM))
+                {
+                    quellen.AddRange(Lists.Data.InventoryManagerList[idstrPIM]);
+                }
+            }
             else
             {
+                idstrPIM = itemType;
+            }
+
+            if (quellen.Count == 0)
+            {
+                // TODO: special warning for missing cargo
                 SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
                 return false;
             }
+
             ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
+
             for (int i = 0; i < quellen.Count; i++)
             {
                 var von = new List<MyInventoryItem>();
@@ -291,7 +324,7 @@ namespace IngameScript
                 {
                     for (int j = von.Count() - 1; j >= 0; j--)
                     {
-                        if (von[j].Type.TypeId.ToString() == itemType)
+                        if (von[j].Type.TypeId.ToString() == itemIngameType)
                         {
                             if (von[j].Type.SubtypeId.ToString() == itemSubType)
                             {
@@ -319,8 +352,8 @@ namespace IngameScript
             {
                 string index = GetPIMItemID(boxi.Type);
                 var boxia = (float)boxi.Amount;
-                if (inventar.ContainsKey(index)) inventar[index] += boxia;
-                else inventar.Add(index, boxia);
+                if (Lists.Data.inventar.ContainsKey(index)) Lists.Data.inventar[index] += boxia;
+                else Lists.Data.inventar.Add(index, boxia);
                 if (ilist != null)
                 {
                     if (ilist.ContainsKey(index)) ilist[index] += boxia;
@@ -355,7 +388,7 @@ namespace IngameScript
                     if (!Lists.Data.InventoryManagerList.ContainsKey(ingame)) Lists.Data.InventoryManagerList.Add(ingame, new List<IMyInventory>());
                     if (!Lists.Data.InventoryManagerList[ingame].Contains(inv)) Lists.Data.InventoryManagerList[ingame].Add(inv);
                     if (!Lists.Data.CargoUseList.ContainsKey(tag)) Lists.Data.CargoUseList.Add(tag, new CargoUse(tag));
-                    Lists.Data.CargoUseList[tag].AddCurrentAndMaxCargocapacity(inv.CurrentVolume.RawValue / 1000, inv.MaxVolume.RawValue / 1000);
+                    Lists.Data.CargoUseList[tag].AddCapacityValues(inv.CurrentVolume.RawValue / 1000, inv.MaxVolume.RawValue / 1000);
                 }
             }
         }

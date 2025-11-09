@@ -9,6 +9,9 @@ namespace IngameScript
 {
     partial class Program
     {
+        string curmod = Strings.M_Vanilla;
+        static int AutocraftingThreshold = 80;
+
         AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
         {
             var bprint = GetBluePrintByProductionItem(pi);
@@ -35,11 +38,11 @@ namespace IngameScript
 
         void addBluePrint(string typeID, string subtypeID, string itemName, string alternativItemName)
         {
-            if (curmod != "Vanilla" && (usedMods.ContainsKey(curmod) ? !usedMods[curmod] : true)) return;
+            if (curmod != "Vanilla" && (Config.Instance.usedMods.ContainsKey(curmod) ? !Config.Instance.usedMods[curmod] : true)) return;
             MyDefinitionId id;
             if (!MyDefinitionId.TryParse("MyObjectBuilder_BlueprintDefinition/" + subtypeID, out id)) return;
             if (subtypeID.StartsWith("Position0")) subtypeID = subtypeID.Substring(subtypeID.IndexOf('_') + 1);
-            if (!mods.Contains(curmod)) mods.Add(curmod);
+            if (!Config.Instance.mods.Contains(curmod)) Config.Instance.mods.Add(curmod);
             var bpi = typeID + " " + subtypeID;
             if (!Lists.Data.BluePrints_Inactive.ContainsKey(bpi)) Lists.Data.BluePrints_Inactive.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
         }
@@ -56,10 +59,8 @@ namespace IngameScript
         public class AssemblerBluePrint : IComparable<AssemblerBluePrint>
         {
             public long ItemPriority = 0;
-            public List<Assembler> ValidAssemblers = new List<Assembler>();
             public bool valid = true;
             public MyDefinitionId definition_id;
-            public int NumBluePrintToAssembler = 0;
             public int CurrentItemAmount = 0;
             public int AssemblingDeltaAmount = 0;
             public int AssemblyAmount = 0;
@@ -92,6 +93,12 @@ namespace IngameScript
             }
             const string AutomaticRifleGun_Mag_ = "AutomaticRifleGun_Mag_";
             string[] ToolsAndGunsTypes = { IG_Tools, IG_Datas, IG_HBottles, IG_OBottles, };
+
+            public bool IfRefineryBluePrint()
+            {
+                return BlueprintID == Ingot.SubFresh || BlueprintID == (Refinery.BluePrintID_SpentFuelReprocessing);
+            }
+
             void ConvertAutoCraftingName()
             {
                 AutoCraftingType = type;
@@ -161,7 +168,6 @@ namespace IngameScript
             public void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
             public void SetCurrentAmount(int amount)
             {
-                NumBluePrintToAssembler = 0;
                 CurrentItemAmount = amount;
                 if (MaximumItemAmount > 0) AssemblingDeltaAmount = MaximumItemAmount - amount;
                 else AssemblingDeltaAmount = -1;
@@ -175,7 +181,7 @@ namespace IngameScript
 
         void InitAssemblerBluePrints()
         {
-            if (!usedMods[Strings.M_IndustrialOverhaulMod])
+            if (!Config.Instance.usedMods[Strings.M_IndustrialOverhaulMod])
             {
                 // blueprint vanilla
                 // Components
@@ -390,7 +396,7 @@ namespace IngameScript
             C("Trinium", "", "Trinium Plate");
             C("Neutronium", "", "Neutronium Crate");
 
-            if (!usedMods[Strings.M_SG_Ores])
+            if (!Config.Instance.usedMods[Strings.M_SG_Ores])
             {
                 curmod = Strings.M_SG_Gates;
                 C("Naquadah", "", "Naquadah Bars");

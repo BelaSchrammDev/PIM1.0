@@ -4,10 +4,6 @@
     {
         public class RefreshControllingGunsJob : CountingJob
         {
-            public RefreshControllingGunsJob(Program program) : base(program)
-            {
-            }
-
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 startIndex = 0;

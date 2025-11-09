@@ -10,27 +10,72 @@ namespace IngameScript
 {
     partial class Program
     {
-        static string GetPIMItemID(MyItemType type) { return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId; }
+        static string GetPIMItemID(MyItemType type)
+        {
+            return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId;
+        }
 
         public class StackItem : IComparable<StackItem>
         {
-            public enum StackingType { Stack, Volume, VolumeBack, }
+            public enum StackingType
+            {
+                Stack,
+                Volume,
+                VolumeBack,
+            }
+
+            public enum StackingSort
+            {
+                Stack,
+                Amount, 
+                AmountBack, 
+                Delta, 
+                ItemsBack, 
+                VolumeFree, 
+                VolumeFreeBack,
+            }
+
             static public StackingType CurrentStackingType = StackingType.Stack;
-            public enum StackingSort { Stack, Amount, AmountBack, Delta, ItemsBack, VolumeFree, VolumeFreeBack, }
             static public StackingSort CurrentStackingSorttype = StackingSort.Stack;
             static IMyInventory big = null;
             static IMyInventory free = null;
-            static public void ClearStackInventory() { big = null; free = null; }
-            static public void CalculateFreeInventory(IMyInventory inv) { if (big == null || (big.MaxVolume < inv.MaxVolume)) big = inv; if (free == null || (free.MaxVolume - free.CurrentVolume < inv.MaxVolume - inv.CurrentVolume)) free = inv; }
+
+            static public void ClearStackInventory() 
+            {
+                big = null; 
+                free = null; 
+            }
+
+            static public void CalculateFreeInventory(IMyInventory inv) 
+            {
+                if (big == null || (big.MaxVolume < inv.MaxVolume)) big = inv;
+                if (free == null || (free.MaxVolume - free.CurrentVolume < inv.MaxVolume - inv.CurrentVolume)) free = inv;
+            }
+
             class Stack : IComparable<Stack>
             {
                 public int items = 0;
                 public float amount = 0;
                 public float volume_free = 0;
                 public IMyInventory inv = null;
-                public Stack(IMyInventory i, MyFixedPoint a) { amount = (float)a; inv = i; refresh(); }
-                public void refresh() { items = inv.ItemCount; volume_free = (float)(inv.MaxVolume - inv.CurrentVolume); }
-                public float GetMaxVolume() { return (float)inv.MaxVolume; }
+                public Stack(IMyInventory i, MyFixedPoint a)
+                {
+                    amount = (float)a;
+                    inv = i;
+                    refresh();
+                }
+
+                public void refresh()
+                {
+                    items = inv.ItemCount;
+                    volume_free = (float)(inv.MaxVolume - inv.CurrentVolume);
+                }
+
+                public float GetMaxVolume()
+                {
+                    return (float)inv.MaxVolume;
+                }
+
                 public int CompareTo(Stack other)
                 {
                     if (CurrentStackingSorttype == StackingSort.Amount) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; }
@@ -46,14 +91,38 @@ namespace IngameScript
             public MyItemType type;
             float typevolume = 1;
             int stacks = 0;
-            public int Stackcount { get { return stacks; } }
+
+            public int Stackcount
+            {
+                get 
+                {
+                    return stacks;
+                }
+            }
+
             float amount = 0;
             float volume = 0;
             List<Stack> invs = new List<Stack>();
             IMyInventory quelle = null, ziel = null;
-            public StackItem(MyItemType itype) { type = itype; typevolume = type.GetItemInfo().Volume; }
-            void refreshInvs() { foreach (var i in invs) i.refresh(); }
-            public void AddStack(IMyInventory inv, MyFixedPoint am) { stacks++; amount += (float)am; volume = amount * typevolume; invs.Add(new Stack(inv, am)); }
+            public StackItem(MyItemType itype)
+            {
+                type = itype; 
+                typevolume = type.GetItemInfo().Volume;
+            }
+
+            void refreshInvs() 
+            {
+                foreach (var i in invs) i.refresh();
+            }
+
+            public void AddStack(IMyInventory inv, MyFixedPoint am)
+            {
+                stacks++;
+                amount += (float)am;
+                volume = amount * typevolume; 
+                invs.Add(new Stack(inv, am)); 
+            }
+
             public int CompareTo(StackItem other)
             {
                 if (CurrentStackingType == StackingType.Stack) { if (other.stacks == stacks) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; } return other.stacks > stacks ? 1 : -1; }
@@ -61,6 +130,7 @@ namespace IngameScript
                 else if (CurrentStackingType == StackingType.VolumeBack) { if (other.volume == volume) return 0; return other.volume < volume ? 1 : -1; }
                 return 0;
             }
+
             public bool check_stacking_gamma()
             {
                 if (stacks == 2)
@@ -80,6 +150,7 @@ namespace IngameScript
                 }
                 return false;
             }
+
             public bool stacking_gamma()
             {
                 var von = new List<MyInventoryItem>();
@@ -97,6 +168,7 @@ namespace IngameScript
                 if (item != null) quelle.TransferItemTo(ziel, (MyInventoryItem)item, null);
                 return (zielleer && item == null);
             }
+
             public bool stacking_beta()
             {
                 if (stacks < 2) return true;
@@ -114,6 +186,7 @@ namespace IngameScript
                 }
                 return true;
             }
+
             public void stacking_delta()
             {
                 if (stacks > 1)
@@ -133,6 +206,7 @@ namespace IngameScript
                     }
                 }
             }
+
             public void stacking_alpha()
             {
                 if (stacks < 2) return;
@@ -169,6 +243,7 @@ namespace IngameScript
                     }
                 }
             }
+
             public void stacking_single()
             {
                 if (stacks < 2) return;

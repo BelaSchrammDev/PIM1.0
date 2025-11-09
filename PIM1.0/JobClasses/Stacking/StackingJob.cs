@@ -9,10 +9,10 @@
             private int cur_stack_type;
             public static string StackType { get; private set; }
 
-            public StackingJob(Program program, params Job[] jobs) : base(program, jobs)
+            public StackingJob(params Job[] jobs) : base(jobs)
             {
                 cur_stack_type = -1;
-                CooldownSeconds = program.stacking_cycle;
+                CooldownSeconds = Config.Instance.stacking_cycle;
                 Active = CooldownSeconds > 0;
             }
 

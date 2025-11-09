@@ -5,10 +5,6 @@
     {
         public class RefreshAssemblerListJob : CountingJob
         {
-            public RefreshAssemblerListJob(Program program) : base(program)
-            {
-            }
-
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 Tools.GetBlockList(Lists.Data.Assemblers);

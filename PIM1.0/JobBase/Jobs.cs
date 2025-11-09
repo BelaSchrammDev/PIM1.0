@@ -7,9 +7,6 @@ namespace IngameScript
 
         public abstract class Job : Tools
         {
-            // Reference to the main Program instance
-            protected readonly Program Program;
-
             // Human-readable name of the job
             public string Name { get; }
 
@@ -34,13 +31,8 @@ namespace IngameScript
             // Timestamp when the last run ended
             private DateTime _lastRunEnd = DateTime.Now;
 
-            protected Job(Program program) : this(program, 0)
+            protected Job(int cooldownSeconds = 0)
             {
-            }
-
-            protected Job(Program program, int cooldownSeconds)
-            {
-                Program = program;
                 Name = this.GetType().Name;
                 _cooldown = TimeSpan.FromSeconds(cooldownSeconds);
             }
@@ -144,8 +136,8 @@ namespace IngameScript
             private int _endIndex;
             private int _step;
 
-            protected CountingJob(Program program, int cooldownSeconds = 0)
-                : base(program, cooldownSeconds)
+            protected CountingJob(int cooldownSeconds = 0)
+                : base(cooldownSeconds)
             {
             }
 
@@ -239,8 +231,8 @@ namespace IngameScript
             // Index of the currently active sub-job
             private int _currentSubJobIndex;
 
-            public MultiJob(Program program, string name, params Job[] subJobs)
-                : base(program)
+            public MultiJob(params Job[] subJobs)
+                : base()
             {
                 _subJobs = subJobs;
             }
@@ -270,7 +262,7 @@ namespace IngameScript
         {
             private readonly Job[] _jobs;
             private int? _currentJobIndex = null;
-            public SequentialJob(Program program, params Job[] jobs) : base(program)
+            public SequentialJob(params Job[] jobs)
             {
                 _jobs = jobs;
             }

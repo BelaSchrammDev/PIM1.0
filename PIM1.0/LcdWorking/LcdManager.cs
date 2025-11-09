@@ -11,10 +11,39 @@ namespace IngameScript
 {
     partial class Program
     {
+        public abstract class LcdManagerBase : Tools
+        {
+            IMyTextSurface _surFace;
+
+            public LcdManagerBase(IMyTextSurface surface)
+            {
+                _surFace = surface;
+            }
+        }
+
+        string bigSpaces = new string(' ', 85);
+
+        static int getIntegerWithPräfix(string cstr)
+        {
+            if (cstr == "") return 0;
+            var cstrlist = cstr.Split(' ');
+            if (cstrlist.Count() == 0) return 0;
+            float wr;
+            if (!float.TryParse(cstrlist[0], out wr)) return 0;
+            if (cstrlist.Count() == 2)
+            {
+                if (cstrlist[1] == "k") wr *= 1000;
+                else if (cstrlist[1] == "M") wr *= 1000000;
+            }
+            return (int)wr;
+        }
+
+        static int getInteger(string cstr) { float wr; float.TryParse(cstr.Trim().Split('.')[0], out wr); return (int)wr; }
+
         void loadAutocratingDefinitions()
         {
             var lcds = new List<IMyTextPanel>();
-            GridTerminalSystem.GetBlocksOfType<IMyTextPanel>(lcds, block => block.CustomName.Contains(Autocrafting) && Me.CubeGrid == block.CubeGrid);
+            GridTerminalSystem.GetBlocksOfType(lcds, block => block.CustomName.Contains(Autocrafting) && Me.CubeGrid == block.CubeGrid);
             foreach (var lcd in lcds)
             {
                 var ac_Types = IG_Component + "," + IG_Ammo;
@@ -165,6 +194,7 @@ namespace IngameScript
                 RenderOrePrio(lcds, filterStrings);
             }
         }
+
         void RenderOrePrio(List<IMyTextPanel> lcds, Dictionary<IMyTextPanel, string> filterStrings)
         {
             foreach (var lcd in lcds)
@@ -251,6 +281,7 @@ namespace IngameScript
         const string ResourcenOverview = "(sms,refining)";
         const string Autocrafting = "(sms,autocrafting)";
         const string AmmoPrioDefinition = "(sms,ammoprio)";
+
         const string line = "\n" + linepur + "\n";
         const string linepur = "/-------------------------------------------------------------------------";
         const string line2 = "\n" + line2pur + "\n";

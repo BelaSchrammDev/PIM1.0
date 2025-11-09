@@ -7,11 +7,7 @@ namespace IngameScript
     {
         public class CalculatingAmountOfInactiveBluePrintItemsJob : CountingJob
         {
-            private List<string> _blueprintKeys;
-            public CalculatingAmountOfInactiveBluePrintItemsJob(Program program) : base(program)
-            {
-                _blueprintKeys = new List<string>();
-            }
+            private List<string> _blueprintKeys = new List<string>();
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
@@ -26,9 +22,9 @@ namespace IngameScript
                 var key = _blueprintKeys[index];
                 var b = Lists.Data.BluePrints_Inactive[key];
 
-                if (inventar.ContainsKey(b.ItemName))
+                if (Lists.Data.inventar.ContainsKey(b.ItemName))
                 {
-                    b.SetCurrentAmount((int)inventar[b.ItemName]);
+                    b.SetCurrentAmount((int)Lists.Data.inventar[b.ItemName]);
                 }
             }
         }

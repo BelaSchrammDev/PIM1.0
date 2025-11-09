@@ -39,20 +39,6 @@ namespace IngameScript
                 return AssemblerBlock.Closed;
             }
 
-            public void AddValidBlueprint(AssemblerBluePrint bluePrint)
-            {
-                if (BlockRemoved())
-                {
-                    return;
-                }
-
-                if (parameter.ControledByPIM() && AssemblerBlock.CanUseBlueprint(bluePrint.definition_id))
-                {
-                    bluePrint.ValidAssemblers.Add(this);
-                    bluePrint.NumBluePrintToAssembler++;
-                }
-            }
-
             public bool AddQueueItemSave(AssemblerBluePrint bluePrint, MyFixedPoint amountPerAssembler)
             {
                 try
@@ -63,7 +49,7 @@ namespace IngameScript
                         return true;
                     }
                 }
-                catch (Exception e)
+                catch
                 {
                     bluePrint.valid = false;
                 }
@@ -125,7 +111,7 @@ namespace IngameScript
                     {
                         if (!IsSurvivalKit)
                         {
-                            AssemblerBlock.Enabled = !assemblers_off || parameter.IsParameter("Nooff");
+                            AssemblerBlock.Enabled = !Config.Instance.assemblers_off || parameter.IsParameter("Nooff");
                         }
 
                         if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
@@ -146,7 +132,7 @@ namespace IngameScript
                             if (RemoveItemMode)
                             {
                                 RemoveItemMode = false;
-                                if (delete_queueItem_if_max)
+                                if (Config.Instance.delete_queueItem_if_max)
                                 {
                                     for (int i = proditem_list.Count - 1; i >= 0; i--)
                                     {

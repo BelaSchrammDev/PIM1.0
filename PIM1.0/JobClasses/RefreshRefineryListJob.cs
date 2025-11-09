@@ -6,10 +6,6 @@ namespace IngameScript
     {
         public class RefreshRefineryListJob : CountingJob
         {
-            public RefreshRefineryListJob(Program program) : base(program)
-            {
-            }
-
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 Lists.Data.ClearAllRefineryBlueprintAssemblyAmounts();
@@ -28,7 +24,7 @@ namespace IngameScript
                     }
                 }
 
-                Refinery.priobt = "";
+                Refinery.PrioBlockTypes = "";
                 startIndex = Lists.Data.Refinerys.Count - 1;
                 endIndex = 0;
             }

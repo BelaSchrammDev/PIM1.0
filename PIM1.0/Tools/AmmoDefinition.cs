@@ -44,8 +44,8 @@ namespace IngameScript
 
             public void CalcAmmoInventoryRatio()
             {
-                ratio = inventar.ContainsKey(Name)
-                    ? Math.Min(inventar[Name] / maxOfVolume, 1)
+                ratio = Lists.Data.inventar.ContainsKey(Name)
+                    ? Math.Min(Lists.Data.inventar[Name] / maxOfVolume, 1)
                     : 1;
             }
         }

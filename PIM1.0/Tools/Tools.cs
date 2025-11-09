@@ -25,7 +25,7 @@ namespace IngameScript
             public static int GetBlockList<T>(List<T> blockList)
                 where T : class, IMyTerminalBlock
             {
-                Program.Instance.GridTerminalSystem.GetBlocksOfType<T>(blockList, block => BlockConstructMember(block));
+                Program.Instance.GridTerminalSystem.GetBlocksOfType(blockList, block => BlockConstructMember(block));
                 return blockList.Count;
             }
         }

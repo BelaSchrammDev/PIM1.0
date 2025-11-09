@@ -16,66 +16,17 @@ namespace IngameScript
         // Array of jobs to execute in sequence
         private readonly Job[] _jobs;
 
+        // RunningSign instance
+        private readonly RunningSign RunSign = new RunningSign();
+
         // Inventory dictionary: maps item types to their total quantities
         private readonly Dictionary<MyItemType, float> _inventory = new Dictionary<MyItemType, float>();
 
-        // Expose inventory to jobs
+        // new inventory dictionary
         public Dictionary<MyItemType, float> Inventory => _inventory;
 
         // singleton Program Instance
         public static Program Instance;
-
-        // old property section --------------------------------------------------------------------------------- START
-
-        bool ShowInfoPBLcd = true;
-        static bool delete_queueItem_if_max = true;
-        static bool always_recycle_greywater = true;
-        static bool assemblers_off = true;
-        static bool refinerys_off = true;
-        bool collect_all_Ore = true;
-        bool collect_all_Ingot = true;
-        bool collect_all_Component = true;
-        int stacking_cycle = 10;
-        StopWatch MainLoopTimeSpan = new StopWatch(3);
-        static int AutocraftingThreshold = 80;
-
-        static string LCD_DebugString = "";
-
-        static Dictionary<string, float> inventar = new Dictionary<string, float>();
-         
-        static Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
-        List<string> mods = new List<string>(); string curmod = Strings.M_Vanilla;
-
-        List<IMyTerminalBlock> tbl = new List<IMyTerminalBlock>();
-        int m0 = -1; int m1, m2 = 0;
-
-        static Dictionary<string, DisplayBox> DisplayBoxList = new Dictionary<string, DisplayBox>();
-
-        string bigSpaces = new string(' ', 85);
-
-        // old property section --------------------------------------------------------------------------------- END
-
-        void writeInfo()
-        {
-            var s = Strings.PimVersion 
-                + Strings.PimCopyright 
-                + getRunningSign() 
-                + (LoopManager.IsMaster 
-                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString) 
-                    : "Standby\nMaster: " + Tools.MySelf.CustomName);
-
-            Echo(s);
-
-            if (ShowInfoPBLcd)
-            {
-                var tp = Me.GetSurface(0);
-                tp.Alignment = TextAlignment.LEFT;
-                tp.ContentType = ContentType.TEXT_AND_IMAGE;
-                tp.WriteText(s);
-            }
-        }
-
-        
 
         public Program()
         {
@@ -88,38 +39,55 @@ namespace IngameScript
 
             LoopManager.Init();
 
-            if (collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
-            if (collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
-            if (collect_all_Component) Lists.Data.collectAll_List.Add(IG_ + IG_Component);
+            if (Config.Instance.collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
+            if (Config.Instance.collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
+            if (Config.Instance.collect_all_Component) Lists.Data.collectAll_List.Add(IG_ + IG_Component);
 
             _jobs = new Job[]
             {
-                new LoopManager(this),
-                new ChangeAutoCraftingSettingsJob(this),
-                new ClearJob(this),
-                new GridScanningJob(this),
-                new FindControllingGunJob(this),
-                new RefreshControllingGunsJob(this),
-                new FindStorageContainersJob(this),
-                new StackingJob(this,
-                    new StackingSingleJob(this),
-                    new StackingAlphaJob(this),
-                    new StackingBetaJob(this),
-                    new StackingDeltaJob(this),
-                    new StackingGammaJob(this)),
-                new RefreshRefineryListJob(this),
-                new RefreshAssemblerListJob(this),
-                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.SmsFlagedInventoryList),
-                new InventoryClearingJob(this, "NoneSMSflaggedClearing", Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
-                new StorageInventoryRefreshJob(this),
-                new FindingRefinerysJob(this),
-                new RefineryManagerJob(this),
-                new FindingAssemblersJob(this),
-                new AssemblerBluePrintManagerJob(this),
-                new CalculatingAmountOfInactiveBluePrintItemsJob(this),
-                new AutoCraftingJob(this),
+                new LoopManager(),
+                new ChangeAutoCraftingSettingsJob(),
+                new ClearJob(),
+                new GridScanningJob(),
+                new FindControllingGunJob(),
+                new RefreshControllingGunsJob(),
+                new FindStorageContainersJob(),
+                new StackingJob(
+                    new StackingSingleJob(),
+                    new StackingAlphaJob(),
+                    new StackingBetaJob(),
+                    new StackingDeltaJob(),
+                    new StackingGammaJob()),
+                new RefreshRefineryListJob(),
+                new RefreshAssemblerListJob(),
+                new InventoryClearingJob("SMSflaggedClearing", Lists.Data.SmsFlagedInventoryList),
+                new InventoryClearingJob("NoneSMSflaggedClearing", Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
+                new StorageInventoryRefreshJob(),
+                new FindingRefinerysJob(),
+                new RefineryManagerJob(),
+                new FindingAssemblersJob(),
+                new AssemblerBluePrintManagerJob(),
+                new CalculatingAmountOfInactiveBluePrintItemsJob(),
+                new AutoCraftingJob(),
+                new ViewManagerJob(),
+                new SendInfosToSmsJob()
             };
         }
+
+        // Current TODO:
+        // ==================================================
+        // - refactoring the VanillaRefinerymanager
+        // - build proper Managers for all Blocks, also Assemblers
+        // - Refinery use storage inv for input
+        //
+        // long term TODOS:
+        // ==================================================
+        // TODO: Tools class implementing
+        // TODO: refactoring, refactoring, refactoring...
+        // TODO: detecting other PIM blocks
+        // TODO: container for ammo not needed when armory is defined
+        // TODO: DNSK Mod update
+        // TODO: create class for runsign
 
         void Main(string argument, UpdateType updateSource)
         {
@@ -129,76 +97,42 @@ namespace IngameScript
                 return;
             }
 
-            OldMainLoop(updateSource);
-
-            writeInfo();
-        }
-
-        void CalcIngotPrio()
-        {
-            foreach (var pl in ingotprio.Values) foreach (IPrio ip in pl) ip.setPrio(0);
-            foreach (var refSubType in Refinery.refineryTypesAcceptedBlueprintsList.Keys)
+            do
             {
-                foreach (var refBluePrint in Refinery.refineryTypesAcceptedBlueprintsList[refSubType])
+                if (_jobs[Loop.Data.CurrentJobIndex].Schedule() == Job.ScheduleResult.Done)
                 {
-                    var inputOre = refBluePrint.InputID;
-                    if (inventar.ContainsKey(inputOre) && inventar[inputOre] > 0)
+                    // Move to the next job, wrapping around if necessary
+                    Loop.Data.CurrentJobIndex++;
+
+                    if (Loop.Data.CurrentJobIndex >= _jobs.Length)
                     {
-                        if (refBluePrint.IsScrap) addPrio(refSubType, refBluePrint, 9999);
-                        else
-                        {
-                            var oreamount = inventar[refBluePrint.InputID];
-                            var ingotamount = inventar.GetValueOrDefault(refBluePrint.OutputID, 0);
-                            if (ingotamount == 0) addPrio(refSubType, refBluePrint, 200);
-                            else if (ingotamount < 500) addPrio(refSubType, refBluePrint, 150);
-                            else if (ingotamount < oreamount) addPrio(refSubType, refBluePrint, 100 - (int)(ingotamount / (oreamount / 97.0f)));
-                            else addPrio(refSubType, refBluePrint, 1);
-                        }
+                        Loop.Data.CurrentJobIndex = 0;
                     }
                 }
             }
-            LoadAndRenderOrePrioDefs();
+            while (!LoopManager.IsMaxInstructionsArrived());
+
+            WritePimRunInfo();
         }
 
-        static int getIntegerWithPräfix(string cstr)
+        void WritePimRunInfo()
         {
-            if (cstr == "") return 0;
-            var cstrlist = cstr.Split(' ');
-            if (cstrlist.Count() == 0) return 0;
-            float wr;
-            if (!float.TryParse(cstrlist[0], out wr)) return 0;
-            if (cstrlist.Count() == 2)
-            {
-                if (cstrlist[1] == "k") wr *= 1000;
-                else if (cstrlist[1] == "M") wr *= 1000000;
-            }
-            return (int)wr;
-        }
+            var s = Strings.PimVersion
+                + Strings.PimCopyright
+                + RunSign.getRunningSign()
+                + (LoopManager.IsMaster
+                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString)
+                    : "Standby\nMaster: " + Tools.MySelf.CustomName);
 
-        static int getInteger(string cstr) { float wr; float.TryParse(cstr.Trim().Split('.')[0], out wr); return (int)wr; }
-        // runningsign
-        int r = 0;
-        int rc = 1;
-        int mr = 7;
-        StringBuilderExtended getRunningSign()
-        {
-            runningSign.SetText('|');
-            r += rc;
-            if (r < 0)
-            {
-                r = 1;
-                rc = 1;
-            }
-            else if (r > mr)
-            {
-                r = mr - 1;
-                rc = -1;
-            }
-            for (int i = 0; i <= mr; i++) runningSign.Append(i == r ? (rc < 0 ? '<' : '>') : ' ');
-            runningSign.Append("| ");
-            return runningSign;
-        }
+            Echo(s);
 
-        StringBuilderExtended runningSign = new StringBuilderExtended(10);
+            if (Config.Instance.ShowInfoPBLcd)
+            {
+                var tp = Me.GetSurface(0);
+                tp.Alignment = TextAlignment.LEFT;
+                tp.ContentType = ContentType.TEXT_AND_IMAGE;
+                tp.WriteText(s);
+            }
+        }
     }
 }

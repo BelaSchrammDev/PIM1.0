@@ -14,7 +14,7 @@ namespace IngameScript
         {
             #region private members
 
-            private List<MyInventoryItem> _InvList = new List<MyInventoryItem>();
+            protected List<MyInventoryItem> _InvList { get; private set; } = new List<MyInventoryItem>();
             private List<string> _SuccessList = new List<string>();
             private Dictionary<string, float> _InsertList = new Dictionary<string, float>();
 
@@ -29,17 +29,32 @@ namespace IngameScript
 
             #region public methods
 
+            public void RefreshInvList()
+            {
+                _InvList.Clear();
+                inv.GetItems(_InvList);
+            }
+
             public void ReloadItems()
             {
-                if (!CheckItems()) return;
+                RefreshInvList();
 
-                CLearLists();
-                inv.GetItems(_InvList);
+                if (!ItemsAmountInvalid()) return;
+
+                var invstring = "Inventory before ReloadItems:\n";
+                foreach (var ii in _InvList)
+                {
+                    invstring += $" - {GetPIMItemID(ii.Type)} : {ii.Amount}\n";
+                }
+
+                Program.LCD_DebugString += $"StorageInventory_ReloadItems for '{invstring}'\n";
+
+                _SuccessList.Clear();
+                _InsertList.Clear();
 
                 if (StackingInventoryItems(_InvList))
                 {
-                    _InvList.Clear();
-                    inv.GetItems(_InvList);
+                    RefreshInvList();
                 }
 
                 DisposeOfSurplusItems(_InvList, _SuccessList, _InsertList);
@@ -50,18 +65,11 @@ namespace IngameScript
 
             #region abstract methods
 
-            abstract public bool CheckItems();
+            abstract public bool ItemsAmountInvalid();
 
             #endregion
 
             #region private methods
-
-            private void CLearLists()
-            {
-                _InvList.Clear();
-                _SuccessList.Clear();
-                _InsertList.Clear();
-            }
 
             private bool StackingInventoryItems(List<MyInventoryItem> invList)
             {
@@ -85,7 +93,11 @@ namespace IngameScript
                 foreach (var i in items.Keys)
                 {
                     if (succlist.Contains(i)) continue;
-                    SendItemByType(i, (einleiten.ContainsKey(i) ? einleiten[i] : items[i]), inv);
+
+                    if (!SendItemByType(i, (einleiten.ContainsKey(i) ? einleiten[i] : items[i]), inv))
+                    {
+                        // TODO: errormessage
+                    }
                 }
             }
 

@@ -4,7 +4,7 @@
     {
         public class StackingBetaJob : StackingJobBase
         {
-            public StackingBetaJob(Program program) : base(program, "Stacking Beta", StackingMode.Beta)
+            public StackingBetaJob() : base(StackingMode.Beta)
             {
             }
 

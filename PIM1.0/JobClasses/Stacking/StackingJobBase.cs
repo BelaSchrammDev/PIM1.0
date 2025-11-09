@@ -18,7 +18,7 @@ namespace IngameScript
                 Gamma
             }
 
-            protected StackingJobBase(Program program, string name, StackingMode mode) : base(program)
+            protected StackingJobBase(StackingMode mode) : base()
             {
             }
 
@@ -34,7 +34,6 @@ namespace IngameScript
                         StackItem.CalculateFreeInventory(i);
                     }
                 }
-                Program.LCD_DebugString += Name + "_Init " + StackItemList.Count + "\n";
 
                 startIndex = 0;
                 endIndex = InitStacking() ? StackItemList.Count - 1 : -1;

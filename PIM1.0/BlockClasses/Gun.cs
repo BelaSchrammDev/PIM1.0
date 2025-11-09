@@ -40,7 +40,7 @@ namespace IngameScript
 
                 Lists.Data.storageinvs.Add(this);
             }
-            public override bool CheckItems()
+            public override bool ItemsAmountInvalid()
             {
                 if (gun is IMyLargeInteriorTurret || CurrentAmmo == "") return false;
 
@@ -76,7 +76,7 @@ namespace IngameScript
                 foreach (var a in ammomax)
                 {
                     var prio = AmmoDefs.GetAmmoDefs(a.Key).GetAmmoPriority(gunType);
-                    if (prio > currentAmmunitionPrio && inventar.ContainsKey(a.Key) && inventar[a.Key] > 0)
+                    if (prio > currentAmmunitionPrio && Lists.Data.inventar.ContainsKey(a.Key) && Lists.Data.inventar[a.Key] > 0)
                     {
                         currentAmmunition = a.Key;
                         currentAmmunitionPrio = prio;

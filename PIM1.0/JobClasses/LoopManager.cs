@@ -22,11 +22,6 @@ namespace IngameScript
 
             public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
             public static int CurrentInstructionAmount = 1000;
-            public static bool firstRun = true;
-
-            public LoopManager(Program program) : base(program)
-            {
-            }
 
             public override RunJobResult RunJob()
             {
@@ -47,7 +42,7 @@ namespace IngameScript
 
             public static void Init()
             {
-                ProgramInstance.LoadConfig();
+                Config.Instance.LoadConfig();
                 ProgramInstance.InitAssemblerBluePrints();
                 ProgramInstance.InitRefineryBlueprints();
                 CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;

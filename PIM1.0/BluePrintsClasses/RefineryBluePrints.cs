@@ -62,7 +62,7 @@ namespace IngameScript
 
         static string CastResourceName(string name)
         {
-            if (usedMods[Strings.M_IndustrialOverhaulMod] && ResourcesNameCastListIOMod.ContainsKey(name)) return ResourcesNameCastListIOMod[name];
+            if (Config.Instance.usedMods[Strings.M_IndustrialOverhaulMod] && ResourcesNameCastListIOMod.ContainsKey(name)) return ResourcesNameCastListIOMod[name];
             if (ResourcesNameCastList.ContainsKey(name)) return ResourcesNameCastList[name];
             if (name.StartsWith("Ore Crushed")) return "Crushed " + name.Substring(11);
             if (name.StartsWith("Ore Purified")) return "Purified " + name.Substring(12);
@@ -150,17 +150,17 @@ namespace IngameScript
             AddRefineryBlueprint("StoneOreToIngotBasic", Ore.Stone, Ingot.Stone);
             AddRefineryBlueprint("ScrapToIronIngot", Ore.Scrap, Ingot.Iron);
             AddRefineryBlueprint("ScrapIngotToIronIngot", Ingot.Scrap, Ingot.Iron);
-            AddRefineryBlueprintOreToIngot("Gold");
-            AddRefineryBlueprintOreToIngot("Platinum");
-            AddRefineryBlueprintOreToIngot("Stone");
-            AddRefineryBlueprintOreToIngot("Silver");
-            AddRefineryBlueprintOreToIngot("Iron");
-            AddRefineryBlueprintOreToIngot("Nickel");
-            AddRefineryBlueprintOreToIngot("Cobalt");
-            AddRefineryBlueprintOreToIngot("Silicon");
-            AddRefineryBlueprintOreToIngot("Uranium");
+            AddRefineryBlueprintOreToIngot(Resources.RGold);
+            AddRefineryBlueprintOreToIngot(Resources.RPlatinum);
+            AddRefineryBlueprintOreToIngot(Resources.RStone);
+            AddRefineryBlueprintOreToIngot(Resources.RSilver);
+            AddRefineryBlueprintOreToIngot(Resources.RIron);
+            AddRefineryBlueprintOreToIngot(Resources.RNickel);
+            AddRefineryBlueprintOreToIngot(Resources.RCobalt);
+            AddRefineryBlueprintOreToIngot(Resources.RSilicon);
+            AddRefineryBlueprintOreToIngot(Resources.RUranium);
 
-            if (usedMods[Strings.M_SigmaDraconisCore])
+            if (Config.Instance.usedMods[Strings.M_SigmaDraconisCore])
             {
                 // Ingots
                 AddRefineryBlueprint("TungstenToIngot", "Ore Tungsten", "Ingot TungstenIngot");
@@ -177,7 +177,7 @@ namespace IngameScript
                 AddRefineryBlueprint("GraphiteOreToIngot", "Ore Graphite", "Ingot Carbon");
             }
 
-            if (usedMods[Strings.M_DeuteriumReactor])
+            if (Config.Instance.usedMods[Strings.M_DeuteriumReactor])
             {
                 AddRefineryBlueprint("StonetoDeuterium", Ore.Stone, Ingot.DeuteriumContainer);
                 AddRefineryBlueprint("IcetoDeuterium", Ore.Ice, Ingot.DeuteriumContainer);
@@ -185,25 +185,25 @@ namespace IngameScript
             }
 
 
-            if (usedMods[Strings.M_DailyNeedsSurvival])
+            if (Config.Instance.usedMods[Strings.M_DailyNeedsSurvival])
             {
-                AddRefineryBlueprintOreToIngot("Carbon");
-                AddRefineryBlueprintOreToIngot("Potassium");
-                AddRefineryBlueprintOreToIngot("Phosphorus");
+                AddRefineryBlueprintOreToIngot(Resources.RCarbon);
+                AddRefineryBlueprintOreToIngot(Resources.RPotassium);
+                AddRefineryBlueprintOreToIngot(Resources.RPhosphorus);
             }
 
 
-            if (usedMods[Strings.M_SG_Ores])
+            if (Config.Instance.usedMods[Strings.M_SG_Ores])
             {
-                AddRefineryBlueprintOreToIngot("Naquadah");
-                AddRefineryBlueprintOreToIngot("Trinium");
-                AddRefineryBlueprintOreToIngot("Neutronium");
+                AddRefineryBlueprintOreToIngot(Resources.RNaquadah);
+                AddRefineryBlueprintOreToIngot(Resources.RTrinium);
+                AddRefineryBlueprintOreToIngot(Resources.RNeutronium);
             }
 
 
-            if (!usedMods[Strings.M_IndustrialOverhaulMod])
+            if (!Config.Instance.usedMods[Strings.M_IndustrialOverhaulMod])
             {
-                AddRefineryBlueprintOreToIngot("Magnesium");
+                AddRefineryBlueprintOreToIngot(Resources.RMagnesium);
             }
 
 
@@ -261,8 +261,8 @@ namespace IngameScript
                     foreach (var bluePrint in RefineryBlueprints)
                     {
                         var OldInputAmount = bluePrint.InputAmount;
-                        bluePrint.InputAmount = inventar.GetValueOrDefault(bluePrint.InputID, 0);
-                        bluePrint.OutputAmount = inventar.GetValueOrDefault(bluePrint.OutputID, 0);
+                        bluePrint.InputAmount = Lists.Data.inventar.GetValueOrDefault(bluePrint.InputID, 0);
+                        bluePrint.OutputAmount = Lists.Data.inventar.GetValueOrDefault(bluePrint.OutputID, 0);
                         var OldAmountSnapshot = bluePrint.AmountSnapshot;
                         bluePrint.AmountSnapshot = DateTime.Now;
                         var diff = (OldInputAmount - bluePrint.InputAmount);
@@ -335,111 +335,6 @@ namespace IngameScript
                 Name = InputIDName + "ToIngots";
                 IsScrap = true;
             }
-        }
-
-
-        public class Resources
-        {
-            public const string
-                RPowder = "powder",
-                RMagnesium = "Magnesium",
-                RStone = "Stone",
-                RIron = "Iron",
-                RNickel = "Nickel",
-                RSilicon = "Silicon",
-                RCobalt = "Cobalt",
-                RPlatinum = "Platinum",
-                RUranium = "Uranium",
-                RScrap = "Scrap",
-                RCarbon = "Carbon",
-                RPotassium = "Potassium",
-                RPhosphorus = "Phosphorus",
-                RNaquadah = "Naquadah",
-                RTrinium = "Trinium",
-                RNeutronium = "Neutronium",
-                RCopper = "Copper",
-                RLithium = "Lithium",
-                RBauxite = "Bauxite",
-                RTitanium = "Titanium",
-                RTantalum = "Tantalum",
-                RSulfur = "Sulfur",
-                RNiter = "Niter",
-                RCoal = "Coal",
-                RDeuterium = "Deuterium";
-            // public const string R = "";
-        }
-
-
-        public class Ingot : Resources
-        {
-            const string prefix = "Ingot ";
-            public const string
-                Scrap = prefix + RScrap,
-                Magnesium = prefix + RMagnesium,
-                Magnesiumpowder = RMagnesium + RPowder,
-                Gunpowder = "Gun" + RPowder,
-                Stone = prefix + RStone,
-                Iron = prefix + RIron,
-                Nickel = prefix + RNickel,
-                Silicon = prefix + RSilicon,
-                Cobalt = prefix + RCobalt,
-                Platinum = prefix + RPlatinum,
-                Uranium = prefix + RUranium,
-                WaterFood = prefix + "WaterFood",
-                Nutrients = prefix + "Nutrients",
-                SubFresh = prefix + "SubFresh",
-                GreyWater = prefix + "GreyWater",
-                CleanWater = prefix + "CleanWater",
-                SpentFuel = prefix + "SpentFuel",
-                Niter = prefix + RNiter,
-                DeuteriumContainer = prefix + RDeuterium + "Container",
-                Carbon = prefix + RCarbon,
-                Potassium = prefix + RPotassium,
-                Phosphorus = prefix + RPhosphorus,
-                Naquadah = prefix + RNaquadah,
-                Trinium = prefix + RTrinium,
-                Neutronium = prefix + RNeutronium,
-                Copper = prefix + RCopper,
-                Lithium = prefix + RLithium,
-                Titanium = prefix + RTitanium,
-                Tantalum = prefix + RTantalum,
-                Sulfur = prefix + RSulfur,
-                Aluminium = prefix + "Aluminium";
-            // public const string  = prefix + "";
-        }
-
-
-        public class Ore : Resources
-        {
-            const string prefix = "Ore ";
-            public const string
-                Scrap = prefix + RScrap,
-                Magnesium = prefix + RMagnesium,
-                Stone = prefix + RStone,
-                Iron = prefix + RIron,
-                Nickel = prefix + RNickel,
-                Silicon = prefix + RSilicon,
-                Cobalt = prefix + RCobalt,
-                Platinum = prefix + RPlatinum,
-                Uranium = prefix + RUranium,
-                Organic = prefix + "Organic",
-                Ice = prefix + "Ice",
-                Deuterium = prefix + RDeuterium,
-                Carbon = prefix + RCarbon,
-                Potassium = prefix + RPotassium,
-                Phosphorus = prefix + RPhosphorus,
-                Naquadah = prefix + RNaquadah,
-                Trinium = prefix + RTrinium,
-                Neutronium = prefix + RNeutronium,
-                Niter = prefix + RNiter,
-                Copper = prefix + RCopper,
-                Lithium = prefix + RLithium,
-                Bauxite = prefix + RBauxite,
-                Titanium = prefix + RTitanium,
-                Tantalum = prefix + RTantalum,
-                Sulfur = prefix + RSulfur,
-                Coal = prefix + RCoal;
-            // public const string  = prefix + "";
         }
     }
 }

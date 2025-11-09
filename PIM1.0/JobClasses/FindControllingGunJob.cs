@@ -7,12 +7,7 @@ namespace IngameScript
     {
         public class FindControllingGunJob : CountingJob
         {
-            private List<IMyUserControllableGun> _GroupGunList;
-
-            public FindControllingGunJob(Program program) : base(program)
-            {
-                _GroupGunList = new List<IMyUserControllableGun>();
-            }
+            private List<IMyUserControllableGun> _GroupGunList = new List<IMyUserControllableGun>();
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {

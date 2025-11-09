@@ -4,7 +4,7 @@
     {
         public class StackingSingleJob : StackingJobBase
         {
-            public StackingSingleJob(Program program) : base(program, "Stacking Single", StackingMode.Single)
+            public StackingSingleJob() : base(StackingMode.Single)
             {
             }
 

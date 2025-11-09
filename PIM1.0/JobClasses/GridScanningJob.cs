@@ -9,10 +9,6 @@ namespace IngameScript
     {
         public class GridScanningJob : ProcessingBlockListBase
         {
-            public GridScanningJob(Program program) : base(program)
-            {
-            }
-
             private bool IsProcessingValid(IMyTerminalBlock t) 
             {
                 return t is IMyCargoContainer
@@ -25,7 +21,7 @@ namespace IngameScript
 
             private bool IsValidSpezialWelder(IMyTerminalBlock t) 
             {
-                return !(t as IMyFunctionalBlock).Enabled;
+                return t is IMyShipWelder && !(t as IMyFunctionalBlock).Enabled;
             }
 
             protected override void ProcessingTerminalBlock(IMyTerminalBlock t)
@@ -57,7 +53,7 @@ namespace IngameScript
                     if (isSmsBlock)
                     {
                         if (isNoKeep) Lists.Data.SmsFlagedInventoryList.Add(inv);
-                        Program.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
+                        ProgramInstance.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
                     else if (isContainerOrConnector)
                     {

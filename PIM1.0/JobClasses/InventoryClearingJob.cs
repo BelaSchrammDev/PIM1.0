@@ -10,7 +10,7 @@ namespace IngameScript
         {
             private List<IMyInventory> _invList;
             private List<string> _collectList;
-            public InventoryClearingJob(Program program, string name, List<IMyInventory> invList, List<string> collect = null) : base(program)
+            public InventoryClearingJob(string name, List<IMyInventory> invList, List<string> collect = null)
             {
                 _invList = invList;
                 _collectList = collect;

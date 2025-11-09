@@ -4,17 +4,12 @@
     {
         public class ClearJob : Job
         {
-            public ClearJob(Program program)
-                : base(program)
-            {
-            }
-
             public override RunJobResult RunJob()
             {
-                Program.loadAutocratingDefinitions();
-                Program.LCD_DebugPrint();
+                ProgramInstance.loadAutocratingDefinitions();
+                ProgramInstance.LCD_DebugPrint();
 
-                ClearInventoryList(inventar);
+                ClearInventoryList(Lists.Data.inventar);
                 Lists.Data.NoneSmsFlagedInventoryList.Clear();
                 Lists.Data.SmsFlagedInventoryList.Clear();
                 Lists.Data.CargoUseList.Clear();

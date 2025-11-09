@@ -10,10 +10,6 @@ namespace IngameScript
         {
             protected List<IMyTerminalBlock> Blocks = new List<IMyTerminalBlock>();
 
-            public ProcessingBlockListBase(Program program) : base(program)
-            {
-            }
-
             protected void FillBlockList()
             {
                 GridTerminalSystem.GetBlocksOfType(Blocks, block => IsValidBlock(block));
