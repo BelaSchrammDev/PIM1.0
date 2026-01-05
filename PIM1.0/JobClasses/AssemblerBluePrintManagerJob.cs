@@ -21,7 +21,7 @@ namespace IngameScript
             {
                 var key = BluePrintKeyList[index];
                 var b = Lists.Data.BluePrints_Active[key];
-                b.SetCurrentAmount((int)Lists.Data.inventar.GetValueOrDefault(b.ItemName, 0));
+                b.SetCurrentAmount((int)Lists.Data.Inventory.GetValueOrDefault(b.ItemName, 0));
                 b.CalcPriority();
             }
         }

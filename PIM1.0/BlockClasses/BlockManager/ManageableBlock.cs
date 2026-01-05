@@ -1,10 +1,12 @@
 ﻿using Sandbox.ModAPI.Ingame;
+using System.Collections.Generic;
+using VRage.Game.ModAPI.Ingame;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public abstract class ManageableBlock 
+        public abstract class ManageableBlock : Tools
         {
             public BlockManager Manager { get; internal set; }
 
@@ -28,6 +30,24 @@ namespace IngameScript
             }
 
             public abstract IMyFunctionalBlock GetFunctionalBlock();
+
+            public void PushItemToFront(IMyInventory inventory, string itemType)
+            {
+                var _InvList = new List<MyInventoryItem>();
+                inventory.GetItems(_InvList);
+
+                for (int i = 0; i < _InvList.Count; i++)
+                {
+                    var invItem = _InvList[i];
+                    var invItemType = GetPIMItemID(invItem.Type);
+                    if (invItemType == itemType)
+                    {
+                        if (i == 0) return;
+                        inventory.TransferItemTo(inventory, i, 0, true, invItem.Amount);
+                        break;
+                    }
+                }
+            }
         }
 
         public abstract class ManageableRefineryBlock : ManageableBlock

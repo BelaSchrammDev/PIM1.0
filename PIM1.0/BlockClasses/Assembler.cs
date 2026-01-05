@@ -13,7 +13,6 @@ namespace IngameScript
             public static Dictionary<string, List<AssemblerBluePrint>> AssemblerTypesAcceptedBluePrints = new Dictionary<string, List<AssemblerBluePrint>>();
 
             public List<AssemblerBluePrint> OwnBlueprintList;
-            //public List<AssemblerBluePrint> BlueprintList = new List<AssemblerBluePrint>();
             public Parameter parameter = new Parameter();
             public IMyAssembler AssemblerBlock;
             public string SubTypeName;
@@ -25,12 +24,6 @@ namespace IngameScript
             {
                 AssemblerBlock = a;
                 SubTypeName = a.BlockDefinition.SubtypeName;
-
-                if (AssemblerTypesAcceptedBluePrints.ContainsKey(SubTypeName)) 
-                {
-                    OwnBlueprintList = AssemblerTypesAcceptedBluePrints[SubTypeName];
-                }
-
                 IsSurvivalKit = a.BlockDefinition.TypeIdString == "SurvivalKit";
             }
 

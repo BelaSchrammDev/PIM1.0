@@ -77,12 +77,12 @@ namespace IngameScript
             string subtypename = "";
             static string BluePrintNameToItemName(string t, string s)
             {
-                var cs = "Component";
-                if (s == "Magnetron_Component") return cs + " " + s; // mod item
+                var cs = IngameStrings.RComponent;
+                if (s == Component.Magnetron) return cs + " " + s; // mod item
                 if (t == cs && s.EndsWith(cs)) return t + " " + s.Substring(0, s.Length - cs.Length); // components remove from bottom
-                if (s.StartsWith("NATO_25")) // NATO Magazine
+                if (s.StartsWith(IngameStrings.RNATO_25)) // NATO Magazine
                 {
-                    cs = "Magazine";
+                    cs = IngameStrings.RMagazine;
                     return t + " " + s.Substring(0, s.Length - cs.Length);
                 }
                 if (t == IG_Tools) // add 'item' to all PhyicalGunItems
@@ -91,22 +91,21 @@ namespace IngameScript
                 }
                 return t + " " + s;
             }
-            const string AutomaticRifleGun_Mag_ = "AutomaticRifleGun_Mag_";
             string[] ToolsAndGunsTypes = { IG_Tools, IG_Datas, IG_HBottles, IG_OBottles, };
 
             public bool IfRefineryBluePrint()
             {
-                return BlueprintID == Ingot.SubFresh || BlueprintID == (Refinery.BluePrintID_SpentFuelReprocessing);
+                return BlueprintID == Ingot.SubFresh || BlueprintID == (Ingot.SpentFuelReprocessing);
             }
 
             void ConvertAutoCraftingName()
             {
                 AutoCraftingType = type;
                 if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = Strings.AC_ToolsAndGuns;
-                else if (seed_cast.Contains(ItemName)) AutoCraftingType = "Seeds";
+                else if (seed_cast.Contains(ItemName)) AutoCraftingType = IngameStrings.RSeeds;
                 else if (food_cast.Contains(ItemName)) AutoCraftingType = IG_Food;
-                else if (subtype == Refinery.BluePrint_SpentFuelReprocessing) AutoCraftingType = Refinery.BluePrint_SpentFuelReprocessing;
-                else if (subtype.Contains("Deuterium")) AutoCraftingType = "Deuterium";
+                else if (subtype == IngameStrings.RSpentFuelReprocessing) AutoCraftingType = IngameStrings.RReprocessing;
+                else if (subtype.Contains(IngameStrings.RDeuterium)) AutoCraftingType = IngameStrings.RDeuterium;
                 if (subtypename != "")
                 {
                     AutoCraftingName = subtypename.Replace('_', ' ');
@@ -116,12 +115,12 @@ namespace IngameScript
                 if (AutoCraftingName.StartsWith("Position")) AutoCraftingName = AutoCraftingName.Substring(AutoCraftingName.IndexOf('_') + 1);
                 else if (AutoCraftingName.StartsWith("MealPack")) AutoCraftingName = AutoCraftingName.Substring(9);
                 else if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
-                else if (AutoCraftingName.Contains(AutomaticRifleGun_Mag_))
+                else if (AutoCraftingName.Contains(IngameStrings.RAutomaticRifleGunMag))
                 {
-                    if (AutoCraftingName.StartsWith(AutomaticRifleGun_Mag_)) AutoCraftingName = "AutoRifleGunMagazine";
-                    else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(AutomaticRifleGun_Mag_)) + "RifleGunMagazine";
+                    if (AutoCraftingName.StartsWith(IngameStrings.RAutomaticRifleGunMag)) AutoCraftingName = IngameStrings.RAutoRifleGunMagazine;
+                    else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(IngameStrings.RAutomaticRifleGunMag)) + IngameStrings.RRifleGunMagazine;
                 }
-                else if (type == IG_Seeds) AutoCraftingName += " Seeds";
+                else if (type == IG_Seeds) AutoCraftingName += " " + IngameStrings.RSeeds;
                 else if (type == IG_Tools && ModName == Strings.M_Vanilla)
                 {
                     string[] Tools = { "HandDrill", "Grinder", "Welder" };
@@ -141,9 +140,10 @@ namespace IngameScript
                     }
                     if (!isTool && AutoCraftingName.EndsWith("Item")) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 4);
                 }
-                if (AutoCraftingName.EndsWith("Magazine")) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 5);
+                if (AutoCraftingName.EndsWith(IngameStrings.RMagazine)) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 5);
                 AutoCraftingName = AutoCraftingName.Replace('_', ' ');
             }
+
             public AssemblerBluePrint(string iTypeID, string iSubTypeID, string modName, string alter, string astype, MyDefinitionId definitionId)
             {
                 subtypename = astype;
@@ -227,10 +227,10 @@ namespace IngameScript
                 A("Position00074_FireworksBoxPink");
                 A("Position00075_FireworksBoxRainbow");
                 // Tools
-                T("Position0010_AngleGrinder");
-                T("Position0020_AngleGrinder2");
-                T("Position0030_AngleGrinder3");
-                T("Position0040_AngleGrinder4");
+                T(IngameStrings.GetPositionString(10, Component.AngleGrinder));
+                T(IngameStrings.GetPositionString(20, Component.AngleGrinder + "2"));
+                T(IngameStrings.GetPositionString(30, Component.AngleGrinder + "3"));
+                T(IngameStrings.GetPositionString(40, Component.AngleGrinder + "4"));
                 T("Position0050_HandDrill");
                 T("Position0060_HandDrill2");
                 T("Position0070_HandDrill3");
@@ -432,7 +432,7 @@ namespace IngameScript
             /* Industrial Overhaul Mod */
             curmod = Strings.M_IndustrialOverhaulMod;
             // Reprocessor
-            I(Refinery.BluePrint_SpentFuelReprocessing, "Uranium", "Nuclear Fuel");
+            I(IngameStrings.RSpentFuelReprocessing, "Uranium", "Nuclear Fuel");
             // AssemblingBenchComponents
             C("CopperWire");
             C("Electromagnet");

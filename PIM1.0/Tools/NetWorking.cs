@@ -29,11 +29,6 @@ namespace IngameScript
 
                     if (s != "") s += "\n\n";
 
-                    foreach (var a in ingotprio.Keys.ToArray())
-                    {
-                        if (ingotprio.ContainsKey(a) && !Refinery.PrioBlockTypes.Contains("@" + a)) ingotprio.Remove(a);
-                    }
-
                     foreach (var sx in ingotprio.Keys)
                     {
                         s += "@INGOTPRIOLIST;" + sx + "\n";

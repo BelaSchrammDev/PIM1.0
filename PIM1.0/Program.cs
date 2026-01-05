@@ -8,6 +8,7 @@ using System.Linq;
 using VRage;
 using VRage.Game.GUI.TextPanel;
 using VRage.Game.ModAPI.Ingame;
+using VRage.Game.ModAPI.Ingame.Utilities;
 
 namespace IngameScript
 {
@@ -27,6 +28,8 @@ namespace IngameScript
 
         // singleton Program Instance
         public static Program Instance;
+
+        public static string VersionShortInfo = "SMS.inventorymanager 2.0";
 
         public Program()
         {
@@ -93,7 +96,11 @@ namespace IngameScript
         {
             if (argument != "")
             {
-                CommandDispatcher.Dispatch(argument);
+                if (!CommandDispatcher.Dispatch(argument))
+                {
+                    SetInfo("unknow command: \"" + argument + "\"");
+                }
+
                 return;
             }
 

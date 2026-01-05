@@ -129,7 +129,7 @@ namespace IngameScript
         static Dictionary<string, string> IngameToPIM = new Dictionary<string, string>
         {
             { "Ammo",  IG_Ammo },
-            { Resources.RStone,  Ore.Stone},
+            { IngameStrings.RStone,  Ore.Stone},
             { "Gravel",  Ingot.Stone},
             { "Tools",  IG_Tools},
             { "Kits",  IG_Kits},
@@ -352,8 +352,8 @@ namespace IngameScript
             {
                 string index = GetPIMItemID(boxi.Type);
                 var boxia = (float)boxi.Amount;
-                if (Lists.Data.inventar.ContainsKey(index)) Lists.Data.inventar[index] += boxia;
-                else Lists.Data.inventar.Add(index, boxia);
+                if (Lists.Data.Inventory.ContainsKey(index)) Lists.Data.Inventory[index] += boxia;
+                else Lists.Data.Inventory.Add(index, boxia);
                 if (ilist != null)
                 {
                     if (ilist.ContainsKey(index)) ilist[index] += boxia;

@@ -2,11 +2,28 @@
 {
     partial class Program
     {
-        public class Resources
+        public class IngameStrings
         {
+            public static string GetPositionString(int value, string append, int? suffix = null)
+            {
+                Program.Instance.Echo($"IngameStrings.GetPositionString '{$"{RPosition}{value:D4}{(suffix.HasValue ? suffix.ToString() : string.Empty)}_{append}"}'\n");
+                return $"{RPosition}{value:D4}{(suffix.HasValue ? suffix.ToString() : string.Empty)}_{append}";
+            }
+
             public const string
+                RComponent = "Component",
+                RPosition = "Position",
+                RReprocessing = "Reprocessing",
+                RSpentFuelReprocessing = "SpentFuel" + RReprocessing,
+                RSeeds = "Seeds",
                 RGun = "Gun",
                 RIce = "Ice",
+                RNATO_25 = "NATO_25",
+                RMagazine = "Magazine",
+                RAutomaticRifleGunMag = "AutomaticRifleGun_Mag_",
+                RGunMagazine = RGun + RMagazine,
+                RAutoRifleGunMagazine = "AutoRifle" + RGunMagazine,
+                RRifleGunMagazine = "Rifle" + RGunMagazine,
                 ROrganic = "Organic",
                 RWaterFood = "WaterFood",
                 RNutrients = "Nutrients",
@@ -15,6 +32,7 @@
                 RCleanWater = "CleanWater",
                 RSpentFuel = "SpentFuel",
                 RContainer = "Container",
+                RMagnetron = "Magnetron",
                 RPowder = "powder",
                 RMagnesium = "Magnesium",
                 RStone = "Stone",
@@ -46,10 +64,21 @@
             // public const string R = "";
         }
 
-        public class Ingot : Resources
+        public class Component : IngameStrings 
+        {
+            public const string
+                AngleGrinder = "AngleGrinder",
+                HandDrill = "HandDrill",
+                Welder = "Welder",
+                Magnetron = RMagnetron + "_" + RComponent;
+            // public const string  = prefix + "";
+        }
+
+        public class Ingot : IngameStrings
         {
             const string prefix = "Ingot ";
             public const string
+                SpentFuelReprocessing = prefix + RSpentFuelReprocessing,
                 Scrap = prefix + RScrap,
                 Magnesium = prefix + RMagnesium,
                 Magnesiumpowder = RMagnesium + RPowder,
@@ -87,7 +116,7 @@
         }
 
 
-        public class Ore : Resources
+        public class Ore : IngameStrings
         {
             const string prefix = "Ore ";
             public const string

@@ -14,6 +14,12 @@ namespace IngameScript
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
+                foreach (var assembler in Lists.Data.AssemblerList)
+                {
+                    assembler.OwnBlueprintList = Assembler.AssemblerTypesAcceptedBluePrints.ContainsKey(assembler.SubTypeName)
+                        ? Assembler.AssemblerTypesAcceptedBluePrints[assembler.SubTypeName]
+                        : new List<AssemblerBluePrint>();
+                }
                 _bluePrints = Lists.Data.BluePrints_Active.Values.ToArray();
                 startIndex = 0;
                 endIndex = Lists.Data.BluePrints_Active.Count - 1;
@@ -33,10 +39,13 @@ namespace IngameScript
                     else
                     {
                         var validAssemblers = Lists.Data.AssemblerList.FindAll(x => x.OwnBlueprintList.Contains(bluePrint));
-                        MyFixedPoint amount = bluePrintNeededAmount / validAssemblers.Count;
-                        foreach (var assembler in validAssemblers)
+                        if (validAssemblers.Count > 0)
                         {
-                            assembler.AddQueueItemSave(bluePrint, amount);
+                            MyFixedPoint amount = bluePrintNeededAmount / validAssemblers.Count;
+                            foreach (var assembler in validAssemblers)
+                            {
+                                assembler.AddQueueItemSave(bluePrint, amount);
+                            }
                         }
                     }
                 }

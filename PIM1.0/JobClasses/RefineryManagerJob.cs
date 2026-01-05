@@ -9,8 +9,8 @@ namespace IngameScript
         {
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                Tools.ProgramInstance.CalcIngotPrio();
-                Tools.ProgramInstance.RenderResourceProccesingLCD();
+                ProgramInstance.CalcIngotPrio();
+                ProgramInstance.RenderResourceProccesingLCD();
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;
             }
@@ -29,13 +29,13 @@ namespace IngameScript
                 foreach (var refBluePrint in Refinery.refineryTypesAcceptedBlueprintsList[refSubType])
                 {
                     var inputOre = refBluePrint.InputID;
-                    if (Lists.Data.inventar.ContainsKey(inputOre) && Lists.Data.inventar[inputOre] > 0)
+                    if (Lists.Data.Inventory.ContainsKey(inputOre) && Lists.Data.Inventory[inputOre] > 0)
                     {
                         if (refBluePrint.IsScrap) addPrio(refSubType, refBluePrint, 9999);
                         else
                         {
-                            var oreamount = Lists.Data.inventar[refBluePrint.InputID];
-                            var ingotamount = Lists.Data.inventar.GetValueOrDefault(refBluePrint.OutputID, 0);
+                            var oreamount = Lists.Data.Inventory[refBluePrint.InputID];
+                            var ingotamount = Lists.Data.Inventory.GetValueOrDefault(refBluePrint.OutputID, 0);
                             if (ingotamount == 0) addPrio(refSubType, refBluePrint, 200);
                             else if (ingotamount < 500) addPrio(refSubType, refBluePrint, 150);
                             else if (ingotamount < oreamount) addPrio(refSubType, refBluePrint, 100 - (int)(ingotamount / (oreamount / 97.0f)));

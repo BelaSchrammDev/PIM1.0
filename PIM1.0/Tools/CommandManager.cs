@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.Common.ObjectBuilders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,49 @@ namespace IngameScript
 {
     partial class Program
     {
-        // TODO: implement separate classes for every command
+
+        public abstract class PimCommand : Job
+        {
+            protected IList<ICommandArgument> Arguments = new List<ICommandArgument>();
+
+            public PimCommand(string argumentLine)
+            {
+                NetWorkingParser.ParseNetWorkingArguments(argumentLine, Arguments);
+            }
+        }
+
+
         public static class CommandDispatcher
         {
-            public static void Dispatch(string commandLine)
+            public static bool Dispatch(string commandLine)
             {
-                switch (commandLine.ToLower())
+                if (NetWorkingDispatcher.Instance.Dispatch(commandLine))
                 {
-                    case "flushrefinerys_all":
-                        foreach (var o in Lists.Data.RefineryList) o.FlushAllInventorys();
-                        SetInfo("all (" + Lists.Data.RefineryList.Count + ") refinerys flushed.");
-                        break;
-
-                    default:
-                        SetInfo("unknow command: \"" + commandLine + "\"");
-                        break;
-
+                    return true;
                 }
+
+                return DispatchOtherCommands(commandLine);
+            }
+
+            public static bool DispatchOtherCommands(string commandLine)
+            {
+                var commandFound = true;
+                var commandParts = commandLine.Split('(', ')');
+                if (commandParts.Length >= 2)
+                {
+                    switch (commandLine.ToLower())
+                    {
+                        case "flushrefinerys_all":
+                            foreach (var o in Lists.Data.RefineryList) o.FlushAllInventorys();
+                            SetInfo("all (" + Lists.Data.RefineryList.Count + ") refinerys flushed.");
+                            break;
+
+                        default:
+                            commandFound = false;
+                            break;
+                    }
+                }
+                return commandFound;
             }
         }
     }

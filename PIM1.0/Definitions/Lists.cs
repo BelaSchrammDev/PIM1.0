@@ -33,7 +33,7 @@ namespace IngameScript
                 }
             }
 
-            public Dictionary<string, float> inventar = new Dictionary<string, float>();
+            public Dictionary<string, float> Inventory = new Dictionary<string, float>();
 
             public List<IMyRefinery> Refinerys = new List<IMyRefinery>();
             public List<Refinery> RefineryList = new List<Refinery>();

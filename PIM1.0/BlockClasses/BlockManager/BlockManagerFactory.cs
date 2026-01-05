@@ -10,19 +10,20 @@ namespace IngameScript
             {
                 switch (type)
                 {
+                    case Refinery.RefreshType.Reprocessor:
+                        return new ReprocessorManager(block);
+
                     case Refinery.RefreshType.VanillaRefinery:
                         return new VanillaRefineryManager(block);
-
-                    //case Refinery.RefreshType.WaterRecyclingSystem:
-                    //    return new WaterRecyclingManager(block);
 
                     case Refinery.RefreshType.HydroponicsFarm:
                         return new HydrophonicsManager(block);
 
+                    case Refinery.RefreshType.WaterRecyclingSystem:
+                        return new WaterRecyclingSystemManager(block);
+
                     default:
-                        // for creating all BlockManager use return null
                         return new DummyBlockManager(block);
-                        // throw new Exception("Unsupported BlockManager type");
 
                 }
             }

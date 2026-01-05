@@ -9,7 +9,7 @@
                 ProgramInstance.loadAutocratingDefinitions();
                 ProgramInstance.LCD_DebugPrint();
 
-                ClearInventoryList(Lists.Data.inventar);
+                ClearInventoryList(Lists.Data.Inventory);
                 Lists.Data.NoneSmsFlagedInventoryList.Clear();
                 Lists.Data.SmsFlagedInventoryList.Clear();
                 Lists.Data.CargoUseList.Clear();

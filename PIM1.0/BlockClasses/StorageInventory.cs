@@ -71,6 +71,27 @@ namespace IngameScript
 
             #region private methods
 
+            public bool IfItemsExists()
+            {
+                RefreshInvList();
+
+                foreach (var item in items.Keys)
+                {
+                    var found = false;
+                    foreach (var invItem in _InvList)
+                    {
+                        var pimID = GetPIMItemID(invItem.Type);
+                        if (pimID == item && invItem.Amount > 0)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) return false;
+                }
+                return true;
+            }
+
             private bool StackingInventoryItems(List<MyInventoryItem> invList)
             {
                 var stackingSuccess = false;

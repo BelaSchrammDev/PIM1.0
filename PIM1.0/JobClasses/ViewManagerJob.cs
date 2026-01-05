@@ -14,7 +14,7 @@ namespace IngameScript
 
                 Dictionary<string, string> recommendedItems = new Dictionary<string, string>
                         {
-                            { Ore.Stone, Resources.RStone },
+                            { Ore.Stone, IngameStrings.RStone },
                             { Ingot.Stone, "Gravel" },
                             { Ore.Ice, "Ice" },
                             { Ingot.WaterFood, "Water" },
@@ -25,7 +25,7 @@ namespace IngameScript
 
                 foreach (var item in recommendedItems)
                 {
-                    var condition = (Lists.Data.inventar.ContainsKey(item.Key) && Lists.Data.inventar[item.Key] > 0 && !Lists.Data.InventoryManagerList.ContainsKey(item.Key));
+                    var condition = (Lists.Data.Inventory.ContainsKey(item.Key) && Lists.Data.Inventory[item.Key] > 0 && !Lists.Data.InventoryManagerList.ContainsKey(item.Key));
                     SetWarningByCondition(condition, Warning.ID.CARGORECOMMENDED, item.Value);
                 }
 

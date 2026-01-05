@@ -2,6 +2,7 @@
 {
     partial class Program
     {
+
         public abstract class BlockManager : Tools
         {
             public ManageableBlock Block { get; }
@@ -13,6 +14,15 @@
             }
 
             public abstract void DoManage();
+        }
+
+        public abstract class RefineryBlockManagerer : BlockManager
+        {
+            protected RefineryBlockManagerer(ManageableBlock block) : base(block)
+            {
+            }
+
+            protected Refinery Refinery { get { return (Refinery)Block; } }
         }
 
         public class DummyBlockManager : BlockManager

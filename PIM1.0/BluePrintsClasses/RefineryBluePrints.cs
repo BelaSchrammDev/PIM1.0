@@ -11,21 +11,21 @@ namespace IngameScript
     {
         static Dictionary<string, string> ResourcesNameCastList = new Dictionary<string, string>
             {
-                { Ore.Stone, Resources.RStone },
+                { Ore.Stone, IngameStrings.RStone },
                 { Ingot.Magnesium, Ingot.Magnesiumpowder },
                 { Ingot.Stone, "Gravel" },
-                { Ingot.DeuteriumContainer, Resources.RDeuterium },
+                { Ingot.DeuteriumContainer, IngameStrings.RDeuterium },
                 { Ore.Ice, "Ice"},
-                { Ingot.Carbon, Resources.RCarbon },
+                { Ingot.Carbon, IngameStrings.RCarbon },
             };
         static Dictionary<string, string> ResourcesNameCastListIOMod = new Dictionary<string, string>
             {
-                { Ore.Coal, Resources.RCoal },
-                { Ore.Bauxite, Resources.RBauxite },
-                { Ore.Niter, Resources.RNiter },
-                { Ingot.Lithium, Resources.RLithium + " Paste" },
-                { Ingot.Sulfur, Resources.RSulfur },
-                { Ingot.Niter, Resources.RPotassium + " Nitrate" },
+                { Ore.Coal, IngameStrings.RCoal },
+                { Ore.Bauxite, IngameStrings.RBauxite },
+                { Ore.Niter, IngameStrings.RNiter },
+                { Ingot.Lithium, IngameStrings.RLithium + " Paste" },
+                { Ingot.Sulfur, IngameStrings.RSulfur },
+                { Ingot.Niter, IngameStrings.RPotassium + " Nitrate" },
                 { Ore.Magnesium, "Crushed Niter" },
                 { Ingot.Magnesium, Ingot.Gunpowder},
             };
@@ -150,15 +150,15 @@ namespace IngameScript
             AddRefineryBlueprint("StoneOreToIngotBasic", Ore.Stone, Ingot.Stone);
             AddRefineryBlueprint("ScrapToIronIngot", Ore.Scrap, Ingot.Iron);
             AddRefineryBlueprint("ScrapIngotToIronIngot", Ingot.Scrap, Ingot.Iron);
-            AddRefineryBlueprintOreToIngot(Resources.RGold);
-            AddRefineryBlueprintOreToIngot(Resources.RPlatinum);
-            AddRefineryBlueprintOreToIngot(Resources.RStone);
-            AddRefineryBlueprintOreToIngot(Resources.RSilver);
-            AddRefineryBlueprintOreToIngot(Resources.RIron);
-            AddRefineryBlueprintOreToIngot(Resources.RNickel);
-            AddRefineryBlueprintOreToIngot(Resources.RCobalt);
-            AddRefineryBlueprintOreToIngot(Resources.RSilicon);
-            AddRefineryBlueprintOreToIngot(Resources.RUranium);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RGold);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RPlatinum);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RStone);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RSilver);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RIron);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RNickel);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RCobalt);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RSilicon);
+            AddRefineryBlueprintOreToIngot(IngameStrings.RUranium);
 
             if (Config.Instance.usedMods[Strings.M_SigmaDraconisCore])
             {
@@ -187,23 +187,23 @@ namespace IngameScript
 
             if (Config.Instance.usedMods[Strings.M_DailyNeedsSurvival])
             {
-                AddRefineryBlueprintOreToIngot(Resources.RCarbon);
-                AddRefineryBlueprintOreToIngot(Resources.RPotassium);
-                AddRefineryBlueprintOreToIngot(Resources.RPhosphorus);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RCarbon);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RPotassium);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RPhosphorus);
             }
 
 
             if (Config.Instance.usedMods[Strings.M_SG_Ores])
             {
-                AddRefineryBlueprintOreToIngot(Resources.RNaquadah);
-                AddRefineryBlueprintOreToIngot(Resources.RTrinium);
-                AddRefineryBlueprintOreToIngot(Resources.RNeutronium);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RNaquadah);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RTrinium);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RNeutronium);
             }
 
 
             if (!Config.Instance.usedMods[Strings.M_IndustrialOverhaulMod])
             {
-                AddRefineryBlueprintOreToIngot(Resources.RMagnesium);
+                AddRefineryBlueprintOreToIngot(IngameStrings.RMagnesium);
             }
 
 
@@ -261,8 +261,8 @@ namespace IngameScript
                     foreach (var bluePrint in RefineryBlueprints)
                     {
                         var OldInputAmount = bluePrint.InputAmount;
-                        bluePrint.InputAmount = Lists.Data.inventar.GetValueOrDefault(bluePrint.InputID, 0);
-                        bluePrint.OutputAmount = Lists.Data.inventar.GetValueOrDefault(bluePrint.OutputID, 0);
+                        bluePrint.InputAmount = Lists.Data.Inventory.GetValueOrDefault(bluePrint.InputID, 0);
+                        bluePrint.OutputAmount = Lists.Data.Inventory.GetValueOrDefault(bluePrint.OutputID, 0);
                         var OldAmountSnapshot = bluePrint.AmountSnapshot;
                         bluePrint.AmountSnapshot = DateTime.Now;
                         var diff = (OldInputAmount - bluePrint.InputAmount);

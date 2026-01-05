@@ -32,14 +32,13 @@ namespace IngameScript
             #region static
 
             // TODO: 
-            static public string PrioBlockTypes = "";
             static public Dictionary<string, List<RefineryBlueprint>> refineryTypesAcceptedBlueprintsList = new Dictionary<string, List<RefineryBlueprint>>();
 
             static public void RemoveUnusedRefinerytypeBlueprintLists()
             {
                 foreach (var a in refineryTypesAcceptedBlueprintsList.Keys.ToArray()) 
                 {
-                    if (refineryTypesAcceptedBlueprintsList.ContainsKey(a) && !PrioBlockTypes.Contains("@" + a))
+                    if (!ingotprio.ContainsKey(a))
                     {
                         refineryTypesAcceptedBlueprintsList.Remove(a);
                     }
@@ -76,7 +75,7 @@ namespace IngameScript
             public List<RefError> ErrorList = new List<RefError>();
             public List<RefineryBlueprint> AcceptedBlueprints = null;
             public string BlockSubType = "";
-            public int fertig;
+            public int Success;
             public RefineryBlueprint CurrentWorkBluePrint = null, NextWorkBluePrint = null;
             public float CurrentWorkOreAmount = 0, NexWorkOreAmount = 0;
 
@@ -98,17 +97,6 @@ namespace IngameScript
                 return RefineryBlock;
             }
 
-            public override bool RunManager()
-            {
-                if (base.RunManager())
-                {
-                    return true;
-                }
-
-                RefineryManager();
-                return true;
-            }
-
             void GetScrapBluePrints()
             {
                 var acceptedItems = new List<MyItemType>();
@@ -119,87 +107,6 @@ namespace IngameScript
                     if (!AcceptedBlueprints.Contains(scrapBlueprint)) AcceptedBlueprints.Add(scrapBlueprint);
                 }
             }
-
-            public void RefineryManager()
-            {
-                if (BlockRemoved()) return;
-
-                if (parameter.ControledByPIM())
-                {
-                    switch (typeid.GetTypeID())
-                    {
-                        case RefreshType.WaterRecyclingSystem:
-                            if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.WaterFood) && !Lists.Data.BluePrints_Active[Ingot.WaterFood].IfMax()) WaterRecyclingSystemManager();
-                            else if (Config.Instance.always_recycle_greywater && Lists.Data.inventar.ContainsKey(Ingot.GreyWater) && Lists.Data.inventar[Ingot.GreyWater] > 0) WaterRecyclingSystemManager(true);
-                            else ClearInputInventoryIfControledByPIM();
-                            break;
-                        case RefreshType.Reprocessor:
-                            if (Lists.Data.BluePrints_Active.ContainsKey(BluePrintID_SpentFuelReprocessing) && !Lists.Data.BluePrints_Active[BluePrintID_SpentFuelReprocessing].IfMax()) ReprocessorManager();
-                            else ClearInputInventoryIfControledByPIM();
-                            break;
-                    }
-                }
-            }
-
-            public bool IfIngredientsNotFilled(string[] ingredients)
-            {
-                foreach (var s in ingredients) if (!(InputInventoryItems.ContainsKey(s) && InputInventoryItems[s] != 0)) return false;
-                return true;
-            }
-
-            public void LoadRecipeItems(string[] itemNames, float[] itemValues, float multipler)
-            {
-                for (int i = 0; i < itemNames.Length; i++)
-                {
-                    SendItemByType(itemNames[i], itemValues[i] * multipler, InputInventory);
-                }
-            }
-
-            /*
-            ReprocessorIngots    #####################################################################################
-	        SubTypeID: SpentFuelReprocessing	File: \Blueprints_POW.sbc
-		        IN------>
-        			Ingot SpentFuel:1
-		        	Ore Ice:0.75
-			        Ingot Sulfur:0.2
-			        Ingot Niter:0.3
-		        OUT------->
-			        Ingot Uranium:0.25
-			        Ingot DepletedUranium:0.5
-			        Ingot NuclearWaste:0.25
-            */
-
-            public const string BluePrintID_SpentFuelReprocessing = "Ingot " + BluePrint_SpentFuelReprocessing, BluePrint_SpentFuelReprocessing = "SpentFuelReprocessing";
-            static string[] ReprocessorIngredients = new string[] { Ingot.SpentFuel, Ore.Ice, Ingot.Sulfur, Ingot.Niter };
-            static float[] ReprocessorRecipeValues = new float[] { 1f, 0.75f, 0.2f, 0.3f, };
-
-            void ReprocessorManager()
-            {
-                if (IfIngredientsNotFilled(ReprocessorIngredients) && fertig < 90) return;
-                ClearInventory(InputInventory);
-                var m = ((InputInventory.MaxVolume.RawValue / 1000) / 56.9f) * 50.5f;
-                LoadRecipeItems(ReprocessorIngredients, ReprocessorRecipeValues, m);
-            }
-
-            //            const string Ingot_GreyWater = "Ingot GreyWater", Ingot_CleanWater = "Ingot CleanWater", Ice = "Ore Ice";
-            public void WaterRecyclingSystemManager(bool grey = false)
-            {
-                if (fertig < 10) ClearInputInventoryIfControledByPIM();
-                if (grey || (Lists.Data.inventar.ContainsKey(Ingot.GreyWater) && Lists.Data.inventar[Ingot.GreyWater] > 0))
-                {
-                    SendItemByType(Ingot.GreyWater, 1000, InputInventory, 0);
-                    if (grey) return;
-                }
-                if (Lists.Data.inventar.ContainsKey(Ingot.CleanWater) && Lists.Data.inventar[Ingot.CleanWater] > 0)
-                {
-                    SendItemByType(Ingot.CleanWater, 1000, InputInventory, (!InputInventoryItems.ContainsKey(Ingot.CleanWater) || InputInventoryItems[Ingot.CleanWater] == 0 ? 0 : 1));
-                }
-                if (fertig > 70)
-                {
-                    SendItemByType(Ore.Ice, 1000, InputInventory);
-                }
-            }
-
 
             void AddRefineryCount()
             {
@@ -237,7 +144,6 @@ namespace IngameScript
                 }
                 if (typeid.IsVanillaManagment())
                 {
-                    if (!PrioBlockTypes.Contains("@" + BlockSubType)) PrioBlockTypes += "@" + BlockSubType;
                     if (!ingotprio.ContainsKey(BlockSubType)) ingotprio.Add(BlockSubType, new List<IPrio>());
                     if (!refineryTypesAcceptedBlueprintsList.ContainsKey(BlockSubType)) refineryTypesAcceptedBlueprintsList.Add(BlockSubType, AcceptedBlueprints);
                 }
@@ -257,7 +163,7 @@ namespace IngameScript
                         if (InputInventory.CurrentVolume > 0) DeleteRefError(RefError.NotFilled);
                     }
 
-                    fertig = 100 - (int)((InputInventory.CurrentVolume.RawValue * 100) / InputInventory.MaxVolume.RawValue);
+                    Success = 100 - (int)((InputInventory.CurrentVolume.RawValue * 100) / InputInventory.MaxVolume.RawValue);
                 }
             }
 
@@ -319,9 +225,10 @@ namespace IngameScript
                         break;
                     case RefreshType.WaterRecyclingSystem:
                         CalculateRefineryAmount(Ingot.WaterFood);
+                        Program.LCD_DebugString += $"WRS: Calculated WaterFood refinery amount.\n";
                         break;
                     case RefreshType.Reprocessor:
-                        CalculateRefineryAmount(BluePrintID_SpentFuelReprocessing);
+                        CalculateRefineryAmount(Ingot.SpentFuelReprocessing);
                         break;
                 }
                 var inhalt = new List<MyInventoryItem>();
@@ -340,14 +247,6 @@ namespace IngameScript
                 CurrentWorkOreAmount = waf;
                 NextWorkBluePrint = AcceptedBlueprints.Find(b => b.InputID == nws);
                 NexWorkOreAmount = nwaf;
-            }
-
-
-
-            public bool Accept(RefineryBlueprint ore)
-            {
-                if (RefineryBlock.GetInventory(0).IsFull) return false;
-                return AcceptedBlueprints.Contains(ore);
             }
         }
     }

@@ -71,7 +71,7 @@ namespace IngameScript
                     {
                         if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(bluePrint.definition_id))
                         {
-                            var subTypeId = a.BlockDefinition.SubtypeId;
+                            var subTypeId = a.BlockDefinition.SubtypeName;
 
                             if (!Assembler.AssemblerTypesAcceptedBluePrints.ContainsKey(subTypeId))
                             {
@@ -79,11 +79,12 @@ namespace IngameScript
                             }
 
                             Assembler.AssemblerTypesAcceptedBluePrints[subTypeId].Add(bluePrint);
+
                             bluePrintUseIsAllowed = true;
                         }
                     }
 
-                    if ( bluePrintUseIsAllowed)
+                    if (bluePrintUseIsAllowed)
                     {
                         Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], bluePrint);
                         Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
@@ -103,7 +104,7 @@ namespace IngameScript
 
             private bool RefineryBluePrintAsAssemblerBP(string definition)
             {
-                return definition == Ingot.SubFresh || definition == (Refinery.BluePrintID_SpentFuelReprocessing);
+                return definition == Ingot.SubFresh || definition == (Ingot.SpentFuelReprocessing);
             }
 
             private void InitAutoCraftingTypes()

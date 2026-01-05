@@ -76,7 +76,7 @@ namespace IngameScript
                 foreach (var a in ammomax)
                 {
                     var prio = AmmoDefs.GetAmmoDefs(a.Key).GetAmmoPriority(gunType);
-                    if (prio > currentAmmunitionPrio && Lists.Data.inventar.ContainsKey(a.Key) && Lists.Data.inventar[a.Key] > 0)
+                    if (prio > currentAmmunitionPrio && Lists.Data.Inventory.ContainsKey(a.Key) && Lists.Data.Inventory[a.Key] > 0)
                     {
                         currentAmmunition = a.Key;
                         currentAmmunitionPrio = prio;

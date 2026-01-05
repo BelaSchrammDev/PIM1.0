@@ -9,7 +9,6 @@ namespace IngameScript
 {
     partial class Program
     {
-        // TODO: gravel not pushed when spezial gravel container is exists
         public class HydrophonicsInputInventory : StorageInventory
         {
             public HydrophonicsInputInventory(IMyInventory hydrophonicsInputInventory)
@@ -32,27 +31,6 @@ namespace IngameScript
                 items.Add(Ingot.Nutrients, 15f * factor);
             }
 
-            public bool IfIngredientsExists()
-            {
-                RefreshInvList();
-
-                foreach (var item in items.Keys)
-                {
-                    var found = false;
-                    foreach (var invItem in _InvList)
-                    {
-                        var pimID = GetPIMItemID(invItem.Type);
-                        if (pimID == item && invItem.Amount > 0)
-                        {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) return false;
-                }
-                return true;
-            }
-
             public override bool ItemsAmountInvalid()
             {
                 return true;
@@ -60,9 +38,8 @@ namespace IngameScript
         }
 
         // TODO: add errormessages when ingreadients not exists
-        public class HydrophonicsManager : BlockManager
+        public class HydrophonicsManager : RefineryBlockManagerer
         {
-            private Refinery Refinery { get { return (Refinery)Block; } }
             private HydrophonicsInputInventory _InputInventory;
 
             public HydrophonicsManager(ManageableBlock block) : base(block)
@@ -72,9 +49,10 @@ namespace IngameScript
 
             public override void DoManage()
             {
+                LCD_DebugString += "HydroManager: Starting management.\n";
                 if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.SubFresh) && !Lists.Data.BluePrints_Active[Ingot.SubFresh].IfMax())
                 {
-                    if (!_InputInventory.IfIngredientsExists() && Refinery.fertig > 90)
+                    if (!_InputInventory.IfItemsExists() && Refinery.Success > 90)
                     {
                         _InputInventory.ReloadItems();
                     }

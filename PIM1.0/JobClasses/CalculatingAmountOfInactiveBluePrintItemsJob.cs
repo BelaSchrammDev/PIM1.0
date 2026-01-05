@@ -22,9 +22,9 @@ namespace IngameScript
                 var key = _blueprintKeys[index];
                 var b = Lists.Data.BluePrints_Inactive[key];
 
-                if (Lists.Data.inventar.ContainsKey(b.ItemName))
+                if (Lists.Data.Inventory.ContainsKey(b.ItemName))
                 {
-                    b.SetCurrentAmount((int)Lists.Data.inventar[b.ItemName]);
+                    b.SetCurrentAmount((int)Lists.Data.Inventory[b.ItemName]);
                 }
             }
         }

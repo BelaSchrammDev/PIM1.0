@@ -8,7 +8,7 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class VanillaRefineryManager : BlockManager
+        public class VanillaRefineryManager : RefineryBlockManagerer
         {
             enum ManagerState
             {
@@ -18,8 +18,6 @@ namespace IngameScript
 
             ManagerState CurrentRefineryState = ManagerState.CLEAR_INPUT;
 
-            private Refinery _Refinery => (Refinery)Block;
-
             public VanillaRefineryManager(ManageableBlock block) : base(block)
             {
             }
@@ -28,12 +26,12 @@ namespace IngameScript
             {
                 Program.LCD_DebugString += "VanillaRefineryManager_DoManage\n";
 
-                if (!ingotprio.ContainsKey(_Refinery.BlockSubType))
+                if (!ingotprio.ContainsKey(Refinery.BlockSubType))
                 {
                     return;
                 }
 
-                if (_Refinery.fertig > 80 || IfForceManagerExecuting())
+                if (Refinery.Success > 80 || IfForceManagerExecuting())
                 {
                     RefineryFilling();
                 }
@@ -53,26 +51,32 @@ namespace IngameScript
             public void ClearInput()
             {
                 var inventoryItems = new List<MyInventoryItem>();
-                _Refinery.InputInventory.GetItems(inventoryItems);
+                Refinery.InputInventory.GetItems(inventoryItems);
                 if (inventoryItems.Count == 0) return;
                 for (int i = inventoryItems.Count - 1; i >= 0; i--)
                 {
                     var inventoryItem = inventoryItems[i];
                     var itemType = GetPIMItemID(inventoryItem.Type);
-                    var refBP = _Refinery.AcceptedBlueprints.Find(b => b.InputID == itemType);
+                    var refBP = Refinery.AcceptedBlueprints.Find(b => b.InputID == itemType);
                     if (refBP == null) continue;
-                    var itemIPrio = IPrio.GetBlueprintPrio(ingotprio[_Refinery.BlockSubType], refBP);
+                    var itemIPrio = IPrio.GetBlueprintPrio(ingotprio[Refinery.BlockSubType], refBP);
                     if (itemIPrio != null && itemIPrio.initp == 0)
                     {
-                        clearItemByType(_Refinery.InputInventory, itemType, inventoryItem);
+                        clearItemByType(Refinery.InputInventory, itemType, inventoryItem);
                     }
                 }
+            }
+
+            public bool Accept(RefineryBlueprint ore)
+            {
+                if (Refinery.RefineryBlock.GetInventory(0).IsFull) return false;
+                return Refinery.AcceptedBlueprints.Contains(ore);
             }
 
             public void OreSwap()
             {
                 var inventoryItems = new List<MyInventoryItem>();
-                var inventory = _Refinery.RefineryBlock.GetInventory(0);
+                var inventory = Refinery.RefineryBlock.GetInventory(0);
                 inventory.GetItems(inventoryItems);
 
                 if (inventoryItems.Count > 1)
@@ -92,7 +96,7 @@ namespace IngameScript
                         int p1 = 0, p2 = 0;
                         var ostrID1 = GetPIMItemID(inventoryItems[0].Type);
                         var ostrID2 = GetPIMItemID(inventoryItems[1].Type);
-                        foreach (IPrio p in ingotprio[_Refinery.BlockSubType])
+                        foreach (IPrio p in ingotprio[Refinery.BlockSubType])
                         {
                             if (ostrID1 == p.refineryBP.InputID) p1 = p.initp;
                             else if (ostrID2 == p.refineryBP.InputID) p2 = p.initp;
@@ -118,29 +122,29 @@ namespace IngameScript
             {
                 bool refineryFilled = false;
                 RefineryBlueprint newworkBP = null;
-                List<IPrio> ingotPrioList = ingotprio[_Refinery.BlockSubType];
+                List<IPrio> ingotPrioList = ingotprio[Refinery.BlockSubType];
 
                 for (int index = 0; index < ingotPrioList.Count; index++)
                 {
                     IPrio ingotPrio = ingotPrioList[index];
 
-                    if (!_Refinery.Accept(ingotPrio.refineryBP) || ingotPrio.prio == 0 || !Lists.Data.inventar.ContainsKey(ingotPrio.refineryBP.InputID))
+                    if (!Accept(ingotPrio.refineryBP) || ingotPrio.prio == 0 || !Lists.Data.Inventory.ContainsKey(ingotPrio.refineryBP.InputID))
                     {
                         continue;
                     }
 
                     newworkBP = ingotPrio.refineryBP;
 
-                    if (_Refinery.fertig < 50)
+                    if (Refinery.Success < 50)
                     {
-                        _Refinery.ClearInputInventoryIfControledByPIM();
+                        Refinery.ClearInputInventoryIfControledByPIM();
                     }
 
                     var types = newworkBP.InputID.Split(' ');
 
-                    if (Lists.Data.inventar.ContainsKey(newworkBP.InputID))
+                    if (Lists.Data.Inventory.ContainsKey(newworkBP.InputID))
                     {
-                        refineryFilled = SendItemByTypeAndSubtype("MyObjectBuilder_" + types[0], types[1], Lists.Data.inventar[newworkBP.InputID], _Refinery.RefineryBlock.GetInventory(0));
+                        refineryFilled = SendItemByTypeAndSubtype("MyObjectBuilder_" + types[0], types[1], Lists.Data.Inventory[newworkBP.InputID], Refinery.RefineryBlock.GetInventory(0));
                     }
 
                     if (!refineryFilled)
@@ -148,7 +152,7 @@ namespace IngameScript
                         refineryFilled = OreStealing(newworkBP);
                     }
 
-                    _Refinery.SetErrorByCondition(Refinery.RefError.NotFilled, !refineryFilled && _Refinery.InputInventory.CurrentVolume == 0);
+                    Refinery.SetErrorByCondition(Refinery.RefError.NotFilled, !refineryFilled && Refinery.InputInventory.CurrentVolume == 0);
                 }
 
                 if (refineryFilled)
@@ -161,9 +165,9 @@ namespace IngameScript
             bool OreStealing(RefineryBlueprint blueprint)
             {
                 var oamount = 0f;
-                if (blueprint == _Refinery.CurrentWorkBluePrint) oamount = _Refinery.CurrentWorkOreAmount;
-                else if (blueprint == _Refinery.NextWorkBluePrint) oamount = _Refinery.NexWorkOreAmount;
-                if (_Refinery.InputInventory.CurrentVolume.RawValue < 100)
+                if (blueprint == Refinery.CurrentWorkBluePrint) oamount = Refinery.CurrentWorkOreAmount;
+                else if (blueprint == Refinery.NextWorkBluePrint) oamount = Refinery.NexWorkOreAmount;
+                if (Refinery.InputInventory.CurrentVolume.RawValue < 100)
                 {
                     foreach (Refinery refinery in Lists.Data.RefineryList)
                     {
@@ -173,11 +177,11 @@ namespace IngameScript
                         refinery.InputInventory.GetItems(inventoryList);
                         foreach (var inventoryItem in inventoryList)
                         {
-                            var ostrID = _Refinery.AcceptedBlueprints.Find(b => b.InputID == GetPIMItemID(inventoryItem.Type));
-                            if (blueprint == ostrID && (float)inventoryItem.Amount > 100 && (float)inventoryItem.Amount > oamount && _Refinery.Accept(ostrID))
+                            var ostrID = Refinery.AcceptedBlueprints.Find(b => b.InputID == GetPIMItemID(inventoryItem.Type));
+                            if (blueprint == ostrID && (float)inventoryItem.Amount > 100 && (float)inventoryItem.Amount > oamount && Accept(ostrID))
                             {
                                 var amount = MyFixedPoint.MultiplySafe(inventoryItem.Amount, (inum == 0 ? 0.5f : 1f));
-                                var xx = refinery.InputInventory.TransferItemTo(_Refinery.InputInventory, inum, null, true, amount);
+                                var xx = refinery.InputInventory.TransferItemTo(Refinery.InputInventory, inum, null, true, amount);
                                 if (xx) return true;
                             }
                             inum++;
@@ -191,10 +195,10 @@ namespace IngameScript
             {
                 int wp100 = 0;
                 int op = 0;
-                foreach (IPrio p in ingotprio[_Refinery.BlockSubType])
+                foreach (IPrio p in ingotprio[Refinery.BlockSubType])
                 {
-                    if (p.refineryBP == _Refinery.CurrentWorkBluePrint || p.refineryBP == _Refinery.NextWorkBluePrint) op = op < p.prio ? (int)(p.prio * 1.5) : op;
-                    else if (wp100 == 0 && _Refinery.Accept(p.refineryBP)) wp100 = p.prio;
+                    if (p.refineryBP == Refinery.CurrentWorkBluePrint || p.refineryBP == Refinery.NextWorkBluePrint) op = op < p.prio ? (int)(p.prio * 1.5) : op;
+                    else if (wp100 == 0 && Accept(p.refineryBP)) wp100 = p.prio;
                 }
                 return op < wp100;
             }

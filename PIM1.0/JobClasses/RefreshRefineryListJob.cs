@@ -24,7 +24,6 @@ namespace IngameScript
                     }
                 }
 
-                Refinery.PrioBlockTypes = "";
                 startIndex = Lists.Data.Refinerys.Count - 1;
                 endIndex = 0;
             }

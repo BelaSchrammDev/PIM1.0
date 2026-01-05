@@ -34,7 +34,7 @@ namespace IngameScript
                         if (def.Length > 1)
                         {
                             int amount = 0;
-                            if (Lists.Data.inventar.ContainsKey(def[1]) && int.TryParse(def[0], out amount))
+                            if (Lists.Data.Inventory.ContainsKey(def[1]) && int.TryParse(def[0], out amount))
                             {
                                 if (amount != 0) items.Add(def[1], amount);
                             }
@@ -48,7 +48,7 @@ namespace IngameScript
                     {
                         var setr = search[i].Trim().ToLower();
                         if (setr == "") continue;
-                        foreach (var t in Lists.Data.inventar.Keys)
+                        foreach (var t in Lists.Data.Inventory.Keys)
                         {
                             if (t.ToLower().Contains(setr) && !items.ContainsKey(t))
                             {
