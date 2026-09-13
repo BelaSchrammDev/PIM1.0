@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- The script itself is limited to C# 6 by the in-game compiler.
+         The test assembly is not, and C# 6 sources compile fine here. -->
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>IngameScript.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <!-- Link individual source files from the script project.
+       Because every file declares "partial class Program", the test assembly
+       ends up with a minimal Program shell holding only what is linked here.
+       Program.cs is deliberately NOT linked: it derives from MyGridProgram and
+       would drag in the Space Engineers assemblies. Keep this list free of any
+       file that touches Sandbox.ModAPI, VRage or Program.Instance. -->
+  <ItemGroup>
+    <Compile Include="..\PIM1.0\Share\Common\StringBuilderExtended.cs"
+             Link="Linked\StringBuilderExtended.cs" />
+    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingParser.cs"
+             Link="Linked\NetWorkingParser.cs" />
+    <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgumentFactory.cs"
+             Link="Linked\CommandArgumentFactory.cs" />
+    <Compile Include="..\PIM1.0\Tools\StopWatch.cs"
+             Link="Linked\StopWatch.cs" />
+    <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgument.cs"
+             Link="Linked\CommandArgument.cs" />
+
+    <!-- Add once Job no longer inherits from Tools: -->
+    <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
+
+    <!-- Add once the budget arithmetic is extracted from LoopManager: -->
+    <!-- <Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs" Link="Linked\InstructionBudget.cs" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.6.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.6.1" />
+  </ItemGroup>
+
+</Project>

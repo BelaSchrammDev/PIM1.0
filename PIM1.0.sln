@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIM1.0", "PIM1.0\PIM1.0.csproj", "{BC69A5F1-C029-485E-9BB5-B5F14DC3071C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIM1.0.Tests", "PIM1.0.Tests\PIM1.0.Tests.csproj", "{A992E3D0-6B5D-4B8A-A2E6-C64E5B4011B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{BC69A5F1-C029-485E-9BB5-B5F14DC3071C}.Debug|x64.Build.0 = Debug|x64
 		{BC69A5F1-C029-485E-9BB5-B5F14DC3071C}.Release|x64.ActiveCfg = Release|x64
 		{BC69A5F1-C029-485E-9BB5-B5F14DC3071C}.Release|x64.Build.0 = Release|x64
+		{A992E3D0-6B5D-4B8A-A2E6-C64E5B4011B3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A992E3D0-6B5D-4B8A-A2E6-C64E5B4011B3}.Debug|x64.Build.0 = Debug|Any CPU
+		{A992E3D0-6B5D-4B8A-A2E6-C64E5B4011B3}.Release|x64.ActiveCfg = Release|Any CPU
+		{A992E3D0-6B5D-4B8A-A2E6-C64E5B4011B3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

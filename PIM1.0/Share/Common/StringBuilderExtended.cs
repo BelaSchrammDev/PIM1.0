@@ -16,40 +16,74 @@ namespace IngameScript
 
             public override string ToString() { return sb.ToString(); }
 
-
             public void Trim()
             {
                 int wsFromBegin = 0;
                 int wsFromEnd = 0;
+
                 for (int i = sb.Length - 1; i >= 0; i--)
                 {
-                    if (char.IsWhiteSpace(sb[i])) wsFromEnd++;
-                    else break;
+                    if (char.IsWhiteSpace(sb[i]))
+                    {
+                        wsFromEnd++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+
                 for (int i = 0; i < sb.Length; i++)
                 {
-                    if (char.IsWhiteSpace(sb[i])) wsFromBegin++;
-                    else break;
+                    if (char.IsWhiteSpace(sb[i]))
+                    {
+                        wsFromBegin++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+
+                // All-whitespace content: both counters hold the full length,
+                // so removing twice would underflow. Clear and leave early.
+                if (wsFromBegin >= sb.Length)
+                {
+                    sb.Clear();
+                    return;
+                }
+
                 sb.Remove(0, wsFromBegin);
                 sb.Remove(sb.Length - wsFromEnd, wsFromEnd);
             }
-
 
             public void Substring(StringBuilderExtended targetSBX, int startindex, int lenght = -1)
             {
                 Substring(targetSBX.sb, startindex, lenght);
             }
 
-
             public void Substring(StringBuilder targetSB, int startindex, int lenght = -1)
             {
                 targetSB.Clear();
-                if (startindex > sb.Length) return;
-                int endindex;
-                if (lenght > 0) endindex = startindex + lenght;
-                else endindex = sb.Length - 1;
-                for (int i = startindex; i <= endindex; i++) targetSB.Append(sb[i]);
+
+                if (startindex < 0 || startindex >= sb.Length)
+                {
+                    return;
+                }
+
+                // endindex is inclusive, so a length of n ends at startindex + n - 1
+                int endindex = lenght > 0 ? startindex + lenght - 1 : sb.Length - 1;
+
+                // Never read past the end of the buffer
+                if (endindex > sb.Length - 1)
+                {
+                    endindex = sb.Length - 1;
+                }
+
+                for (int i = startindex; i <= endindex; i++)
+                {
+                    targetSB.Append(sb[i]);
+                }
             }
 
             public bool IsEmpty() { return sb.Length == 0; }
@@ -93,23 +127,36 @@ namespace IngameScript
 
             public bool Contains(string s) { return IndexOf(s) != -1; }
 
-
             public int IndexOf(string s)
             {
-                int sIndex = 0;
-                int contains = 0;
-                int findIndex = -1;
-                for (int i = 0; sIndex < s.Length && i < sb.Length && i + (s.Length - sIndex) < sb.Length; i++, sIndex += contains)
+                if (s.Length == 0)
                 {
-                    if (sb[i] == s[sIndex])
-                    {
-                        if (contains == 0) findIndex = i;
-                        contains = 1;
-                    }
-                    else { contains = 0; sIndex = 0; findIndex = -1; }
+                    return 0;
                 }
-                if (sIndex < s.Length - 1) findIndex = -1;
-                return findIndex;
+
+                if (s.Length > sb.Length)
+                {
+                    return -1;
+                }
+
+                int lastStart = sb.Length - s.Length;
+
+                for (int start = 0; start <= lastStart; start++)
+                {
+                    int offset = 0;
+
+                    while (offset < s.Length && sb[start + offset] == s[offset])
+                    {
+                        offset++;
+                    }
+
+                    if (offset == s.Length)
+                    {
+                        return start;
+                    }
+                }
+
+                return -1;
             }
         }
     }
