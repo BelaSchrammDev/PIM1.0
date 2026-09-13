@@ -26,7 +26,6 @@ Supports a few mods as well, currently Sigma Draconis Core and Apex items.
 ## Requirements
 
 - Space Engineers with a Programmable Block
-- SMS v1.4 (older versions will not work)
 
 ## Setup
 
