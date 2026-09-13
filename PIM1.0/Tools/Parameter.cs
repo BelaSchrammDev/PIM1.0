@@ -8,23 +8,30 @@ namespace IngameScript
         static string ToArgStr(string qstr)
         {
             var zstr = "";
-            var tc = true;
+            var startOfWord = true;
+
             foreach (var ctr in qstr)
             {
-                if (tc)
+                // Separators are checked first: otherwise a separator directly following
+                // another one consumes the "next character is upper case" flag and gets
+                // lower-cased into the key itself.
+                if (ctr == ' ' || ctr == ',' || ctr == '-' || ctr == '_' || ctr == '&' || ctr == ':')
                 {
-                    tc = false;
-                    zstr += Char.ToUpper(ctr);
-                    continue;
-                }
-                if (ctr == ' ' | ctr == ',' | ctr == '-' | ctr == '_' | ctr == '&' | ctr == ':')
-                {
-                    tc = true;
+                    startOfWord = true;
                     zstr += ctr;
                     continue;
                 }
-                zstr += Char.ToLower(ctr);
+
+                if (startOfWord)
+                {
+                    startOfWord = false;
+                    zstr += char.ToUpper(ctr);
+                    continue;
+                }
+
+                zstr += char.ToLower(ctr);
             }
+
             return zstr;
         }
 
@@ -47,14 +54,15 @@ namespace IngameScript
                 var nameLower = LastCustomName.ToString().ToLower();
                 if (nameLower.Contains("(sms"))
                 {
-                    LastCustomName.Substring(Name, 0, nameLower.IndexOf("(sms") - 1);
+                    LastCustomName.Substring(Name, 0, nameLower.IndexOf("(sms"));
                     Name.Trim();
                     foreach (var tag in nameLower.Split('('))
                     {
                         if (tag.Contains("sms") && tag.Contains(")"))
                         {
-                            foreach (var s in ToArgStr(tag).Split(',', ')'))
+                            foreach (var raw in ToArgStr(tag).Split(',', ')'))
                             {
+                                var s = raw.Trim();
                                 if (s != "" && s != "Sms")
                                 {
                                     var x = s.IndexOf(':');

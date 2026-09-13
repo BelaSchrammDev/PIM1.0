@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IngameScript
 {

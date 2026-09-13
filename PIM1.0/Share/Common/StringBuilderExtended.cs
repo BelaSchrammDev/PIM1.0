@@ -71,8 +71,8 @@ namespace IngameScript
                     return;
                 }
 
-                // endindex is inclusive, so a length of n ends at startindex + n - 1
-                int endindex = lenght > 0 ? startindex + lenght - 1 : sb.Length - 1;
+                // A negative length means "to the end"; a length of zero means zero characters
+                int endindex = lenght >= 0 ? startindex + lenght - 1 : sb.Length - 1;
 
                 // Never read past the end of the buffer
                 if (endindex > sb.Length - 1)
