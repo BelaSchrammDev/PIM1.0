@@ -44,7 +44,16 @@ namespace IngameScript
 
         class Warning : View
         {
-            public enum ID { NONE, CARGOUSEHEAVY, CARGOUSEFULL, CARGOMISSING, CARGORECOMMENDED, REFINERYNOTSUPPORTED }
+            public enum ID 
+            {
+                NONE,
+                CARGOUSEHEAVY, 
+                CARGOUSEFULL, 
+                CARGOMISSING, 
+                CARGORECOMMENDED, 
+                REFINERYNOTSUPPORTED 
+            }
+
             public ID WarningID = ID.NONE;
             public string subType = "";
 
@@ -90,8 +99,8 @@ namespace IngameScript
         {
             public override StringBuilderExtended GetInfoText()
             {
-                if (guns.Count == 0) return null;
-                InfoString.SetText("AmmonitionManager: ", guns.Count.ToString(), " weapons.");
+                if (Lists.Data.guns.Count == 0) return null;
+                InfoString.SetText("AmmonitionManager: ", Lists.Data.guns.Count.ToString(), " weapons.");
                 return InfoString;
             }
         }
@@ -101,8 +110,8 @@ namespace IngameScript
         {
             public override StringBuilderExtended GetInfoText()
             {
-                if (storageCargos.Count == 0) return null;
-                InfoString.SetText("StorageManager: ", storageCargos.Count.ToString(), " containers.");
+                if (Lists.Data.StorageCargos.Count == 0) return null;
+                InfoString.SetText("StorageManager: ", Lists.Data.StorageCargos.Count.ToString(), " containers.");
                 return InfoString;
             }
         }
@@ -113,7 +122,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 InfoString.Clear();
-                foreach (var refinery in RefineryList) refinery.GetErrorInfo(InfoString);
+                foreach (var refinery in Lists.Data.RefineryList) refinery.GetErrorInfo(InfoString);
                 if (InfoString.IsEmpty()) return null;
                 InfoString.Insert(0, "--------------- RefineryManager ---------------\n");
                 return InfoString;
@@ -126,7 +135,7 @@ namespace IngameScript
             public override StringBuilderExtended GetInfoText()
             {
                 InfoString.Clear();
-                foreach (var assembler in AssemblerList) assembler.GetErrorInfo(InfoString);
+                foreach (var assembler in Lists.Data.AssemblerList) assembler.GetErrorInfo(InfoString);
                 if (InfoString.IsEmpty()) return null;
                 InfoString.Insert(0, "--------------- AssemblerManager ----------------\n");
                 return InfoString;

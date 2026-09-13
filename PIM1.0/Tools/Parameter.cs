@@ -1,16 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IngameScript
 {
     partial class Program
     {
+        static string ToArgStr(string qstr)
+        {
+            var zstr = "";
+            var tc = true;
+            foreach (var ctr in qstr)
+            {
+                if (tc)
+                {
+                    tc = false;
+                    zstr += Char.ToUpper(ctr);
+                    continue;
+                }
+                if (ctr == ' ' | ctr == ',' | ctr == '-' | ctr == '_' | ctr == '&' | ctr == ':')
+                {
+                    tc = true;
+                    zstr += ctr;
+                    continue;
+                }
+                zstr += Char.ToLower(ctr);
+            }
+            return zstr;
+        }
+
         public class Parameter
         {
-            public Dictionary<string, string> ParameterList = new Dictionary<string, string>();
-            StringBuilderExtended LastCustomName = new StringBuilderExtended(150);
-            public StringBuilderExtended Name = new StringBuilderExtended(150);
-            bool PIMcontrolled = false;
+            // TODO: parameter as boolean
 
+            private StringBuilderExtended LastCustomName = new StringBuilderExtended(150);
+
+            public Dictionary<string, string> ParameterList = new Dictionary<string, string>();
+            public StringBuilderExtended Name = new StringBuilderExtended(150);
+            public bool PIMcontrolled { get; private set; }
 
             public bool ParseArgs(string newCustomName, bool canChangeAutocraftingStatus = false)
             {
@@ -36,7 +62,7 @@ namespace IngameScript
                                     else AddParameter(s);
                                 }
                             }
-                            if (canChangeAutocraftingStatus && PIMcontrolled == false) changeAutoCraftingSettings = true;
+                            if (canChangeAutocraftingStatus && PIMcontrolled == false) Properties.Data.AutoCraftingSettingsInValid = true;
                             PIMcontrolled = true;
                             return true;
                         }
@@ -44,7 +70,7 @@ namespace IngameScript
                 }
                 Name.Clear();
                 Name.Append(newCustomName.Trim());
-                if (canChangeAutocraftingStatus && PIMcontrolled == true) changeAutoCraftingSettings = true;
+                if (canChangeAutocraftingStatus && PIMcontrolled == true) Properties.Data.AutoCraftingSettingsInValid = true;
                 PIMcontrolled = false;
                 return false;
             }
@@ -52,8 +78,6 @@ namespace IngameScript
             void AddParameter(string key, string value = "") { if (!IsParameter(key)) ParameterList.Add(key, value); }
 
             public bool IsParameter(string key) { return ParameterList.ContainsKey(key); }
-
-            public bool ControledByPIM() { return PIMcontrolled; }
         }
     }
 }

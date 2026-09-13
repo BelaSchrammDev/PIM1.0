@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.ModAPI.Ingame;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -8,15 +9,42 @@ namespace IngameScript
 {
     partial class Program
     {
+        string curmod = Strings.M_Vanilla;
+        static int AutocraftingThreshold = 80;
+
+        AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
+        {
+            var bprint = GetBluePrintByProductionItem(pi);
+            if (bprint != null) bprint.AssemblyAmount += pi.Amount.ToIntSafe();
+            return bprint;
+        }
+        AssemblerBluePrint GetBluePrintByItemName(string itemName)
+        {
+            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.ItemName == itemName) return b;
+            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.ItemName == itemName) return b;
+            return null;
+        }
+        AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
+        {
+            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            return null;
+        }
+
+        public void SetAutocraftingThresholdNew()
+        {
+            foreach (var bp in Lists.Data.BluePrints_Active.Values) bp.CalcMinimumAmount();
+        }
+
         void addBluePrint(string typeID, string subtypeID, string itemName, string alternativItemName)
         {
-            if (curmod != "Vanilla" && (usedMods.ContainsKey(curmod) ? !usedMods[curmod] : true)) return;
+            if (curmod != "Vanilla" && (Config.Instance.usedMods.ContainsKey(curmod) ? !Config.Instance.usedMods[curmod] : true)) return;
             MyDefinitionId id;
             if (!MyDefinitionId.TryParse("MyObjectBuilder_BlueprintDefinition/" + subtypeID, out id)) return;
             if (subtypeID.StartsWith("Position0")) subtypeID = subtypeID.Substring(subtypeID.IndexOf('_') + 1);
-            if (!mods.Contains(curmod)) mods.Add(curmod);
+            if (!Config.Instance.mods.Contains(curmod)) Config.Instance.mods.Add(curmod);
             var bpi = typeID + " " + subtypeID;
-            if (!bprints_pool.ContainsKey(bpi)) bprints_pool.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
+            if (!Lists.Data.BluePrints_Inactive.ContainsKey(bpi)) Lists.Data.BluePrints_Inactive.Add(bpi, new AssemblerBluePrint(typeID, subtypeID, curmod, (itemName == "" ? "" : typeID + " " + itemName), alternativItemName, id));
         }
         void C(string s, string astr = "", string astn = "") { addBluePrint("Component", s, astr, astn); }
         void A(string s, string astr = "", string astn = "") { addBluePrint(IG_Ammo, s, astr, astn); }
@@ -25,15 +53,14 @@ namespace IngameScript
         void O(string s, string astr = "", string astn = "") { addBluePrint(IG_OBottles, s, astr, astn); }
         void H(string s, string astr = "", string astn = "") { addBluePrint(IG_HBottles, s, astr, astn); }
         void D(string s, string astr = "", string astn = "") { addBluePrint(IG_Datas, s, astr, astn); }
+        void S(string s, string astr = "", string astn = "") { addBluePrint(IG_Seeds, s, astr, astn); }
         void I(string blueprintNmae, string itemName = "", string alternativeItemName = "") { addBluePrint(IG_I, blueprintNmae, itemName, alternativeItemName); }
         void E(string s, string astr = "", string astn = "") { addBluePrint("Ore", s, astr, astn); }
         public class AssemblerBluePrint : IComparable<AssemblerBluePrint>
         {
             public long ItemPriority = 0;
-            public List<Assembler> o = new List<Assembler>();
             public bool valid = true;
             public MyDefinitionId definition_id;
-            public int NumBluePrintToAssembler = 0;
             public int CurrentItemAmount = 0;
             public int AssemblingDeltaAmount = 0;
             public int AssemblyAmount = 0;
@@ -48,18 +75,14 @@ namespace IngameScript
             string type = "";
             public string subtype = "";
             string subtypename = "";
-            static public void SetAutocraftingThresholdNew()
-            {
-                foreach (var bp in bprints.Values) bp.CalcMinimumAmount();
-            }
             static string BluePrintNameToItemName(string t, string s)
             {
-                var cs = "Component";
-                if (s == "Magnetron_Component") return cs + " " + s; // mod item
+                var cs = IngameStrings.RComponent;
+                if (s == Component.Magnetron) return cs + " " + s; // mod item
                 if (t == cs && s.EndsWith(cs)) return t + " " + s.Substring(0, s.Length - cs.Length); // components remove from bottom
-                if (s.StartsWith("NATO_25")) // NATO Magazine
+                if (s.StartsWith(IngameStrings.RNATO_25)) // NATO Magazine
                 {
-                    cs = "Magazine";
+                    cs = IngameStrings.RMagazine;
                     return t + " " + s.Substring(0, s.Length - cs.Length);
                 }
                 if (t == IG_Tools) // add 'item' to all PhyicalGunItems
@@ -68,15 +91,21 @@ namespace IngameScript
                 }
                 return t + " " + s;
             }
-            const string AutomaticRifleGun_Mag_ = "AutomaticRifleGun_Mag_";
             string[] ToolsAndGunsTypes = { IG_Tools, IG_Datas, IG_HBottles, IG_OBottles, };
+
+            public bool IfRefineryBluePrint()
+            {
+                return BlueprintID == Ingot.SubFresh || BlueprintID == (Ingot.SpentFuelReprocessing);
+            }
+
             void ConvertAutoCraftingName()
             {
                 AutoCraftingType = type;
-                if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = AC_ToolsAndGuns;
+                if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = Strings.AC_ToolsAndGuns;
+                else if (seed_cast.Contains(ItemName)) AutoCraftingType = IngameStrings.RSeeds;
                 else if (food_cast.Contains(ItemName)) AutoCraftingType = IG_Food;
-                else if (subtype == Refinery.BluePrint_SpentFuelReprocessing) AutoCraftingType = Refinery.BluePrint_SpentFuelReprocessing;
-                else if (subtype.Contains("Deuterium")) AutoCraftingType = "Deuterium";
+                else if (subtype == IngameStrings.RSpentFuelReprocessing) AutoCraftingType = IngameStrings.RReprocessing;
+                else if (subtype.Contains(IngameStrings.RDeuterium)) AutoCraftingType = IngameStrings.RDeuterium;
                 if (subtypename != "")
                 {
                     AutoCraftingName = subtypename.Replace('_', ' ');
@@ -84,13 +113,15 @@ namespace IngameScript
                 }
                 AutoCraftingName = ItemName.Split(' ')[1];
                 if (AutoCraftingName.StartsWith("Position")) AutoCraftingName = AutoCraftingName.Substring(AutoCraftingName.IndexOf('_') + 1);
-                if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
-                else if (AutoCraftingName.Contains(AutomaticRifleGun_Mag_))
+                else if (AutoCraftingName.StartsWith("MealPack")) AutoCraftingName = AutoCraftingName.Substring(9);
+                else if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
+                else if (AutoCraftingName.Contains(IngameStrings.RAutomaticRifleGunMag))
                 {
-                    if (AutoCraftingName.StartsWith(AutomaticRifleGun_Mag_)) AutoCraftingName = "AutoRifleGunMagazine";
-                    else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(AutomaticRifleGun_Mag_)) + "RifleGunMagazine";
+                    if (AutoCraftingName.StartsWith(IngameStrings.RAutomaticRifleGunMag)) AutoCraftingName = IngameStrings.RAutoRifleGunMagazine;
+                    else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(IngameStrings.RAutomaticRifleGunMag)) + IngameStrings.RRifleGunMagazine;
                 }
-                else if (type == IG_Tools && ModName == M_Vanilla)
+                else if (type == IG_Seeds) AutoCraftingName += " " + IngameStrings.RSeeds;
+                else if (type == IG_Tools && ModName == Strings.M_Vanilla)
                 {
                     string[] Tools = { "HandDrill", "Grinder", "Welder" };
                     var isTool = false;
@@ -109,9 +140,10 @@ namespace IngameScript
                     }
                     if (!isTool && AutoCraftingName.EndsWith("Item")) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 4);
                 }
-                if (AutoCraftingName.EndsWith("Magazine")) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 5);
+                if (AutoCraftingName.EndsWith(IngameStrings.RMagazine)) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 5);
                 AutoCraftingName = AutoCraftingName.Replace('_', ' ');
             }
+
             public AssemblerBluePrint(string iTypeID, string iSubTypeID, string modName, string alter, string astype, MyDefinitionId definitionId)
             {
                 subtypename = astype;
@@ -133,10 +165,9 @@ namespace IngameScript
             public bool NeedsAssembling() { return (MinimumAmount > CurrentItemAmount + AssemblyAmount); }
             public bool IfMax() { return (MaximumItemAmount <= CurrentItemAmount); }
             public void SetMaximumAmount(int m) { MaximumItemAmount = m; CalcMinimumAmount(); }
-            void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
+            public void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
             public void SetCurrentAmount(int amount)
             {
-                NumBluePrintToAssembler = 0;
                 CurrentItemAmount = amount;
                 if (MaximumItemAmount > 0) AssemblingDeltaAmount = MaximumItemAmount - amount;
                 else AssemblingDeltaAmount = -1;
@@ -150,7 +181,7 @@ namespace IngameScript
 
         void InitAssemblerBluePrints()
         {
-            if (!usedMods[M_IndustrialOverhaulMod])
+            if (!Config.Instance.usedMods[Strings.M_IndustrialOverhaulMod])
             {
                 // blueprint vanilla
                 // Components
@@ -196,10 +227,10 @@ namespace IngameScript
                 A("Position00074_FireworksBoxPink");
                 A("Position00075_FireworksBoxRainbow");
                 // Tools
-                T("Position0010_AngleGrinder");
-                T("Position0020_AngleGrinder2");
-                T("Position0030_AngleGrinder3");
-                T("Position0040_AngleGrinder4");
+                T(IngameStrings.GetPositionString(10, Component.AngleGrinder));
+                T(IngameStrings.GetPositionString(20, Component.AngleGrinder + "2"));
+                T(IngameStrings.GetPositionString(30, Component.AngleGrinder + "3"));
+                T(IngameStrings.GetPositionString(40, Component.AngleGrinder + "4"));
                 T("Position0050_HandDrill");
                 T("Position0060_HandDrill2");
                 T("Position0070_HandDrill3");
@@ -233,9 +264,35 @@ namespace IngameScript
                 A("Position0120_LargeCalibreAmmo");
                 A("Position0130_SmallRailgunAmmo");
                 A("Position0140_LargeRailgunAmmo");
+                // FoodProcessorRations
+                K("Position0010_CookMammalMeat", "MammalMeatCooked");
+                K("Position0020_CookSpiderMeat", "InsectMeatCooked");
+                K("Position0030_MealPack_KelpCrisp");
+                K("Position0040_MealPack_FruitBar");
+                K("Position0050_MealPack_GardenSlaw");
+                K("Position0060_MealPack_RedPellets");
+                K("Position0070_MealPack_Chili");
+                K("Position0080_MealPack_Flatbread");
+                K("Position0090_MealPack_Ramen");
+                K("Position0100_MealPack_FruitPastry");
+                K("Position0110_MealPack_VeggieBurger");
+                K("Position0120_MealPack_Curry");
+                K("Position0130_MealPack_GreenPellets");
+                K("Position0140_MealPack_Dumplings");
+                K("Position0150_MealPack_Spaghetti");
+                K("Position0160_MealPack_Lasagna");
+                K("Position0170_MealPack_Burrito");
+                K("Position0180_MealPack_FrontierStew");
+                K("Position0190_MealPack_SearedSabiroid");
+                K("Position0200_MealPack_SteakDinner");
+                // FoodProcessorSeeds
+                S("Position0010_Seeds_Fruit", "Fruit");
+                S("Position0020_Seeds_Grain", "Grain");
+                S("Position0030_Seeds_Vegetables", "Vegetables");
+                S("Position0040_Spores_Mushrooms", "Mushrooms");
             }
 
-            curmod = M_SigmaDraconisCore;
+            curmod = Strings.M_SigmaDraconisCore;
             // TradeGoods
             C("Composting", "Compost");
             C("CrateofTomatoes", "CrateTomato");
@@ -294,7 +351,7 @@ namespace IngameScript
 
 
             /* DailyNeedsSurvivalMod */
-            curmod = M_DailyNeedsSurvival;
+            curmod = Strings.M_DailyNeedsSurvival;
             I("SubFresh", "", "Algae-Soy Product");
             I("WaterFood", "", "Drinking Water Packet");
             I("OrganicToNutrients", "Nutrients", "Nutrients");
@@ -330,52 +387,52 @@ namespace IngameScript
             I("ProteinShake");
 
             /* AzimuthThrusterMod */
-            curmod = M_AzimuthThruster;
+            curmod = Strings.M_AzimuthThruster;
             C("AzimuthSuperchargerComponent", "AzimuthSupercharger");
 
             /* StargateMods */
-            curmod = M_SG_Ores;
+            curmod = Strings.M_SG_Ores;
             C("Naquadah", "", "Naquadah Bars");
             C("Trinium", "", "Trinium Plate");
             C("Neutronium", "", "Neutronium Crate");
 
-            if (!usedMods[M_SG_Ores])
+            if (!Config.Instance.usedMods[Strings.M_SG_Ores])
             {
-                curmod = M_SG_Gates;
+                curmod = Strings.M_SG_Gates;
                 C("Naquadah", "", "Naquadah Bars");
             }
 
             /* PaintGunMod */
-            curmod = M_PaintGun;
+            curmod = Strings.M_PaintGun;
             T("Blueprint_PaintGun", "PhysicalPaintGun");
             A("Blueprint_PaintGunMag", "PaintGunMag");
 
             /* DeuteriumReactorMod */
-            curmod = M_DeuteriumReactor;
+            curmod = Strings.M_DeuteriumReactor;
             C("Magnetron_Component");
             I("DeuteriumOreToIngot", "DeuteriumContainer", "Deuterium");
             I("StonetoDeuterium", "DeuteriumContainer", "Deuterium (Stone)");
             I("IcetoDeuterium", "DeuteriumContainer", "Deuterium (Ice)");
 
             /* DefenseShieldMod */
-            curmod = M_Shield;
+            curmod = Strings.M_Shield;
             C("ShieldComponentBP", "ShieldComponent", "Field Emitter");
 
             /* MCRN RailGunMod */
-            curmod = M_RailGun;
+            curmod = Strings.M_RailGun;
             A("RailGunAmmoMag");
 
             /* MWI Homing Weaponry Mod */
-            curmod = M_HomingWeaponry;
+            curmod = Strings.M_HomingWeaponry;
             A("TorpedoMk1_Blueprint", "TorpedoMk1");
             A("SwarmMissileMk1_Blueprint", "SwarmMissile50mm");
             A("DestroyerMissileX_Blueprint", "DestroyerMissileX");
             A("DestroyerMissileMk1_Blueprint", "DestroyerMissileMk1");
 
             /* Industrial Overhaul Mod */
-            curmod = M_IndustrialOverhaulMod;
+            curmod = Strings.M_IndustrialOverhaulMod;
             // Reprocessor
-            I(Refinery.BluePrint_SpentFuelReprocessing, "Uranium", "Nuclear Fuel");
+            I(IngameStrings.RSpentFuelReprocessing, "Uranium", "Nuclear Fuel");
             // AssemblingBenchComponents
             C("CopperWire");
             C("Electromagnet");
@@ -492,12 +549,12 @@ namespace IngameScript
             T("POHandDrill4", "HandDrill4Item");
 
             // IndustrialOverhaulWater Mod
-            curmod = M_IndustrialOverhaulWaterMod;
+            curmod = Strings.M_IndustrialOverhaulWaterMod;
             C("Foam");
             C("BuoyancyTube");
 
             // IndustrialOverhaulLockLoad Mod
-            curmod = M_IndustrialOverhaulLLMod;
+            curmod = Strings.M_IndustrialOverhaulLLMod;
             // CompressedGravel
             A("GravelMag");
             A("GravelMagBig");
@@ -512,12 +569,12 @@ namespace IngameScript
             A("DUAPCoilgunShell");
             A("CLGGMag", "CLGG");
 
-            curmod = M_EatDrinkSleep;
+            curmod = Strings.M_EatDrinkSleep;
             // Emergency
             K("SparklingWater");
             K("Emergency_Ration");
 
-            curmod = M_PlantCook;
+            curmod = Strings.M_PlantCook;
             // Farming
             I("Soya");
             I("Herbs");
@@ -548,10 +605,10 @@ namespace IngameScript
             I("FarmedPumpkin", "Pumpkin");
             I("FarmedCabbage", "Cabbage");
 
-            curmod = M_AryxEpsteinDrive;
+            curmod = Strings.M_AryxEpsteinDrive;
             C("AryxLynxon_FusionComponentBP", "AryxLynxon_FusionComponent", "Fusion Coil");
 
-            curmod = M_HSR;
+            curmod = Strings.M_HSR;
             // Components
             C("K_HSR_Component_Rail_Vanilla", "K_HSR_RailComponents");
             A("K_HSR_Ammuntion_Recipe_Slug", "K_HSR_Slug");
@@ -575,7 +632,7 @@ namespace IngameScript
             I("K_HSR_Hexagol_Recipe", "K_HSR_Nanites_Hexagol");
             I("K_HSR_Chromium_Recipe", "K_HSR_Nanites_Chromium");
 
-            curmod = M_NorthWindWeapons;
+            curmod = Strings.M_NorthWindWeapons;
             // Ammo
             A("R75ammo", "", "75mm Railgun Ammo");
             A("R150ammo", "", "150mm Railgun Ammo");

@@ -2,98 +2,82 @@
 using System;
 using System.Collections.Generic;
 using VRage;
+using VRage.Game;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public class Assembler : IComparable<Assembler>
+        public class Assembler : ProductionBlockWithInventorys
         {
-            int BlueprintCount = 0;
-            public List<AssemblerBluePrint> BlueprintList = new List<AssemblerBluePrint>();
-            public Parameter parameter = new Parameter();
+            public static Dictionary<string, List<AssemblerBluePrint>> AssemblerTypesAcceptedBluePrints = new Dictionary<string, List<AssemblerBluePrint>>();
+
+            public List<AssemblerBluePrint> OwnBlueprintList;
             public IMyAssembler AssemblerBlock;
+            public string SubTypeName;
             bool outputInventoryNotEmpty = false;
             bool IsSurvivalKit = false;
             bool RemoveItemMode = false;
 
-
-
             public Assembler(IMyAssembler a)
             {
                 AssemblerBlock = a;
+                SubTypeName = a.BlockDefinition.SubtypeName;
                 IsSurvivalKit = a.BlockDefinition.TypeIdString == "SurvivalKit";
             }
 
-            public bool BlockRemoved() { return AssemblerBlock.Closed; }
-
-
-            public int CompareTo(Assembler other)
+            public override IMyFunctionalBlock GetFunctionalBlock()
             {
-                if (other.BlueprintCount < BlueprintCount) return 1;
-                else if (other.BlueprintCount > BlueprintCount) return -1;
-                return 0;
+                return AssemblerBlock;
             }
 
-
-            public void AddValidBlueprint(AssemblerBluePrint bluePrint)
+            public bool AddQueueItemSave(AssemblerBluePrint bluePrint, MyFixedPoint amountPerAssembler)
             {
-                if (BlockRemoved()) return;
-                if (parameter.ControledByPIM() && AssemblerBlock.CanUseBlueprint(bluePrint.definition_id))
-                {
-                    bluePrint.o.Add(this);
-                    bluePrint.NumBluePrintToAssembler++;
-                    BlueprintList.Add(bluePrint);
-                    BlueprintCount++;
-                }
-            }
-
-
-            public bool AddBlueprintToQueue(AssemblerBluePrint bluePrint)
-            {
-                if (BlockRemoved()) return false;
-                if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly) return false;
-                var ret = false;
-                var bpmg = (bluePrint.MaximumItemAmount - bluePrint.CurrentItemAmount - bluePrint.AssemblyAmount);
-                var mg = bpmg / bluePrint.NumBluePrintToAssembler;
-                if (bpmg < 100)
-                {
-                    mg = bpmg;
-                    ret = true;
-                }
-                AssemblerBlock.Repeating = false;
                 try
                 {
-                    if (bluePrint.valid) AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)mg);
+                    if (bluePrint.valid)
+                    {
+                        AssemblerBlock.AddQueueItem(bluePrint.definition_id, (MyFixedPoint)amountPerAssembler);
+                        return true;
+                    }
                 }
-                catch (Exception e)
+                catch
                 {
                     bluePrint.valid = false;
                 }
-                return ret;
+                return false;
             }
-
 
             public void GetErrorInfo(StringBuilderExtended errString)
             {
+                if (IsClosed)
+                {
+                    return;
+                }
+
                 if (outputInventoryNotEmpty)
                 {
-                    errString.Append(parameter.Name);
+                    errString.Append(Parameter.Name);
                     errString.Append(" cannot unload output items.\n");
                 }
-                if (!BlockRemoved() && !AssemblerBlock.IsFunctional)
+
+                if (!IsFunctional)
                 {
-                    errString.Append(parameter.Name);
+                    errString.Append(Parameter.Name);
                     errString.Append(" is damaged.\n");
                 }
             }
 
-
             public void Refresh()
             {
-                if (BlockRemoved()) return;
+                if (IsClosed)
+                {
+                    return;
+                }
+
                 var proditem_list = new List<MyProductionItem>();
                 var bprint_list = new List<AssemblerBluePrint>();
+
                 if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
                 {
                     var outInventory = AssemblerBlock.GetInventory(1);
@@ -102,38 +86,51 @@ namespace IngameScript
                     AssemblerBlock.GetQueue(proditem_list);
                     for (int i = proditem_list.Count - 1; i >= 0; i--)
                     {
-                        var bprint = AddProductionAmount(proditem_list[i]);
+                        var bprint = Program.Instance.AddProductionAmount(proditem_list[i]);
                         if (bprint != null)
                         {
                             bprint_list.Add(bprint);
                         }
                     }
                 }
-                else ClearInventory(AssemblerBlock.GetInventory(0));
-                if (!parameter.ParseArgs(AssemblerBlock.CustomName, true)) return;
-                BlueprintList.Clear();
-                BlueprintCount = 0;
+                else
+                {
+                    ClearInventory(AssemblerBlock.GetInventory(0));
+                }
+
+                if (!Parameter.ParseArgs(AssemblerBlock.CustomName, true))
+                {
+                    return;
+                }
+
                 if (AssemblerBlock.IsFunctional)
                 {
                     if (AssemblerBlock.IsQueueEmpty)
                     {
                         if (!IsSurvivalKit)
                         {
-                            if (!assemblers_off || parameter.IsParameter("Nooff")) AssemblerBlock.Enabled = true;
-                            else AssemblerBlock.Enabled = false;
+                            AssemblerBlock.Enabled = !Config.Instance.assemblers_off || Parameter.IsParameter("Nooff");
                         }
-                        if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly) ClearInventory(AssemblerBlock.GetInventory(1));
-                        else ClearInventory(AssemblerBlock.GetInventory(0));
+
+                        if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
+                        {
+                            ClearInventory(AssemblerBlock.GetInventory(1));
+                        }
+                        else
+                        {
+                            ClearInventory(AssemblerBlock.GetInventory(0));
+                        }
                     }
                     else
                     {
                         AssemblerBlock.Enabled = true;
+
                         if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
                         {
                             if (RemoveItemMode)
                             {
                                 RemoveItemMode = false;
-                                if (delete_queueItem_if_max)
+                                if (Config.Instance.delete_queueItem_if_max)
                                 {
                                     for (int i = proditem_list.Count - 1; i >= 0; i--)
                                     {
@@ -155,12 +152,12 @@ namespace IngameScript
                             else
                             {
                                 RemoveItemMode = true;
-                                AssemblerBluePrint firstBlueprint = proditem_list.Count > 1 ? GetBluePrintByProductionItem(proditem_list[0]) : null;
+                                AssemblerBluePrint firstBlueprint = proditem_list.Count > 1 ? Program.Instance.GetBluePrintByProductionItem(proditem_list[0]) : null;
                                 if (firstBlueprint != null)
                                 {
                                     for (int i = proditem_list.Count - 1; i > 0; i--)
                                     {
-                                        var productionItemBlueprint = GetBluePrintByProductionItem(proditem_list[i]);
+                                        var productionItemBlueprint = Program.Instance.GetBluePrintByProductionItem(proditem_list[i]);
                                         if (productionItemBlueprint != null
                                             && productionItemBlueprint.MaximumItemAmount != 0
                                             && productionItemBlueprint.ItemPriority > firstBlueprint.ItemPriority)
@@ -177,6 +174,5 @@ namespace IngameScript
                 }
             }
         }
-
     }
 }
