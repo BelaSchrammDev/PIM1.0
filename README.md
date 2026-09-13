@@ -1,3 +1,4 @@
+![tests](https://github.com/BelaSchrammDev/PIM1.0/actions/workflows/tests.yml/badge.svg)
 # Production Inventory Manager
 
 A Programmable Block script for [Space Engineers](https://www.spaceengineersgame.com/)
