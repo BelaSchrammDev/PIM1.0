@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # MDK Files
-PIM1.0.mdk.local.ini
+PIM1.0/PIM1.0.mdk.local.ini
