@@ -16,7 +16,7 @@ namespace IngameScript
                     case Refinery.RefreshType.VanillaRefinery:
                         return new VanillaRefineryManager(block);
 
-                    case Refinery.RefreshType.HydroponicsFarm:
+                    case Refinery.RefreshType.HydrophonicsFarm:
                         return new HydrophonicsManager(block);
 
                     case Refinery.RefreshType.WaterRecyclingSystem:

@@ -4,19 +4,20 @@ using System.Collections.Immutable;
 using System.Linq;
 using VRage;
 using VRage.Game.ModAPI.Ingame;
+using static IngameScript.Program;
 
 namespace IngameScript
 {
     partial class Program
     {
-        public partial class Refinery : ManageableBlock
+        public partial class Refinery : ProductionBlockWithInventorys
         {
             public enum RefreshType 
             {
                 Unknow, 
                 VanillaRefinery, 
                 WaterRecyclingSystem, 
-                HydroponicsFarm, 
+                HydrophonicsFarm, 
                 Reprocessor, 
                 Incinerator, 
             }
@@ -52,7 +53,7 @@ namespace IngameScript
                 new TypeDefinitions( "LargeRefineryIndustrial", RefreshType.VanillaRefinery, "Large Industrial Refinery"),
                 new TypeDefinitions( "LargeRefinery", RefreshType.VanillaRefinery, "Large Refinery"),
                 new TypeDefinitions( "K_HSR_Refinery_A", RefreshType.VanillaRefinery, "HSR Refinery A"),
-                new TypeDefinitions( false, "Hydroponics", RefreshType.HydroponicsFarm, "Hydroponics Farm"),
+                new TypeDefinitions( false, "Hydroponics", RefreshType.HydrophonicsFarm, "Hydroponics Farm"),
                 new TypeDefinitions( "RockCrusher", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "OrePurifier", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "ChemicalPlant", RefreshType.VanillaRefinery),
@@ -67,10 +68,8 @@ namespace IngameScript
 
             #endregion
 
-            public IMyInventory InputInventory, OutputInventory;
-            public Dictionary<string, float> InputInventoryItems = new Dictionary<string, float>();
-            public TypeDefinitions typeid;
-            public Parameter parameter = new Parameter();
+            public TypeDefinitions typeid { get; set; }
+            //public Parameter parameter = new Parameter();
             public IMyRefinery RefineryBlock = null;
             public List<RefError> ErrorList = new List<RefError>();
             public List<RefineryBlueprint> AcceptedBlueprints = null;
@@ -82,8 +81,6 @@ namespace IngameScript
             public Refinery(IMyRefinery refinery)
             {
                 RefineryBlock = refinery;
-                InputInventory = refinery.GetInventory(0);
-                OutputInventory = refinery.GetInventory(1);
                 BlockSubType = refinery.BlockDefinition.SubtypeId;
                 typeid = TypeDefs.Find(t => t.CompareTypeName(BlockSubType));
                 BlockSubType = typeid.GetAlternativOrDefaultName();
@@ -110,11 +107,9 @@ namespace IngameScript
 
             void AddRefineryCount()
             {
-                List<MyInventoryItem> inhalt = new List<MyInventoryItem>();
-                InputInventory.GetItems(inhalt);
-                if (inhalt.Count > 0)
+                if (InputInventory.ItemCount > 0)
                 {
-                    var ore = GetPIMItemID(inhalt[0].Type);
+                    var ore = InputInventoryItems.First().Key;
                     var bluePrint = AcceptedBlueprints.Find(b => b.InputID == ore);
                     if (bluePrint != null) bluePrint.RefineryCount++;
                 }
@@ -123,62 +118,83 @@ namespace IngameScript
 
             public void Refresh()
             {
-                if (BlockRemoved()) return;
-                ClearInventoryList(InputInventoryItems);
-                CountItemsToDictionary(InputInventory, InputInventoryItems);
+                if (IsClosed) return;
+
+                RefreshInventoryLists();
+                AddInventoryListsToSummary();
                 AddRefineryCount();
                 ClearInventory(OutputInventory);
                 SetErrorByCondition(RefError.OutputNotEmpty, OutputInventory.CurrentVolume > 0);
-                if (!parameter.ParseArgs(RefineryBlock.CustomName, true)) return;
-                if (typeid.GetTypeID() == RefreshType.Incinerator)
+
+                if (!Parameter.ParseArgs(RefineryBlock.CustomName, true)) return;
+
+                SetRefineryErrors();
+
+                if (typeid.IsUnknowType() || typeid.GetTypeID() == RefreshType.Incinerator)
                 {
-                    if (typeid.GetTypeID() == RefreshType.Incinerator) AddRefError(RefError.IncineratorNoAutofill);
-                    SetErrorByCondition(RefError.OutputNotEmpty, OutputInventory.CurrentVolume > 0);
-                    SetErrorByCondition(RefError.Damaged, !RefineryBlock.IsFunctional);
                     return;
                 }
-                if (typeid.IsUnknowType())
-                {
-                    SetWarning(Warning.ID.REFINERYNOTSUPPORTED, BlockSubType);
-                    return;
-                }
+
                 if (typeid.IsVanillaManagment())
                 {
                     if (!ingotprio.ContainsKey(BlockSubType)) ingotprio.Add(BlockSubType, new List<IPrio>());
                     if (!refineryTypesAcceptedBlueprintsList.ContainsKey(BlockSubType)) refineryTypesAcceptedBlueprintsList.Add(BlockSubType, AcceptedBlueprints);
                 }
-                GetWorkItems();
-                SetErrorByCondition(RefError.Damaged, !RefineryBlock.IsFunctional);
+
+                CalculateWorkAmount();
+                SetRefineryStatus();
+            }
+
+            private void SetRefineryErrors()
+            {
+                if (typeid.GetTypeID() == RefreshType.Incinerator)
+                {
+                    AddRefineryError(RefError.IncineratorNoAutofill);
+                }
+
+                if (typeid.IsUnknowType())
+                {
+                    SetWarning(Warning.ID.REFINERYNOTSUPPORTED, BlockSubType);
+                }
+
+                if (RefineryBlock.IsFunctional)
+                {
+                    if (InputInventory.ItemCount == 0 || InputInventory.CurrentVolume > 0)
+                    {
+                        DeleteRefineryError(RefError.NotFilled);
+                    }
+                }
+                else
+                {
+                    AddRefineryError(RefError.Damaged);
+                }
+            }
+
+            private void SetRefineryStatus()
+            {
                 if (RefineryBlock.IsFunctional)
                 {
                     RefineryBlock.UseConveyorSystem = false;
                     if (InputInventory.ItemCount == 0)
                     {
-                        RefineryBlock.Enabled = (Config.Instance.refinerys_off && !parameter.IsParameter("Nooff")) ? false : true;
-                        DeleteRefError(RefError.NotFilled);
+                        RefineryBlock.Enabled = (Config.Instance.refinerys_off && !Parameter.IsParameter("Nooff")) ? false : true;
                     }
                     else
                     {
                         RefineryBlock.Enabled = true;
-                        if (InputInventory.CurrentVolume > 0) DeleteRefError(RefError.NotFilled);
                     }
 
                     Success = 100 - (int)((InputInventory.CurrentVolume.RawValue * 100) / InputInventory.MaxVolume.RawValue);
                 }
             }
 
-            public void AddRefError(RefError error) { if (!ErrorList.Contains(error)) ErrorList.Add(error); }
+            public void AddRefineryError(RefError error) { if (!ErrorList.Contains(error)) ErrorList.Add(error); }
 
-            public void DeleteRefError(RefError error) { if (ErrorList.Contains(error)) ErrorList.Remove(error); }
+            public void DeleteRefineryError(RefError error) { if (ErrorList.Contains(error)) ErrorList.Remove(error); }
 
-            public void SetErrorByCondition(RefError error, bool condition) { if (condition) AddRefError(error); else DeleteRefError(error); }
+            public void SetErrorByCondition(RefError error, bool condition) { if (condition) AddRefineryError(error); else DeleteRefineryError(error); }
 
             public void FlushAllInventorys() { ClearInventory(InputInventory); ClearInventory(OutputInventory); }
-
-            public bool BlockRemoved() { return RefineryBlock.Closed; }
-
-            public void ClearInputInventoryIfControledByPIM() { if (parameter.ControledByPIM()) ClearInventory(InputInventory); }
-
 
             static Dictionary<RefError, string> RefErrors = new Dictionary<RefError, string>
             {
@@ -191,10 +207,10 @@ namespace IngameScript
 
             public void GetErrorInfo(StringBuilderExtended errString)
             {
-                if (!parameter.ControledByPIM() && ErrorList.Count == 0) return;
+                if (!IsPimControlled && ErrorList.Count == 0) return;
                 foreach (var error in ErrorList)
                 {
-                    errString.Append(parameter.Name);
+                    errString.Append(Parameter.Name);
                     errString.Append(RefErrors.GetValueOrDefault(error, ": unknown error\n"));
                 }
             }
@@ -211,28 +227,16 @@ namespace IngameScript
                 }
             }
 
-
-            void GetWorkItems()
+            private void GetVanillaWorkItems() 
             {
                 string ws = "----";
-                string nws = "----";
+                string nws = ws;
                 float waf = 0f;
                 float nwaf = 0f;
-                switch (typeid.GetTypeID())
-                {
-                    case RefreshType.HydroponicsFarm:
-                        CalculateRefineryAmount(Ingot.SubFresh);
-                        break;
-                    case RefreshType.WaterRecyclingSystem:
-                        CalculateRefineryAmount(Ingot.WaterFood);
-                        Program.LCD_DebugString += $"WRS: Calculated WaterFood refinery amount.\n";
-                        break;
-                    case RefreshType.Reprocessor:
-                        CalculateRefineryAmount(Ingot.SpentFuelReprocessing);
-                        break;
-                }
                 var inhalt = new List<MyInventoryItem>();
+
                 InputInventory.GetItems(inhalt);
+
                 if (inhalt.Count() > 0)
                 {
                     ws = GetPIMItemID(inhalt[0].Type);
@@ -243,10 +247,34 @@ namespace IngameScript
                         nwaf = (float)inhalt[1].Amount;
                     }
                 }
+
                 CurrentWorkBluePrint = AcceptedBlueprints.Find(b => b.InputID == ws);
                 CurrentWorkOreAmount = waf;
                 NextWorkBluePrint = AcceptedBlueprints.Find(b => b.InputID == nws);
                 NexWorkOreAmount = nwaf;
+            }
+
+            void CalculateWorkAmount()
+            {
+                switch (typeid.GetTypeID())
+                {
+                    case RefreshType.HydrophonicsFarm:
+                        CalculateRefineryAmount(Ingot.SubFresh);
+                        break;
+
+                    case RefreshType.WaterRecyclingSystem:
+                        CalculateRefineryAmount(Ingot.WaterFood);
+                        break;
+
+                    case RefreshType.Reprocessor:
+                        CalculateRefineryAmount(Ingot.SpentFuelReprocessing);
+                        break;
+
+                    case RefreshType.VanillaRefinery:
+                        GetVanillaWorkItems();
+                        break;
+    
+                }
             }
         }
     }

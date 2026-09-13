@@ -25,12 +25,12 @@ namespace IngameScript
 
             public override RunJobResult RunJob()
             {
-                Propertys.Data.CurrentCycleInSec = (DateTime.Now - Propertys.Data.LastStart).TotalSeconds;
-                Propertys.Data.LastStart = DateTime.Now;
+                Properties.Data.CurrentCycleInSec = (DateTime.Now - Properties.Data.LastStart).TotalSeconds;
+                Properties.Data.LastStart = DateTime.Now;
 
                 if (IfMeIsMaster())
                 {
-                    SetMasterBehavior(Propertys.Data.CurrentCycleInSec);
+                    SetMasterBehavior(Properties.Data.CurrentCycleInSec);
                     return RunJobResult.Finished;
                 }
                 else

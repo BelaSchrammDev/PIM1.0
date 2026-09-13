@@ -41,7 +41,7 @@ namespace IngameScript
                     }
                     else if (Refinery.Success < 10 || waterBluePrint.IfMax())
                     {
-                        Refinery.ClearInputInventoryIfControledByPIM();
+                        ClearInventory(Refinery.InputInventory);
                     }
                 }
             }

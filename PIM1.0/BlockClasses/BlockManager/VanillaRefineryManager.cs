@@ -137,7 +137,7 @@ namespace IngameScript
 
                     if (Refinery.Success < 50)
                     {
-                        Refinery.ClearInputInventoryIfControledByPIM();
+                        ClearInventory(Refinery.InputInventory);
                     }
 
                     var types = newworkBP.InputID.Split(' ');
@@ -171,7 +171,7 @@ namespace IngameScript
                 {
                     foreach (Refinery refinery in Lists.Data.RefineryList)
                     {
-                        if (refinery.BlockRemoved()) continue;
+                        if (refinery.IsClosed) continue;
                         int inum = 0;
                         var inventoryList = new List<MyInventoryItem>();
                         refinery.InputInventory.GetItems(inventoryList);

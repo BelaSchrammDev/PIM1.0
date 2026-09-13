@@ -71,10 +71,8 @@ namespace IngameScript
                 {
                     return Lists.Data.Inventory.ContainsKey(itemType) && Lists.Data.Inventory[itemType] > 0;
                 }
-                else
-                {
-                    return inv.ContainsKey(itemType) && inv[itemType] > 0;
-                }
+
+                return inv.ContainsKey(itemType) && inv[itemType] > 0;
             }
 
             public static bool IsInventoryItemEmpty(string itemType, Dictionary<string, float> inv = null)
@@ -84,12 +82,12 @@ namespace IngameScript
 
             public static float GetInventoryItemAmount(string itemType, Dictionary<string, float> inv = null)
             {
-                if (inv != null)
+                if (inv == null)
                 {
-                    return inv.GetValueOrDefault(itemType, 0);
+                    return Lists.Data.Inventory.GetValueOrDefault(itemType, 0);
                 }
 
-                return Lists.Data.Inventory.GetValueOrDefault(itemType, 0);
+                return inv.GetValueOrDefault(itemType, 0);
             }
 
             public static void AddToDebugString(string str)

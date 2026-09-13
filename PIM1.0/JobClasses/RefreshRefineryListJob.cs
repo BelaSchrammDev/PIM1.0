@@ -19,7 +19,7 @@ namespace IngameScript
                     }
                     else
                     {
-                        Propertys.Data.AutoCraftingSettingsInValid = true;
+                        Properties.Data.AutoCraftingSettingsInValid = true;
                         Lists.Data.RefineryList.Remove(Lists.Data.RefineryList[i]);
                     }
                 }

@@ -8,16 +8,16 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class Propertys
+        public class Properties
         {
-            private static Propertys _data = null;
-            public static Propertys Data
+            private static Properties _data = null;
+            public static Properties Data
             {
                 get
                 {
                     if (_data == null)
                     {
-                        _data = new Propertys();
+                        _data = new Properties();
                     }
                     return _data;
                 }

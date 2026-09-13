@@ -17,7 +17,7 @@
                     }
                     else
                     {
-                        Propertys.Data.AutoCraftingSettingsInValid = true;
+                        Properties.Data.AutoCraftingSettingsInValid = true;
                         Lists.Data.AssemblerList.Remove(Lists.Data.AssemblerList[i]);
                     }
                 }

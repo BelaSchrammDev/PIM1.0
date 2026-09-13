@@ -344,7 +344,7 @@ namespace IngameScript
             for (int i = 0; i < keys.Length; i++) invList[keys[i]] = 0;
         }
 
-        static void CountItemsToSummaryDictionary(IMyInventory box, Dictionary<string, float> ilist = null)
+        static void CountItemsToSummaryDictionary(IMyInventory box)
         {
             var boxl = new List<MyInventoryItem>();
             box.GetItems(boxl);
@@ -354,27 +354,6 @@ namespace IngameScript
                 var boxia = (float)boxi.Amount;
                 if (Lists.Data.Inventory.ContainsKey(index)) Lists.Data.Inventory[index] += boxia;
                 else Lists.Data.Inventory.Add(index, boxia);
-                if (ilist != null)
-                {
-                    if (ilist.ContainsKey(index)) ilist[index] += boxia;
-                    else ilist.Add(index, boxia);
-                }
-            }
-        }
-
-        static void CountItemsToDictionary(IMyInventory box, Dictionary<string, float> ilist = null)
-        {
-            var boxl = new List<MyInventoryItem>();
-            box.GetItems(boxl);
-            foreach (var boxi in boxl)
-            {
-                string index = GetPIMItemID(boxi.Type);
-                var boxia = (float)boxi.Amount;
-                if (ilist != null)
-                {
-                    if (ilist.ContainsKey(index)) ilist[index] += boxia;
-                    else ilist.Add(index, boxia);
-                }
             }
         }
 

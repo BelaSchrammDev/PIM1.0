@@ -81,10 +81,10 @@ namespace IngameScript
         // ==================================================
         // - refactoring the VanillaRefinerymanager
         // - build proper Managers for all Blocks, also Assemblers
-        // - Refinery use storage inv for input
         //
         // long term TODOS:
         // ==================================================
+        // TODO: improve RefineryManager Error Infos
         // TODO: Tools class implementing
         // TODO: refactoring, refactoring, refactoring...
         // TODO: detecting other PIM blocks
@@ -98,7 +98,7 @@ namespace IngameScript
             {
                 if (!CommandDispatcher.Dispatch(argument))
                 {
-                    SetInfo("unknow command: \"" + argument + "\"");
+                    SetInfo("unknown command: \"" + argument + "\"");
                 }
 
                 return;
@@ -106,7 +106,9 @@ namespace IngameScript
 
             do
             {
-                if (_jobs[Loop.Data.CurrentJobIndex].Schedule() == Job.ScheduleResult.Done)
+                var result = _jobs[Loop.Data.CurrentJobIndex].Schedule();
+
+                if (result == Job.ScheduleResult.Done)
                 {
                     // Move to the next job, wrapping around if necessary
                     Loop.Data.CurrentJobIndex++;
@@ -128,7 +130,7 @@ namespace IngameScript
                 + Strings.PimCopyright
                 + RunSign.getRunningSign()
                 + (LoopManager.IsMaster
-                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Propertys.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString)
+                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString)
                     : "Standby\nMaster: " + Tools.MySelf.CustomName);
 
             Echo(s);

@@ -44,7 +44,16 @@ namespace IngameScript
 
         class Warning : View
         {
-            public enum ID { NONE, CARGOUSEHEAVY, CARGOUSEFULL, CARGOMISSING, CARGORECOMMENDED, REFINERYNOTSUPPORTED }
+            public enum ID 
+            {
+                NONE,
+                CARGOUSEHEAVY, 
+                CARGOUSEFULL, 
+                CARGOMISSING, 
+                CARGORECOMMENDED, 
+                REFINERYNOTSUPPORTED 
+            }
+
             public ID WarningID = ID.NONE;
             public string subType = "";
 

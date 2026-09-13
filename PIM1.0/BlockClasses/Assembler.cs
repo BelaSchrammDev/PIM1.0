@@ -8,12 +8,11 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class Assembler
+        public class Assembler : ProductionBlockWithInventorys
         {
             public static Dictionary<string, List<AssemblerBluePrint>> AssemblerTypesAcceptedBluePrints = new Dictionary<string, List<AssemblerBluePrint>>();
 
             public List<AssemblerBluePrint> OwnBlueprintList;
-            public Parameter parameter = new Parameter();
             public IMyAssembler AssemblerBlock;
             public string SubTypeName;
             bool outputInventoryNotEmpty = false;
@@ -27,9 +26,9 @@ namespace IngameScript
                 IsSurvivalKit = a.BlockDefinition.TypeIdString == "SurvivalKit";
             }
 
-            public bool BlockRemoved()
+            public override IMyFunctionalBlock GetFunctionalBlock()
             {
-                return AssemblerBlock.Closed;
+                return AssemblerBlock;
             }
 
             public bool AddQueueItemSave(AssemblerBluePrint bluePrint, MyFixedPoint amountPerAssembler)
@@ -51,21 +50,27 @@ namespace IngameScript
 
             public void GetErrorInfo(StringBuilderExtended errString)
             {
+                if (IsClosed)
+                {
+                    return;
+                }
+
                 if (outputInventoryNotEmpty)
                 {
-                    errString.Append(parameter.Name);
+                    errString.Append(Parameter.Name);
                     errString.Append(" cannot unload output items.\n");
                 }
-                if (!BlockRemoved() && !AssemblerBlock.IsFunctional)
+
+                if (!IsFunctional)
                 {
-                    errString.Append(parameter.Name);
+                    errString.Append(Parameter.Name);
                     errString.Append(" is damaged.\n");
                 }
             }
 
             public void Refresh()
             {
-                if (BlockRemoved())
+                if (IsClosed)
                 {
                     return;
                 }
@@ -93,7 +98,7 @@ namespace IngameScript
                     ClearInventory(AssemblerBlock.GetInventory(0));
                 }
 
-                if (!parameter.ParseArgs(AssemblerBlock.CustomName, true))
+                if (!Parameter.ParseArgs(AssemblerBlock.CustomName, true))
                 {
                     return;
                 }
@@ -104,7 +109,7 @@ namespace IngameScript
                     {
                         if (!IsSurvivalKit)
                         {
-                            AssemblerBlock.Enabled = !Config.Instance.assemblers_off || parameter.IsParameter("Nooff");
+                            AssemblerBlock.Enabled = !Config.Instance.assemblers_off || Parameter.IsParameter("Nooff");
                         }
 
                         if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
@@ -169,6 +174,5 @@ namespace IngameScript
                 }
             }
         }
-
     }
 }

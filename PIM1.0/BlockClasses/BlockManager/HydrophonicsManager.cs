@@ -59,7 +59,7 @@ namespace IngameScript
                 }
                 else
                 {
-                    Refinery.ClearInputInventoryIfControledByPIM();
+                    ClearInventory(Refinery.InputInventory);
                 }
             }
         }
