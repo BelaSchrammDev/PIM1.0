@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngameScript
+﻿namespace IngameScript
 {
     partial class Program
     {
@@ -26,7 +20,9 @@ namespace IngameScript
 
             public int GetCarcoCapacityUseRatio()
             {
-                return (int)(CurrentCapacity * 100 / MaximumCapacity);
+                return MaximumCapacity > 0
+                    ? (int)(CurrentCapacity * 100 / MaximumCapacity)
+                    : 0;
             }
         }
     }

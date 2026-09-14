@@ -27,10 +27,20 @@
              Link="Linked\StopWatch.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgument.cs"
              Link="Linked\CommandArgument.cs" />
-
-    <Compile Include="..\PIM1.0\Tools\Parameter.cs"        Link="Linked\Parameter.cs" />
-    <Compile Include="..\PIM1.0\Definitions\Properties.cs" Link="Linked\Properties.cs" />
-    <Compile Include="..\PIM1.0\Definitions\Strings.cs"    Link="Linked\Strings.cs" />
+    <Compile Include="..\PIM1.0\Tools\Parameter.cs"
+			Link="Linked\Parameter.cs" />
+    <Compile Include="..\PIM1.0\Definitions\Properties.cs"
+	        Link="Linked\Properties.cs" />
+    <Compile Include="..\PIM1.0\Definitions\Strings.cs"
+	        Link="Linked\Strings.cs" />
+    <Compile Include="..\PIM1.0\Tools\CargoUse.cs"
+			Link="Linked\CargoUse.cs" />
+	<Compile Include="..\PIM1.0\Tools\Filter.cs"
+	        Link="Linked\Filter.cs" />
+	<Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs"
+	        Link="Linked\Jobs.cs" />
+	<Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs"
+	        Link="Linked\InstructionBudget.cs" />
 
     <!-- Add once Job no longer inherits from Tools: -->
     <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->

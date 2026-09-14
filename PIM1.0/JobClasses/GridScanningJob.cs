@@ -53,7 +53,7 @@ namespace IngameScript
                     if (isSmsBlock)
                     {
                         if (isNoKeep) Lists.Data.SmsFlagedInventoryList.Add(inv);
-                        ProgramInstance.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
+                        Tools.ProgramInstance.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
                     else if (isContainerOrConnector)
                     {

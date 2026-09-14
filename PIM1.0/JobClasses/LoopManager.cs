@@ -12,12 +12,12 @@ namespace IngameScript
 
             public static bool IsMaster
             {
-                get { return Master == MySelf; }
+                get { return Master == Tools.MySelf; }
             }
 
             public static bool IsMaxInstructionsArrived()
             {
-                return RunTime.CurrentInstructionCount > CurrentInstructionAmount;
+                return Tools.RunTime.CurrentInstructionCount > CurrentInstructionAmount;
             }
 
             public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
@@ -43,31 +43,28 @@ namespace IngameScript
             public static void Init()
             {
                 Config.Instance.LoadConfig();
-                ProgramInstance.InitAssemblerBluePrints();
-                ProgramInstance.InitRefineryBlueprints();
+                Tools.ProgramInstance.InitAssemblerBluePrints();
+                Tools.ProgramInstance.InitRefineryBlueprints();
                 CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
                 SetMasterBehavior();
             }
 
             private static void SetMasterBehavior(double currentCycleInSec = 0.0)
             {
-                RunTime.UpdateFrequency = UpdateFrequency.Update10;
-                if (currentCycleInSec < 3.5) CurrentInstructionAmount -= 100;
-                else if (currentCycleInSec > 4.5) CurrentInstructionAmount += 100;
-                if (CurrentInstructionAmount < INSTRUCTION_MIN) CurrentInstructionAmount = INSTRUCTION_MIN;
-                else if (CurrentInstructionAmount > INSTRUCTION_MAX) CurrentInstructionAmount = INSTRUCTION_MAX;
+                Tools.RunTime.UpdateFrequency = UpdateFrequency.Update10;
+                CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, currentCycleInSec);
             }
 
             private static void SetSlaveBehavior()
             {
-                RunTime.UpdateFrequency = UpdateFrequency.Update100;
+                Tools.RunTime.UpdateFrequency = UpdateFrequency.Update100;
                 CurrentInstructionAmount = INSTRUCTION_MIN;
             }
 
             private static bool IfMeIsMaster()
             {
-                GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => BlockConstructMember(block));
-                Master = MySelf;
+                Tools.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => Tools.BlockConstructMember(block));
+                Master = Tools.MySelf;
                 return true;
 
                 // TODO: detecting other PIM PRGs; with block.TryRun();

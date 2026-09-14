@@ -77,21 +77,6 @@ namespace IngameScript
             };
         }
 
-        // Current TODO:
-        // ==================================================
-        // - refactoring the VanillaRefinerymanager
-        // - build proper Managers for all Blocks, also Assemblers
-        //
-        // long term TODOS:
-        // ==================================================
-        // TODO: improve RefineryManager Error Infos
-        // TODO: Tools class implementing
-        // TODO: refactoring, refactoring, refactoring...
-        // TODO: detecting other PIM blocks
-        // TODO: container for ammo not needed when armory is defined
-        // TODO: DNSK Mod update
-        // TODO: create class for runsign
-
         void Main(string argument, UpdateType updateSource)
         {
             if (argument != "")

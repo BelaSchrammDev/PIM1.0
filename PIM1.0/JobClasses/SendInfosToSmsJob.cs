@@ -8,7 +8,7 @@
         {
             public override RunJobResult RunJob()
             {
-                ProgramInstance.SendInfosToSMS();
+                Tools.ProgramInstance.SendInfosToSMS();
                 return base.RunJob();
             }
         }

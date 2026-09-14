@@ -10,7 +10,7 @@ namespace IngameScript
     {
         Filter filter = new Filter(); // two times used, Program and LcdManager
 
-        class Filter
+        public class Filter
         {
             List<string> FilterWhiteList = new List<string>();
             List<string> FilterBlackList = new List<string>();
@@ -29,7 +29,12 @@ namespace IngameScript
                 foreach (var s in filterString.Split(','))
                 {
                     var filterStringTrimmed = s.Trim();
-                    if (filterStringTrimmed.Length > 0 && filterStringTrimmed[0] == '-')
+                    if (filterStringTrimmed.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    if (filterStringTrimmed[0] == '-')
                     {
                         FilterBlackList.Add(filterStringTrimmed.Substring(1));
                     }

@@ -24,8 +24,8 @@ namespace IngameScript
                 schedule = true;
                 LCD_DebugString += "calc_ACDef\n";
 
-                GetBlockList(Lists.Data.Assemblers);
-                GetBlockList(Lists.Data.Refinerys);
+                Tools.GetBlockList(Lists.Data.Assemblers);
+                Tools.GetBlockList(Lists.Data.Refinerys);
 
                 Assembler.AssemblerTypesAcceptedBluePrints.Clear();
 

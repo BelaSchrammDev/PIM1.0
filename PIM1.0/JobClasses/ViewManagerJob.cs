@@ -49,7 +49,7 @@ namespace IngameScript
                     }
                 }
 
-                ProgramInstance.CalcutateInfos();
+                Tools.ProgramInstance.CalcutateInfos();
 
                 return base.RunJob();
             }

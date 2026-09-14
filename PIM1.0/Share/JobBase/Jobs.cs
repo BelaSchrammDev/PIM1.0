@@ -5,8 +5,10 @@ namespace IngameScript
     partial class Program
     {
 
-        public abstract class Job : Tools
+        public abstract class Job
         {
+            public static Func<DateTime> Clock = () => DateTime.Now;
+
             // Human-readable name of the job
             public string Name { get; }
 
@@ -29,7 +31,7 @@ namespace IngameScript
             private TimeSpan _cooldown;
 
             // Timestamp when the last run ended
-            private DateTime _lastRunEnd = DateTime.Now;
+            private DateTime _lastRunEnd = Clock();
 
             protected Job(int cooldownSeconds = 0)
             {
@@ -110,13 +112,13 @@ namespace IngameScript
                         {
                             // Job finished for now, start cooldown
                             _status = JobStatus.Cooling;
-                            _lastRunEnd = DateTime.Now;
+                            _lastRunEnd = Clock();
                             return ScheduleResult.Done;
                         }
 
                     case JobStatus.Cooling:
                         // Check if cooldown has elapsed
-                        if (DateTime.Now - _lastRunEnd > _cooldown)
+                        if (Clock() - _lastRunEnd > _cooldown)
                         {
                             _status = JobStatus.Init;
                             return ScheduleResult.InProgress;

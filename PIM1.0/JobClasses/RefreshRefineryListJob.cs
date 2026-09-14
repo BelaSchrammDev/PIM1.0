@@ -9,7 +9,7 @@ namespace IngameScript
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 Lists.Data.ClearAllRefineryBlueprintAssemblyAmounts();
-                GetBlockList(Lists.Data.Refinerys);
+                Tools.GetBlockList(Lists.Data.Refinerys);
 
                 for (int i = Lists.Data.RefineryList.Count - 1; i >= 0; i--)
                 {
