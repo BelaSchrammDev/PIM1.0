@@ -39,7 +39,12 @@
 
                 public RefreshType GetTypeID() { return TypeID; }
 
-                public string GetAlternativOrDefaultName() { return AlternativName == "" ? TypeIDName : AlternativName; }
+                public string GetAlternativOrDefaultName() 
+                {
+                    return string.IsNullOrEmpty(AlternativName) 
+                        ? TypeIDName
+                        : AlternativName; 
+                }
 
                 public bool IsVanillaManagment() { return TypeID == RefreshType.VanillaRefinery; }
 
@@ -48,7 +53,6 @@
                 public bool CompareTypeName(string compareString)
                 {
                     return
-                        (TypeID == RefreshType.Unknow) || 
                         (ComplettName && TypeIDName == compareString) || 
                         (!ComplettName && compareString.StartsWith(TypeIDName));
                 }

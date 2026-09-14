@@ -41,6 +41,10 @@
 	        Link="Linked\Jobs.cs" />
 	<Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs"
 	        Link="Linked\InstructionBudget.cs" />
+	<Compile Include="..\PIM1.0\BlockClasses\Refinerys\RefreshType.cs"
+	        Link="Linked\RefreshType.cs" />
+    <Compile Include="..\PIM1.0\BlockClasses\Refinerys\TypeDefinitions.cs"
+	        Link="Linked\TypeDefinitions.cs" />
 
     <!-- Add once Job no longer inherits from Tools: -->
     <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->

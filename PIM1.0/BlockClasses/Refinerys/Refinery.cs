@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using VRage;
 using VRage.Game.ModAPI.Ingame;
-using static IngameScript.Program;
 
 namespace IngameScript
 {
@@ -12,22 +10,12 @@ namespace IngameScript
     {
         public partial class Refinery : ProductionBlockWithInventorys
         {
-            public enum RefreshType 
+            public enum RefError
             {
-                Unknow, 
-                VanillaRefinery, 
-                WaterRecyclingSystem, 
-                HydrophonicsFarm, 
-                Reprocessor, 
-                Incinerator, 
-            }
-
-            public enum RefError 
-            { 
-                NotFilled, 
-                OutputNotEmpty, 
-                Damaged, 
-                IncineratorNoAutofill 
+                NotFilled,
+                OutputNotEmpty,
+                Damaged,
+                IncineratorNoAutofill
             }
 
             #region static
@@ -37,7 +25,7 @@ namespace IngameScript
 
             static public void RemoveUnusedRefinerytypeBlueprintLists()
             {
-                foreach (var a in refineryTypesAcceptedBlueprintsList.Keys.ToArray()) 
+                foreach (var a in refineryTypesAcceptedBlueprintsList.Keys.ToArray())
                 {
                     if (!ingotprio.ContainsKey(a))
                     {
@@ -45,6 +33,8 @@ namespace IngameScript
                     }
                 }
             }
+
+            static readonly TypeDefinitions UnknownTypeDefinition = new TypeDefinitions();
 
             static List<TypeDefinitions> TypeDefs = new List<TypeDefinitions>
             {
@@ -62,8 +52,7 @@ namespace IngameScript
                 new TypeDefinitions( "BitumenExtractor", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "Reprocessor", RefreshType.Reprocessor),
                 new TypeDefinitions( "OilCracker", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "DeuteriumProcessor", RefreshType.VanillaRefinery, "Deuterium Refinery"),
-                new TypeDefinitions(), // reserved for unknow types
+                new TypeDefinitions( "DeuteriumProcessor", RefreshType.VanillaRefinery, "Deuterium Refinery")
             };
 
             #endregion
@@ -82,7 +71,7 @@ namespace IngameScript
             {
                 RefineryBlock = refinery;
                 BlockSubType = refinery.BlockDefinition.SubtypeId;
-                typeid = TypeDefs.Find(t => t.CompareTypeName(BlockSubType));
+                typeid = TypeDefs.Find(t => t.CompareTypeName(BlockSubType)) ?? UnknownTypeDefinition;
                 BlockSubType = typeid.GetAlternativOrDefaultName();
                 AcceptedBlueprints = RefineryBlueprints.FindAll(b => RefineryBlock.CanUseBlueprint(b.Definition_id));
                 GetScrapBluePrints();
@@ -227,7 +216,7 @@ namespace IngameScript
                 }
             }
 
-            private void GetVanillaWorkItems() 
+            private void GetVanillaWorkItems()
             {
                 string ws = "----";
                 string nws = ws;
@@ -273,7 +262,7 @@ namespace IngameScript
                     case RefreshType.VanillaRefinery:
                         GetVanillaWorkItems();
                         break;
-    
+
                 }
             }
         }
