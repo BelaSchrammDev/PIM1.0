@@ -33,7 +33,7 @@ namespace IngameScript
             public AmmoDefs(string iname)
             {
                 Name = iname;
-                ammoBluePrint = Program.Instance.GetBluePrintByItemName(iname);
+                ammoBluePrint = Program.MyProgram.GetBluePrintByItemName(iname);
                 type = Name.Substring(Name.IndexOf(' ') + 1);
             }
 

@@ -12,7 +12,7 @@ namespace IngameScript
         void SendInfosToSMS()
         {
             var comp = new List<IMyProgrammableBlock>();
-            GridTerminalSystem.GetBlocksOfType(comp, block => Tools.BlockConstructMember(block));
+            GridTerminalSystem.GetBlocksOfType(comp, block => block.IsMainConstruct());
             foreach (var p in comp)
             {
                 if (p.Enabled && p.DetailedInfo.StartsWith(Strings.SmsVersion))

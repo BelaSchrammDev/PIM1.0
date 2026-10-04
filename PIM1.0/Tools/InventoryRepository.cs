@@ -27,9 +27,9 @@ namespace IngameScript
             {
                 // Gather all inventory-owner blocks belonging to this grid
                 _inventoryOwners.Clear();
-                GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(
+                MyProgram.GridTerminalSystem.GetBlocksOfType<IMyInventoryOwner>(
                     _inventoryOwners,
-                    b => (b as IMyTerminalBlock).IsSameConstructAs(ProgramInstance.Me)
+                    b => (b as IMyTerminalBlock).IsSameConstructAs(MyProgram.Me)
                 );
 
                 // Reset cursors to start of list
@@ -37,9 +37,9 @@ namespace IngameScript
                 _slotIndex = 0;
 
                 // Reset all tracked inventory counts
-                foreach (var key in ProgramInstance.Inventory.Keys.ToList())
+                foreach (var key in MyProgram.Inventory.Keys.ToList())
                 {
-                    ProgramInstance.Inventory[key] = 0f;
+                    MyProgram.Inventory[key] = 0f;
                 }
             }
 
@@ -68,13 +68,13 @@ namespace IngameScript
                     // Tally up each item in this slot
                     foreach (var item in _itemsCache)
                     {
-                        if (ProgramInstance.Inventory.ContainsKey(item.Type))
+                        if (MyProgram.Inventory.ContainsKey(item.Type))
                         {
-                            ProgramInstance.Inventory[item.Type] += (float)item.Amount;
+                            MyProgram.Inventory[item.Type] += (float)item.Amount;
                         }
                         else
                         {
-                            ProgramInstance.Inventory[item.Type] = (float)item.Amount;
+                            MyProgram.Inventory[item.Type] = (float)item.Amount;
                         }
                     }
                 }

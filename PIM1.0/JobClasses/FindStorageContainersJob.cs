@@ -11,7 +11,7 @@ namespace IngameScript
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                Tools.GridTerminalSystem.GetBlocksOfType(_CargoContainerBlocks, cargo => IsValidStorageContainer(cargo));
+                MyProgram.GridTerminalSystem.GetBlocksOfType(_CargoContainerBlocks, cargo => IsValidStorageContainer(cargo));
 
                 for (int i = Lists.Data.StorageCargos.Count - 1; i >= 0; i--)
                 {
@@ -38,7 +38,7 @@ namespace IngameScript
 
             private bool IsValidStorageContainer(IMyCargoContainer cargo)
             {
-                return Tools.BlockConstructMember(cargo) && cargo.CustomName.Contains(Strings.SmsStorageTag);
+                return cargo.IsMainConstruct() && cargo.CustomName.Contains(Strings.SmsStorageTag);
             }
         }
     }

@@ -9,8 +9,8 @@ namespace IngameScript
         {
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                Tools.ProgramInstance.CalcIngotPrio();
-                Tools.ProgramInstance.RenderResourceProccesingLCD();
+                MyProgram.CalcIngotPrio();
+                MyProgram.RenderResourceProccesingLCD();
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;
             }

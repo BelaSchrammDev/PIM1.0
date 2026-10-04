@@ -6,8 +6,8 @@
         {
             public override RunJobResult RunJob()
             {
-                Tools.ProgramInstance.loadAutocratingDefinitions();
-                Tools.ProgramInstance.LCD_DebugPrint();
+                MyProgram.loadAutocratingDefinitions();
+                MyProgram.LCD_DebugPrint();
 
                 ClearInventoryList(Lists.Data.Inventory);
                 Lists.Data.NoneSmsFlagedInventoryList.Clear();

@@ -5,49 +5,8 @@ namespace IngameScript
 {
     partial class Program
     {
-        public abstract class Tools 
+        public abstract class Tools
         {
-            public static bool TryParseDouble(string str, out double result, double defaultValue = 0)
-            {
-                if (double.TryParse(str, out result))
-                {
-                    return true;
-                }
-
-                result = defaultValue;
-                return false;
-            }
-
-            public static bool TryParseInt(string str, out int result, int defaultValue = 0)
-            {
-                if (int.TryParse(str, out result))
-                {
-                    return true;
-                }
-                result = defaultValue;
-                return false;
-            }
-
-            public static bool TryParseLong(string str, out long result, long defaultValue = 0)
-            {
-                if (long.TryParse(str, out result))
-                {
-                    return true;
-                }
-                result = defaultValue;
-                return false;
-            }
-
-            public static Program ProgramInstance => Program.Instance;
-            public static IMyProgrammableBlock MySelf => ProgramInstance.Me;
-            public static IMyGridProgramRuntimeInfo RunTime => ProgramInstance.Runtime;
-            public static IMyGridTerminalSystem GridTerminalSystem => ProgramInstance.GridTerminalSystem;
-
-            public static bool BlockConstructMember(IMyTerminalBlock block) 
-            {
-                return block.IsSameConstructAs(MySelf);
-            }
-
             public static bool IsAssemblerBluePrintActive(string itemType)
             {
                 return Lists.Data.BluePrints_Active.ContainsKey(itemType);
@@ -98,7 +57,7 @@ namespace IngameScript
             public static int GetBlockList<T>(List<T> blockList)
                 where T : class, IMyTerminalBlock
             {
-                Program.Instance.GridTerminalSystem.GetBlocksOfType(blockList, block => BlockConstructMember(block));
+                Program.MyProgram.GridTerminalSystem.GetBlocksOfType(blockList, block => block.IsMainConstruct());
                 return blockList.Count;
             }
         }

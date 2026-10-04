@@ -27,13 +27,13 @@ namespace IngameScript
         public Dictionary<MyItemType, float> Inventory => _inventory;
 
         // singleton Program Instance
-        public static Program Instance;
+        public static Program MyProgram;
 
         public static string VersionShortInfo = "SMS.inventorymanager 2.0";
 
         public Program()
         {
-            Instance = this;
+            MyProgram = this;
             
             viewList.Add(new AmmoManagerInfo());
             viewList.Add(new StorageManagerInfo());
@@ -116,7 +116,7 @@ namespace IngameScript
                 + RunSign.getRunningSign()
                 + (LoopManager.IsMaster
                     ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString)
-                    : "Standby\nMaster: " + Tools.MySelf.CustomName);
+                    : "Standby\nMaster: " + MyProgram.Me.CustomName);
 
             Echo(s);
 

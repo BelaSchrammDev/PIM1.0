@@ -11,7 +11,7 @@ namespace IngameScript
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                var group = Tools.GridTerminalSystem.GetBlockGroupWithName(Properties.Data.CurrentGunGroupName);
+                var group = MyProgram.GridTerminalSystem.GetBlockGroupWithName(Properties.Data.CurrentGunGroupName);
                 if (group == null)
                 {
                     ClearGunList();
@@ -19,7 +19,7 @@ namespace IngameScript
                 }
                 else
                 {
-                    group.GetBlocksOfType(_GroupGunList, block => Tools.BlockConstructMember(block));
+                    group.GetBlocksOfType(_GroupGunList, block => block.IsMainConstruct());
                     RefreshGunBlockList();
                     startIndex = _GroupGunList.Count - 1;
                 }

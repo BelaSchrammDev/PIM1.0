@@ -12,7 +12,7 @@ namespace IngameScript
 
             protected void FillBlockList()
             {
-                GridTerminalSystem.GetBlocksOfType(Blocks, block => IsValidBlock(block));
+                MyProgram.GridTerminalSystem.GetBlocksOfType(Blocks, block => block.IsMainConstruct());
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
@@ -28,11 +28,6 @@ namespace IngameScript
             }
 
             protected abstract void ProcessingTerminalBlock(IMyTerminalBlock t);
-
-            protected virtual bool IsValidBlock(IMyTerminalBlock t) 
-            {
-                return BlockConstructMember(t);
-            }
         }
     }
 }

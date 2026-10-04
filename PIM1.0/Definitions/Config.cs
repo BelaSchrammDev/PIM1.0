@@ -85,7 +85,7 @@ namespace IngameScript
                 }
 
                 configstr += "\n" + Strings.X_Config_end + "\n";
-                MySelf.CustomData = configstr;
+                MyProgram.Me.CustomData = configstr;
             }
 
             public void LoadConfig()
@@ -119,7 +119,7 @@ namespace IngameScript
                 }
 
                 bool config = false;
-                foreach (var s1 in MySelf.CustomData.Split('\n'))
+                foreach (var s1 in MyProgram.Me.CustomData.Split('\n'))
                 {
                     var s = s1.Trim();
 

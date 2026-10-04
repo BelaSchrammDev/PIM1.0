@@ -12,12 +12,12 @@ namespace IngameScript
 
             public static bool IsMaster
             {
-                get { return Master == Tools.MySelf; }
+                get { return Master == MyProgram.Me; }
             }
 
             public static bool IsMaxInstructionsArrived()
             {
-                return Tools.RunTime.CurrentInstructionCount > CurrentInstructionAmount;
+                return MyProgram.Runtime.CurrentInstructionCount > CurrentInstructionAmount;
             }
 
             public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
@@ -43,28 +43,28 @@ namespace IngameScript
             public static void Init()
             {
                 Config.Instance.LoadConfig();
-                Tools.ProgramInstance.InitAssemblerBluePrints();
-                Tools.ProgramInstance.InitRefineryBlueprints();
+                MyProgram.InitAssemblerBluePrints();
+                MyProgram.InitRefineryBlueprints();
                 CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
                 SetMasterBehavior();
             }
 
             private static void SetMasterBehavior(double currentCycleInSec = 0.0)
             {
-                Tools.RunTime.UpdateFrequency = UpdateFrequency.Update10;
+                MyProgram.Runtime.UpdateFrequency = UpdateFrequency.Update10;
                 CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, currentCycleInSec);
             }
 
             private static void SetSlaveBehavior()
             {
-                Tools.RunTime.UpdateFrequency = UpdateFrequency.Update100;
+                MyProgram.Runtime.UpdateFrequency = UpdateFrequency.Update100;
                 CurrentInstructionAmount = INSTRUCTION_MIN;
             }
 
             private static bool IfMeIsMaster()
             {
-                Tools.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => Tools.BlockConstructMember(block));
-                Master = Tools.MySelf;
+                MyProgram.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsMainConstruct());
+                Master = MyProgram.Me;
                 return true;
 
                 // TODO: detecting other PIM PRGs; with block.TryRun();
