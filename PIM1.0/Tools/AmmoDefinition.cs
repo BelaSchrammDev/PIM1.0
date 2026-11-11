@@ -22,7 +22,6 @@ namespace IngameScript
 
             private readonly string Name = "";
             public string type = "";
-            private readonly Dictionary<string, int> gunAmmoPrio = new Dictionary<string, int>();
             private readonly AssemblerBluePrint ammoBluePrint;
 
             public float ratio = 1
@@ -35,11 +34,6 @@ namespace IngameScript
                 Name = iname;
                 ammoBluePrint = Program.MyProgram.GetBluePrintByItemName(iname);
                 type = Name.Substring(Name.IndexOf(' ') + 1);
-            }
-
-            public int GetAmmoPriority(string gunType)
-            {
-                return gunAmmoPrio.ContainsKey(gunType) ? gunAmmoPrio[gunType] : 0;
             }
 
             public void CalcAmmoInventoryRatio()

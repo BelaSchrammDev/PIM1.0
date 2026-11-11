@@ -40,6 +40,11 @@ Fix:
 - autocrafting: items with a max amount of 1 were never crafted (the threshold was rounded down
   to 0, it is rounded up now), and nothing was queued if fewer items were missing than there
   are assemblers for them
+- weapons that accept several ammo types were never loaded (the priorities came from the
+  ammoprio LCD that was removed). Without configuration the first accepted type is preferred;
+  a type is used if there is at least one magazine per weapon in stock, otherwise the next one
+- removing a weapon with several ammo types from the PIM group only removed it from one of
+  its ammo types
 
 Changes:
 

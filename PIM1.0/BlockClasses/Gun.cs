@@ -1,5 +1,6 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
+using System;
 using SpaceEngineers.Game.ModAPI.Ingame;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace IngameScript
             public string gunType = "";
             public string CurrentAmmo = "";
             public Dictionary<string, int> ammomax = new Dictionary<string, int>();
+            // accepted ammo in the order of the game: the default priority (ChooseAmmo)
+            public List<string> ammoTypes = new List<string>();
+
+            static readonly Func<string, float> AmmoStock = a => Lists.Data.Inventory.GetValueOrDefault(a, 0);
+            static readonly Func<string, int> AmmoGunCount = a => AmmoDefs.GetAmmoDefs(a).guns.Count;
             public Gun(IMyUserControllableGun g)
             {
                 gun = g;
@@ -35,6 +41,7 @@ namespace IngameScript
                         var amax = (int)((float)inv.MaxVolume / a.GetItemInfo().Volume);
                         newadef.maxOfVolume += amax;
                         ammomax.Add(mtype, amax);
+                        ammoTypes.Add(mtype);
                     }
                 }
 
@@ -64,39 +71,19 @@ namespace IngameScript
                     gun.ApplyAction(Strings.X_UseConveyor);
                 }
 
-                CurrentAmmo = GetCurrentAmmo();
-            }
-
-            string GetCurrentAmmo()
-            {
-                if (ammomax.Count == 0) return "";
-                else if (ammomax.Count == 1) return ammomax.Keys.First();
-                var currentAmmunition = "";
-                var currentAmmunitionPrio = 0;
-                foreach (var a in ammomax)
-                {
-                    var prio = AmmoDefs.GetAmmoDefs(a.Key).GetAmmoPriority(gunType);
-                    if (prio > currentAmmunitionPrio && Lists.Data.Inventory.ContainsKey(a.Key) && Lists.Data.Inventory[a.Key] > 0)
-                    {
-                        currentAmmunition = a.Key;
-                        currentAmmunitionPrio = prio;
-                    }
-                }
-                return currentAmmunition;
+                CurrentAmmo = ChooseAmmo(gunType, ammoTypes, AmmoStock, AmmoGunCount);
             }
 
             public void Remove()
             {
-                var keyList = Lists.Data.AmmoDefinitions.Keys.ToArray();
-                for (int i = Lists.Data.AmmoDefinitions.Count - 1; i >= 0; i--)
+                // every ammo definition of the gun (a gun with several ammo types is in several of them)
+                foreach (var a in ammomax)
                 {
-                    if (Lists.Data.AmmoDefinitions[keyList[i]].guns.Contains(this))
-                    {
-                        Lists.Data.AmmoDefinitions[keyList[i]].guns.Remove(this);
-                        if (Lists.Data.AmmoDefinitions[keyList[i]].guns.Count == 0) Lists.Data.AmmoDefinitions.Remove(keyList[i]);
-                        else Lists.Data.AmmoDefinitions[keyList[i]].maxOfVolume -= ammomax[keyList[i]];
-                        break;
-                    }
+                    AmmoDefs def;
+                    if (!Lists.Data.AmmoDefinitions.TryGetValue(a.Key, out def)) continue;
+                    def.guns.Remove(this);
+                    def.maxOfVolume -= a.Value;
+                    if (def.guns.Count == 0) Lists.Data.AmmoDefinitions.Remove(a.Key);
                 }
                 if (Lists.Data.storageinvs.Contains(this)) Lists.Data.storageinvs.Remove(this);
                 var p = gun.GetProperty(Strings.X_UseConveyor);
