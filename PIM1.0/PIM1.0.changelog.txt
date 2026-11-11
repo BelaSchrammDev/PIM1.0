@@ -57,6 +57,8 @@ Fix:
 - storage containers, weapons and farms: the wanted amount of an item was compared with every
   stack separately. Two stacks of one item that cannot be merged (e.g. bottles) stopped the script
   if items were still missing; now the stacks are added up
+- assemblers, hydroponics farms and reprocessors tagged with upper case letters, e.g. "(SMS)",
+  were controlled by PIM but their blueprints were not activated for autocrafting
 
 Changes:
 

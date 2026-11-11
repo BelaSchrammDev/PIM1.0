@@ -206,5 +206,40 @@ namespace IngameScript.Tests
 
             Assert.IsTrue(_parameter.IsParameter("Food"));
         }
+
+        // ------------------------------------------------------------------
+        // HasSmsTag: the same decision for places that only have the name
+        // ------------------------------------------------------------------
+
+        [DataTestMethod]
+        [DataRow("Assembler (sms)", true)]
+        [DataRow("Assembler (SMS)", true)]
+        [DataRow("Assembler (Sms,nooff)", true)]
+        [DataRow("(sms) Assembler", true)]
+        [DataRow("Assembler(sms)", true)]
+        [DataRow("Assembler", false)]
+        [DataRow("Assembler sms", false)]
+        [DataRow("Assembler (sms", false)]
+        [DataRow("Assembler (food)", false)]
+        [DataRow("", false)]
+        public void HasSmsTag_RecognisesTheTagInAnyCase(string name, bool expected)
+        {
+            Assert.AreEqual(expected, Program.HasSmsTag(name));
+        }
+
+        [DataTestMethod]
+        [DataRow("Assembler (sms)")]
+        [DataRow("Assembler (SMS)")]
+        [DataRow("Assembler (sMs,NoOff)")]
+        [DataRow("Assembler")]
+        [DataRow("Assembler (sms")]
+        [DataRow("Assembler (sms (x)")]
+        [DataRow("Assembler (x) (sms)")]
+        [DataRow("sms) Assembler (sms")]
+        [DataRow("Assembler (food) (sms,keep) 2")]
+        public void HasSmsTag_DecidesLikeParseArgs(string name)
+        {
+            Assert.AreEqual(new Program.Parameter().ParseArgs(name), Program.HasSmsTag(name));
+        }
     }
 }

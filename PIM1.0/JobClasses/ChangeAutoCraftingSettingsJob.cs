@@ -55,7 +55,7 @@ namespace IngameScript
                     foreach (var ingameRefineryBlock in Lists.Data.Refinerys)
                     {
                         var subTypeName = ingameRefineryBlock.BlockDefinition.SubtypeId;
-                        if (ingameRefineryBlock.CustomName.Contains("(sms") && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
+                        if (HasSmsTag(ingameRefineryBlock.CustomName) && (subTypeName.Contains("Hydroponics") || subTypeName.Contains("Reprocessor")))
                         {
                             Lists.Data.BluePrints_Active.Add(BluePrintKeyList[Index], bluePrint);
                             Lists.Data.BluePrints_Inactive.Remove(BluePrintKeyList[Index]);
@@ -69,7 +69,7 @@ namespace IngameScript
 
                     foreach (var a in Lists.Data.Assemblers)
                     {
-                        if (a.CustomName.Contains("(sms") && a.CanUseBlueprint(bluePrint.definition_id))
+                        if (HasSmsTag(a.CustomName) && a.CanUseBlueprint(bluePrint.definition_id))
                         {
                             var subTypeId = a.BlockDefinition.SubtypeName;
 

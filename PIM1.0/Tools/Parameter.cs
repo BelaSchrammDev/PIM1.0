@@ -35,6 +35,21 @@ namespace IngameScript
             return zstr;
         }
 
+        /// <summary>
+        /// The block name contains a PIM tag "(sms...)", upper/lower case does not matter.
+        /// Same rule as Parameter.ParseArgs (checked in ParameterTests), for places that only have the name.
+        /// </summary>
+        public static bool HasSmsTag(string customName)
+        {
+            var nameLower = customName.ToLower();
+            if (!nameLower.Contains("(sms")) return false;
+            foreach (var tag in nameLower.Split('('))
+            {
+                if (tag.Contains("sms") && tag.Contains(")")) return true;
+            }
+            return false;
+        }
+
         public class Parameter
         {
             // TODO: parameter as boolean
