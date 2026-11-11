@@ -59,6 +59,8 @@ Fix:
   if items were still missing; now the stacks are added up
 - assemblers, hydroponics farms and reprocessors tagged with upper case letters, e.g. "(SMS)",
   were controlled by PIM but their blueprints were not activated for autocrafting
+- refining LCD: the remaining time showed "Infinity years" or "NaN days" if the amount of ore
+  did not change between two measurements, now "..."
 
 Changes:
 

@@ -9,26 +9,6 @@ namespace IngameScript
     // Ingame part of RefineryBlueprint: everything that needs Sandbox/VRage types.
     partial class Program
     {
-        static string GetTimeStringFromHours(double h)
-        {
-            if (h < 1)
-            {
-                if ((h * 60) > 1) return Math.Round(h * 60, 0) + " min.";
-                else return Math.Round(h * 60 * 60, 0) + " s";
-            }
-            if (h < 24)
-            {
-                return Math.Round(h, 1) + " h";
-            }
-            double tage = Math.Round(h / 24, 1);
-            if (tage > 365)
-            {
-                return Math.Round(tage / 365, 1) + " years";
-            }
-            if (tage < 1.1) return tage + " day";
-            else return tage + " days";
-        }
-
         // to be removed ---------------------------------------------------------------------------------
         void addPrio(string reftype, RefineryBlueprint type, int prio)
         {
@@ -61,8 +41,7 @@ namespace IngameScript
                         bluePrint.OutputAmount = Lists.Data.Inventory.GetValueOrDefault(bluePrint.OutputID, 0);
                         var OldAmountSnapshot = bluePrint.AmountSnapshot;
                         bluePrint.AmountSnapshot = DateTime.Now;
-                        var diff = (OldInputAmount - bluePrint.InputAmount);
-                        bluePrint.ETA_String = diff < 0 ? "..." : GetTimeStringFromHours((bluePrint.InputAmount / diff) * (bluePrint.AmountSnapshot - OldAmountSnapshot).TotalHours);
+                        bluePrint.ETA_String = GetEtaString(OldInputAmount, bluePrint.InputAmount, (bluePrint.AmountSnapshot - OldAmountSnapshot).TotalHours);
                     }
                 }
             }

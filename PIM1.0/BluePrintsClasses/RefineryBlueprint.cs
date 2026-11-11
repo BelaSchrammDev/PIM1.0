@@ -41,7 +41,38 @@ namespace IngameScript
             return name;
         }
 
-        public static Dictionary<string, List<IPrio>> ingotprio = new Dictionary<string, List<IPrio>>();
+        static string GetTimeStringFromHours(double h)
+        {
+            if (h < 1)
+            {
+                if ((h * 60) > 1) return Math.Round(h * 60, 0) + " min.";
+                else return Math.Round(h * 60 * 60, 0) + " s";
+            }
+            if (h < 24)
+            {
+                return Math.Round(h, 1) + " h";
+            }
+            double tage = Math.Round(h / 24, 1);
+            if (tage > 365)
+            {
+                return Math.Round(tage / 365, 1) + " years";
+            }
+            if (tage < 1.1) return tage + " day";
+            else return tage + " days";
+        }
+
+        /// <summary>
+        /// Remaining refining time of an ore: the amount that is left, divided by what was used up
+        /// since the last snapshot. "..." if the amount did not shrink (nothing refined or ore added),
+        /// there is no meaningful time then (the division gave "Infinity years" / "NaN days").
+        /// </summary>
+        public static string GetEtaString(float oldAmount, float amount, double hoursSinceOldAmount)
+        {
+            var diff = oldAmount - amount;
+            return diff <= 0 ? "..." : GetTimeStringFromHours((amount / diff) * hoursSinceOldAmount);
+        }
+
+        public static Dictionary<string, List<IPrio>> ingotprio =new Dictionary<string, List<IPrio>>();
         public static Dictionary<string, Dictionary<RefineryBlueprint, int>> OrePrioConfig = new Dictionary<string, Dictionary<RefineryBlueprint, int>>();
 
         public class IPrio : IComparable<IPrio>
