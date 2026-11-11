@@ -10,6 +10,7 @@ Fix:
 - Deuterium Fusion Reactors mod: the data came from a workshop version that was deleted,
   now taken from the current mod 1259182705 (item DTFuelCapsule, component MagnetronComponent;
   the LCD key of the magnetron changed)
+- Industrial Overhaul mod: bauxite refinery blueprints output Ingot Aluminum
 - refinery blueprints with the same input keep their definition order (stable sort);
   before, the order depended on the unstable List.Sort
 - blueprint initialisation could only run once (curmod was left at "" after the first run)
@@ -43,8 +44,11 @@ New:
 
 - vanilla: Medkit and Powerkit
 - PlantAndCook: EmptyTinCan; DailyNeedsSurvival: CleanToCleanWater
+- Industrial Overhaul: base ammo (POHEMissile200mm, AutocannonClip, MediumCalibreAmmo, LargeCalibreAmmo,
+  LargeRailgunAmmo, LargeRailgunAmmoDUAP, SmallRailgunAmmo)
 - [Ignore] section in the data files: blueprints that are deliberately not used
-  (not generated, not proposed by the tool), e.g. the PlantAndCook composter recipes
+  (not generated, not proposed by the tool), e.g. the PlantAndCook composter recipes,
+  the Industrial Overhaul disposal and starting recipes
 - PIM1.0.BluePrintGenerator: converts the data files into BluePrintData.g.cs during the build,
   drops item and display names the script derives by itself, data errors are reported as file(line)
 - PIM1.0.BluePrintTool: compares the data files with the .sbc files of the game and the workshop mods
