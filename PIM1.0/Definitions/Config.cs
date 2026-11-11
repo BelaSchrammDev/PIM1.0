@@ -34,9 +34,11 @@ namespace IngameScript
             public int stacking_cycle = 10;
             public Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
 
-            bool ParseBoolean(string str)
+            // an invalid value (typo) keeps the current setting instead of stopping the script
+            bool ParseBoolean(string str, bool current)
             {
-                return Convert.ToBoolean(str);
+                bool value;
+                return bool.TryParse(str, out value) ? value : current;
             }
 
             void WriteConfig()
@@ -124,17 +126,17 @@ namespace IngameScript
 
                         switch (cs[0])
                         {
-                            case "ShowInfoPBLcd": ShowInfoPBLcd = ParseBoolean(cs[1]); break;
-                            case "delete_queueItem_if_max": delete_queueItem_if_max = ParseBoolean(cs[1]); break;
-                            case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1]); break;
-                            case "assemblers_off": assemblers_off = ParseBoolean(cs[1]); break;
-                            case "refinerys_off": refinerys_off = ParseBoolean(cs[1]); break;
-                            case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1]); break;
-                            case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1]); break;
-                            case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1]); break;
+                            case "ShowInfoPBLcd": ShowInfoPBLcd = ParseBoolean(cs[1], ShowInfoPBLcd); break;
+                            case "delete_queueItem_if_max": delete_queueItem_if_max = ParseBoolean(cs[1], delete_queueItem_if_max); break;
+                            case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1], always_recycle_greywater); break;
+                            case "assemblers_off": assemblers_off = ParseBoolean(cs[1], assemblers_off); break;
+                            case "refinerys_off": refinerys_off = ParseBoolean(cs[1], refinerys_off); break;
+                            case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1], collect_all_Ore); break;
+                            case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1], collect_all_Ingot); break;
+                            case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1], collect_all_Component); break;
                             case "stacking_cycle": int.TryParse(cs[1], out stacking_cycle); break;
                             case "PIM_controlled_Weapons": Properties.Data.CurrentGunGroupName = cs[1]; break;
-                            default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1]); break;
+                            default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1], usedMods[cs[0]]); break;
                         }
 
                         continue;

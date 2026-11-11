@@ -34,6 +34,8 @@ Fix:
   instead of the ore it is refining now
 - possible script stop "divide by zero" when a refinery was filled with an ore that no refinery
   was refining yet
+- a typo in a True/False option of the config (custom data) stopped the script at start,
+  now the option keeps its value
 
 Changes:
 
