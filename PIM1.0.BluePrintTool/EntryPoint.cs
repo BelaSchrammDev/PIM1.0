@@ -13,6 +13,7 @@ namespace PimBluePrintTool
     ///   update [mod ...] [--write]       fix renamed blueprints / wrong items, add new blueprints
     ///                                    (without --write: only show what would change)
     ///   new    Name id [id ...] [--write] create the data file of a new mod and add it to Mods.txt
+    ///   status                           mods of Mods.txt: downloaded? title, last update, still on Steam? (Steam Web API)
     ///   scan   [--titles]                list installed workshop items with blueprints usable by PIM
     ///   download mod|id ... [--steamcmd path]   download workshop items with steamcmd (anonymous)
     ///
@@ -49,6 +50,7 @@ namespace PimBluePrintTool
                     case "update": return Check(o, write: o.Write, alwaysReport: false);
                     case "new": return New(o);
                     case "scan": return Scan(o);
+                    case "status": return Status(o);
                     case "download": return Download(o);
                     default: Console.Error.WriteLine($"unknown command '{o.Command}'"); Usage(); return 2;
                 }
@@ -67,6 +69,7 @@ namespace PimBluePrintTool
   check  [mod ...]                   report differences between data files and game/mod definitions
   update [mod ...] [--write]         apply fixes and add new blueprints (dry run without --write)
   new    Name id [id ...] [--write]  create a data file for a new mod, add it to Mods.txt
+  status                             mods of Mods.txt: downloaded, title, last update, still on Steam (online)
   scan   [--titles]                  list installed workshop items with blueprints usable by PIM
   download mod|id ...                download workshop items with steamcmd
 options: --data dir  --game dir  --workshop dir  --steamcmd path  --titles  --verbose");
@@ -257,8 +260,8 @@ options: --data dir  --game dir  --workshop dir  --steamcmd path  --titles  --ve
 
             if (o.Titles)
             {
-                var titles = Steam.FetchTitles(rows.Select(r => r[0]).ToList());
-                foreach (var r in rows) { string t; if (titles.TryGetValue(r[0], out t)) r[5] = t; }
+                var details = Steam.FetchDetails(rows.Select(r => r[0]).ToList());
+                foreach (var r in rows) { WorkshopDetails d; if (details.TryGetValue(r[0], out d) && d.Available) r[5] = d.Title; }
             }
 
             Console.WriteLine($"{"workshop id",-12} {"PIM mod",-32} {"asm",4} {"ref",4}  {(o.Titles ? "title / " : "")}examples");
@@ -270,6 +273,41 @@ options: --data dir  --game dir  --workshop dir  --steamcmd path  --titles  --ve
             foreach (var m in mods.Where(m => m.Name != IngameScript.Program.Strings.M_Vanilla && m.WorkshopIds.Count == 0))
                 Console.WriteLine($"no workshop id in Mods.txt: {m.Name}");
             return 0;
+        }
+
+        // ------------------------------------------------------------ status
+
+        static int Status(Options o)
+        {
+            var mods = BluePrintDataFile.Read(FindDataDir(o));
+            var paths = Paths(o);
+            var details = Steam.FetchDetails(mods.SelectMany(m => m.WorkshopIds).ToList());
+
+            Console.WriteLine($"{"PIM mod",-30} {"workshop id",-11} {"local",-10} {"updated",-10} title");
+            var problems = 0;
+            foreach (var mod in mods.Where(m => m.Name != IngameScript.Program.Strings.M_Vanilla))
+            {
+                if (mod.WorkshopIds.Count == 0)
+                {
+                    Console.WriteLine($"{mod.Name,-30} {"-",-11} {"",-10} {"",-10} (no workshop id in Mods.txt)");
+                    problems++;
+                    continue;
+                }
+                foreach (var id in mod.WorkshopIds)
+                {
+                    var local = paths.FindMod(id) != null ? "downloaded" : "missing";
+                    WorkshopDetails d;
+                    string updated, title;
+                    if (!details.TryGetValue(id, out d)) { updated = "?"; title = "(no answer from Steam)"; }
+                    else if (!d.Available) { updated = "-"; title = $"NOT AVAILABLE on Steam (result {d.Result}: deleted or hidden)"; }
+                    else { updated = d.Updated.ToString("yyyy-MM-dd"); title = $"{d.Title} ({d.Subscriptions:N0} subscribers)"; }
+                    if (d == null || !d.Available || local == "missing") problems++;
+                    Console.WriteLine($"{mod.Name,-30} {id,-11} {local,-10} {updated,-10} {title}");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine(problems == 0 ? "all mods available" : $"{problems} entr{(problems == 1 ? "y" : "ies")} need attention");
+            return problems == 0 ? 0 : 1;
         }
 
         // ------------------------------------------------------------ download

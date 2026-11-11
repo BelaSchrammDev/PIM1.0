@@ -112,56 +112,6 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## all
-A|Component Composting|Composting|Component Compost|Component|Compost|SigmaDraconisCoreMod|0|0
-A|Component CrateofTomatoes|CrateofTomatoes|Component CrateTomato|Component|CrateTomato|SigmaDraconisCoreMod|0|0
-A|Component BottleWater|BottleWater|Component DrinkingWater|Component|DrinkingWater|SigmaDraconisCoreMod|0|0
-A|Component ToSmallArms|ToSmallArms|Component SmallArms|Component|SmallArms|SigmaDraconisCoreMod|0|0
-A|Component ToHeavyArms|ToHeavyArms|Component HeavyArms|Component|HeavyArms|SigmaDraconisCoreMod|0|0
-A|Component ToTools|ToTools|Component ToolPack|Component|ToolPack|SigmaDraconisCoreMod|0|0
-A|Component ToAmmo|ToAmmo|Component AmmoCache|Component|AmmoCache|SigmaDraconisCoreMod|0|0
-A|Component ToMedicalCache|ToMedicalCache|Component MedicalCache|Component|MedicalCache|SigmaDraconisCoreMod|0|0
-A|Component ToRepairCache|ToRepairCache|Component RepairCache|Component|RepairCache|SigmaDraconisCoreMod|0|0
-A|Component toMachinePart|toMachinePart|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toUpgradedBelterComp|toUpgradedBelterComp|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toOPAExpComponent|toOPAExpComponent|Component OPAExpComponent|Component|OPAExpComponent|SigmaDraconisCoreMod|0|0
-A|Component IcetoNPTradeGoods|IcetoNPTradeGoods|Component IceBox|Component|IceBox|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsCraft|RawMaterialsCraft|Component RawMaterials|Component|RawMaterials|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsUse|RawMaterialsUse|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationTycho|ComponentCreationTycho|Component TychoComponent|Component|TychoComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationCeres|ComponentCreationCeres|Component CeresComponent|Component|CeresComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationVesta|ComponentCreationVesta|Component VestaComponent|Component|VestaComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationMedina|ComponentCreationMedina|Component MedinaComponent|Component|MedinaComponent|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationTycho|PassengerCreationTycho|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationCeres|PassengerCreationCeres|Component TychoPassenger|Component|TychoPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationVesta|PassengerCreationVesta|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationGanymede|PassengerCreationGanymede|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationMedina|PassengerCreationMedina|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component SurviviorConsume|SurviviorConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component WelWalaConsume|WelWalaConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component toInnerComp|toInnerComp|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNComponent|toMCRNComponent|Component MCRNComponent|Component|MCRNComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNAdvComponent|toMCRNAdvComponent|Component MCRNAdvComponent|Component|MCRNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNExpComponent|toMCRNExpComponent|Component MCRNExpComponent|Component|MCRNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNComponent|toUNNComponent|Component UNNComponent|Component|UNNComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNAdvComponent|toUNNAdvComponent|Component UNNAdvComponent|Component|UNNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNExpComponent|toUNNExpComponent|Component UNNExpComponent|Component|UNNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component ToLithiumPowerCell|ToLithiumPowerCell|Component LithiumCell|Component|LithiumCell|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerUNN|toResearchInnerUNN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerMCRN|toResearchInnerMCRN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchBelter|toResearchBelter|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component Fuel_Processing|Fuel_Processing|Component Fuel_Tank|Component|Fuel Tank|SigmaDraconisCoreMod|0|0
-A|Component BulkTungsten|BulkTungsten|Component BulkTungstenCrate|Component|BulkTungstenCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCopper|BulkCopper|Component BulkCopperCrate|Component|BulkCopperCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkLead|BulkLead|Component BulkLeadCrate|Component|BulkLeadCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkTitanium|BulkTitanium|Component BulkTitaniumCrate|Component|BulkTitaniumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkIron|BulkIron|Component BulkIronCrate|Component|BulkIronCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkNickel|BulkNickel|Component BulkNickelCrate|Component|BulkNickelCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCobalt|BulkCobalt|Component BulkCobaltCrate|Component|BulkCobaltCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkMagnesium|BulkMagnesium|Component BulkMagnesiumCrate|Component|BulkMagnesiumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilicon|BulkSilicon|Component BulkSiliconCrate|Component|BulkSiliconCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilver|BulkSilver|Component BulkSilverCrate|Component|BulkSilverCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkGold|BulkGold|Component BulkGoldCrate|Component|BulkGoldCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkUranium|BulkUranium|Component BulkUraniumCrate|Component|BulkUraniumCrate|SigmaDraconisCoreMod|0|0
 A|Ingot SubFresh|SubFresh|Ingot SubFresh|Food|Algae-Soy Product|DailyNeedsSurvivalMod|0|0
 A|Ingot WaterFood|WaterFood|Ingot WaterFood|Food|Drinking Water Packet|DailyNeedsSurvivalMod|0|0
 A|Ingot OrganicToNutrients|OrganicToNutrients|Ingot Nutrients|Food|Nutrients|DailyNeedsSurvivalMod|0|0
@@ -201,10 +151,10 @@ A|Component Trinium|Trinium|Component Trinium|Component|Trinium Plate|StarGateMo
 A|Component Neutronium|Neutronium|Component Neutronium|Component|Neutronium Crate|StarGateMod_Ores|0|0
 A|PhysicalGunObject Blueprint_PaintGun|Blueprint_PaintGun|PhysicalGunObject PhysicalPaintGun|Tools&Guns|PhysicalPaintGun|PaintGunMod|0|0
 A|AmmoMagazine Blueprint_PaintGunMag|Blueprint_PaintGunMag|AmmoMagazine PaintGunMag|AmmoMagazine|PaintGunMag|PaintGunMod|0|0
-A|Component Magnetron_Component|Magnetron_Component|Component Magnetron_Component|Component|Magnetron Component|DeuteriumReactorMod|0|0
-A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DeuteriumContainer|Deuterium|Deuterium|DeuteriumReactorMod|0|0
-A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
-A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
+A|Component MagnetronComponent|MagnetronComponent|Component MagnetronComponent|Component|Magnetron|DeuteriumReactorMod|0|0
+A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DTFuelCapsule|Deuterium|Deuterium|DeuteriumReactorMod|0|0
+A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
+A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
 A|Component ShieldComponentBP|ShieldComponentBP|Component ShieldComponent|Component|Field Emitter|DefenseShieldMod|0|0
 A|AmmoMagazine RailGunAmmoMag|RailGunAmmoMag|AmmoMagazine RailGunAmmoMag|AmmoMagazine|RailGunAmmoMag|MCRN_RailGunMod|0|0
 A|AmmoMagazine TorpedoMk1_Blueprint|TorpedoMk1_Blueprint|AmmoMagazine TorpedoMk1|AmmoMagazine|TorpedoMk1|MWI_HomingWeaponryMod|0|0
@@ -303,8 +253,6 @@ A|PhysicalGunObject POEliteAutoPistol|POEliteAutoPistol|PhysicalGunObject EliteP
 A|PhysicalGunObject POWelder4|POWelder4|PhysicalGunObject Welder4Item|Tools&Guns|Welder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POAngleGrinder4|POAngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|AngleGrinder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POHandDrill4|POHandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|HandDrill4Item|IndustrialOverhaulMod|0|0
-A|Component Foam|Foam|Component Foam|Component|Foam|IndustrialOverhaulWaterMod|0|0
-A|Component BuoyancyTube|BuoyancyTube|Component BuoyancyTube|Component|BuoyancyTube|IndustrialOverhaulWaterMod|0|0
 A|AmmoMagazine GravelMag|GravelMag|AmmoMagazine GravelMag|AmmoMagazine|GravelMag|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine GravelMagBig|GravelMagBig|AmmoMagazine GravelMagBig|AmmoMagazine|GravelMagBig|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine 155mmAPShell|155mmAPShell|AmmoMagazine 155mmAPShell|AmmoMagazine|155mmAPShell|IndustrialOverhaulLockLoadMod|0|0
@@ -340,24 +288,6 @@ A|Ingot FarmedSoya|FarmedSoya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot FarmedPumpkin|FarmedPumpkin|Ingot Pumpkin|Food|Pumpkin|PlantAndCookMod|0|0
 A|Ingot FarmedCabbage|FarmedCabbage|Ingot Cabbage|Food|Cabbage|PlantAndCookMod|0|0
 A|Component AryxLynxon_FusionComponentBP|AryxLynxon_FusionComponentBP|Component AryxLynxon_FusionComponent|Component|Fusion Coil|AryxEpsteinDriveMod|0|0
-A|Component K_HSR_Component_Rail_Vanilla|K_HSR_Component_Rail_Vanilla|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug|K_HSR_Ammuntion_Recipe_Slug|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Component K_HSR_Component_AssemblerStabilizer_Vanilla|K_HSR_Component_AssemblerStabilizer_Vanilla|Component K_HSR_AssemblerSystem|Component|AssemblerSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Rail|K_HSR_Component_Rail|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|Component K_HSR_Component_PulseSystem|K_HSR_Component_PulseSystem|Component K_HSR_PulseSystem|Component|PulseSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Globe|K_HSR_Component_Globe|Component K_HSR_Globe|Component|Globe|HSR_Mod|0|0
-A|Component K_HSR_Component_Circuitry|K_HSR_Component_Circuitry|Component K_HSR_HyperConductiveCircuitry|Component|HyperConductiveCircuitry|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlate|K_HSR_Component_HexPlate|Component K_HSR_HexagolPlating|Component|HexagolPlating|HSR_Mod|0|0
-A|Component K_HSR_Component_Conduit|K_HSR_Component_Conduit|Component K_HSR_GelConduit|Component|GelConduit|HSR_Mod|0|0
-A|Component K_HSR_Component_GlobeII|K_HSR_Component_GlobeII|Component K_HSR_Globe_II|Component|Globe II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailII|K_HSR_Component_RailII|Component K_HSR_RailComponents_II|Component|RailComponents II|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlateII|K_HSR_Component_HexPlateII|Component K_HSR_HexagolPlating_II|Component|HexagolPlating II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailIII|K_HSR_Component_RailIII|Component K_HSR_RailComponents_III|Component|RailComponents III|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug_Automated|K_HSR_Ammuntion_Recipe_Slug_Automated|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Ingot K_HSR_NaniteSludge_Recipe|K_HSR_NaniteSludge_Recipe|Ingot K_HSR_Nanites_Sludge|Ingot|Nanites Sludge|HSR_Mod|0|0
-A|Ingot K_HSR_EnergizedGel_Recipe|K_HSR_EnergizedGel_Recipe|Ingot K_HSR_Nanites_EnergizedGel|Ingot|Nanites EnergizedGel|HSR_Mod|0|0
-A|Ingot K_HSR_Hexagol_Recipe|K_HSR_Hexagol_Recipe|Ingot K_HSR_Nanites_Hexagol|Ingot|Nanites Hexagol|HSR_Mod|0|0
-A|Ingot K_HSR_Chromium_Recipe|K_HSR_Chromium_Recipe|Ingot K_HSR_Nanites_Chromium|Ingot|Nanites Chromium|HSR_Mod|0|0
 A|AmmoMagazine R75ammo|R75ammo|AmmoMagazine R75ammo|AmmoMagazine|75mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R150ammo|R150ammo|AmmoMagazine R150ammo|AmmoMagazine|150mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R250ammo|R250ammo|AmmoMagazine R250ammo|AmmoMagazine|250mm Railgun Ammo|NorthWindWeaponsMod|0|0
@@ -411,25 +341,21 @@ R|CrushedTitaniumOreToIngot|Ore CrushedTitanium|Crushed Titanium|Ingot Titanium|
 R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Purified Titanium|False
 R|CrushedUraniumOreToIngot|Ore CrushedUranium|Crushed Uranium|Ingot Uranium|Ingot Uranium|False
 R|PurifyUraniumOre|Ore CrushedUranium|Crushed Uranium|Ore PurifiedUranium|Purified Uranium|False
-R|IcetoDeuterium|Ore Ice|Ice|Ingot DeuteriumContainer|Deuterium|False
+R|IcetoDeuterium|Ore Ice|Ice|Ingot DTFuelCapsule|Deuterium|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CrushNiterOre|Ore Niter|Niter|Ore Magnesium|Crushed Niter|False
 R|NiterOreToIngot|Ore Niter|Niter|Ingot Niter|Potassium Nitrate|False
 R|CarbonOreToIngot|Ore Carbon|Ore Carbon|Ingot Carbon|Carbon|False
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|CrushCobaltOre|Ore Cobalt|Ore Cobalt|Ore CrushedCobalt|Crushed Cobalt|False
-R|CopperToIngot|Ore Copper|Ore Copper|Ingot CopperIngot|Ingot CopperIngot|False
 R|CopperOreToIngot|Ore Copper|Ore Copper|Ingot Copper|Ingot Copper|False
 R|CrushCopperOre|Ore Copper|Ore Copper|Ore CrushedCopper|Crushed Copper|False
 R|CrudeOilCracking|Ore CrudeOil|Ore CrudeOil|Ingot FuelOil|Ingot FuelOil|False
-R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DeuteriumContainer|Deuterium|False
+R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DTFuelCapsule|Deuterium|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
 R|CrushGoldOre|Ore Gold|Ore Gold|Ore CrushedGold|Crushed Gold|False
-R|GraphiteOreToIngot|Ore Graphite|Ore Graphite|Ingot Carbon|Carbon|False
 R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
 R|CrushIronOre|Ore Iron|Ore Iron|Ore CrushedIron|Crushed Iron|False
-R|LeadToIngot|Ore Lead|Ore Lead|Ingot LeadIngot|Ingot LeadIngot|False
-R|LithiumToIngot|Ore Lithium|Ore Lithium|Ingot LithiumIngot|Ingot LithiumIngot|False
 R|CrushLithiumOre|Ore Lithium|Ore Lithium|Ore CrushedLithium|Crushed Lithium|False
 R|LithiumOreToIngot|Ore Lithium|Ore Lithium|Ingot Lithium|Lithium Paste|False
 R|NaquadahOreToIngot|Ore Naquadah|Ore Naquadah|Ingot Naquadah|Ingot Naquadah|False
@@ -450,11 +376,9 @@ R|CrushSulfurOre|Ore Sulfur|Ore Sulfur|Ore CrushedSulfur|Crushed Sulfur|False
 R|SulfurOreToIngot|Ore Sulfur|Ore Sulfur|Ingot Sulfur|Sulfur|False
 R|TantalumOreToIngot|Ore Tantalum|Ore Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|CrushTantalumOre|Ore Tantalum|Ore Tantalum|Ore CrushedTantalum|Crushed Tantalum|False
-R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TitaniumOreToIngot|Ore Titanium|Ore Titanium|Ingot Titanium|Ingot Titanium|False
 R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titanium|False
 R|TriniumOreToIngot|Ore Trinium|Ore Trinium|Ingot Trinium|Ingot Trinium|False
-R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
 R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Bauxite|Ingot Bauxite|False
@@ -473,7 +397,7 @@ R|PurifiedTantalumOreToIngot|Ore PurifiedTantalum|Purified Tantalum|Ingot Tantal
 R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titanium|Ingot Titanium|False
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
+R|StonetoDeuterium|Ore Stone|Stone|Ingot DTFuelCapsule|Deuterium|False
 R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## all-except-IndustrialOverhaulMod-StarGateMod_Ores
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -576,56 +500,6 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
-A|Component Composting|Composting|Component Compost|Component|Compost|SigmaDraconisCoreMod|0|0
-A|Component CrateofTomatoes|CrateofTomatoes|Component CrateTomato|Component|CrateTomato|SigmaDraconisCoreMod|0|0
-A|Component BottleWater|BottleWater|Component DrinkingWater|Component|DrinkingWater|SigmaDraconisCoreMod|0|0
-A|Component ToSmallArms|ToSmallArms|Component SmallArms|Component|SmallArms|SigmaDraconisCoreMod|0|0
-A|Component ToHeavyArms|ToHeavyArms|Component HeavyArms|Component|HeavyArms|SigmaDraconisCoreMod|0|0
-A|Component ToTools|ToTools|Component ToolPack|Component|ToolPack|SigmaDraconisCoreMod|0|0
-A|Component ToAmmo|ToAmmo|Component AmmoCache|Component|AmmoCache|SigmaDraconisCoreMod|0|0
-A|Component ToMedicalCache|ToMedicalCache|Component MedicalCache|Component|MedicalCache|SigmaDraconisCoreMod|0|0
-A|Component ToRepairCache|ToRepairCache|Component RepairCache|Component|RepairCache|SigmaDraconisCoreMod|0|0
-A|Component toMachinePart|toMachinePart|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toUpgradedBelterComp|toUpgradedBelterComp|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toOPAExpComponent|toOPAExpComponent|Component OPAExpComponent|Component|OPAExpComponent|SigmaDraconisCoreMod|0|0
-A|Component IcetoNPTradeGoods|IcetoNPTradeGoods|Component IceBox|Component|IceBox|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsCraft|RawMaterialsCraft|Component RawMaterials|Component|RawMaterials|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsUse|RawMaterialsUse|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationTycho|ComponentCreationTycho|Component TychoComponent|Component|TychoComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationCeres|ComponentCreationCeres|Component CeresComponent|Component|CeresComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationVesta|ComponentCreationVesta|Component VestaComponent|Component|VestaComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationMedina|ComponentCreationMedina|Component MedinaComponent|Component|MedinaComponent|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationTycho|PassengerCreationTycho|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationCeres|PassengerCreationCeres|Component TychoPassenger|Component|TychoPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationVesta|PassengerCreationVesta|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationGanymede|PassengerCreationGanymede|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationMedina|PassengerCreationMedina|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component SurviviorConsume|SurviviorConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component WelWalaConsume|WelWalaConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component toInnerComp|toInnerComp|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNComponent|toMCRNComponent|Component MCRNComponent|Component|MCRNComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNAdvComponent|toMCRNAdvComponent|Component MCRNAdvComponent|Component|MCRNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNExpComponent|toMCRNExpComponent|Component MCRNExpComponent|Component|MCRNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNComponent|toUNNComponent|Component UNNComponent|Component|UNNComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNAdvComponent|toUNNAdvComponent|Component UNNAdvComponent|Component|UNNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNExpComponent|toUNNExpComponent|Component UNNExpComponent|Component|UNNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component ToLithiumPowerCell|ToLithiumPowerCell|Component LithiumCell|Component|LithiumCell|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerUNN|toResearchInnerUNN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerMCRN|toResearchInnerMCRN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchBelter|toResearchBelter|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component Fuel_Processing|Fuel_Processing|Component Fuel_Tank|Component|Fuel Tank|SigmaDraconisCoreMod|0|0
-A|Component BulkTungsten|BulkTungsten|Component BulkTungstenCrate|Component|BulkTungstenCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCopper|BulkCopper|Component BulkCopperCrate|Component|BulkCopperCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkLead|BulkLead|Component BulkLeadCrate|Component|BulkLeadCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkTitanium|BulkTitanium|Component BulkTitaniumCrate|Component|BulkTitaniumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkIron|BulkIron|Component BulkIronCrate|Component|BulkIronCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkNickel|BulkNickel|Component BulkNickelCrate|Component|BulkNickelCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCobalt|BulkCobalt|Component BulkCobaltCrate|Component|BulkCobaltCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkMagnesium|BulkMagnesium|Component BulkMagnesiumCrate|Component|BulkMagnesiumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilicon|BulkSilicon|Component BulkSiliconCrate|Component|BulkSiliconCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilver|BulkSilver|Component BulkSilverCrate|Component|BulkSilverCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkGold|BulkGold|Component BulkGoldCrate|Component|BulkGoldCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkUranium|BulkUranium|Component BulkUraniumCrate|Component|BulkUraniumCrate|SigmaDraconisCoreMod|0|0
 A|Ingot SubFresh|SubFresh|Ingot SubFresh|Food|Algae-Soy Product|DailyNeedsSurvivalMod|0|0
 A|Ingot WaterFood|WaterFood|Ingot WaterFood|Food|Drinking Water Packet|DailyNeedsSurvivalMod|0|0
 A|Ingot OrganicToNutrients|OrganicToNutrients|Ingot Nutrients|Food|Nutrients|DailyNeedsSurvivalMod|0|0
@@ -663,18 +537,16 @@ A|Component AzimuthSuperchargerComponent|AzimuthSuperchargerComponent|Component 
 A|Component Naquadah|Naquadah|Component Naquadah|Component|Naquadah Bars|StarGateMod_Gates|0|0
 A|PhysicalGunObject Blueprint_PaintGun|Blueprint_PaintGun|PhysicalGunObject PhysicalPaintGun|Tools&Guns|PhysicalPaintGun|PaintGunMod|0|0
 A|AmmoMagazine Blueprint_PaintGunMag|Blueprint_PaintGunMag|AmmoMagazine PaintGunMag|AmmoMagazine|PaintGunMag|PaintGunMod|0|0
-A|Component Magnetron_Component|Magnetron_Component|Component Magnetron_Component|Component|Magnetron Component|DeuteriumReactorMod|0|0
-A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DeuteriumContainer|Deuterium|Deuterium|DeuteriumReactorMod|0|0
-A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
-A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
+A|Component MagnetronComponent|MagnetronComponent|Component MagnetronComponent|Component|Magnetron|DeuteriumReactorMod|0|0
+A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DTFuelCapsule|Deuterium|Deuterium|DeuteriumReactorMod|0|0
+A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
+A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
 A|Component ShieldComponentBP|ShieldComponentBP|Component ShieldComponent|Component|Field Emitter|DefenseShieldMod|0|0
 A|AmmoMagazine RailGunAmmoMag|RailGunAmmoMag|AmmoMagazine RailGunAmmoMag|AmmoMagazine|RailGunAmmoMag|MCRN_RailGunMod|0|0
 A|AmmoMagazine TorpedoMk1_Blueprint|TorpedoMk1_Blueprint|AmmoMagazine TorpedoMk1|AmmoMagazine|TorpedoMk1|MWI_HomingWeaponryMod|0|0
 A|AmmoMagazine SwarmMissileMk1_Blueprint|SwarmMissileMk1_Blueprint|AmmoMagazine SwarmMissile50mm|AmmoMagazine|SwarmMissile50mm|MWI_HomingWeaponryMod|0|0
 A|AmmoMagazine DestroyerMissileX_Blueprint|DestroyerMissileX_Blueprint|AmmoMagazine DestroyerMissileX|AmmoMagazine|DestroyerMissileX|MWI_HomingWeaponryMod|0|0
 A|AmmoMagazine DestroyerMissileMk1_Blueprint|DestroyerMissileMk1_Blueprint|AmmoMagazine DestroyerMissileMk1|AmmoMagazine|DestroyerMissileMk1|MWI_HomingWeaponryMod|0|0
-A|Component Foam|Foam|Component Foam|Component|Foam|IndustrialOverhaulWaterMod|0|0
-A|Component BuoyancyTube|BuoyancyTube|Component BuoyancyTube|Component|BuoyancyTube|IndustrialOverhaulWaterMod|0|0
 A|AmmoMagazine GravelMag|GravelMag|AmmoMagazine GravelMag|AmmoMagazine|GravelMag|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine GravelMagBig|GravelMagBig|AmmoMagazine GravelMagBig|AmmoMagazine|GravelMagBig|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine 155mmAPShell|155mmAPShell|AmmoMagazine 155mmAPShell|AmmoMagazine|155mmAPShell|IndustrialOverhaulLockLoadMod|0|0
@@ -710,24 +582,6 @@ A|Ingot FarmedSoya|FarmedSoya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot FarmedPumpkin|FarmedPumpkin|Ingot Pumpkin|Food|Pumpkin|PlantAndCookMod|0|0
 A|Ingot FarmedCabbage|FarmedCabbage|Ingot Cabbage|Food|Cabbage|PlantAndCookMod|0|0
 A|Component AryxLynxon_FusionComponentBP|AryxLynxon_FusionComponentBP|Component AryxLynxon_FusionComponent|Component|Fusion Coil|AryxEpsteinDriveMod|0|0
-A|Component K_HSR_Component_Rail_Vanilla|K_HSR_Component_Rail_Vanilla|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug|K_HSR_Ammuntion_Recipe_Slug|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Component K_HSR_Component_AssemblerStabilizer_Vanilla|K_HSR_Component_AssemblerStabilizer_Vanilla|Component K_HSR_AssemblerSystem|Component|AssemblerSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Rail|K_HSR_Component_Rail|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|Component K_HSR_Component_PulseSystem|K_HSR_Component_PulseSystem|Component K_HSR_PulseSystem|Component|PulseSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Globe|K_HSR_Component_Globe|Component K_HSR_Globe|Component|Globe|HSR_Mod|0|0
-A|Component K_HSR_Component_Circuitry|K_HSR_Component_Circuitry|Component K_HSR_HyperConductiveCircuitry|Component|HyperConductiveCircuitry|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlate|K_HSR_Component_HexPlate|Component K_HSR_HexagolPlating|Component|HexagolPlating|HSR_Mod|0|0
-A|Component K_HSR_Component_Conduit|K_HSR_Component_Conduit|Component K_HSR_GelConduit|Component|GelConduit|HSR_Mod|0|0
-A|Component K_HSR_Component_GlobeII|K_HSR_Component_GlobeII|Component K_HSR_Globe_II|Component|Globe II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailII|K_HSR_Component_RailII|Component K_HSR_RailComponents_II|Component|RailComponents II|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlateII|K_HSR_Component_HexPlateII|Component K_HSR_HexagolPlating_II|Component|HexagolPlating II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailIII|K_HSR_Component_RailIII|Component K_HSR_RailComponents_III|Component|RailComponents III|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug_Automated|K_HSR_Ammuntion_Recipe_Slug_Automated|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Ingot K_HSR_NaniteSludge_Recipe|K_HSR_NaniteSludge_Recipe|Ingot K_HSR_Nanites_Sludge|Ingot|Nanites Sludge|HSR_Mod|0|0
-A|Ingot K_HSR_EnergizedGel_Recipe|K_HSR_EnergizedGel_Recipe|Ingot K_HSR_Nanites_EnergizedGel|Ingot|Nanites EnergizedGel|HSR_Mod|0|0
-A|Ingot K_HSR_Hexagol_Recipe|K_HSR_Hexagol_Recipe|Ingot K_HSR_Nanites_Hexagol|Ingot|Nanites Hexagol|HSR_Mod|0|0
-A|Ingot K_HSR_Chromium_Recipe|K_HSR_Chromium_Recipe|Ingot K_HSR_Nanites_Chromium|Ingot|Nanites Chromium|HSR_Mod|0|0
 A|AmmoMagazine R75ammo|R75ammo|AmmoMagazine R75ammo|AmmoMagazine|75mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R150ammo|R150ammo|AmmoMagazine R150ammo|AmmoMagazine|150mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R250ammo|R250ammo|AmmoMagazine R250ammo|AmmoMagazine|250mm Railgun Ammo|NorthWindWeaponsMod|0|0
@@ -747,17 +601,13 @@ A|AmmoMagazine C500AmmoAP|C500AmmoAP|AmmoMagazine C500AmmoAP|AmmoMagazine|500mm 
 A|AmmoMagazine C500AmmoHE|C500AmmoHE|AmmoMagazine C500AmmoHE|AmmoMagazine|500mm HE Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine C500AmmoCasaba|C500AmmoCasaba|AmmoMagazine C500AmmoCasaba|AmmoMagazine|500mm Casaba Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine PlasmaCell10MJ|PlasmaCell10MJ|AmmoMagazine PlasmaCell10MJ|AmmoMagazine|10MJ PlasmaCannon Cell|NorthWindWeaponsMod|0|0
-R|IcetoDeuterium|Ore Ice|Ice|Ingot DeuteriumContainer|Deuterium|False
+R|IcetoDeuterium|Ore Ice|Ice|Ingot DTFuelCapsule|Deuterium|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CarbonOreToIngot|Ore Carbon|Ore Carbon|Ingot Carbon|Carbon|False
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|CopperToIngot|Ore Copper|Ore Copper|Ingot CopperIngot|Ingot CopperIngot|False
-R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DeuteriumContainer|Deuterium|False
+R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DTFuelCapsule|Deuterium|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
-R|GraphiteOreToIngot|Ore Graphite|Ore Graphite|Ingot Carbon|Carbon|False
 R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
-R|LeadToIngot|Ore Lead|Ore Lead|Ingot LeadIngot|Ingot LeadIngot|False
-R|LithiumToIngot|Ore Lithium|Ore Lithium|Ingot LithiumIngot|Ingot LithiumIngot|False
 R|MagnesiumOreToIngot|Ore Magnesium|Ore Magnesium|Ingot Magnesium|Magnesiumpowder|False
 R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
 R|PhosphorusOreToIngot|Ore Phosphorus|Ore Phosphorus|Ingot Phosphorus|Ingot Phosphorus|False
@@ -766,11 +616,9 @@ R|PotassiumOreToIngot|Ore Potassium|Ore Potassium|Ingot Potassium|Ingot Potassiu
 R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
-R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
-R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
+R|StonetoDeuterium|Ore Stone|Stone|Ingot DTFuelCapsule|Deuterium|False
 ## only-AryxEpsteinDriveMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -1363,14 +1211,14 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
-A|Component Magnetron_Component|Magnetron_Component|Component Magnetron_Component|Component|Magnetron Component|DeuteriumReactorMod|0|0
-A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DeuteriumContainer|Deuterium|Deuterium|DeuteriumReactorMod|0|0
-A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
-A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DeuteriumContainer|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
-R|IcetoDeuterium|Ore Ice|Ice|Ingot DeuteriumContainer|Deuterium|False
+A|Component MagnetronComponent|MagnetronComponent|Component MagnetronComponent|Component|Magnetron|DeuteriumReactorMod|0|0
+A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DTFuelCapsule|Deuterium|Deuterium|DeuteriumReactorMod|0|0
+A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
+A|Ingot IcetoDeuterium|IcetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Ice)|DeuteriumReactorMod|0|0
+R|IcetoDeuterium|Ore Ice|Ice|Ingot DTFuelCapsule|Deuterium|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DeuteriumContainer|Deuterium|False
+R|DeuteriumOreToIngot|Ore Deuterium|Ore Deuterium|Ingot DTFuelCapsule|Deuterium|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
 R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
 R|MagnesiumOreToIngot|Ore Magnesium|Ore Magnesium|Ingot Magnesium|Magnesiumpowder|False
@@ -1381,7 +1229,7 @@ R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
+R|StonetoDeuterium|Ore Stone|Stone|Ingot DTFuelCapsule|Deuterium|False
 ## only-EatDrinkSleepRepeatMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -1485,137 +1333,6 @@ A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Se
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
 A|ConsumableItem SparklingWater|SparklingWater|ConsumableItem SparklingWater|Food|SparklingWater|EatDrinkSleepRepeatMod|0|0
 A|ConsumableItem Emergency_Ration|Emergency_Ration|ConsumableItem Emergency_Ration|Food|Emergency Ration|EatDrinkSleepRepeatMod|0|0
-R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
-R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
-R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
-R|MagnesiumOreToIngot|Ore Magnesium|Ore Magnesium|Ingot Magnesium|Magnesiumpowder|False
-R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
-R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|False
-R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
-R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
-R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
-R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-## only-HSR_Mod
-A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
-A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
-A|Component MetalGrid|MetalGrid|Component MetalGrid|Component|MetalGrid|Vanilla|0|0
-A|Component InteriorPlate|InteriorPlate|Component InteriorPlate|Component|InteriorPlate|Vanilla|0|0
-A|Component SteelPlate|SteelPlate|Component SteelPlate|Component|SteelPlate|Vanilla|0|0
-A|Component SmallTube|SmallTube|Component SmallTube|Component|SmallTube|Vanilla|0|0
-A|Component LargeTube|LargeTube|Component LargeTube|Component|LargeTube|Vanilla|0|0
-A|Component MotorComponent|MotorComponent|Component Motor|Component|Motor|Vanilla|0|0
-A|Component Display|Display|Component Display|Component|Display|Vanilla|0|0
-A|Component BulletproofGlass|BulletproofGlass|Component BulletproofGlass|Component|BulletproofGlass|Vanilla|0|0
-A|Component ComputerComponent|ComputerComponent|Component Computer|Component|Computer|Vanilla|0|0
-A|Component ReactorComponent|ReactorComponent|Component Reactor|Component|Reactor|Vanilla|0|0
-A|Component ThrustComponent|ThrustComponent|Component Thrust|Component|Thrust|Vanilla|0|0
-A|Component GravityGeneratorComponent|GravityGeneratorComponent|Component GravityGenerator|Component|GravityGenerator|Vanilla|0|0
-A|Component MedicalComponent|MedicalComponent|Component Medical|Component|Medical|Vanilla|0|0
-A|Component RadioCommunicationComponent|RadioCommunicationComponent|Component RadioCommunication|Component|RadioCommunication|Vanilla|0|0
-A|Component DetectorComponent|DetectorComponent|Component Detector|Component|Detector|Vanilla|0|0
-A|Component ExplosivesComponent|ExplosivesComponent|Component Explosives|Component|Explosives|Vanilla|0|0
-A|Component SolarCell|SolarCell|Component SolarCell|Component|SolarCell|Vanilla|0|0
-A|Component PowerCell|PowerCell|Component PowerCell|Component|PowerCell|Vanilla|0|0
-A|Component Superconductor|Superconductor|Component Superconductor|Component|Superconductor|Vanilla|0|0
-A|Component PrototechPanel|PrototechPanel|Component PrototechPanel|Component|PrototechPanel|Vanilla|0|0
-A|Component PrototechCapacitor|PrototechCapacitor|Component PrototechCapacitor|Component|PrototechCapacitor|Vanilla|0|0
-A|Component PrototechPropulsionUnit|PrototechPropulsionUnit|Component PrototechPropulsionUnit|Component|PrototechPropulsionUnit|Vanilla|0|0
-A|Component PrototechMachinery|PrototechMachinery|Component PrototechMachinery|Component|PrototechMachinery|Vanilla|0|0
-A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|Component|PrototechCircuitry|Vanilla|0|0
-A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
-A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
-A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
-A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder4|Position0040_AngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|EliteGrinder|Vanilla|0|0
-A|PhysicalGunObject HandDrill|Position0050_HandDrill|PhysicalGunObject HandDrillItem|Tools&Guns|HandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill2|Position0060_HandDrill2|PhysicalGunObject HandDrill2Item|Tools&Guns|UltimateHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill3|Position0070_HandDrill3|PhysicalGunObject HandDrill3Item|Tools&Guns|ProfessionalHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill4|Position0080_HandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|EliteHandDrill|Vanilla|0|0
-A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tools&Guns|Welder|Vanilla|0|0
-A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
-A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
-A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
-A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
-A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
-A|AmmoMagazine AutomaticRifleGun_Mag_20rd|Position0040_AutomaticRifleGun_Mag_20rd|AmmoMagazine AutomaticRifleGun_Mag_20rd|AmmoMagazine|AutoRifleGunMag|Vanilla|0|0
-A|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|Position0050_RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine|RapidFireRifleGunMag|Vanilla|0|0
-A|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|Position0060_PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine|PreciseRifleGunMag|Vanilla|0|0
-A|AmmoMagazine NATO_25x184mmMagazine|Position0080_NATO_25x184mmMagazine|AmmoMagazine NATO_25x184mm|AmmoMagazine|NATO 25x184mm|Vanilla|0|0
-A|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|Position0070_UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine|UltimateRifleGunMag|Vanilla|0|0
-A|AmmoMagazine AutocannonClip|Position0090_AutocannonClip|AmmoMagazine AutocannonClip|AmmoMagazine|AutocannonClip|Vanilla|0|0
-A|AmmoMagazine Missile200mm|Position0100_Missile200mm|AmmoMagazine Missile200mm|AmmoMagazine|Missile200mm|Vanilla|0|0
-A|AmmoMagazine MediumCalibreAmmo|Position0110_MediumCalibreAmmo|AmmoMagazine MediumCalibreAmmo|AmmoMagazine|MediumCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine LargeCalibreAmmo|Position0120_LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|AmmoMagazine|LargeCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine SmallRailgunAmmo|Position0130_SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|Vanilla|0|0
-A|AmmoMagazine LargeRailgunAmmo|Position0140_LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|Vanilla|0|0
-A|ConsumableItem CookMammalMeat|Position0010_CookMammalMeat|ConsumableItem MammalMeatCooked|Food|MammalMeatCooked|Vanilla|0|0
-A|ConsumableItem CookSpiderMeat|Position0020_CookSpiderMeat|ConsumableItem InsectMeatCooked|Food|InsectMeatCooked|Vanilla|0|0
-A|ConsumableItem MealPack_KelpCrisp|Position0030_MealPack_KelpCrisp|ConsumableItem MealPack_KelpCrisp|Food|KelpCrisp|Vanilla|0|0
-A|ConsumableItem MealPack_FruitBar|Position0040_MealPack_FruitBar|ConsumableItem MealPack_FruitBar|Food|FruitBar|Vanilla|0|0
-A|ConsumableItem MealPack_GardenSlaw|Position0050_MealPack_GardenSlaw|ConsumableItem MealPack_GardenSlaw|Food|GardenSlaw|Vanilla|0|0
-A|ConsumableItem MealPack_RedPellets|Position0060_MealPack_RedPellets|ConsumableItem MealPack_RedPellets|Food|RedPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Chili|Position0070_MealPack_Chili|ConsumableItem MealPack_Chili|Food|Chili|Vanilla|0|0
-A|ConsumableItem MealPack_Flatbread|Position0080_MealPack_Flatbread|ConsumableItem MealPack_Flatbread|Food|Flatbread|Vanilla|0|0
-A|ConsumableItem MealPack_Ramen|Position0090_MealPack_Ramen|ConsumableItem MealPack_Ramen|Food|Ramen|Vanilla|0|0
-A|ConsumableItem MealPack_FruitPastry|Position0100_MealPack_FruitPastry|ConsumableItem MealPack_FruitPastry|Food|FruitPastry|Vanilla|0|0
-A|ConsumableItem MealPack_VeggieBurger|Position0110_MealPack_VeggieBurger|ConsumableItem MealPack_VeggieBurger|Food|VeggieBurger|Vanilla|0|0
-A|ConsumableItem MealPack_Curry|Position0120_MealPack_Curry|ConsumableItem MealPack_Curry|Food|Curry|Vanilla|0|0
-A|ConsumableItem MealPack_GreenPellets|Position0130_MealPack_GreenPellets|ConsumableItem MealPack_GreenPellets|Food|GreenPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Dumplings|Position0140_MealPack_Dumplings|ConsumableItem MealPack_Dumplings|Food|Dumplings|Vanilla|0|0
-A|ConsumableItem MealPack_Spaghetti|Position0150_MealPack_Spaghetti|ConsumableItem MealPack_Spaghetti|Food|Spaghetti|Vanilla|0|0
-A|ConsumableItem MealPack_Lasagna|Position0160_MealPack_Lasagna|ConsumableItem MealPack_Lasagna|Food|Lasagna|Vanilla|0|0
-A|ConsumableItem MealPack_Burrito|Position0170_MealPack_Burrito|ConsumableItem MealPack_Burrito|Food|Burrito|Vanilla|0|0
-A|ConsumableItem MealPack_FrontierStew|Position0180_MealPack_FrontierStew|ConsumableItem MealPack_FrontierStew|Food|FrontierStew|Vanilla|0|0
-A|ConsumableItem MealPack_SearedSabiroid|Position0190_MealPack_SearedSabiroid|ConsumableItem MealPack_SearedSabiroid|Food|SearedSabiroid|Vanilla|0|0
-A|ConsumableItem MealPack_SteakDinner|Position0200_MealPack_SteakDinner|ConsumableItem MealPack_SteakDinner|Food|SteakDinner|Vanilla|0|0
-A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds|Vanilla|0|0
-A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
-A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
-A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
-A|Component K_HSR_Component_Rail_Vanilla|K_HSR_Component_Rail_Vanilla|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug|K_HSR_Ammuntion_Recipe_Slug|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Component K_HSR_Component_AssemblerStabilizer_Vanilla|K_HSR_Component_AssemblerStabilizer_Vanilla|Component K_HSR_AssemblerSystem|Component|AssemblerSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Rail|K_HSR_Component_Rail|Component K_HSR_RailComponents|Component|RailComponents|HSR_Mod|0|0
-A|Component K_HSR_Component_PulseSystem|K_HSR_Component_PulseSystem|Component K_HSR_PulseSystem|Component|PulseSystem|HSR_Mod|0|0
-A|Component K_HSR_Component_Globe|K_HSR_Component_Globe|Component K_HSR_Globe|Component|Globe|HSR_Mod|0|0
-A|Component K_HSR_Component_Circuitry|K_HSR_Component_Circuitry|Component K_HSR_HyperConductiveCircuitry|Component|HyperConductiveCircuitry|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlate|K_HSR_Component_HexPlate|Component K_HSR_HexagolPlating|Component|HexagolPlating|HSR_Mod|0|0
-A|Component K_HSR_Component_Conduit|K_HSR_Component_Conduit|Component K_HSR_GelConduit|Component|GelConduit|HSR_Mod|0|0
-A|Component K_HSR_Component_GlobeII|K_HSR_Component_GlobeII|Component K_HSR_Globe_II|Component|Globe II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailII|K_HSR_Component_RailII|Component K_HSR_RailComponents_II|Component|RailComponents II|HSR_Mod|0|0
-A|Component K_HSR_Component_HexPlateII|K_HSR_Component_HexPlateII|Component K_HSR_HexagolPlating_II|Component|HexagolPlating II|HSR_Mod|0|0
-A|Component K_HSR_Component_RailIII|K_HSR_Component_RailIII|Component K_HSR_RailComponents_III|Component|RailComponents III|HSR_Mod|0|0
-A|AmmoMagazine K_HSR_Ammuntion_Recipe_Slug_Automated|K_HSR_Ammuntion_Recipe_Slug_Automated|AmmoMagazine K_HSR_Slug|AmmoMagazine|Slug|HSR_Mod|0|0
-A|Ingot K_HSR_NaniteSludge_Recipe|K_HSR_NaniteSludge_Recipe|Ingot K_HSR_Nanites_Sludge|Ingot|Nanites Sludge|HSR_Mod|0|0
-A|Ingot K_HSR_EnergizedGel_Recipe|K_HSR_EnergizedGel_Recipe|Ingot K_HSR_Nanites_EnergizedGel|Ingot|Nanites EnergizedGel|HSR_Mod|0|0
-A|Ingot K_HSR_Hexagol_Recipe|K_HSR_Hexagol_Recipe|Ingot K_HSR_Nanites_Hexagol|Ingot|Nanites Hexagol|HSR_Mod|0|0
-A|Ingot K_HSR_Chromium_Recipe|K_HSR_Chromium_Recipe|Ingot K_HSR_Nanites_Chromium|Ingot|Nanites Chromium|HSR_Mod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
@@ -1928,121 +1645,6 @@ R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titani
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
-## only-IndustrialOverhaulWaterMod
-A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
-A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
-A|Component MetalGrid|MetalGrid|Component MetalGrid|Component|MetalGrid|Vanilla|0|0
-A|Component InteriorPlate|InteriorPlate|Component InteriorPlate|Component|InteriorPlate|Vanilla|0|0
-A|Component SteelPlate|SteelPlate|Component SteelPlate|Component|SteelPlate|Vanilla|0|0
-A|Component SmallTube|SmallTube|Component SmallTube|Component|SmallTube|Vanilla|0|0
-A|Component LargeTube|LargeTube|Component LargeTube|Component|LargeTube|Vanilla|0|0
-A|Component MotorComponent|MotorComponent|Component Motor|Component|Motor|Vanilla|0|0
-A|Component Display|Display|Component Display|Component|Display|Vanilla|0|0
-A|Component BulletproofGlass|BulletproofGlass|Component BulletproofGlass|Component|BulletproofGlass|Vanilla|0|0
-A|Component ComputerComponent|ComputerComponent|Component Computer|Component|Computer|Vanilla|0|0
-A|Component ReactorComponent|ReactorComponent|Component Reactor|Component|Reactor|Vanilla|0|0
-A|Component ThrustComponent|ThrustComponent|Component Thrust|Component|Thrust|Vanilla|0|0
-A|Component GravityGeneratorComponent|GravityGeneratorComponent|Component GravityGenerator|Component|GravityGenerator|Vanilla|0|0
-A|Component MedicalComponent|MedicalComponent|Component Medical|Component|Medical|Vanilla|0|0
-A|Component RadioCommunicationComponent|RadioCommunicationComponent|Component RadioCommunication|Component|RadioCommunication|Vanilla|0|0
-A|Component DetectorComponent|DetectorComponent|Component Detector|Component|Detector|Vanilla|0|0
-A|Component ExplosivesComponent|ExplosivesComponent|Component Explosives|Component|Explosives|Vanilla|0|0
-A|Component SolarCell|SolarCell|Component SolarCell|Component|SolarCell|Vanilla|0|0
-A|Component PowerCell|PowerCell|Component PowerCell|Component|PowerCell|Vanilla|0|0
-A|Component Superconductor|Superconductor|Component Superconductor|Component|Superconductor|Vanilla|0|0
-A|Component PrototechPanel|PrototechPanel|Component PrototechPanel|Component|PrototechPanel|Vanilla|0|0
-A|Component PrototechCapacitor|PrototechCapacitor|Component PrototechCapacitor|Component|PrototechCapacitor|Vanilla|0|0
-A|Component PrototechPropulsionUnit|PrototechPropulsionUnit|Component PrototechPropulsionUnit|Component|PrototechPropulsionUnit|Vanilla|0|0
-A|Component PrototechMachinery|PrototechMachinery|Component PrototechMachinery|Component|PrototechMachinery|Vanilla|0|0
-A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|Component|PrototechCircuitry|Vanilla|0|0
-A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
-A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
-A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
-A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder4|Position0040_AngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|EliteGrinder|Vanilla|0|0
-A|PhysicalGunObject HandDrill|Position0050_HandDrill|PhysicalGunObject HandDrillItem|Tools&Guns|HandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill2|Position0060_HandDrill2|PhysicalGunObject HandDrill2Item|Tools&Guns|UltimateHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill3|Position0070_HandDrill3|PhysicalGunObject HandDrill3Item|Tools&Guns|ProfessionalHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill4|Position0080_HandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|EliteHandDrill|Vanilla|0|0
-A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tools&Guns|Welder|Vanilla|0|0
-A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
-A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
-A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
-A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
-A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
-A|AmmoMagazine AutomaticRifleGun_Mag_20rd|Position0040_AutomaticRifleGun_Mag_20rd|AmmoMagazine AutomaticRifleGun_Mag_20rd|AmmoMagazine|AutoRifleGunMag|Vanilla|0|0
-A|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|Position0050_RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine|RapidFireRifleGunMag|Vanilla|0|0
-A|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|Position0060_PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine|PreciseRifleGunMag|Vanilla|0|0
-A|AmmoMagazine NATO_25x184mmMagazine|Position0080_NATO_25x184mmMagazine|AmmoMagazine NATO_25x184mm|AmmoMagazine|NATO 25x184mm|Vanilla|0|0
-A|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|Position0070_UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine|UltimateRifleGunMag|Vanilla|0|0
-A|AmmoMagazine AutocannonClip|Position0090_AutocannonClip|AmmoMagazine AutocannonClip|AmmoMagazine|AutocannonClip|Vanilla|0|0
-A|AmmoMagazine Missile200mm|Position0100_Missile200mm|AmmoMagazine Missile200mm|AmmoMagazine|Missile200mm|Vanilla|0|0
-A|AmmoMagazine MediumCalibreAmmo|Position0110_MediumCalibreAmmo|AmmoMagazine MediumCalibreAmmo|AmmoMagazine|MediumCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine LargeCalibreAmmo|Position0120_LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|AmmoMagazine|LargeCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine SmallRailgunAmmo|Position0130_SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|Vanilla|0|0
-A|AmmoMagazine LargeRailgunAmmo|Position0140_LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|Vanilla|0|0
-A|ConsumableItem CookMammalMeat|Position0010_CookMammalMeat|ConsumableItem MammalMeatCooked|Food|MammalMeatCooked|Vanilla|0|0
-A|ConsumableItem CookSpiderMeat|Position0020_CookSpiderMeat|ConsumableItem InsectMeatCooked|Food|InsectMeatCooked|Vanilla|0|0
-A|ConsumableItem MealPack_KelpCrisp|Position0030_MealPack_KelpCrisp|ConsumableItem MealPack_KelpCrisp|Food|KelpCrisp|Vanilla|0|0
-A|ConsumableItem MealPack_FruitBar|Position0040_MealPack_FruitBar|ConsumableItem MealPack_FruitBar|Food|FruitBar|Vanilla|0|0
-A|ConsumableItem MealPack_GardenSlaw|Position0050_MealPack_GardenSlaw|ConsumableItem MealPack_GardenSlaw|Food|GardenSlaw|Vanilla|0|0
-A|ConsumableItem MealPack_RedPellets|Position0060_MealPack_RedPellets|ConsumableItem MealPack_RedPellets|Food|RedPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Chili|Position0070_MealPack_Chili|ConsumableItem MealPack_Chili|Food|Chili|Vanilla|0|0
-A|ConsumableItem MealPack_Flatbread|Position0080_MealPack_Flatbread|ConsumableItem MealPack_Flatbread|Food|Flatbread|Vanilla|0|0
-A|ConsumableItem MealPack_Ramen|Position0090_MealPack_Ramen|ConsumableItem MealPack_Ramen|Food|Ramen|Vanilla|0|0
-A|ConsumableItem MealPack_FruitPastry|Position0100_MealPack_FruitPastry|ConsumableItem MealPack_FruitPastry|Food|FruitPastry|Vanilla|0|0
-A|ConsumableItem MealPack_VeggieBurger|Position0110_MealPack_VeggieBurger|ConsumableItem MealPack_VeggieBurger|Food|VeggieBurger|Vanilla|0|0
-A|ConsumableItem MealPack_Curry|Position0120_MealPack_Curry|ConsumableItem MealPack_Curry|Food|Curry|Vanilla|0|0
-A|ConsumableItem MealPack_GreenPellets|Position0130_MealPack_GreenPellets|ConsumableItem MealPack_GreenPellets|Food|GreenPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Dumplings|Position0140_MealPack_Dumplings|ConsumableItem MealPack_Dumplings|Food|Dumplings|Vanilla|0|0
-A|ConsumableItem MealPack_Spaghetti|Position0150_MealPack_Spaghetti|ConsumableItem MealPack_Spaghetti|Food|Spaghetti|Vanilla|0|0
-A|ConsumableItem MealPack_Lasagna|Position0160_MealPack_Lasagna|ConsumableItem MealPack_Lasagna|Food|Lasagna|Vanilla|0|0
-A|ConsumableItem MealPack_Burrito|Position0170_MealPack_Burrito|ConsumableItem MealPack_Burrito|Food|Burrito|Vanilla|0|0
-A|ConsumableItem MealPack_FrontierStew|Position0180_MealPack_FrontierStew|ConsumableItem MealPack_FrontierStew|Food|FrontierStew|Vanilla|0|0
-A|ConsumableItem MealPack_SearedSabiroid|Position0190_MealPack_SearedSabiroid|ConsumableItem MealPack_SearedSabiroid|Food|SearedSabiroid|Vanilla|0|0
-A|ConsumableItem MealPack_SteakDinner|Position0200_MealPack_SteakDinner|ConsumableItem MealPack_SteakDinner|Food|SteakDinner|Vanilla|0|0
-A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds|Vanilla|0|0
-A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
-A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
-A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
-A|Component Foam|Foam|Component Foam|Component|Foam|IndustrialOverhaulWaterMod|0|0
-A|Component BuoyancyTube|BuoyancyTube|Component BuoyancyTube|Component|BuoyancyTube|IndustrialOverhaulWaterMod|0|0
-R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
-R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
-R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
-R|MagnesiumOreToIngot|Ore Magnesium|Ore Magnesium|Ingot Magnesium|Magnesiumpowder|False
-R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
-R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|False
-R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
-R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
-R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
-R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-MCRN_RailGunMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -2653,175 +2255,6 @@ R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|Fal
 R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
-R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-## only-SigmaDraconisCoreMod
-A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
-A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
-A|Component MetalGrid|MetalGrid|Component MetalGrid|Component|MetalGrid|Vanilla|0|0
-A|Component InteriorPlate|InteriorPlate|Component InteriorPlate|Component|InteriorPlate|Vanilla|0|0
-A|Component SteelPlate|SteelPlate|Component SteelPlate|Component|SteelPlate|Vanilla|0|0
-A|Component SmallTube|SmallTube|Component SmallTube|Component|SmallTube|Vanilla|0|0
-A|Component LargeTube|LargeTube|Component LargeTube|Component|LargeTube|Vanilla|0|0
-A|Component MotorComponent|MotorComponent|Component Motor|Component|Motor|Vanilla|0|0
-A|Component Display|Display|Component Display|Component|Display|Vanilla|0|0
-A|Component BulletproofGlass|BulletproofGlass|Component BulletproofGlass|Component|BulletproofGlass|Vanilla|0|0
-A|Component ComputerComponent|ComputerComponent|Component Computer|Component|Computer|Vanilla|0|0
-A|Component ReactorComponent|ReactorComponent|Component Reactor|Component|Reactor|Vanilla|0|0
-A|Component ThrustComponent|ThrustComponent|Component Thrust|Component|Thrust|Vanilla|0|0
-A|Component GravityGeneratorComponent|GravityGeneratorComponent|Component GravityGenerator|Component|GravityGenerator|Vanilla|0|0
-A|Component MedicalComponent|MedicalComponent|Component Medical|Component|Medical|Vanilla|0|0
-A|Component RadioCommunicationComponent|RadioCommunicationComponent|Component RadioCommunication|Component|RadioCommunication|Vanilla|0|0
-A|Component DetectorComponent|DetectorComponent|Component Detector|Component|Detector|Vanilla|0|0
-A|Component ExplosivesComponent|ExplosivesComponent|Component Explosives|Component|Explosives|Vanilla|0|0
-A|Component SolarCell|SolarCell|Component SolarCell|Component|SolarCell|Vanilla|0|0
-A|Component PowerCell|PowerCell|Component PowerCell|Component|PowerCell|Vanilla|0|0
-A|Component Superconductor|Superconductor|Component Superconductor|Component|Superconductor|Vanilla|0|0
-A|Component PrototechPanel|PrototechPanel|Component PrototechPanel|Component|PrototechPanel|Vanilla|0|0
-A|Component PrototechCapacitor|PrototechCapacitor|Component PrototechCapacitor|Component|PrototechCapacitor|Vanilla|0|0
-A|Component PrototechPropulsionUnit|PrototechPropulsionUnit|Component PrototechPropulsionUnit|Component|PrototechPropulsionUnit|Vanilla|0|0
-A|Component PrototechMachinery|PrototechMachinery|Component PrototechMachinery|Component|PrototechMachinery|Vanilla|0|0
-A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|Component|PrototechCircuitry|Vanilla|0|0
-A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
-A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
-A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
-A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
-A|PhysicalGunObject AngleGrinder4|Position0040_AngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|EliteGrinder|Vanilla|0|0
-A|PhysicalGunObject HandDrill|Position0050_HandDrill|PhysicalGunObject HandDrillItem|Tools&Guns|HandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill2|Position0060_HandDrill2|PhysicalGunObject HandDrill2Item|Tools&Guns|UltimateHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill3|Position0070_HandDrill3|PhysicalGunObject HandDrill3Item|Tools&Guns|ProfessionalHandDrill|Vanilla|0|0
-A|PhysicalGunObject HandDrill4|Position0080_HandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|EliteHandDrill|Vanilla|0|0
-A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tools&Guns|Welder|Vanilla|0|0
-A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
-A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
-A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
-A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
-A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
-A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
-A|AmmoMagazine AutomaticRifleGun_Mag_20rd|Position0040_AutomaticRifleGun_Mag_20rd|AmmoMagazine AutomaticRifleGun_Mag_20rd|AmmoMagazine|AutoRifleGunMag|Vanilla|0|0
-A|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|Position0050_RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine RapidFireAutomaticRifleGun_Mag_50rd|AmmoMagazine|RapidFireRifleGunMag|Vanilla|0|0
-A|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|Position0060_PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine PreciseAutomaticRifleGun_Mag_5rd|AmmoMagazine|PreciseRifleGunMag|Vanilla|0|0
-A|AmmoMagazine NATO_25x184mmMagazine|Position0080_NATO_25x184mmMagazine|AmmoMagazine NATO_25x184mm|AmmoMagazine|NATO 25x184mm|Vanilla|0|0
-A|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|Position0070_UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine UltimateAutomaticRifleGun_Mag_30rd|AmmoMagazine|UltimateRifleGunMag|Vanilla|0|0
-A|AmmoMagazine AutocannonClip|Position0090_AutocannonClip|AmmoMagazine AutocannonClip|AmmoMagazine|AutocannonClip|Vanilla|0|0
-A|AmmoMagazine Missile200mm|Position0100_Missile200mm|AmmoMagazine Missile200mm|AmmoMagazine|Missile200mm|Vanilla|0|0
-A|AmmoMagazine MediumCalibreAmmo|Position0110_MediumCalibreAmmo|AmmoMagazine MediumCalibreAmmo|AmmoMagazine|MediumCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine LargeCalibreAmmo|Position0120_LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|AmmoMagazine|LargeCalibreAmmo|Vanilla|0|0
-A|AmmoMagazine SmallRailgunAmmo|Position0130_SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|Vanilla|0|0
-A|AmmoMagazine LargeRailgunAmmo|Position0140_LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|Vanilla|0|0
-A|ConsumableItem CookMammalMeat|Position0010_CookMammalMeat|ConsumableItem MammalMeatCooked|Food|MammalMeatCooked|Vanilla|0|0
-A|ConsumableItem CookSpiderMeat|Position0020_CookSpiderMeat|ConsumableItem InsectMeatCooked|Food|InsectMeatCooked|Vanilla|0|0
-A|ConsumableItem MealPack_KelpCrisp|Position0030_MealPack_KelpCrisp|ConsumableItem MealPack_KelpCrisp|Food|KelpCrisp|Vanilla|0|0
-A|ConsumableItem MealPack_FruitBar|Position0040_MealPack_FruitBar|ConsumableItem MealPack_FruitBar|Food|FruitBar|Vanilla|0|0
-A|ConsumableItem MealPack_GardenSlaw|Position0050_MealPack_GardenSlaw|ConsumableItem MealPack_GardenSlaw|Food|GardenSlaw|Vanilla|0|0
-A|ConsumableItem MealPack_RedPellets|Position0060_MealPack_RedPellets|ConsumableItem MealPack_RedPellets|Food|RedPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Chili|Position0070_MealPack_Chili|ConsumableItem MealPack_Chili|Food|Chili|Vanilla|0|0
-A|ConsumableItem MealPack_Flatbread|Position0080_MealPack_Flatbread|ConsumableItem MealPack_Flatbread|Food|Flatbread|Vanilla|0|0
-A|ConsumableItem MealPack_Ramen|Position0090_MealPack_Ramen|ConsumableItem MealPack_Ramen|Food|Ramen|Vanilla|0|0
-A|ConsumableItem MealPack_FruitPastry|Position0100_MealPack_FruitPastry|ConsumableItem MealPack_FruitPastry|Food|FruitPastry|Vanilla|0|0
-A|ConsumableItem MealPack_VeggieBurger|Position0110_MealPack_VeggieBurger|ConsumableItem MealPack_VeggieBurger|Food|VeggieBurger|Vanilla|0|0
-A|ConsumableItem MealPack_Curry|Position0120_MealPack_Curry|ConsumableItem MealPack_Curry|Food|Curry|Vanilla|0|0
-A|ConsumableItem MealPack_GreenPellets|Position0130_MealPack_GreenPellets|ConsumableItem MealPack_GreenPellets|Food|GreenPellets|Vanilla|0|0
-A|ConsumableItem MealPack_Dumplings|Position0140_MealPack_Dumplings|ConsumableItem MealPack_Dumplings|Food|Dumplings|Vanilla|0|0
-A|ConsumableItem MealPack_Spaghetti|Position0150_MealPack_Spaghetti|ConsumableItem MealPack_Spaghetti|Food|Spaghetti|Vanilla|0|0
-A|ConsumableItem MealPack_Lasagna|Position0160_MealPack_Lasagna|ConsumableItem MealPack_Lasagna|Food|Lasagna|Vanilla|0|0
-A|ConsumableItem MealPack_Burrito|Position0170_MealPack_Burrito|ConsumableItem MealPack_Burrito|Food|Burrito|Vanilla|0|0
-A|ConsumableItem MealPack_FrontierStew|Position0180_MealPack_FrontierStew|ConsumableItem MealPack_FrontierStew|Food|FrontierStew|Vanilla|0|0
-A|ConsumableItem MealPack_SearedSabiroid|Position0190_MealPack_SearedSabiroid|ConsumableItem MealPack_SearedSabiroid|Food|SearedSabiroid|Vanilla|0|0
-A|ConsumableItem MealPack_SteakDinner|Position0200_MealPack_SteakDinner|ConsumableItem MealPack_SteakDinner|Food|SteakDinner|Vanilla|0|0
-A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds|Vanilla|0|0
-A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
-A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
-A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
-A|Component Composting|Composting|Component Compost|Component|Compost|SigmaDraconisCoreMod|0|0
-A|Component CrateofTomatoes|CrateofTomatoes|Component CrateTomato|Component|CrateTomato|SigmaDraconisCoreMod|0|0
-A|Component BottleWater|BottleWater|Component DrinkingWater|Component|DrinkingWater|SigmaDraconisCoreMod|0|0
-A|Component ToSmallArms|ToSmallArms|Component SmallArms|Component|SmallArms|SigmaDraconisCoreMod|0|0
-A|Component ToHeavyArms|ToHeavyArms|Component HeavyArms|Component|HeavyArms|SigmaDraconisCoreMod|0|0
-A|Component ToTools|ToTools|Component ToolPack|Component|ToolPack|SigmaDraconisCoreMod|0|0
-A|Component ToAmmo|ToAmmo|Component AmmoCache|Component|AmmoCache|SigmaDraconisCoreMod|0|0
-A|Component ToMedicalCache|ToMedicalCache|Component MedicalCache|Component|MedicalCache|SigmaDraconisCoreMod|0|0
-A|Component ToRepairCache|ToRepairCache|Component RepairCache|Component|RepairCache|SigmaDraconisCoreMod|0|0
-A|Component toMachinePart|toMachinePart|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toUpgradedBelterComp|toUpgradedBelterComp|Component UpgradedBelterComponent|Component|UpgradedBelterComponent|SigmaDraconisCoreMod|0|0
-A|Component toOPAExpComponent|toOPAExpComponent|Component OPAExpComponent|Component|OPAExpComponent|SigmaDraconisCoreMod|0|0
-A|Component IcetoNPTradeGoods|IcetoNPTradeGoods|Component IceBox|Component|IceBox|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsCraft|RawMaterialsCraft|Component RawMaterials|Component|RawMaterials|SigmaDraconisCoreMod|0|0
-A|Component RawMaterialsUse|RawMaterialsUse|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationTycho|ComponentCreationTycho|Component TychoComponent|Component|TychoComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationCeres|ComponentCreationCeres|Component CeresComponent|Component|CeresComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationVesta|ComponentCreationVesta|Component VestaComponent|Component|VestaComponent|SigmaDraconisCoreMod|0|0
-A|Component ComponentCreationMedina|ComponentCreationMedina|Component MedinaComponent|Component|MedinaComponent|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationTycho|PassengerCreationTycho|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationCeres|PassengerCreationCeres|Component TychoPassenger|Component|TychoPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationVesta|PassengerCreationVesta|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationGanymede|PassengerCreationGanymede|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component PassengerCreationMedina|PassengerCreationMedina|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component SurviviorConsume|SurviviorConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component WelWalaConsume|WelWalaConsume|Component CeresPassenger|Component|CeresPassenger|SigmaDraconisCoreMod|0|0
-A|Component toInnerComp|toInnerComp|Component InnerComponent|Component|InnerComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNComponent|toMCRNComponent|Component MCRNComponent|Component|MCRNComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNAdvComponent|toMCRNAdvComponent|Component MCRNAdvComponent|Component|MCRNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toMCRNExpComponent|toMCRNExpComponent|Component MCRNExpComponent|Component|MCRNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNComponent|toUNNComponent|Component UNNComponent|Component|UNNComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNAdvComponent|toUNNAdvComponent|Component UNNAdvComponent|Component|UNNAdvComponent|SigmaDraconisCoreMod|0|0
-A|Component toUNNExpComponent|toUNNExpComponent|Component UNNExpComponent|Component|UNNExpComponent|SigmaDraconisCoreMod|0|0
-A|Component ToLithiumPowerCell|ToLithiumPowerCell|Component LithiumCell|Component|LithiumCell|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerUNN|toResearchInnerUNN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchInnerMCRN|toResearchInnerMCRN|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component toResearchBelter|toResearchBelter|Component Research|Component|Research|SigmaDraconisCoreMod|0|0
-A|Component Fuel_Processing|Fuel_Processing|Component Fuel_Tank|Component|Fuel Tank|SigmaDraconisCoreMod|0|0
-A|Component BulkTungsten|BulkTungsten|Component BulkTungstenCrate|Component|BulkTungstenCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCopper|BulkCopper|Component BulkCopperCrate|Component|BulkCopperCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkLead|BulkLead|Component BulkLeadCrate|Component|BulkLeadCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkTitanium|BulkTitanium|Component BulkTitaniumCrate|Component|BulkTitaniumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkIron|BulkIron|Component BulkIronCrate|Component|BulkIronCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkNickel|BulkNickel|Component BulkNickelCrate|Component|BulkNickelCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkCobalt|BulkCobalt|Component BulkCobaltCrate|Component|BulkCobaltCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkMagnesium|BulkMagnesium|Component BulkMagnesiumCrate|Component|BulkMagnesiumCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilicon|BulkSilicon|Component BulkSiliconCrate|Component|BulkSiliconCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkSilver|BulkSilver|Component BulkSilverCrate|Component|BulkSilverCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkGold|BulkGold|Component BulkGoldCrate|Component|BulkGoldCrate|SigmaDraconisCoreMod|0|0
-A|Component BulkUranium|BulkUranium|Component BulkUraniumCrate|Component|BulkUraniumCrate|SigmaDraconisCoreMod|0|0
-R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
-R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|CopperToIngot|Ore Copper|Ore Copper|Ingot CopperIngot|Ingot CopperIngot|False
-R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
-R|GraphiteOreToIngot|Ore Graphite|Ore Graphite|Ingot Carbon|Carbon|False
-R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
-R|LeadToIngot|Ore Lead|Ore Lead|Ingot LeadIngot|Ingot LeadIngot|False
-R|LithiumToIngot|Ore Lithium|Ore Lithium|Ingot LithiumIngot|Ingot LithiumIngot|False
-R|MagnesiumOreToIngot|Ore Magnesium|Ore Magnesium|Ingot Magnesium|Magnesiumpowder|False
-R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
-R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|False
-R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
-R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
-R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
-R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
-R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-StarGateMod_Gates

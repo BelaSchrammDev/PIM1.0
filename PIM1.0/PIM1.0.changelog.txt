@@ -8,3 +8,12 @@ Changes:
 
 New:
 
+
+
+Version 1.1c:
+
+- add support for Apex items, add (sms,food) to containers
+
+Version 1.1b:
+
+- add Modsupport: Sigma Draconis Core Mod

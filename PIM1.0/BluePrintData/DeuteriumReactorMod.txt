@@ -8,12 +8,12 @@
 
 [Assembler]
 # DeuteriumReactorMod
-Component | Magnetron_Component
-Ingot | DeuteriumOreToIngot | DeuteriumContainer | Deuterium
-Ingot | StonetoDeuterium | DeuteriumContainer | Deuterium (Stone)
-Ingot | IcetoDeuterium | DeuteriumContainer | Deuterium (Ice)
+Component | MagnetronComponent | MagnetronComponent | Magnetron
+Ingot | DeuteriumOreToIngot | DTFuelCapsule | Deuterium
+Ingot | StonetoDeuterium | DTFuelCapsule | Deuterium (Stone)
+Ingot | IcetoDeuterium | DTFuelCapsule | Deuterium (Ice)
 
 [Refinery]
-StonetoDeuterium | Ore Stone | Ingot DeuteriumContainer
-IcetoDeuterium | Ore Ice | Ingot DeuteriumContainer
-DeuteriumOreToIngot | Ore Deuterium | Ingot DeuteriumContainer
+StonetoDeuterium | Ore Stone | Ingot DTFuelCapsule
+IcetoDeuterium | Ore Ice | Ingot DTFuelCapsule
+DeuteriumOreToIngot | Ore Deuterium | Ingot DTFuelCapsule

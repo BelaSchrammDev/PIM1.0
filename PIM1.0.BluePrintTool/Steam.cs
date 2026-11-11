@@ -5,42 +5,86 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 
 namespace PimBluePrintTool
 {
-    /// <summary>Optional online functions. Only used on explicit request (--titles, download).</summary>
+    public sealed class WorkshopDetails
+    {
+        public string Id;
+        /// <summary>Steam result code: 1 = ok, 9 = not found (deleted), others: hidden/no access.</summary>
+        public int Result;
+        public string Title;
+        public DateTime Updated;
+        public long FileSize;
+        public int Subscriptions;
+
+        public bool Available => Result == 1;
+    }
+
+    /// <summary>Optional online functions. Only used on explicit request (status, --titles, download).</summary>
     public static class Steam
     {
+        const string DetailsUrl = "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/";
+        const int BatchSize = 100;   // the API accepts about 100 ids per request
+
         /// <summary>
-        /// Titles of workshop items via the public Steam Web API (no API key needed).
+        /// Details of workshop items via the public Steam Web API (no API key needed).
         /// Sends only the workshop ids.
         /// </summary>
-        public static Dictionary<string, string> FetchTitles(IList<string> workshopIds)
+        public static Dictionary<string, WorkshopDetails> FetchDetails(IList<string> workshopIds)
         {
-            var result = new Dictionary<string, string>();
-            if (workshopIds.Count == 0) return result;
-
-            var form = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("itemcount", workshopIds.Count.ToString()) };
-            for (int i = 0; i < workshopIds.Count; i++)
-                form.Add(new KeyValuePair<string, string>($"publishedfileids[{i}]", workshopIds[i]));
-
+            var result = new Dictionary<string, WorkshopDetails>();
             using (var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) })
             {
                 http.DefaultRequestHeaders.UserAgent.ParseAdd("PIM-BluePrintTool");
-                var response = http.PostAsync("https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/",
-                    new FormUrlEncodedContent(form)).GetAwaiter().GetResult();
-                response.EnsureSuccessStatusCode();
-                using (var doc = JsonDocument.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult()))
+                var ids = workshopIds.Distinct().ToList();
+                for (int start = 0; start < ids.Count; start += BatchSize)
                 {
-                    foreach (var item in doc.RootElement.GetProperty("response").GetProperty("publishedfiledetails").EnumerateArray())
+                    if (start > 0) Thread.Sleep(500);   // avoid rate limiting
+                    var batch = ids.Skip(start).Take(BatchSize).ToList();
+                    var form = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("itemcount", batch.Count.ToString()) };
+                    for (int i = 0; i < batch.Count; i++)
+                        form.Add(new KeyValuePair<string, string>($"publishedfileids[{i}]", batch[i]));
+
+                    var response = http.PostAsync(DetailsUrl, new FormUrlEncodedContent(form)).GetAwaiter().GetResult();
+                    response.EnsureSuccessStatusCode();
+                    using (var doc = JsonDocument.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult()))
                     {
-                        JsonElement title;
-                        if (item.TryGetProperty("title", out title))
-                            result[item.GetProperty("publishedfileid").GetString()] = title.GetString();
+                        foreach (var item in doc.RootElement.GetProperty("response").GetProperty("publishedfiledetails").EnumerateArray())
+                        {
+                            var details = new WorkshopDetails
+                            {
+                                Id = String(item, "publishedfileid"),
+                                Result = (int)Number(item, "result"),
+                                Title = String(item, "title"),
+                                Updated = DateTimeOffset.FromUnixTimeSeconds(Number(item, "time_updated")).LocalDateTime,
+                                FileSize = Number(item, "file_size"),
+                                Subscriptions = (int)Number(item, "subscriptions"),
+                            };
+                            result[details.Id] = details;
+                        }
                     }
                 }
             }
             return result;
+        }
+
+        // the API returns numbers sometimes as strings
+        static string String(JsonElement e, string name)
+        {
+            JsonElement p;
+            if (!e.TryGetProperty(name, out p)) return "";
+            return p.ValueKind == JsonValueKind.String ? p.GetString() : p.ValueKind == JsonValueKind.Number ? p.GetInt64().ToString() : "";
+        }
+
+        static long Number(JsonElement e, string name)
+        {
+            JsonElement p;
+            long value;
+            if (!e.TryGetProperty(name, out p)) return 0;
+            if (p.ValueKind == JsonValueKind.Number) return p.GetInt64();
+            return p.ValueKind == JsonValueKind.String && long.TryParse(p.GetString(), out value) ? value : 0;
         }
 
         /// <summary>steamcmd executable: given path, or found in PATH.</summary>

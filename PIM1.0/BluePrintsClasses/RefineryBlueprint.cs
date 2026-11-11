@@ -16,7 +16,7 @@ namespace IngameScript
                 { Ore.Stone, IngameStrings.RStone },
                 { Ingot.Magnesium, Ingot.Magnesiumpowder },
                 { Ingot.Stone, "Gravel" },
-                { Ingot.DeuteriumContainer, IngameStrings.RDeuterium },
+                { Ingot.DTFuelCapsule, IngameStrings.RDeuterium },
                 { Ore.Ice, "Ice"},
                 { Ingot.Carbon, IngameStrings.RCarbon },
             };

@@ -91,7 +91,7 @@
                 CleanWater = prefix + RCleanWater,
                 SpentFuel = prefix + RSpentFuel,
                 Niter = prefix + RNiter,
-                DeuteriumContainer = prefix + RDeuterium + RContainer,
+                DTFuelCapsule = prefix + "DTFuelCapsule",   // fuel of the Deuterium Fusion Reactors mod
                 Carbon = prefix + RCarbon,
                 Potassium = prefix + RPotassium,
                 Phosphorus = prefix + RPhosphorus,

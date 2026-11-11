@@ -19,7 +19,7 @@ namespace IngameScript
                             { Ore.Ice, "Ice" },
                             { Ingot.WaterFood, "Water" },
                             { Ingot.GreyWater, "Greywater" },
-                            { Ingot.DeuteriumContainer, "Deuterium" },
+                            { Ingot.DTFuelCapsule, "Deuterium" },
                             { Ore.Organic, "Organic" },
                         };
 

@@ -35,7 +35,7 @@ namespace IngameScript
             { "Ice",  Ore.Ice},
             { "Water",  Ingot.WaterFood},
             { "Greywater",  Ingot.GreyWater},
-            { "Deuterium",  Ingot.DeuteriumContainer},
+            { "Deuterium",  Ingot.DTFuelCapsule},
             { "Organic", Ore.Organic },
             { "Seeds", IG_Seeds }
         };

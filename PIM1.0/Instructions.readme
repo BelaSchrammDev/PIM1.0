@@ -6,15 +6,15 @@ only compatible with SMS v1.4!
 
 the configuration is located in the customdata.
 
-new in update 1.1b:
-
- - add Modsupport
-	Sigma Draconis Core Mod
-
-new in update 1.1c:
- - add support for Apex items, add (sms,food) to containers
-
 new in update 1.1d:
  - massive code overhaul
+ - blueprints are loaded step by step at script start
+ - vanilla fixes: pistols and rocket launchers are counted correctly,
+   flare gun and fireworks can be autocrafted again,
+   medkit and powerkit added
+ - Deuterium Fusion Reactors mod updated to the current version
+   (the autocrafting setting of the Magnetron must be set again)
+ - removed mod support: Sigma Draconis Core (no longer on the workshop),
+   HSR (discontinued), Industrial Overhaul Water (no blueprints anymore)
 
 ----------------------------------------------------------------------------------------------------------------
