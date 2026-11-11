@@ -130,16 +130,11 @@ namespace IngameScript
                     SetWarning(Warning.ID.REFINERYNOTSUPPORTED, BlockSubType);
                 }
 
-                if (RefineryBlock.IsFunctional)
+                SetErrorByCondition(RefError.Damaged, !RefineryBlock.IsFunctional);
+
+                if (RefineryBlock.IsFunctional && (InputInventory.ItemCount == 0 || InputInventory.CurrentVolume > 0))
                 {
-                    if (InputInventory.ItemCount == 0 || InputInventory.CurrentVolume > 0)
-                    {
-                        DeleteRefineryError(RefError.NotFilled);
-                    }
-                }
-                else
-                {
-                    AddRefineryError(RefError.Damaged);
+                    DeleteRefineryError(RefError.NotFilled);
                 }
             }
 

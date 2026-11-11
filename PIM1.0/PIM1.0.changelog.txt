@@ -36,6 +36,7 @@ Fix:
   was refining yet
 - a typo in a True/False option of the config (custom data) stopped the script at start,
   now the option keeps its value
+- the hint "refinery is damaged" stayed on the PB display after the refinery was repaired
 
 Changes:
 
