@@ -2,12 +2,55 @@ Version 1.1d:
 
 Fix:
 
+- vanilla blueprint data checked against the game definitions (Content/Data/Blueprints.sbc):
+  - pistols and rocket launchers had wrong item names (missing "Item"), their stock was never counted
+  - flare gun, flare gun magazine and fireworks had outdated blueprint ids
+    (renumbered by the game to Position0050/0051/0060-0065), they could not be activated
+  - StoneOreToIngotBasic removed (no longer in the game)
+- Deuterium Fusion Reactors mod: the data came from a workshop version that was deleted,
+  now taken from the current mod 1259182705 (item DTFuelCapsule, component MagnetronComponent;
+  the LCD key of the magnetron changed)
+- refinery blueprints with the same input keep their definition order (stable sort);
+  before, the order depended on the unstable List.Sort
+- blueprint initialisation could only run once (curmod was left at "" after the first run)
+- duplicate blueprint definitions removed (Sigma Draconis refinery, Industrial Overhaul assembler)
+- debug Echo removed from GetPositionString (the method was removed later)
+- StringBuilderExtended fixed
+
 Changes:
 
 - rewrite WaterRecyclerManager
+- blueprint definitions moved from C# calls to data files: PIM1.0/BluePrintData/<Mod>.txt,
+  load order and workshop ids in Mods.txt. The build generates BluePrintsClasses/Generated/BluePrintData.g.cs
+  (one compact string per mod), about 4,000 characters less script
+- blueprint code split into pure parts (no Sandbox/VRage types, testable) and *Ingame.cs parts
+- blueprints are loaded by a startup job instead of in the constructor: BluePrintLoadJob (SequentialJob)
+  with one BluePrintModJob per mod, one data entry per step, maximum instruction budget while loading
+- MyDefinitionId of blueprints is created on first use, scrap item types on first use
+- refinery blueprint duplicate check via HashSet instead of List.Find
+- ConvertAutoCraftingName split into DeriveAutoCraftingType / DeriveAutoCraftingName, dead rules removed
+  (no change of the generated names)
+- RefreshType.Incinerator renamed to NoAutofill, Composter added: shows "cannot filled by PIM" with (sms)
+- the mod list of the config is taken from the blueprint data (order of Mods.txt)
+- removed mod support: Sigma Draconis Core (deleted on Steam), HSR (discontinued),
+  Industrial Overhaul Water (no blueprints anymore); HSR refinery type and name rule removed
+- Ingot.DeuteriumContainer renamed to Ingot.DTFuelCapsule
+- unused Config.mods and mod name constants removed
+- Tools.* helpers replaced by extension methods, TypeDefinitions moved to its own file
+- Instructions.readme only contains the news of the current version, older ones are in this file
 
 New:
 
+- vanilla: Medkit and Powerkit
+- PlantAndCook: EmptyTinCan; DailyNeedsSurvival: CleanToCleanWater
+- [Ignore] section in the data files: blueprints that are deliberately not used
+  (not generated, not proposed by the tool), e.g. the PlantAndCook composter recipes
+- PIM1.0.BluePrintGenerator: converts the data files into BluePrintData.g.cs during the build,
+  drops item and display names the script derives by itself, data errors are reported as file(line)
+- PIM1.0.BluePrintTool: compares the data files with the .sbc files of the game and the workshop mods
+  (check, update, new, scan, status, download), status and titles via the Steam Web API
+- test project (MSTest) with CI: Parameter, StringBuilderExtended, Jobs, Filter, CargoUse, TypeDefinitions,
+  InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool
 
 
 Version 1.1c:
