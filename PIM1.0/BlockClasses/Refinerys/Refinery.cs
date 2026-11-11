@@ -20,7 +20,7 @@ namespace IngameScript
 
             #region static
 
-            // TODO: 
+            // TODO: create partial blueprint class
             static public Dictionary<string, List<RefineryBlueprint>> refineryTypesAcceptedBlueprintsList = new Dictionary<string, List<RefineryBlueprint>>();
 
             static public void RemoveUnusedRefinerytypeBlueprintLists()
@@ -34,31 +34,9 @@ namespace IngameScript
                 }
             }
 
-            static readonly TypeDefinitions UnknownTypeDefinition = new TypeDefinitions();
-
-            static List<TypeDefinitions> TypeDefs = new List<TypeDefinitions>
-            {
-                new TypeDefinitions( false, "WRS", RefreshType.WaterRecyclingSystem, "Water Recycling System" ),
-                new TypeDefinitions( "Blast Furnace", RefreshType.VanillaRefinery, "Basic Refinery"),
-                new TypeDefinitions( "LargeRefineryIndustrial", RefreshType.VanillaRefinery, "Large Industrial Refinery"),
-                new TypeDefinitions( "LargeRefinery", RefreshType.VanillaRefinery, "Large Refinery"),
-                new TypeDefinitions( "K_HSR_Refinery_A", RefreshType.VanillaRefinery, "HSR Refinery A"),
-                new TypeDefinitions( false, "Hydroponics", RefreshType.HydrophonicsFarm, "Hydroponics Farm"),
-                new TypeDefinitions( "RockCrusher", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "OrePurifier", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "ChemicalPlant", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "Centrifuge", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "Incinerator", RefreshType.Incinerator),
-                new TypeDefinitions( "BitumenExtractor", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "Reprocessor", RefreshType.Reprocessor),
-                new TypeDefinitions( "OilCracker", RefreshType.VanillaRefinery),
-                new TypeDefinitions( "DeuteriumProcessor", RefreshType.VanillaRefinery, "Deuterium Refinery")
-            };
-
             #endregion
 
-            public TypeDefinitions typeid { get; set; }
-            //public Parameter parameter = new Parameter();
+            public TypeDefinitions RefineryType { get; set; }
             public IMyRefinery RefineryBlock = null;
             public List<RefError> ErrorList = new List<RefError>();
             public List<RefineryBlueprint> AcceptedBlueprints = null;
@@ -71,11 +49,11 @@ namespace IngameScript
             {
                 RefineryBlock = refinery;
                 BlockSubType = refinery.BlockDefinition.SubtypeId;
-                typeid = TypeDefs.Find(t => t.CompareTypeName(BlockSubType)) ?? UnknownTypeDefinition;
-                BlockSubType = typeid.GetAlternativOrDefaultName();
+                RefineryType = GetRefineryDefinition(BlockSubType);
+                BlockSubType = RefineryType.GetAlternativOrDefaultName();
                 AcceptedBlueprints = RefineryBlueprints.FindAll(b => RefineryBlock.CanUseBlueprint(b.Definition_id));
                 GetScrapBluePrints();
-                BlockManagerFactory.GetManager(typeid.GetTypeID(), this);
+                BlockManagerFactory.GetManager(RefineryType.GetTypeID(), this);
             }
 
             public override IMyFunctionalBlock GetFunctionalBlock()
@@ -119,12 +97,12 @@ namespace IngameScript
 
                 SetRefineryErrors();
 
-                if (typeid.IsUnknowType() || typeid.GetTypeID() == RefreshType.Incinerator)
+                if (RefineryType.IsUnknowType() || RefineryType.IsType(RefreshType.Incinerator))
                 {
                     return;
                 }
 
-                if (typeid.IsVanillaManagment())
+                if (RefineryType.IsVanillaManagment())
                 {
                     if (!ingotprio.ContainsKey(BlockSubType)) ingotprio.Add(BlockSubType, new List<IPrio>());
                     if (!refineryTypesAcceptedBlueprintsList.ContainsKey(BlockSubType)) refineryTypesAcceptedBlueprintsList.Add(BlockSubType, AcceptedBlueprints);
@@ -136,12 +114,12 @@ namespace IngameScript
 
             private void SetRefineryErrors()
             {
-                if (typeid.GetTypeID() == RefreshType.Incinerator)
+                if (RefineryType.IsType(RefreshType.Incinerator))
                 {
                     AddRefineryError(RefError.IncineratorNoAutofill);
                 }
 
-                if (typeid.IsUnknowType())
+                if (RefineryType.IsUnknowType())
                 {
                     SetWarning(Warning.ID.REFINERYNOTSUPPORTED, BlockSubType);
                 }
@@ -245,7 +223,7 @@ namespace IngameScript
 
             void CalculateWorkAmount()
             {
-                switch (typeid.GetTypeID())
+                switch (RefineryType.GetTypeID())
                 {
                     case RefreshType.HydrophonicsFarm:
                         CalculateRefineryAmount(Ingot.SubFresh);
