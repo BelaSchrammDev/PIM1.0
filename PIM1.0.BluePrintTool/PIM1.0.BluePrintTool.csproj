@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Developer tool: compares PIM1.0/BluePrintData/*.txt with the game and workshop mod
+       definitions (.sbc) and updates the data files. Not part of the build.
+       Run: dotnet run project PIM1.0.BluePrintTool, then the command, e.g. check (see EntryPoint.cs). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>PimBluePrintTool</RootNamespace>
+  </PropertyGroup>
+
+  <!-- data file reader of the generator -->
+  <ItemGroup>
+    <ProjectReference Include="..\PIM1.0.BluePrintGenerator\PIM1.0.BluePrintGenerator.csproj" />
+  </ItemGroup>
+
+  <!-- the item name rules of the script: the tool checks the item name the script really derives -->
+  <ItemGroup>
+    <Compile Include="..\PIM1.0\Definitions\Strings.cs" Link="Script\Strings.cs" />
+    <Compile Include="..\PIM1.0\Definitions\IngameResources\IngameStrings.cs" Link="Script\IngameStrings.cs" />
+    <Compile Include="..\PIM1.0\Definitions\ItemCasts.cs" Link="Script\ItemCasts.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs" Link="Script\AssemblerBluePrint.cs" />
+  </ItemGroup>
+
+</Project>

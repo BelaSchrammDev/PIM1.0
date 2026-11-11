@@ -73,9 +73,11 @@
     <None Include="Golden\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <!-- for the test that the committed BluePrintData.g.cs matches BluePrintData/*.txt -->
+  <!-- generator: test that the committed BluePrintData.g.cs matches BluePrintData/*.txt
+       tool: tests with fake .sbc files -->
   <ItemGroup>
     <ProjectReference Include="..\PIM1.0.BluePrintGenerator\PIM1.0.BluePrintGenerator.csproj" />
+    <ProjectReference Include="..\PIM1.0.BluePrintTool\PIM1.0.BluePrintTool.csproj" />
   </ItemGroup>
 
   <ItemGroup>

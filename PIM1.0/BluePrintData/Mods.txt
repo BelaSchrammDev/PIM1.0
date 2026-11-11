@@ -1,21 +1,31 @@
 # Load order of the blueprint data files (one mod per line, file BluePrintData/<Mod>.txt).
 # Order matters: the first definition of a blueprint wins, Vanilla is always loaded.
+# Optional after '|': Steam workshop id(s) of the mod, only used by PIM1.0.BluePrintTool.
 Vanilla
-SigmaDraconisCoreMod
-DailyNeedsSurvivalMod
+SigmaDraconisCoreMod | 2597877727
+DailyNeedsSurvivalMod | 1608841667
+# workshop id unknown
 AzimuthThrusterMod
-StarGateMod_Ores
+StarGateMod_Ores | 2362164390
+# workshop id unknown
 StarGateMod_Gates
+# workshop id unknown
 PaintGunMod
-DeuteriumReactorMod
+DeuteriumReactorMod | 2751123308
+# workshop id unknown (ShieldComponentBP was only found in the IndustrialOverhaulMod pack 2344068716)
 DefenseShieldMod
+# workshop id unknown
 MCRN_RailGunMod
+# workshop id unknown
 MWI_HomingWeaponryMod
-IndustrialOverhaulMod
+IndustrialOverhaulMod | 2344068716
+# workshop id unknown
 IndustrialOverhaulWaterMod
-IndustrialOverhaulLockLoadMod
-EatDrinkSleepRepeatMod
-PlantAndCookMod
-AryxEpsteinDriveMod
-HSR_Mod
-NorthWindWeaponsMod
+# GravelMag was also found in 2344068716
+IndustrialOverhaulLockLoadMod | 2616181591
+EatDrinkSleepRepeatMod | 2547246713
+PlantAndCookMod | 2570427696
+# AryxLynxon_FusionComponentBP was also found in the SigmaDraconis pack 2597877727
+AryxEpsteinDriveMod | 2394430829, 2976641132
+HSR_Mod | 1383538199
+NorthWindWeaponsMod | 2016817336

@@ -32,6 +32,8 @@ namespace PimBluePrintGenerator
 
     public sealed class DataSection
     {
+        /// <summary>Line of the section header (1-based).</summary>
+        public int HeaderLine;
         public bool IsRefinery;
         /// <summary>null = unconditional.</summary>
         public string ConditionMod;
@@ -43,12 +45,16 @@ namespace PimBluePrintGenerator
     public sealed class ModData
     {
         public string Name;
+        /// <summary>Full path of the mod data file.</summary>
+        public string File;
+        /// <summary>Steam workshop ids from Mods.txt (only used by PIM1.0.BluePrintTool).</summary>
+        public readonly List<string> WorkshopIds = new List<string>();
         public readonly List<DataSection> Sections = new List<DataSection>();
     }
 
     /// <summary>
     /// Reads the blueprint data directory:
-    ///   Mods.txt       load order, one mod name per line
+    ///   Mods.txt       load order, one mod per line: Name [| WorkshopId, WorkshopId, ...]
     ///   &lt;Mod&gt;.txt      one file per mod (see the header of the files for the format)
     /// Lines starting with '#' are comments.
     /// </summary>
@@ -77,13 +83,18 @@ namespace PimBluePrintGenerator
             if (!File.Exists(modListPath)) throw new BluePrintDataException(modListPath, "file not found");
 
             var modNames = new List<string>();
+            var workshopIds = new Dictionary<string, List<string>>();
             foreach (var row in ReadLines(modListPath))
             {
                 var name = row.Fields[0];
-                if (row.Fields.Length != 1 || name.Contains(' ')) throw row.Error("expected one mod name per line");
+                if (row.Fields.Length > 2 || name.Length == 0 || name.Contains(' ')) throw row.Error("expected 'ModName [| WorkshopId, WorkshopId, ...]'");
                 if (modNames.Contains(name)) throw row.Error($"mod '{name}' listed twice");
                 if (!File.Exists(Path.Combine(dataDir, name + ".txt"))) throw row.Error($"file {name}.txt not found");
+
+                var ids = row.Field(1).Split(',').Select(i => i.Trim()).Where(i => i.Length > 0).ToList();
+                if (ids.Any(i => !i.All(char.IsDigit))) throw row.Error("workshop ids must be numbers");
                 modNames.Add(name);
+                workshopIds[name] = ids;
             }
 
             if (modNames.Count == 0 || modNames[0] != IngameScript.Program.Strings.M_Vanilla)
@@ -97,6 +108,7 @@ namespace PimBluePrintGenerator
             }
 
             var mods = modNames.Select(n => ReadMod(Path.Combine(dataDir, n + ".txt"), n, modNames)).ToList();
+            foreach (var mod in mods) mod.WorkshopIds.AddRange(workshopIds[mod.Name]);
 
             if (!modNames.Contains(IngameScript.Program.Strings.M_IndustrialOverhaulMod))
                 throw new BluePrintDataException(modListPath, $"mod '{IngameScript.Program.Strings.M_IndustrialOverhaulMod}' is required by the script code");
@@ -106,7 +118,7 @@ namespace PimBluePrintGenerator
 
         static ModData ReadMod(string path, string name, List<string> allMods)
         {
-            var mod = new ModData { Name = name };
+            var mod = new ModData { Name = name, File = Path.GetFullPath(path) };
             DataSection section = null;
 
             foreach (var row in ReadLines(path))
@@ -115,6 +127,7 @@ namespace PimBluePrintGenerator
                 if (first.StartsWith("["))
                 {
                     section = ParseSectionHeader(row, allMods, name);
+                    section.HeaderLine = row.Line;
                     mod.Sections.Add(section);
                     continue;
                 }
