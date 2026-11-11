@@ -165,7 +165,7 @@ namespace IngameScript
 
         static bool SendItemByType(string iType, float itemAmount, IMyInventory ziel, int? p = null)
         {
-            return SendItemByTypeAndSubtype(IG_ + iType.Substring(0, iType.IndexOf(' ')), iType.Substring(iType.IndexOf(' ') + 1), itemAmount, ziel);
+            return SendItemByTypeAndSubtype(IG_ + iType.Substring(0, iType.IndexOf(' ')), iType.Substring(iType.IndexOf(' ') + 1), itemAmount, ziel, p);
         }
 
         static bool SendItemByTypeAndSubtype(string itemIngameType, string itemSubType, float itemAmount, IMyInventory ziel, int? p = null)
