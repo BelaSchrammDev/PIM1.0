@@ -229,13 +229,18 @@ namespace IngameScript
                 }
                 else
                 {
-                    for (int x = 1; x < invs.Count - 1; x++)
+                    // everything fits into the inventory with the most free space: all others are emptied into it
+                    // (the loop ended at Count - 1 before and left the last stack where it was,
+                    // with two stacks nothing was moved at all)
+                    var ziel = invs[0].inv;
+                    for (int x = 1; x < invs.Count; x++)
                     {
                         var i = invs[x].inv;
+                        if (i == ziel) continue;
                         var item = i.FindItem(type);
                         if (item != null)
                         {
-                            invs[0].inv.TransferItemFrom(i, (MyInventoryItem)item, null);
+                            ziel.TransferItemFrom(i, (MyInventoryItem)item, null);
                         }
                     }
                 }

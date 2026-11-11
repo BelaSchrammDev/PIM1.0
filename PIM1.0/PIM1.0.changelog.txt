@@ -45,6 +45,8 @@ Fix:
   a type is used if there is at least one magazine per weapon in stock, otherwise the next one
 - removing a weapon with several ammo types from the PIM group only removed it from one of
   its ammo types
+- stacking: an item that fits completely into one of its containers was not gathered there if it
+  was in only two containers, with more containers the last stack was left behind
 
 Changes:
 
