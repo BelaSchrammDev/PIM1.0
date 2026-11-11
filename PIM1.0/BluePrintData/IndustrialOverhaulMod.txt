@@ -121,11 +121,19 @@ PhysicalGunObject | POEliteAutoPistol | ElitePistolItem
 PhysicalGunObject | POWelder4 | Welder4Item
 PhysicalGunObject | POAngleGrinder4 | AngleGrinder4Item
 PhysicalGunObject | POHandDrill4 | HandDrill4Item
+# Ammo (base variants)
+AmmoMagazine | POHEMissile200mm | HEMissile200mm
+AmmoMagazine | AutocannonClip
+AmmoMagazine | MediumCalibreAmmo
+AmmoMagazine | LargeCalibreAmmo
+AmmoMagazine | LargeRailgunAmmo
+AmmoMagazine | LargeRailgunAmmoDUAP
+AmmoMagazine | SmallRailgunAmmo
 
 [Refinery]
 # SmelterIngots & RefineryIngots
 CopperOreToIngot | Ore Copper | Ingot Copper
-BauxiteOreToIngot | Ore Bauxite | Ingot Aluminium
+BauxiteOreToIngot | Ore Bauxite | Ingot Aluminum
 TitaniumOreToIngot | Ore Titanium | Ingot Titanium
 TantalumOreToIngot | Ore Tantalum | Ingot Tantalum
 CoalToCarbonBasic | Ore Coal | Ingot Carbon
@@ -140,7 +148,7 @@ CrushedPlatinumOreToIngot | Ore CrushedPlatinum | Ingot Platinum
 CrushedUraniumOreToIngot | Ore CrushedUranium | Ingot Uranium
 CrushedCopperOreToIngot | Ore CrushedCopper | Ingot Copper
 CrushedLithiumOreToIngot | Ore CrushedLithium | Ingot Lithium
-CrushedBauxiteOreToIngot | Ore CrushedBauxite | Ingot Bauxite
+CrushedBauxiteOreToIngot | Ore CrushedBauxite | Ingot Aluminum
 CrushedTitaniumOreToIngot | Ore CrushedTitanium | Ingot Titanium
 CrushedTantalumOreToIngot | Ore CrushedTantalum | Ingot Tantalum
 CrushedSulfurOreToIngot | Ore CrushedSulfur | Ingot Sulfur
@@ -155,7 +163,7 @@ PurifiedPlatinumOreToIngot | Ore PurifiedPlatinum | Ingot Platinum
 PurifiedUraniumOreToIngot | Ore PurifiedUranium | Ingot Uranium
 PurifiedCopperOreToIngot | Ore PurifiedCopper | Ingot Copper
 PurifiedLithiumOreToIngot | Ore PurifiedLithium | Ingot Lithium
-PurifiedBauxiteOreToIngot | Ore PurifiedBauxite | Ingot Bauxite
+PurifiedBauxiteOreToIngot | Ore PurifiedBauxite | Ingot Aluminum
 PurifiedTitaniumOreToIngot | Ore PurifiedTitanium | Ingot Titanium
 PurifiedTantalumOreToIngot | Ore PurifiedTantalum | Ingot Tantalum
 PurifiedSulfurOreToIngot | Ore PurifiedSulfur | Ingot Sulfur
@@ -205,3 +213,49 @@ OilSandToCrudeOil | Ore OilSand | Ore CrudeOil
 CrudeOilCracking | Ore CrudeOil | Ingot FuelOil
 # CentrifugeIngots
 UraniumOreToIngot | Ore Uranium | Ingot Uranium
+
+[Ignore]
+# Incinerator recipes (-> carbon): the Incinerator is not filled by PIM
+StoneOreDisposal
+IronOreDisposal
+NickelOreDisposal
+CobaltOreDisposal
+MagnesiumOreDisposal
+SiliconOreDisposal
+SilverOreDisposal
+GoldOreDisposal
+PlatinumOreDisposal
+UraniumOreDisposal
+ScrapIngotDisposal
+ScrapDisposal
+OilSandDisposal
+CopperOreDisposal
+LithiumOreDisposal
+BauxiteOreDisposal
+TitaniumOreDisposal
+TantalumOreDisposal
+StoneIngotDisposal
+IronIngotDisposal
+NickelIngotDisposal
+CobaltIngotDisposal
+MagnesiumIngotDisposal
+SiliconIngotDisposal
+SilverIngotDisposal
+GoldIngotDisposal
+PlatinumIngotDisposal
+UraniumIngotDisposal
+CrudeOilDisposal
+CopperIngotDisposal
+LithiumIngotDisposal
+BauxiteIngotDisposal
+TitaniumIngotDisposal
+TantalumIngotDisposal
+NiterIngotDisposal
+SulfurIngotDisposal
+PolymerIngotDisposal
+FuelOilDisposal
+# ingots in an assembler (starting recipes)
+CopperOreToIngotStarting
+IronOreToIngotStarting
+# same item as POSemiAutoPistolMagazine (two blueprints for one item would be queued twice)
+SemiAutoPistolMagazine

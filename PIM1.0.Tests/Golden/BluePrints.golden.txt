@@ -253,6 +253,13 @@ A|PhysicalGunObject POEliteAutoPistol|POEliteAutoPistol|PhysicalGunObject EliteP
 A|PhysicalGunObject POWelder4|POWelder4|PhysicalGunObject Welder4Item|Tools&Guns|Welder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POAngleGrinder4|POAngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|AngleGrinder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POHandDrill4|POHandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|HandDrill4Item|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POHEMissile200mm|POHEMissile200mm|AmmoMagazine HEMissile200mm|AmmoMagazine|HEMissile200mm|IndustrialOverhaulMod|0|0
+A|AmmoMagazine AutocannonClip|AutocannonClip|AmmoMagazine AutocannonClip|AmmoMagazine|AutocannonClip|IndustrialOverhaulMod|0|0
+A|AmmoMagazine MediumCalibreAmmo|MediumCalibreAmmo|AmmoMagazine MediumCalibreAmmo|AmmoMagazine|MediumCalibreAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeCalibreAmmo|LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|AmmoMagazine|LargeCalibreAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeRailgunAmmo|LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeRailgunAmmoDUAP|LargeRailgunAmmoDUAP|AmmoMagazine LargeRailgunAmmoDUAP|AmmoMagazine|LargeRailgunAmmoDUAP|IndustrialOverhaulMod|0|0
+A|AmmoMagazine SmallRailgunAmmo|SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|IndustrialOverhaulMod|0|0
 A|AmmoMagazine GravelMag|GravelMag|AmmoMagazine GravelMag|AmmoMagazine|GravelMag|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine GravelMagBig|GravelMagBig|AmmoMagazine GravelMagBig|AmmoMagazine|GravelMagBig|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine 155mmAPShell|155mmAPShell|AmmoMagazine 155mmAPShell|AmmoMagazine|155mmAPShell|IndustrialOverhaulLockLoadMod|0|0
@@ -308,11 +315,11 @@ A|AmmoMagazine C500AmmoAP|C500AmmoAP|AmmoMagazine C500AmmoAP|AmmoMagazine|500mm 
 A|AmmoMagazine C500AmmoHE|C500AmmoHE|AmmoMagazine C500AmmoHE|AmmoMagazine|500mm HE Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine C500AmmoCasaba|C500AmmoCasaba|AmmoMagazine C500AmmoCasaba|AmmoMagazine|500mm Casaba Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine PlasmaCell10MJ|PlasmaCell10MJ|AmmoMagazine PlasmaCell10MJ|AmmoMagazine|10MJ PlasmaCannon Cell|NorthWindWeaponsMod|0|0
-R|BauxiteOreToIngot|Ore Bauxite|Bauxite|Ingot Aluminium|Ingot Aluminium|False
+R|BauxiteOreToIngot|Ore Bauxite|Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|CrushBauxiteOre|Ore Bauxite|Bauxite|Ore CrushedBauxite|Crushed Bauxite|False
 R|CoalToCarbonBasic|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CoalToCarbon|Ore Coal|Coal|Ingot Carbon|Carbon|False
-R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Bauxite|Ingot Bauxite|False
+R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|PurifyBauxiteOre|Ore CrushedBauxite|Crushed Bauxite|Ore PurifiedBauxite|Purified Bauxite|False
 R|CrushedCobaltOreToIngot|Ore CrushedCobalt|Crushed Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
@@ -383,7 +390,7 @@ R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titaniu
 R|TriniumOreToIngot|Ore Trinium|Ore Trinium|Ingot Trinium|Ingot Trinium|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
-R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Bauxite|Ingot Bauxite|False
+R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|PurifiedCobaltOreToIngot|Ore PurifiedCobalt|Purified Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|PurifiedCopperOreToIngot|Ore PurifiedCopper|Purified Copper|Ingot Copper|Ingot Copper|False
 R|PurifiedGoldOreToIngot|Ore PurifiedGold|Purified Gold|Ingot Gold|Ingot Gold|False
@@ -1567,11 +1574,18 @@ A|PhysicalGunObject POEliteAutoPistol|POEliteAutoPistol|PhysicalGunObject EliteP
 A|PhysicalGunObject POWelder4|POWelder4|PhysicalGunObject Welder4Item|Tools&Guns|Welder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POAngleGrinder4|POAngleGrinder4|PhysicalGunObject AngleGrinder4Item|Tools&Guns|AngleGrinder4Item|IndustrialOverhaulMod|0|0
 A|PhysicalGunObject POHandDrill4|POHandDrill4|PhysicalGunObject HandDrill4Item|Tools&Guns|HandDrill4Item|IndustrialOverhaulMod|0|0
-R|BauxiteOreToIngot|Ore Bauxite|Bauxite|Ingot Aluminium|Ingot Aluminium|False
+A|AmmoMagazine POHEMissile200mm|POHEMissile200mm|AmmoMagazine HEMissile200mm|AmmoMagazine|HEMissile200mm|IndustrialOverhaulMod|0|0
+A|AmmoMagazine AutocannonClip|AutocannonClip|AmmoMagazine AutocannonClip|AmmoMagazine|AutocannonClip|IndustrialOverhaulMod|0|0
+A|AmmoMagazine MediumCalibreAmmo|MediumCalibreAmmo|AmmoMagazine MediumCalibreAmmo|AmmoMagazine|MediumCalibreAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeCalibreAmmo|LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|AmmoMagazine|LargeCalibreAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeRailgunAmmo|LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine LargeRailgunAmmoDUAP|LargeRailgunAmmoDUAP|AmmoMagazine LargeRailgunAmmoDUAP|AmmoMagazine|LargeRailgunAmmoDUAP|IndustrialOverhaulMod|0|0
+A|AmmoMagazine SmallRailgunAmmo|SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|IndustrialOverhaulMod|0|0
+R|BauxiteOreToIngot|Ore Bauxite|Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|CrushBauxiteOre|Ore Bauxite|Bauxite|Ore CrushedBauxite|Crushed Bauxite|False
 R|CoalToCarbonBasic|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CoalToCarbon|Ore Coal|Coal|Ingot Carbon|Carbon|False
-R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Bauxite|Ingot Bauxite|False
+R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|PurifyBauxiteOre|Ore CrushedBauxite|Crushed Bauxite|Ore PurifiedBauxite|Purified Bauxite|False
 R|CrushedCobaltOreToIngot|Ore CrushedCobalt|Crushed Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
@@ -1633,7 +1647,7 @@ R|TitaniumOreToIngot|Ore Titanium|Ore Titanium|Ingot Titanium|Ingot Titanium|Fal
 R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titanium|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
-R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Bauxite|Ingot Bauxite|False
+R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|PurifiedCobaltOreToIngot|Ore PurifiedCobalt|Purified Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|PurifiedCopperOreToIngot|Ore PurifiedCopper|Purified Copper|Ingot Copper|Ingot Copper|False
 R|PurifiedGoldOreToIngot|Ore PurifiedGold|Purified Gold|Ingot Gold|Ingot Gold|False
