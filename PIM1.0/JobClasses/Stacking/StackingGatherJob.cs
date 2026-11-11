@@ -4,10 +4,6 @@
     {
         public class StackingGatherJob : StackingStrategyJob
         {
-            public StackingGatherJob() : base(StackingMode.Alpha)
-            {
-            }
-
             public override bool InitStacking()
             {
                 int max_stack = 0;

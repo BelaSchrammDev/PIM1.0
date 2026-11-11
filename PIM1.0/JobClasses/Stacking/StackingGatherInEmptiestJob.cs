@@ -4,10 +4,6 @@
     {
         public class StackingGatherInEmptiestJob : StackingStrategyJob
         {
-            public StackingGatherInEmptiestJob() : base(StackingMode.Beta)
-            {
-            }
-
             public override bool InitStacking()
             {
                 ItemStacks.CurrentStackingType = ItemStacks.StackingType.VolumeBack;

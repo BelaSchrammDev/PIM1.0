@@ -4,10 +4,6 @@
     {
         public class StackingMergePairsJob : StackingStrategyJob
         {
-            public StackingMergePairsJob() : base(StackingMode.Delta)
-            {
-            }
-
             public override bool InitStacking()
             {
                 ItemStacks.CurrentStackingType = ItemStacks.StackingType.Volume;

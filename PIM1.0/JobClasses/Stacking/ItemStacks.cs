@@ -37,18 +37,15 @@ namespace IngameScript
 
             static public StackingType CurrentStackingType = StackingType.Stack;
             static public StackingSort CurrentStackingSorttype = StackingSort.Stack;
-            static IMyInventory big = null;
             static IMyInventory free = null;
 
             static public void ClearStackInventory() 
             {
-                big = null; 
                 free = null; 
             }
 
             static public void CalculateFreeInventory(IMyInventory inv) 
             {
-                if (big == null || (big.MaxVolume < inv.MaxVolume)) big = inv;
                 if (free == null || (free.MaxVolume - free.CurrentVolume < inv.MaxVolume - inv.CurrentVolume)) free = inv;
             }
 

@@ -4,10 +4,6 @@
     {
         public class StackingMergeInContainerJob : StackingStrategyJob
         {
-            public StackingMergeInContainerJob() : base(StackingMode.Single)
-            {
-            }
-
             public override bool InitStacking()
             {
                 int max_stack = 0;

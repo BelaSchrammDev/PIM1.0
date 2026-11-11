@@ -9,19 +9,6 @@ namespace IngameScript
         {
             protected List<ItemStacks> ItemStacksList = new List<ItemStacks>();
 
-            public enum StackingMode
-            {
-                Single,
-                Alpha,
-                Beta,
-                Delta,
-                Gamma
-            }
-
-            protected StackingStrategyJob(StackingMode mode) : base()
-            {
-            }
-
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 ItemStacksList.Clear();

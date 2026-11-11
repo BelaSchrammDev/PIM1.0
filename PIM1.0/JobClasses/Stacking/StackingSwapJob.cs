@@ -4,10 +4,6 @@
     {
         public class StackingSwapJob : StackingStrategyJob
         {
-            public StackingSwapJob() : base(StackingMode.Gamma)
-            {
-            }
-
             public override bool InitStacking()
             {
                 ItemStacks.CurrentStackingType = ItemStacks.StackingType.Stack;
