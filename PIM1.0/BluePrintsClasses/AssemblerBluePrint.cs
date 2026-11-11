@@ -35,7 +35,7 @@ namespace IngameScript
             public string subtype = "";
             string subtypename = "";
 
-            static string BluePrintNameToItemName(string t, string s)
+            public static string BluePrintNameToItemName(string t, string s)
             {
                 var cs = IngameStrings.RComponent;
                 if (s == Component.Magnetron) return cs + " " + s; // mod item

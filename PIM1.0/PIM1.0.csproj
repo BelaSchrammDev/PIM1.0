@@ -24,4 +24,25 @@
     <AdditionalFiles Include="Instructions.readme" />
     <AdditionalFiles Include="thumb.png" />
   </ItemGroup>
+
+  <!-- Blueprint data: BluePrintData/*.txt -> BluePrintsClasses/Generated/BluePrintData.g.cs
+       The generator only runs if one of the inputs changed (stamp file in obj) and only
+       rewrites the .g.cs if its content changed. The .g.cs is committed, so the test project
+       (and CI without Space Engineers) can use it without running the generator. -->
+  <PropertyGroup>
+    <BluePrintGeneratorProject>$(MSBuildProjectDirectory)\..\PIM1.0.BluePrintGenerator\PIM1.0.BluePrintGenerator.csproj</BluePrintGeneratorProject>
+    <BluePrintDataDir>$(MSBuildProjectDirectory)\BluePrintData</BluePrintDataDir>
+    <BluePrintDataOutput>$(MSBuildProjectDirectory)\BluePrintsClasses\Generated\BluePrintData.g.cs</BluePrintDataOutput>
+    <BluePrintDataStamp>$(BaseIntermediateOutputPath)BluePrintData.stamp</BluePrintDataStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <BluePrintDataInput Include="BluePrintData\*.txt" />
+    <BluePrintDataInput Include="..\PIM1.0.BluePrintGenerator\*.cs;..\PIM1.0.BluePrintGenerator\*.csproj" />
+    <!-- script files the generator uses for the item name rules -->
+    <BluePrintDataInput Include="BluePrintsClasses\AssemblerBluePrint.cs;Definitions\Strings.cs;Definitions\IngameResources\IngameStrings.cs;Definitions\ItemCasts.cs" />
+  </ItemGroup>
+  <Target Name="GenerateBluePrintData" BeforeTargets="CoreCompile" Inputs="@(BluePrintDataInput)" Outputs="$(BluePrintDataStamp)">
+    <Exec Command="dotnet run --project &quot;$(BluePrintGeneratorProject)&quot; -c Release -- &quot;$(BluePrintDataDir)&quot; &quot;$(BluePrintDataOutput)&quot;" />
+    <Touch Files="$(BluePrintDataStamp)" AlwaysCreate="true" />
+  </Target>
 </Project>

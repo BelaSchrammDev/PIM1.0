@@ -1,0 +1,134 @@
+# PIM blueprint data for mod 'Vanilla'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler if !IndustrialOverhaulMod]
+# blueprint vanilla
+# Components
+Component | ConstructionComponent
+Component | GirderComponent
+Component | MetalGrid
+Component | InteriorPlate
+Component | SteelPlate
+Component | SmallTube
+Component | LargeTube
+Component | MotorComponent
+Component | Display
+Component | BulletproofGlass
+Component | ComputerComponent
+Component | ReactorComponent
+Component | ThrustComponent
+Component | GravityGeneratorComponent
+Component | MedicalComponent
+Component | RadioCommunicationComponent
+Component | DetectorComponent
+Component | ExplosivesComponent
+Component | SolarCell
+Component | PowerCell
+Component | Superconductor
+# PrototechComponents
+Component | PrototechPanel
+Component | PrototechCapacitor
+Component | PrototechPropulsionUnit
+Component | PrototechMachinery
+Component | PrototechCircuitry
+Component | PrototechCoolingUnit
+# Equipment
+OxygenContainerObject | Position0010_OxygenBottle
+GasContainerObject | Position0020_HydrogenBottle
+Component | Position0030_Canvas
+Datapad | Position0040_Datapad
+PhysicalGunObject | Position0005_FlareGun | FlareGunItem
+AmmoMagazine | Position0005_FlareGunMagazine | FlareClip
+AmmoMagazine | Position0007_FireworksBoxBlue
+AmmoMagazine | Position00071_FireworksBoxGreen
+AmmoMagazine | Position00072_FireworksBoxRed
+AmmoMagazine | Position00073_FireworksBoxYellow
+AmmoMagazine | Position00074_FireworksBoxPink
+AmmoMagazine | Position00075_FireworksBoxRainbow
+# Tools
+PhysicalGunObject | Position0010_AngleGrinder
+PhysicalGunObject | Position0020_AngleGrinder2
+PhysicalGunObject | Position0030_AngleGrinder3
+PhysicalGunObject | Position0040_AngleGrinder4
+PhysicalGunObject | Position0050_HandDrill
+PhysicalGunObject | Position0060_HandDrill2
+PhysicalGunObject | Position0070_HandDrill3
+PhysicalGunObject | Position0080_HandDrill4
+PhysicalGunObject | Position0090_Welder
+PhysicalGunObject | Position0100_Welder2
+PhysicalGunObject | Position0110_Welder3
+PhysicalGunObject | Position0120_Welder4
+# Weapons
+PhysicalGunObject | Position0010_SemiAutoPistol
+PhysicalGunObject | Position0020_FullAutoPistol
+PhysicalGunObject | Position0030_EliteAutoPistol
+PhysicalGunObject | Position0040_AutomaticRifle
+PhysicalGunObject | Position0050_RapidFireAutomaticRifle
+PhysicalGunObject | Position0060_PreciseAutomaticRifle
+PhysicalGunObject | Position0070_UltimateAutomaticRifle
+PhysicalGunObject | Position0080_BasicHandHeldLauncher
+PhysicalGunObject | Position0090_AdvancedHandHeldLauncher
+# Ammo
+AmmoMagazine | Position0010_SemiAutoPistolMagazine
+AmmoMagazine | Position0020_FullAutoPistolMagazine
+AmmoMagazine | Position0030_ElitePistolMagazine
+AmmoMagazine | Position0040_AutomaticRifleGun_Mag_20rd
+AmmoMagazine | Position0050_RapidFireAutomaticRifleGun_Mag_50rd
+AmmoMagazine | Position0060_PreciseAutomaticRifleGun_Mag_5rd
+AmmoMagazine | Position0080_NATO_25x184mmMagazine
+AmmoMagazine | Position0070_UltimateAutomaticRifleGun_Mag_30rd
+AmmoMagazine | Position0090_AutocannonClip
+AmmoMagazine | Position0100_Missile200mm
+AmmoMagazine | Position0110_MediumCalibreAmmo
+AmmoMagazine | Position0120_LargeCalibreAmmo
+AmmoMagazine | Position0130_SmallRailgunAmmo
+AmmoMagazine | Position0140_LargeRailgunAmmo
+# FoodProcessorRations
+ConsumableItem | Position0010_CookMammalMeat | MammalMeatCooked
+ConsumableItem | Position0020_CookSpiderMeat | InsectMeatCooked
+ConsumableItem | Position0030_MealPack_KelpCrisp
+ConsumableItem | Position0040_MealPack_FruitBar
+ConsumableItem | Position0050_MealPack_GardenSlaw
+ConsumableItem | Position0060_MealPack_RedPellets
+ConsumableItem | Position0070_MealPack_Chili
+ConsumableItem | Position0080_MealPack_Flatbread
+ConsumableItem | Position0090_MealPack_Ramen
+ConsumableItem | Position0100_MealPack_FruitPastry
+ConsumableItem | Position0110_MealPack_VeggieBurger
+ConsumableItem | Position0120_MealPack_Curry
+ConsumableItem | Position0130_MealPack_GreenPellets
+ConsumableItem | Position0140_MealPack_Dumplings
+ConsumableItem | Position0150_MealPack_Spaghetti
+ConsumableItem | Position0160_MealPack_Lasagna
+ConsumableItem | Position0170_MealPack_Burrito
+ConsumableItem | Position0180_MealPack_FrontierStew
+ConsumableItem | Position0190_MealPack_SearedSabiroid
+ConsumableItem | Position0200_MealPack_SteakDinner
+# FoodProcessorSeeds
+SeedItem | Position0010_Seeds_Fruit | Fruit
+SeedItem | Position0020_Seeds_Grain | Grain
+SeedItem | Position0030_Seeds_Vegetables | Vegetables
+SeedItem | Position0040_Spores_Mushrooms | Mushrooms
+
+[Refinery]
+# Ingots
+StoneOreToIngotBasic | Ore Stone | Ingot Stone
+ScrapToIronIngot | Ore Scrap | Ingot Iron
+ScrapIngotToIronIngot | Ingot Scrap | Ingot Iron
+GoldOreToIngot | Ore Gold | Ingot Gold
+PlatinumOreToIngot | Ore Platinum | Ingot Platinum
+StoneOreToIngot | Ore Stone | Ingot Stone
+SilverOreToIngot | Ore Silver | Ingot Silver
+IronOreToIngot | Ore Iron | Ingot Iron
+NickelOreToIngot | Ore Nickel | Ingot Nickel
+CobaltOreToIngot | Ore Cobalt | Ingot Cobalt
+SiliconOreToIngot | Ore Silicon | Ingot Silicon
+UraniumOreToIngot | Ore Uranium | Ingot Uranium
+
+[Refinery if !IndustrialOverhaulMod]
+MagnesiumOreToIngot | Ore Magnesium | Ingot Magnesium

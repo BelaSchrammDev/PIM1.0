@@ -9,6 +9,8 @@ namespace IngameScript
     // The ingame part (MyDefinitionId, scrap types, ETA) lives in RefineryBlueprintIngame.cs.
     partial class Program
     {
+        static List<RefineryBlueprint> RefineryBlueprints = new List<RefineryBlueprint>();
+
         static Dictionary<string, string> ResourcesNameCastList = new Dictionary<string, string>
             {
                 { Ore.Stone, IngameStrings.RStone },

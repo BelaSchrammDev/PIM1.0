@@ -1,0 +1,29 @@
+# PIM blueprint data for mod 'NorthWindWeaponsMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# Ammo
+AmmoMagazine | R75ammo |  | 75mm Railgun Ammo
+AmmoMagazine | R150ammo |  | 150mm Railgun Ammo
+AmmoMagazine | R250ammo |  | 250mm Railgun Ammo
+AmmoMagazine | H203Ammo |  | 203mm HE Ammo
+AmmoMagazine | H203AmmoAP |  | 203mm AP Ammo
+AmmoMagazine | C30Ammo |  | 30mm Standard Ammo
+AmmoMagazine | C30DUammo |  | 30mm DU Ammo
+AmmoMagazine | CRAM30mmAmmo |  | 30mm C-RAM Ammo
+AmmoMagazine | C100mmAmmo |  | 100mm HE Ammo
+AmmoMagazine | C300AmmoAP |  | 300mm AP Ammo
+AmmoMagazine | C300AmmoHE |  | 300mm HE Ammo
+AmmoMagazine | C300AmmoG |  | 300mm Guided Ammo
+AmmoMagazine | C400AmmoAP |  | 400mm AP Ammo
+AmmoMagazine | C400AmmoHE |  | 400mm HE Ammo
+AmmoMagazine | C400AmmoCluster |  | 400mm Cluster Ammo
+AmmoMagazine | C500AmmoAP |  | 500mm AP Ammo
+AmmoMagazine | C500AmmoHE |  | 500mm HE Ammo
+AmmoMagazine | C500AmmoCasaba |  | 500mm Casaba Ammo
+AmmoMagazine | PlasmaCell10MJ |  | 10MJ PlasmaCannon Cell

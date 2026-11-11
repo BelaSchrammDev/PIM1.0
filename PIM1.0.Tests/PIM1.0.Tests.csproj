@@ -53,12 +53,12 @@
             Link="Linked\ItemCasts.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs"
             Link="Linked\AssemblerBluePrint.cs" />
-    <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrintDefinitions.cs"
-            Link="Linked\AssemblerBluePrintDefinitions.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprint.cs"
             Link="Linked\RefineryBlueprint.cs" />
-    <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprintDefinitions.cs"
-            Link="Linked\RefineryBlueprintDefinitions.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\BluePrintDefinitions.cs"
+            Link="Linked\BluePrintDefinitions.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\Generated\BluePrintData.g.cs"
+            Link="Linked\BluePrintData.g.cs" />
 
     <!-- Add once Job no longer inherits from Tools: -->
     <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
@@ -69,6 +69,11 @@
 
   <ItemGroup>
     <None Include="Golden\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- for the test that the committed BluePrintData.g.cs matches BluePrintData/*.txt -->
+  <ItemGroup>
+    <ProjectReference Include="..\PIM1.0.BluePrintGenerator\PIM1.0.BluePrintGenerator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,38 @@
+# PIM blueprint data for mod 'PlantAndCookMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# Farming
+Ingot | Soya
+Ingot | Herbs
+# Cooking
+ConsumableItem | AppleJuice
+ConsumableItem | ApplePie
+ConsumableItem | Tofu
+ConsumableItem | MeatRoasted
+ConsumableItem | ShroomSteak
+ConsumableItem | Bread
+ConsumableItem | Burger
+ConsumableItem | Soup
+ConsumableItem | MushroomSoup
+ConsumableItem | TofuSoup
+ConsumableItem | SparklingWaterCan | SparklingWater
+ConsumableItem | EuropaTea
+# MushroomsFarm
+ConsumableItem | FarmedMushrooms | Mushrooms
+# AppleFarm
+ConsumableItem | FarmedApples | Apple
+# WheatFarm
+Ingot | FarmedWheat | Wheat
+# HerbsFarm
+Ingot | FarmedHerbs | Herbs
+# Soya_Farm
+Ingot | FarmedSoya | Soya
+# VegetablesFarm
+Ingot | FarmedPumpkin | Pumpkin
+Ingot | FarmedCabbage | Cabbage

@@ -1,0 +1,21 @@
+# Load order of the blueprint data files (one mod per line, file BluePrintData/<Mod>.txt).
+# Order matters: the first definition of a blueprint wins, Vanilla is always loaded.
+Vanilla
+SigmaDraconisCoreMod
+DailyNeedsSurvivalMod
+AzimuthThrusterMod
+StarGateMod_Ores
+StarGateMod_Gates
+PaintGunMod
+DeuteriumReactorMod
+DefenseShieldMod
+MCRN_RailGunMod
+MWI_HomingWeaponryMod
+IndustrialOverhaulMod
+IndustrialOverhaulWaterMod
+IndustrialOverhaulLockLoadMod
+EatDrinkSleepRepeatMod
+PlantAndCookMod
+AryxEpsteinDriveMod
+HSR_Mod
+NorthWindWeaponsMod

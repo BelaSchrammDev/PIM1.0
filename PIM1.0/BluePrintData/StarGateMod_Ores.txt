@@ -1,0 +1,18 @@
+# PIM blueprint data for mod 'StarGateMod_Ores'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# StargateMods
+Component | Naquadah |  | Naquadah Bars
+Component | Trinium |  | Trinium Plate
+Component | Neutronium |  | Neutronium Crate
+
+[Refinery]
+NaquadahOreToIngot | Ore Naquadah | Ingot Naquadah
+TriniumOreToIngot | Ore Trinium | Ingot Trinium
+NeutroniumOreToIngot | Ore Neutronium | Ingot Neutronium

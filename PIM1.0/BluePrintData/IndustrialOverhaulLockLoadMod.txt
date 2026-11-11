@@ -1,0 +1,23 @@
+# PIM blueprint data for mod 'IndustrialOverhaulLockLoadMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# IndustrialOverhaulLockLoad Mod
+# CompressedGravel
+AmmoMagazine | GravelMag
+AmmoMagazine | GravelMagBig
+# MunitionsFactory
+AmmoMagazine | 155mmAPShell
+AmmoMagazine | 155mmDUAPShell
+AmmoMagazine | 155mmHEShell
+AmmoMagazine | 305mmAPShell
+AmmoMagazine | 305mmDUAPShell
+AmmoMagazine | 305mmHEShell
+AmmoMagazine | APCoilgunShell
+AmmoMagazine | DUAPCoilgunShell
+AmmoMagazine | CLGGMag | CLGG

@@ -4,11 +4,6 @@
     {
         public class IngameStrings
         {
-            public static string GetPositionString(int value, string append, int? suffix = null)
-            {
-                return $"{RPosition}{value:D4}{(suffix.HasValue ? suffix.ToString() : string.Empty)}_{append}";
-            }
-
             public const string
                 RComponent = "Component",
                 RPosition = "Position",

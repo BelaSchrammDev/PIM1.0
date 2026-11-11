@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,6 +16,11 @@ namespace IngameScript.Tests
     /// run against stubbed SE types). Every refactoring of the blueprint creation
     /// must reproduce it exactly: keys, item names, autocrafting names/types,
     /// mod assignment, order and refinery input/output names.
+    /// Intended change since then: the refinery list is sorted stable (equal inputs
+    /// keep their definition order).
+    ///
+    /// The test covers the complete path: BluePrintData/*.txt -> generator ->
+    /// BluePrintData.g.cs (kept up to date, see BluePrintDataGeneratorTests) -> DefineBluePrints().
     ///
     /// The keys (BlueprintID, refinery Name) are persisted on player LCDs and sent
     /// via SMS networking, so they must never change silently.
@@ -30,9 +34,8 @@ namespace IngameScript.Tests
         const string GoldenFileName = "BluePrints.golden.txt";
 
         static string[] AllMods() =>
-            typeof(Program.Strings).GetFields(BindingFlags.Public | BindingFlags.Static)
-                .Where(f => f.IsLiteral && f.Name.StartsWith("M_") && f.Name != "M_Vanilla")
-                .Select(f => (string)f.GetRawConstantValue())
+            Program.BluePrintMods
+                .Where(m => m != Program.Strings.M_Vanilla)
                 .OrderBy(s => s, StringComparer.Ordinal)
                 .ToArray();
 
@@ -42,7 +45,7 @@ namespace IngameScript.Tests
             yield return new KeyValuePair<string, Func<string, bool>>("all", m => true);
             yield return new KeyValuePair<string, Func<string, bool>>(
                 "all-except-IndustrialOverhaulMod-StarGateMod_Ores",
-                m => m != Program.Strings.M_IndustrialOverhaulMod && m != Program.Strings.M_SG_Ores);
+                m => m != Program.Strings.M_IndustrialOverhaulMod && m != "StarGateMod_Ores");
             foreach (var mod in AllMods())
             {
                 var only = mod;
@@ -57,8 +60,7 @@ namespace IngameScript.Tests
 
             var assembler = new Dictionary<string, Program.AssemblerBluePrint>();
             var refinery = new List<Program.RefineryBlueprint>();
-            Program.DefineAssemblerBluePrints(usedMods, assembler);
-            Program.DefineRefineryBlueprints(usedMods, refinery);
+            Program.DefineBluePrints(usedMods, assembler, refinery);
 
             var sb = new StringBuilder();
             sb.Append("## ").Append(name).Append('\n');
@@ -118,7 +120,7 @@ namespace IngameScript.Tests
         {
             var usedMods = AllMods().ToDictionary(m => m, m => false);
             var assembler = new Dictionary<string, Program.AssemblerBluePrint>();
-            Program.DefineAssemblerBluePrints(usedMods, assembler);
+            Program.DefineBluePrints(usedMods, assembler, new List<Program.RefineryBlueprint>());
 
             Assert.IsTrue(assembler.ContainsKey("OxygenContainerObject OxygenBottle"));
             var bottle = assembler["OxygenContainerObject OxygenBottle"];
@@ -131,22 +133,22 @@ namespace IngameScript.Tests
         {
             var usedMods = AllMods().ToDictionary(m => m, m => true);
             var refinery = new List<Program.RefineryBlueprint>();
-            Program.DefineRefineryBlueprints(usedMods, refinery);
+            Program.DefineBluePrints(usedMods, new Dictionary<string, Program.AssemblerBluePrint>(), refinery);
 
             var duplicates = refinery.GroupBy(r => r.Name).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
             Assert.AreEqual(0, duplicates.Count, "duplicates: " + string.Join(", ", duplicates));
         }
 
         [TestMethod]
-        public void DefineAssemblerBluePrints_CanRunTwice()
+        public void DefineBluePrints_CanRunTwice()
         {
             // The old code left curmod == "" after the first run, so a second run silently skipped
             // all vanilla blueprints. Needed for re-initialisation / later mod loading at runtime.
             var usedMods = AllMods().ToDictionary(m => m, m => false);
             var first = new Dictionary<string, Program.AssemblerBluePrint>();
             var second = new Dictionary<string, Program.AssemblerBluePrint>();
-            Program.DefineAssemblerBluePrints(usedMods, first);
-            Program.DefineAssemblerBluePrints(usedMods, second);
+            Program.DefineBluePrints(usedMods, first, new List<Program.RefineryBlueprint>());
+            Program.DefineBluePrints(usedMods, second, new List<Program.RefineryBlueprint>());
 
             CollectionAssert.AreEqual(first.Keys.ToList(), second.Keys.ToList());
         }

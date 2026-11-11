@@ -1,0 +1,14 @@
+# PIM blueprint data for mod 'MWI_HomingWeaponryMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# MWI Homing Weaponry Mod
+AmmoMagazine | TorpedoMk1_Blueprint | TorpedoMk1
+AmmoMagazine | SwarmMissileMk1_Blueprint | SwarmMissile50mm
+AmmoMagazine | DestroyerMissileX_Blueprint | DestroyerMissileX
+AmmoMagazine | DestroyerMissileMk1_Blueprint | DestroyerMissileMk1

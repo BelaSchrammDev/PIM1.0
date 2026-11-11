@@ -1,0 +1,31 @@
+# PIM blueprint data for mod 'HSR_Mod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# Components
+Component | K_HSR_Component_Rail_Vanilla | K_HSR_RailComponents
+AmmoMagazine | K_HSR_Ammuntion_Recipe_Slug | K_HSR_Slug
+Component | K_HSR_Component_AssemblerStabilizer_Vanilla | K_HSR_AssemblerSystem
+# HSR_BlueprintClassFolder
+Component | K_HSR_Component_Rail | K_HSR_RailComponents
+Component | K_HSR_Component_PulseSystem | K_HSR_PulseSystem
+Component | K_HSR_Component_Globe | K_HSR_Globe
+Component | K_HSR_Component_Circuitry | K_HSR_HyperConductiveCircuitry
+Component | K_HSR_Component_HexPlate | K_HSR_HexagolPlating
+Component | K_HSR_Component_Conduit | K_HSR_GelConduit
+Component | K_HSR_Component_GlobeII | K_HSR_Globe_II
+Component | K_HSR_Component_RailII | K_HSR_RailComponents_II
+Component | K_HSR_Component_HexPlateII | K_HSR_HexagolPlating_II
+Component | K_HSR_Component_RailIII | K_HSR_RailComponents_III
+# HSR_BlueprintClassFolderII
+AmmoMagazine | K_HSR_Ammuntion_Recipe_Slug_Automated | K_HSR_Slug
+# HSR_BlueprintClassFolderIII
+Ingot | K_HSR_NaniteSludge_Recipe | K_HSR_Nanites_Sludge
+Ingot | K_HSR_EnergizedGel_Recipe | K_HSR_Nanites_EnergizedGel
+Ingot | K_HSR_Hexagol_Recipe | K_HSR_Nanites_Hexagol
+Ingot | K_HSR_Chromium_Recipe | K_HSR_Nanites_Chromium

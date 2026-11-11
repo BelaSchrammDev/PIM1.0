@@ -89,32 +89,10 @@ namespace IngameScript
 
             public void LoadConfig()
             {
-
-                string[] modInitList =
+                // all mods with blueprint data (BluePrintData/Mods.txt), Vanilla is always on
+                foreach (var m in BluePrintMods)
                 {
-                Strings.M_DailyNeedsSurvival,
-                Strings.M_AzimuthThruster,
-                Strings.M_SG_Ores,
-                Strings.M_PaintGun,
-                Strings.M_DeuteriumReactor,
-                Strings.M_Shield,
-                Strings.M_RailGun,
-                Strings.M_HomingWeaponry,
-                Strings.M_IndustrialOverhaulMod,
-                Strings.M_IndustrialOverhaulLLMod,
-                Strings.M_IndustrialOverhaulWaterMod,
-                Strings.M_EatDrinkSleep,
-                Strings.M_PlantCook,
-                Strings.M_AryxEpsteinDrive,
-                Strings.M_NorthWindWeapons,
-                Strings.M_HSR,
-                Strings.M_SigmaDraconisCore,
-                Strings.M_SG_Gates,
-                };
-
-                foreach (var m in modInitList)
-                {
-                    usedMods.Add(m, false);
+                    if (m != Strings.M_Vanilla) usedMods.Add(m, false);
                 }
 
                 bool config = false;

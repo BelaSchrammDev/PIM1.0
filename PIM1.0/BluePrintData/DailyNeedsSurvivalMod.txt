@@ -1,0 +1,48 @@
+# PIM blueprint data for mod 'DailyNeedsSurvivalMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# DailyNeedsSurvivalMod
+Ingot | SubFresh |  | Algae-Soy Product
+Ingot | WaterFood |  | Drinking Water Packet
+Ingot | OrganicToNutrients | Nutrients | Nutrients
+Ingot | ArtificialFood
+Ingot | LuxuryMeal
+Ingot | SabiroidSteak
+Ingot | VeganFood
+Ingot | WolfSteak
+Ingot | WolfBouillon
+Ingot | SabiroidBouillon
+Ingot | CoffeeFood |  | Coffee
+Ingot | EmergencyWater | WaterFood | Emergency Water Packets
+Ingot | EmergencyFood
+Ore | ClonedAnimalMeat | WolfMeat
+Ore | ClonedSabiroidMeat | SabiroidMeat
+Ingot | Potatoes
+Ingot | Tomatoes
+Ingot | Carrots
+Ingot | Cucumbers
+Ingot | PotatoSeeds
+Ingot | TomatoSeeds
+Ingot | CarrotSeeds
+Ingot | CucumberSeeds
+Ingot | Ketchup
+Ingot | MartianSpecial
+Ingot | OrganicToFertilizer | Fertilizer | Organic Fertilizer
+Ingot | IngotsToFertilizer | Fertilizer | Artificial Fertilizer
+Ingot | NotBeefBurger
+Ingot | ToFurkey |  | ToFurkey Dinner
+Ingot | SpaceMealBar
+Ingot | HotChocolate
+Ingot | SpacersBreakfast
+Ingot | ProteinShake
+
+[Refinery]
+CarbonOreToIngot | Ore Carbon | Ingot Carbon
+PotassiumOreToIngot | Ore Potassium | Ingot Potassium
+PhosphorusOreToIngot | Ore Phosphorus | Ingot Phosphorus

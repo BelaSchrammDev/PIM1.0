@@ -382,22 +382,22 @@ R|CoalToCarbonBasic|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CoalToCarbon|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Bauxite|Ingot Bauxite|False
 R|PurifyBauxiteOre|Ore CrushedBauxite|Crushed Bauxite|Ore PurifiedBauxite|Purified Bauxite|False
-R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
 R|CrushedCobaltOreToIngot|Ore CrushedCobalt|Crushed Cobalt|Ingot Cobalt|Ingot Cobalt|False
-R|PurifyCopperOre|Ore CrushedCopper|Crushed Copper|Ore PurifiedCopper|Purified Copper|False
+R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
 R|CrushedCopperOreToIngot|Ore CrushedCopper|Crushed Copper|Ingot Copper|Ingot Copper|False
-R|PurifyGoldOre|Ore CrushedGold|Crushed Gold|Ore PurifiedGold|Purified Gold|False
+R|PurifyCopperOre|Ore CrushedCopper|Crushed Copper|Ore PurifiedCopper|Purified Copper|False
 R|CrushedGoldOreToIngot|Ore CrushedGold|Crushed Gold|Ingot Gold|Ingot Gold|False
+R|PurifyGoldOre|Ore CrushedGold|Crushed Gold|Ore PurifiedGold|Purified Gold|False
 R|CrushedIronOreToIngot|Ore CrushedIron|Crushed Iron|Ingot Iron|Ingot Iron|False
 R|PurifyIronOre|Ore CrushedIron|Crushed Iron|Ore PurifiedIron|Purified Iron|False
-R|PurifyLithiumOre|Ore CrushedLithium|Crushed Lithium|Ore PurifiedLithium|Purified Lithium|False
 R|CrushedLithiumOreToIngot|Ore CrushedLithium|Crushed Lithium|Ingot Lithium|Lithium Paste|False
+R|PurifyLithiumOre|Ore CrushedLithium|Crushed Lithium|Ore PurifiedLithium|Purified Lithium|False
 R|CrushedNickelOreToIngot|Ore CrushedNickel|Crushed Nickel|Ingot Nickel|Ingot Nickel|False
 R|PurifyNickelOre|Ore CrushedNickel|Crushed Nickel|Ore PurifiedNickel|Purified Nickel|False
 R|PurifyNiterOre|Ore Magnesium|Crushed Niter|Ore PurifiedNiter|Purified Niter|False
 R|CrushedNiterOreToIngot|Ore Magnesium|Crushed Niter|Ingot Niter|Potassium Nitrate|False
-R|PurifyPlatinumOre|Ore CrushedPlatinum|Crushed Platinum|Ore PurifiedPlatinum|Purified Platinum|False
 R|CrushedPlatinumOreToIngot|Ore CrushedPlatinum|Crushed Platinum|Ingot Platinum|Ingot Platinum|False
+R|PurifyPlatinumOre|Ore CrushedPlatinum|Crushed Platinum|Ore PurifiedPlatinum|Purified Platinum|False
 R|CrushedSiliconOreToIngot|Ore CrushedSilicon|Crushed Silicon|Ingot Silicon|Ingot Silicon|False
 R|PurifySiliconOre|Ore CrushedSilicon|Crushed Silicon|Ore PurifiedSilicon|Purified Silicon|False
 R|CrushedSilverOreToIngot|Ore CrushedSilver|Crushed Silver|Ingot Silver|Ingot Silver|False
@@ -406,10 +406,10 @@ R|CrushedSulfurOreToIngot|Ore CrushedSulfur|Crushed Sulfur|Ingot Sulfur|Sulfur|F
 R|PurifySulfurOre|Ore CrushedSulfur|Crushed Sulfur|Ore PurifiedSulfur|Purified Sulfur|False
 R|CrushedTantalumOreToIngot|Ore CrushedTantalum|Crushed Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|PurifyTantalumOre|Ore CrushedTantalum|Crushed Tantalum|Ore PurifiedTantalum|Purified Tantalum|False
-R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Purified Titanium|False
 R|CrushedTitaniumOreToIngot|Ore CrushedTitanium|Crushed Titanium|Ingot Titanium|Ingot Titanium|False
-R|PurifyUraniumOre|Ore CrushedUranium|Crushed Uranium|Ore PurifiedUranium|Purified Uranium|False
+R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Purified Titanium|False
 R|CrushedUraniumOreToIngot|Ore CrushedUranium|Crushed Uranium|Ingot Uranium|Ingot Uranium|False
+R|PurifyUraniumOre|Ore CrushedUranium|Crushed Uranium|Ore PurifiedUranium|Purified Uranium|False
 R|IcetoDeuterium|Ore Ice|Ice|Ingot DeuteriumContainer|Deuterium|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CrushNiterOre|Ore Niter|Niter|Ore Magnesium|Crushed Niter|False
@@ -437,25 +437,25 @@ R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
 R|CrushNickelOre|Ore Nickel|Ore Nickel|Ore CrushedNickel|Crushed Nickel|False
 R|OilSandToCrudeOil|Ore OilSand|Ore OilSand|Ore CrudeOil|Ore CrudeOil|False
 R|PhosphorusOreToIngot|Ore Phosphorus|Ore Phosphorus|Ingot Phosphorus|Ingot Phosphorus|False
-R|CrushPlatinumOre|Ore Platinum|Ore Platinum|Ore CrushedPlatinum|Crushed Platinum|False
 R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|False
+R|CrushPlatinumOre|Ore Platinum|Ore Platinum|Ore CrushedPlatinum|Crushed Platinum|False
 R|PotassiumOreToIngot|Ore Potassium|Ore Potassium|Ingot Potassium|Ingot Potassium|False
 R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
-R|CrushSiliconOre|Ore Silicon|Ore Silicon|Ore CrushedSilicon|Crushed Silicon|False
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
-R|CrushSilverOre|Ore Silver|Ore Silver|Ore CrushedSilver|Crushed Silver|False
+R|CrushSiliconOre|Ore Silicon|Ore Silicon|Ore CrushedSilicon|Crushed Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
+R|CrushSilverOre|Ore Silver|Ore Silver|Ore CrushedSilver|Crushed Silver|False
 R|CrushSulfurOre|Ore Sulfur|Ore Sulfur|Ore CrushedSulfur|Crushed Sulfur|False
 R|SulfurOreToIngot|Ore Sulfur|Ore Sulfur|Ingot Sulfur|Sulfur|False
-R|CrushTantalumOre|Ore Tantalum|Ore Tantalum|Ore CrushedTantalum|Crushed Tantalum|False
 R|TantalumOreToIngot|Ore Tantalum|Ore Tantalum|Ingot Tantalum|Ingot Tantalum|False
+R|CrushTantalumOre|Ore Tantalum|Ore Tantalum|Ore CrushedTantalum|Crushed Tantalum|False
+R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TitaniumOreToIngot|Ore Titanium|Ore Titanium|Ingot Titanium|Ingot Titanium|False
 R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titanium|False
-R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TriniumOreToIngot|Ore Trinium|Ore Trinium|Ingot Trinium|Ingot Trinium|False
 R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
-R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
+R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
 R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Bauxite|Ingot Bauxite|False
 R|PurifiedCobaltOreToIngot|Ore PurifiedCobalt|Purified Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|PurifiedCopperOreToIngot|Ore PurifiedCopper|Purified Copper|Ingot Copper|Ingot Copper|False
@@ -471,10 +471,10 @@ R|PurifiedSulfurOreToIngot|Ore PurifiedSulfur|Purified Sulfur|Ingot Sulfur|Sulfu
 R|PurifiedTantalumOreToIngot|Ore PurifiedTantalum|Purified Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titanium|Ingot Titanium|False
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
-R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
-R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
-R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
+R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
+R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
+R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## all-except-IndustrialOverhaulMod-StarGateMod_Ores
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -767,9 +767,9 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
+R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-AryxEpsteinDriveMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -1842,64 +1842,64 @@ R|CoalToCarbonBasic|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CoalToCarbon|Ore Coal|Coal|Ingot Carbon|Carbon|False
 R|CrushedBauxiteOreToIngot|Ore CrushedBauxite|Crushed Bauxite|Ingot Bauxite|Ingot Bauxite|False
 R|PurifyBauxiteOre|Ore CrushedBauxite|Crushed Bauxite|Ore PurifiedBauxite|Purified Bauxite|False
-R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
 R|CrushedCobaltOreToIngot|Ore CrushedCobalt|Crushed Cobalt|Ingot Cobalt|Ingot Cobalt|False
+R|PurifyCobaltOre|Ore CrushedCobalt|Crushed Cobalt|Ore PurifiedCobalt|Purified Cobalt|False
 R|CrushedCopperOreToIngot|Ore CrushedCopper|Crushed Copper|Ingot Copper|Ingot Copper|False
 R|PurifyCopperOre|Ore CrushedCopper|Crushed Copper|Ore PurifiedCopper|Purified Copper|False
 R|CrushedGoldOreToIngot|Ore CrushedGold|Crushed Gold|Ingot Gold|Ingot Gold|False
 R|PurifyGoldOre|Ore CrushedGold|Crushed Gold|Ore PurifiedGold|Purified Gold|False
-R|PurifyIronOre|Ore CrushedIron|Crushed Iron|Ore PurifiedIron|Purified Iron|False
 R|CrushedIronOreToIngot|Ore CrushedIron|Crushed Iron|Ingot Iron|Ingot Iron|False
+R|PurifyIronOre|Ore CrushedIron|Crushed Iron|Ore PurifiedIron|Purified Iron|False
 R|CrushedLithiumOreToIngot|Ore CrushedLithium|Crushed Lithium|Ingot Lithium|Lithium Paste|False
 R|PurifyLithiumOre|Ore CrushedLithium|Crushed Lithium|Ore PurifiedLithium|Purified Lithium|False
 R|CrushedNickelOreToIngot|Ore CrushedNickel|Crushed Nickel|Ingot Nickel|Ingot Nickel|False
 R|PurifyNickelOre|Ore CrushedNickel|Crushed Nickel|Ore PurifiedNickel|Purified Nickel|False
-R|CrushedNiterOreToIngot|Ore Magnesium|Crushed Niter|Ingot Niter|Potassium Nitrate|False
 R|PurifyNiterOre|Ore Magnesium|Crushed Niter|Ore PurifiedNiter|Purified Niter|False
+R|CrushedNiterOreToIngot|Ore Magnesium|Crushed Niter|Ingot Niter|Potassium Nitrate|False
 R|CrushedPlatinumOreToIngot|Ore CrushedPlatinum|Crushed Platinum|Ingot Platinum|Ingot Platinum|False
 R|PurifyPlatinumOre|Ore CrushedPlatinum|Crushed Platinum|Ore PurifiedPlatinum|Purified Platinum|False
-R|PurifySiliconOre|Ore CrushedSilicon|Crushed Silicon|Ore PurifiedSilicon|Purified Silicon|False
 R|CrushedSiliconOreToIngot|Ore CrushedSilicon|Crushed Silicon|Ingot Silicon|Ingot Silicon|False
-R|PurifySilverOre|Ore CrushedSilver|Crushed Silver|Ore PurifiedSilver|Purified Silver|False
+R|PurifySiliconOre|Ore CrushedSilicon|Crushed Silicon|Ore PurifiedSilicon|Purified Silicon|False
 R|CrushedSilverOreToIngot|Ore CrushedSilver|Crushed Silver|Ingot Silver|Ingot Silver|False
-R|PurifySulfurOre|Ore CrushedSulfur|Crushed Sulfur|Ore PurifiedSulfur|Purified Sulfur|False
+R|PurifySilverOre|Ore CrushedSilver|Crushed Silver|Ore PurifiedSilver|Purified Silver|False
 R|CrushedSulfurOreToIngot|Ore CrushedSulfur|Crushed Sulfur|Ingot Sulfur|Sulfur|False
-R|PurifyTantalumOre|Ore CrushedTantalum|Crushed Tantalum|Ore PurifiedTantalum|Purified Tantalum|False
+R|PurifySulfurOre|Ore CrushedSulfur|Crushed Sulfur|Ore PurifiedSulfur|Purified Sulfur|False
 R|CrushedTantalumOreToIngot|Ore CrushedTantalum|Crushed Tantalum|Ingot Tantalum|Ingot Tantalum|False
-R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Purified Titanium|False
+R|PurifyTantalumOre|Ore CrushedTantalum|Crushed Tantalum|Ore PurifiedTantalum|Purified Tantalum|False
 R|CrushedTitaniumOreToIngot|Ore CrushedTitanium|Crushed Titanium|Ingot Titanium|Ingot Titanium|False
+R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Purified Titanium|False
 R|CrushedUraniumOreToIngot|Ore CrushedUranium|Crushed Uranium|Ingot Uranium|Ingot Uranium|False
 R|PurifyUraniumOre|Ore CrushedUranium|Crushed Uranium|Ore PurifiedUranium|Purified Uranium|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CrushNiterOre|Ore Niter|Niter|Ore Magnesium|Crushed Niter|False
 R|NiterOreToIngot|Ore Niter|Niter|Ingot Niter|Potassium Nitrate|False
-R|CrushCobaltOre|Ore Cobalt|Ore Cobalt|Ore CrushedCobalt|Crushed Cobalt|False
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
+R|CrushCobaltOre|Ore Cobalt|Ore Cobalt|Ore CrushedCobalt|Crushed Cobalt|False
 R|CopperOreToIngot|Ore Copper|Ore Copper|Ingot Copper|Ingot Copper|False
 R|CrushCopperOre|Ore Copper|Ore Copper|Ore CrushedCopper|Crushed Copper|False
 R|CrudeOilCracking|Ore CrudeOil|Ore CrudeOil|Ingot FuelOil|Ingot FuelOil|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
 R|CrushGoldOre|Ore Gold|Ore Gold|Ore CrushedGold|Crushed Gold|False
-R|CrushIronOre|Ore Iron|Ore Iron|Ore CrushedIron|Crushed Iron|False
 R|IronOreToIngot|Ore Iron|Ore Iron|Ingot Iron|Ingot Iron|False
-R|LithiumOreToIngot|Ore Lithium|Ore Lithium|Ingot Lithium|Lithium Paste|False
+R|CrushIronOre|Ore Iron|Ore Iron|Ore CrushedIron|Crushed Iron|False
 R|CrushLithiumOre|Ore Lithium|Ore Lithium|Ore CrushedLithium|Crushed Lithium|False
-R|CrushNickelOre|Ore Nickel|Ore Nickel|Ore CrushedNickel|Crushed Nickel|False
+R|LithiumOreToIngot|Ore Lithium|Ore Lithium|Ingot Lithium|Lithium Paste|False
 R|NickelOreToIngot|Ore Nickel|Ore Nickel|Ingot Nickel|Ingot Nickel|False
+R|CrushNickelOre|Ore Nickel|Ore Nickel|Ore CrushedNickel|Crushed Nickel|False
 R|OilSandToCrudeOil|Ore OilSand|Ore OilSand|Ore CrudeOil|Ore CrudeOil|False
 R|PlatinumOreToIngot|Ore Platinum|Ore Platinum|Ingot Platinum|Ingot Platinum|False
 R|CrushPlatinumOre|Ore Platinum|Ore Platinum|Ore CrushedPlatinum|Crushed Platinum|False
 R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|CrushSiliconOre|Ore Silicon|Ore Silicon|Ore CrushedSilicon|Crushed Silicon|False
-R|CrushSilverOre|Ore Silver|Ore Silver|Ore CrushedSilver|Crushed Silver|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
+R|CrushSilverOre|Ore Silver|Ore Silver|Ore CrushedSilver|Crushed Silver|False
 R|CrushSulfurOre|Ore Sulfur|Ore Sulfur|Ore CrushedSulfur|Crushed Sulfur|False
 R|SulfurOreToIngot|Ore Sulfur|Ore Sulfur|Ingot Sulfur|Sulfur|False
-R|CrushTantalumOre|Ore Tantalum|Ore Tantalum|Ore CrushedTantalum|Crushed Tantalum|False
 R|TantalumOreToIngot|Ore Tantalum|Ore Tantalum|Ingot Tantalum|Ingot Tantalum|False
-R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titanium|False
+R|CrushTantalumOre|Ore Tantalum|Ore Tantalum|Ore CrushedTantalum|Crushed Tantalum|False
 R|TitaniumOreToIngot|Ore Titanium|Ore Titanium|Ingot Titanium|Ingot Titanium|False
+R|CrushTitaniumOre|Ore Titanium|Ore Titanium|Ore CrushedTitanium|Crushed Titanium|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|CrushUraniumOre|Ore Uranium|Ore Uranium|Ore CrushedUranium|Crushed Uranium|False
 R|PurifiedBauxiteOreToIngot|Ore PurifiedBauxite|Purified Bauxite|Ingot Bauxite|Ingot Bauxite|False
@@ -1917,9 +1917,9 @@ R|PurifiedSulfurOreToIngot|Ore PurifiedSulfur|Purified Sulfur|Ingot Sulfur|Sulfu
 R|PurifiedTantalumOreToIngot|Ore PurifiedTantalum|Purified Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titanium|Ingot Titanium|False
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
+R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-IndustrialOverhaulWaterMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0
@@ -2807,8 +2807,8 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
+R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-StarGateMod_Gates
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
 A|Component GirderComponent|GirderComponent|Component Girder|Component|Girder|Vanilla|0|0

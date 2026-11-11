@@ -11,11 +11,15 @@ namespace IngameScript
             public MyDefinitionId definition_id;
         }
 
-        void InitAssemblerBluePrints()
+        /// <summary>Creates all blueprints of the enabled mods (see BluePrintDefinitions.cs).</summary>
+        void InitBluePrints()
         {
-            DefineAssemblerBluePrints(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive);
+            RefineryBlueprint.InitScrapTypeBlueprintTypes();
+            DefineBluePrints(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints);
             foreach (var b in Lists.Data.BluePrints_Inactive.Values)
                 MyDefinitionId.TryParse(BluePrintDefinitionPrefix + b.DefinitionSubtype, out b.definition_id);
+            foreach (var b in RefineryBlueprints)
+                MyDefinitionId.TryParse(BluePrintDefinitionPrefix + b.Name, out b.Definition_id);
         }
 
         AssemblerBluePrint AddProductionAmount(MyProductionItem pi)

@@ -43,8 +43,7 @@ namespace IngameScript
             public static void Init()
             {
                 Config.Instance.LoadConfig();
-                MyProgram.InitAssemblerBluePrints();
-                MyProgram.InitRefineryBlueprints();
+                MyProgram.InitBluePrints();
                 CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
                 SetMasterBehavior();
             }

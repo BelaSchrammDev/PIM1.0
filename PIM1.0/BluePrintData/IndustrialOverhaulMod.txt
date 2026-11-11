@@ -1,0 +1,206 @@
+# PIM blueprint data for mod 'IndustrialOverhaulMod'.
+# Converted into BluePrintsClasses/Generated/BluePrintData.g.cs by PIM1.0.BluePrintGenerator.
+#
+# Sections:  [Assembler]  [Refinery]  optionally with condition: [Assembler if !OtherMod] / [Assembler if OtherMod]
+# Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
+#            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
+# Refinery:  BlueprintSubtype | InputItem | OutputItem
+
+[Assembler]
+# Industrial Overhaul Mod
+# Reprocessor
+Ingot | SpentFuelReprocessing | Uranium | Nuclear Fuel
+# AssemblingBenchComponents
+Component | CopperWire
+Component | Electromagnet
+Component | Lightbulb
+Component | AcidPowerCell
+Component | AlkalinePowerCell
+Component | HeatingElement
+Component | POConstructionComponent | Construction
+Component | POSteelPlate | SteelPlate
+Component | POSmallTube | SmallTube
+Component | POLargeTube | LargeTube
+Component | POMotorComponent | Motor
+Component | POComputerComponent | Computer
+Component | PORadioCommunicationComponent | RadioCommunication
+# FabricatorComponents (+ Electromagnet, Lightbulb, AlkalinePowerCell, HeatingElement, see AssemblingBench)
+Component | POMetalGrid | MetalGrid
+# WireDrawerComponents
+Component | GoldWire
+Component | POSuperconductor | Superconductor
+# PlateStampComponents
+Component | CompositeArmor
+Component | TitaniumPlate
+Component | ArmoredPlate
+Component | POInteriorPlate | InteriorPlate
+# ExtruderComponents
+Component | POGirderComponent | Girder
+# SiliconFuserComponents
+Component | ArmorGlass
+Component | Ceramic
+Component | POBulletproofGlass | BulletproofGlass
+# CementKilnComponents
+Component | Concrete
+# AssemblerComponents
+Component | Capacitor
+Component | Cryocooler
+Component | POMedicalComponent | Medical
+Component | POSolarCell | SolarCell
+# MicroelectronicsFactoryComponents
+Component | Thermocouple
+Component | AdvancedComputer
+Component | PODisplay | Display
+Component | PODetectorComponent | Detector
+# AutoLoomComponents
+Component | Fabric
+Component | POCanvas | Canvas
+# AdvancedAssemblerComponents
+Component | TokamakBlanket
+Component | SuperMagnet
+Component | LaserEmitter
+Component | POReactorComponent | Reactor
+Component | POPowerCell | PowerCell
+# NanoAssemblerComponents
+Component | ElectronMatrix
+Component | QuantumComputer
+Component | POThrustComponent | Thrust
+Component | POGravityGeneratorComponent | GravityGenerator
+Component | FSSolarCell
+# MunitionsFactory
+Component | POExplosivesComponent | Explosives
+Ingot | Gunpowder | Magnesium
+AmmoMagazine | POInteriorTurret_Mag_50rd | InteriorTurret_Mag_50rd
+AmmoMagazine | PONATO_25x184mmMagazine | NATO_25x184mm
+AmmoMagazine | DUNATO_25x184mmMagazine | DUNATO_25x184mm
+AmmoMagazine | POMissile200mm | Missile200mm
+AmmoMagazine | POFullAutoPistolMagazine | FullAutoPistolMagazine
+AmmoMagazine | POElitePistolMagazine | ElitePistolMagazine
+AmmoMagazine | POAutomaticRifleGun_Mag_20rd | AutomaticRifleGun_Mag_20rd
+AmmoMagazine | PORapidFireAutomaticRifleGun_Mag_50rd | RapidFireAutomaticRifleGun_Mag_50rd
+AmmoMagazine | POPreciseAutomaticRifleGun_Mag_5rd | PreciseAutomaticRifleGun_Mag_5rd
+AmmoMagazine | POUltimateAutomaticRifleGun_Mag_30rd | UltimateAutomaticRifleGun_Mag_30rd
+AmmoMagazine | AutocannonClipDUAP
+AmmoMagazine | MediumCalibreAmmoHE
+AmmoMagazine | MediumCalibreAmmoDUAP
+AmmoMagazine | LargeCalibreAmmoHE
+AmmoMagazine | LargeCalibreAmmoDUAP
+AmmoMagazine | SmallRailgunAmmoDUAP
+# ChemicalPlantComponents
+Component | PolymerToPlastic | Plastic
+Component | Rubber
+Ingot | SyntheticPolymer | Polymer
+Component | Asphalt
+# T1Tools
+PhysicalGunObject | POWelder | WelderItem
+PhysicalGunObject | POAngleGrinder | AngleGrinderItem
+PhysicalGunObject | POHandDrill | HandDrillItem
+PhysicalGunObject | POSemiAutoPistol | SemiAutoPistolItem
+AmmoMagazine | POSemiAutoPistolMagazine | SemiAutoPistolMagazine
+# Bottles
+OxygenContainerObject | POOxygenBottle | OxygenBottle
+GasContainerObject | POHydrogenBottle | HydrogenBottle
+# T2Tools
+PhysicalGunObject | POWelder2 | Welder2Item
+PhysicalGunObject | POAngleGrinder2 | AngleGrinder2Item
+PhysicalGunObject | POHandDrill2 | HandDrill2Item
+PhysicalGunObject | POAutomaticRifle | AutomaticRifleItem
+PhysicalGunObject | POPreciseAutomaticRifle | PreciseAutomaticRifleItem
+PhysicalGunObject | PORapidFireAutomaticRifle | RapidFireAutomaticRifleItem
+PhysicalGunObject | POBasicHandHeldLauncher | BasicHandHeldLauncherItem
+PhysicalGunObject | POFullAutoPistol | FullAutoPistolItem
+# T3Tools
+PhysicalGunObject | POWelder3 | Welder3Item
+PhysicalGunObject | POAngleGrinder3 | AngleGrinder3Item
+PhysicalGunObject | POHandDrill3 | HandDrill3Item
+PhysicalGunObject | POUltimateAutomaticRifle | UltimateAutomaticRifleItem
+PhysicalGunObject | POAdvancedHandHeldLauncher | AdvancedHandHeldLauncherItem
+PhysicalGunObject | POEliteAutoPistol | ElitePistolItem
+# T4Tools
+PhysicalGunObject | POWelder4 | Welder4Item
+PhysicalGunObject | POAngleGrinder4 | AngleGrinder4Item
+PhysicalGunObject | POHandDrill4 | HandDrill4Item
+
+[Refinery]
+# SmelterIngots & RefineryIngots
+CopperOreToIngot | Ore Copper | Ingot Copper
+BauxiteOreToIngot | Ore Bauxite | Ingot Aluminium
+TitaniumOreToIngot | Ore Titanium | Ingot Titanium
+TantalumOreToIngot | Ore Tantalum | Ingot Tantalum
+CoalToCarbonBasic | Ore Coal | Ingot Carbon
+# CrushedToIngot
+CrushedIronOreToIngot | Ore CrushedIron | Ingot Iron
+CrushedNickelOreToIngot | Ore CrushedNickel | Ingot Nickel
+CrushedCobaltOreToIngot | Ore CrushedCobalt | Ingot Cobalt
+CrushedSiliconOreToIngot | Ore CrushedSilicon | Ingot Silicon
+CrushedSilverOreToIngot | Ore CrushedSilver | Ingot Silver
+CrushedGoldOreToIngot | Ore CrushedGold | Ingot Gold
+CrushedPlatinumOreToIngot | Ore CrushedPlatinum | Ingot Platinum
+CrushedUraniumOreToIngot | Ore CrushedUranium | Ingot Uranium
+CrushedCopperOreToIngot | Ore CrushedCopper | Ingot Copper
+CrushedLithiumOreToIngot | Ore CrushedLithium | Ingot Lithium
+CrushedBauxiteOreToIngot | Ore CrushedBauxite | Ingot Bauxite
+CrushedTitaniumOreToIngot | Ore CrushedTitanium | Ingot Titanium
+CrushedTantalumOreToIngot | Ore CrushedTantalum | Ingot Tantalum
+CrushedSulfurOreToIngot | Ore CrushedSulfur | Ingot Sulfur
+# PurifiedToIngot
+PurifiedIronOreToIngot | Ore PurifiedIron | Ingot Iron
+PurifiedNickelOreToIngot | Ore PurifiedNickel | Ingot Nickel
+PurifiedCobaltOreToIngot | Ore PurifiedCobalt | Ingot Cobalt
+PurifiedSiliconOreToIngot | Ore PurifiedSilicon | Ingot Silicon
+PurifiedSilverOreToIngot | Ore PurifiedSilver | Ingot Silver
+PurifiedGoldOreToIngot | Ore PurifiedGold | Ingot Gold
+PurifiedPlatinumOreToIngot | Ore PurifiedPlatinum | Ingot Platinum
+PurifiedUraniumOreToIngot | Ore PurifiedUranium | Ingot Uranium
+PurifiedCopperOreToIngot | Ore PurifiedCopper | Ingot Copper
+PurifiedLithiumOreToIngot | Ore PurifiedLithium | Ingot Lithium
+PurifiedBauxiteOreToIngot | Ore PurifiedBauxite | Ingot Bauxite
+PurifiedTitaniumOreToIngot | Ore PurifiedTitanium | Ingot Titanium
+PurifiedTantalumOreToIngot | Ore PurifiedTantalum | Ingot Tantalum
+PurifiedSulfurOreToIngot | Ore PurifiedSulfur | Ingot Sulfur
+# Crusher
+CrushIronOre | Ore Iron | Ore CrushedIron
+CrushNickelOre | Ore Nickel | Ore CrushedNickel
+CrushCobaltOre | Ore Cobalt | Ore CrushedCobalt
+CrushSiliconOre | Ore Silicon | Ore CrushedSilicon
+CrushSilverOre | Ore Silver | Ore CrushedSilver
+CrushGoldOre | Ore Gold | Ore CrushedGold
+CrushPlatinumOre | Ore Platinum | Ore CrushedPlatinum
+CrushUraniumOre | Ore Uranium | Ore CrushedUranium
+CrushCopperOre | Ore Copper | Ore CrushedCopper
+CrushLithiumOre | Ore Lithium | Ore CrushedLithium
+CrushBauxiteOre | Ore Bauxite | Ore CrushedBauxite
+CrushTitaniumOre | Ore Titanium | Ore CrushedTitanium
+CrushTantalumOre | Ore Tantalum | Ore CrushedTantalum
+CrushSulfurOre | Ore Sulfur | Ore CrushedSulfur
+CrushNiterOre | Ore Niter | Ore Magnesium
+CrushStoneOre | Ore Stone | Ingot Stone
+# Purifier
+PurifyIronOre | Ore CrushedIron | Ore PurifiedIron
+PurifyNickelOre | Ore CrushedNickel | Ore PurifiedNickel
+PurifyCobaltOre | Ore CrushedCobalt | Ore PurifiedCobalt
+PurifySiliconOre | Ore CrushedSilicon | Ore PurifiedSilicon
+PurifySilverOre | Ore CrushedSilver | Ore PurifiedSilver
+PurifyGoldOre | Ore CrushedGold | Ore PurifiedGold
+PurifyPlatinumOre | Ore CrushedPlatinum | Ore PurifiedPlatinum
+PurifyUraniumOre | Ore CrushedUranium | Ore PurifiedUranium
+PurifyCopperOre | Ore CrushedCopper | Ore PurifiedCopper
+PurifyLithiumOre | Ore CrushedLithium | Ore PurifiedLithium
+PurifyBauxiteOre | Ore CrushedBauxite | Ore PurifiedBauxite
+PurifyTitaniumOre | Ore CrushedTitanium | Ore PurifiedTitanium
+PurifyTantalumOre | Ore CrushedTantalum | Ore PurifiedTantalum
+PurifySulfurOre | Ore CrushedSulfur | Ore PurifiedSulfur
+PurifyNiterOre | Ore Magnesium | Ore PurifiedNiter
+# ChemicalPlantOre
+NiterOreToIngot | Ore Niter | Ingot Niter
+LithiumOreToIngot | Ore Lithium | Ingot Lithium
+SulfurOreToIngot | Ore Sulfur | Ingot Sulfur
+CoalToCarbon | Ore Coal | Ingot Carbon
+CrushedNiterOreToIngot | Ore Magnesium | Ingot Niter
+PurifiedNiterOreToIngot | Ore PurifiedNiter | Ingot Niter
+# BitumenExtractor
+OilSandToCrudeOil | Ore OilSand | Ore CrudeOil
+# OilCracking
+CrudeOilCracking | Ore CrudeOil | Ingot FuelOil
+# CentrifugeIngots
+UraniumOreToIngot | Ore Uranium | Ingot Uranium

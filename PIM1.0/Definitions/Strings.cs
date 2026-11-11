@@ -31,26 +31,9 @@
                 // Gun Control
                 DefaultGunGroupName = "PIM controlled Guns",
 
-                // mod names
+                // mod names used in code (the full mod list is generated: BluePrintMods)
                 M_Vanilla = "Vanilla",
-                M_SigmaDraconisCore = "SigmaDraconisCoreMod",
-                M_HSR = "HSR_Mod",
-                M_NorthWindWeapons = "NorthWindWeaponsMod",
-                M_AryxEpsteinDrive = "AryxEpsteinDriveMod",
-                M_PlantCook = "PlantAndCookMod", 
-                M_EatDrinkSleep = "EatDrinkSleepRepeatMod", 
-                M_IndustrialOverhaulLLMod = "IndustrialOverhaulLockLoadMod", 
-                M_IndustrialOverhaulWaterMod = "IndustrialOverhaulWaterMod", 
-                M_IndustrialOverhaulMod = "IndustrialOverhaulMod", 
-                M_DailyNeedsSurvival = "DailyNeedsSurvivalMod", 
-                M_AzimuthThruster = "AzimuthThrusterMod", 
-                M_SG_Gates = "StarGateMod_Gates", 
-                M_SG_Ores = "StarGateMod_Ores", 
-                M_PaintGun = "PaintGunMod", 
-                M_DeuteriumReactor = "DeuteriumReactorMod", 
-                M_Shield = "DefenseShieldMod", 
-                M_RailGun = "MCRN_RailGunMod", 
-                M_HomingWeaponry = "MWI_HomingWeaponryMod";
+                M_IndustrialOverhaulMod = "IndustrialOverhaulMod";
         }
     }
 }

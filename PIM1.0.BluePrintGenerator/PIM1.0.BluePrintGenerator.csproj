@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build-time tool: converts PIM1.0/BluePrintData/*.txt into
+       PIM1.0/BluePrintsClasses/Generated/BluePrintData.g.cs (compact strings for the script).
+       Arguments: <dataDir> <outputFile>
+       It is started automatically by the GenerateBluePrintData target in PIM1.0.csproj. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>PimBluePrintGenerator</RootNamespace>
+  </PropertyGroup>
+
+  <!-- The pure script files: the generator uses the same item name rules as the script,
+       so it can drop every item/display name that the script derives by itself. -->
+  <ItemGroup>
+    <Compile Include="..\PIM1.0\Definitions\Strings.cs" Link="Script\Strings.cs" />
+    <Compile Include="..\PIM1.0\Definitions\IngameResources\IngameStrings.cs" Link="Script\IngameStrings.cs" />
+    <Compile Include="..\PIM1.0\Definitions\ItemCasts.cs" Link="Script\ItemCasts.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs" Link="Script\AssemblerBluePrint.cs" />
+  </ItemGroup>
+
+</Project>

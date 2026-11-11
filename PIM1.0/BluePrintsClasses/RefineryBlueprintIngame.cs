@@ -84,15 +84,6 @@ namespace IngameScript
         static Dictionary<string, Dictionary<RefineryBlueprint, int>> OrePrioConfig = new Dictionary<string, Dictionary<RefineryBlueprint, int>>();
 
 
-        void InitRefineryBlueprints()
-        {
-            RefineryBlueprint.InitScrapTypeBlueprintTypes();
-            DefineRefineryBlueprints(Config.Instance.usedMods, RefineryBlueprints);
-            foreach (var b in RefineryBlueprints)
-                MyDefinitionId.TryParse(BluePrintDefinitionPrefix + b.Name, out b.Definition_id);
-        }
-
-
         public partial class RefineryBlueprint
         {
             static DateTime FillTimestamp = DateTime.Now;
