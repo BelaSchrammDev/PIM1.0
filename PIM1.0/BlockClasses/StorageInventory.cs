@@ -15,7 +15,6 @@ namespace IngameScript
             #region private members
 
             protected List<MyInventoryItem> _InvList { get; private set; } = new List<MyInventoryItem>();
-            private List<string> _SuccessList = new List<string>();
             private Dictionary<string, float> _InsertList = new Dictionary<string, float>();
 
             #endregion
@@ -49,7 +48,6 @@ namespace IngameScript
 
                 Program.LCD_DebugString.Append($"StorageInventory_ReloadItems for '{invstring}'\n");
 
-                _SuccessList.Clear();
                 _InsertList.Clear();
 
                 if (StackingInventoryItems(_InvList))
@@ -57,8 +55,8 @@ namespace IngameScript
                     RefreshInvList();
                 }
 
-                DisposeOfSurplusItems(_InvList, _SuccessList, _InsertList);
-                InsertMissingItems(_SuccessList, _InsertList);
+                DisposeOfSurplusItems(_InvList, _InsertList);
+                InsertMissingItems(_InsertList);
             }
 
             #endregion
@@ -109,20 +107,28 @@ namespace IngameScript
                 return stackingSuccess;
             }
 
-            private void InsertMissingItems(List<string> succlist, Dictionary<string, float> einleiten)
+            /// <param name="einleiten">amount still missing per item, filled by DisposeOfSurplusItems
+            /// (no entry: the item is not in the inventory at all)</param>
+            private void InsertMissingItems(Dictionary<string, float> einleiten)
             {
                 foreach (var i in items.Keys)
                 {
-                    if (succlist.Contains(i)) continue;
+                    float missing;
+                    if (!einleiten.TryGetValue(i, out missing)) missing = items[i];
+                    if (missing <= 0) continue;
 
-                    if (!SendItemByType(i, (einleiten.ContainsKey(i) ? einleiten[i] : items[i]), inv))
+                    if (!SendItemByType(i, missing, inv))
                     {
                         // TODO: errormessage
                     }
                 }
             }
 
-            private void DisposeOfSurplusItems(List<MyInventoryItem> invList, List<string> succlist, Dictionary<string, float> einleiten)
+            /// <summary>
+            /// Removes what is not wanted and notes per item what is still missing. The amounts are added
+            /// up per item, not per stack: an item can be in several stacks that cannot be merged (bottles).
+            /// </summary>
+            private void DisposeOfSurplusItems(List<MyInventoryItem> invList, Dictionary<string, float> einleiten)
             {
                 for (int i = invList.Count - 1; i >= 0; i--)
                 {
@@ -131,14 +137,11 @@ namespace IngameScript
                     if (!items.ContainsKey(iType)) clearItemByType(inv, iType, iItem);
                     else
                     {
-                        var adiff = items[iType] - (float)iItem.Amount;
-                        if (adiff < 0)
-                        {
-                            clearItemByType(inv, iType, iItem, Math.Abs(adiff));
-                            succlist.Add(iType);
-                        }
-                        else if (adiff == 0) succlist.Add(iType);
-                        else einleiten.Add(iType, adiff);
+                        float missing;
+                        if (!einleiten.TryGetValue(iType, out missing)) missing = items[iType];
+                        var surplus = SurplusOfStack((float)iItem.Amount, ref missing);
+                        if (surplus > 0) clearItemByType(inv, iType, iItem, surplus);
+                        einleiten[iType] = missing;
                     }
                 }
             }

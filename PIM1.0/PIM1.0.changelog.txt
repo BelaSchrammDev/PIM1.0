@@ -54,6 +54,9 @@ Fix:
   a wrong queue item or stopped the script
 - ore and ingots inside refinerys were counted twice (by the grid scan and again by the
   refinery), which distorted the stock on the LCDs and the ore priorities
+- storage containers, weapons and farms: the wanted amount of an item was compared with every
+  stack separately. Two stacks of one item that cannot be merged (e.g. bottles) stopped the script
+  if items were still missing; now the stacks are added up
 
 Changes:
 

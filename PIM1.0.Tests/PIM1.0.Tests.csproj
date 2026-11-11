@@ -27,6 +27,8 @@
              Link="Linked\CommandArgumentFactory.cs" />
     <Compile Include="..\PIM1.0\Tools\StopWatch.cs"
              Link="Linked\StopWatch.cs" />
+    <Compile Include="..\PIM1.0\Tools\StorageAmounts.cs"
+             Link="Linked\StorageAmounts.cs" />
     <Compile Include="..\PIM1.0\Tools\AmmoPriority.cs"
              Link="Linked\AmmoPriority.cs" />
     <Compile Include="..\PIM1.0\Tools\RunningSign.cs"
