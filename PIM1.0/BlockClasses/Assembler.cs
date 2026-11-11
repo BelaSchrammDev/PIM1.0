@@ -143,6 +143,9 @@ namespace IngameScript
                                             {
                                                 AssemblerBlock.RemoveQueueItem(i, productionItem.Amount);
                                                 proditem_list.RemoveAt(i);
+                                                // the item is gone: without the break a blueprint that is in the queue
+                                                // twice (and so twice in bprint_list) would remove index i again
+                                                break;
                                             }
                                         }
 

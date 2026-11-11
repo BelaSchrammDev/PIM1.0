@@ -50,6 +50,8 @@ Fix:
 - stacking: exchanging the contents of two containers (item in exactly two containers) is
   repeated until it is finished, at most 10 rounds; before, the number of rounds depended on
   the number of other items
+- assembler queue: if a blueprint at its max amount was in the queue twice, removing it deleted
+  a wrong queue item or stopped the script
 
 Changes:
 
