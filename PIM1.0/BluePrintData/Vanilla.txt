@@ -42,14 +42,16 @@ OxygenContainerObject | Position0010_OxygenBottle
 GasContainerObject | Position0020_HydrogenBottle
 Component | Position0030_Canvas
 Datapad | Position0040_Datapad
-PhysicalGunObject | Position0005_FlareGun | FlareGunItem
-AmmoMagazine | Position0005_FlareGunMagazine | FlareClip
-AmmoMagazine | Position0007_FireworksBoxBlue
-AmmoMagazine | Position00071_FireworksBoxGreen
-AmmoMagazine | Position00072_FireworksBoxRed
-AmmoMagazine | Position00073_FireworksBoxYellow
-AmmoMagazine | Position00074_FireworksBoxPink
-AmmoMagazine | Position00075_FireworksBoxRainbow
+ConsumableItem | Position0021_Medkit
+ConsumableItem | Position0022_Powerkit
+PhysicalGunObject | Position0050_FlareGun | FlareGunItem
+AmmoMagazine | Position0051_FlareGunMagazine | FlareClip
+AmmoMagazine | Position0060_FireworksBoxBlue
+AmmoMagazine | Position0061_FireworksBoxGreen
+AmmoMagazine | Position0062_FireworksBoxRed
+AmmoMagazine | Position0063_FireworksBoxYellow
+AmmoMagazine | Position0064_FireworksBoxPink
+AmmoMagazine | Position0065_FireworksBoxRainbow
 # Tools
 PhysicalGunObject | Position0010_AngleGrinder
 PhysicalGunObject | Position0020_AngleGrinder2
@@ -64,15 +66,15 @@ PhysicalGunObject | Position0100_Welder2
 PhysicalGunObject | Position0110_Welder3
 PhysicalGunObject | Position0120_Welder4
 # Weapons
-PhysicalGunObject | Position0010_SemiAutoPistol
-PhysicalGunObject | Position0020_FullAutoPistol
-PhysicalGunObject | Position0030_EliteAutoPistol
+PhysicalGunObject | Position0010_SemiAutoPistol | SemiAutoPistolItem
+PhysicalGunObject | Position0020_FullAutoPistol | FullAutoPistolItem
+PhysicalGunObject | Position0030_EliteAutoPistol | ElitePistolItem
 PhysicalGunObject | Position0040_AutomaticRifle
 PhysicalGunObject | Position0050_RapidFireAutomaticRifle
 PhysicalGunObject | Position0060_PreciseAutomaticRifle
 PhysicalGunObject | Position0070_UltimateAutomaticRifle
-PhysicalGunObject | Position0080_BasicHandHeldLauncher
-PhysicalGunObject | Position0090_AdvancedHandHeldLauncher
+PhysicalGunObject | Position0080_BasicHandHeldLauncher | BasicHandHeldLauncherItem
+PhysicalGunObject | Position0090_AdvancedHandHeldLauncher | AdvancedHandHeldLauncherItem
 # Ammo
 AmmoMagazine | Position0010_SemiAutoPistolMagazine
 AmmoMagazine | Position0020_FullAutoPistolMagazine
@@ -117,7 +119,6 @@ SeedItem | Position0040_Spores_Mushrooms | Mushrooms
 
 [Refinery]
 # Ingots
-StoneOreToIngotBasic | Ore Stone | Ingot Stone
 ScrapToIronIngot | Ore Scrap | Ingot Iron
 ScrapIngotToIronIngot | Ingot Scrap | Ingot Iron
 GoldOreToIngot | Ore Gold | Ingot Gold

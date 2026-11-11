@@ -30,14 +30,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -50,15 +52,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -108,7 +110,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## all
 A|Component Composting|Composting|Component Compost|Component|Compost|SigmaDraconisCoreMod|0|0
@@ -471,7 +472,6 @@ R|PurifiedSulfurOreToIngot|Ore PurifiedSulfur|Purified Sulfur|Ingot Sulfur|Sulfu
 R|PurifiedTantalumOreToIngot|Ore PurifiedTantalum|Purified Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titanium|Ingot Titanium|False
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
 R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
@@ -507,14 +507,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -527,15 +529,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -767,7 +769,6 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
 ## only-AryxEpsteinDriveMod
@@ -802,14 +803,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -822,15 +825,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -881,7 +884,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-AzimuthThrusterMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -915,14 +917,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -935,15 +939,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -994,7 +998,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-DailyNeedsSurvivalMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -1028,14 +1031,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1048,15 +1053,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1142,7 +1147,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-DefenseShieldMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -1176,14 +1180,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1196,15 +1202,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1255,7 +1261,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-DeuteriumReactorMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -1289,14 +1294,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1309,15 +1316,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1373,7 +1380,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StonetoDeuterium|Ore Stone|Stone|Ingot DeuteriumContainer|Deuterium|False
 ## only-EatDrinkSleepRepeatMod
@@ -1408,14 +1414,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1428,15 +1436,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1488,7 +1496,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-HSR_Mod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -1522,14 +1529,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1542,15 +1551,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1618,7 +1627,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-IndustrialOverhaulLockLoadMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -1652,14 +1660,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1672,15 +1682,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -1741,7 +1751,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-IndustrialOverhaulMod
 A|Ingot SpentFuelReprocessing|SpentFuelReprocessing|Ingot Uranium|Reprocessing|Nuclear Fuel|IndustrialOverhaulMod|0|0
@@ -1917,7 +1926,6 @@ R|PurifiedSulfurOreToIngot|Ore PurifiedSulfur|Purified Sulfur|Ingot Sulfur|Sulfu
 R|PurifiedTantalumOreToIngot|Ore PurifiedTantalum|Purified Tantalum|Ingot Tantalum|Ingot Tantalum|False
 R|PurifiedTitaniumOreToIngot|Ore PurifiedTitanium|Purified Titanium|Ingot Titanium|Ingot Titanium|False
 R|PurifiedUraniumOreToIngot|Ore PurifiedUranium|Purified Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|CrushStoneOre|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-IndustrialOverhaulWaterMod
@@ -1952,14 +1960,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -1972,15 +1982,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2032,7 +2042,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-MCRN_RailGunMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2066,14 +2075,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2086,15 +2097,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2145,7 +2156,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-MWI_HomingWeaponryMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2179,14 +2189,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2199,15 +2211,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2261,7 +2273,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-NorthWindWeaponsMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2295,14 +2306,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2315,15 +2328,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2392,7 +2405,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-PaintGunMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2426,14 +2438,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2446,15 +2460,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2506,7 +2520,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-PlantAndCookMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2540,14 +2553,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2560,15 +2575,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2639,7 +2654,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-SigmaDraconisCoreMod
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2673,14 +2687,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2693,15 +2709,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2807,7 +2823,6 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|TitaniumToIngot|Ore Titanium|Ore Titanium|Ingot TitaniumIngot|Ingot TitaniumIngot|False
 R|TungstenToIngot|Ore Tungsten|Ore Tungsten|Ingot TungstenIngot|Ingot TungstenIngot|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-StarGateMod_Gates
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2841,14 +2856,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2861,15 +2878,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -2920,7 +2937,6 @@ R|ScrapToIronIngot|Ore Scrap|Ore Scrap|Ingot Iron|Ingot Iron|True
 R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-StarGateMod_Ores
 A|Component ConstructionComponent|ConstructionComponent|Component Construction|Component|Construction|Vanilla|0|0
@@ -2954,14 +2970,16 @@ A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerOb
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
 A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
 A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0005_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0005_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
-A|AmmoMagazine FireworksBoxBlue|Position0007_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
-A|AmmoMagazine FireworksBoxGreen|Position00071_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRed|Position00072_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
-A|AmmoMagazine FireworksBoxYellow|Position00073_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
-A|AmmoMagazine FireworksBoxPink|Position00074_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
-A|AmmoMagazine FireworksBoxRainbow|Position00075_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
+A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
+A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
+A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
+A|AmmoMagazine FireworksBoxYellow|Position0063_FireworksBoxYellow|AmmoMagazine FireworksBoxYellow|AmmoMagazine|FireworksBoxYellow|Vanilla|0|0
+A|AmmoMagazine FireworksBoxPink|Position0064_FireworksBoxPink|AmmoMagazine FireworksBoxPink|AmmoMagazine|FireworksBoxPink|Vanilla|0|0
+A|AmmoMagazine FireworksBoxRainbow|Position0065_FireworksBoxRainbow|AmmoMagazine FireworksBoxRainbow|AmmoMagazine|FireworksBoxRainbow|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder|Position0010_AngleGrinder|PhysicalGunObject AngleGrinderItem|Tools&Guns|Grinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder2|Position0020_AngleGrinder2|PhysicalGunObject AngleGrinder2Item|Tools&Guns|UltimateGrinder|Vanilla|0|0
 A|PhysicalGunObject AngleGrinder3|Position0030_AngleGrinder3|PhysicalGunObject AngleGrinder3Item|Tools&Guns|ProfessionalGrinder|Vanilla|0|0
@@ -2974,15 +2992,15 @@ A|PhysicalGunObject Welder|Position0090_Welder|PhysicalGunObject WelderItem|Tool
 A|PhysicalGunObject Welder2|Position0100_Welder2|PhysicalGunObject Welder2Item|Tools&Guns|UltimateWelder|Vanilla|0|0
 A|PhysicalGunObject Welder3|Position0110_Welder3|PhysicalGunObject Welder3Item|Tools&Guns|ProfessionalWelder|Vanilla|0|0
 A|PhysicalGunObject Welder4|Position0120_Welder4|PhysicalGunObject Welder4Item|Tools&Guns|EliteWelder|Vanilla|0|0
-A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistol|Tools&Guns|SemiAutoPistol|Vanilla|0|0
-A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistol|Tools&Guns|FullAutoPistol|Vanilla|0|0
-A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject EliteAutoPistol|Tools&Guns|EliteAutoPistol|Vanilla|0|0
+A|PhysicalGunObject SemiAutoPistol|Position0010_SemiAutoPistol|PhysicalGunObject SemiAutoPistolItem|Tools&Guns|SemiAutoPistol|Vanilla|0|0
+A|PhysicalGunObject FullAutoPistol|Position0020_FullAutoPistol|PhysicalGunObject FullAutoPistolItem|Tools&Guns|FullAutoPistol|Vanilla|0|0
+A|PhysicalGunObject EliteAutoPistol|Position0030_EliteAutoPistol|PhysicalGunObject ElitePistolItem|Tools&Guns|ElitePistol|Vanilla|0|0
 A|PhysicalGunObject AutomaticRifle|Position0040_AutomaticRifle|PhysicalGunObject AutomaticRifleItem|Tools&Guns|AutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject RapidFireAutomaticRifle|Position0050_RapidFireAutomaticRifle|PhysicalGunObject RapidFireAutomaticRifleItem|Tools&Guns|RapidFireAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject PreciseAutomaticRifle|Position0060_PreciseAutomaticRifle|PhysicalGunObject PreciseAutomaticRifleItem|Tools&Guns|PreciseAutomaticRifle|Vanilla|0|0
 A|PhysicalGunObject UltimateAutomaticRifle|Position0070_UltimateAutomaticRifle|PhysicalGunObject UltimateAutomaticRifleItem|Tools&Guns|UltimateAutomaticRifle|Vanilla|0|0
-A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncher|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
-A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncher|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject BasicHandHeldLauncher|Position0080_BasicHandHeldLauncher|PhysicalGunObject BasicHandHeldLauncherItem|Tools&Guns|BasicHandHeldLauncher|Vanilla|0|0
+A|PhysicalGunObject AdvancedHandHeldLauncher|Position0090_AdvancedHandHeldLauncher|PhysicalGunObject AdvancedHandHeldLauncherItem|Tools&Guns|AdvancedHandHeldLauncher|Vanilla|0|0
 A|AmmoMagazine SemiAutoPistolMagazine|Position0010_SemiAutoPistolMagazine|AmmoMagazine SemiAutoPistolMagazine|AmmoMagazine|SemiAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine FullAutoPistolMagazine|Position0020_FullAutoPistolMagazine|AmmoMagazine FullAutoPistolMagazine|AmmoMagazine|FullAutoPistolMag|Vanilla|0|0
 A|AmmoMagazine ElitePistolMagazine|Position0030_ElitePistolMagazine|AmmoMagazine ElitePistolMagazine|AmmoMagazine|ElitePistolMag|Vanilla|0|0
@@ -3038,5 +3056,4 @@ R|SiliconOreToIngot|Ore Silicon|Ore Silicon|Ingot Silicon|Ingot Silicon|False
 R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|TriniumOreToIngot|Ore Trinium|Ore Trinium|Ingot Trinium|Ingot Trinium|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
-R|StoneOreToIngotBasic|Ore Stone|Stone|Ingot Stone|Gravel|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
