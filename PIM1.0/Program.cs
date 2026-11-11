@@ -41,6 +41,7 @@ namespace IngameScript
             viewList.Add(new AssemblerManagerInfo());
 
             LoopManager.Init();
+            LoopManager.StartupJob = new BluePrintLoadJob(new BluePrintSet(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints));
 
             if (Config.Instance.collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
             if (Config.Instance.collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
@@ -48,6 +49,7 @@ namespace IngameScript
 
             _jobs = new Job[]
             {
+                LoopManager.StartupJob,   // must be first: all other jobs need the blueprints
                 new LoopManager(),
                 new ChangeAutoCraftingSettingsJob(),
                 new ClearJob(),

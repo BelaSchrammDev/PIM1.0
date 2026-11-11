@@ -8,18 +8,22 @@ namespace IngameScript
     {
         public partial class AssemblerBluePrint
         {
-            public MyDefinitionId definition_id;
-        }
+            MyDefinitionId _definitionId;
+            bool _definitionIdSet;
 
-        /// <summary>Creates all blueprints of the enabled mods (see BluePrintDefinitions.cs).</summary>
-        void InitBluePrints()
-        {
-            RefineryBlueprint.InitScrapTypeBlueprintTypes();
-            DefineBluePrints(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints);
-            foreach (var b in Lists.Data.BluePrints_Inactive.Values)
-                MyDefinitionId.TryParse(BluePrintDefinitionPrefix + b.DefinitionSubtype, out b.definition_id);
-            foreach (var b in RefineryBlueprints)
-                MyDefinitionId.TryParse(BluePrintDefinitionPrefix + b.Name, out b.Definition_id);
+            // created on first use, so loading the blueprints (BluePrintLoadJob) needs no VRage types
+            public MyDefinitionId definition_id
+            {
+                get
+                {
+                    if (!_definitionIdSet)
+                    {
+                        MyDefinitionId.TryParse(BluePrintDefinitionPrefix + DefinitionSubtype, out _definitionId);
+                        _definitionIdSet = true;
+                    }
+                    return _definitionId;
+                }
+            }
         }
 
         AssemblerBluePrint AddProductionAmount(MyProductionItem pi)
@@ -36,8 +40,8 @@ namespace IngameScript
         }
         AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
         {
-            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
-            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.definition_id.SubtypeName == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.DefinitionSubtype == pi.BlueprintId.SubtypeName) return b;
+            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.DefinitionSubtype == pi.BlueprintId.SubtypeName) return b;
             return null;
         }
 

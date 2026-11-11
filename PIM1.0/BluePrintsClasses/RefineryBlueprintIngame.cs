@@ -110,7 +110,11 @@ namespace IngameScript
             }
 
 
-            public static bool IsKnowScrapType(MyItemType scrapType) { return ScrapItemTypes.Contains(scrapType); }
+            public static bool IsKnowScrapType(MyItemType scrapType)
+            {
+                if (ScrapItemTypes == null) InitScrapTypeBlueprintTypes();
+                return ScrapItemTypes.Contains(scrapType);
+            }
 
 
             public static RefineryBlueprint GetScrapBlueprintByItemtypeOrCreateNew(MyItemType scrapType)
@@ -124,7 +128,7 @@ namespace IngameScript
             }
 
 
-            public static void InitScrapTypeBlueprintTypes()
+            static void InitScrapTypeBlueprintTypes()
             {
                 ScrapItemTypes = new MyItemType[ScrapTypeBlueprintNames.Length];
                 for (int i = 0; i < ScrapTypeBlueprintNames.Length; i++)
@@ -138,7 +142,22 @@ namespace IngameScript
 
 
             // ----------------------------------------------------------------------------------------------------------------
-            public MyDefinitionId Definition_id;
+            MyDefinitionId _definitionId;
+            bool _definitionIdSet;
+
+            // created on first use, so loading the blueprints (BluePrintLoadJob) needs no VRage types
+            public MyDefinitionId Definition_id
+            {
+                get
+                {
+                    if (!_definitionIdSet)
+                    {
+                        MyDefinitionId.TryParse(BluePrintDefinitionPrefix + Name, out _definitionId);
+                        _definitionIdSet = true;
+                    }
+                    return _definitionId;
+                }
+            }
 
 
             // special constructor for blueprints from the AWWScrap mod
@@ -149,6 +168,7 @@ namespace IngameScript
                 InputIDName = iScrapType.SubtypeId;
                 Name = InputIDName + "ToIngots";
                 IsScrap = true;
+                _definitionIdSet = true;   // no real blueprint definition: keep the empty id
             }
         }
     }

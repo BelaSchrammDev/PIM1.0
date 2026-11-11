@@ -15,9 +15,12 @@ namespace IngameScript
                 get { return Master == MyProgram.Me; }
             }
 
+            // while this job is active (blueprint loading at script start) the maximum budget is used
+            public static Job StartupJob;
+
             public static bool IsMaxInstructionsArrived()
             {
-                return MyProgram.Runtime.CurrentInstructionCount > CurrentInstructionAmount;
+                return MyProgram.Runtime.CurrentInstructionCount > (StartupJob != null && StartupJob.Active ? INSTRUCTION_MAX : CurrentInstructionAmount);
             }
 
             public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
@@ -43,7 +46,6 @@ namespace IngameScript
             public static void Init()
             {
                 Config.Instance.LoadConfig();
-                MyProgram.InitBluePrints();
                 CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
                 SetMasterBehavior();
             }

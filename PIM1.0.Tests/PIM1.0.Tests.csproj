@@ -55,6 +55,8 @@
             Link="Linked\AssemblerBluePrint.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprint.cs"
             Link="Linked\RefineryBlueprint.cs" />
+    <Compile Include="..\PIM1.0\Share\JobBase\SequentialJob.cs"
+            Link="Linked\SequentialJob.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\BluePrintDefinitions.cs"
             Link="Linked\BluePrintDefinitions.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\Generated\BluePrintData.g.cs"

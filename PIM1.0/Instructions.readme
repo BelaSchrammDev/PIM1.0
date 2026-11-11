@@ -1,8 +1,8 @@
 ﻿Production Inventory Manager v1.1d
-c BelaOkuma 2017-2025
+c BelaOkuma 2017-2026
 only compatible with SMS v1.4!
 
-### developed with MDK2 ###
+### developed with MDK2 and claude ###
 
 the configuration is located in the customdata.
 
@@ -13,5 +13,8 @@ new in update 1.1b:
 
 new in update 1.1c:
  - add support for Apex items, add (sms,food) to containers
+
+new in update 1.1d:
+ - massive code overhaul
 
 ----------------------------------------------------------------------------------------------------------------
