@@ -1,0 +1,553 @@
+## autocrafting-empty
+/ Autocraftingdefinition:
+/ add '...(sms)' to the name of assemblers to crafting their items,
+/ and set the max quantity as you want
+
+/ if the quantity of items falls below this percentage value,
+/ then it will be increased to max.
+Autocrafting_threshold = 80%
+
+/ possible autocrafting types, please add them separated by comma.
+/ Reprocessing,Component,Ingot,AmmoMagazine,Tools&Guns,
+AutocraftingTypes=Component,AmmoMagazine
+
+/                           Item            |     current    ­|       max      ­|   assembly
+/-------------------------------------------------------------------------------------------
+ Type : Component =  * 
+/-------------------------------------------------------------------------------------------
+                       AcidPowerCell |           ­­­148 |                 ­   |                 ­                                                                                       |Component AcidPowerCell|
+             ­­AdvancedComputer |         ­­­­1147 |          ­4650 |                 ­                                                                                       |Component AdvancedComputer|
+                 AlkalinePowerCell |           ­­­185 |         ­­­­750 |            ­­­­10                                                                                     |Component AlkalinePowerCell|
+                    ­­­­ArmoredPlate |              703 |          ­2850 |                 ­                                                                                       |Component ArmoredPlate|
+                            ArmorGlass |           ­­­814 |        ­­­3300 |                 ­                                                                                       |Component ArmorGlass|
+                               ­­­Asphalt |        ­­­2479 |         ­10050 |                 ­                                                                                       |Component Asphalt|
+                    BulletproofGlass |           ­­888 |                 ­   |            ­­­24                                                                                     |Component POBulletproofGlass|
+                                  ­Canvas |          ­­1295 |          ­5250 |                70                                                                                     |Component POCanvas|
+                           ­­­­Capacitor |           ­­962 |         ­­3900 |                 ­                                                                                       |Component Capacitor|
+                             ­­­­Ceramic |           ­­­851 |         ­­3450 |                 ­                                                                                       |Component Ceramic|
+               ­­­­CompositeArmor |           ­­629 |          ­2550 |                 ­                                                                                       |Component CompositeArmor|
+                            ­­­Computer |           ­­444 |                 ­   |            ­­­­12                                                                                     |Component POComputerComponent|
+                            ­­­­Concrete |           ­­925 |       ­­­­3750 |            ­­­50                                                                                     |Component Concrete|
+                       ­­­Construction |           ­­259 |          ­­1050 |                 ­                                                                                       |Component POConstructionComponent|
+                            CopperWire |              ­­37 |           ­­­150 |                 ­                                                                                       |Component CopperWire|
+                          ­­­Cryocooler |           ­­999 |          ­4050 |                27                                                                                     |Component Cryocooler|
+                               ­­Detector |           ­­1221 |          ­4950 |               ­33                                                                                     |Component PODetectorComponent|
+                              ­­­­Display |           ­­1184 |                 ­   |                 ­                                                                                       |Component PODisplay|
+                    ­­­Electromagnet |                74 |          ­­­300 |                 ­                                                                                       |Component Electromagnet|
+                   ­­­­ElectronMatrix |         ­­­­1517 |          ­­6150 |                 ­                                                                                       |Component ElectronMatrix|
+                          ­­­Explosives |         ­­­1702 |          ­6900 |                 ­                                                                                       |Component POExplosivesComponent|
+                                    ­Fabric |          ­­1258 |          ­­5100 |                 ­                                                                                       |Component Fabric|
+                            FSSolarCell |          ­­1665 |        ­­­6750 |            ­­­45                                                                                     |Component FSSolarCell|
+                                  ­­­Girder |           ­­­777 |         ­­­3150 |            ­­­­21                                                                                     |Component POGirderComponent|
+                               ­GoldWire |           ­­555 |          ­2250 |            ­­­­15                                                                                     |Component GoldWire|
+                    GravityGenerator |          ­­1628 |                 ­   |                 ­                                                                                       |Component POGravityGeneratorComponent|
+                   ­­HeatingElement |           ­­222 |           ­­900 |                  6                                                                                     |Component HeatingElement|
+                         ­­InteriorPlate |         ­­­­740 |                 ­   |            ­­­40                                                                                     |Component POInteriorPlate|
+                             ­LargeTube |              370 |          ­­1500 |            ­­­20                                                                                     |Component POLargeTube|
+                       ­­­LaserEmitter |          ­­1406 |        ­­­5700 |                 ­                                                                                       |Component LaserEmitter|
+                              ­­Lightbulb |                 111 |           ­­450 |                 ­3                                                                                     |Component Lightbulb|
+                                ­­Medical |         ­­­1036 |                 ­   |                 ­                                                                                       |Component POMedicalComponent|
+                            ­­­MetalGrid |           ­­­518 |          ­­2100 |                 ­                                                                                       |Component POMetalGrid|
+                                      Motor |         ­­­­407 |          ­­1650 |                 ­                                                                                       |Component POMotorComponent|
+                                    Plastic |         ­­2368 |                 ­   |                 ­                                                                                       |Component PolymerToPlastic|
+                            ­­PowerCell |          ­­1480 |                 ­   |            ­­­80                                                                                     |Component POPowerCell|
+                 QuantumComputer |          ­­1554 |         ­­6300 |            ­­­42                                                                                     |Component QuantumComputer|
+          ­­RadioCommunication |           ­­­481 |          ­­1950 |                 ­                                                                                       |Component PORadioCommunicationComponent|
+                               ­­­Reactor |         ­­­1443 |          ­5850 |                39                                                                                     |Component POReactorComponent|
+                                ­­­Rubber |          ­2405 |        ­­­9750 |          ­­­­130                                                                                     |Component Rubber|
+                          ­­­SmallTube |             ­333 |         ­­­1350 |                  9                                                                                     |Component POSmallTube|
+                              ­­SolarCell |             1073 |         ­­4350 |                 ­                                                                                       |Component POSolarCell|
+                             ­SteelPlate |           ­­296 |                 ­   |                 ­                                                                                       |Component POSteelPlate|
+                   ­­Superconductor |           ­­592 |                 ­   |                 ­                                                                                       |Component POSuperconductor|
+                       ­­SuperMagnet |         ­­­1369 |          ­5550 |                 ­                                                                                       |Component SuperMagnet|
+                        Thermocouple |           ­­­1110 |          ­4500 |                30                                                                                     |Component Thermocouple|
+                                     Thrust |           ­­1591 |          ­6450 |                 ­                                                                                       |Component POThrustComponent|
+                     ­­­TitaniumPlate |           ­­666 |        ­­­2700 |            ­­­­18                                                                                     |Component TitaniumPlate|
+                ­­­TokamakBlanket |        ­­­­1332 |                 ­   |                36                                                                                     |Component TokamakBlanket|
+/-------------------------------------------------------------------------------------------
+ Type : AmmoMagazine =  * 
+/-------------------------------------------------------------------------------------------
+                  ­­­AutocannonClip |         ­­­3441 |        ­­13950 |                93                                                                                     |AmmoMagazine AutocannonClip|
+            AutocannonClipDUAP |          ­­2146 |        ­­­8700 |                 ­                                                                                       |AmmoMagazine AutocannonClipDUAP|
+              ­­­­AutoRifleGunMag |          ­­1998 |          ­­8100 |            ­­­54                                                                                     |AmmoMagazine POAutomaticRifleGun_Mag_20rd|
+              DUNATO 25x184mm |          ­­1850 |        ­­­7500 |           ­­­100                                                                                     |AmmoMagazine DUNATO_25x184mmMagazine|
+                    ­­­ElitePistolMag |           ­­1961 |        ­­­7950 |                 ­                                                                                       |AmmoMagazine POElitePistolMagazine|
+                ­FullAutoPistolMag |          ­­1924 |                 ­   |                 ­                                                                                       |AmmoMagazine POFullAutoPistolMagazine|
+                  HEMissile200mm |         ­­3404 |                 ­   |                 ­                                                                                       |AmmoMagazine POHEMissile200mm|
+       ­­InteriorTurret Mag 50rd |             1776 |                 ­   |            ­­­48                                                                                     |AmmoMagazine POInteriorTurret_Mag_50rd|
+                LargeCalibreAmmo |         ­­­3515 |         ­14250 |           ­­­190                                                                                     |AmmoMagazine LargeCalibreAmmo|
+    ­­LargeCalibreAmmoDUAP |          ­2294 |         ­­9300 |                 ­                                                                                       |AmmoMagazine LargeCalibreAmmoDUAP|
+        ­­­LargeCalibreAmmoHE |        ­­­2257 |          ­­9150 |                 ­                                                                                       |AmmoMagazine LargeCalibreAmmoHE|
+               LargeRailgunAmmo |         ­­3552 |                 ­   |            ­­­96                                                                                     |AmmoMagazine LargeRailgunAmmo|
+   ­­LargeRailgunAmmoDUAP |         ­­3589 |         ­14550 |                 ­                                                                                       |AmmoMagazine LargeRailgunAmmoDUAP|
+            MediumCalibreAmmo |       ­­­­3478 |          ­14100 |                 ­                                                                                       |AmmoMagazine MediumCalibreAmmo|
+   MediumCalibreAmmoDUAP |          ­2220 |                 ­   |            ­­­60                                                                                     |AmmoMagazine MediumCalibreAmmoDUAP|
+    ­­­MediumCalibreAmmoHE |         ­­­2183 |          ­8850 |                 ­                                                                                       |AmmoMagazine MediumCalibreAmmoHE|
+                     ­Missile200mm |         ­­­1887 |        ­­­7650 |            ­­­­51                                                                                     |AmmoMagazine POMissile200mm|
+               ­­­NATO 25x184mm |         ­­­­1813 |       ­­­­7350 |                 ­                                                                                       |AmmoMagazine PONATO_25x184mmMagazine|
+              PreciseRifleGunMag |        ­­­2072 |                 ­   |                 ­                                                                                       |AmmoMagazine POPreciseAutomaticRifleGun_Mag_5rd|
+       ­­­RapidFireRifleGunMag |         ­­2035 |          ­8250 |           ­­­­110                                                                                     |AmmoMagazine PORapidFireAutomaticRifleGun_Mag_50rd|
+           ­­­SemiAutoPistolMag |          ­2664 |                 ­   |                72                                                                                     |AmmoMagazine POSemiAutoPistolMagazine|
+            ­­SmallRailgunAmmo |         ­­3626 |        ­­14700 |                 ­                                                                                       |AmmoMagazine SmallRailgunAmmo|
+     SmallRailgunAmmoDUAP |        ­­­­2331 |          ­9450 |                63                                                                                     |AmmoMagazine SmallRailgunAmmoDUAP|
+         ­­­UltimateRifleGunMag |          ­­2109 |          ­8550 |                57                                                                                     |AmmoMagazine POUltimateAutomaticRifleGun_Mag_30rd|
+
+## autocrafting-all-types-filtered
+/ Autocraftingdefinition:
+/ add '...(sms)' to the name of assemblers to crafting their items,
+/ and set the max quantity as you want
+
+/ if the quantity of items falls below this percentage value,
+/ then it will be increased to max.
+Autocrafting_threshold = 75%
+
+/ possible autocrafting types, please add them separated by comma.
+/ Reprocessing,Component,Ingot,AmmoMagazine,Tools&Guns,
+AutocraftingTypes=Reprocessing,Component,Ingot,AmmoMagazine,Tools&Guns
+
+/                           Item            |     current    ­|       max      ­|   assembly
+/-------------------------------------------------------------------------------------------
+ Type : Reprocessing =  * 
+/-------------------------------------------------------------------------------------------
+                       ­­­Nuclear Fuel |                 ­   |                 ­   |                 ­                                                                                       |Ingot SpentFuelReprocessing|
+/-------------------------------------------------------------------------------------------
+ Type : Component = Steel, Plate, -Large
+/-------------------------------------------------------------------------------------------
+                    ­­­­ArmoredPlate |              703 |          ­2850 |                 ­                                                                                       |Component ArmoredPlate|
+                         ­­InteriorPlate |         ­­­­740 |                 ­   |            ­­­40                                                                                     |Component POInteriorPlate|
+                             ­SteelPlate |           ­­296 |                 ­   |                 ­                                                                                       |Component POSteelPlate|
+                     ­­­TitaniumPlate |           ­­666 |        ­­­2700 |            ­­­­18                                                                                     |Component TitaniumPlate|
+/-------------------------------------------------------------------------------------------
+ Type : Ingot =  * 
+/-------------------------------------------------------------------------------------------
+                           ­Magnesium |             1739 |        ­­­7050 |                 ­                                                                                       |Ingot Gunpowder|
+                              ­­­Polymer |          ­2442 |          ­9900 |            ­­­66                                                                                     |Ingot SyntheticPolymer|
+/-------------------------------------------------------------------------------------------
+ Type : AmmoMagazine =  * 
+/-------------------------------------------------------------------------------------------
+                  ­­­AutocannonClip |         ­­­3441 |        ­­13950 |                93                                                                                     |AmmoMagazine AutocannonClip|
+            AutocannonClipDUAP |          ­­2146 |        ­­­8700 |                 ­                                                                                       |AmmoMagazine AutocannonClipDUAP|
+              ­­­­AutoRifleGunMag |          ­­1998 |          ­­8100 |            ­­­54                                                                                     |AmmoMagazine POAutomaticRifleGun_Mag_20rd|
+              DUNATO 25x184mm |          ­­1850 |        ­­­7500 |           ­­­100                                                                                     |AmmoMagazine DUNATO_25x184mmMagazine|
+                    ­­­ElitePistolMag |           ­­1961 |        ­­­7950 |                 ­                                                                                       |AmmoMagazine POElitePistolMagazine|
+                ­FullAutoPistolMag |          ­­1924 |                 ­   |                 ­                                                                                       |AmmoMagazine POFullAutoPistolMagazine|
+                  HEMissile200mm |         ­­3404 |                 ­   |                 ­                                                                                       |AmmoMagazine POHEMissile200mm|
+       ­­InteriorTurret Mag 50rd |             1776 |                 ­   |            ­­­48                                                                                     |AmmoMagazine POInteriorTurret_Mag_50rd|
+                LargeCalibreAmmo |         ­­­3515 |         ­14250 |           ­­­190                                                                                     |AmmoMagazine LargeCalibreAmmo|
+    ­­LargeCalibreAmmoDUAP |          ­2294 |         ­­9300 |                 ­                                                                                       |AmmoMagazine LargeCalibreAmmoDUAP|
+        ­­­LargeCalibreAmmoHE |        ­­­2257 |          ­­9150 |                 ­                                                                                       |AmmoMagazine LargeCalibreAmmoHE|
+               LargeRailgunAmmo |         ­­3552 |                 ­   |            ­­­96                                                                                     |AmmoMagazine LargeRailgunAmmo|
+   ­­LargeRailgunAmmoDUAP |         ­­3589 |         ­14550 |                 ­                                                                                       |AmmoMagazine LargeRailgunAmmoDUAP|
+            MediumCalibreAmmo |       ­­­­3478 |          ­14100 |                 ­                                                                                       |AmmoMagazine MediumCalibreAmmo|
+   MediumCalibreAmmoDUAP |          ­2220 |                 ­   |            ­­­60                                                                                     |AmmoMagazine MediumCalibreAmmoDUAP|
+    ­­­MediumCalibreAmmoHE |         ­­­2183 |          ­8850 |                 ­                                                                                       |AmmoMagazine MediumCalibreAmmoHE|
+                     ­Missile200mm |         ­­­1887 |        ­­­7650 |            ­­­­51                                                                                     |AmmoMagazine POMissile200mm|
+               ­­­NATO 25x184mm |         ­­­­1813 |       ­­­­7350 |                 ­                                                                                       |AmmoMagazine PONATO_25x184mmMagazine|
+              PreciseRifleGunMag |        ­­­2072 |                 ­   |                 ­                                                                                       |AmmoMagazine POPreciseAutomaticRifleGun_Mag_5rd|
+       ­­­RapidFireRifleGunMag |         ­­2035 |          ­8250 |           ­­­­110                                                                                     |AmmoMagazine PORapidFireAutomaticRifleGun_Mag_50rd|
+           ­­­SemiAutoPistolMag |          ­2664 |                 ­   |                72                                                                                     |AmmoMagazine POSemiAutoPistolMagazine|
+            ­­SmallRailgunAmmo |         ­­3626 |        ­­14700 |                 ­                                                                                       |AmmoMagazine SmallRailgunAmmo|
+     SmallRailgunAmmoDUAP |        ­­­­2331 |          ­9450 |                63                                                                                     |AmmoMagazine SmallRailgunAmmoDUAP|
+         ­­­UltimateRifleGunMag |          ­­2109 |          ­8550 |                57                                                                                     |AmmoMagazine POUltimateAutomaticRifleGun_Mag_30rd|
+/-------------------------------------------------------------------------------------------
+ Type : Tools&Guns =  * 
+/-------------------------------------------------------------------------------------------
+    A...HandHeldLauncherItem |         ­­­3219 |        ­­13050 |                87                                                                                     |PhysicalGunObject POAdvancedHandHeldLauncher|
+             ­­­AngleGrinder2Item |          ­­2812 |                 ­   |                 ­                                                                                       |PhysicalGunObject POAngleGrinder2|
+            ­­­­AngleGrinder3Item |         ­­­3108 |                 ­   |            ­­­84                                                                                     |PhysicalGunObject POAngleGrinder3|
+             ­­­AngleGrinder4Item |            3330 |        ­­13500 |            ­­­90                                                                                     |PhysicalGunObject POAngleGrinder4|
+              ­­­­AngleGrinderItem |         ­­2553 |        ­­10350 |            ­­­69                                                                                     |PhysicalGunObject POAngleGrinder|
+           ­­­­AutomaticRifleItem |          ­2886 |        ­­­11700 |                78                                                                                     |PhysicalGunObject POAutomaticRifle|
+ BasicHandHeldLauncherItem |        ­­­2997 |          ­12150 |            ­­­­81                                                                                     |PhysicalGunObject POBasicHandHeldLauncher|
+                     ­­ElitePistolItem |         ­­3256 |                 ­   |                 ­                                                                                       |PhysicalGunObject POEliteAutoPistol|
+                 FullAutoPistolItem |        ­­­3034 |        ­­12300 |                 ­                                                                                       |PhysicalGunObject POFullAutoPistol|
+                  ­­­­HandDrill2Item |          ­2849 |          ­11550 |                 ­                                                                                       |PhysicalGunObject POHandDrill2|
+                       HandDrill3Item |         ­­­3145 |        ­­12750 |               170                                                                                     |PhysicalGunObject POHandDrill3|
+                  ­­­­HandDrill4Item |            3367 |        ­­13650 |                 ­                                                                                       |PhysicalGunObject POHandDrill4|
+                         HandDrillItem |          ­2590 |         ­10500 |           ­­­140                                                                                     |PhysicalGunObject POHandDrill|
+                      HydrogenBottle |       ­­­­2738 |          ­­11100 |                 ­                                                                                       |GasContainerObject POHydrogenBottle|
+                       ­­OxygenBottle |         ­­­2701 |         ­10950 |                 ­                                                                                       |OxygenContainerObject POOxygenBottle|
+    PreciseAutomaticRifleItem |         ­­2923 |          ­11850 |                 ­                                                                                       |PhysicalGunObject POPreciseAutomaticRifle|
+ RapidFireAutomaticRifleItem |          ­2960 |                 ­   |           ­­­160                                                                                     |PhysicalGunObject PORapidFireAutomaticRifle|
+            ­­SemiAutoPistolItem |        ­­­2627 |         ­10650 |                 ­                                                                                       |PhysicalGunObject POSemiAutoPistol|
+   UltimateAutomaticRifleItem |         ­­­3182 |         ­12900 |                 ­                                                                                       |PhysicalGunObject POUltimateAutomaticRifle|
+                          Welder2Item |            2775 |          ­11250 |                75                                                                                     |PhysicalGunObject POWelder2|
+                         ­Welder3Item |             3071 |         ­12450 |                 ­                                                                                       |PhysicalGunObject POWelder3|
+                          Welder4Item |        ­­­3293 |       ­­­13350 |                 ­                                                                                       |PhysicalGunObject POWelder4|
+                           ­WelderItem |          ­­2516 |                 ­   |                 ­                                                                                       |PhysicalGunObject POWelder|
+
+## oreprio-empty
+/ Orepriorityconfig:
+/ only refinerytypes with '(sms)' in the name are displayed.
+
+/ set the 'value' between 1 and 10000
+/ if value = 0 then the ore will be ignored
+/ if value empty then prio will be calculated by PIM.
+/ any type of scrap is always refined first
+
+/ Refinerytypefilter, separated by comma, '*' for all
+ Filter: *
+
+/                Recipe                       |    Value   |       Current
+/-------------------------------------------------------------------------
+ RefineryType: LargeRefinery
+/-------------------------------------------------------------------------
+ BauxiteOreToIngot                     |                |                                                                                       |OrePrio:BauxiteOreToIngot|
+ CrushBauxiteOre                   ­­­ |                |             ­­­13                                                                                       |OrePrio:CrushBauxiteOre|
+ CoalToCarbonBasic                 ­ |                |              ­26                                                                                       |OrePrio:CoalToCarbonBasic|
+ CoalToCarbon                         ­­ |                |             ­­39                                                                                       |OrePrio:CoalToCarbon|
+ CrushedBauxiteOreToIngot    ­­ |                |              ­52                                                                                       |OrePrio:CrushedBauxiteOreToIngot|
+ PurifyBauxiteOre                    ­­ |                |              ­65                                                                                       |OrePrio:PurifyBauxiteOre|
+ CrushedCobaltOreToIngot     ­­­ |                |             ­­78                                                                                       |OrePrio:CrushedCobaltOreToIngot|
+ PurifyCobaltOre                      ­­ |                |              ­­91                                                                                       |OrePrio:PurifyCobaltOre|
+ PurifyCopperOre                     ­­ |                |            ­­­117                                                                                       |OrePrio:PurifyCopperOre|
+ CrushedCopperOreToIngot     ­­ |                |              104                                                                                       |OrePrio:CrushedCopperOreToIngot|
+ CrushedGoldOreToIngot        ­­­ |                |            ­­130                                                                                       |OrePrio:CrushedGoldOreToIngot|
+ PurifyGoldOre                         ­­ |                |            ­­143                                                                                       |OrePrio:PurifyGoldOre|
+ CrushedIronOreToIngot         ­­­ |                |              156                                                                                       |OrePrio:CrushedIronOreToIngot|
+ PurifyIronOre                         ­­­ |                |              169                                                                                       |OrePrio:PurifyIronOre|
+ CrushedLithiumOreToIngot        |                |              182                                                                                       |OrePrio:CrushedLithiumOreToIngot|
+ PurifyLithiumOre                  ­­­­ |                |              195                                                                                       |OrePrio:PurifyLithiumOre|
+ CrushedNickelOreToIngot      ­­ |                |             208                                                                                       |OrePrio:CrushedNickelOreToIngot|
+ PurifyNickelOre                      ­­ |                |              221                                                                                       |OrePrio:PurifyNickelOre|
+ CrushedNiterOreToIngot          ­ |                |            ­247                                                                                       |OrePrio:CrushedNiterOreToIngot|
+ PurifyNiterOre                            |                |            ­234                                                                                       |OrePrio:PurifyNiterOre|
+ CrushedPlatinumOreToIngot  ­­ |                |              ­­10                                                                                       |OrePrio:CrushedPlatinumOreToIngot|
+ PurifyPlatinumOre                   ­ |                |             ­­23                                                                                       |OrePrio:PurifyPlatinumOre|
+ CrushedSiliconOreToIngot     ­­ |                |             ­­36                                                                                       |OrePrio:CrushedSiliconOreToIngot|
+ PurifySiliconOre                     ­­ |                |              ­49                                                                                       |OrePrio:PurifySiliconOre|
+ CrushedSilverOreToIngot       ­­ |                |              ­62                                                                                       |OrePrio:CrushedSilverOreToIngot|
+ PurifySilverOre                       ­­ |                |             ­­75                                                                                       |OrePrio:PurifySilverOre|
+ CrushedSulfurOreToIngot        ­ |                |              ­88                                                                                       |OrePrio:CrushedSulfurOreToIngot|
+ PurifySulfurOre                          |                |              ­101                                                                                       |OrePrio:PurifySulfurOre|
+ PurifyTantalumOre                ­­­ |                |            ­­127                                                                                       |OrePrio:PurifyTantalumOre|
+ CrushedTantalumOreToIngot     |                |              ­114                                                                                       |OrePrio:CrushedTantalumOreToIngot|
+ CrushedTitaniumOreToIngot ­­­ |                |              140                                                                                       |OrePrio:CrushedTitaniumOreToIngot|
+ PurifyTitaniumOre                 ­­­ |                |            ­­153                                                                                       |OrePrio:PurifyTitaniumOre|
+ CrushedUraniumOreToIngot    ­ |                |              166                                                                                       |OrePrio:CrushedUraniumOreToIngot|
+ PurifyUraniumOre                    ­ |                |            ­­179                                                                                       |OrePrio:PurifyUraniumOre|
+ CrushNiterOre                          ­ |                |             205                                                                                       |OrePrio:CrushNiterOre|
+ NiterOreToIngot                     ­­­ |                |              218                                                                                       |OrePrio:NiterOreToIngot|
+ CobaltOreToIngot                       |                |            ­­231                                                                                       |OrePrio:CobaltOreToIngot|
+ CrushCobaltOre                     ­­­ |                |             244                                                                                       |OrePrio:CrushCobaltOre|
+ CopperOreToIngot                      |                |             ­­­­7                                                                                       |OrePrio:CopperOreToIngot|
+ CrushCopperOre                    ­­­ |                |              ­20                                                                                       |OrePrio:CrushCopperOre|
+ CrudeOilCracking                       |                |            ­­­33                                                                                       |OrePrio:CrudeOilCracking|
+ GoldOreToIngot                          |                |              ­46                                                                                       |OrePrio:GoldOreToIngot|
+ CrushGoldOre                        ­­­ |                |              ­59                                                                                       |OrePrio:CrushGoldOre|
+ IronOreToIngot                         ­ |                |             ­­72                                                                                       |OrePrio:IronOreToIngot|
+ CrushIronOre                        ­­­­ |                |              ­85                                                                                       |OrePrio:CrushIronOre|
+ CrushLithiumOre                        |                |              ­98                                                                                       |OrePrio:CrushLithiumOre|
+ LithiumOreToIngot                  ­­ |                |              ­­111                                                                                       |OrePrio:LithiumOreToIngot|
+ NickelOreToIngot                       |                |              124                                                                                       |OrePrio:NickelOreToIngot|
+ CrushNickelOre                     ­­­ |                |           ­­­137                                                                                       |OrePrio:CrushNickelOre|
+ OilSandToCrudeOil                  ­ |                |              150                                                                                       |OrePrio:OilSandToCrudeOil|
+ CrushPlatinumOre                  ­­ |                |            ­­176                                                                                       |OrePrio:CrushPlatinumOre|
+ PlatinumOreToIngot             ­­­­ |                |            ­­163                                                                                       |OrePrio:PlatinumOreToIngot|
+ SiliconOreToIngot                      |                |             202                                                                                       |OrePrio:SiliconOreToIngot|
+ CrushSiliconOre                    ­­­ |                |              215                                                                                       |OrePrio:CrushSiliconOre|
+ SilverOreToIngot                        |                |             228                                                                                       |OrePrio:SilverOreToIngot|
+ CrushSilverOre                       ­­ |                |              241                                                                                       |OrePrio:CrushSilverOre|
+ CrushSulfurOre                        ­ |                |               ­­4                                                                                       |OrePrio:CrushSulfurOre|
+ SulfurOreToIngot                   ­­­ |                |             ­­­17                                                                                       |OrePrio:SulfurOreToIngot|
+ TantalumOreToIngot                ­ |                |             ­­30                                                                                       |OrePrio:TantalumOreToIngot|
+ CrushTantalumOre               ­­­­ |                |             ­­43                                                                                       |OrePrio:CrushTantalumOre|
+ CrushTitaniumOre                ­­­­ |                |              ­69                                                                                       |OrePrio:CrushTitaniumOre|
+ TitaniumOreToIngot                 ­ |                |              ­56                                                                                       |OrePrio:TitaniumOreToIngot|
+ UraniumOreToIngot               ­­­ |                |              ­82                                                                                       |OrePrio:UraniumOreToIngot|
+ CrushUraniumOre                   ­­ |                |              ­95                                                                                       |OrePrio:CrushUraniumOre|
+ PurifiedBauxiteOreToIngot     ­­ |                |              108                                                                                       |OrePrio:PurifiedBauxiteOreToIngot|
+ PurifiedCobaltOreToIngot       ­­ |                |              ­121                                                                                       |OrePrio:PurifiedCobaltOreToIngot|
+ PurifiedCopperOreToIngot       ­ |                |            ­­134                                                                                       |OrePrio:PurifiedCopperOreToIngot|
+ PurifiedGoldOreToIngot          ­­ |                |            ­­147                                                                                       |OrePrio:PurifiedGoldOreToIngot|
+ PurifiedIronOreToIngot           ­­ |                |              160                                                                                       |OrePrio:PurifiedIronOreToIngot|
+ PurifiedLithiumOreToIngot    ­­­ |                |           ­­­173                                                                                       |OrePrio:PurifiedLithiumOreToIngot|
+ PurifiedNickelOreToIngot       ­­ |                |              186                                                                                       |OrePrio:PurifiedNickelOreToIngot|
+ PurifiedNiterOreToIngot             |                |              199                                                                                       |OrePrio:PurifiedNiterOreToIngot|
+ PurifiedPlatinumOreToIngot    ­ |                |              212                                                                                       |OrePrio:PurifiedPlatinumOreToIngot|
+ PurifiedSiliconOreToIngot      ­­ |                |             225                                                                                       |OrePrio:PurifiedSiliconOreToIngot|
+ PurifiedSilverOreToIngot         ­ |                |            ­238                                                                                       |OrePrio:PurifiedSilverOreToIngot|
+ PurifiedSulfurOreToIngot           |                |               ­­­1                                                                                       |OrePrio:PurifiedSulfurOreToIngot|
+ PurifiedTantalumOreToIngot  ­­ |                |              ­­14                                                                                       |OrePrio:PurifiedTantalumOreToIngot|
+ PurifiedTitaniumOreToIngot   ­­ |                |             ­­27                                                                                       |OrePrio:PurifiedTitaniumOreToIngot|
+ PurifiedUraniumOreToIngot       |                |              ­40                                                                                       |OrePrio:PurifiedUraniumOreToIngot|
+ StoneOreToIngot                  ­­­­ |                |             ­­53                                                                                       |OrePrio:StoneOreToIngot|
+ CrushStoneOre                       ­­ |                |              ­66                                                                                       |OrePrio:CrushStoneOre|
+/-------------------------------------------------------------------------
+ RefineryType: Blast Furnace
+/-------------------------------------------------------------------------
+ BauxiteOreToIngot                     |                |                                                                                       |OrePrio:BauxiteOreToIngot|
+ CrushBauxiteOre                   ­­­ |                |             ­­­13                                                                                       |OrePrio:CrushBauxiteOre|
+ CoalToCarbonBasic                 ­ |                |              ­26                                                                                       |OrePrio:CoalToCarbonBasic|
+ CoalToCarbon                         ­­ |                |             ­­39                                                                                       |OrePrio:CoalToCarbon|
+
+## oreprio-edited
+/ Orepriorityconfig:
+/ only refinerytypes with '(sms)' in the name are displayed.
+
+/ set the 'value' between 1 and 10000
+/ if value = 0 then the ore will be ignored
+/ if value empty then prio will be calculated by PIM.
+/ any type of scrap is always refined first
+
+/ Refinerytypefilter, separated by comma, '*' for all
+ Filter: Large
+
+/                Recipe                       |    Value   |       Current
+/-------------------------------------------------------------------------
+ RefineryType: LargeRefinery
+/-------------------------------------------------------------------------
+ BauxiteOreToIngot                     |                |                                                                                       |OrePrio:BauxiteOreToIngot|
+ CrushBauxiteOre                   ­­­ |      ­500  |             500                                                                                       |OrePrio:CrushBauxiteOre|
+ CoalToCarbonBasic                 ­ |        ­­­0  |                                                                                       |OrePrio:CoalToCarbonBasic|
+ CoalToCarbon                         ­­ |                |             ­­39                                                                                       |OrePrio:CoalToCarbon|
+ CrushedBauxiteOreToIngot    ­­ |                |              ­52                                                                                       |OrePrio:CrushedBauxiteOreToIngot|
+ PurifyBauxiteOre                    ­­ |                |              ­65                                                                                       |OrePrio:PurifyBauxiteOre|
+ CrushedCobaltOreToIngot     ­­­ |                |             ­­78                                                                                       |OrePrio:CrushedCobaltOreToIngot|
+ PurifyCobaltOre                      ­­ |                |              ­­91                                                                                       |OrePrio:PurifyCobaltOre|
+ PurifyCopperOre                     ­­ |                |            ­­­117                                                                                       |OrePrio:PurifyCopperOre|
+ CrushedCopperOreToIngot     ­­ |                |              104                                                                                       |OrePrio:CrushedCopperOreToIngot|
+ CrushedGoldOreToIngot        ­­­ |                |            ­­130                                                                                       |OrePrio:CrushedGoldOreToIngot|
+ PurifyGoldOre                         ­­ |                |            ­­143                                                                                       |OrePrio:PurifyGoldOre|
+ CrushedIronOreToIngot         ­­­ |                |              156                                                                                       |OrePrio:CrushedIronOreToIngot|
+ PurifyIronOre                         ­­­ |                |              169                                                                                       |OrePrio:PurifyIronOre|
+ CrushedLithiumOreToIngot        |                |              182                                                                                       |OrePrio:CrushedLithiumOreToIngot|
+ PurifyLithiumOre                  ­­­­ |                |              195                                                                                       |OrePrio:PurifyLithiumOre|
+ CrushedNickelOreToIngot      ­­ |                |             208                                                                                       |OrePrio:CrushedNickelOreToIngot|
+ PurifyNickelOre                      ­­ |                |              221                                                                                       |OrePrio:PurifyNickelOre|
+ CrushedNiterOreToIngot          ­ |                |            ­247                                                                                       |OrePrio:CrushedNiterOreToIngot|
+ PurifyNiterOre                            |                |            ­234                                                                                       |OrePrio:PurifyNiterOre|
+ CrushedPlatinumOreToIngot  ­­ |                |              ­­10                                                                                       |OrePrio:CrushedPlatinumOreToIngot|
+ PurifyPlatinumOre                   ­ |                |             ­­23                                                                                       |OrePrio:PurifyPlatinumOre|
+ CrushedSiliconOreToIngot     ­­ |                |             ­­36                                                                                       |OrePrio:CrushedSiliconOreToIngot|
+ PurifySiliconOre                     ­­ |                |              ­49                                                                                       |OrePrio:PurifySiliconOre|
+ CrushedSilverOreToIngot       ­­ |                |              ­62                                                                                       |OrePrio:CrushedSilverOreToIngot|
+ PurifySilverOre                       ­­ |                |             ­­75                                                                                       |OrePrio:PurifySilverOre|
+ CrushedSulfurOreToIngot        ­ |                |              ­88                                                                                       |OrePrio:CrushedSulfurOreToIngot|
+ PurifySulfurOre                          |                |              ­101                                                                                       |OrePrio:PurifySulfurOre|
+ PurifyTantalumOre                ­­­ |                |            ­­127                                                                                       |OrePrio:PurifyTantalumOre|
+ CrushedTantalumOreToIngot     |                |              ­114                                                                                       |OrePrio:CrushedTantalumOreToIngot|
+ CrushedTitaniumOreToIngot ­­­ |                |              140                                                                                       |OrePrio:CrushedTitaniumOreToIngot|
+ PurifyTitaniumOre                 ­­­ |                |            ­­153                                                                                       |OrePrio:PurifyTitaniumOre|
+ CrushedUraniumOreToIngot    ­ |                |              166                                                                                       |OrePrio:CrushedUraniumOreToIngot|
+ PurifyUraniumOre                    ­ |                |            ­­179                                                                                       |OrePrio:PurifyUraniumOre|
+ CrushNiterOre                          ­ |                |             205                                                                                       |OrePrio:CrushNiterOre|
+ NiterOreToIngot                     ­­­ |                |              218                                                                                       |OrePrio:NiterOreToIngot|
+ CobaltOreToIngot                       |                |            ­­231                                                                                       |OrePrio:CobaltOreToIngot|
+ CrushCobaltOre                     ­­­ |                |             244                                                                                       |OrePrio:CrushCobaltOre|
+ CopperOreToIngot                      |                |             ­­­­7                                                                                       |OrePrio:CopperOreToIngot|
+ CrushCopperOre                    ­­­ |                |              ­20                                                                                       |OrePrio:CrushCopperOre|
+ CrudeOilCracking                       |                |            ­­­33                                                                                       |OrePrio:CrudeOilCracking|
+ GoldOreToIngot                          |                |              ­46                                                                                       |OrePrio:GoldOreToIngot|
+ CrushGoldOre                        ­­­ |                |              ­59                                                                                       |OrePrio:CrushGoldOre|
+ IronOreToIngot                         ­ |                |             ­­72                                                                                       |OrePrio:IronOreToIngot|
+ CrushIronOre                        ­­­­ |                |              ­85                                                                                       |OrePrio:CrushIronOre|
+ CrushLithiumOre                        |                |              ­98                                                                                       |OrePrio:CrushLithiumOre|
+ LithiumOreToIngot                  ­­ |                |              ­­111                                                                                       |OrePrio:LithiumOreToIngot|
+ NickelOreToIngot                       |                |              124                                                                                       |OrePrio:NickelOreToIngot|
+ CrushNickelOre                     ­­­ |                |           ­­­137                                                                                       |OrePrio:CrushNickelOre|
+ OilSandToCrudeOil                  ­ |                |              150                                                                                       |OrePrio:OilSandToCrudeOil|
+ CrushPlatinumOre                  ­­ |                |            ­­176                                                                                       |OrePrio:CrushPlatinumOre|
+ PlatinumOreToIngot             ­­­­ |                |            ­­163                                                                                       |OrePrio:PlatinumOreToIngot|
+ SiliconOreToIngot                      |                |             202                                                                                       |OrePrio:SiliconOreToIngot|
+ CrushSiliconOre                    ­­­ |                |              215                                                                                       |OrePrio:CrushSiliconOre|
+ SilverOreToIngot                        |                |             228                                                                                       |OrePrio:SilverOreToIngot|
+ CrushSilverOre                       ­­ |                |              241                                                                                       |OrePrio:CrushSilverOre|
+ CrushSulfurOre                        ­ |                |               ­­4                                                                                       |OrePrio:CrushSulfurOre|
+ SulfurOreToIngot                   ­­­ |                |             ­­­17                                                                                       |OrePrio:SulfurOreToIngot|
+ TantalumOreToIngot                ­ |                |             ­­30                                                                                       |OrePrio:TantalumOreToIngot|
+ CrushTantalumOre               ­­­­ |                |             ­­43                                                                                       |OrePrio:CrushTantalumOre|
+ CrushTitaniumOre                ­­­­ |                |              ­69                                                                                       |OrePrio:CrushTitaniumOre|
+ TitaniumOreToIngot                 ­ |                |              ­56                                                                                       |OrePrio:TitaniumOreToIngot|
+ UraniumOreToIngot               ­­­ |                |              ­82                                                                                       |OrePrio:UraniumOreToIngot|
+ CrushUraniumOre                   ­­ |                |              ­95                                                                                       |OrePrio:CrushUraniumOre|
+ PurifiedBauxiteOreToIngot     ­­ |                |              108                                                                                       |OrePrio:PurifiedBauxiteOreToIngot|
+ PurifiedCobaltOreToIngot       ­­ |                |              ­121                                                                                       |OrePrio:PurifiedCobaltOreToIngot|
+ PurifiedCopperOreToIngot       ­ |                |            ­­134                                                                                       |OrePrio:PurifiedCopperOreToIngot|
+ PurifiedGoldOreToIngot          ­­ |                |            ­­147                                                                                       |OrePrio:PurifiedGoldOreToIngot|
+ PurifiedIronOreToIngot           ­­ |                |              160                                                                                       |OrePrio:PurifiedIronOreToIngot|
+ PurifiedLithiumOreToIngot    ­­­ |                |           ­­­173                                                                                       |OrePrio:PurifiedLithiumOreToIngot|
+ PurifiedNickelOreToIngot       ­­ |                |              186                                                                                       |OrePrio:PurifiedNickelOreToIngot|
+ PurifiedNiterOreToIngot             |                |              199                                                                                       |OrePrio:PurifiedNiterOreToIngot|
+ PurifiedPlatinumOreToIngot    ­ |                |              212                                                                                       |OrePrio:PurifiedPlatinumOreToIngot|
+ PurifiedSiliconOreToIngot      ­­ |                |             225                                                                                       |OrePrio:PurifiedSiliconOreToIngot|
+ PurifiedSilverOreToIngot         ­ |                |            ­238                                                                                       |OrePrio:PurifiedSilverOreToIngot|
+ PurifiedSulfurOreToIngot           |                |               ­­­1                                                                                       |OrePrio:PurifiedSulfurOreToIngot|
+ PurifiedTantalumOreToIngot  ­­ |                |              ­­14                                                                                       |OrePrio:PurifiedTantalumOreToIngot|
+ PurifiedTitaniumOreToIngot   ­­ |                |             ­­27                                                                                       |OrePrio:PurifiedTitaniumOreToIngot|
+ PurifiedUraniumOreToIngot       |                |              ­40                                                                                       |OrePrio:PurifiedUraniumOreToIngot|
+ StoneOreToIngot                  ­­­­ |                |             ­­53                                                                                       |OrePrio:StoneOreToIngot|
+ CrushStoneOre                       ­­ |                |              ­66                                                                                       |OrePrio:CrushStoneOre|
+
+## refining
+ Refiningprogress:
+-------------------------------------------------------------------------------------------
+CrushBauxiteOre                        ­­ | Bauxite                      ­­­ 500.0 g  
+1 Refinerys.    -> 2 h                    ­ | Crushed Bauxite             ­­­ 1.5 T  
+-------------------------------------------------------------------------------------------
+CoalToCarbonBasic                       | Coal                                 ­ 12.0 kg
+2 Refinerys.   -> ...                      ­ | Carbon                                2.5 kT
+-------------------------------------------------------------------------------------------
+CrushedBauxiteOreToIngot        ­­ | Crushed Bauxite            ­­­ 2.5 kT
+4 Refinerys.   -> ...                      ­ | Ingot Aluminum           ­ 500.0 g  
+-------------------------------------------------------------------------------------------
+PurifyBauxiteOre                        ­­ | Crushed Bauxite                        ­  
+5 Refinerys.   -> 6 h                    ­ | Purified Bauxite              ­ 12.0 kg
+-------------------------------------------------------------------------------------------
+PurifyCobaltOre                          ­­ | Crushed Cobalt              ­­ 12.0 kg
+7 Refinerys.  ­-> 8 h                    ­ | Purified Cobalt                ­­ 2.5 kT
+-------------------------------------------------------------------------------------------
+CrushedCopperOreToIngot          ­ | Crushed Copper              ­­­ 1.5 T  
+8 Refinerys.   -> ...                      ­ | Ingot Copper                             ­­  
+-------------------------------------------------------------------------------------------
+CrushedGoldOreToIngot             ­­ | Crushed Gold                             ­  
+10 Refinerys.  -> ...                      ­ | Ingot Gold                          12.0 kg
+-------------------------------------------------------------------------------------------
+PurifyGoldOre                             ­­ | Crushed Gold               ­ 500.0 g  
+11 Refinerys.   -> 12 h                   ­ | Purified Gold                   ­­­ 1.5 T  
+-------------------------------------------------------------------------------------------
+PurifyIronOre                              ­­ | Crushed Iron                        1.5 T  
+13 Refinerys.  -> 14 h                   ­ | Purified Iron                               ­  
+-------------------------------------------------------------------------------------------
+CrushedLithiumOreToIngot       ­­­ | Crushed Lithium                 2.5 kT
+14 Refinerys.  -> ...                      ­ | Lithium Paste             ­­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushedNickelOreToIngot          ­­ | Crushed Nickel            ­ 500.0 g  
+16 Refinerys.  -> ...                      ­ | Ingot Nickel                       ­ 1.5 T  
+-------------------------------------------------------------------------------------------
+PurifyNickelOre                          ­­ | Crushed Nickel              ­­ 12.0 kg
+17 Refinerys. ­-> 18 h                   ­ | Purified Nickel                ­­ 2.5 kT
+-------------------------------------------------------------------------------------------
+CrushedNiterOreToIngot                | Crushed Niter                   ­ 2.5 kT
+19 Refinerys.  -> 20 h                    | Potassium Nitrate      ­­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushedPlatinumOreToIngot       ­ | Crushed Platinum                         
+20 Refinerys. -> ...                      ­ | Ingot Platinum              ­­­ 12.0 kg
+-------------------------------------------------------------------------------------------
+CrushedSiliconOreToIngot         ­­ | Crushed Silicon             ­­ 12.0 kg
+22 Refinerys. -> ...                      ­ | Ingot Silicon                       2.5 kT
+-------------------------------------------------------------------------------------------
+PurifySiliconOre                         ­­ | Crushed Silicon              ­­­ 1.5 T  
+23 Refinerys. -> 24 h                    | Purified Silicon                             
+-------------------------------------------------------------------------------------------
+PurifySilverOre                            ­ | Crushed Silver                              
+25 Refinerys. -> 26 h                    | Purified Silver                 ­ 12.0 kg
+-------------------------------------------------------------------------------------------
+CrushedSulfurOreToIngot              | Crushed Sulfur          ­­­ 500.0 g  
+26 Refinerys. -> ...                      ­ | Sulfur                             ­­­­ 1.5 T  
+-------------------------------------------------------------------------------------------
+CrushedTantalumOreToIngot    ­­­ | Crushed Tantalum               1.5 T  
+28 Refinerys. -> ...                      ­ | Ingot Tantalum                        ­­­  
+-------------------------------------------------------------------------------------------
+PurifyTantalumOre                     ­­ | Crushed Tantalum         ­­­ 2.5 kT
+29 Refinerys. -> 30 h                  ­ | Purified Tantalum          500.0 g  
+-------------------------------------------------------------------------------------------
+PurifyTitaniumOre                      ­­ | Crushed Titanium        ­ 500.0 g  
+31 Refinerys.  -> 32 h                  ­ | Purified Titanium            ­­­ 1.5 T  
+-------------------------------------------------------------------------------------------
+CrushedUraniumOreToIngot        ­ | Crushed Uranium            ­ 12.0 kg
+32 Refinerys. -> ...                      ­ | Ingot Uranium                ­­­ 2.5 kT
+-------------------------------------------------------------------------------------------
+ScrapIngotToIronIngot                   | Ingot Scrap                    ­­­ 2.5 kT
+34 Refinerys. -> ...                      ­ | Ingot Iron                   ­­­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushNiterOre                                | Niter                                           ­  
+35 Refinerys. -> 36 h                  ­ | Crushed Niter                    12.0 kg
+-------------------------------------------------------------------------------------------
+CobaltOreToIngot                           | Ore Cobalt                       ­ 12.0 kg
+37 Refinerys.  -> 38 h                  ­ | Ingot Cobalt                        2.5 kT
+-------------------------------------------------------------------------------------------
+CrushCobaltOre                          ­­ | Ore Cobalt                       ­­­ 1.5 T  
+38 Refinerys. -> ...                      ­ | Crushed Cobalt                          ­  
+-------------------------------------------------------------------------------------------
+CrushCopperOre                         ­­ | Ore Copper                                    
+40 Refinerys. -> ...                      ­ | Crushed Copper             ­­ 12.0 kg
+-------------------------------------------------------------------------------------------
+CrudeOilCracking                      ­­­ | Ore CrudeOil                ­ 500.0 g  
+41 Refinerys.  -> 42 h                    | Ingot FuelOil                        1.5 T  
+-------------------------------------------------------------------------------------------
+CrushGoldOre                            ­­­ | Ore Gold                          ­­­ 1.5 T  
+43 Refinerys. -> 44 h                    | Crushed Gold                             ­  
+-------------------------------------------------------------------------------------------
+IronOreToIngot                               | Ore Iron                           ­­ 2.5 kT
+44 Refinerys. -> ...                      ­ | Ingot Iron                   ­­­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushLithiumOre                      ­­­­ | Ore Lithium                  ­ 500.0 g  
+46 Refinerys. -> ...                      ­ | Crushed Lithium                  1.5 T  
+-------------------------------------------------------------------------------------------
+LithiumOreToIngot                       ­ | Ore Lithium                   ­­­ 12.0 kg
+47 Refinerys. -> 48 h                    | Lithium Paste                     2.5 kT
+-------------------------------------------------------------------------------------------
+CrushNickelOre                          ­­ | Ore Nickel                       ­­ 2.5 kT
+49 Refinerys. -> 50 h                    | Crushed Nickel            ­ 500.0 g  
+-------------------------------------------------------------------------------------------
+OilSandToCrudeOil                      ­ | Ore OilSand                              ­­  
+50 Refinerys. -> ...                      ­ | Ore CrudeOil                 ­­­ 12.0 kg
+-------------------------------------------------------------------------------------------
+CrushPlatinumOre                      ­­ | Ore Platinum                     12.0 kg
+52 Refinerys. -> ...                      ­ | Crushed Platinum           ­­ 2.5 kT
+-------------------------------------------------------------------------------------------
+ScrapToIronIngot                         ­ | Ore Scrap                          ­ 1.5 T  
+53 Refinerys. -> 54 h                    | Ingot Iron                                 ­­­  
+-------------------------------------------------------------------------------------------
+CrushSiliconOre                         ­­ | Ore Silicon                                    
+55 Refinerys. -> 56 h                    | Crushed Silicon             ­­ 12.0 kg
+-------------------------------------------------------------------------------------------
+SilverOreToIngot                       ­­­ | Ore Silver                  ­­­ 500.0 g  
+56 Refinerys. -> ...                      ­ | Ingot Silver                          1.5 T  
+-------------------------------------------------------------------------------------------
+CrushSulfurOre                              | Ore Sulfur                            1.5 T  
+58 Refinerys. -> ...                      ­ | Crushed Sulfur                       ­­­­  
+-------------------------------------------------------------------------------------------
+SulfurOreToIngot                        ­­ | Ore Sulfur                           2.5 kT
+59 Refinerys. -> 60 h                    | Sulfur                           ­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushTantalumOre                    ­­­ | Ore Tantalum                 500.0 g  
+61 Refinerys.  -> 62 h                    | Crushed Tantalum               1.5 T  
+-------------------------------------------------------------------------------------------
+TitaniumOreToIngot                       | Ore Titanium                  ­­ 12.0 kg
+62 Refinerys. -> ...                      ­ | Ingot Titanium                  ­ 2.5 kT
+-------------------------------------------------------------------------------------------
+UraniumOreToIngot                   ­­­ | Ore Uranium                       2.5 kT
+64 Refinerys. -> ...                      ­ | Ingot Uranium              ­ 500.0 g  
+-------------------------------------------------------------------------------------------
+CrushUraniumOre                        ­ | Ore Uranium                            ­­­  
+65 Refinerys. -> 66 h                    | Crushed Uranium            ­ 12.0 kg
+-------------------------------------------------------------------------------------------
+PurifiedCobaltOreToIngot            ­ | Purified Cobalt               ­­ 12.0 kg
+67 Refinerys. -> 68 h                    | Ingot Cobalt                        2.5 kT
+-------------------------------------------------------------------------------------------
+PurifiedCopperOreToIngot           ­ | Purified Copper                ­­ 1.5 T  
+68 Refinerys. -> ...                      ­ | Ingot Copper                             ­­  
+-------------------------------------------------------------------------------------------
+PurifiedIronOreToIngot               ­­ | Purified Iron                               ­  
+70 Refinerys. -> ...                      ­ | Ingot Iron                           12.0 kg
+-------------------------------------------------------------------------------------------
+PurifiedLithiumOreToIngot        ­­­ | Purified Lithium           ­ 500.0 g  
+71 Refinerys. ­-> 72 h                 ­­ | Lithium Paste                    ­ 1.5 T  
+-------------------------------------------------------------------------------------------
+PurifiedNiterOreToIngot           ­­­­ | Purified Niter                     ­ 1.5 T  
+73 Refinerys.  -> 74 h                 ­­ | Potassium Nitrate                   ­­­  
+-------------------------------------------------------------------------------------------
+PurifiedPlatinumOreToIngot          | Purified Platinum             ­ 2.5 kT
+74 Refinerys. -> ...                      ­ | Ingot Platinum             ­ 500.0 g  
+-------------------------------------------------------------------------------------------
+PurifiedSilverOreToIngot             ­ | Purified Silver          ­­­­ 500.0 g  
+76 Refinerys. -> ...                      ­ | Ingot Silver                          1.5 T  
+-------------------------------------------------------------------------------------------
+PurifiedSulfurOreToIngot         ­­­­ | Purified Sulfur                   12.0 kg
+77 Refinerys.  -> 78 h                 ­­ | Sulfur                             ­­­ 2.5 kT
+-------------------------------------------------------------------------------------------
+PurifiedTitaniumOreToIngot       ­­ | Purified Titanium           ­­­ 2.5 kT
+79 Refinerys. -> 80 h                    | Ingot Titanium           ­­­ 500.0 g  
+-------------------------------------------------------------------------------------------
+PurifiedUraniumOreToIngot           | Purified Uranium                     ­­­  
+80 Refinerys. -> ...                      ­ | Ingot Uranium               ­­­ 12.0 kg
+-------------------------------------------------------------------------------------------
+CrushStoneOre                            ­ | Stone                            ­­­ 12.0 kg
+82 Refinerys. -> ...                      ­ | Gravel                               ­ 2.5 kT
+-------------------------------------------------------------------------------------------
+A...NotFitIntoTheColumnToIngot   | Ore Iron                        ­­ 123.5 T  
+12 Refinerys.  -> 2 days              ­ | Ingot Iron                   ­­­ 250.0 g  
+-------------------------------------------------------------------------------------------
+

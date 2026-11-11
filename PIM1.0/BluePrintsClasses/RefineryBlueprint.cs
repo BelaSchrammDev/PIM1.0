@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,6 +39,47 @@ namespace IngameScript
             if (name.StartsWith("Ore Crushed")) return "Crushed " + name.Substring(11);
             if (name.StartsWith("Ore Purified")) return "Purified " + name.Substring(12);
             return name;
+        }
+
+        public static Dictionary<string, List<IPrio>> ingotprio = new Dictionary<string, List<IPrio>>();
+        public static Dictionary<string, Dictionary<RefineryBlueprint, int>> OrePrioConfig = new Dictionary<string, Dictionary<RefineryBlueprint, int>>();
+
+        public class IPrio : IComparable<IPrio>
+        {
+            public RefineryBlueprint refineryBP;
+            public int prio = 0;
+            public int initp = 0;
+            public int CompareTo(IPrio other)
+            {
+                if (other.initp == initp) return 0;
+                return other.initp > initp ? 1 : -1;
+            }
+            public IPrio(RefineryBlueprint bluePrint, int pr = 0)
+            {
+                refineryBP = bluePrint;
+                prio = pr;
+                initp = pr;
+            }
+            public void setPrio(int np)
+            {
+                if (np > 10000) np = 10000;
+                prio = np;
+                if (np == 0 || initp != np) initp = np;
+            }
+            public static IPrio GetBlueprintPrio(List<IPrio> ingotprioList, RefineryBlueprint bp, bool newip = false)
+            {
+                foreach (IPrio ip in ingotprioList)
+                {
+                    if (ip.refineryBP == bp) return ip;
+                }
+                if (newip)
+                {
+                    IPrio np = new IPrio(bp);
+                    ingotprioList.Add(np);
+                    return np;
+                }
+                else return null;
+            }
         }
 
         public partial class RefineryBlueprint

@@ -1,4 +1,4 @@
-﻿using Sandbox.Game;
+using Sandbox.Game;
 using System.Collections.Generic;
 using VRage.Game.ModAPI.Ingame;
 
@@ -14,11 +14,11 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                LCD_DebugString += "\nWRSManager: Starting management.\n";
+                LCD_DebugString.Append("\nWRSManager: Starting management.\n");
 
                 if (Config.Instance.always_recycle_greywater && ProccessingGreyWater())
                 {
-                    LCD_DebugString += "\nWRSManager: Recycling GreyWater.\n";
+                    LCD_DebugString.Append("\nWRSManager: Recycling GreyWater.\n");
                     return;
                 }
 
@@ -30,12 +30,12 @@ namespace IngameScript
                     {
                         if(IsInventoryItemExists(Ingot.CleanWater))
                         {
-                            LCD_DebugString += $"WRSManager: Processing cleanwater to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n";
+                            LCD_DebugString.Append($"WRSManager: Processing cleanwater to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n");
                             ProccessingCleanWater();
                         }
                         else
                         {
-                            LCD_DebugString += $"WRSManager: Processing ice to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n";
+                            LCD_DebugString.Append($"WRSManager: Processing ice to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n");
                             ProccessingIce();
                         }
                     }

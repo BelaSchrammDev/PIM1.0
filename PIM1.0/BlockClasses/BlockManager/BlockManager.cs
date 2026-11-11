@@ -1,4 +1,4 @@
-﻿namespace IngameScript
+namespace IngameScript
 {
     partial class Program
     {
@@ -33,7 +33,7 @@
 
             public override void DoManage()
             {
-                Program.LCD_DebugString += $"DummyBlockManager_DoManage '{Block.FunctionalBlock.BlockDefinition}'\n";
+                Program.LCD_DebugString.Append($"DummyBlockManager_DoManage '{Block.FunctionalBlock.BlockDefinition}'\n");
                 // Do nothing
             }
         }

@@ -10,7 +10,8 @@ namespace IngameScript
 {
     partial class Program
     {
-        static string LCD_DebugString = "";
+        // collected during one cycle, written to the panel "PIMXXXDEBUG" and cleared by LCD_DebugPrint
+        static StringBuilder LCD_DebugString = new StringBuilder();
 
         //string Debug_RefineryBPs()
         //{
@@ -183,12 +184,13 @@ namespace IngameScript
         void LCD_DebugPrint()
         {
             var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
-            if (panel == null) return;
-            if (panel.CubeGrid != Me.CubeGrid) return;
-            var s = "";
-            s += Debug_WaterFood();
-            panel.WriteText(s + "\n" + LCD_DebugString);
-            LCD_DebugString = "";
+            if (panel != null && panel.IsSameConstructAs(Me))
+            {
+                panel.WriteText(Debug_WaterFood() + "\n");
+                panel.WriteText(LCD_DebugString, true);
+            }
+            // always cleared, also without debug panel (otherwise it grows forever)
+            LCD_DebugString.Clear();
         }
     }
 }

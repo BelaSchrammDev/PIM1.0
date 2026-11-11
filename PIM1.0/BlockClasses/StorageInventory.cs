@@ -1,4 +1,4 @@
-﻿using Sandbox.ModAPI.Interfaces;
+using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
 using System.Collections;
@@ -47,7 +47,7 @@ namespace IngameScript
                     invstring += $" - {GetPIMItemID(ii.Type)} : {ii.Amount}\n";
                 }
 
-                Program.LCD_DebugString += $"StorageInventory_ReloadItems for '{invstring}'\n";
+                Program.LCD_DebugString.Append($"StorageInventory_ReloadItems for '{invstring}'\n");
 
                 _SuccessList.Clear();
                 _InsertList.Clear();

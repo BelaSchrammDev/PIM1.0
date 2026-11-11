@@ -12,12 +12,15 @@ namespace IngameScript
 
         static DisplayBox GetDisplayBox(string boxID, float width)
         {
-            if (!DisplayBoxList.ContainsKey(boxID))
+            DisplayBox box;
+            if (!DisplayBoxList.TryGetValue(boxID, out box))
             {
-                var newDisplayBox = new DisplayBox(width);
-                DisplayBoxList.Add(boxID, newDisplayBox);
+                // the ids contain the displayed values: start over from time to time instead of growing forever
+                if (DisplayBoxList.Count > 2000) DisplayBoxList.Clear();
+                box = new DisplayBox(width);
+                DisplayBoxList.Add(boxID, box);
             }
-            return DisplayBoxList[boxID];
+            return box;
         }
 
         static string GetDisplayBoxString(string text, float amount, float width)
@@ -38,12 +41,6 @@ namespace IngameScript
             return GetDisplayBox(amountStr + width.ToString(), width).GetStringWithSpaces(amountStr, left);
         }
 
-        static string GetDisplayBoxStringDisplayNull(int amount, float width, bool left = false)
-        {
-            var displaytext = amount.ToString();
-            return GetDisplayBox("###" + displaytext + width.ToString() + left.ToString(), width).GetStringWithSpaces(displaytext, left);
-        }
-
         static string GetDisplayBoxString(string displaytext, float width, bool left = false)
         {
             return GetDisplayBox(displaytext + width.ToString() + left.ToString(), width).GetStringWithSpaces(displaytext, left);
@@ -62,7 +59,8 @@ namespace IngameScript
                 InitCharWidthList();
             }
 
-            string LeftText = "", RightText = "", BoxText = "", SpaceString = "";
+            // Src1/Src2: last arguments (untrimmed), LeftText: Src1 shortened to the width
+            string Src1, Src2, LeftText = "", SpaceString = "";
             float Width = 0;
 
             public DisplayBox(float iwidth)
@@ -101,11 +99,8 @@ namespace IngameScript
                 {
                     if (--SpacePoolLiveCycle < 1)
                     {
-                        for (int i = SpacePoolList.Count - 1; i > 0; i--)
-                        {
-                            SP osp = SpacePoolList[i];
-                            if (--osp.LiveCycle < 0) SpacePoolList.Remove(osp);
-                        }
+                        for (int i = SpacePoolList.Count - 1; i >= 0; i--)
+                            if (--SpacePoolList[i].LiveCycle < 0) SpacePoolList.RemoveAt(i);
                         SpacePoolLiveCycle = 500;
                     }
                 }
@@ -113,44 +108,37 @@ namespace IngameScript
 
             public string Get2StringWithSpaces(string arg1, string arg2)
             {
-                if (arg1 != LeftText || arg2 != RightText)
+                if (arg1 != Src1 || arg2 != Src2)
                 {
+                    Src1 = arg1;
+                    Src2 = arg2;
                     var strLength2 = GetStringWidth(arg2);
-                    arg1 = TrimStringByWidth(arg1, Width - 2.6f - strLength2);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(arg1) - strLength2);
-                    LeftText = arg1;
-                    RightText = arg2;
+                    LeftText = TrimStringByWidth(arg1, Width - 2.6f - strLength2);
+                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(LeftText) - strLength2);
                 }
-                BoxText = LeftText + SpaceString + RightText;
-                return BoxText;
+                return LeftText + SpaceString + Src2;
             }
 
             public string GetStringWithSpaces(string arg, bool leftAlignment = false)
             {
-                if (arg != LeftText)
+                if (arg != Src1)
                 {
-                    arg = TrimStringByWidth(arg, Width - 2.6f);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(arg));
-                    LeftText = arg;
+                    Src1 = arg;
+                    LeftText = TrimStringByWidth(arg, Width - 2.6f);
+                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(LeftText));
                 }
-                if (leftAlignment) BoxText = LeftText + SpaceString;
-                else BoxText = SpaceString + LeftText;
-                return BoxText;
+                return leftAlignment ? LeftText + SpaceString : SpaceString + LeftText;
             }
 
-            string TrimStringByWidth(string arg, float cutLength)
+            /// <summary>"AVeryLongName" -> "A...ongName": first char, "..." and as much of the end as fits.
+            /// Up to about 2 chars too long are tolerated (shortening would replace them by "...").</summary>
+            static string TrimStringByWidth(string arg, float cutLength)
             {
-                var strLength = GetStringWidth(arg);
-                if (strLength > cutLength)
-                {
-                    var charDiff = (int)((strLength - cutLength - 5f) / 1.5f);
-                    if (charDiff > 0 && charDiff < arg.Length - 1)
-                    {
-                        var lastString = arg.Substring(charDiff);
-                        return arg[0] + "..." + lastString;
-                    }
-                }
-                return arg;
+                if (GetStringWidth(arg) <= cutLength + 5f) return arg;
+                var w = GetCharWidth(arg[0]) + 3 * GetCharWidth('.');
+                var i = arg.Length;
+                while (i > 1 && w + GetCharWidth(arg[i - 1]) <= cutLength) w += GetCharWidth(arg[--i]);
+                return arg[0] + "..." + arg.Substring(i);
             }
 
             static SP GetSpaceStringObject(float with) 
@@ -204,10 +192,16 @@ namespace IngameScript
                 }
             }
 
+            static float GetCharWidth(char c)
+            {
+                float w;
+                return CharWidthList.TryGetValue(c, out w) ? w : 2f;
+            }
+
             static float GetStringWidth(string strData)
             {
                 float fltTotal = 0;
-                foreach (var c in strData) fltTotal += CharWidthList.ContainsKey(c) ? CharWidthList[c] : 2f;
+                foreach (var c in strData) fltTotal += GetCharWidth(c);
                 return fltTotal;
             }
 
@@ -216,12 +210,6 @@ namespace IngameScript
                 return GetStringFromDoubleWithSuffixMask(d, WeightFormatStrings);
             }
 
-            public static string GetIntString(double d)
-            {
-                return GetStringFromDoubleWithSuffixMask(d, DigitalFormatString);
-            }
-
-            private static readonly string[] DigitalFormatString = new string[] { " 0.# m ", " 0.#   ", " 0.# k", " 0.# M" };
             private static readonly string[] WeightFormatStrings = new string[] { " 0.0 g  ", " 0.0 kg", " 0.0 T  ", " 0.0 kT" };
 
             static string GetStringFromDoubleWithSuffixMask(double a, string[] p)
@@ -236,7 +224,7 @@ namespace IngameScript
                 }
                 else if (a < 1.0f)
                 {
-                    (a * 1000).ToString(p[0]);
+                    return (a * 1000).ToString(p[0]);
                 }
 
                 return a.ToString(p[1]);

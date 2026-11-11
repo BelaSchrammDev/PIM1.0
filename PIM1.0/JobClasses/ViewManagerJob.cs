@@ -8,20 +8,20 @@ namespace IngameScript
     {
         public class ViewManagerJob : Job
         {
+            static readonly Dictionary<string, string> recommendedItems = new Dictionary<string, string>
+            {
+                { Ore.Stone, IngameStrings.RStone },
+                { Ingot.Stone, "Gravel" },
+                { Ore.Ice, "Ice" },
+                { Ingot.WaterFood, "Water" },
+                { Ingot.GreyWater, "Greywater" },
+                { Ingot.DTFuelCapsule, "Deuterium" },
+                { Ore.Organic, "Organic" },
+            };
+
             public override RunJobResult RunJob()
             {
-                for (int i = viewList.Count - 1; i >= 0; i--) { if (viewList[i].IsOver()) viewList.Remove(viewList[i]); }
-
-                Dictionary<string, string> recommendedItems = new Dictionary<string, string>
-                        {
-                            { Ore.Stone, IngameStrings.RStone },
-                            { Ingot.Stone, "Gravel" },
-                            { Ore.Ice, "Ice" },
-                            { Ingot.WaterFood, "Water" },
-                            { Ingot.GreyWater, "Greywater" },
-                            { Ingot.DTFuelCapsule, "Deuterium" },
-                            { Ore.Organic, "Organic" },
-                        };
+                for (int i = viewList.Count - 1; i >= 0; i--) { if (viewList[i].IsOver()) viewList.RemoveAt(i); }
 
                 foreach (var item in recommendedItems)
                 {
@@ -32,15 +32,15 @@ namespace IngameScript
                 foreach (var c in Lists.Data.CargoUseList.Keys)
                 {
                     var cargoUseRatio = Lists.Data.CargoUseList[c].GetCarcoCapacityUseRatio();
-                    if (cargoUseRatio >= 90)
-                    {
-                        SetWarning(Warning.ID.CARGOUSEHEAVY, c);
-                        ClearWarning(Warning.ID.CARGOUSEFULL, c);
-                    }
-                    else if (cargoUseRatio >= 99)
+                    if (cargoUseRatio >= 99)
                     {
                         SetWarning(Warning.ID.CARGOUSEFULL, c);
                         ClearWarning(Warning.ID.CARGOUSEHEAVY, c);
+                    }
+                    else if (cargoUseRatio >= 90)
+                    {
+                        SetWarning(Warning.ID.CARGOUSEHEAVY, c);
+                        ClearWarning(Warning.ID.CARGOUSEFULL, c);
                     }
                     else
                     {

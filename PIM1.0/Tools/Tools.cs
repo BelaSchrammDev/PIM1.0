@@ -1,4 +1,4 @@
-﻿using Sandbox.ModAPI.Ingame;
+using Sandbox.ModAPI.Ingame;
 using System.Collections.Generic;
 
 namespace IngameScript
@@ -51,7 +51,7 @@ namespace IngameScript
 
             public static void AddToDebugString(string str)
             {
-                Program.LCD_DebugString += str;
+                Program.LCD_DebugString.Append(str);
             }
 
             public static int GetBlockList<T>(List<T> blockList)

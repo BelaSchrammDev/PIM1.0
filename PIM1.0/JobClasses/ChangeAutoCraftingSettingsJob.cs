@@ -1,4 +1,4 @@
-﻿using Sandbox.ModAPI.Ingame;
+using Sandbox.ModAPI.Ingame;
 using System.Collections.Generic;
 using VRage;
 
@@ -16,13 +16,13 @@ namespace IngameScript
             {
                 if (!Properties.Data.AutoCraftingSettingsInValid)
                 {
-                    LCD_DebugString += "kein calc_ACDef\n";
+                    LCD_DebugString.Append("kein calc_ACDef\n");
                     schedule = false;
                     return;
                 }
 
                 schedule = true;
-                LCD_DebugString += "calc_ACDef\n";
+                LCD_DebugString.Append("calc_ACDef\n");
 
                 Tools.GetBlockList(Lists.Data.Assemblers);
                 Tools.GetBlockList(Lists.Data.Refinerys);

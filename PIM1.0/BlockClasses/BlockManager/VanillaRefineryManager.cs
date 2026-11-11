@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VRage;
 using VRage.Game.ModAPI.Ingame;
 using static IngameScript.Program;
@@ -24,7 +24,7 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                Program.LCD_DebugString += "VanillaRefineryManager_DoManage\n";
+                Program.LCD_DebugString.Append("VanillaRefineryManager_DoManage\n");
 
                 if (!ingotprio.ContainsKey(Refinery.BlockSubType))
                 {

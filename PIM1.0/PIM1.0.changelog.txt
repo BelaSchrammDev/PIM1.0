@@ -16,6 +16,13 @@ Fix:
 - blueprint initialisation could only run once (curmod was left at "" after the first run)
 - duplicate blueprint definitions removed (Sigma Draconis refinery, Industrial Overhaul assembler)
 - debug Echo removed from GetPositionString (the method was removed later)
+- the debug text grew forever without debug panel (now a StringBuilder, cleared every cycle)
+- LCD cell cache (DisplayBox) grew forever, shortened texts were never found in the cache
+- masses below 1 kg are shown in g (missing return)
+- long names on LCDs are shortened exactly to the column width
+- hint "cargo is full" never appeared (was checked after "heavy")
+- autocrafting threshold line without '=' crashed the script
+- several autocrafting LCDs with different thresholds reset each other every cycle
 - StringBuilderExtended fixed
 
 Changes:
@@ -35,6 +42,11 @@ Changes:
 - the mod list of the config is taken from the blueprint data (order of Mods.txt)
 - removed mod support: Sigma Draconis Core (deleted on Steam), HSR (discontinued),
   Industrial Overhaul Water (no blueprints anymore); HSR refinery type and name rule removed
+- LCD pages (autocrafting, oreprio, refining): built with a StringBuilder, a panel is only read again
+  if the player changed it and only written if the content changed
+- LCD pages and debug panel: only panels of the same construct (subgrids via rotors/pistons, no docked ships)
+- parsing and rendering of the LCD pages moved to LcdPages.cs (pure, testable); ore priorities of the
+  oreprio LCDs are applied after every priority calculation
 - Ingot.DeuteriumContainer renamed to Ingot.DTFuelCapsule
 - unused Config.mods and mod name constants removed
 - Tools.* helpers replaced by extension methods, TypeDefinitions moved to its own file
@@ -54,7 +66,8 @@ New:
 - PIM1.0.BluePrintTool: compares the data files with the .sbc files of the game and the workshop mods
   (check, update, new, scan, status, download), status and titles via the Steam Web API
 - test project (MSTest) with CI: Parameter, StringBuilderExtended, Jobs, Filter, CargoUse, TypeDefinitions,
-  InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool
+  InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool,
+  LCD pages golden snapshot and read-back tests
 
 
 Version 1.1c:
