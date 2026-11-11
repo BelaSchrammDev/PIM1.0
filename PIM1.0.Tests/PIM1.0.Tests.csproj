@@ -25,6 +25,8 @@
              Link="Linked\CommandArgumentFactory.cs" />
     <Compile Include="..\PIM1.0\Tools\StopWatch.cs"
              Link="Linked\StopWatch.cs" />
+    <Compile Include="..\PIM1.0\Tools\RunningSign.cs"
+             Link="Linked\RunningSign.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgument.cs"
              Link="Linked\CommandArgument.cs" />
     <Compile Include="..\PIM1.0\Tools\Parameter.cs"

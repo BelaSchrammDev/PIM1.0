@@ -2,33 +2,23 @@
 {
     partial class Program
     {
-        // runningsign
-        public class RunningSign : Tools
+        /// <summary>
+        /// Running sign of the PB info: a marker bouncing between two bars, one step per call,
+        /// "|>       | ", "| >      | ", ... "|       >| ", "|      < | ", ... "|<       | ".
+        /// Pure (no SE types), tested in RunningSignTests.
+        /// </summary>
+        public class RunningSign
         {
-            private int r = 0,
-                        rc = 1,
-                        mr = 7;
+            const int Width = 8;
+            int _pos, _dir = 1;
 
-            public StringBuilderExtended getRunningSign()
+            public string Next()
             {
-                runningSign.SetText('|');
-                r += rc;
-                if (r < 0)
-                {
-                    r = 1;
-                    rc = 1;
-                }
-                else if (r > mr)
-                {
-                    r = mr - 1;
-                    rc = -1;
-                }
-                for (int i = 0; i <= mr; i++) runningSign.Append(i == r ? (rc < 0 ? '<' : '>') : ' ');
-                runningSign.Append("| ");
-                return runningSign;
+                _pos += _dir;
+                var marker = _dir > 0 ? ">" : "<";
+                if (_pos == 0 || _pos == Width - 1) _dir = -_dir;
+                return "|" + new string(' ', _pos) + marker + new string(' ', Width - 1 - _pos) + "| ";
             }
-
-            StringBuilderExtended runningSign = new StringBuilderExtended(10);
         }
     }
 }

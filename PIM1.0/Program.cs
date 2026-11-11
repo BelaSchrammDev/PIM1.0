@@ -113,22 +113,21 @@ namespace IngameScript
             WritePimRunInfo();
         }
 
+        // every run: only the running sign changes, the status (PimStatus) is built once per cycle by CalculateInfos
         void WritePimRunInfo()
         {
-            var s = Strings.PimVersion
-                + Strings.PimCopyright
-                + RunSign.getRunningSign()
-                + (LoopManager.IsMaster
-                    ? (" Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString)
-                    : "Standby\nMaster: " + MyProgram.Me.CustomName);
+            var s = Strings.PimVersion + Strings.PimCopyright + RunSign.Next() + PimStatus;
 
             Echo(s);
 
             if (Config.Instance.ShowInfoPBLcd)
             {
                 var tp = Me.GetSurface(0);
-                tp.Alignment = TextAlignment.LEFT;
-                tp.ContentType = ContentType.TEXT_AND_IMAGE;
+                if (tp.ContentType != ContentType.TEXT_AND_IMAGE)
+                {
+                    tp.Alignment = TextAlignment.LEFT;
+                    tp.ContentType = ContentType.TEXT_AND_IMAGE;
+                }
                 tp.WriteText(s);
             }
         }

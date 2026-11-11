@@ -184,8 +184,11 @@ namespace IngameScript
         StringBuilderExtended infoString = new StringBuilderExtended(2000);
         StringBuilderExtended warnungstring = new StringBuilderExtended(1000);
 
+        // PB info after the running sign, built once per cycle (WritePimRunInfo runs every tick)
+        string PimStatus = " starting...\n";
 
-        void CalcutateInfos()
+
+        void CalculateInfos()
         {
             infoString.SetText("\n");
             warnungstring.Clear();
@@ -202,6 +205,9 @@ namespace IngameScript
                 infoString.Append("\n--------------------- Hints ---------------------\n");
                 infoString.Append(warnungstring);
             }
+            PimStatus = LoopManager.IsMaster
+                ? " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString
+                : "Standby\nMaster: " + Me.CustomName;
         }
     }
 }
