@@ -47,6 +47,9 @@ Fix:
   its ammo types
 - stacking: an item that fits completely into one of its containers was not gathered there if it
   was in only two containers, with more containers the last stack was left behind
+- stacking: exchanging the contents of two containers (item in exactly two containers) is
+  repeated until it is finished, at most 10 rounds; before, the number of rounds depended on
+  the number of other items
 
 Changes:
 

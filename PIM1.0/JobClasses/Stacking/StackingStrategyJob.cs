@@ -23,10 +23,13 @@ namespace IngameScript
                 }
 
                 startIndex = 0;
-                endIndex = InitStacking() ? ItemStacksList.Count - 1 : -1;
+                endIndex = InitStacking() ? StepCount - 1 : -1;
             }
 
             public abstract bool InitStacking();
+
+            /// <summary>Number of ProcessingIndex calls of one run, by default one per item of the list.</summary>
+            protected virtual int StepCount => ItemStacksList.Count;
 
             void NewStackCount(IMyInventory quelle, string ti)
             {

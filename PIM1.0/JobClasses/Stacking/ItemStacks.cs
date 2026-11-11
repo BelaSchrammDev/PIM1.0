@@ -130,7 +130,8 @@ namespace IngameScript
 
             public bool PrepareSwap()
             {
-                if (stacks == 2)
+                // two stacks in the same container are merged by MergeInContainer, there is nothing to swap
+                if (stacks == 2 && invs[0].inv != invs[1].inv)
                 {
                     if (invs[0].GetMaxVolume() > volume)
                     {
@@ -148,22 +149,28 @@ namespace IngameScript
                 return false;
             }
 
+            /// <summary>
+            /// One round of the exchange: everything else out of the target into the source, then the item
+            /// from the source into the target. Returns true if no further round is needed: the exchange
+            /// is complete, or nothing could be moved anymore (both containers full).
+            /// </summary>
             public bool Swap()
             {
                 var von = new List<MyInventoryItem>();
                 ziel.GetItems(von);
-                bool zielleer = true;
+                bool zielleer = true, moved = false;
                 for (int x = von.Count - 1; x >= 0; x--)
                 {
                     var i = von[x];
                     if (i.Type != type)
                     {
-                        if (!quelle.TransferItemFrom(ziel, i, null)) zielleer = false;
+                        if (quelle.TransferItemFrom(ziel, i, null)) moved = true;
+                        else zielleer = false;
                     }
                 }
                 var item = quelle.FindItem(type);
-                if (item != null) quelle.TransferItemTo(ziel, (MyInventoryItem)item, null);
-                return (zielleer && item == null);
+                if (item != null && quelle.TransferItemTo(ziel, (MyInventoryItem)item, null)) moved = true;
+                return (zielleer && item == null) || !moved;
             }
 
             public bool GatherInEmptiest()
