@@ -26,6 +26,8 @@ Fix:
 - StringBuilderExtended fixed
 - stacking only ran for components, ore and ingots were never stacked; every stacking cycle now
   runs one strategy on one item type (all strategies on components, then ore, then ingots)
+- run argument "flushrefinerys_all" never worked, and unknown arguments without brackets
+  were ignored silently instead of being reported as "unknown command"
 
 Changes:
 

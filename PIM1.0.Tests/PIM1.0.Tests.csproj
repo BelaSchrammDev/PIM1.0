@@ -21,6 +21,8 @@
              Link="Linked\StringBuilderExtended.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingParser.cs"
              Link="Linked\NetWorkingParser.cs" />
+    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingDispatcher.cs"
+             Link="Linked\NetWorkingDispatcher.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgumentFactory.cs"
              Link="Linked\CommandArgumentFactory.cs" />
     <Compile Include="..\PIM1.0\Tools\StopWatch.cs"

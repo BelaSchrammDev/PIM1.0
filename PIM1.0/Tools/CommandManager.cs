@@ -35,23 +35,15 @@ namespace IngameScript
 
             public static bool DispatchOtherCommands(string commandLine)
             {
-                var commandFound = true;
-                var commandParts = commandLine.Split('(', ')');
-                if (commandParts.Length >= 2)
+                switch (NetWorkingParser.ParseCommandName(commandLine))
                 {
-                    switch (commandLine.ToLower())
-                    {
-                        case "flushrefinerys_all":
-                            foreach (var o in Lists.Data.RefineryList) o.FlushAllInventorys();
-                            SetInfo("all (" + Lists.Data.RefineryList.Count + ") refinerys flushed.");
-                            break;
-
-                        default:
-                            commandFound = false;
-                            break;
-                    }
+                    case "flushrefinerys_all":
+                        foreach (var o in Lists.Data.RefineryList) o.FlushAllInventorys();
+                        SetInfo("all (" + Lists.Data.RefineryList.Count + ") refinerys flushed.");
+                        return true;
                 }
-                return commandFound;
+
+                return false;
             }
         }
     }

@@ -13,6 +13,15 @@ namespace IngameScript
             public const string ARG_Patch = "patch";
             public const string ARG_EmitterId = "emitter_id";
 
+            /// <summary>
+            /// Name of a command line: "Say_Hello(emitter_id=1)" and " say_hello " -> "say_hello".
+            /// The brackets with the arguments are optional.
+            /// </summary>
+            public static string ParseCommandName(string commandLine)
+            {
+                return commandLine.Split('(')[0].Trim().ToLower();
+            }
+
             public static void ParseNetWorkingArguments(string argumentLine, IList<ICommandArgument> argList)
             {
                 var args = argumentLine.Split(';');
