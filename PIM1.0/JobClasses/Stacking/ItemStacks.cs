@@ -15,7 +15,7 @@ namespace IngameScript
             return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId;
         }
 
-        public class StackItem : IComparable<StackItem>
+        public class ItemStacks : IComparable<ItemStacks>
         {
             public enum StackingType
             {
@@ -29,7 +29,7 @@ namespace IngameScript
                 Stack,
                 Amount, 
                 AmountBack, 
-                Delta, 
+                Pairs, 
                 ItemsBack, 
                 VolumeFree, 
                 VolumeFreeBack,
@@ -52,13 +52,13 @@ namespace IngameScript
                 if (free == null || (free.MaxVolume - free.CurrentVolume < inv.MaxVolume - inv.CurrentVolume)) free = inv;
             }
 
-            class Stack : IComparable<Stack>
+            class StackLocation : IComparable<StackLocation>
             {
                 public int items = 0;
                 public float amount = 0;
                 public float volume_free = 0;
                 public IMyInventory inv = null;
-                public Stack(IMyInventory i, MyFixedPoint a)
+                public StackLocation(IMyInventory i, MyFixedPoint a)
                 {
                     amount = (float)a;
                     inv = i;
@@ -76,11 +76,11 @@ namespace IngameScript
                     return (float)inv.MaxVolume;
                 }
 
-                public int CompareTo(Stack other)
+                public int CompareTo(StackLocation other)
                 {
                     if (CurrentStackingSorttype == StackingSort.Amount) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.AmountBack) { if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.Delta) { if (items == 1 && other.items == 1) return 0; else if (items == 1) return 1; if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
+                    else if (CurrentStackingSorttype == StackingSort.Pairs) { if (items == 1 && other.items == 1) return 0; else if (items == 1) return 1; if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.ItemsBack) { if (other.items == items) return 0; return other.items < items ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.VolumeFree) { if (other.volume_free == volume_free) return 0; return other.volume_free > volume_free ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.VolumeFreeBack) { if (other.volume_free == volume_free) return 0; return other.volume_free < volume_free ? 1 : -1; }
@@ -102,9 +102,9 @@ namespace IngameScript
 
             float amount = 0;
             float volume = 0;
-            List<Stack> invs = new List<Stack>();
+            List<StackLocation> invs = new List<StackLocation>();
             IMyInventory quelle = null, ziel = null;
-            public StackItem(MyItemType itype)
+            public ItemStacks(MyItemType itype)
             {
                 type = itype; 
                 typevolume = type.GetItemInfo().Volume;
@@ -120,10 +120,10 @@ namespace IngameScript
                 stacks++;
                 amount += (float)am;
                 volume = amount * typevolume; 
-                invs.Add(new Stack(inv, am)); 
+                invs.Add(new StackLocation(inv, am)); 
             }
 
-            public int CompareTo(StackItem other)
+            public int CompareTo(ItemStacks other)
             {
                 if (CurrentStackingType == StackingType.Stack) { if (other.stacks == stacks) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; } return other.stacks > stacks ? 1 : -1; }
                 else if (CurrentStackingType == StackingType.Volume) { if (other.volume == volume) return 0; return other.volume > volume ? 1 : -1; }
@@ -131,7 +131,7 @@ namespace IngameScript
                 return 0;
             }
 
-            public bool check_stacking_gamma()
+            public bool PrepareSwap()
             {
                 if (stacks == 2)
                 {
@@ -151,7 +151,7 @@ namespace IngameScript
                 return false;
             }
 
-            public bool stacking_gamma()
+            public bool Swap()
             {
                 var von = new List<MyInventoryItem>();
                 ziel.GetItems(von);
@@ -169,7 +169,7 @@ namespace IngameScript
                 return (zielleer && item == null);
             }
 
-            public bool stacking_beta()
+            public bool GatherInEmptiest()
             {
                 if (stacks < 2) return true;
                 if (((float)(free.MaxVolume - free.CurrentVolume)) < volume) return false;
@@ -187,12 +187,12 @@ namespace IngameScript
                 return true;
             }
 
-            public void stacking_delta()
+            public void MergePairs()
             {
                 if (stacks > 1)
                 {
                     refreshInvs();
-                    CurrentStackingSorttype = StackingSort.Delta;
+                    CurrentStackingSorttype = StackingSort.Pairs;
                     invs.Sort();
                     int x = 0;
                     int y = invs.Count - 1;
@@ -207,7 +207,7 @@ namespace IngameScript
                 }
             }
 
-            public void stacking_alpha()
+            public void Gather()
             {
                 if (stacks < 2) return;
                 refreshInvs();
@@ -244,7 +244,7 @@ namespace IngameScript
                 }
             }
 
-            public void stacking_single()
+            public void MergeInContainer()
             {
                 if (stacks < 2) return;
                 for (int x = invs.Count - 1; x > 0; x--)

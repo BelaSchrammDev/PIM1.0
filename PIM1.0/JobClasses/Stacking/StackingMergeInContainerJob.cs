@@ -2,20 +2,20 @@
 {
     partial class Program
     {
-        public class StackingSingleJob : StackingJobBase
+        public class StackingMergeInContainerJob : StackingStrategyJob
         {
-            public StackingSingleJob() : base(StackingMode.Single)
+            public StackingMergeInContainerJob() : base(StackingMode.Single)
             {
             }
 
             public override bool InitStacking()
             {
                 int max_stack = 0;
-                foreach (var s in StackItemList) if (max_stack < s.Stackcount) max_stack = s.Stackcount;
+                foreach (var s in ItemStacksList) if (max_stack < s.Stackcount) max_stack = s.Stackcount;
                 if (max_stack > 1)
                 {
-                    StackItem.CurrentStackingType = StackItem.StackingType.Stack;
-                    StackItemList.Sort();
+                    ItemStacks.CurrentStackingType = ItemStacks.StackingType.Stack;
+                    ItemStacksList.Sort();
                     return true;
                 }
                 else
@@ -26,7 +26,7 @@
 
             protected override void ProcessingIndex(int index)
             {
-                StackItemList[index].stacking_single();
+                ItemStacksList[index].MergeInContainer();
             }
         }
     }

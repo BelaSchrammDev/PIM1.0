@@ -5,7 +5,7 @@
         /// <summary>
         /// One stacking step per cooldown (config stacking_cycle): one strategy on one item type.
         /// All strategies run on a type one after the other, then the next type is used:
-        /// Single/Component, Alpha/Component, ... Gamma/Component, Single/Ore, ...
+        /// MergeInContainer/Component, Gather/Component, ... Swap/Component, MergeInContainer/Ore, ...
         /// Pure (no SE types), tested in StackingJobTests.
         /// </summary>
         public class StackingJob : Job
@@ -15,7 +15,7 @@
             private readonly Job[] _strategies;
             private int _strategy, _type;
 
-            // item type of the current step, read by the strategies (StackingJobBase)
+            // item type of the current step, read by the strategies (StackingStrategyJob)
             public static string StackType { get; private set; }
 
             /// <param name="cooldownSeconds">pause between two steps, 0 = stacking off</param>

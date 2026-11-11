@@ -70,57 +70,57 @@ namespace IngameScript.Tests
         [TestMethod]
         public void EveryStep_RunsOneStrategyOnOneType()
         {
-            var job = new Program.StackingJob(Cooldown, new Strategy("Single", _log), new Strategy("Alpha", _log));
+            var job = new Program.StackingJob(Cooldown, new Strategy("MergeInContainer", _log), new Strategy("Gather", _log));
 
             Step(job);
 
-            CollectionAssert.AreEqual(new[] { "Single/Component" }, _log);
+            CollectionAssert.AreEqual(new[] { "MergeInContainer/Component" }, _log);
         }
 
         [TestMethod]
         public void AllStrategiesRunOnAllTypes_ThenItStartsOver()
         {
             var job = new Program.StackingJob(Cooldown,
-                new Strategy("Single", _log), new Strategy("Alpha", _log), new Strategy("Beta", _log));
+                new Strategy("MergeInContainer", _log), new Strategy("Gather", _log), new Strategy("GatherInEmptiest", _log));
 
             for (int i = 0; i < 10; i++) Step(job);
 
             CollectionAssert.AreEqual(new[]
             {
-                "Single/Component", "Alpha/Component", "Beta/Component",
-                "Single/Ore", "Alpha/Ore", "Beta/Ore",
-                "Single/Ingot", "Alpha/Ingot", "Beta/Ingot",
-                "Single/Component",
+                "MergeInContainer/Component", "Gather/Component", "GatherInEmptiest/Component",
+                "MergeInContainer/Ore", "Gather/Ore", "GatherInEmptiest/Ore",
+                "MergeInContainer/Ingot", "Gather/Ingot", "GatherInEmptiest/Ingot",
+                "MergeInContainer/Component",
             }, _log);
         }
 
         [TestMethod]
         public void StrategyWithSeveralRuns_FinishesWithinOneStep()
         {
-            var job = new Program.StackingJob(Cooldown, new Strategy("Single", _log, runsBeforeFinished: 3), new Strategy("Alpha", _log));
+            var job = new Program.StackingJob(Cooldown, new Strategy("MergeInContainer", _log, runsBeforeFinished: 3), new Strategy("Gather", _log));
 
             Step(job);
             Step(job);
 
-            CollectionAssert.AreEqual(new[] { "Single/Component", "Single/Component", "Single/Component", "Alpha/Component" }, _log);
+            CollectionAssert.AreEqual(new[] { "MergeInContainer/Component", "MergeInContainer/Component", "MergeInContainer/Component", "Gather/Component" }, _log);
         }
 
         [TestMethod]
         public void BeforeTheCooldownIsOver_NothingRuns()
         {
-            var job = new Program.StackingJob(Cooldown, new Strategy("Single", _log), new Strategy("Alpha", _log));
+            var job = new Program.StackingJob(Cooldown, new Strategy("MergeInContainer", _log), new Strategy("Gather", _log));
             Step(job);
 
             _now = _now.AddSeconds(Cooldown - 1);
             Assert.AreEqual(Program.Job.ScheduleResult.Done, job.Schedule());
 
-            CollectionAssert.AreEqual(new[] { "Single/Component" }, _log);
+            CollectionAssert.AreEqual(new[] { "MergeInContainer/Component" }, _log);
         }
 
         [TestMethod]
         public void CooldownZero_StackingIsOff()
         {
-            var job = new Program.StackingJob(0, new Strategy("Single", _log));
+            var job = new Program.StackingJob(0, new Strategy("MergeInContainer", _log));
 
             Assert.IsFalse(job.Active);
             Assert.AreEqual(Program.Job.ScheduleResult.Done, job.Schedule());

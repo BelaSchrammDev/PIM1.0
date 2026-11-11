@@ -2,22 +2,22 @@
 {
     partial class Program
     {
-        public class StackingBetaJob : StackingJobBase
+        public class StackingMergePairsJob : StackingStrategyJob
         {
-            public StackingBetaJob() : base(StackingMode.Beta)
+            public StackingMergePairsJob() : base(StackingMode.Delta)
             {
             }
 
             public override bool InitStacking()
             {
-                StackItem.CurrentStackingType = StackItem.StackingType.VolumeBack;
-                StackItemList.Sort();
+                ItemStacks.CurrentStackingType = ItemStacks.StackingType.Volume;
+                ItemStacksList.Sort();
                 return true;
             }
 
             protected override void ProcessingIndex(int index)
             {
-                StackItemList[index].stacking_beta();
+                ItemStacksList[index].MergePairs();
             }
         }
     }

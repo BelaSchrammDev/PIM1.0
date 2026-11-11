@@ -2,20 +2,20 @@
 {
     partial class Program
     {
-        public class StackingAlphaJob : StackingJobBase
+        public class StackingGatherJob : StackingStrategyJob
         {
-            public StackingAlphaJob() : base(StackingMode.Alpha)
+            public StackingGatherJob() : base(StackingMode.Alpha)
             {
             }
 
             public override bool InitStacking()
             {
                 int max_stack = 0;
-                foreach (var s in StackItemList) if (max_stack < s.Stackcount) max_stack = s.Stackcount;
+                foreach (var s in ItemStacksList) if (max_stack < s.Stackcount) max_stack = s.Stackcount;
                 if (max_stack > 1)
                 {
-                    StackItem.CurrentStackingType = StackItem.StackingType.Stack;
-                    StackItemList.Sort();
+                    ItemStacks.CurrentStackingType = ItemStacks.StackingType.Stack;
+                    ItemStacksList.Sort();
                     return true;
                 }
                 else
@@ -25,7 +25,7 @@
             }
             protected override void ProcessingIndex(int index)
             {
-                StackItemList[index].stacking_alpha();
+                ItemStacksList[index].Gather();
             }
         }
     }

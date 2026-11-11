@@ -5,9 +5,9 @@ namespace IngameScript
 {
     partial class Program
     {
-        public abstract class StackingJobBase : CountingJob
+        public abstract class StackingStrategyJob : CountingJob
         {
-            protected List<StackItem> StackItemList = new List<StackItem>();
+            protected List<ItemStacks> ItemStacksList = new List<ItemStacks>();
 
             public enum StackingMode
             {
@@ -18,25 +18,25 @@ namespace IngameScript
                 Gamma
             }
 
-            protected StackingJobBase(StackingMode mode) : base()
+            protected StackingStrategyJob(StackingMode mode) : base()
             {
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
-                StackItemList.Clear();
-                StackItem.ClearStackInventory();
+                ItemStacksList.Clear();
+                ItemStacks.ClearStackInventory();
                 if (Lists.Data.InventoryManagerList.ContainsKey(StackingJob.StackType))
                 {
                     foreach (var i in Lists.Data.InventoryManagerList[StackingJob.StackType])
                     {
                         NewStackCount(i, StackingJob.StackType);
-                        StackItem.CalculateFreeInventory(i);
+                        ItemStacks.CalculateFreeInventory(i);
                     }
                 }
 
                 startIndex = 0;
-                endIndex = InitStacking() ? StackItemList.Count - 1 : -1;
+                endIndex = InitStacking() ? ItemStacksList.Count - 1 : -1;
             }
 
             public abstract bool InitStacking();
@@ -49,12 +49,12 @@ namespace IngameScript
                 {
                     if (i.Type.TypeId.Contains(ti) && !Lists.Data.InventoryManagerList.ContainsKey(GetPIMItemID(i.Type)))
                     {
-                        GetStackItem(i.Type).AddStack(quelle, i.Amount);
+                        GetItemStacks(i.Type).AddStack(quelle, i.Amount);
                     }
                 }
             }
 
-            StackItem GetStackItem(MyItemType t) { foreach (var s in StackItemList) if (s.type == t) return s; var nt = new StackItem(t); StackItemList.Add(nt); return nt; }
+            ItemStacks GetItemStacks(MyItemType t) { foreach (var s in ItemStacksList) if (s.type == t) return s; var nt = new ItemStacks(t); ItemStacksList.Add(nt); return nt; }
 
         }
     }
