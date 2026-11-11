@@ -84,30 +84,39 @@ namespace IngameScript
             return thresholdChanged;
         }
 
-        public static void RenderAutocrafting(StringBuilder sb, string acTypes, Dictionary<string, string> typeFilters, List<string> allTypes, IEnumerable<AssemblerBluePrint> active, Filter filter)
+        // The pages are rendered in parts (header, one block per type), one part per job step.
+        // One concatenation per line: linear (no growing string), and fewer calls than single Appends.
+
+        /// <summary>The autocrafting types of the page ("Component, AmmoMagazine"), one block each.</summary>
+        public static string[] AutocraftingTypeList(string acTypes)
         {
-            // one concatenation per line: linear (no growing string), and fewer calls than single Appends
+            return acTypes.Split(',').Select(s => s.Trim()).Where(s => s != "").ToArray();
+        }
+
+        public static void RenderAutocraftingHeader(StringBuilder sb, string acTypes, List<string> allTypes)
+        {
             sb.Append("/ Autocraftingdefinition:\n/ add '...(sms)' to the name of assemblers to crafting their items,\n/ and set the max quantity as you want\n\n/ if the quantity of items falls below this percentage value,\n/ then it will be increased to max.\n"
                 + Strings.X_Autocrafting_treshold + " = " + AutocraftingThreshold + "%\n\n/ possible autocrafting types, please add them separated by comma.\n/ "
                 + string.Concat(allTypes.Select(t => t + ","))
                 + "\n" + Strings.AutoCraftingTypeStringName + "=" + acTypes
                 + "\n\n/                           Item            |     current    ­|       max      ­|   assembly\n");
-            foreach (var actype in acTypes.Split(',').Select(s => s.Trim()).Where(s => s != ""))
-            {
-                string typeFilter;
-                if (typeFilters.TryGetValue(actype, out typeFilter)) filter.InitFilter(typeFilter);
-                else filter.SetFilterToAll();
-                sb.Append(line2pur + "\n Type : " + actype + " = " + (typeFilter == null || typeFilter == "" ? " * " : typeFilter) + line2);
-                var bpList = active.Where(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName)).ToList();
-                bpList.Sort((x, y) => x.AutoCraftingName.CompareTo(y.AutoCraftingName));
-                foreach (var bp in bpList)
-                    sb.Append(" "
-                        + GetDisplayBoxString(bp.AutoCraftingName, 60) + " | "
-                        + GetDisplayBoxString(bp.CurrentItemAmount, 25) + " | "
-                        + GetDisplayBoxString(bp.MaximumItemAmount, 25) + " | "
-                        + GetDisplayBoxString(bp.AssemblyAmount > 0 ? bp.AssemblyAmount : (bp.RefineryAmount > 0 ? bp.RefineryAmount : 0), 25)
-                        + bigSpaces + "|" + bp.BlueprintID + "|\n");
-            }
+        }
+
+        public static void RenderAutocraftingType(StringBuilder sb, string actype, Dictionary<string, string> typeFilters, IEnumerable<AssemblerBluePrint> active, Filter filter)
+        {
+            string typeFilter;
+            if (typeFilters.TryGetValue(actype, out typeFilter)) filter.InitFilter(typeFilter);
+            else filter.SetFilterToAll();
+            sb.Append(line2pur + "\n Type : " + actype + " = " + (typeFilter == null || typeFilter == "" ? " * " : typeFilter) + line2);
+            var bpList = active.Where(b => b.AutoCraftingType == actype && filter.IfFilter(b.AutoCraftingName)).ToList();
+            bpList.Sort((x, y) => x.AutoCraftingName.CompareTo(y.AutoCraftingName));
+            foreach (var bp in bpList)
+                sb.Append(" "
+                    + GetDisplayBoxString(bp.AutoCraftingName, 60) + " | "
+                    + GetDisplayBoxString(bp.CurrentItemAmount, 25) + " | "
+                    + GetDisplayBoxString(bp.MaximumItemAmount, 25) + " | "
+                    + GetDisplayBoxString(bp.AssemblyAmount > 0 ? bp.AssemblyAmount : (bp.RefineryAmount > 0 ? bp.RefineryAmount : 0), 25)
+                    + bigSpaces + "|" + bp.BlueprintID + "|\n");
         }
 
         // ---------------------------------------------------------------------------------------- ore priority
@@ -172,32 +181,34 @@ namespace IngameScript
         }
 
         /// <param name="filterString">refinery type filter of the panel, null = all</param>
-        public static void RenderOrePrio(StringBuilder sb, string filterString, Dictionary<string, List<RefineryBlueprint>> accepted, Filter filter)
+        public static void RenderOrePrioHeader(StringBuilder sb, string filterString, Filter filter)
         {
             if (filterString != null) filter.InitFilter(filterString);
             else filter.SetFilterToAll();
             sb.Append("/ Orepriorityconfig:\n/ only refinerytypes with '(sms)' in the name are displayed.\n\n/ set the 'value' between 1 and 10000\n/ if value = 0 then the ore will be ignored\n/ if value empty then prio will be calculated by PIM.\n/ any type of scrap is always refined first\n\n/ Refinerytypefilter, separated by comma, '*' for all\n Filter: "
                 + (filterString ?? "*") + "\n\n/                Recipe                       |    Value   |       Current\n");
-            foreach (var key in accepted.Keys)
+        }
+
+        /// <summary>Block of one refinery type (only with at least 2 recipes and if not filtered out), uses the filter of the header.</summary>
+        public static void RenderOrePrioType(StringBuilder sb, string key, List<RefineryBlueprint> accepted, Filter filter)
+        {
+            Dictionary<RefineryBlueprint, int> config;
+            if (!OrePrioConfig.TryGetValue(key, out config)) OrePrioConfig.Add(key, config = new Dictionary<RefineryBlueprint, int>());
+            var blueprintList = accepted.FindAll(o => !o.IsScrap);
+            if (blueprintList.Count < 2 || !filter.IfFilter(key)) return;
+            sb.Append(linepur + "\n RefineryType: " + key + line);
+            var curIngotPrioList = ingotprio[key];
+            blueprintList.Sort((x, y) => x.InputIDName.CompareTo(y.InputIDName));
+            foreach (var bp in blueprintList)
             {
-                Dictionary<RefineryBlueprint, int> config;
-                if (!OrePrioConfig.TryGetValue(key, out config)) OrePrioConfig.Add(key, config = new Dictionary<RefineryBlueprint, int>());
-                var blueprintList = accepted[key].FindAll(o => !o.IsScrap);
-                if (blueprintList.Count < 2 || !filter.IfFilter(key)) continue;
-                sb.Append(linepur + "\n RefineryType: " + key + line);
-                var curIngotPrioList = ingotprio[key];
-                blueprintList.Sort((x, y) => x.InputIDName.CompareTo(y.InputIDName));
-                foreach (var bp in blueprintList)
-                {
-                    int prio;
-                    if (!config.TryGetValue(bp, out prio)) config.Add(bp, prio = -1);
-                    var curPrio = IPrio.GetBlueprintPrio(curIngotPrioList, bp);
-                    sb.Append(" "
-                        + GetDisplayBoxString(bp.Name, 65, true) + " | "
-                        + GetDisplayBoxString(prio == -1 ? "  |  " : prio + "  |  ", 23)
-                        + (curPrio != null && curPrio.initp > 0 ? GetDisplayBoxString(curPrio.initp.ToString(), 23) + "  " : "")
-                        + bigSpaces + "|OrePrio:" + bp.Name + "|\n");
-                }
+                int prio;
+                if (!config.TryGetValue(bp, out prio)) config.Add(bp, prio = -1);
+                var curPrio = IPrio.GetBlueprintPrio(curIngotPrioList, bp);
+                sb.Append(" "
+                    + GetDisplayBoxString(bp.Name, 65, true) + " | "
+                    + GetDisplayBoxString(prio == -1 ? "  |  " : prio + "  |  ", 23)
+                    + (curPrio != null && curPrio.initp > 0 ? GetDisplayBoxString(curPrio.initp.ToString(), 23) + "  " : "")
+                    + bigSpaces + "|OrePrio:" + bp.Name + "|\n");
             }
         }
 

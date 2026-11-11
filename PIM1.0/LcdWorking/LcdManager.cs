@@ -6,7 +6,7 @@ using VRage.Game.GUI.TextPanel;
 
 namespace IngameScript
 {
-    // Ingame part of the LCD pages: finding, reading and writing the panels.
+    // Ingame part of the LCD pages: finding, reading and writing the panels, one job per page.
     // Parsing and rendering live in LcdPages.cs.
     //
     // A panel is only read again if its text differs from what PIM wrote last (changed by the player),
@@ -23,8 +23,6 @@ namespace IngameScript
             public Dictionary<string, string> Filters = new Dictionary<string, string>();
         }
 
-        List<LcdPanel> AutocraftingLcds = new List<LcdPanel>(), OrePrioLcds = new List<LcdPanel>(), RefiningLcds = new List<LcdPanel>();
-
         // render buffer, shared by all pages
         static readonly StringBuilder LcdText = new StringBuilder();
 
@@ -39,67 +37,137 @@ namespace IngameScript
             return blocks.Select(b => known.Find(p => p.Panel == b) ?? new LcdPanel { Panel = b }).ToList();
         }
 
-        /// <summary>Writes LcdText to the panel if it differs from the current panel text.</summary>
-        static void WriteLcd(LcdPanel p, string current)
+        /// <summary>
+        /// One LCD page: per panel one step to read (if changed by the player) and render the first part,
+        /// one step per further part, the last one writes the panel (if the content changed).
+        /// </summary>
+        public abstract class LcdPage : Job
         {
-            p.Text = LcdText.ToString();
-            if (p.Text == current) return;
-            var lcd = p.Panel;
-            LCD_DebugString.Append("LCD written: " + lcd.CustomName + "\n");
-            lcd.Alignment = TextAlignment.LEFT;
-            lcd.ContentType = ContentType.TEXT_AND_IMAGE;
-            lcd.WriteText(p.Text);
-        }
+            readonly string _tag;
+            List<LcdPanel> _panels = new List<LcdPanel>();
+            int _panel, _part;
+            string _current;
+            protected readonly Filter Filter = new Filter();
 
-        void loadAutocratingDefinitions()
-        {
-            AutocraftingLcds = GetLcds(Autocrafting, AutocraftingLcds);
-            foreach (var p in AutocraftingLcds)
+            protected LcdPage(string tag) { _tag = tag; }
+
+            public override void InitJob()
             {
-                var current = p.Panel.GetText();
-                if (current != p.Text)
+                _panels = MyProgram.GetLcds(_tag, _panels);
+                _panel = _part = 0;
+                if (_panels.Count > 0) Start();
+            }
+
+            public override RunJobResult RunJob()
+            {
+                if (_panel >= _panels.Count) return RunJobResult.Finished;
+                var p = _panels[_panel];
+                if (_part == 0)
                 {
-                    p.Types = IG_Component + "," + IG_Ammo;
-                    p.Filters.Clear();
-                    if (ParseAutocrafting(current, Lists.Data.BluePrints_Active, ref p.Types, p.Filters)) SetAutocraftingThresholdNew();
+                    _current = p.Panel.GetText();
+                    if (_current != p.Text) Read(p, _current);
+                    LcdText.Clear();
                 }
-                LcdText.Clear();
-                RenderAutocrafting(LcdText, p.Types, p.Filters, Lists.Data.autocrafting_Types, Lists.Data.BluePrints_Active.Values, filter);
-                WriteLcd(p, current);
+                if (Render(p, _part++))
+                {
+                    Write(p);
+                    _panel++;
+                    _part = 0;
+                }
+                return _panel < _panels.Count ? RunJobResult.Continue : RunJobResult.Finished;
+            }
+
+            void Write(LcdPanel p)
+            {
+                var text = LcdText.ToString();
+                var lcd = p.Panel;
+                if (text != _current)
+                {
+                    // changed by the player while the page was rendered: keep it, it is read in the next cycle
+                    if (lcd.GetText() != _current) return;
+                    LCD_DebugString.Append("LCD written: " + lcd.CustomName + "\n");
+                    lcd.Alignment = TextAlignment.LEFT;
+                    lcd.ContentType = ContentType.TEXT_AND_IMAGE;
+                    lcd.WriteText(text);
+                }
+                p.Text = text;
+            }
+
+            /// <summary>Once per cycle before the first panel (only if there are panels).</summary>
+            protected virtual void Start() { }
+
+            /// <summary>The panel was changed by the player (or is new): take over its settings.</summary>
+            protected virtual void Read(LcdPanel p, string text) { }
+
+            /// <summary>Renders part <paramref name="part"/> (0, 1, ...) into LcdText, returns true if it was the last part.</summary>
+            protected abstract bool Render(LcdPanel p, int part);
+        }
+
+        /// <summary>(sms,autocrafting): max amounts of the active blueprints, header + one part per autocrafting type.</summary>
+        public class AutocraftingPage : LcdPage
+        {
+            string[] _types;
+
+            public AutocraftingPage() : base(Autocrafting) { }
+
+            protected override void Read(LcdPanel p, string text)
+            {
+                p.Types = IG_Component + "," + IG_Ammo;
+                p.Filters.Clear();
+                if (ParseAutocrafting(text, Lists.Data.BluePrints_Active, ref p.Types, p.Filters)) MyProgram.SetAutocraftingThresholdNew();
+            }
+
+            protected override bool Render(LcdPanel p, int part)
+            {
+                if (part == 0)
+                {
+                    _types = AutocraftingTypeList(p.Types);
+                    RenderAutocraftingHeader(LcdText, p.Types, Lists.Data.autocrafting_Types);
+                }
+                else RenderAutocraftingType(LcdText, _types[part - 1], p.Filters, Lists.Data.BluePrints_Active.Values, Filter);
+                return part >= _types.Length;
             }
         }
 
-        void LoadAndRenderOrePrioDefs()
+        /// <summary>(sms,oreprio): ore priorities per refinery type, header + one part per refinery type.
+        /// The values are applied by ApplyOrePrioConfig after each priority calculation (RefineryManagerJob).</summary>
+        public class OrePrioPage : LcdPage
         {
-            OrePrioLcds = GetLcds(OrePrioDefString, OrePrioLcds);
-            if (OrePrioLcds.Count == 0) return;
-            Refinery.RemoveUnusedRefinerytypeBlueprintLists();
-            var accepted = Refinery.refineryTypesAcceptedBlueprintsList;
-            // read all panels first, then write all
-            var current = new List<string>();
-            foreach (var p in OrePrioLcds)
+            string[] _keys;
+
+            public OrePrioPage() : base(OrePrioDefString) { }
+
+            protected override void Start()
             {
-                var text = p.Panel.GetText();
-                if (text != p.Text) p.Filter = ParseOrePrio(text, accepted, RefineryBlueprints);
-                current.Add(text);
+                Refinery.RemoveUnusedRefinerytypeBlueprintLists();
+                _keys = Refinery.refineryTypesAcceptedBlueprintsList.Keys.ToArray();
             }
-            ApplyOrePrioConfig();
-            for (int i = 0; i < OrePrioLcds.Count; i++)
+
+            protected override void Read(LcdPanel p, string text)
             {
-                LcdText.Clear();
-                RenderOrePrio(LcdText, OrePrioLcds[i].Filter, accepted, filter);
-                WriteLcd(OrePrioLcds[i], current[i]);
+                p.Filter = ParseOrePrio(text, Refinery.refineryTypesAcceptedBlueprintsList, RefineryBlueprints);
+            }
+
+            protected override bool Render(LcdPanel p, int part)
+            {
+                if (part == 0) RenderOrePrioHeader(LcdText, p.Filter, Filter);
+                else RenderOrePrioType(LcdText, _keys[part - 1], Refinery.refineryTypesAcceptedBlueprintsList[_keys[part - 1]], Filter);
+                return part >= _keys.Length;
             }
         }
 
-        void RenderResourceProccesingLCD()
+        /// <summary>(sms,refining): refining progress, the same page on all panels.</summary>
+        public class RefiningPage : LcdPage
         {
-            RefiningLcds = GetLcds(ResourcenOverview, RefiningLcds);
-            if (RefiningLcds.Count == 0) return;
-            RefineryBlueprint.FillInputOutputAmountAndETA();
-            LcdText.Clear();
-            RenderRefining(LcdText, RefineryBlueprints);
-            foreach (var p in RefiningLcds) WriteLcd(p, p.Panel.GetText());
+            public RefiningPage() : base(ResourcenOverview) { }
+
+            protected override void Start() { RefineryBlueprint.FillInputOutputAmountAndETA(); }
+
+            protected override bool Render(LcdPanel p, int part)
+            {
+                RenderRefining(LcdText, RefineryBlueprints);
+                return true;
+            }
         }
     }
 }

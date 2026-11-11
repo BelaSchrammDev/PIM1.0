@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace IngameScript
 {
@@ -10,7 +10,6 @@ namespace IngameScript
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 MyProgram.CalcIngotPrio();
-                MyProgram.RenderResourceProccesingLCD();
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;
             }
@@ -61,7 +60,8 @@ namespace IngameScript
                 }
             }
 
-            LoadAndRenderOrePrioDefs();
+            // values of the oreprio LCDs (read by OrePrioPage)
+            ApplyOrePrioConfig();
         }
     }
 }

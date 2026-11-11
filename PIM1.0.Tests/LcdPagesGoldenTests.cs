@@ -94,15 +94,19 @@ namespace IngameScript.Tests
 
         static string RenderAutocrafting(string acTypes, Dictionary<string, string> typeFilters, List<string> allTypes, IEnumerable<Program.AssemblerBluePrint> active, Program.Filter filter)
         {
+            // same parts as AutocraftingPage: header, one block per type
             var sb = new StringBuilder();
-            Program.RenderAutocrafting(sb, acTypes, typeFilters, allTypes, active, filter);
+            Program.RenderAutocraftingHeader(sb, acTypes, allTypes);
+            foreach (var type in Program.AutocraftingTypeList(acTypes)) Program.RenderAutocraftingType(sb, type, typeFilters, active, filter);
             return sb.ToString();
         }
 
         static string RenderOrePrio(string filterString, Dictionary<string, List<Program.RefineryBlueprint>> accepted, Program.Filter filter)
         {
+            // same parts as OrePrioPage: header, one block per refinery type
             var sb = new StringBuilder();
-            Program.RenderOrePrio(sb, filterString, accepted, filter);
+            Program.RenderOrePrioHeader(sb, filterString, filter);
+            foreach (var key in accepted.Keys.ToArray()) Program.RenderOrePrioType(sb, key, accepted[key], filter);
             return sb.ToString();
         }
 

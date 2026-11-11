@@ -1,4 +1,4 @@
-﻿using Sandbox.ModAPI.Ingame;
+using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
@@ -73,6 +73,8 @@ namespace IngameScript
                 new FindingAssemblersJob(),
                 new AssemblerBluePrintManagerJob(),
                 new CalculatingAmountOfInactiveBluePrintItemsJob(),
+                // LCD pages: after the amounts are counted, before autocrafting uses the max amounts
+                new SequentialJob(new AutocraftingPage(), new OrePrioPage(), new RefiningPage()),
                 new AutoCraftingJob(),
                 new ViewManagerJob(),
                 new SendInfosToSmsJob()

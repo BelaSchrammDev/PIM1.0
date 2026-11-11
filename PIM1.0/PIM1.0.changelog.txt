@@ -44,6 +44,9 @@ Changes:
   Industrial Overhaul Water (no blueprints anymore); HSR refinery type and name rule removed
 - LCD pages (autocrafting, oreprio, refining): built with a StringBuilder, a panel is only read again
   if the player changed it and only written if the content changed
+- LCD pages run as jobs (LcdPage: AutocraftingPage, OrePrioPage, RefiningPage) before the autocrafting,
+  rendered in parts (header, one block per type) within the instruction budget; a panel changed by the
+  player while it is rendered is not overwritten
 - LCD pages and debug panel: only panels of the same construct (subgrids via rotors/pistons, no docked ships)
 - parsing and rendering of the LCD pages moved to LcdPages.cs (pure, testable); ore priorities of the
   oreprio LCDs are applied after every priority calculation

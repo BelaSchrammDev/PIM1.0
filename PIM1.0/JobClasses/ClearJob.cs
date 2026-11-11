@@ -1,4 +1,4 @@
-﻿namespace IngameScript
+namespace IngameScript
 {
     partial class Program
     {
@@ -6,7 +6,6 @@
         {
             public override RunJobResult RunJob()
             {
-                MyProgram.loadAutocratingDefinitions();
                 MyProgram.LCD_DebugPrint();
 
                 ClearInventoryList(Lists.Data.Inventory);
