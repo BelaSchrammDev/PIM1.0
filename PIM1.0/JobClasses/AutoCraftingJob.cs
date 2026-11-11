@@ -39,13 +39,11 @@ namespace IngameScript
                     else
                     {
                         var validAssemblers = Lists.Data.AssemblerList.FindAll(x => x.OwnBlueprintList.Contains(bluePrint));
-                        if (validAssemblers.Count > 0)
+                        for (int i = 0; i < validAssemblers.Count; i++)
                         {
-                            MyFixedPoint amount = bluePrintNeededAmount / validAssemblers.Count;
-                            foreach (var assembler in validAssemblers)
-                            {
-                                assembler.AddQueueItemSave(bluePrint, amount);
-                            }
+                            MyFixedPoint amount = AssemblerBluePrint.SplitAmount(bluePrintNeededAmount, validAssemblers.Count, i);
+                            if (amount <= 0) break;
+                            validAssemblers[i].AddQueueItemSave(bluePrint, amount);
                         }
                     }
                 }

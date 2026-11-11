@@ -119,7 +119,26 @@ namespace IngameScript
             public bool NeedsAssembling() { return (MinimumAmount > CurrentItemAmount + AssemblyAmount); }
             public bool IfMax() { return (MaximumItemAmount <= CurrentItemAmount); }
             public void SetMaximumAmount(int m) { MaximumItemAmount = m; CalcMinimumAmount(); }
-            public void CalcMinimumAmount() { MinimumAmount = (MaximumItemAmount * AutocraftingThreshold) / 100; }
+            public void CalcMinimumAmount() { MinimumAmount = MinimumAmountFor(MaximumItemAmount, AutocraftingThreshold); }
+
+            /// <summary>
+            /// Stock below which an item is crafted: the threshold percentage of the maximum, rounded up.
+            /// Rounded down, a maximum of 1 gave 0 and the item was never crafted.
+            /// </summary>
+            public static int MinimumAmountFor(int maximum, int thresholdPercent)
+            {
+                return (maximum * thresholdPercent + 99) / 100;
+            }
+
+            /// <summary>
+            /// Share of assembler number <paramref name="index"/> (0, 1, ...) if <paramref name="amount"/> is
+            /// split between <paramref name="count"/> assemblers. The remainder goes to the first ones,
+            /// so nothing is lost if the amount is smaller than the number of assemblers.
+            /// </summary>
+            public static int SplitAmount(int amount, int count, int index)
+            {
+                return amount / count + (index < amount % count ? 1 : 0);
+            }
             public void SetCurrentAmount(int amount)
             {
                 CurrentItemAmount = amount;
