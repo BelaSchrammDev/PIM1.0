@@ -35,6 +35,8 @@ namespace PimBluePrintGenerator
         /// <summary>Line of the section header (1-based).</summary>
         public int HeaderLine;
         public bool IsRefinery;
+        /// <summary>[Ignore]: blueprint subtypes that are deliberately not used (not generated, not proposed by the tool).</summary>
+        public bool IsIgnore;
         /// <summary>null = unconditional.</summary>
         public string ConditionMod;
         /// <summary>true: section is used if ConditionMod is enabled, false: if it is disabled.</summary>
@@ -131,9 +133,10 @@ namespace PimBluePrintGenerator
                     mod.Sections.Add(section);
                     continue;
                 }
-                if (section == null) throw row.Error("data before the first section header ([Assembler] or [Refinery])");
+                if (section == null) throw row.Error("data before the first section header ([Assembler], [Refinery] or [Ignore])");
 
-                if (section.IsRefinery) ValidateRefineryRow(row);
+                if (section.IsIgnore) ValidateIgnoreRow(row);
+                else if (section.IsRefinery) ValidateRefineryRow(row);
                 else ValidateAssemblerRow(row);
                 section.Rows.Add(row);
             }
@@ -151,9 +154,11 @@ namespace PimBluePrintGenerator
             if (parts.Length == 0) throw row.Error("invalid section header");
             if (parts[0] == "Assembler") section.IsRefinery = false;
             else if (parts[0] == "Refinery") section.IsRefinery = true;
-            else throw row.Error($"unknown section '{parts[0]}', expected Assembler or Refinery");
+            else if (parts[0] == "Ignore") section.IsIgnore = true;
+            else throw row.Error($"unknown section '{parts[0]}', expected Assembler, Refinery or Ignore");
 
             if (parts.Length == 1) return section;
+            if (section.IsIgnore) throw row.Error("[Ignore] cannot have a condition");
             if (parts.Length != 3 || parts[1] != "if") throw row.Error("expected [Section] or [Section if Mod] or [Section if !Mod]");
 
             var condition = parts[2];
@@ -181,6 +186,12 @@ namespace PimBluePrintGenerator
             if (int.TryParse(row.Field(2), out dummy)) throw row.Error("item subtype must not be a number");
 
             for (int i = 1; i < row.Fields.Length; i++) CheckChars(row, row.Fields[i]);
+        }
+
+        static void ValidateIgnoreRow(DataRow row)
+        {
+            if (row.Fields.Length != 1 || row.Fields[0].Contains(' ')) throw row.Error("ignore row: expected one blueprint subtype");
+            CheckChars(row, row.Fields[0]);
         }
 
         static void ValidateRefineryRow(DataRow row)

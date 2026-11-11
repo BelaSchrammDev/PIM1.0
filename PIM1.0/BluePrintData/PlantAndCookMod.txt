@@ -5,6 +5,7 @@
 # Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
 #            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
 # Refinery:  BlueprintSubtype | InputItem | OutputItem
+# [Ignore]:  BlueprintSubtype (deliberately not used: not generated, not proposed by BluePrintTool)
 
 [Assembler]
 # Farming
@@ -36,3 +37,15 @@ Ingot | FarmedSoya | Soya
 # VegetablesFarm
 Ingot | FarmedPumpkin | Pumpkin
 Ingot | FarmedCabbage | Cabbage
+# Components
+Component | EmptyTinCan
+
+[Ignore]
+# Composter recipes (food -> organic): the Composter is not managed by PIM
+CompostingAlgae
+CompostingH2Algae
+CompostingPumpkin
+CompostingCabbage
+CompostingWheat
+CompostingSoya
+CompostingHerbs

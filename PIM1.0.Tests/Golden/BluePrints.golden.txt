@@ -287,6 +287,7 @@ A|Ingot FarmedHerbs|FarmedHerbs|Ingot Herbs|Food|Herbs|PlantAndCookMod|0|0
 A|Ingot FarmedSoya|FarmedSoya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot FarmedPumpkin|FarmedPumpkin|Ingot Pumpkin|Food|Pumpkin|PlantAndCookMod|0|0
 A|Ingot FarmedCabbage|FarmedCabbage|Ingot Cabbage|Food|Cabbage|PlantAndCookMod|0|0
+A|Component EmptyTinCan|EmptyTinCan|Component EmptyTinCan|Component|EmptyTinCan|PlantAndCookMod|0|0
 A|Component AryxLynxon_FusionComponentBP|AryxLynxon_FusionComponentBP|Component AryxLynxon_FusionComponent|Component|Fusion Coil|AryxEpsteinDriveMod|0|0
 A|AmmoMagazine R75ammo|R75ammo|AmmoMagazine R75ammo|AmmoMagazine|75mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R150ammo|R150ammo|AmmoMagazine R150ammo|AmmoMagazine|150mm Railgun Ammo|NorthWindWeaponsMod|0|0
@@ -342,6 +343,7 @@ R|PurifyTitaniumOre|Ore CrushedTitanium|Crushed Titanium|Ore PurifiedTitanium|Pu
 R|CrushedUraniumOreToIngot|Ore CrushedUranium|Crushed Uranium|Ingot Uranium|Ingot Uranium|False
 R|PurifyUraniumOre|Ore CrushedUranium|Crushed Uranium|Ore PurifiedUranium|Purified Uranium|False
 R|IcetoDeuterium|Ore Ice|Ice|Ingot DTFuelCapsule|Deuterium|False
+R|CleanToCleanWater|Ingot CleanWater|Ingot CleanWater|Ingot WaterFood|Ingot WaterFood|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CrushNiterOre|Ore Niter|Niter|Ore Magnesium|Crushed Niter|False
 R|NiterOreToIngot|Ore Niter|Niter|Ingot Niter|Potassium Nitrate|False
@@ -581,6 +583,7 @@ A|Ingot FarmedHerbs|FarmedHerbs|Ingot Herbs|Food|Herbs|PlantAndCookMod|0|0
 A|Ingot FarmedSoya|FarmedSoya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot FarmedPumpkin|FarmedPumpkin|Ingot Pumpkin|Food|Pumpkin|PlantAndCookMod|0|0
 A|Ingot FarmedCabbage|FarmedCabbage|Ingot Cabbage|Food|Cabbage|PlantAndCookMod|0|0
+A|Component EmptyTinCan|EmptyTinCan|Component EmptyTinCan|Component|EmptyTinCan|PlantAndCookMod|0|0
 A|Component AryxLynxon_FusionComponentBP|AryxLynxon_FusionComponentBP|Component AryxLynxon_FusionComponent|Component|Fusion Coil|AryxEpsteinDriveMod|0|0
 A|AmmoMagazine R75ammo|R75ammo|AmmoMagazine R75ammo|AmmoMagazine|75mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R150ammo|R150ammo|AmmoMagazine R150ammo|AmmoMagazine|150mm Railgun Ammo|NorthWindWeaponsMod|0|0
@@ -602,6 +605,7 @@ A|AmmoMagazine C500AmmoHE|C500AmmoHE|AmmoMagazine C500AmmoHE|AmmoMagazine|500mm 
 A|AmmoMagazine C500AmmoCasaba|C500AmmoCasaba|AmmoMagazine C500AmmoCasaba|AmmoMagazine|500mm Casaba Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine PlasmaCell10MJ|PlasmaCell10MJ|AmmoMagazine PlasmaCell10MJ|AmmoMagazine|10MJ PlasmaCannon Cell|NorthWindWeaponsMod|0|0
 R|IcetoDeuterium|Ore Ice|Ice|Ingot DTFuelCapsule|Deuterium|False
+R|CleanToCleanWater|Ingot CleanWater|Ingot CleanWater|Ingot WaterFood|Ingot WaterFood|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CarbonOreToIngot|Ore Carbon|Ore Carbon|Ingot Carbon|Carbon|False
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -981,6 +985,7 @@ A|Ingot SpaceMealBar|SpaceMealBar|Ingot SpaceMealBar|Food|SpaceMealBar|DailyNeed
 A|Ingot HotChocolate|HotChocolate|Ingot HotChocolate|Food|HotChocolate|DailyNeedsSurvivalMod|0|0
 A|Ingot SpacersBreakfast|SpacersBreakfast|Ingot SpacersBreakfast|Food|SpacersBreakfast|DailyNeedsSurvivalMod|0|0
 A|Ingot ProteinShake|ProteinShake|Ingot ProteinShake|Food|ProteinShake|DailyNeedsSurvivalMod|0|0
+R|CleanToCleanWater|Ingot CleanWater|Ingot CleanWater|Ingot WaterFood|Ingot WaterFood|False
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CarbonOreToIngot|Ore Carbon|Ore Carbon|Ingot Carbon|Carbon|False
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -2245,6 +2250,7 @@ A|Ingot FarmedHerbs|FarmedHerbs|Ingot Herbs|Food|Herbs|PlantAndCookMod|0|0
 A|Ingot FarmedSoya|FarmedSoya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot FarmedPumpkin|FarmedPumpkin|Ingot Pumpkin|Food|Pumpkin|PlantAndCookMod|0|0
 A|Ingot FarmedCabbage|FarmedCabbage|Ingot Cabbage|Food|Cabbage|PlantAndCookMod|0|0
+A|Component EmptyTinCan|EmptyTinCan|Component EmptyTinCan|Component|EmptyTinCan|PlantAndCookMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False

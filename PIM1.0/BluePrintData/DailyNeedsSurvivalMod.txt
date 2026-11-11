@@ -5,6 +5,7 @@
 # Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
 #            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
 # Refinery:  BlueprintSubtype | InputItem | OutputItem
+# [Ignore]:  BlueprintSubtype (deliberately not used: not generated, not proposed by BluePrintTool)
 
 [Assembler]
 # DailyNeedsSurvivalMod
@@ -46,3 +47,5 @@ Ingot | ProteinShake
 CarbonOreToIngot | Ore Carbon | Ingot Carbon
 PotassiumOreToIngot | Ore Potassium | Ingot Potassium
 PhosphorusOreToIngot | Ore Phosphorus | Ingot Phosphorus
+# Water Recycling System
+CleanToCleanWater | Ingot CleanWater | Ingot WaterFood

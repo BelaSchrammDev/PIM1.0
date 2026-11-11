@@ -15,7 +15,7 @@ namespace IngameScript
                 NotFilled,
                 OutputNotEmpty,
                 Damaged,
-                IncineratorNoAutofill
+                NoAutofill
             }
 
             #region static
@@ -97,7 +97,7 @@ namespace IngameScript
 
                 SetRefineryErrors();
 
-                if (RefineryType.IsUnknowType() || RefineryType.IsType(RefreshType.Incinerator))
+                if (RefineryType.IsUnknowType() || RefineryType.IsType(RefreshType.NoAutofill))
                 {
                     return;
                 }
@@ -114,9 +114,9 @@ namespace IngameScript
 
             private void SetRefineryErrors()
             {
-                if (RefineryType.IsType(RefreshType.Incinerator))
+                if (RefineryType.IsType(RefreshType.NoAutofill))
                 {
-                    AddRefineryError(RefError.IncineratorNoAutofill);
+                    AddRefineryError(RefError.NoAutofill);
                 }
 
                 if (RefineryType.IsUnknowType())
@@ -168,7 +168,7 @@ namespace IngameScript
                 { RefError.NotFilled, " could not be filled\n"},
                 { RefError.OutputNotEmpty, " cannot unload outputitems.\n"},
                 { RefError.Damaged, " is damaged.\n"},
-                { RefError.IncineratorNoAutofill, " cannot filled by PIM.\n"},
+                { RefError.NoAutofill, " cannot filled by PIM.\n"},
             };
 
 

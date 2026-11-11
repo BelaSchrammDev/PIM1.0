@@ -189,6 +189,26 @@ namespace IngameScript.Tests
         }
 
         [TestMethod]
+        public void IgnoreSection_IsNotProposedAndNotGenerated()
+        {
+            File.WriteAllText(Path.Combine(_dataDir, "TestMod.txt"), "[Assembler]\n\n[Ignore]\n# not wanted\nGoldOreToIngot\n");
+
+            System.Collections.Generic.List<ModData> mods;
+            var findings = Checker(out mods).Check(mods.Single(m => m.Name == "TestMod"));
+            Assert.AreEqual("FancyPlateBP", findings.Single(f => f.Kind == FindingKind.NewBlueprint).Fix[1]);
+
+            Assert.IsFalse(BluePrintDataGenerator.Generate(_dataDir).Contains("GoldOreToIngot"));
+        }
+
+        [TestMethod]
+        public void IgnoreSection_WithCondition_IsRejected()
+        {
+            File.WriteAllText(Path.Combine(_dataDir, "TestMod.txt"), "[Ignore if IndustrialOverhaulMod]\nGoldOreToIngot\n");
+            var e = Assert.ThrowsException<BluePrintDataException>(() => BluePrintDataFile.Read(_dataDir));
+            StringAssert.Contains(e.Message, "[Ignore]");
+        }
+
+        [TestMethod]
         public void Check_ModWithoutSource_IsSkipped()
         {
             System.Collections.Generic.List<ModData> mods;

@@ -5,6 +5,7 @@
 # Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
 #            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
 # Refinery:  BlueprintSubtype | InputItem | OutputItem
+# [Ignore]:  BlueprintSubtype (deliberately not used: not generated, not proposed by BluePrintTool)
 
 [Assembler]
 # MCRN RailGunMod

@@ -70,9 +70,9 @@ namespace PimBluePrintTool
             _mods = mods;
             // every blueprint subtype used in any data file
             _knownSubtypes = new HashSet<string>(mods.SelectMany(m => m.Sections)
-                .SelectMany(s => s.Rows.Select(r => s.IsRefinery ? r.Field(0) : r.Field(1))));
+                .SelectMany(s => s.Rows.Select(r => s.IsRefinery || s.IsIgnore ? r.Field(0) : r.Field(1))));
             foreach (var mod in mods)
-                foreach (var section in mod.Sections.Where(s => !s.IsRefinery))
+                foreach (var section in mod.Sections.Where(s => !s.IsRefinery && !s.IsIgnore))
                     foreach (var row in section.Rows)
                     {
                         var key = row.Field(0) + " " + StripPosition(row.Field(1));
@@ -135,7 +135,7 @@ namespace PimBluePrintTool
             Func<string, bool> inRefinery = s => model.InRefinery(s) || AllModsModel.InRefinery(s);
             var ownSubtypes = new HashSet<string>(own.SelectMany(s => s.Blueprints).Select(b => b.Subtype));
 
-            foreach (var section in mod.Sections)
+            foreach (var section in mod.Sections.Where(s => !s.IsIgnore))
                 foreach (var row in section.Rows)
                 {
                     var f = section.IsRefinery

@@ -40,7 +40,7 @@ namespace PimBluePrintTool
                 var rows = new List<string> { NewRowsComment };
                 rows.AddRange(group.Select(f => FormatRow(f.Fix)));
 
-                var section = mod.Sections.FirstOrDefault(s => s.IsRefinery == group.Key && s.ConditionMod == null);
+                var section = mod.Sections.FirstOrDefault(s => !s.IsIgnore && s.IsRefinery == group.Key && s.ConditionMod == null);
                 if (section == null)
                 {
                     rows.Insert(0, group.Key ? "[Refinery]" : "[Assembler]");
@@ -76,6 +76,7 @@ $@"# PIM blueprint data for mod '{modName}'.
 # Assembler: ItemType | BlueprintSubtype [| ItemSubtype] [| DisplayName]
 #            ItemSubtype empty = derived from the blueprint subtype; DisplayName empty = derived from the item
 # Refinery:  BlueprintSubtype | InputItem | OutputItem
+# [Ignore]:  BlueprintSubtype (deliberately not used: not generated, not proposed by BluePrintTool)
 # Created by PIM1.0.BluePrintTool from workshop item(s) {{0}}.
 ";
 

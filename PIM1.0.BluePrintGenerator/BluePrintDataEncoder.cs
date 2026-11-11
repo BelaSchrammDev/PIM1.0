@@ -20,7 +20,7 @@ namespace PimBluePrintGenerator
         public static string EncodeMod(ModData mod)
         {
             var entries = new List<string>();
-            foreach (var section in mod.Sections)
+            foreach (var section in mod.Sections.Where(s => !s.IsIgnore))
             {
                 entries.Add(SectionHeader(section));
                 if (section.IsRefinery) EncodeRefinerySection(section, entries);

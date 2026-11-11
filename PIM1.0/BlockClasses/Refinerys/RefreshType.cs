@@ -11,7 +11,7 @@
                 WaterRecyclingSystem,
                 HydrophonicsFarm,
                 Reprocessor,
-                Incinerator,
+                NoAutofill,   // known block, not filled by PIM (e.g. incinerator, composter): only a hint on the PB display
             }
         }
     }
