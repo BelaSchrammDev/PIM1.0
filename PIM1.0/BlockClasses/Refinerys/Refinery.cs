@@ -74,9 +74,12 @@ namespace IngameScript
 
             void AddRefineryCount()
             {
-                if (InputInventory.ItemCount > 0)
+                // the ore that is refined right now is the first item of the input inventory
+                // (not the first key of InputInventoryItems: that is the first ore the refinery ever had)
+                var firstItem = InputInventory.GetItemAt(0);
+                if (firstItem.HasValue)
                 {
-                    var ore = InputInventoryItems.First().Key;
+                    var ore = GetPIMItemID(firstItem.Value.Type);
                     var bluePrint = AcceptedBlueprints.Find(b => b.InputID == ore);
                     if (bluePrint != null) bluePrint.RefineryCount++;
                 }

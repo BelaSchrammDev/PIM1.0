@@ -30,6 +30,8 @@ Fix:
   were ignored silently instead of being reported as "unknown command"
 - Water Recycling System: grey water and clean water are put at the intended position of the
   input inventory (the position was not passed on to the transfer)
+- refining LCD: the number of refinerys was counted for the first ore a refinery ever had
+  instead of the ore it is refining now
 
 Changes:
 
