@@ -32,6 +32,8 @@ Fix:
   input inventory (the position was not passed on to the transfer)
 - refining LCD: the number of refinerys was counted for the first ore a refinery ever had
   instead of the ore it is refining now
+- possible script stop "divide by zero" when a refinery was filled with an ore that no refinery
+  was refining yet
 
 Changes:
 

@@ -8,6 +8,7 @@
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
                 foreach (var b in RefineryBlueprints) b.RefineryCount = 0;
+                Refinery.FunctionalCount = 0;
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;
             }

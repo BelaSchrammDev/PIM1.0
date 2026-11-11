@@ -208,12 +208,7 @@ namespace IngameScript
                 IPrio ingotPriot = null;
                 if (ingotPrioList.Count > 0 && null != (ingotPriot = IPrio.GetBlueprintPrio(ingotPrioList, bluePrint)))
                 {
-                    if (ingotPriot.prio < 100)
-                    {
-                        ingotPriot.prio -= ingotPriot.prio / bluePrint.RefineryCount;
-                        if (ingotPriot.prio < 0) ingotPriot.prio = 1;
-                        ingotPrioList.Sort();
-                    }
+                    if (ingotPriot.LowerAfterFilling(FunctionalCount)) ingotPrioList.Sort();
                 }
             }
         }

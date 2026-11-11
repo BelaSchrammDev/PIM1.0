@@ -66,6 +66,17 @@ namespace IngameScript
                 prio = np;
                 if (np == 0 || initp != np) initp = np;
             }
+            /// <summary>
+            /// A refinery was filled with this ore: lowers a calculated priority (below 100) by one
+            /// share per PIM controlled refinery, so the following refinerys prefer other ores.
+            /// Returns false if the priority is not changed.
+            /// </summary>
+            public bool LowerAfterFilling(int refineryCount)
+            {
+                if (prio >= 100) return false;
+                prio -= prio / (refineryCount > 1 ? refineryCount : 1);
+                return true;
+            }
             public static IPrio GetBlueprintPrio(List<IPrio> ingotprioList, RefineryBlueprint bp, bool newip = false)
             {
                 foreach (IPrio ip in ingotprioList)

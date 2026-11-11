@@ -23,6 +23,9 @@ namespace IngameScript
             // TODO: create partial blueprint class
             static public Dictionary<string, List<RefineryBlueprint>> refineryTypesAcceptedBlueprintsList = new Dictionary<string, List<RefineryBlueprint>>();
 
+            // number of functional PIM controlled refinerys, counted in every cycle (FindingRefinerysJob)
+            static public int FunctionalCount = 0;
+
             static public void RemoveUnusedRefinerytypeBlueprintLists()
             {
                 foreach (var a in refineryTypesAcceptedBlueprintsList.Keys.ToArray())
@@ -144,6 +147,7 @@ namespace IngameScript
             {
                 if (RefineryBlock.IsFunctional)
                 {
+                    FunctionalCount++;
                     RefineryBlock.UseConveyorSystem = false;
                     if (InputInventory.ItemCount == 0)
                     {
