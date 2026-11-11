@@ -42,12 +42,6 @@ namespace IngameScript
                 RefreshInventoryItems(OutputInventoryIndex, OutputInventoryItems);
             }
 
-            public void AddInventoryListsToSummary()
-            {
-                AddInventoryToSummaryDictionary(InputInventoryItems);
-                AddInventoryToSummaryDictionary(OutputInventoryItems);
-            }
-
             public IMyInventory InputInventory
             {
                 get 
@@ -77,15 +71,6 @@ namespace IngameScript
             public Dictionary<string, float> OutputInventoryItems => _OutputInventoryItems;
 
             #region private methode
-
-            private void AddInventoryToSummaryDictionary(Dictionary<string, float> list)
-            {
-                foreach (var item in list)
-                {
-                    if (Lists.Data.Inventory.ContainsKey(item.Key)) Lists.Data.Inventory[item.Key] += item.Value;
-                    else Lists.Data.Inventory.Add(item.Key, item.Value);
-                }
-            }
 
             private void ClearInventoryList(Dictionary<string, float> list)
             {

@@ -93,8 +93,9 @@ namespace IngameScript
             {
                 if (IsClosed) return;
 
+                // only the own lists: the stock (Lists.Data.Inventory) already contains the refinery
+                // inventories, GridScanningJob counts every inventory of the grid
                 RefreshInventoryLists();
-                AddInventoryListsToSummary();
                 AddRefineryCount();
                 ClearInventory(OutputInventory);
                 SetErrorByCondition(RefError.OutputNotEmpty, OutputInventory.CurrentVolume > 0);

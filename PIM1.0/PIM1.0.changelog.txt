@@ -52,6 +52,8 @@ Fix:
   the number of other items
 - assembler queue: if a blueprint at its max amount was in the queue twice, removing it deleted
   a wrong queue item or stopped the script
+- ore and ingots inside refinerys were counted twice (by the grid scan and again by the
+  refinery), which distorted the stock on the LCDs and the ore priorities
 
 Changes:
 
