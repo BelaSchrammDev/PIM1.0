@@ -24,6 +24,8 @@ Fix:
 - autocrafting threshold line without '=' crashed the script
 - several autocrafting LCDs with different thresholds reset each other every cycle
 - StringBuilderExtended fixed
+- stacking only ran for components, ore and ingots were never stacked; every stacking cycle now
+  runs one strategy on one item type (all strategies on components, then ore, then ingots)
 
 Changes:
 

@@ -58,6 +58,7 @@ namespace IngameScript
                 new RefreshControllingGunsJob(),
                 new FindStorageContainersJob(),
                 new StackingJob(
+                    Config.Instance.stacking_cycle,
                     new StackingSingleJob(),
                     new StackingAlphaJob(),
                     new StackingBetaJob(),

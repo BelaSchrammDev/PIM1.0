@@ -2,29 +2,45 @@
 {
     partial class Program
     {
-        public class StackingJob : SequentialJob
+        /// <summary>
+        /// One stacking step per cooldown (config stacking_cycle): one strategy on one item type.
+        /// All strategies run on a type one after the other, then the next type is used:
+        /// Single/Component, Alpha/Component, ... Gamma/Component, Single/Ore, ...
+        /// Pure (no SE types), tested in StackingJobTests.
+        /// </summary>
+        public class StackingJob : Job
         {
             private static readonly string[] StackTypes = new string[] { "Component", "Ore", "Ingot" };
-            
-            private int cur_stack_type;
+
+            private readonly Job[] _strategies;
+            private int _strategy, _type;
+
+            // item type of the current step, read by the strategies (StackingJobBase)
             public static string StackType { get; private set; }
 
-            public StackingJob(params Job[] jobs) : base(jobs)
+            /// <param name="cooldownSeconds">pause between two steps, 0 = stacking off</param>
+            public StackingJob(int cooldownSeconds, params Job[] strategies) : base(cooldownSeconds)
             {
-                cur_stack_type = -1;
-                CooldownSeconds = Config.Instance.stacking_cycle;
-                Active = CooldownSeconds > 0;
+                _strategies = strategies;
+                Active = cooldownSeconds > 0 && strategies.Length > 0;
             }
 
             public override void InitJob()
             {
-                cur_stack_type++;
-                if (cur_stack_type >= StackTypes.Length)
+                StackType = StackTypes[_type];
+            }
+
+            public override RunJobResult RunJob()
+            {
+                if (_strategies[_strategy].Schedule() == ScheduleResult.InProgress) return RunJobResult.Continue;
+
+                // strategy done: the next step uses the next strategy, after the last one the next type
+                if (++_strategy >= _strategies.Length)
                 {
-                    cur_stack_type = 0;
-                    NextJob();
+                    _strategy = 0;
+                    if (++_type >= StackTypes.Length) _type = 0;
                 }
-                StackType = StackTypes[cur_stack_type];
+                return RunJobResult.Finished;
             }
         }
     }
