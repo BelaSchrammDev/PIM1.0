@@ -46,11 +46,29 @@
     <Compile Include="..\PIM1.0\BlockClasses\Refinerys\TypeDefinitions.cs"
 	        Link="Linked\TypeDefinitions.cs" />
 
+    <!-- Blueprints: only the pure parts (the *Ingame.cs files need Sandbox/VRage) -->
+    <Compile Include="..\PIM1.0\Definitions\IngameResources\IngameStrings.cs"
+            Link="Linked\IngameStrings.cs" />
+    <Compile Include="..\PIM1.0\Definitions\ItemCasts.cs"
+            Link="Linked\ItemCasts.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs"
+            Link="Linked\AssemblerBluePrint.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrintDefinitions.cs"
+            Link="Linked\AssemblerBluePrintDefinitions.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprint.cs"
+            Link="Linked\RefineryBlueprint.cs" />
+    <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprintDefinitions.cs"
+            Link="Linked\RefineryBlueprintDefinitions.cs" />
+
     <!-- Add once Job no longer inherits from Tools: -->
     <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
 
     <!-- Add once the budget arithmetic is extracted from LoopManager: -->
     <!-- <Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs" Link="Linked\InstructionBudget.cs" /> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Golden\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

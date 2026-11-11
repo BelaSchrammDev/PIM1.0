@@ -21,7 +21,7 @@ namespace IngameScript
                 }
             }
 
-            public void ClearAllRefineryBlueprintAssemblyAmounts()
+            public void ClearAllAssemblerBluePrintAssemblyAmounts()
             {
                 foreach (var bp in BluePrints_Active.Values)
                 {

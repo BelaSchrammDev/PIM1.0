@@ -6,7 +6,6 @@
         {
             public static string GetPositionString(int value, string append, int? suffix = null)
             {
-                Program.MyProgram.Echo($"IngameStrings.GetPositionString '{$"{RPosition}{value:D4}{(suffix.HasValue ? suffix.ToString() : string.Empty)}_{append}"}'\n");
                 return $"{RPosition}{value:D4}{(suffix.HasValue ? suffix.ToString() : string.Empty)}_{append}";
             }
 

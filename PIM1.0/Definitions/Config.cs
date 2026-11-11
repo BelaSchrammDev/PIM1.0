@@ -32,7 +32,6 @@ namespace IngameScript
             public bool collect_all_Ingot = true;
             public bool collect_all_Component = true;
             public int stacking_cycle = 10;
-            public List<string> mods = new List<string>();
             public Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
 
             bool ParseBoolean(string str)
