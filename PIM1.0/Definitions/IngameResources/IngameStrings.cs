@@ -63,8 +63,7 @@
             public const string
                 AngleGrinder = "AngleGrinder",
                 HandDrill = "HandDrill",
-                Welder = "Welder",
-                Magnetron = RMagnetron + "_" + RComponent;
+                Welder = "Welder";
             // public const string  = prefix + "";
         }
 

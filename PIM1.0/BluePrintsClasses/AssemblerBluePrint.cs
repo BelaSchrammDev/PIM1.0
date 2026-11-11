@@ -35,20 +35,16 @@ namespace IngameScript
             public string subtype = "";
             string subtypename = "";
 
+            /// <summary>Item name derived from the blueprint subtype, e.g. "Component ConstructionComponent" -> "Component Construction".</summary>
             public static string BluePrintNameToItemName(string t, string s)
             {
                 var cs = IngameStrings.RComponent;
-                if (s == Component.Magnetron) return cs + " " + s; // mod item
-                if (t == cs && s.EndsWith(cs)) return t + " " + s.Substring(0, s.Length - cs.Length); // components remove from bottom
-                if (s.StartsWith(IngameStrings.RNATO_25)) // NATO Magazine
-                {
-                    cs = IngameStrings.RMagazine;
-                    return t + " " + s.Substring(0, s.Length - cs.Length);
-                }
-                if (t == IG_Tools) // add 'item' to all PhyicalGunItems
-                {
-                    if (s.Contains("Drill") || s.Contains("Grinder") || s.Contains("Welder") || s.Contains("Rifle")) return t + " " + s + "Item";
-                }
+                // components: "...Component" suffix removed
+                if (t == cs && s.EndsWith(cs)) return t + " " + s.Substring(0, s.Length - cs.Length);
+                // NATO magazines: "Magazine" suffix removed
+                if (s.StartsWith(IngameStrings.RNATO_25)) return t + " " + s.Substring(0, s.Length - IngameStrings.RMagazine.Length);
+                // hand tools and rifles: "Item" added
+                if (t == IG_Tools && (s.Contains("Drill") || s.Contains("Grinder") || s.Contains("Welder") || s.Contains("Rifle"))) return t + " " + s + "Item";
                 return t + " " + s;
             }
 
@@ -59,48 +55,47 @@ namespace IngameScript
 
             void ConvertAutoCraftingName()
             {
-                AutoCraftingType = type;
-                if (ToolsAndGunsTypes.Contains(type)) AutoCraftingType = Strings.AC_ToolsAndGuns;
-                else if (seed_cast.Contains(ItemName)) AutoCraftingType = IngameStrings.RSeeds;
-                else if (food_cast.Contains(ItemName)) AutoCraftingType = IG_Food;
-                else if (subtype == IngameStrings.RSpentFuelReprocessing) AutoCraftingType = IngameStrings.RReprocessing;
-                else if (subtype.Contains(IngameStrings.RDeuterium)) AutoCraftingType = IngameStrings.RDeuterium;
-                if (subtypename != "")
+                AutoCraftingType = DeriveAutoCraftingType();
+                AutoCraftingName = (subtypename != "" ? subtypename : DeriveAutoCraftingName()).Replace('_', ' ');
+            }
+
+            string DeriveAutoCraftingType()
+            {
+                if (ToolsAndGunsTypes.Contains(type)) return Strings.AC_ToolsAndGuns;
+                if (seed_cast.Contains(ItemName)) return IngameStrings.RSeeds;
+                if (food_cast.Contains(ItemName)) return IG_Food;
+                if (subtype == IngameStrings.RSpentFuelReprocessing) return IngameStrings.RReprocessing;
+                if (subtype.Contains(IngameStrings.RDeuterium)) return IngameStrings.RDeuterium;
+                return type;
+            }
+
+            /// <summary>Short name for the autocrafting LCD, derived from the item subtype.</summary>
+            string DeriveAutoCraftingName()
+            {
+                var name = ItemName.Split(' ')[1];
+                if (name.StartsWith("MealPack")) name = name.Substring(9);   // "MealPack_Chili" -> "Chili"
+                else if (name.Contains(IngameStrings.RAutomaticRifleGunMag))
                 {
-                    AutoCraftingName = subtypename.Replace('_', ' ');
-                    return;
+                    // "AutomaticRifleGun_Mag_20rd" -> "AutoRifleGunMag", "PreciseAutomaticRifleGun_Mag_5rd" -> "PreciseRifleGunMag"
+                    var i = name.IndexOf(IngameStrings.RAutomaticRifleGunMag);
+                    name = i == 0 ? IngameStrings.RAutoRifleGunMagazine : name.Substring(0, i) + IngameStrings.RRifleGunMagazine;
                 }
-                AutoCraftingName = ItemName.Split(' ')[1];
-                if (AutoCraftingName.StartsWith("Position")) AutoCraftingName = AutoCraftingName.Substring(AutoCraftingName.IndexOf('_') + 1);
-                else if (AutoCraftingName.StartsWith("MealPack")) AutoCraftingName = AutoCraftingName.Substring(9);
-                else if (AutoCraftingName.StartsWith("K_HSR_")) AutoCraftingName = AutoCraftingName.Substring(6);
-                else if (AutoCraftingName.Contains(IngameStrings.RAutomaticRifleGunMag))
-                {
-                    if (AutoCraftingName.StartsWith(IngameStrings.RAutomaticRifleGunMag)) AutoCraftingName = IngameStrings.RAutoRifleGunMagazine;
-                    else AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.IndexOf(IngameStrings.RAutomaticRifleGunMag)) + IngameStrings.RRifleGunMagazine;
-                }
-                else if (type == IG_Seeds) AutoCraftingName += " " + IngameStrings.RSeeds;
-                else if (type == IG_Tools && ModName == Strings.M_Vanilla)
-                {
-                    string[] Tools = { "HandDrill", "Grinder", "Welder" };
-                    var isTool = false;
-                    foreach (var toolType in Tools)
-                    {
-                        if (AutoCraftingName.Contains(toolType))
-                        {
-                            var preString = "";
-                            if (AutoCraftingName.Contains('4')) preString = "Elite";
-                            else if (AutoCraftingName.Contains('3')) preString = "Professional";
-                            else if (AutoCraftingName.Contains('2')) preString = "Ultimate";
-                            AutoCraftingName = preString + toolType;
-                            isTool = true;
-                            break;
-                        }
-                    }
-                    if (!isTool && AutoCraftingName.EndsWith("Item")) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 4);
-                }
-                if (AutoCraftingName.EndsWith(IngameStrings.RMagazine)) AutoCraftingName = AutoCraftingName.Substring(0, AutoCraftingName.Length - 5);
-                AutoCraftingName = AutoCraftingName.Replace('_', ' ');
+                else if (type == IG_Seeds) name += " " + IngameStrings.RSeeds;
+                else if (type == IG_Tools && ModName == Strings.M_Vanilla) name = VanillaToolName(name);
+
+                // "...Magazine" -> "...Mag"
+                return name.EndsWith(IngameStrings.RMagazine) ? name.Substring(0, name.Length - 5) : name;
+            }
+
+            static readonly string[] VanillaTools = { "HandDrill", "Grinder", "Welder" };
+
+            /// <summary>"AngleGrinder4Item" -> "EliteGrinder", "Welder2Item" -> "UltimateWelder", "SemiAutoPistolItem" -> "SemiAutoPistol".</summary>
+            static string VanillaToolName(string name)
+            {
+                foreach (var tool in VanillaTools)
+                    if (name.Contains(tool))
+                        return (name.Contains('4') ? "Elite" : name.Contains('3') ? "Professional" : name.Contains('2') ? "Ultimate" : "") + tool;
+                return name.EndsWith("Item") ? name.Substring(0, name.Length - 4) : name;
             }
 
             public AssemblerBluePrint(string iTypeID, string iSubTypeID, string definitionSubtype, string modName, string alter, string astype)

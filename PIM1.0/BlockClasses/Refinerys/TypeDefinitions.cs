@@ -14,7 +14,6 @@ namespace IngameScript
                 new TypeDefinitions( "Blast Furnace", RefreshType.VanillaRefinery, "Basic Refinery"),
                 new TypeDefinitions( "LargeRefineryIndustrial", RefreshType.VanillaRefinery, "Large Industrial Refinery"),
                 new TypeDefinitions( "LargeRefinery", RefreshType.VanillaRefinery, "Large Refinery"),
-                new TypeDefinitions( "K_HSR_Refinery_A", RefreshType.VanillaRefinery, "HSR Refinery A"),
                 new TypeDefinitions( false, "Hydroponics", RefreshType.HydrophonicsFarm, "Hydroponics Farm"),
                 new TypeDefinitions( "RockCrusher", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "OrePurifier", RefreshType.VanillaRefinery),
