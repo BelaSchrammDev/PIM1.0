@@ -19,11 +19,8 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                LCD_DebugString.Append("\nWRSManager: Starting management.\n");
-
                 if (Config.Instance.always_recycle_greywater && ProccessingGreyWater())
                 {
-                    LCD_DebugString.Append("\nWRSManager: Recycling GreyWater.\n");
                     return;
                 }
 
@@ -35,12 +32,10 @@ namespace IngameScript
                     {
                         if(IsInventoryItemExists(Ingot.CleanWater))
                         {
-                            LCD_DebugString.Append($"WRSManager: Processing cleanwater to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n");
                             ProccessingCleanWater();
                         }
                         else
                         {
-                            LCD_DebugString.Append($"WRSManager: Processing ice to WaterFood {Lists.Data.BluePrints_Active[Ingot.WaterFood].MaximumItemAmount} / {Lists.Data.BluePrints_Active[Ingot.WaterFood].CurrentItemAmount}\n");
                             ProccessingIce();
                         }
                     }

@@ -40,14 +40,6 @@ namespace IngameScript
 
                 if (!ItemsAmountInvalid()) return;
 
-                var invstring = "Inventory before ReloadItems:\n";
-                foreach (var ii in _InvList)
-                {
-                    invstring += $" - {ItemTypesConverter.ToPimId(ii.Type)} : {ii.Amount}\n";
-                }
-
-                Program.LCD_DebugString.Append($"StorageInventory_ReloadItems for '{invstring}'\n");
-
                 _InsertList.Clear();
 
                 if (StackingInventoryItems(_InvList))

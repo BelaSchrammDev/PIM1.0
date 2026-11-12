@@ -9,7 +9,7 @@
             public const string
                 // PIM Strings
                 PimVersion = "PIM v1.1",
-                PimCopyright = "c (c) BelaOkuma\n",
+                PimCopyright = "d (c) BelaOkuma\n",
                 SmsVersion = "SMS v1.4",
 
                 // General

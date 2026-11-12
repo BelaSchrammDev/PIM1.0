@@ -30,14 +30,14 @@ namespace IngameScript
                     else if (!itemsdef && trims.StartsWith(X_AddToList)) searchstring = trims;
                     else if (itemsdef)
                     {
+                        // kept also if the item is not on the grid right now (otherwise the line is lost
+                        // after a script restart); a line twice: the last one wins
                         var def = trims.Split(';');
-                        if (def.Length > 1)
+                        int amount;
+                        if (def.Length > 1 && int.TryParse(def[0].Trim(), out amount) && amount != 0)
                         {
-                            int amount = 0;
-                            if (Lists.Data.Inventory.ContainsKey(def[1]) && int.TryParse(def[0], out amount))
-                            {
-                                if (amount != 0) items.Add(def[1], amount);
-                            }
+                            var id = def[1].Trim();
+                            if (id != "") items[id] = amount;
                         }
                     }
                 }

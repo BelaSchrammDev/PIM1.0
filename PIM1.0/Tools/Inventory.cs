@@ -1,4 +1,5 @@
-﻿using Sandbox.ModAPI.Ingame;
+﻿using Sandbox.Game.WorldEnvironment.Modules;
+using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,20 +68,20 @@ namespace IngameScript
 
         static bool SendItemByNum(IMyInventory quelle, int itemnum, List<IMyInventory> ziele)
         {
-            var trans = false;
             if (ziele.Count != 0)
             {
                 foreach (var zinv in ziele) if (quelle == zinv) return true;
                 for (int i = 0; i < ziele.Count; i++)
                 {
                     var ziel_inv = ziele[i];
-                    if (!ziel_inv.IsFull)
+                    if (!ziel_inv.IsFull && quelle.TransferItemTo(ziel_inv, itemnum, null, true, null))
                     {
-                        trans = quelle.TransferItemTo(ziel_inv, itemnum, null, true, null);
+                        return true;
                     }
                 }
             }
-            return trans;
+
+            return false;
         }
 
         /// <summary>Moves an item ("Ore Ice") from its cargo into <paramref name="ziel"/>.</summary>

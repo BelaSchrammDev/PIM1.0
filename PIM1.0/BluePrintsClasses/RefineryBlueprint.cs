@@ -52,13 +52,13 @@ namespace IngameScript
             {
                 return Math.Round(h, 1) + " h";
             }
-            double tage = Math.Round(h / 24, 1);
-            if (tage > 365)
+            double days = Math.Round(h / 24, 1);
+            if (days > 365)
             {
-                return Math.Round(tage / 365, 1) + " years";
+                return Math.Round(days / 365, 1) + " years";
             }
-            if (tage < 1.1) return tage + " day";
-            else return tage + " days";
+            if (days < 1.1) return days + " day";
+            else return days + " days";
         }
 
         /// <summary>

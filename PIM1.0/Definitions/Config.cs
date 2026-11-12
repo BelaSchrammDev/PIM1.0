@@ -41,6 +41,12 @@ namespace IngameScript
                 return bool.TryParse(str, out value) ? value : current;
             }
 
+            int ParseInt(string str, int current)
+            {
+                int value;
+                return int.TryParse(str, out value) ? value : current;
+            }
+
             void WriteConfig()
             {
                 var configstr =
@@ -134,7 +140,7 @@ namespace IngameScript
                             case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1], collect_all_Ore); break;
                             case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1], collect_all_Ingot); break;
                             case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1], collect_all_Component); break;
-                            case "stacking_cycle": int.TryParse(cs[1], out stacking_cycle); break;
+                            case "stacking_cycle": stacking_cycle = ParseInt(cs[1], stacking_cycle); break;
                             case "PIM_controlled_Weapons": Properties.Data.CurrentGunGroupName = cs[1]; break;
                             default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1], usedMods[cs[0]]); break;
                         }

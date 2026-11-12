@@ -37,7 +37,6 @@ namespace IngameScript
             }
         }
 
-        // TODO: add errormessages when ingreadients not exists
         public class HydrophonicsManager : RefineryBlockManagerer
         {
             private HydrophonicsInputInventory _InputInventory;
@@ -54,7 +53,6 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                LCD_DebugString.Append("HydroManager: Starting management.\n");
                 if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.SubFresh) && !Lists.Data.BluePrints_Active[Ingot.SubFresh].IfMax())
                 {
                     if (!_InputInventory.IfItemsExists() && Refinery.Success > 90)

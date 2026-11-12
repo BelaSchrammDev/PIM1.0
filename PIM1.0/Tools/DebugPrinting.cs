@@ -55,20 +55,20 @@ namespace IngameScript
         //    return debugText;
         //}
 
-        string Debug_AssemblerBPs()
-        {
-            string DebugText = "Accepted BluePrints by Assemblersubtype\nPool:\n";
-            foreach (var bluePrint in Lists.Data.BluePrints_Inactive)
-            {
-                DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.ItemName + " / " + bluePrint.Value.definition_id + "\n";
-            }
-            DebugText += "Active:\n";
-            foreach (var bluePrint in Lists.Data.BluePrints_Active)
-            {
-                DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.ItemName + " / " + bluePrint.Value.definition_id + "\n";
-            }
-            return DebugText;
-        }
+        //string Debug_AssemblerBPs()
+        //{
+        //    string DebugText = "Accepted BluePrints by Assemblersubtype\nPool:\n";
+        //    foreach (var bluePrint in Lists.Data.BluePrints_Inactive)
+        //    {
+        //        DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.ItemName + " / " + bluePrint.Value.definition_id + "\n";
+        //    }
+        //    DebugText += "Active:\n";
+        //    foreach (var bluePrint in Lists.Data.BluePrints_Active)
+        //    {
+        //        DebugText += bluePrint.Value.AutoCraftingType + " -> " + bluePrint.Value.ItemName + " / " + bluePrint.Value.definition_id + "\n";
+        //    }
+        //    return DebugText;
+        //}
 
         //string Debug_AddIPrioLists()
         //{
@@ -152,41 +152,40 @@ namespace IngameScript
         //    return DebugText;
         //}
 
-        string Debug_WaterFood()
-        {
-            var DebugText = "WaterFood Info:\n";
-            var items = Inventory.Where(i => i.Key.SubtypeId == "WaterFood");
-            foreach (var item in items)
-            {
-                DebugText += $"WaterFood Item: {item.Key.SubtypeId} / Amount: {item.Value}\n";
-            }
-            var waterFoodBP = Lists.Data.BluePrints_Active.GetValueOrDefault(Ingot.WaterFood);
-            if (waterFoodBP != null)
-            {
-                DebugText += $"WaterFood BP - Current: {waterFoodBP.CurrentItemAmount} / Max: {waterFoodBP.MaximumItemAmount}\n";
-            }
-            else
-            {
-                DebugText += "No active WaterFood Blueprint found.\n";
-            }
-            var waterfoodBPinactive = Lists.Data.BluePrints_Inactive.GetValueOrDefault(Ingot.WaterFood);
-            if (waterfoodBPinactive != null)
-            {
-                DebugText += $"Inactive WaterFood BP - Current: {waterfoodBPinactive.CurrentItemAmount} / Max: {waterfoodBPinactive.MaximumItemAmount}\n";
-            }
-            else
-            {
-                DebugText += "No inactive WaterFood Blueprint found.\n";
-            }
-            return DebugText;
-        }
+        //string Debug_WaterFood()
+        //{
+        //    var DebugText = "WaterFood Info:\n";
+        //    var items = Inventory.Where(i => i.Key.SubtypeId == "WaterFood");
+        //    foreach (var item in items)
+        //    {
+        //        DebugText += $"WaterFood Item: {item.Key.SubtypeId} / Amount: {item.Value}\n";
+        //    }
+        //    var waterFoodBP = Lists.Data.BluePrints_Active.GetValueOrDefault(Ingot.WaterFood);
+        //    if (waterFoodBP != null)
+        //    {
+        //        DebugText += $"WaterFood BP - Current: {waterFoodBP.CurrentItemAmount} / Max: {waterFoodBP.MaximumItemAmount}\n";
+        //    }
+        //    else
+        //    {
+        //        DebugText += "No active WaterFood Blueprint found.\n";
+        //    }
+        //    var waterfoodBPinactive = Lists.Data.BluePrints_Inactive.GetValueOrDefault(Ingot.WaterFood);
+        //    if (waterfoodBPinactive != null)
+        //    {
+        //        DebugText += $"Inactive WaterFood BP - Current: {waterfoodBPinactive.CurrentItemAmount} / Max: {waterfoodBPinactive.MaximumItemAmount}\n";
+        //    }
+        //    else
+        //    {
+        //        DebugText += "No inactive WaterFood Blueprint found.\n";
+        //    }
+        //    return DebugText;
+        //}
 
         void LCD_DebugPrint()
         {
             var panel = GridTerminalSystem.GetBlockWithName("PIMXXXDEBUG") as IMyTextPanel;
             if (panel != null && panel.IsSameConstructAs(Me))
             {
-                panel.WriteText(Debug_WaterFood() + "\n");
                 panel.WriteText(LCD_DebugString, true);
             }
             // always cleared, also without debug panel (otherwise it grows forever)

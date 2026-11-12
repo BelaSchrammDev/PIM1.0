@@ -20,12 +20,6 @@ namespace IngameScript
         // RunningSign instance
         private readonly RunningSign RunSign = new RunningSign();
 
-        // Inventory dictionary: maps item types to their total quantities
-        private readonly Dictionary<MyItemType, float> _inventory = new Dictionary<MyItemType, float>();
-
-        // new inventory dictionary
-        public Dictionary<MyItemType, float> Inventory => _inventory;
-
         // singleton Program Instance
         public static Program MyProgram;
 
