@@ -16,7 +16,9 @@ namespace IngameScript
             {
                 foreach (var assembler in Lists.Data.AssemblerList)
                 {
-                    assembler.OwnBlueprintList = Assembler.AssemblerTypesAcceptedBluePrints.ContainsKey(assembler.SubTypeName)
+                    // the accepted blueprints are kept per block type: an assembler without (sms) tag of the
+                    // same type as a tagged one must not get them (IsPimControlled is set by FindingAssemblersJob)
+                    assembler.OwnBlueprintList = assembler.IsPimControlled && Assembler.AssemblerTypesAcceptedBluePrints.ContainsKey(assembler.SubTypeName)
                         ? Assembler.AssemblerTypesAcceptedBluePrints[assembler.SubTypeName]
                         : new List<AssemblerBluePrint>();
                 }

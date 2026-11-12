@@ -73,6 +73,8 @@ Fix:
 - removing the (sms) tag from a refinery left it as PIM had set it: conveyor system off, and switched
   off while empty. Now conveyor and power are switched on again (not for blocks PIM does not fill,
   e.g. incinerator), and its hints disappear from the PB display
+- autocrafting also queued items in assemblers without (sms) tag if a tagged assembler of the same
+  type existed, and split the amount between them
 
 Changes:
 
