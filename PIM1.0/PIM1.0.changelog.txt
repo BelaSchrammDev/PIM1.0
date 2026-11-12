@@ -75,6 +75,11 @@ Fix:
   e.g. incinerator), and its hints disappear from the PB display
 - autocrafting also queued items in assemblers without (sms) tag if a tagged assembler of the same
   type existed, and split the amount between them
+- removing the (sms) tag from an assembler left it switched off if PIM had switched it off while
+  idle (assemblers_off), now it is switched on again
+- the hint "assembler is damaged" also appeared for assemblers without (sms) tag
+- the hint "assembler cannot unload output items" was not updated while disassembling: it stayed
+  from the last assembling, and the disassembled components that could not be unloaded were not reported
 
 Changes:
 

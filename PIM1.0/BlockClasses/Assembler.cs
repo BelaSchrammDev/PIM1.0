@@ -61,7 +61,8 @@ namespace IngameScript
                     errString.Append(" cannot unload output items.\n");
                 }
 
-                if (!IsFunctional)
+                // only for tagged assemblers, like the refinerys: a damaged block PIM does not use is no PIM problem
+                if (IsPimControlled && !IsFunctional)
                 {
                     errString.Append(Parameter.Name);
                     errString.Append(" is damaged.\n");
@@ -75,12 +76,16 @@ namespace IngameScript
                     return;
                 }
 
+                var wasPimControlled = IsPimControlled;
+                var pimControlled = Parameter.ParseArgs(AssemblerBlock.CustomName, true);
+                if (wasPimControlled && !pimControlled) Release();
+
                 var queue = new List<MyProductionItem>();
                 var queueBluePrints = new List<AssemblerBluePrint>();
 
                 RefreshState(queue, queueBluePrints);
 
-                if (!Parameter.ParseArgs(AssemblerBlock.CustomName, true) || !AssemblerBlock.IsFunctional)
+                if (!pimControlled || !AssemblerBlock.IsFunctional)
                 {
                     return;
                 }
@@ -101,28 +106,36 @@ namespace IngameScript
             }
 
             /// <summary>
+            /// The tag was removed: give the block back to the player switched on, PIM switches it off while
+            /// idle (assemblers_off). Survival kits are never switched off by PIM.
+            /// </summary>
+            void Release()
+            {
+                if (!IsSurvivalKit) AssemblerBlock.Enabled = true;
+            }
+
+            /// <summary>
             /// For every assembler, also the ones without tag: count the queue as "in production" and unload.
             /// </summary>
             void RefreshState(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)
             {
-                if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
+                var isAssembly = AssemblerBlock.Mode == MyAssemblerMode.Assembly;
+
+                // disassembling puts the components into the input inventory (0)
+                var outInventory = AssemblerBlock.GetInventory(isAssembly ? 1 : 0);
+                ClearInventory(outInventory);
+                outputInventoryNotEmpty = outInventory.CurrentVolume > 0;
+
+                if (!isAssembly) return;
+
+                AssemblerBlock.GetQueue(queue);
+                for (int i = queue.Count - 1; i >= 0; i--)
                 {
-                    var outInventory = AssemblerBlock.GetInventory(1);
-                    ClearInventory(outInventory);
-                    outputInventoryNotEmpty = outInventory.CurrentVolume > 0;
-                    AssemblerBlock.GetQueue(queue);
-                    for (int i = queue.Count - 1; i >= 0; i--)
+                    var bprint = Program.MyProgram.AddProductionAmount(queue[i]);
+                    if (bprint != null)
                     {
-                        var bprint = Program.MyProgram.AddProductionAmount(queue[i]);
-                        if (bprint != null)
-                        {
-                            queueBluePrints.Add(bprint);
-                        }
+                        queueBluePrints.Add(bprint);
                     }
-                }
-                else
-                {
-                    ClearInventory(AssemblerBlock.GetInventory(0));
                 }
             }
 
