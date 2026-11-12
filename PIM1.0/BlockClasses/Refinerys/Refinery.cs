@@ -26,14 +26,24 @@ namespace IngameScript
             // number of functional PIM controlled refinerys, counted in every cycle (FindingRefinerysJob)
             static public int FunctionalCount = 0;
 
-            static public void RemoveUnusedRefinerytypeBlueprintLists()
+            // types of the PIM controlled refinerys of this cycle: cleared by FindingRefinerysJob,
+            // filled by VanillaRefineryManager.Refresh
+            static public HashSet<string> TypesInUse = new HashSet<string>();
+
+            /// <summary>
+            /// Types without a PIM controlled refinery in this cycle (block removed, tag removed) are dropped:
+            /// otherwise they stay on the oreprio LCD and in the data for SMS until the script restarts.
+            /// The settings of the oreprio LCD (OrePrioConfig) are kept, in case the type comes back.
+            /// </summary>
+            static public void RemoveUnusedRefineryTypes()
             {
-                foreach (var a in refineryTypesAcceptedBlueprintsList.Keys.ToArray())
+                foreach (var type in ingotprio.Keys.ToArray())
                 {
-                    if (!ingotprio.ContainsKey(a))
-                    {
-                        refineryTypesAcceptedBlueprintsList.Remove(a);
-                    }
+                    if (!TypesInUse.Contains(type)) ingotprio.Remove(type);
+                }
+                foreach (var type in refineryTypesAcceptedBlueprintsList.Keys.ToArray())
+                {
+                    if (!TypesInUse.Contains(type)) refineryTypesAcceptedBlueprintsList.Remove(type);
                 }
             }
 

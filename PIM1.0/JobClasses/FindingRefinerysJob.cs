@@ -9,6 +9,7 @@
             {
                 foreach (var b in RefineryBlueprints) b.RefineryCount = 0;
                 Refinery.FunctionalCount = 0;
+                Refinery.TypesInUse.Clear();
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;
             }

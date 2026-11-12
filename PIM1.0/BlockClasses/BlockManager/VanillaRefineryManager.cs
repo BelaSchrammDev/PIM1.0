@@ -26,6 +26,7 @@ namespace IngameScript
             public override void Refresh()
             {
                 // registers the refinery type, CalcIngotPrio then calculates the priorities of its blueprints
+                Refinery.TypesInUse.Add(Refinery.BlockSubType);
                 if (!ingotprio.ContainsKey(Refinery.BlockSubType)) ingotprio.Add(Refinery.BlockSubType, new List<IPrio>());
                 if (!Refinery.refineryTypesAcceptedBlueprintsList.ContainsKey(Refinery.BlockSubType)) Refinery.refineryTypesAcceptedBlueprintsList.Add(Refinery.BlockSubType, Refinery.AcceptedBlueprints);
                 GetWorkItems();

@@ -72,7 +72,15 @@ namespace IngameScript
                 {
                     if (CurrentStackingSorttype == StackingSort.Amount) { if (other.amount == amount) return 0; return other.amount > amount ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.AmountBack) { if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
-                    else if (CurrentStackingSorttype == StackingSort.Pairs) { if (items == 1 && other.items == 1) return 0; else if (items == 1) return 1; if (other.amount == amount) return 0; return other.amount < amount ? 1 : -1; }
+                    else if (CurrentStackingSorttype == StackingSort.Pairs)
+                    {
+                        // inventories with only this item to the end (they are emptied first), the others by amount;
+                        // checked for both sides, otherwise a.CompareTo(b) and b.CompareTo(a) can disagree
+                        bool single = items == 1, otherSingle = other.items == 1;
+                        if (single != otherSingle) return single ? 1 : -1;
+                        if (single || other.amount == amount) return 0;
+                        return other.amount < amount ? 1 : -1;
+                    }
                     else if (CurrentStackingSorttype == StackingSort.ItemsBack) { if (other.items == items) return 0; return other.items < items ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.VolumeFree) { if (other.volume_free == volume_free) return 0; return other.volume_free > volume_free ? 1 : -1; }
                     else if (CurrentStackingSorttype == StackingSort.VolumeFreeBack) { if (other.volume_free == volume_free) return 0; return other.volume_free < volume_free ? 1 : -1; }

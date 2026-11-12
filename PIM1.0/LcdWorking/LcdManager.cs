@@ -139,7 +139,6 @@ namespace IngameScript
 
             protected override void Start()
             {
-                Refinery.RemoveUnusedRefinerytypeBlueprintLists();
                 _keys = Refinery.refineryTypesAcceptedBlueprintsList.Keys.ToArray();
             }
 

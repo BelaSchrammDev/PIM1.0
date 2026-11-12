@@ -9,6 +9,8 @@ namespace IngameScript
         {
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
+                // after FindingRefinerysJob: the types in use of this cycle are known
+                Refinery.RemoveUnusedRefineryTypes();
                 MyProgram.CalcIngotPrio();
                 startIndex = 0;
                 endIndex = Lists.Data.RefineryList.Count - 1;

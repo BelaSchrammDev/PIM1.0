@@ -48,6 +48,13 @@ namespace IngameScript
             {
                 if(!schedule) return RunJobResult.Finished;
 
+                // no blueprints at all: nothing to check (Index would be -1)
+                if (Index < 0)
+                {
+                    InitAutoCraftingTypes();
+                    return RunJobResult.Finished;
+                }
+
                 var bluePrint = Lists.Data.BluePrints_Inactive[BluePrintKeyList[Index]];
 
                 if (bluePrint.IfRefineryBluePrint())
@@ -107,8 +114,10 @@ namespace IngameScript
                 return definition == Ingot.SubFresh || definition == (Ingot.SpentFuelReprocessing);
             }
 
+            // built again from the active blueprints: types without a tagged assembler disappear from the autocrafting LCD
             private void InitAutoCraftingTypes()
             {
+                Lists.Data.autocrafting_Types.Clear();
                 foreach (var bpType in Lists.Data.BluePrints_Active.Values)
                     if (!Lists.Data.autocrafting_Types.Contains(bpType.AutoCraftingType))
                         Lists.Data.autocrafting_Types.Add(bpType.AutoCraftingType);
