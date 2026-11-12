@@ -43,8 +43,14 @@ namespace IngameScript
         static bool clearItemByType(IMyInventory quelle, string id, MyInventoryItem item, float amount = 0)
         {
             if (amount == 0) amount = (float)item.Amount;
-            // only the most specific cargo
-            foreach (var ziele in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id)) return SendItemByIItem(quelle, item, amount, ziele);
+            var found = false;
+            // like ClearInventory: the next cargo is tried if the item could not be moved into the more specific one
+            foreach (var ziele in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id))
+            {
+                found = true;
+                if (SendItemByIItem(quelle, item, amount, ziele)) return true;
+            }
+            if (!found) SetCargoMissing(ItemTypesConverter.TypeOf(id));
             return false;
         }
 
