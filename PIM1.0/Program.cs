@@ -23,8 +23,6 @@ namespace IngameScript
         // singleton Program Instance
         public static Program MyProgram;
 
-        public static string VersionShortInfo = "SMS.inventorymanager 2.0";
-
         public Program()
         {
             MyProgram = this;
@@ -60,8 +58,8 @@ namespace IngameScript
                     new StackingSwapJob()),
                 new RefreshBlockListJob<IMyRefinery, Refinery>(Lists.Data.Refinerys, Lists.Data.RefineryList, b => new Refinery(b)),
                 new RefreshBlockListJob<IMyAssembler, Assembler>(Lists.Data.Assemblers, Lists.Data.AssemblerList, b => new Assembler(b)),
-                new InventoryClearingJob("SMSflaggedClearing", Lists.Data.SmsFlagedInventoryList),
-                new InventoryClearingJob("NoneSMSflaggedClearing", Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
+                new InventoryClearingJob(Lists.Data.SmsFlagedInventoryList),
+                new InventoryClearingJob(Lists.Data.NoneSmsFlagedInventoryList, Lists.Data.collectAll_List),
                 new StorageInventoryRefreshJob(),
                 new FindingRefinerysJob(),
                 new RefineryManagerJob(),

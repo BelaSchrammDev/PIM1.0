@@ -5,9 +5,6 @@
         public class NetWorkingDispatcher
         {
             public const string NW_SayHello = "say_hello";
-            public const string NW_HelloResponse = "hello_response";
-            public const string NW_RequestCargoUse = "request_cargouse";
-            public const string NW_RequestAssemblys = "request_assemblys";
 
             private static NetWorkingDispatcher _Instance;
             public static NetWorkingDispatcher Instance

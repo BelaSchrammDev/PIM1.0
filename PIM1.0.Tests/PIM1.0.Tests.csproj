@@ -23,10 +23,6 @@
              Link="Linked\NetWorkingParser.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingDispatcher.cs"
              Link="Linked\NetWorkingDispatcher.cs" />
-    <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgumentFactory.cs"
-             Link="Linked\CommandArgumentFactory.cs" />
-    <Compile Include="..\PIM1.0\Tools\StopWatch.cs"
-             Link="Linked\StopWatch.cs" />
     <Compile Include="..\PIM1.0\Tools\StorageAmounts.cs"
              Link="Linked\StorageAmounts.cs" />
     <Compile Include="..\PIM1.0\Tools\AmmoPriority.cs"
@@ -37,8 +33,6 @@
              Link="Linked\StatusViews.cs" />
     <Compile Include="..\PIM1.0\Tools\RunningSign.cs"
              Link="Linked\RunningSign.cs" />
-    <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgument.cs"
-             Link="Linked\CommandArgument.cs" />
     <Compile Include="..\PIM1.0\Tools\Parameter.cs"
 			Link="Linked\Parameter.cs" />
     <Compile Include="..\PIM1.0\Definitions\Properties.cs"

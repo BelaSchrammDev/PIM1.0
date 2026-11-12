@@ -1,5 +1,4 @@
-﻿using Sandbox.Game.WorldEnvironment.Modules;
-using Sandbox.ModAPI.Ingame;
+﻿using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using System.Linq;

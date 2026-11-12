@@ -109,11 +109,6 @@ namespace IngameScript
                 return RunJobResult.Finished;
             }
 
-            private bool RefineryBluePrintAsAssemblerBP(string definition)
-            {
-                return definition == Ingot.SubFresh || definition == (Ingot.SpentFuelReprocessing);
-            }
-
             // built again from the active blueprints: types without a tagged assembler disappear from the autocrafting LCD
             private void InitAutoCraftingTypes()
             {

@@ -47,9 +47,6 @@ namespace IngameScript
             public List<IMyInventory> SmsFlagedInventoryList = new List<IMyInventory>();
             public List<string> collectAll_List = new List<string>();
 
-
-            public List<IMyProgrammableBlock> ProgrammableBlocks = new List<IMyProgrammableBlock>();
-
             public List<StorageCargo> StorageCargos = new List<StorageCargo>();
             public List<StorageInventory> storageinvs = new List<StorageInventory>();
 

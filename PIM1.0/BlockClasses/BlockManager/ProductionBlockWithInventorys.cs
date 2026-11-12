@@ -82,7 +82,7 @@ namespace IngameScript
                 }
             }
 
-            private Dictionary<string, float> RefreshInventoryItems(int type, Dictionary<string, float> ilist)
+            private void RefreshInventoryItems(int type, Dictionary<string, float> ilist)
             {
                 var boxl = new List<MyInventoryItem>();
                 FunctionalBlock.GetInventory(type).GetItems(boxl);
@@ -94,8 +94,6 @@ namespace IngameScript
                     if (ilist.ContainsKey(index)) ilist[index] += boxia;
                     else ilist.Add(index, boxia);
                 }
-
-                return ilist;
             }
 
             #endregion

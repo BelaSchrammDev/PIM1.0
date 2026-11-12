@@ -84,13 +84,6 @@
             /// Optional: Called after the bounds have been configured.
             /// </summary>
             protected virtual void OnCountingStarted() { }
-
-            // Helpful properties for derived classes
-            protected int CurrentIndex => _index;
-            protected int StartIndex => _startIndex;
-            protected int EndIndex => _endIndex;
-            protected bool IsCountingForward => _step > 0;
-            protected bool IsEmpty => _step == 0;
         }
     }
 }

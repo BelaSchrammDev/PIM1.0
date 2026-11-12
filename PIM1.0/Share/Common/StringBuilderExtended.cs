@@ -10,8 +10,6 @@ namespace IngameScript
 
             public StringBuilderExtended(int size) { sb = new StringBuilder(size); }
 
-            public StringBuilder GetSB() { return sb; }
-
             public string GetString() { return sb.ToString(); }
 
             public override string ToString() { return sb.ToString(); }

@@ -1,26 +1,7 @@
-﻿using Sandbox.Common.ObjectBuilders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IngameScript
+﻿namespace IngameScript
 {
     partial class Program
     {
-
-        public abstract class PimCommand : Job
-        {
-            protected IList<ICommandArgument> Arguments = new List<ICommandArgument>();
-
-            public PimCommand(string argumentLine)
-            {
-                NetWorkingParser.ParseNetWorkingArguments(argumentLine, Arguments);
-            }
-        }
-
-
         public static class CommandDispatcher
         {
             public static bool Dispatch(string commandLine)

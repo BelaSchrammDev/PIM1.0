@@ -14,21 +14,8 @@ namespace IngameScript
 
             public bool Active { get; set; } = true;
 
-            // Cooldown period in seconds
-            public int CooldownSeconds
-            {
-                get
-                {
-                    return (int)_cooldown.TotalSeconds;
-                }
-                set
-                {
-                    _cooldown = TimeSpan.FromSeconds(value);
-                }
-            }
-
             // Cooldown period between job executions
-            private TimeSpan _cooldown;
+            private readonly TimeSpan _cooldown;
 
             // Timestamp when the last run ended
             private DateTime _lastRunEnd = Clock();

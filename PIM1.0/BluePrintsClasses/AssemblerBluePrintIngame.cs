@@ -32,12 +32,6 @@ namespace IngameScript
             if (bprint != null) bprint.AssemblyAmount += pi.Amount.ToIntSafe();
             return bprint;
         }
-        AssemblerBluePrint GetBluePrintByItemName(string itemName)
-        {
-            foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.ItemName == itemName) return b;
-            foreach (var b in Lists.Data.BluePrints_Inactive.Values) if (b.ItemName == itemName) return b;
-            return null;
-        }
         AssemblerBluePrint GetBluePrintByProductionItem(MyProductionItem pi)
         {
             foreach (var b in Lists.Data.BluePrints_Active.Values) if (b.DefinitionSubtype == pi.BlueprintId.SubtypeName) return b;

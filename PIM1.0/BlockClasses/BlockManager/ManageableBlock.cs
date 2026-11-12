@@ -17,8 +17,6 @@ namespace IngameScript
 
             public bool IsFunctional => FunctionalBlock != null && FunctionalBlock.IsFunctional;
 
-            public bool IsWorking => FunctionalBlock != null && FunctionalBlock.IsWorking;
-
             public bool IsClosed => FunctionalBlock != null && FunctionalBlock.Closed;
 
             public bool IsPimControlled => Parameter.PIMcontrolled;

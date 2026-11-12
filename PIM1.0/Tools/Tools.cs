@@ -39,21 +39,6 @@ namespace IngameScript
                 return !IsInventoryItemExists(itemType, inv);
             }
 
-            public static float GetInventoryItemAmount(string itemType, Dictionary<string, float> inv = null)
-            {
-                if (inv == null)
-                {
-                    return Lists.Data.Inventory.GetValueOrDefault(itemType, 0);
-                }
-
-                return inv.GetValueOrDefault(itemType, 0);
-            }
-
-            public static void AddToDebugString(string str)
-            {
-                Program.LCD_DebugString.Append(str);
-            }
-
             public static int GetBlockList<T>(List<T> blockList)
                 where T : class, IMyTerminalBlock
             {

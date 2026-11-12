@@ -22,7 +22,6 @@ namespace IngameScript
 
             private readonly string Name = "";
             public string type = "";
-            private readonly AssemblerBluePrint ammoBluePrint;
 
             public float ratio = 1
                 , maxOfVolume = 0;
@@ -32,7 +31,6 @@ namespace IngameScript
             public AmmoDefs(string iname)
             {
                 Name = iname;
-                ammoBluePrint = Program.MyProgram.GetBluePrintByItemName(iname);
                 type = ItemTypesConverter.SubtypeOf(Name);
             }
 
