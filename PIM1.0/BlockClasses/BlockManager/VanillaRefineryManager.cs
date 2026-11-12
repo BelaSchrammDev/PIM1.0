@@ -100,7 +100,7 @@ namespace IngameScript
                 {
                     if (items[i].Type.SubtypeId.ToLower().Contains("scrap"))
                     {
-                        inventory.TransferItemTo(inventory, i, 0, true, items[i].Amount);
+                        if (i > 0) inventory.TransferItemTo(inventory, i, 0, true, items[i].Amount);
                         return;
                     }
                 }
@@ -118,42 +118,49 @@ namespace IngameScript
                     inventory.TransferItemTo(inventory, 0, 1, true, items[0].Amount);
                 }
 
-                if (items.Count == 3)
+                // only the current and the next ore stay
+                for (int i = items.Count - 1; i >= 2; i--)
                 {
-                    clearItemByType(inventory, ItemTypesConverter.ToPimId(items[2].Type), items[2]);
+                    clearItemByType(inventory, ItemTypesConverter.ToPimId(items[i].Type), items[i]);
                 }
             }
 
-            /// <summary>Fills the input inventory from the cargo, or from other refinerys, by priority.</summary>
+            /// <summary>
+            /// Fills the input inventory with one ore, from the cargo or from another refinery: the first one
+            /// of the priority list (sorted, highest first) that can be filled in. Called if the refinery is
+            /// nearly empty (the next ore is ready behind the current one) or a higher prioritised ore is waiting.
+            /// </summary>
             void RefineryFilling(List<IPrio> prios)
             {
-                bool refineryFilled = false;
-                RefineryBlueprint blueprint = null;
+                bool tried = false;
 
                 foreach (IPrio prio in prios)
                 {
-                    if (!Accept(prio.refineryBP) || prio.prio == 0 || !Lists.Data.Inventory.ContainsKey(prio.refineryBP.InputID))
+                    var blueprint = prio.refineryBP;
+                    if (prio.prio == 0 || !Accept(blueprint) || !Lists.Data.Inventory.ContainsKey(blueprint.InputID))
                     {
                         continue;
                     }
 
-                    blueprint = prio.refineryBP;
-
-                    if (Refinery.Success < 50)
+                    // a higher prioritised ore is waiting and the refinery is more than half full: empty it first
+                    // (not for an ore it works on already, it is only topped up)
+                    if (Refinery.Success < 50 && blueprint != CurrentWorkBluePrint && blueprint != NextWorkBluePrint)
                     {
                         ClearInventory(Refinery.InputInventory);
                     }
 
-                    refineryFilled = SendItemByType(blueprint.InputID, Lists.Data.Inventory[blueprint.InputID], Refinery.InputInventory)
-                        || OreStealing(blueprint);
-
-                    Refinery.SetErrorByCondition(Refinery.RefError.NotFilled, !refineryFilled && Refinery.InputInventory.CurrentVolume == 0);
+                    if (SendItemByType(blueprint.InputID, Lists.Data.Inventory[blueprint.InputID], Refinery.InputInventory)
+                        || OreStealing(blueprint))
+                    {
+                        Refinery.DeleteRefineryError(Refinery.RefError.NotFilled);
+                        // the list is not enumerated any more after the sort
+                        if (prio.LowerAfterFilling(Refinery.FunctionalCount)) prios.Sort();
+                        return;
+                    }
+                    tried = true;
                 }
 
-                if (refineryFilled)
-                {
-                    LowerPrio(prios, blueprint);
-                }
+                if (tried) Refinery.SetErrorByCondition(Refinery.RefError.NotFilled, Refinery.InputInventory.CurrentVolume == 0);
             }
 
             /// <summary>
@@ -171,7 +178,8 @@ namespace IngameScript
                 var items = new List<MyInventoryItem>();
                 foreach (Refinery refinery in Lists.Data.RefineryList)
                 {
-                    if (refinery.IsClosed) continue;
+                    // only from refinerys PIM fills itself, the others belong to the player
+                    if (refinery == Refinery || refinery.IsClosed || !refinery.IsPimControlled || !refinery.Manager.IsFilledByPim) continue;
                     items.Clear();
                     refinery.InputInventory.GetItems(items);
                     for (int i = 0; i < items.Count; i++)
@@ -197,16 +205,15 @@ namespace IngameScript
                 int workPrio = 0;
                 foreach (IPrio p in prios)
                 {
-                    if (p.refineryBP == CurrentWorkBluePrint || p.refineryBP == NextWorkBluePrint) workPrio = workPrio < p.prio ? (int)(p.prio * 1.5) : workPrio;
+                    if (p.refineryBP == CurrentWorkBluePrint || p.refineryBP == NextWorkBluePrint)
+                    {
+                        var weighted = (int)(p.prio * 1.5);
+                        if (weighted > workPrio) workPrio = weighted;
+                    }
+                    // the list is sorted: the first other ore has the highest priority
                     else if (otherPrio == 0 && Accept(p.refineryBP)) otherPrio = p.prio;
                 }
                 return workPrio < otherPrio;
-            }
-
-            static void LowerPrio(List<IPrio> prios, RefineryBlueprint blueprint)
-            {
-                var prio = IPrio.GetBlueprintPrio(prios, blueprint);
-                if (prio != null && prio.LowerAfterFilling(Refinery.FunctionalCount)) prios.Sort();
             }
         }
     }

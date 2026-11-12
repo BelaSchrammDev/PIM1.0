@@ -56,6 +56,24 @@ namespace IngameScript.Tests
         }
 
         [TestMethod]
+        public void Sort_ByCurrentPriority_HighestFirst_SameByName()
+        {
+            var iron = Prio(80);
+            var gold = new Program.IPrio(new Program.RefineryBlueprint("GoldOreToIngot", "Ore Gold", "Ingot Gold", false), 50);
+            var silver = new Program.IPrio(new Program.RefineryBlueprint("SilverOreToIngot", "Ore Silver", "Ingot Silver", false), 50);
+            var list = new System.Collections.Generic.List<Program.IPrio> { silver, gold, iron };
+
+            list.Sort();
+            CollectionAssert.AreEqual(new[] { iron, gold, silver }, list);
+
+            // a refinery was filled with iron: the next refinerys take gold first
+            iron.LowerAfterFilling(4);
+            iron.LowerAfterFilling(4);
+            list.Sort();
+            CollectionAssert.AreEqual(new[] { gold, silver, iron }, list);
+        }
+
+        [TestMethod]
         public void ConfiguredPriority_IsNotTouched()
         {
             var p = Prio(80);

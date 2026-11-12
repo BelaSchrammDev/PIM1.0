@@ -80,6 +80,18 @@ Fix:
 - the hint "assembler is damaged" also appeared for assemblers without (sms) tag
 - the hint "assembler cannot unload output items" was not updated while disassembling: it stayed
   from the last assembling, and the disassembled components that could not be unloaded were not reported
+- refinerys were not filled by the ore priority: the list was sorted by the calculated priority only
+  after a refinery was filled with an ore below 100 (before, in the order the ores were found), and
+  lowering the priority after filling did not change the order, so all refinerys of a type got the
+  same ore. Now the highest current priority is filled in first, the next refinerys take other ores
+- a refinery was filled with several ores in one go if there was not enough of the first one, and
+  then the priority of the wrong ore was lowered; with a higher prioritised ore waiting it was even
+  emptied again for every further ore. Now one ore per filling, the next one follows when the
+  refinery is nearly empty
+- a higher prioritised ore emptied the refinery and filled it with the same ore again if that ore
+  came first in the priority list- refinerys took ore from refinerys without (sms) tag
+- the priority of the current ores was not weighted with 1.5 if the second ore had a higher one
+- only the third item was moved out of a refinery, not a fourth or more
 
 Changes:
 

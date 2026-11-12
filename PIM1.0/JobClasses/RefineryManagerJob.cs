@@ -62,6 +62,9 @@ namespace IngameScript
 
             // values of the oreprio LCDs (read by OrePrioPage)
             ApplyOrePrioConfig();
+
+            // the refinerys are filled in this order
+            foreach (var pl in ingotprio.Values) pl.Sort();
         }
     }
 }

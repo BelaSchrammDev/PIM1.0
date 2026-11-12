@@ -80,10 +80,14 @@ namespace IngameScript
             public RefineryBlueprint refineryBP;
             public int prio = 0;
             public int initp = 0;
+            /// <summary>
+            /// Highest current priority first (lowered by LowerAfterFilling, so the next refinerys take
+            /// another ore), the same priority by name, so the order does not change from cycle to cycle.
+            /// </summary>
             public int CompareTo(IPrio other)
             {
-                if (other.initp == initp) return 0;
-                return other.initp > initp ? 1 : -1;
+                if (other.prio != prio) return other.prio > prio ? 1 : -1;
+                return string.CompareOrdinal(refineryBP.Name, other.refineryBP.Name);
             }
             public IPrio(RefineryBlueprint bluePrint, int pr = 0)
             {
