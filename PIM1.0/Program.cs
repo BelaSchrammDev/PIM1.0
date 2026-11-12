@@ -64,8 +64,8 @@ namespace IngameScript
                 new FindingRefinerysJob(),
                 new RefineryManagerJob(),
                 new FindingAssemblersJob(),
-                new AssemblerBluePrintManagerJob(),
-                new CalculatingAmountOfInactiveBluePrintItemsJob(),
+                new BluePrintAmountJob(Lists.Data.BluePrints_Active, true),
+                new BluePrintAmountJob(Lists.Data.BluePrints_Inactive, false),
                 // LCD pages: after the amounts are counted, before autocrafting uses the max amounts
                 new SequentialJob(new AutocraftingPage(), new OrePrioPage(), new RefiningPage()),
                 new AutoCraftingJob(),

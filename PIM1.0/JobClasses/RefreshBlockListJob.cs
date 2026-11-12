@@ -31,15 +31,8 @@ namespace IngameScript
             {
                 Tools.GetBlockList(_blocks);
 
-                for (int i = _pimBlocks.Count - 1; i >= 0; i--)
-                {
-                    if (!_blocks.Remove((TBlock)_pimBlocks[i].FunctionalBlock))
-                    {
-                        // block is gone: the accepted blueprints of the remaining blocks must be determined again
-                        Properties.Data.AutoCraftingSettingsInValid = true;
-                        _pimBlocks.RemoveAt(i);
-                    }
-                }
+                // block is gone: the accepted blueprints of the remaining blocks must be determined again
+                Tools.SyncBlockList(_blocks, _pimBlocks, p => (TBlock)p.FunctionalBlock, p => Properties.Data.AutoCraftingSettingsInValid = true);
 
                 startIndex = _blocks.Count - 1;
                 endIndex = 0;

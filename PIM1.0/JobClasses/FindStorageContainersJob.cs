@@ -13,19 +13,7 @@ namespace IngameScript
             {
                 MyProgram.GridTerminalSystem.GetBlocksOfType(_CargoContainerBlocks, cargo => IsValidStorageContainer(cargo));
 
-                for (int i = Lists.Data.StorageCargos.Count - 1; i >= 0; i--)
-                {
-                    if (_CargoContainerBlocks.Contains(Lists.Data.StorageCargos[i].container))
-                    {
-                        _CargoContainerBlocks.Remove(Lists.Data.StorageCargos[i].container);
-                    }
-                    else
-                    {
-                        var stor = Lists.Data.StorageCargos[i];
-                        stor.Remove();
-                        Lists.Data.StorageCargos.Remove(stor);
-                    }
-                }
+                Tools.SyncBlockList(_CargoContainerBlocks, Lists.Data.StorageCargos, s => s.container, s => s.Remove());
 
                 startIndex = _CargoContainerBlocks.Count - 1;
                 endIndex = 0;

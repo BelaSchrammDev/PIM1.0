@@ -37,23 +37,24 @@ namespace IngameScript
 
                     foreach (var c in Lists.Data.CargoUseList.Values) s += "@CARGOUSE;" + c.Type + ";" + c.CurrentCapacity + ";" + c.MaximumCapacity + "\n";
 
-                    foreach (var b in Lists.Data.BluePrints_Active.Values)
-                    {
-                        if (b.MaximumItemAmount > 0) s += Strings.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
-                        if (b.AssemblyAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
-                        else if (b.RefineryAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
-                    }
-
-                    foreach (var b in Lists.Data.BluePrints_Inactive.Values)
-                    {
-                        if (b.MaximumItemAmount > 0) s += Strings.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
-                        if (b.AssemblyAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
-                        else if (b.RefineryAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
-                    }
+                    s += BluePrintInfos(Lists.Data.BluePrints_Active.Values) + BluePrintInfos(Lists.Data.BluePrints_Inactive.Values);
 
                     p.CustomData = s;
                 }
             }
+        }
+
+        /// <summary>Max amount and amount in production of the blueprints, one line each (for SMS).</summary>
+        static string BluePrintInfos(IEnumerable<AssemblerBluePrint> bluePrints)
+        {
+            var s = "";
+            foreach (var b in bluePrints)
+            {
+                if (b.MaximumItemAmount > 0) s += Strings.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
+                if (b.AssemblyAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
+                else if (b.RefineryAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
+            }
+            return s;
         }
     }
 }

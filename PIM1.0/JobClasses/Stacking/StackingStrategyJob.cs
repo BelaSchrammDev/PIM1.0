@@ -28,6 +28,21 @@ namespace IngameScript
 
             public abstract bool InitStacking();
 
+            /// <summary>Sorts by number of stacks if an item has more than one stack, returns false if none has.</summary>
+            protected bool SortByStackCount()
+            {
+                foreach (var s in ItemStacksList)
+                {
+                    if (s.Stackcount > 1)
+                    {
+                        ItemStacks.CurrentStackingType = ItemStacks.StackingType.Stack;
+                        ItemStacksList.Sort();
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             /// <summary>Number of ProcessingIndex calls of one run, by default one per item of the list.</summary>
             protected virtual int StepCount => ItemStacksList.Count;
 

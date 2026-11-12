@@ -121,7 +121,8 @@ namespace IngameScript
             for (int i = 0; i < keys.Length; i++) invList[keys[i]] = 0;
         }
 
-        static void CountItemsToSummaryDictionary(IMyInventory box)
+        /// <summary>Adds the amounts of all items of <paramref name="box"/> to <paramref name="amounts"/> (key: PIM item id).</summary>
+        static void CountItems(IMyInventory box, Dictionary<string, float> amounts)
         {
             var boxl = new List<MyInventoryItem>();
             box.GetItems(boxl);
@@ -129,8 +130,8 @@ namespace IngameScript
             {
                 string index = ItemTypesConverter.ToPimId(boxi.Type);
                 var boxia = (float)boxi.Amount;
-                if (Lists.Data.Inventory.ContainsKey(index)) Lists.Data.Inventory[index] += boxia;
-                else Lists.Data.Inventory.Add(index, boxia);
+                if (amounts.ContainsKey(index)) amounts[index] += boxia;
+                else amounts.Add(index, boxia);
             }
         }
 

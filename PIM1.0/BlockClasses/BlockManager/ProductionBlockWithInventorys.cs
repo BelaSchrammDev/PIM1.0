@@ -38,8 +38,8 @@ namespace IngameScript
             public void RefreshInventoryLists()
             {
                 ClearInventoryLists();
-                RefreshInventoryItems(InputInventoryIndex, InputInventoryItems);
-                RefreshInventoryItems(OutputInventoryIndex, OutputInventoryItems);
+                CountItems(InputInventory, InputInventoryItems);
+                CountItems(OutputInventory, OutputInventoryItems);
             }
 
             public IMyInventory InputInventory
@@ -69,34 +69,6 @@ namespace IngameScript
             public Dictionary<string, float> InputInventoryItems => _InputInventoryItems;
 
             public Dictionary<string, float> OutputInventoryItems => _OutputInventoryItems;
-
-            #region private methode
-
-            private void ClearInventoryList(Dictionary<string, float> list)
-            {
-                var keys = new List<string>(list.Keys);
-
-                foreach (var key in keys)
-                {
-                    list[key] = 0;
-                }
-            }
-
-            private void RefreshInventoryItems(int type, Dictionary<string, float> ilist)
-            {
-                var boxl = new List<MyInventoryItem>();
-                FunctionalBlock.GetInventory(type).GetItems(boxl);
-
-                foreach (var boxi in boxl)
-                {
-                    string index = ItemTypesConverter.ToPimId(boxi.Type);
-                    var boxia = (float)boxi.Amount;
-                    if (ilist.ContainsKey(index)) ilist[index] += boxia;
-                    else ilist.Add(index, boxia);
-                }
-            }
-
-            #endregion
         }
     }
 }

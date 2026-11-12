@@ -1,4 +1,5 @@
 using Sandbox.ModAPI.Ingame;
+using System;
 using System.Collections.Generic;
 
 namespace IngameScript
@@ -44,6 +45,21 @@ namespace IngameScript
             {
                 Program.MyProgram.GridTerminalSystem.GetBlocksOfType(blockList, block => block.IsMainConstruct());
                 return blockList.Count;
+            }
+
+            /// <summary>
+            /// Compares the PIM objects with the blocks found on the grid: the objects of blocks that are gone
+            /// are removed (after <paramref name="removed"/> was called for them). Afterwards only the new blocks
+            /// are left in <paramref name="found"/>.
+            /// </summary>
+            public static void SyncBlockList<TBlock, TObj>(List<TBlock> found, List<TObj> objects, Func<TObj, TBlock> blockOf, Action<TObj> removed)
+            {
+                for (int i = objects.Count - 1; i >= 0; i--)
+                {
+                    if (found.Remove(blockOf(objects[i]))) continue;
+                    removed(objects[i]);
+                    objects.RemoveAt(i);
+                }
             }
         }
     }
