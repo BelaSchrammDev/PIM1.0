@@ -33,7 +33,7 @@ namespace IngameScript
             {
                 Name = iname;
                 ammoBluePrint = Program.MyProgram.GetBluePrintByItemName(iname);
-                type = Name.Substring(Name.IndexOf(' ') + 1);
+                type = ItemTypesConverter.SubtypeOf(Name);
             }
 
             public void CalcAmmoInventoryRatio()

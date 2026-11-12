@@ -61,6 +61,15 @@ Fix:
   were controlled by PIM but their blueprints were not activated for autocrafting
 - refining LCD: the remaining time showed "Infinity years" or "NaN days" if the amount of ore
   did not change between two measurements, now "..."
+- hint "please define cargo for Ammo" appeared although an (sms,armory) container was defined
+  (also for containers of a single item, e.g. (sms,steelplate)): emptying assemblers and refinerys
+  only checked the cargo of the item type
+- the flare gun was put into the (sms,tools) container instead of the armory (its magazine already
+  went to the armory)
+- hints on the PB display: "please define cargo" stayed after the cargo was defined or the item was
+  gone, and it flickered or disappeared if one item of a type had a cargo and another one had none
+  (a hint that was set again after it had been cleared in the same cycle was lost)
+- hint "please define cargo for Ammo" also names the armory: "...(sms,ammo) or ...(sms,armory)"
 
 Changes:
 
@@ -94,6 +103,17 @@ Changes:
 - unused Config.mods and mod name constants removed
 - Tools.* helpers replaced by extension methods, TypeDefinitions moved to its own file
 - Instructions.readme only contains the news of the current version, older ones are in this file
+- ItemTypesConverter (pure, tested; SE parts in ItemTypesConverterIngame.cs): container tags to
+  InventoryManagerList keys and back (one table instead of a dictionary and a switch), cargo categories
+  (Armory, Seeds, Food, Waste; the item lists in ItemCasts.cs), the cargo of an item (item, category,
+  type) in one place instead of three, and the parts of an item id (TypeOf, SubtypeOf, ToPimId,
+  ToItemType) instead of splitting the strings in many places
+- SendItemByTypeAndSubtype merged into SendItemByType, which takes the PIM item id
+- the hints "... found. you can define cargo for it" (stone, gravel, ice, water, ...) are hidden after
+  5 minutes until the script restarts
+- hints of the PB display are reported every cycle instead of being set and cleared: a hint is shown
+  as long as it is reported, ViewManagerJob removes the others at the end of the cycle (SweepViews).
+  ClearWarning and SetWarningByCondition removed; views and hints moved to StatusViews.cs (pure, tested)
 
 New:
 

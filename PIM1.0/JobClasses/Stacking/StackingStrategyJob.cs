@@ -37,7 +37,7 @@ namespace IngameScript
                 quelle.GetItems(von);
                 foreach (var i in von)
                 {
-                    if (i.Type.TypeId.Contains(ti) && !Lists.Data.InventoryManagerList.ContainsKey(GetPIMItemID(i.Type)))
+                    if (i.Type.TypeId.Contains(ti) && !Lists.Data.InventoryManagerList.ContainsKey(ItemTypesConverter.ToPimId(i.Type)))
                     {
                         GetItemStacks(i.Type).AddStack(quelle, i.Amount);
                     }

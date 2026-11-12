@@ -62,8 +62,8 @@ namespace IngameScript
             string DeriveAutoCraftingType()
             {
                 if (ToolsAndGunsTypes.Contains(type)) return Strings.AC_ToolsAndGuns;
-                if (seed_cast.Contains(ItemName)) return IngameStrings.RSeeds;
-                if (food_cast.Contains(ItemName)) return IG_Food;
+                if (ItemTypesConverter.SeedItems.Contains(ItemName)) return IngameStrings.RSeeds;
+                if (ItemTypesConverter.FoodItems.Contains(ItemName)) return IG_Food;
                 if (subtype == IngameStrings.RSpentFuelReprocessing) return IngameStrings.RReprocessing;
                 if (subtype.Contains(IngameStrings.RDeuterium)) return IngameStrings.RDeuterium;
                 return type;
@@ -72,7 +72,7 @@ namespace IngameScript
             /// <summary>Short name for the autocrafting LCD, derived from the item subtype.</summary>
             string DeriveAutoCraftingName()
             {
-                var name = ItemName.Split(' ')[1];
+                var name = ItemTypesConverter.SubtypeOf(ItemName);
                 if (name.StartsWith("MealPack")) name = name.Substring(9);   // "MealPack_Chili" -> "Chili"
                 else if (name.Contains(IngameStrings.RAutomaticRifleGunMag))
                 {

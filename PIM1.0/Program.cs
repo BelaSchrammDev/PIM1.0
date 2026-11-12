@@ -77,6 +77,7 @@ namespace IngameScript
                 // LCD pages: after the amounts are counted, before autocrafting uses the max amounts
                 new SequentialJob(new AutocraftingPage(), new OrePrioPage(), new RefiningPage()),
                 new AutoCraftingJob(),
+                // after every job that reports hints (SetWarning): it removes the hints not reported in this cycle
                 new ViewManagerJob(),
                 new SendInfosToSmsJob()
             };

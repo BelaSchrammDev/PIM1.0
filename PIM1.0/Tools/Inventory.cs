@@ -11,71 +11,11 @@ namespace IngameScript
 {
     partial class Program
     {
-        static string TypeCast(string t)
+        // CARGOMISSING hint for an item type ("AmmoMagazine" -> "Ammo"), with the category of the whole type
+        // as alternative ("AmmoMagazine" -> "Armory", but not "PhysicalGunObject": welders are no weapons)
+        static void SetCargoMissing(string itemType)
         {
-            if (t.Contains("RifleItem") || t.Contains(IG_Ammo) || t.Contains("PistolItem") || t.Contains("LauncherItem")) return "Armory";
-            if (seed_cast.Contains(t)) return "Seeds";
-            if (food_cast.Contains(t)) return "Food";
-            if (waste_cast.Contains(t)) return "Waste";
-            return "";
-        }
-
-        // ----------------------------------------------------------------------------------
-        static Dictionary<string, string> IngameToPIM = new Dictionary<string, string>
-        {
-            { "Ammo",  IG_Ammo },
-            { IngameStrings.RStone,  Ore.Stone},
-            { "Gravel",  Ingot.Stone},
-            { "Tools",  IG_Tools},
-            { "Kits",  IG_Kits},
-            { "Cash",  IG_Phys},
-            { "Datapads",  IG_Datas},
-            { "H-Bottles",  IG_HBottles},
-            { "O-Bottles",  IG_OBottles},
-            { "Ice",  Ore.Ice},
-            { "Water",  Ingot.WaterFood},
-            { "Greywater",  Ingot.GreyWater},
-            { "Deuterium",  Ingot.DTFuelCapsule},
-            { "Organic", Ore.Organic },
-            { "Seeds", IG_Seeds }
-        };
-
-        static string TryToConvertFromIngame2Tag(string ingame)
-        {
-            foreach (var x in IngameToPIM) if (x.Value == ingame) return x.Key;
-            return null;
-        }
-
-        string Tag2Ingame(string ststr)
-        {
-            if (ststr.Contains("Dock")) return "";
-            if (IngameToPIM.ContainsKey(ststr)) return IngameToPIM[ststr];
-            switch (ststr)
-            {
-                case "Steelplate": return IG_Com + "SteelPlate";
-                case "Metalgrid": return IG_Com + "MetalGrid";
-                case "Interiorplate": return IG_Com + "InteriorPlate";
-                case "Smalltube": return IG_Com + "SmallTube";
-                case "Largetube": return IG_Com + "LargeTube";
-                case "Glass": return IG_Com + "BulletproofGlass";
-                case "Gravity": return IG_Com + "GravityGenerator";
-                case "Radio": return IG_Com + "RadioCommunication";
-                case "Solar": return IG_Com + "SolarCell";
-                case "Power": return IG_Com + "PowerCell";
-                case "Zonechip": return IG_Com + "ZoneChip";
-                case "Reactor":
-                case "Thrust":
-                case "Medical":
-                case "Detector":
-                case "Explosives":
-                case "Construction":
-                case "Motor":
-                case "Display":
-                case "Girder":
-                case "Computer":
-                case "Canvas": return IG_Com + ststr;
-                default: return ststr;
-            }
+            SetWarning(Warning.ID.CARGOMISSING, ItemTypesConverter.ToTag(itemType) ?? itemType, ItemTypesConverter.Category(itemType));
         }
 
         static void ClearInventory(IMyInventory quelle, List<string> typeID_l = null)
@@ -85,46 +25,26 @@ namespace IngameScript
             if (von.Count() == 0) return;
             for (int j = von.Count() - 1; j >= 0; j--)
             {
-                bool success = false;
                 var vcon = von[j].Type;
-                var clr = true;
-                if (typeID_l != null)
+                if (typeID_l != null && !typeID_l.Contains(vcon.TypeId)) continue;
+                var id = ItemTypesConverter.ToPimId(vcon);
+                var found = false;
+                // the next cargo is tried if the item could not be moved into the more specific one
+                foreach (var ziele in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id))
                 {
-                    clr = false;
-                    foreach (var nt in typeID_l)
-                        if (vcon.TypeId.ToString() == nt)
-                        {
-                            clr = true;
-                            break;
-                        }
+                    found = true;
+                    if (SendItemByNum(quelle, j, ziele)) break;
                 }
-                if (!clr) continue;
-                var idstr = vcon.TypeId.ToString().Split('_')[1];
-                var stype = vcon.SubtypeId.ToString();
-                var fullid = idstr + " " + stype;
-                var atype = TypeCast(fullid);
-                if (Lists.Data.InventoryManagerList.ContainsKey(fullid)) success = SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[fullid]);
-                if (!success && atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) success = SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[atype]);
-                if (!success && Lists.Data.InventoryManagerList.ContainsKey(idstr)) SendItemByNum(quelle, j, Lists.Data.InventoryManagerList[idstr]);
-
-                var idstrPIM = TryToConvertFromIngame2Tag(idstr);
-                if(idstrPIM == null) idstrPIM = idstr;
-                if (Lists.Data.InventoryManagerList.ContainsKey(idstr)) ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
-                else SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
+                if (!found) SetCargoMissing(ItemTypesConverter.TypeOf(id));
             }
         }
 
-        static bool clearItemByType(IMyInventory quelle, string type, MyInventoryItem item, float amount = 0)
+        static bool clearItemByType(IMyInventory quelle, string id, MyInventoryItem item, float amount = 0)
         {
-            var typeID = type.Substring(0, type.IndexOf(' '));
-            var stypeID = type.Substring(type.IndexOf(' ') + 1);
-            var atype = TypeCast(type);
-            var trans = false;
             if (amount == 0) amount = (float)item.Amount;
-            if (Lists.Data.InventoryManagerList.ContainsKey(type)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[type]);
-            else if (atype != "" && Lists.Data.InventoryManagerList.ContainsKey(atype)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[atype]);
-            else if (Lists.Data.InventoryManagerList.ContainsKey(typeID)) trans = SendItemByIItem(quelle, item, amount, Lists.Data.InventoryManagerList[typeID]);
-            return trans;
+            // only the most specific cargo
+            foreach (var ziele in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id)) return SendItemByIItem(quelle, item, amount, ziele);
+            return false;
         }
 
         static bool SendItemByIItem(IMyInventory quelle, MyInventoryItem item, float amount, List<IMyInventory> ziele)
@@ -163,71 +83,27 @@ namespace IngameScript
             return trans;
         }
 
-        static bool SendItemByType(string iType, float itemAmount, IMyInventory ziel, int? p = null)
+        /// <summary>Moves an item ("Ore Ice") from its cargo into <paramref name="ziel"/>.</summary>
+        static bool SendItemByType(string id, float itemAmount, IMyInventory ziel, int? p = null)
         {
-            return SendItemByTypeAndSubtype(IG_ + iType.Substring(0, iType.IndexOf(' ')), iType.Substring(iType.IndexOf(' ') + 1), itemAmount, ziel, p);
-        }
-
-        static bool SendItemByTypeAndSubtype(string itemIngameType, string itemSubType, float itemAmount, IMyInventory ziel, int? p = null)
-        {
-            List<IMyInventory> quellen = new List<IMyInventory>();
-            var itemType = itemIngameType.Split('_')[1];
-            var idstrPIM = TryToConvertFromIngame2Tag(itemType);
-            var castedType = TypeCast(itemType + " " + itemSubType);
-
-            if (Lists.Data.InventoryManagerList.ContainsKey(itemType + " " + itemSubType))
-            {
-                quellen.AddRange(Lists.Data.InventoryManagerList[itemType + " " + itemSubType]);
-            }
-
-            if (castedType != "" && Lists.Data.InventoryManagerList.ContainsKey(castedType))
-            {
-                quellen.AddRange(Lists.Data.InventoryManagerList[castedType]);
-            }
-
-            if (Lists.Data.InventoryManagerList.ContainsKey(itemType))
-            {
-                quellen.AddRange(Lists.Data.InventoryManagerList[itemType]);
-            }
-
-            if (idstrPIM != null)
-            {
-                if (Lists.Data.InventoryManagerList.ContainsKey(idstrPIM))
-                {
-                    quellen.AddRange(Lists.Data.InventoryManagerList[idstrPIM]);
-                }
-            }
-            else
-            {
-                idstrPIM = itemType;
-            }
-
+            var quellen = new List<IMyInventory>();
+            // every cargo that takes the item
+            foreach (var c in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id)) quellen.AddRange(c);
             if (quellen.Count == 0)
             {
-                // TODO: special warning for missing cargo
-                SetWarning(Warning.ID.CARGOMISSING, idstrPIM);
+                SetCargoMissing(ItemTypesConverter.TypeOf(id));
                 return false;
             }
 
-            ClearWarning(Warning.ID.CARGOMISSING, idstrPIM);
-
+            var itemType = ItemTypesConverter.ToItemType(id);
+            var von = new List<MyInventoryItem>();
             for (int i = 0; i < quellen.Count; i++)
             {
-                var von = new List<MyInventoryItem>();
+                von.Clear();
                 quellen[i].GetItems(von);
-                if (von.Count() > 0)
+                for (int j = von.Count - 1; j >= 0; j--)
                 {
-                    for (int j = von.Count() - 1; j >= 0; j--)
-                    {
-                        if (von[j].Type.TypeId.ToString() == itemIngameType)
-                        {
-                            if (von[j].Type.SubtypeId.ToString() == itemSubType)
-                            {
-                                var menge = (MyFixedPoint)itemAmount;
-                                if (quellen[i].TransferItemTo(ziel, j, p, true, menge)) return true;
-                            }
-                        }
-                    }
+                    if (von[j].Type == itemType && quellen[i].TransferItemTo(ziel, j, p, true, (MyFixedPoint)itemAmount)) return true;
                 }
             }
             return false;
@@ -245,7 +121,7 @@ namespace IngameScript
             box.GetItems(boxl);
             foreach (var boxi in boxl)
             {
-                string index = GetPIMItemID(boxi.Type);
+                string index = ItemTypesConverter.ToPimId(boxi.Type);
                 var boxia = (float)boxi.Amount;
                 if (Lists.Data.Inventory.ContainsKey(index)) Lists.Data.Inventory[index] += boxia;
                 else Lists.Data.Inventory.Add(index, boxia);
@@ -256,7 +132,7 @@ namespace IngameScript
         {
             foreach (var tag in tags.Keys)
             {
-                var ingame = Tag2Ingame(tag);
+                var ingame = ItemTypesConverter.ToIngame(tag);
                 if (ingame != "")
                 {
                     if (!Lists.Data.InventoryManagerList.ContainsKey(ingame)) Lists.Data.InventoryManagerList.Add(ingame, new List<IMyInventory>());

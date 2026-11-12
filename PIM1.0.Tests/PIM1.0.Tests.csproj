@@ -31,6 +31,10 @@
              Link="Linked\StorageAmounts.cs" />
     <Compile Include="..\PIM1.0\Tools\AmmoPriority.cs"
              Link="Linked\AmmoPriority.cs" />
+    <Compile Include="..\PIM1.0\Tools\ItemTypesConverter.cs"
+             Link="Linked\ItemTypesConverter.cs" />
+    <Compile Include="..\PIM1.0\Tools\StatusViews.cs"
+             Link="Linked\StatusViews.cs" />
     <Compile Include="..\PIM1.0\Tools\RunningSign.cs"
              Link="Linked\RunningSign.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\CommandArgument.cs"

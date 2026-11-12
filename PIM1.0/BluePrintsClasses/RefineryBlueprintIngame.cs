@@ -68,13 +68,7 @@ namespace IngameScript
             static void InitScrapTypeBlueprintTypes()
             {
                 ScrapItemTypes = new MyItemType[ScrapTypeBlueprintNames.Length];
-                for (int i = 0; i < ScrapTypeBlueprintNames.Length; i++)
-                {
-                    var t = ScrapTypeBlueprintNames[i];
-                    var parts = t.Split(' ');
-                    var newType = MyItemType.Parse(IG_ + parts[0] + "/" + parts[1]);
-                    ScrapItemTypes[i] = newType;
-                }
+                for (int i = 0; i < ScrapTypeBlueprintNames.Length; i++) ScrapItemTypes[i] = ItemTypesConverter.ToItemType(ScrapTypeBlueprintNames[i]);
             }
 
 
@@ -101,7 +95,7 @@ namespace IngameScript
             // the blueprints wont be realtime created and canot be predefined
             public RefineryBlueprint(MyItemType iScrapType)
             {
-                InputID = GetPIMItemID(iScrapType);
+                InputID = ItemTypesConverter.ToPimId(iScrapType);
                 InputIDName = iScrapType.SubtypeId;
                 Name = InputIDName + "ToIngots";
                 IsScrap = true;

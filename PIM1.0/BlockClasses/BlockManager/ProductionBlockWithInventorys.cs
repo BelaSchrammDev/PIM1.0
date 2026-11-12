@@ -19,7 +19,7 @@ namespace IngameScript
                 for (int i = 0; i < _InvList.Count; i++)
                 {
                     var invItem = _InvList[i];
-                    var invItemType = GetPIMItemID(invItem.Type);
+                    var invItemType = ItemTypesConverter.ToPimId(invItem.Type);
                     if (invItemType == itemType)
                     {
                         if (i == 0) return;
@@ -89,7 +89,7 @@ namespace IngameScript
 
                 foreach (var boxi in boxl)
                 {
-                    string index = GetPIMItemID(boxi.Type);
+                    string index = ItemTypesConverter.ToPimId(boxi.Type);
                     var boxia = (float)boxi.Amount;
                     if (ilist.ContainsKey(index)) ilist[index] += boxia;
                     else ilist.Add(index, boxia);

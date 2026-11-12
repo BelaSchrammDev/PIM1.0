@@ -56,7 +56,7 @@ namespace IngameScript
                 for (int i = inventoryItems.Count - 1; i >= 0; i--)
                 {
                     var inventoryItem = inventoryItems[i];
-                    var itemType = GetPIMItemID(inventoryItem.Type);
+                    var itemType = ItemTypesConverter.ToPimId(inventoryItem.Type);
                     var refBP = Refinery.AcceptedBlueprints.Find(b => b.InputID == itemType);
                     if (refBP == null) continue;
                     var itemIPrio = IPrio.GetBlueprintPrio(ingotprio[Refinery.BlockSubType], refBP);
@@ -94,8 +94,8 @@ namespace IngameScript
                     if (scrap == -1)
                     {
                         int p1 = 0, p2 = 0;
-                        var ostrID1 = GetPIMItemID(inventoryItems[0].Type);
-                        var ostrID2 = GetPIMItemID(inventoryItems[1].Type);
+                        var ostrID1 = ItemTypesConverter.ToPimId(inventoryItems[0].Type);
+                        var ostrID2 = ItemTypesConverter.ToPimId(inventoryItems[1].Type);
                         foreach (IPrio p in ingotprio[Refinery.BlockSubType])
                         {
                             if (ostrID1 == p.refineryBP.InputID) p1 = p.initp;
@@ -108,7 +108,7 @@ namespace IngameScript
 
                         if (inventoryItems.Count == 3)
                         {
-                            clearItemByType(inventory, GetPIMItemID(inventoryItems[2].Type), inventoryItems[2]);
+                            clearItemByType(inventory, ItemTypesConverter.ToPimId(inventoryItems[2].Type), inventoryItems[2]);
                         }
                     }
                     else
@@ -140,11 +140,9 @@ namespace IngameScript
                         ClearInventory(Refinery.InputInventory);
                     }
 
-                    var types = newworkBP.InputID.Split(' ');
-
                     if (Lists.Data.Inventory.ContainsKey(newworkBP.InputID))
                     {
-                        refineryFilled = SendItemByTypeAndSubtype("MyObjectBuilder_" + types[0], types[1], Lists.Data.Inventory[newworkBP.InputID], Refinery.RefineryBlock.GetInventory(0));
+                        refineryFilled = SendItemByType(newworkBP.InputID, Lists.Data.Inventory[newworkBP.InputID], Refinery.RefineryBlock.GetInventory(0));
                     }
 
                     if (!refineryFilled)
@@ -177,7 +175,7 @@ namespace IngameScript
                         refinery.InputInventory.GetItems(inventoryList);
                         foreach (var inventoryItem in inventoryList)
                         {
-                            var ostrID = Refinery.AcceptedBlueprints.Find(b => b.InputID == GetPIMItemID(inventoryItem.Type));
+                            var ostrID = Refinery.AcceptedBlueprints.Find(b => b.InputID == ItemTypesConverter.ToPimId(inventoryItem.Type));
                             if (blueprint == ostrID && (float)inventoryItem.Amount > 100 && (float)inventoryItem.Amount > oamount && Accept(ostrID))
                             {
                                 var amount = MyFixedPoint.MultiplySafe(inventoryItem.Amount, (inum == 0 ? 0.5f : 1f));

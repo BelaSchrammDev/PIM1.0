@@ -82,7 +82,7 @@ namespace IngameScript
                 var firstItem = InputInventory.GetItemAt(0);
                 if (firstItem.HasValue)
                 {
-                    var ore = GetPIMItemID(firstItem.Value.Type);
+                    var ore = ItemTypesConverter.ToPimId(firstItem.Value.Type);
                     var bluePrint = AcceptedBlueprints.Find(b => b.InputID == ore);
                     if (bluePrint != null) bluePrint.RefineryCount++;
                 }
@@ -209,11 +209,11 @@ namespace IngameScript
 
                 if (inhalt.Count() > 0)
                 {
-                    ws = GetPIMItemID(inhalt[0].Type);
+                    ws = ItemTypesConverter.ToPimId(inhalt[0].Type);
                     waf = (float)inhalt[0].Amount;
                     if (inhalt.Count() > 1)
                     {
-                        nws = GetPIMItemID(inhalt[1].Type);
+                        nws = ItemTypesConverter.ToPimId(inhalt[1].Type);
                         nwaf = (float)inhalt[1].Amount;
                     }
                 }

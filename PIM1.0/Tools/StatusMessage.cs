@@ -1,100 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace IngameScript
+﻿namespace IngameScript
 {
+    // Manager infos and the text of the PB display. The infos and hints themselves are in StatusViews.cs.
     partial class Program
     {
-
-        static List<View> viewList = new List<View>();
-        abstract class View
-        {
-            public const string Color_Red = "[Color=#FFFF0000]", Color_Yellow = "[Color=#FF000000]", Color_End = "[/Color]";
-            public enum ViewType { NONE, INFO, WARNING }
-            DateTime burn = DateTime.Now;
-            public ViewType type = ViewType.NONE;
-            int SecondsToLive = -1;
-            public StringBuilderExtended InfoString = new StringBuilderExtended(1000);
-            public View()
-            {
-                type = ViewType.INFO;
-            }
-            public View(ViewType itype)
-            {
-                type = itype;
-            }
-            public View(string itext, ViewType itype, int sec = -1)
-            {
-                InfoString.SetText(itext);
-                type = itype;
-                SecondsToLive = sec;
-            }
-            public void SetSecondsToLive(int sec) { SecondsToLive = sec; }
-            public virtual StringBuilderExtended GetInfoText() { return InfoString; }
-            public bool IsOver() { if (SecondsToLive == -1) return false; if ((DateTime.Now - burn).TotalSeconds > SecondsToLive) return true; return false; }
-            public void SetOver() { SecondsToLive = 0; }
-        }
-
-
-        class Info : View
-        {
-            public Info(string text, int sec = -1) : base(text, ViewType.INFO, sec) { }
-        }
-
-
-        class Warning : View
-        {
-            public enum ID 
-            {
-                NONE,
-                CARGOUSEHEAVY, 
-                CARGOUSEFULL, 
-                CARGOMISSING, 
-                CARGORECOMMENDED, 
-                REFINERYNOTSUPPORTED 
-            }
-
-            public ID WarningID = ID.NONE;
-            public string subType = "";
-
-            public Warning(ID warn_ID, string isubtype = "") : base(ViewType.WARNING)
-            {
-                WarningID = warn_ID;
-                subType = isubtype;
-                SetInfoString(isubtype);
-            }
-
-            public override StringBuilderExtended GetInfoText()
-            {
-                if (IsOver()) return null;
-                return InfoString;
-            }
-
-
-            void SetInfoString(string subType)
-            {
-                switch (WarningID)
-                {
-                    case ID.REFINERYNOTSUPPORTED:
-                        InfoString.SetText("! refinery '", subType, "' not supported.");
-                        break;
-                    case ID.CARGORECOMMENDED:
-                        InfoString.SetText("   - ", subType, " found. you can define cargo for it with ...(sms,", subType.ToLower(), ")");
-                        break;
-                    case ID.CARGOMISSING:
-                        InfoString.SetText("!! please define cargo for ", subType, ". name container like ...(sms,", subType.ToLower(), ")");
-                        break;
-                    case ID.CARGOUSEFULL:
-                        InfoString.SetText("!!!! cargo with ", subType, " is full !!!!!");
-                        break;
-                    case ID.CARGOUSEHEAVY:
-                        InfoString.SetText("!!! cargo with ", subType, " is heavy.");
-                        break;
-                }
-            }
-        }
-
-
         class AmmoManagerInfo : View
         {
             public override StringBuilderExtended GetInfoText()
@@ -140,44 +48,6 @@ namespace IngameScript
                 InfoString.Insert(0, "--------------- AssemblerManager ----------------\n");
                 return InfoString;
             }
-        }
-
-
-        static void SetInfo(string warnungstext, int zeit = 10)
-        {
-            viewList.Add(new Info(warnungstext, zeit));
-        }
-
-
-        static void SetWarningByCondition(bool condition, Warning.ID warnID, string subtype = "")
-        {
-            if (condition) SetWarning(warnID, subtype);
-            else ClearWarning(warnID, subtype);
-        }
-
-
-        static void SetWarning(Warning.ID warnID, string subtype = "")
-        {
-            if (GetWarning(warnID, subtype) == null) viewList.Add(new Warning(warnID, subtype));
-        }
-
-
-        static Warning GetWarning(Warning.ID warnID, string subtype)
-        {
-            foreach (var v in viewList)
-            {
-                if (!(v is Warning)) continue;
-                var w = v as Warning;
-                if ((w.WarningID == warnID) && w.subType == subtype) return w;
-            }
-            return null;
-        }
-
-
-        static void ClearWarning(Warning.ID warnID, string subtype)
-        {
-            var w = GetWarning(warnID, subtype);
-            if (w != null) w.SetOver();
         }
 
 

@@ -10,11 +10,6 @@ namespace IngameScript
 {
     partial class Program
     {
-        static string GetPIMItemID(MyItemType type)
-        {
-            return type.TypeId.Substring(type.TypeId.IndexOf('_') + 1) + " " + type.SubtypeId;
-        }
-
         public class ItemStacks : IComparable<ItemStacks>
         {
             public enum StackingType

@@ -43,7 +43,7 @@ namespace IngameScript
                 var invstring = "Inventory before ReloadItems:\n";
                 foreach (var ii in _InvList)
                 {
-                    invstring += $" - {GetPIMItemID(ii.Type)} : {ii.Amount}\n";
+                    invstring += $" - {ItemTypesConverter.ToPimId(ii.Type)} : {ii.Amount}\n";
                 }
 
                 Program.LCD_DebugString.Append($"StorageInventory_ReloadItems for '{invstring}'\n");
@@ -78,7 +78,7 @@ namespace IngameScript
                     var found = false;
                     foreach (var invItem in _InvList)
                     {
-                        var pimID = GetPIMItemID(invItem.Type);
+                        var pimID = ItemTypesConverter.ToPimId(invItem.Type);
                         if (pimID == item && invItem.Amount > 0)
                         {
                             found = true;
@@ -133,7 +133,7 @@ namespace IngameScript
                 for (int i = invList.Count - 1; i >= 0; i--)
                 {
                     var iItem = invList[i];
-                    var iType = GetPIMItemID(iItem.Type);
+                    var iType = ItemTypesConverter.ToPimId(iItem.Type);
                     if (!items.ContainsKey(iType)) clearItemByType(inv, iType, iItem);
                     else
                     {
