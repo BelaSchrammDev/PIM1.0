@@ -1,21 +1,19 @@
 using System.Collections.Generic;
 using VRage;
 using VRage.Game.ModAPI.Ingame;
-using static IngameScript.Program;
 
 namespace IngameScript
 {
     partial class Program
     {
+        /// <summary>
+        /// Refinerys that refine ore by the ore priority (ingotprio) of their type.
+        /// The refinery works on the first item of its input inventory only.
+        /// </summary>
         public class VanillaRefineryManager : RefineryBlockManagerer
         {
-            enum ManagerState
-            {
-                CLEAR_INPUT,
-                SWAP_ORES,
-            };
-
-            ManagerState CurrentRefineryState = ManagerState.CLEAR_INPUT;
+            // DoManage alternates between ClearInput and OreSwap
+            bool swapOresNext = false;
 
             // the ore that is refined right now (first input item) and the next one (second input item)
             RefineryBlueprint CurrentWorkBluePrint, NextWorkBluePrint;
@@ -27,6 +25,7 @@ namespace IngameScript
 
             public override void Refresh()
             {
+                // registers the refinery type, CalcIngotPrio then calculates the priorities of its blueprints
                 if (!ingotprio.ContainsKey(Refinery.BlockSubType)) ingotprio.Add(Refinery.BlockSubType, new List<IPrio>());
                 if (!Refinery.refineryTypesAcceptedBlueprintsList.ContainsKey(Refinery.BlockSubType)) Refinery.refineryTypesAcceptedBlueprintsList.Add(Refinery.BlockSubType, Refinery.AcceptedBlueprints);
                 GetWorkItems();
@@ -51,190 +50,163 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                Program.LCD_DebugString.Append("VanillaRefineryManager_DoManage\n");
+                List<IPrio> prios;
+                if (!ingotprio.TryGetValue(Refinery.BlockSubType, out prios)) return;
 
-                if (!ingotprio.ContainsKey(Refinery.BlockSubType))
+                if (Refinery.Success > 80 || HigherPrioOreWaiting(prios))
                 {
-                    return;
-                }
-
-                if (Refinery.Success > 80 || IfForceManagerExecuting())
-                {
-                    RefineryFilling();
+                    RefineryFilling(prios);
                 }
 
-                if (CurrentRefineryState == ManagerState.CLEAR_INPUT)
-                {
-                    CurrentRefineryState = ManagerState.SWAP_ORES;
-                    ClearInput();
-                }
-                else if (CurrentRefineryState == ManagerState.SWAP_ORES)
-                {
-                    CurrentRefineryState = ManagerState.CLEAR_INPUT;
-                    OreSwap();
-                }
+                if (swapOresNext) OreSwap(prios);
+                else ClearInput(prios);
+                swapOresNext = !swapOresNext;
             }
 
-            public void ClearInput()
+            /// <summary>Moves the ores with priority 0 (ignored) out of the input inventory.</summary>
+            void ClearInput(List<IPrio> prios)
             {
-                var inventoryItems = new List<MyInventoryItem>();
-                Refinery.InputInventory.GetItems(inventoryItems);
-                if (inventoryItems.Count == 0) return;
-                for (int i = inventoryItems.Count - 1; i >= 0; i--)
+                var items = new List<MyInventoryItem>();
+                Refinery.InputInventory.GetItems(items);
+                for (int i = items.Count - 1; i >= 0; i--)
                 {
-                    var inventoryItem = inventoryItems[i];
-                    var itemType = ItemTypesConverter.ToPimId(inventoryItem.Type);
-                    var refBP = Refinery.AcceptedBlueprints.Find(b => b.InputID == itemType);
-                    if (refBP == null) continue;
-                    var itemIPrio = IPrio.GetBlueprintPrio(ingotprio[Refinery.BlockSubType], refBP);
-                    if (itemIPrio != null && itemIPrio.initp == 0)
+                    var blueprint = FindBlueprint(items[i]);
+                    if (blueprint == null) continue;
+                    var prio = IPrio.GetBlueprintPrio(prios, blueprint);
+                    if (prio != null && prio.initp == 0)
                     {
-                        clearItemByType(Refinery.InputInventory, itemType, inventoryItem);
+                        clearItemByType(Refinery.InputInventory, ItemTypesConverter.ToPimId(items[i].Type), items[i]);
                     }
                 }
             }
 
-            public bool Accept(RefineryBlueprint ore)
+            bool Accept(RefineryBlueprint blueprint)
             {
-                if (Refinery.RefineryBlock.GetInventory(0).IsFull) return false;
-                return Refinery.AcceptedBlueprints.Contains(ore);
+                return !Refinery.InputInventory.IsFull && Refinery.AcceptedBlueprints.Contains(blueprint);
             }
 
-            public void OreSwap()
+            /// <summary>
+            /// Orders the input inventory: scrap to the front, otherwise the ore with the higher priority
+            /// of the first two items to the front. A third item is moved out.
+            /// </summary>
+            void OreSwap(List<IPrio> prios)
             {
-                var inventoryItems = new List<MyInventoryItem>();
-                var inventory = Refinery.RefineryBlock.GetInventory(0);
-                inventory.GetItems(inventoryItems);
+                var inventory = Refinery.InputInventory;
+                var items = new List<MyInventoryItem>();
+                inventory.GetItems(items);
+                if (items.Count < 2) return;
 
-                if (inventoryItems.Count > 1)
+                for (int i = 0; i < items.Count; i++)
                 {
-                    var scrap = -1;
-                    for (int index = 0; index < inventoryItems.Count; index++)
+                    if (items[i].Type.SubtypeId.ToLower().Contains("scrap"))
                     {
-                        if (inventoryItems[index].Type.SubtypeId.ToLower().Contains("scrap")) 
-                        {
-                            scrap = index; 
-                            break; 
-                        }
+                        inventory.TransferItemTo(inventory, i, 0, true, items[i].Amount);
+                        return;
                     }
+                }
 
-                    if (scrap == -1)
-                    {
-                        int p1 = 0, p2 = 0;
-                        var ostrID1 = ItemTypesConverter.ToPimId(inventoryItems[0].Type);
-                        var ostrID2 = ItemTypesConverter.ToPimId(inventoryItems[1].Type);
-                        foreach (IPrio p in ingotprio[Refinery.BlockSubType])
-                        {
-                            if (ostrID1 == p.refineryBP.InputID) p1 = p.initp;
-                            else if (ostrID2 == p.refineryBP.InputID) p2 = p.initp;
-                        }
-                        if (p1 < p2)
-                        {
-                            inventory.TransferItemTo(inventory, 0, 1, true, inventoryItems[0].Amount);
-                        }
+                int firstPrio = 0, secondPrio = 0;
+                var firstOre = ItemTypesConverter.ToPimId(items[0].Type);
+                var secondOre = ItemTypesConverter.ToPimId(items[1].Type);
+                foreach (IPrio p in prios)
+                {
+                    if (firstOre == p.refineryBP.InputID) firstPrio = p.initp;
+                    else if (secondOre == p.refineryBP.InputID) secondPrio = p.initp;
+                }
+                if (firstPrio < secondPrio)
+                {
+                    inventory.TransferItemTo(inventory, 0, 1, true, items[0].Amount);
+                }
 
-                        if (inventoryItems.Count == 3)
-                        {
-                            clearItemByType(inventory, ItemTypesConverter.ToPimId(inventoryItems[2].Type), inventoryItems[2]);
-                        }
-                    }
-                    else
-                    {
-                        inventory.TransferItemTo(inventory, scrap, 0, true, inventoryItems[scrap].Amount);
-                    }
+                if (items.Count == 3)
+                {
+                    clearItemByType(inventory, ItemTypesConverter.ToPimId(items[2].Type), items[2]);
                 }
             }
 
-            public void RefineryFilling()
+            /// <summary>Fills the input inventory from the cargo, or from other refinerys, by priority.</summary>
+            void RefineryFilling(List<IPrio> prios)
             {
                 bool refineryFilled = false;
-                RefineryBlueprint newworkBP = null;
-                List<IPrio> ingotPrioList = ingotprio[Refinery.BlockSubType];
+                RefineryBlueprint blueprint = null;
 
-                for (int index = 0; index < ingotPrioList.Count; index++)
+                foreach (IPrio prio in prios)
                 {
-                    IPrio ingotPrio = ingotPrioList[index];
-
-                    if (!Accept(ingotPrio.refineryBP) || ingotPrio.prio == 0 || !Lists.Data.Inventory.ContainsKey(ingotPrio.refineryBP.InputID))
+                    if (!Accept(prio.refineryBP) || prio.prio == 0 || !Lists.Data.Inventory.ContainsKey(prio.refineryBP.InputID))
                     {
                         continue;
                     }
 
-                    newworkBP = ingotPrio.refineryBP;
+                    blueprint = prio.refineryBP;
 
                     if (Refinery.Success < 50)
                     {
                         ClearInventory(Refinery.InputInventory);
                     }
 
-                    if (Lists.Data.Inventory.ContainsKey(newworkBP.InputID))
-                    {
-                        refineryFilled = SendItemByType(newworkBP.InputID, Lists.Data.Inventory[newworkBP.InputID], Refinery.RefineryBlock.GetInventory(0));
-                    }
-
-                    if (!refineryFilled)
-                    {
-                        refineryFilled = OreStealing(newworkBP);
-                    }
+                    refineryFilled = SendItemByType(blueprint.InputID, Lists.Data.Inventory[blueprint.InputID], Refinery.InputInventory)
+                        || OreStealing(blueprint);
 
                     Refinery.SetErrorByCondition(Refinery.RefError.NotFilled, !refineryFilled && Refinery.InputInventory.CurrentVolume == 0);
                 }
 
                 if (refineryFilled)
                 {
-                    SetIngotPrio(ingotPrioList, newworkBP);
+                    LowerPrio(prios, blueprint);
                 }
             }
 
-
+            /// <summary>
+            /// Empty refinery: takes the ore from another refinery that has more than 100 of it
+            /// (half of the stack it is working on, the whole stack otherwise).
+            /// </summary>
             bool OreStealing(RefineryBlueprint blueprint)
             {
-                var oamount = 0f;
-                if (blueprint == CurrentWorkBluePrint) oamount = CurrentWorkOreAmount;
-                else if (blueprint == NextWorkBluePrint) oamount = NextWorkOreAmount;
-                if (Refinery.InputInventory.CurrentVolume.RawValue < 100)
+                if (Refinery.InputInventory.CurrentVolume.RawValue >= 100) return false;
+
+                var ownAmount = 0f;
+                if (blueprint == CurrentWorkBluePrint) ownAmount = CurrentWorkOreAmount;
+                else if (blueprint == NextWorkBluePrint) ownAmount = NextWorkOreAmount;
+
+                var items = new List<MyInventoryItem>();
+                foreach (Refinery refinery in Lists.Data.RefineryList)
                 {
-                    foreach (Refinery refinery in Lists.Data.RefineryList)
+                    if (refinery.IsClosed) continue;
+                    items.Clear();
+                    refinery.InputInventory.GetItems(items);
+                    for (int i = 0; i < items.Count; i++)
                     {
-                        if (refinery.IsClosed) continue;
-                        int inum = 0;
-                        var inventoryList = new List<MyInventoryItem>();
-                        refinery.InputInventory.GetItems(inventoryList);
-                        foreach (var inventoryItem in inventoryList)
+                        var amount = (float)items[i].Amount;
+                        if (amount > 100 && amount > ownAmount && FindBlueprint(items[i]) == blueprint)
                         {
-                            var ostrID = Refinery.AcceptedBlueprints.Find(b => b.InputID == ItemTypesConverter.ToPimId(inventoryItem.Type));
-                            if (blueprint == ostrID && (float)inventoryItem.Amount > 100 && (float)inventoryItem.Amount > oamount && Accept(ostrID))
-                            {
-                                var amount = MyFixedPoint.MultiplySafe(inventoryItem.Amount, (inum == 0 ? 0.5f : 1f));
-                                var xx = refinery.InputInventory.TransferItemTo(Refinery.InputInventory, inum, null, true, amount);
-                                if (xx) return true;
-                            }
-                            inum++;
+                            var stealAmount = MyFixedPoint.MultiplySafe(items[i].Amount, i == 0 ? 0.5f : 1f);
+                            if (refinery.InputInventory.TransferItemTo(Refinery.InputInventory, i, null, true, stealAmount)) return true;
                         }
                     }
                 }
                 return false;
             }
 
-            public bool IfForceManagerExecuting()
+            /// <summary>
+            /// true if an ore that is not in the refinery has a higher priority than the ores it works on
+            /// (their priority counts one and a half times).
+            /// </summary>
+            bool HigherPrioOreWaiting(List<IPrio> prios)
             {
-                int wp100 = 0;
-                int op = 0;
-                foreach (IPrio p in ingotprio[Refinery.BlockSubType])
+                int otherPrio = 0;
+                int workPrio = 0;
+                foreach (IPrio p in prios)
                 {
-                    if (p.refineryBP == CurrentWorkBluePrint || p.refineryBP == NextWorkBluePrint) op = op < p.prio ? (int)(p.prio * 1.5) : op;
-                    else if (wp100 == 0 && Accept(p.refineryBP)) wp100 = p.prio;
+                    if (p.refineryBP == CurrentWorkBluePrint || p.refineryBP == NextWorkBluePrint) workPrio = workPrio < p.prio ? (int)(p.prio * 1.5) : workPrio;
+                    else if (otherPrio == 0 && Accept(p.refineryBP)) otherPrio = p.prio;
                 }
-                return op < wp100;
+                return workPrio < otherPrio;
             }
 
-            static void SetIngotPrio(List<IPrio> ingotPrioList, RefineryBlueprint bluePrint)
+            static void LowerPrio(List<IPrio> prios, RefineryBlueprint blueprint)
             {
-                IPrio ingotPriot = null;
-                if (ingotPrioList.Count > 0 && null != (ingotPriot = IPrio.GetBlueprintPrio(ingotPrioList, bluePrint)))
-                {
-                    if (ingotPriot.LowerAfterFilling(Refinery.FunctionalCount)) ingotPrioList.Sort();
-                }
+                var prio = IPrio.GetBlueprintPrio(prios, blueprint);
+                if (prio != null && prio.LowerAfterFilling(Refinery.FunctionalCount)) prios.Sort();
             }
         }
     }
