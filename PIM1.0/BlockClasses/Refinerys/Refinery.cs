@@ -61,7 +61,7 @@ namespace IngameScript
                 RefineryBlock = refinery;
                 BlockSubType = refinery.BlockDefinition.SubtypeId;
                 RefineryType = GetRefineryDefinition(BlockSubType);
-                BlockSubType = RefineryType.GetAlternativOrDefaultName();
+                BlockSubType = RefineryType.GetAlternativeOrDefaultName();
                 AcceptedBlueprints = RefineryBlueprints.FindAll(b => RefineryBlock.CanUseBlueprint(b.Definition_id));
                 GetScrapBluePrints();
                 BlockManagerFactory.GetManager(RefineryType.GetTypeID(), this);
@@ -75,7 +75,7 @@ namespace IngameScript
             void GetScrapBluePrints()
             {
                 var acceptedItems = new List<MyItemType>();
-                InputInventory.GetAcceptedItems(acceptedItems, i => i.SubtypeId.ToLower().Contains("scrap") && !RefineryBlueprint.IsKnowScrapType(i));
+                InputInventory.GetAcceptedItems(acceptedItems, i => i.SubtypeId.ToLower().Contains("scrap") && !RefineryBlueprint.IsKnownScrapType(i));
                 foreach (var inventoryItem in acceptedItems)
                 {
                     var scrapBlueprint = RefineryBlueprint.GetScrapBlueprintByItemtypeOrCreateNew(inventoryItem);
@@ -174,9 +174,9 @@ namespace IngameScript
             static Dictionary<RefError, string> RefErrors = new Dictionary<RefError, string>
             {
                 { RefError.NotFilled, " could not be filled\n"},
-                { RefError.OutputNotEmpty, " cannot unload outputitems.\n"},
+                { RefError.OutputNotEmpty, " cannot unload output items.\n"},
                 { RefError.Damaged, " is damaged.\n"},
-                { RefError.NoAutofill, " cannot filled by PIM.\n"},
+                { RefError.NoAutofill, " cannot be filled by PIM.\n"},
             };
 
 

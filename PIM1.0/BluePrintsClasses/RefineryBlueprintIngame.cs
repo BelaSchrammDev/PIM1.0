@@ -26,7 +26,7 @@ namespace IngameScript
         {
             static DateTime FillTimestamp = DateTime.Now;
             static MyItemType[] ScrapItemTypes;
-            static Dictionary<MyItemType, RefineryBlueprint> KnowScrapTypes = new Dictionary<MyItemType, RefineryBlueprint>();
+            static Dictionary<MyItemType, RefineryBlueprint> KnownScrapTypes = new Dictionary<MyItemType, RefineryBlueprint>();
 
 
             public static void FillInputOutputAmountAndETA()
@@ -47,7 +47,7 @@ namespace IngameScript
             }
 
 
-            public static bool IsKnowScrapType(MyItemType scrapType)
+            public static bool IsKnownScrapType(MyItemType scrapType)
             {
                 if (ScrapItemTypes == null) InitScrapTypeBlueprintTypes();
                 return ScrapItemTypes.Contains(scrapType);
@@ -56,12 +56,12 @@ namespace IngameScript
 
             public static RefineryBlueprint GetScrapBlueprintByItemtypeOrCreateNew(MyItemType scrapType)
             {
-                if (!KnowScrapTypes.ContainsKey(scrapType))
+                if (!KnownScrapTypes.ContainsKey(scrapType))
                 {
-                    KnowScrapTypes.Add(scrapType, new RefineryBlueprint(scrapType));
-                    RefineryBlueprints.Add(KnowScrapTypes[scrapType]);
+                    KnownScrapTypes.Add(scrapType, new RefineryBlueprint(scrapType));
+                    RefineryBlueprints.Add(KnownScrapTypes[scrapType]);
                 }
-                return KnowScrapTypes[scrapType];
+                return KnownScrapTypes[scrapType];
             }
 
 
@@ -92,7 +92,7 @@ namespace IngameScript
 
 
             // special constructor for blueprints from the AWWScrap mod
-            // the blueprints wont be realtime created and canot be predefined
+            // the blueprints won't be realtime created and cannot be predefined
             public RefineryBlueprint(MyItemType iScrapType)
             {
                 InputID = ItemTypesConverter.ToPimId(iScrapType);

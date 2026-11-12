@@ -6,10 +6,10 @@
         {
             public enum RefreshType
             {
-                Unknow,
+                Unknown,
                 VanillaRefinery,
                 WaterRecyclingSystem,
-                HydrophonicsFarm,
+                HydroponicsFarm,
                 Reprocessor,
                 NoAutofill,   // known block, not filled by PIM (e.g. incinerator, composter): only a hint on the PB display
             }

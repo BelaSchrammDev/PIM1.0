@@ -50,9 +50,9 @@ namespace IngameScript
             var s = "";
             foreach (var b in bluePrints)
             {
-                if (b.MaximumItemAmount > 0) s += Strings.ItemMaxNameSemikolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
-                if (b.AssemblyAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
-                else if (b.RefineryAmount > 0) s += Strings.AssemblerQueueNameSemikolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
+                if (b.MaximumItemAmount > 0) s += Strings.ItemMaxNameSemicolon + b.ItemName + ";" + b.MaximumItemAmount + ";" + b.subtype + "\n";
+                if (b.AssemblyAmount > 0) s += Strings.AssemblerQueueNameSemicolon + b.ItemName + ";" + b.AssemblyAmount + ";" + b.subtype + "\n";
+                else if (b.RefineryAmount > 0) s += Strings.AssemblerQueueNameSemicolon + b.ItemName + ";" + b.RefineryAmount + ";" + b.subtype + "\n";
             }
             return s;
         }

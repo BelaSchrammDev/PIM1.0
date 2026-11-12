@@ -18,7 +18,7 @@
                 MaximumCapacity += maxCapacity;
             }
 
-            public int GetCarcoCapacityUseRatio()
+            public int GetCargoCapacityUseRatio()
             {
                 return MaximumCapacity > 0
                     ? (int)(CurrentCapacity * 100 / MaximumCapacity)

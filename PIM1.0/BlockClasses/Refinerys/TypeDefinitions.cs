@@ -14,7 +14,7 @@ namespace IngameScript
                 new TypeDefinitions( "Blast Furnace", RefreshType.VanillaRefinery, "Basic Refinery"),
                 new TypeDefinitions( "LargeRefineryIndustrial", RefreshType.VanillaRefinery, "Large Industrial Refinery"),
                 new TypeDefinitions( "LargeRefinery", RefreshType.VanillaRefinery, "Large Refinery"),
-                new TypeDefinitions( false, "Hydroponics", RefreshType.HydrophonicsFarm, "Hydroponics Farm"),
+                new TypeDefinitions( false, "Hydroponics", RefreshType.HydroponicsFarm, "Hydroponics Farm"),
                 new TypeDefinitions( "RockCrusher", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "OrePurifier", RefreshType.VanillaRefinery),
                 new TypeDefinitions( "ChemicalPlant", RefreshType.VanillaRefinery),
@@ -35,30 +35,30 @@ namespace IngameScript
             public class TypeDefinitions
             {
                 string TypeIDName, AlternativName;
-                bool ComplettName;
+                bool _ExactMatch;
                 RefreshType TypeID;
 
                 public TypeDefinitions()
-                    : this(true, "", RefreshType.Unknow)
+                    : this(true, "", RefreshType.Unknown)
                 {
                 }
 
-                public TypeDefinitions(string iTypeName, RefreshType iTypeID, string iAlternativName = "")
-                    : this(true, iTypeName, iTypeID, iAlternativName)
+                public TypeDefinitions(string iTypeName, RefreshType iTypeID, string iAlternativeName = "")
+                    : this(true, iTypeName, iTypeID, iAlternativeName)
                 {
                 }
 
-                public TypeDefinitions(bool iComplettName, string iTypeName, RefreshType iTypeID, string iAlternativName = "")
+                public TypeDefinitions(bool iExactMatch, string iTypeName, RefreshType iTypeID, string iAlternativName = "")
                 {
                     TypeIDName = iTypeName;
-                    ComplettName = iComplettName;
+                    _ExactMatch = iExactMatch;
                     TypeID = iTypeID;
                     AlternativName = iAlternativName;
                 }
 
                 public RefreshType GetTypeID() => TypeID;
 
-                public string GetAlternativOrDefaultName() 
+                public string GetAlternativeOrDefaultName() 
                 {
                     return string.IsNullOrEmpty(AlternativName) 
                         ? TypeIDName
@@ -68,8 +68,8 @@ namespace IngameScript
                 public bool CompareTypeName(string compareString)
                 {
                     return
-                        (ComplettName && TypeIDName == compareString) || 
-                        (!ComplettName && compareString.StartsWith(TypeIDName));
+                        (_ExactMatch && TypeIDName == compareString) || 
+                        (!_ExactMatch && compareString.StartsWith(TypeIDName));
                 }
             }
         }

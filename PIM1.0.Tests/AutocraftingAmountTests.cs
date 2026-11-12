@@ -29,7 +29,7 @@ namespace IngameScript.Tests
         static Program.AssemblerBluePrint BluePrint(int threshold, int maximum, int current, int assembling = 0)
         {
             string types = "";
-            Program.ParseAutocrafting(Program.Strings.X_Autocrafting_treshold + " = " + threshold + "%",
+            Program.ParseAutocrafting(Program.Strings.X_Autocrafting_threshold + " = " + threshold + "%",
                 new Dictionary<string, Program.AssemblerBluePrint>(), ref types, new Dictionary<string, string>());
             var bp = new Program.AssemblerBluePrint("Component", "SteelPlate", "SteelPlate", "Vanilla", "", "");
             bp.SetMaximumAmount(maximum);

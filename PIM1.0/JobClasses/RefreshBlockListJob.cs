@@ -32,7 +32,7 @@ namespace IngameScript
                 Tools.GetBlockList(_blocks);
 
                 // block is gone: the accepted blueprints of the remaining blocks must be determined again
-                Tools.SyncBlockList(_blocks, _pimBlocks, p => (TBlock)p.FunctionalBlock, p => Properties.Data.AutoCraftingSettingsInValid = true);
+                Tools.SyncBlockList(_blocks, _pimBlocks, p => (TBlock)p.FunctionalBlock, p => Properties.Data.AutoCraftingSettingsInvalid = true);
 
                 startIndex = _blocks.Count - 1;
                 endIndex = 0;

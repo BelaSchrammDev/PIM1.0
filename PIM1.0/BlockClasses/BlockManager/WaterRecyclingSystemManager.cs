@@ -5,7 +5,7 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class WaterRecyclingSystemManager : RefineryBlockManagerer
+        public class WaterRecyclingSystemManager : RefineryBlockManager
         {
             public WaterRecyclingSystemManager(ManageableBlock block) : base(block)
             {
@@ -18,7 +18,7 @@ namespace IngameScript
 
             public override void DoManage()
             {
-                if (Config.Instance.always_recycle_greywater && ProccessingGreyWater())
+                if (Config.Instance.always_recycle_greywater && ProcessingGreyWater())
                 {
                     return;
                 }
@@ -31,11 +31,11 @@ namespace IngameScript
                     {
                         if(IsInventoryItemExists(Ingot.CleanWater))
                         {
-                            ProccessingCleanWater();
+                            ProcessingCleanWater();
                         }
                         else
                         {
-                            ProccessingIce();
+                            ProcessingIce();
                         }
                     }
                     else if (Refinery.Success < 10 || waterBluePrint.IfMax())
@@ -45,17 +45,17 @@ namespace IngameScript
                 }
             }
 
-            private void ProccessingIce()
+            private void ProcessingIce()
             {
                 SendItemByType(Ore.Ice, 1000, Refinery.InputInventory);
             }
 
-            private void ProccessingCleanWater()
+            private void ProcessingCleanWater()
             {
                 SendItemByType(Ingot.CleanWater, 1000, Refinery.InputInventory, (!Refinery.InputInventoryItems.ContainsKey(Ingot.CleanWater) || Refinery.InputInventoryItems[Ingot.CleanWater] == 0 ? 0 : 1));
             }
 
-            private bool ProccessingGreyWater()
+            private bool ProcessingGreyWater()
             {
                 if (IsInventoryItemExists(Ingot.GreyWater))
                 {

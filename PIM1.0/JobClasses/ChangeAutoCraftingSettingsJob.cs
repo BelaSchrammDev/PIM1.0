@@ -14,7 +14,7 @@ namespace IngameScript
 
             public override void InitJob()
             {
-                if (!Properties.Data.AutoCraftingSettingsInValid)
+                if (!Properties.Data.AutoCraftingSettingsInvalid)
                 {
                     LCD_DebugString.Append("kein calc_ACDef\n");
                     schedule = false;
@@ -41,7 +41,7 @@ namespace IngameScript
 
                 BluePrintKeyList = new List<string>(Lists.Data.BluePrints_Inactive.Keys);
                 Index = BluePrintKeyList.Count - 1;
-                Properties.Data.AutoCraftingSettingsInValid = false;
+                Properties.Data.AutoCraftingSettingsInvalid = false;
             }
 
             public override RunJobResult RunJob()

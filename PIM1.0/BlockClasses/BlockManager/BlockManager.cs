@@ -30,9 +30,9 @@ namespace IngameScript
             public virtual bool IsFilledByPim => true;
         }
 
-        public abstract class RefineryBlockManagerer : BlockManager
+        public abstract class RefineryBlockManager : BlockManager
         {
-            protected RefineryBlockManagerer(ManageableBlock block) : base(block)
+            protected RefineryBlockManager(ManageableBlock block) : base(block)
             {
             }
 
@@ -51,7 +51,7 @@ namespace IngameScript
         }
 
         /// <summary>Known block that PIM does not fill (e.g. incinerator, composter): only a hint on the PB display.</summary>
-        public class NoAutofillManager : RefineryBlockManagerer
+        public class NoAutofillManager : RefineryBlockManager
         {
             public NoAutofillManager(ManageableBlock block) : base(block)
             {

@@ -16,10 +16,10 @@ namespace IngameScript
                     || t is IMyShipDrill
                     || t is IMyShipGrinder
                     || t is IMyShipController
-                    || IsValidSpezialWelder(t);
+                    || IsValidSpecialWelder(t);
             }
 
-            private bool IsValidSpezialWelder(IMyTerminalBlock t) 
+            private bool IsValidSpecialWelder(IMyTerminalBlock t) 
             {
                 return t is IMyShipWelder && !(t as IMyFunctionalBlock).Enabled;
             }
@@ -52,12 +52,12 @@ namespace IngameScript
 
                     if (isSmsBlock)
                     {
-                        if (isNoKeep) Lists.Data.SmsFlagedInventoryList.Add(inv);
+                        if (isNoKeep) Lists.Data.SmsFlaggedInventoryList.Add(inv);
                         MyProgram.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
                     else if (isContainerOrConnector)
                     {
-                        Lists.Data.NoneSmsFlagedInventoryList.Add(inv);
+                        Lists.Data.NonSmsFlaggedInventoryList.Add(inv);
                     }
                 }
             }

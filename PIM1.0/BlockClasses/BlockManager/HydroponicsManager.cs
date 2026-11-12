@@ -4,9 +4,9 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class HydrophonicsManager : RecipeManager
+        public class HydroponicsManager : RecipeManager
         {
-            public HydrophonicsManager(ManageableBlock block) : base(block, Ingot.SubFresh, new Dictionary<string, float>
+            public HydroponicsManager(ManageableBlock block) : base(block, Ingot.SubFresh, new Dictionary<string, float>
             {
                 { Ingot.Stone, 16.428f },
                 { Ingot.WaterFood, 5f },

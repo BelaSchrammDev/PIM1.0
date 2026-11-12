@@ -16,7 +16,7 @@
                 SmsStorageTag = "(sms,storage)",
                 X_UseConveyor = "UseConveyor",
                 AC_ToolsAndGuns = "Tools&Guns",
-                X_Autocrafting_treshold = "Autocrafting_threshold",
+                X_Autocrafting_threshold = "Autocrafting_threshold",
                 AutoCraftingTypeStringName = "AutocraftingTypes",
 
                 // configstrings
@@ -25,8 +25,8 @@
                 X_Line = "  / =================================\n",
 
                 // SMS Networking
-                AssemblerQueueNameSemikolon = "@ASSEMBLERQUEUE;",
-                ItemMaxNameSemikolon = "@ITEMMAX;",
+                AssemblerQueueNameSemicolon = "@ASSEMBLERQUEUE;",
+                ItemMaxNameSemicolon = "@ITEMMAX;",
 
                 // Gun Control
                 DefaultGunGroupName = "PIM controlled Guns",

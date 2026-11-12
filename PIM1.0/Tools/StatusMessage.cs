@@ -8,7 +8,7 @@
             public override StringBuilderExtended GetInfoText()
             {
                 if (Lists.Data.guns.Count == 0) return null;
-                InfoString.SetText("AmmonitionManager: ", Lists.Data.guns.Count.ToString(), " weapons.");
+                InfoString.SetText("AmmunitionManager: ", Lists.Data.guns.Count.ToString(), " weapons.");
                 return InfoString;
             }
         }

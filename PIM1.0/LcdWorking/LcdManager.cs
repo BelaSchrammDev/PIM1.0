@@ -158,7 +158,7 @@ namespace IngameScript
         /// <summary>(sms,refining): refining progress, the same page on all panels.</summary>
         public class RefiningPage : LcdPage
         {
-            public RefiningPage() : base(ResourcenOverview) { }
+            public RefiningPage() : base(RefiningOverview) { }
 
             protected override void Start() { RefineryBlueprint.FillInputOutputAmountAndETA(); }
 

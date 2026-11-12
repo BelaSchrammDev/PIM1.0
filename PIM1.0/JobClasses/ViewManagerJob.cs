@@ -37,7 +37,7 @@ namespace IngameScript
 
                 foreach (var c in Lists.Data.CargoUseList.Keys)
                 {
-                    var cargoUseRatio = Lists.Data.CargoUseList[c].GetCarcoCapacityUseRatio();
+                    var cargoUseRatio = Lists.Data.CargoUseList[c].GetCargoCapacityUseRatio();
                     if (cargoUseRatio >= 99) SetWarning(Warning.ID.CARGOUSEFULL, c);
                     else if (cargoUseRatio >= 90) SetWarning(Warning.ID.CARGOUSEHEAVY, c);
                 }

@@ -18,7 +18,7 @@ namespace IngameScript.Tests
 
             // Properties.Data is a static singleton with no reset, so tests would
             // otherwise leak state into each other.
-            Program.Properties.Data.AutoCraftingSettingsInValid = false;
+            Program.Properties.Data.AutoCraftingSettingsInvalid = false;
         }
 
         // ------------------------------------------------------------------
@@ -138,29 +138,29 @@ namespace IngameScript.Tests
         {
             _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
 
-            Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInValid);
+            Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInvalid);
         }
 
         [TestMethod]
         public void ParseArgs_LosingControl_InvalidatesAutocraftingSettings()
         {
             _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
-            Program.Properties.Data.AutoCraftingSettingsInValid = false;
+            Program.Properties.Data.AutoCraftingSettingsInvalid = false;
 
             _parameter.ParseArgs("Box", canChangeAutocraftingStatus: true);
 
-            Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInValid);
+            Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInvalid);
         }
 
         [TestMethod]
         public void ParseArgs_UnchangedName_DoesNotInvalidateAutocraftingSettings()
         {
             _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
-            Program.Properties.Data.AutoCraftingSettingsInValid = false;
+            Program.Properties.Data.AutoCraftingSettingsInvalid = false;
 
             _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
 
-            Assert.IsFalse(Program.Properties.Data.AutoCraftingSettingsInValid,
+            Assert.IsFalse(Program.Properties.Data.AutoCraftingSettingsInvalid,
                 "an unchanged name must not force a settings rebuild");
         }
 

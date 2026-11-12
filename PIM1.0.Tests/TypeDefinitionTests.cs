@@ -24,8 +24,8 @@ namespace IngameScript.Tests
         public void CompareTypeName_PrefixConfigured_MatchesAnyStringStartingWithIt()
         {
             var def = new Program.Refinery.TypeDefinitions(
-                iComplettName: false, iTypeName: "Hydroponics",
-                iTypeID: Program.Refinery.RefreshType.HydrophonicsFarm, iAlternativName: "Hydroponics Farm");
+                iExactMatch: false, iTypeName: "Hydroponics",
+                iTypeID: Program.Refinery.RefreshType.HydroponicsFarm, iAlternativName: "Hydroponics Farm");
 
             Assert.IsTrue(def.CompareTypeName("Hydroponics"));
             Assert.IsTrue(def.CompareTypeName("HydroponicsMk2"));
@@ -40,7 +40,7 @@ namespace IngameScript.Tests
             // explicitly by the caller (Refinery.UnknownTypeDefinition via
             // `TypeDefs.Find(...) ?? UnknownTypeDefinition`), not by a hidden
             // always-true branch in this method. A bare TypeDefinitions() now
-            // behaves like any other entry: TypeIDName is "" and ComplettName
+            // behaves like any other entry: TypeIDName is "" and ExactMatch
             // is true, so it only matches an empty compareString.
             var fallback = new Program.Refinery.TypeDefinitions();
 
@@ -49,24 +49,24 @@ namespace IngameScript.Tests
         }
 
         [TestMethod]
-        public void GetAlternativOrDefaultName_WithAlternativeName_ReturnsAlternative()
+        public void GetAlternativeOrDefaultName_WithAlternativeName_ReturnsAlternative()
         {
             var def = new Program.Refinery.TypeDefinitions(
                 "LargeRefinery", Program.Refinery.RefreshType.VanillaRefinery, "Large Refinery");
 
-            Assert.AreEqual("Large Refinery", def.GetAlternativOrDefaultName());
+            Assert.AreEqual("Large Refinery", def.GetAlternativeOrDefaultName());
         }
 
         [TestMethod]
-        public void GetAlternativOrDefaultName_WithoutAlternativeName_FallsBackToTypeIDName()
+        public void GetAlternativeOrDefaultName_WithoutAlternativeName_FallsBackToTypeIDName()
         {
             var def = new Program.Refinery.TypeDefinitions("RockCrusher", Program.Refinery.RefreshType.VanillaRefinery);
 
-            Assert.AreEqual("RockCrusher", def.GetAlternativOrDefaultName());
+            Assert.AreEqual("RockCrusher", def.GetAlternativeOrDefaultName());
         }
 
         [TestMethod]
-        public void GetAlternativOrDefaultName_DefaultUnknownEntry_ReturnsEmptyStringNotNull()
+        public void GetAlternativeOrDefaultName_DefaultUnknownEntry_ReturnsEmptyStringNotNull()
         {
             // The parameterless constructor never assigns AlternativName, so
             // it stays at its default (null). The original check compared
@@ -75,7 +75,7 @@ namespace IngameScript.Tests
             // elsewhere, where a null key throws on Add.
             var fallback = new Program.Refinery.TypeDefinitions();
 
-            Assert.AreEqual(string.Empty, fallback.GetAlternativOrDefaultName());
+            Assert.AreEqual(string.Empty, fallback.GetAlternativeOrDefaultName());
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace IngameScript.Tests
             // the fallback for unknown blocks: BlockManagerFactory gives it the UnknownRefineryManager
             var fallback = new Program.Refinery.TypeDefinitions();
 
-            Assert.AreEqual(Program.Refinery.RefreshType.Unknow, fallback.GetTypeID());
+            Assert.AreEqual(Program.Refinery.RefreshType.Unknown, fallback.GetTypeID());
         }
 
         [TestMethod]

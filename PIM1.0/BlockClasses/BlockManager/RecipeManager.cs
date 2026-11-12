@@ -24,7 +24,7 @@ namespace IngameScript
         /// Block with one fixed recipe (Hydroponics, Reprocessor): filled with the ingredients until the
         /// autocrafting maximum of its blueprint is reached, emptied then.
         /// </summary>
-        public abstract class RecipeManager : RefineryBlockManagerer
+        public abstract class RecipeManager : RefineryBlockManager
         {
             readonly string _bluePrint;
             readonly RecipeInputInventory _inputInventory;

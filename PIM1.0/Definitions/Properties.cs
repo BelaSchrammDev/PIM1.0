@@ -18,7 +18,7 @@
             }
             
             public double CurrentCycleInSec = 0;
-            public bool AutoCraftingSettingsInValid = true;
+            public bool AutoCraftingSettingsInvalid = true;
             public string CurrentGunGroupName = Strings.DefaultGunGroupName;
         }
     }

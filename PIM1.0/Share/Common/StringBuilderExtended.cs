@@ -55,12 +55,12 @@ namespace IngameScript
                 sb.Remove(sb.Length - wsFromEnd, wsFromEnd);
             }
 
-            public void Substring(StringBuilderExtended targetSBX, int startindex, int lenght = -1)
+            public void Substring(StringBuilderExtended targetSBX, int startindex, int length = -1)
             {
-                Substring(targetSBX.sb, startindex, lenght);
+                Substring(targetSBX.sb, startindex, length);
             }
 
-            public void Substring(StringBuilder targetSB, int startindex, int lenght = -1)
+            public void Substring(StringBuilder targetSB, int startindex, int length = -1)
             {
                 targetSB.Clear();
 
@@ -70,7 +70,7 @@ namespace IngameScript
                 }
 
                 // A negative length means "to the end"; a length of zero means zero characters
-                int endindex = lenght >= 0 ? startindex + lenght - 1 : sb.Length - 1;
+                int endindex = length >= 0 ? startindex + length - 1 : sb.Length - 1;
 
                 // Never read past the end of the buffer
                 if (endindex > sb.Length - 1)

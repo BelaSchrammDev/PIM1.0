@@ -34,7 +34,7 @@ namespace IngameScript.Tests
             Program.ingotprio.Clear();
             Program.OrePrioConfig.Clear();
             string types = "";
-            Program.ParseAutocrafting(Program.Strings.X_Autocrafting_treshold + " = 80%", new Dictionary<string, Program.AssemblerBluePrint>(), ref types, new Dictionary<string, string>());
+            Program.ParseAutocrafting(Program.Strings.X_Autocrafting_threshold + " = 80%", new Dictionary<string, Program.AssemblerBluePrint>(), ref types, new Dictionary<string, string>());
         }
 
         /// <summary>Vanilla + Industrial Overhaul (renamed resources), amounts derived from the index.</summary>
@@ -140,7 +140,7 @@ namespace IngameScript.Tests
             sb.Append("## autocrafting-all-types-filtered\n");
             acTypes = "Component,AmmoMagazine";
             typeFilters = new Dictionary<string, string>();
-            var input = Program.Strings.X_Autocrafting_treshold + " = 75%\n"
+            var input = Program.Strings.X_Autocrafting_threshold + " = 75%\n"
                 + Program.Strings.AutoCraftingTypeStringName + "=" + string.Join(",", allTypes) + "\n"
                 + " Type : Component = Steel, Plate, -Large\n"
                 + " Type : PhysicalGunObject = \n";

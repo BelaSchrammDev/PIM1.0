@@ -10,7 +10,7 @@ namespace IngameScript
         /// Refinerys that refine ore by the ore priority (ingotprio) of their type.
         /// The refinery works on the first item of its input inventory only.
         /// </summary>
-        public class VanillaRefineryManager : RefineryBlockManagerer
+        public class VanillaRefineryManager : RefineryBlockManager
         {
             // DoManage alternates between ClearInput and OreSwap
             bool swapOresNext = false;

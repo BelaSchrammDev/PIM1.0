@@ -13,7 +13,7 @@ namespace IngameScript
     partial class Program
     {
         const string OrePrioDefString = "(sms,oreprio)";
-        const string ResourcenOverview = "(sms,refining)";
+        const string RefiningOverview = "(sms,refining)";
         const string Autocrafting = "(sms,autocrafting)";
 
         const string line = "\n" + linepur + "\n";
@@ -24,7 +24,7 @@ namespace IngameScript
 
         static readonly string bigSpaces = new string(' ', 85);
 
-        static int getIntegerWithPräfix(string cstr)
+        static int getIntegerWithPrefix(string cstr)
         {
             if (cstr == "") return 0;
             var cstrlist = cstr.Split(' ');
@@ -65,7 +65,7 @@ namespace IngameScript
                 {
                     if (l[1] != "") acTypes = l[1];
                 }
-                else if (l[0] == Strings.X_Autocrafting_treshold && l.Length > 1)
+                else if (l[0] == Strings.X_Autocrafting_threshold && l.Length > 1)
                 {
                     var old = AutocraftingThreshold;
                     AutocraftingThreshold = getInteger(l[1]);
@@ -78,7 +78,7 @@ namespace IngameScript
                 }
                 else if (l.Length == 6 && active.ContainsKey(l[4]))
                 {
-                    active[l[4]].SetMaximumAmount(getIntegerWithPräfix(l[2]));
+                    active[l[4]].SetMaximumAmount(getIntegerWithPrefix(l[2]));
                 }
             }
             return thresholdChanged;
@@ -96,7 +96,7 @@ namespace IngameScript
         public static void RenderAutocraftingHeader(StringBuilder sb, string acTypes, List<string> allTypes)
         {
             sb.Append("/ Autocraftingdefinition:\n/ add '...(sms)' to the name of assemblers to crafting their items,\n/ and set the max quantity as you want\n\n/ if the quantity of items falls below this percentage value,\n/ then it will be increased to max.\n"
-                + Strings.X_Autocrafting_treshold + " = " + AutocraftingThreshold + "%\n\n/ possible autocrafting types, please add them separated by comma.\n/ "
+                + Strings.X_Autocrafting_threshold + " = " + AutocraftingThreshold + "%\n\n/ possible autocrafting types, please add them separated by comma.\n/ "
                 + string.Concat(allTypes.Select(t => t + ","))
                 + "\n" + Strings.AutoCraftingTypeStringName + "=" + acTypes
                 + "\n\n/                           Item            |     current    ­|       max      ­|   assembly\n");

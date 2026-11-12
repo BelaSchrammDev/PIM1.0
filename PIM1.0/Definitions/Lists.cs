@@ -43,8 +43,8 @@ namespace IngameScript
             public Dictionary<string, List<IMyInventory>> InventoryManagerList = new Dictionary<string, List<IMyInventory>>();
             public Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
 
-            public List<IMyInventory> NoneSmsFlagedInventoryList = new List<IMyInventory>();
-            public List<IMyInventory> SmsFlagedInventoryList = new List<IMyInventory>();
+            public List<IMyInventory> NonSmsFlaggedInventoryList = new List<IMyInventory>();
+            public List<IMyInventory> SmsFlaggedInventoryList = new List<IMyInventory>();
             public List<string> collectAll_List = new List<string>();
 
             public List<StorageCargo> StorageCargos = new List<StorageCargo>();

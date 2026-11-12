@@ -9,8 +9,8 @@ namespace IngameScript
                 MyProgram.LCD_DebugPrint();
 
                 ClearInventoryList(Lists.Data.Inventory);
-                Lists.Data.NoneSmsFlagedInventoryList.Clear();
-                Lists.Data.SmsFlagedInventoryList.Clear();
+                Lists.Data.NonSmsFlaggedInventoryList.Clear();
+                Lists.Data.SmsFlaggedInventoryList.Clear();
                 Lists.Data.CargoUseList.Clear();
 
                 // TODO: must be do that

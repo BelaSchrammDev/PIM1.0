@@ -70,8 +70,8 @@ namespace IngameScript
 
             class SP
             {
-                static int SpacePoolLiveCycle = 700;
-                int LiveCycle = 5;
+                static int SpacePoolLifeCycle = 700;
+                int LifeCycle = 5;
                 public float Width = 0;
                 string FillString = "";
                 public SP(float iw)
@@ -91,17 +91,17 @@ namespace IngameScript
                 }
                 public string GetFillString()
                 {
-                    LiveCycle = 5;
+                    LifeCycle = 5;
                     RefreshSpacePoolList();
                     return FillString;
                 }
                 static void RefreshSpacePoolList()
                 {
-                    if (--SpacePoolLiveCycle < 1)
+                    if (--SpacePoolLifeCycle < 1)
                     {
                         for (int i = SpacePoolList.Count - 1; i >= 0; i--)
-                            if (--SpacePoolList[i].LiveCycle < 0) SpacePoolList.RemoveAt(i);
-                        SpacePoolLiveCycle = 500;
+                            if (--SpacePoolList[i].LifeCycle < 0) SpacePoolList.RemoveAt(i);
+                        SpacePoolLifeCycle = 500;
                     }
                 }
             }
