@@ -58,12 +58,6 @@ namespace IngameScript
 
                 public RefreshType GetTypeID() => TypeID;
 
-                public bool IsVanillaManagment() => TypeID == RefreshType.VanillaRefinery;
-
-                public bool IsUnknowType() => TypeID == RefreshType.Unknow;
-
-                public bool IsType(RefreshType typeToCheck) => TypeID == typeToCheck;
-
                 public string GetAlternativOrDefaultName() 
                 {
                     return string.IsNullOrEmpty(AlternativName) 

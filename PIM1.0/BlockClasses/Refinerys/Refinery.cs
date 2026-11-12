@@ -174,7 +174,6 @@ namespace IngameScript
 
             public void GetErrorInfo(StringBuilderExtended errString)
             {
-                if (!IsPimControlled && ErrorList.Count == 0) return;
                 foreach (var error in ErrorList)
                 {
                     errString.Append(Parameter.Name);

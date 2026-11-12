@@ -79,27 +79,20 @@ namespace IngameScript.Tests
         }
 
         [TestMethod]
-        public void IsUnknowType_DefaultEntry_IsTrue()
+        public void GetTypeID_DefaultEntry_IsUnknow()
         {
+            // the fallback for unknown blocks: BlockManagerFactory gives it the UnknownRefineryManager
             var fallback = new Program.Refinery.TypeDefinitions();
 
-            Assert.IsTrue(fallback.IsUnknowType());
+            Assert.AreEqual(Program.Refinery.RefreshType.Unknow, fallback.GetTypeID());
         }
 
         [TestMethod]
-        public void IsVanillaManagment_VanillaRefineryType_IsTrue()
-        {
-            var def = new Program.Refinery.TypeDefinitions("Centrifuge", Program.Refinery.RefreshType.VanillaRefinery);
-
-            Assert.IsTrue(def.IsVanillaManagment());
-        }
-
-        [TestMethod]
-        public void IsVanillaManagment_NonVanillaType_IsFalse()
+        public void GetTypeID_ReturnsTheTypeOfTheDefinition()
         {
             var def = new Program.Refinery.TypeDefinitions("Reprocessor", Program.Refinery.RefreshType.Reprocessor);
 
-            Assert.IsFalse(def.IsVanillaManagment());
+            Assert.AreEqual(Program.Refinery.RefreshType.Reprocessor, def.GetTypeID());
         }
     }
 }

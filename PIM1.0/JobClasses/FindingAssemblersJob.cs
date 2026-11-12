@@ -7,6 +7,8 @@
         {
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
             {
+                // the assembler queues are counted again (Assembler.Refresh → AddProductionAmount)
+                Lists.Data.ClearAllAssemblerBluePrintAssemblyAmounts();
                 startIndex = 0;
                 endIndex = Lists.Data.AssemblerList.Count - 1;
             }
