@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IngameScript
+﻿namespace IngameScript
 {
     partial class Program
     {
@@ -20,7 +18,6 @@ namespace IngameScript
             }
             
             public double CurrentCycleInSec = 0;
-            public DateTime LastStart = DateTime.Now;
             public bool AutoCraftingSettingsInValid = true;
             public string CurrentGunGroupName = Strings.DefaultGunGroupName;
         }

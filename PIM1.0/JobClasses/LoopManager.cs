@@ -18,22 +18,42 @@ namespace IngameScript
             // while this job is active (blueprint loading at script start) the maximum budget is used
             public static Job StartupJob;
 
-            public static bool IsMaxInstructionsArrived()
+            private static bool IsStartupRunning
             {
-                return MyProgram.Runtime.CurrentInstructionCount > (StartupJob != null && StartupJob.Active ? INSTRUCTION_MAX : CurrentInstructionAmount);
+                get { return StartupJob != null && StartupJob.Active; }
             }
 
-            public const int INSTRUCTION_MIN = 300, INSTRUCTION_MAX = 5000;
-            public static int CurrentInstructionAmount = 1000;
+            public static bool IsMaxInstructionsArrived()
+            {
+                return MyProgram.Runtime.CurrentInstructionCount > (IsStartupRunning ? InstructionBudget.INSTRUCTION_MAX : CurrentInstructionAmount);
+            }
+
+            public static int CurrentInstructionAmount = InstructionBudget.INSTRUCTION_MIN;
+
+            // runs since the last cycle start; a cycle containing startup runs (max budget) is not used for the budget
+            private static int _runsInCycle;
+            private static bool _cycleHadStartup = true;
+
+            // once per Main run, before the jobs run
+            public static void CountRun()
+            {
+                _runsInCycle++;
+                if (IsStartupRunning) _cycleHadStartup = true;
+            }
 
             public override RunJobResult RunJob()
             {
-                Properties.Data.CurrentCycleInSec = (DateTime.Now - Properties.Data.LastStart).TotalSeconds;
-                Properties.Data.LastStart = DateTime.Now;
+                var runs = _runsInCycle;
+                var measured = !_cycleHadStartup;
+                _runsInCycle = 0;
+                _cycleHadStartup = false;
+                // a cycle with startup runs is no real cycle: stays 0 ("measuring...")
+                if (measured) Properties.Data.CurrentCycleInSec = InstructionBudget.CycleSeconds(runs);
 
                 if (IfMeIsMaster())
                 {
-                    SetMasterBehavior(Properties.Data.CurrentCycleInSec);
+                    SetMasterBehavior();
+                    if (measured) CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, runs);
                     return RunJobResult.Finished;
                 }
                 else
@@ -46,20 +66,19 @@ namespace IngameScript
             public static void Init()
             {
                 Config.Instance.LoadConfig();
-                CurrentInstructionAmount = LoopManager.INSTRUCTION_MIN;
+                CurrentInstructionAmount = InstructionBudget.INSTRUCTION_MIN;
                 SetMasterBehavior();
             }
 
-            private static void SetMasterBehavior(double currentCycleInSec = 0.0)
+            private static void SetMasterBehavior()
             {
                 MyProgram.Runtime.UpdateFrequency = UpdateFrequency.Update10;
-                CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, currentCycleInSec);
             }
 
             private static void SetSlaveBehavior()
             {
                 MyProgram.Runtime.UpdateFrequency = UpdateFrequency.Update100;
-                CurrentInstructionAmount = INSTRUCTION_MIN;
+                CurrentInstructionAmount = InstructionBudget.INSTRUCTION_MIN;
             }
 
             private static bool IfMeIsMaster()

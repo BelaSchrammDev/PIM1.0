@@ -76,7 +76,7 @@
                 infoString.Append(warnungstring);
             }
             PimStatus = LoopManager.IsMaster
-                ? " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" + infoString
+                ? " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + (Properties.Data.CurrentCycleInSec > 0 ? Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" : "measuring...\n") + infoString
                 : "Standby\nMaster: " + Me.CustomName;
         }
     }

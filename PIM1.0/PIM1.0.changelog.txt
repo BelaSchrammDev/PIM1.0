@@ -124,6 +124,10 @@ Changes:
 - hints of the PB display are reported every cycle instead of being set and cleared: a hint is shown
   as long as it is reported, ViewManagerJob removes the others at the end of the cycle (SweepViews).
   ClearWarning and SetWarningByCondition removed; views and hints moved to StatusViews.cs (pure, tested)
+- instruction budget: proportional control instead of steps of 100, so it settles within a few cycles
+  (budget scaled by measured / target cycle length, 60% of the way, at most x0.7 / x1.6 per cycle,
+  no change within 3.5 .. 4.5 s). The cycle length is counted in runs (game time) instead of
+  DateTime.Now, so a low sim speed does not raise the budget; cycles with blueprint loading are not used
 
 New:
 

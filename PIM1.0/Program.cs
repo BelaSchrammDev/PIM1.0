@@ -95,6 +95,8 @@ namespace IngameScript
                 return;
             }
 
+            LoopManager.CountRun();
+
             do
             {
                 var result = _jobs[Loop.Data.CurrentJobIndex].Schedule();

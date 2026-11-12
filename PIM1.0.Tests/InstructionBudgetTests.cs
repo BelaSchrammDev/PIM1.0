@@ -3,9 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IngameScript.Tests
 {
     /// <summary>
-    /// Tests for InstructionBudget.Adjust, extracted from
-    /// LoopManager.SetMasterBehavior so the budget arithmetic is testable
-    /// without any Space Engineers dependency.
+    /// Tests for InstructionBudget.Adjust: proportional control on the cycle length
+    /// measured in runs (target 24 runs = 4 s at Update10, no change within 21..27 runs).
     /// </summary>
     [TestClass]
     public class InstructionBudgetTests
@@ -13,59 +12,77 @@ namespace IngameScript.Tests
         [TestMethod]
         public void Adjust_CycleWithinTargetRange_LeavesBudgetUnchanged()
         {
-            var result = Program.InstructionBudget.Adjust(current: 1000, cycleSeconds: 4.0);
-
-            Assert.AreEqual(1000, result);
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 24));
         }
 
         [TestMethod]
-        public void Adjust_CycleFasterThanTarget_DecreasesBudget()
+        public void Adjust_AtRangeBounds_LeavesBudgetUnchanged()
         {
-            var result = Program.InstructionBudget.Adjust(current: 1000, cycleSeconds: 3.0);
-
-            Assert.AreEqual(900, result);
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 21));
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 27));
         }
 
         [TestMethod]
-        public void Adjust_CycleSlowerThanTarget_IncreasesBudget()
+        public void Adjust_CycleTooLong_IncreasesProportionallyDamped()
         {
-            var result = Program.InstructionBudget.Adjust(current: 1000, cycleSeconds: 5.0);
-
-            Assert.AreEqual(1100, result);
+            // 36 runs: ratio 1.5, ideal 1500, 60% of the way -> 1300
+            Assert.AreEqual(1300, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 36));
         }
 
         [TestMethod]
-        public void Adjust_AtLowerBound_DoesNotChangeBudget()
+        public void Adjust_CycleTooShort_DecreasesProportionallyDamped()
         {
-            // 3.5s is the boundary itself (< 3.5 decreases), so exactly 3.5
-            // must count as "within range".
-            var result = Program.InstructionBudget.Adjust(current: 1000, cycleSeconds: 3.5);
-
-            Assert.AreEqual(1000, result);
+            // 18 runs: ratio 0.75, ideal 750, 60% of the way -> 850
+            Assert.AreEqual(850, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 18));
         }
 
         [TestMethod]
-        public void Adjust_AtUpperBound_DoesNotChangeBudget()
+        public void Adjust_VeryLongCycle_IsLimitedToRatioTwo()
         {
-            var result = Program.InstructionBudget.Adjust(current: 1000, cycleSeconds: 4.5);
+            // ratio clamped to 2.0 -> factor 1.6
+            Assert.AreEqual(1600, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 240));
+        }
 
-            Assert.AreEqual(1000, result);
+        [TestMethod]
+        public void Adjust_ZeroRuns_IsLimitedToRatioHalf()
+        {
+            // cycle finished within one run: ratio clamped to 0.5 -> factor 0.7
+            Assert.AreEqual(700, Program.InstructionBudget.Adjust(current: 1000, cycleRuns: 0));
         }
 
         [TestMethod]
         public void Adjust_NeverGoesBelowMinimum()
         {
-            var result = Program.InstructionBudget.Adjust(current: 300, cycleSeconds: 1.0);
-
-            Assert.AreEqual(300, result);
+            Assert.AreEqual(300, Program.InstructionBudget.Adjust(current: 300, cycleRuns: 1));
         }
 
         [TestMethod]
         public void Adjust_NeverGoesAboveMaximum()
         {
-            var result = Program.InstructionBudget.Adjust(current: 5000, cycleSeconds: 10.0);
+            Assert.AreEqual(5000, Program.InstructionBudget.Adjust(current: 4000, cycleRuns: 240));
+        }
 
-            Assert.AreEqual(5000, result);
+        [TestMethod]
+        public void Adjust_ConvergesWithinFewCycles()
+        {
+            // work needing 900 inst. per run for a 24-run cycle: runs = 24 * 900 / budget
+            var budget = 300;
+            var cycles = 0;
+            int runs;
+            while ((runs = 24 * 900 / budget) > 27 || runs < 21)
+            {
+                budget = Program.InstructionBudget.Adjust(budget, runs);
+                cycles++;
+                Assert.IsTrue(cycles < 10, "no convergence, budget " + budget);
+            }
+
+            Assert.IsTrue(cycles <= 4, "cycles: " + cycles);
+        }
+
+        [TestMethod]
+        public void CycleSeconds_UsesTenTicksPerRun()
+        {
+            Assert.AreEqual(4.0, Program.InstructionBudget.CycleSeconds(24), 1e-9);
         }
     }
 }
