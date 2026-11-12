@@ -17,7 +17,8 @@ namespace IngameScript
             public string SubTypeName;
             bool outputInventoryNotEmpty = false;
             bool IsSurvivalKit = false;
-            bool RemoveItemMode = false;
+            // ManageQueue alternates: true = move the most important item to the front, false = remove the items at their maximum
+            bool moveToFrontNext = true;
 
             public Assembler(IMyAssembler a)
             {
@@ -153,8 +154,7 @@ namespace IngameScript
             /// <summary>Alternates between removing items that reached their maximum and moving the most important one to the front.</summary>
             void ManageQueue(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)
             {
-                RemoveItemMode = !RemoveItemMode;
-                if (RemoveItemMode)
+                if (moveToFrontNext)
                 {
                     MoveMostImportantToFront(queue);
                 }
@@ -162,6 +162,7 @@ namespace IngameScript
                 {
                     RemoveItemsAtMaximum(queue, queueBluePrints);
                 }
+                moveToFrontNext = !moveToFrontNext;
             }
 
             void RemoveItemsAtMaximum(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)

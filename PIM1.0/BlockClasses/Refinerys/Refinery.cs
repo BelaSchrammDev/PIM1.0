@@ -140,10 +140,8 @@ namespace IngameScript
             {
                 SetErrorByCondition(RefError.Damaged, !RefineryBlock.IsFunctional);
 
-                if (RefineryBlock.IsFunctional && (InputInventory.ItemCount == 0 || InputInventory.CurrentVolume > 0))
-                {
-                    DeleteRefineryError(RefError.NotFilled);
-                }
+                // set again by the filling (phase 2, RefineryFilling) if the refinery is still empty
+                if (RefineryBlock.IsFunctional) DeleteRefineryError(RefError.NotFilled);
             }
 
             private void SetRefineryStatus()

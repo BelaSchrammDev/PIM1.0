@@ -59,15 +59,12 @@
             }
 
             /// <summary>
-            /// Checks if the range is empty (no valid indices to process).
+            /// Empty range: an index below 0, as given by an empty list
+            /// (forward: start=0, end=Count-1=-1; backward: start=Count-1=-1, end=0).
             /// </summary>
             private bool IsEmptyRange(int start, int end)
             {
-                // Forward: start > end is invalid (e.g., start=5, end=3)
-                // Backward: end > start is invalid (e.g., start=3, end=5 but meant to go backward)
-                // Actually, we need to check if it's logically empty
-                // For now, check common empty cases like list.Count=0 → start=0, end=-1
-                return (start == 0 && end < 0) || (start < 0) || (end < 0 && start >= 0);
+                return start < 0 || end < 0;
             }
 
             /// <summary>

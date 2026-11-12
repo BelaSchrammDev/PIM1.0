@@ -83,12 +83,12 @@ namespace IngameScript
 
             private static bool IfMeIsMaster()
             {
-                MyProgram.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsMainConstruct());
                 Master = MyProgram.Me;
                 return true;
 
                 // TODO: detecting other PIM PRGs; with block.TryRun();
                 // ============================================================================
+                //MyProgram.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsMainConstruct());
                 //Program.Instance.Echo("prg.count = " + Lists.Data.ProgrammableBlocks.Count);
                 //Program.Instance.Echo("myself.entityID = " + MySelf.EntityId);
 

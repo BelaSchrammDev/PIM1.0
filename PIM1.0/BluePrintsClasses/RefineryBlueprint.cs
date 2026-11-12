@@ -99,7 +99,7 @@ namespace IngameScript
             {
                 if (np > 10000) np = 10000;
                 prio = np;
-                if (np == 0 || initp != np) initp = np;
+                initp = np;
             }
             /// <summary>
             /// A refinery was filled with this ore: lowers a calculated priority (below 100) by one
