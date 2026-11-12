@@ -51,6 +51,11 @@ namespace IngameScript
                 _InputInventory = new ReprocessorInputInventory(Refinery.InputInventory);
             }
 
+            public override void Refresh()
+            {
+                CalculateRefineryAmount(Ingot.SpentFuelReprocessing);
+            }
+
             public override void DoManage()
             {
                 if (Lists.Data.BluePrints_Active.ContainsKey(Ingot.SpentFuelReprocessing) && !Lists.Data.BluePrints_Active[Ingot.SpentFuelReprocessing].IfMax())

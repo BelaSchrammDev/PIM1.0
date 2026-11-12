@@ -22,8 +22,11 @@ namespace IngameScript
                     case Refinery.RefreshType.WaterRecyclingSystem:
                         return new WaterRecyclingSystemManager(block);
 
+                    case Refinery.RefreshType.NoAutofill:
+                        return new NoAutofillManager(block);
+
                     default:
-                        return new DummyBlockManager(block);
+                        return new UnknownRefineryManager(block);
 
                 }
             }

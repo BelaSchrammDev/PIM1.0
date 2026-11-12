@@ -45,8 +45,6 @@ namespace IngameScript
             public List<RefineryBlueprint> AcceptedBlueprints = null;
             public string BlockSubType = "";
             public int Success;
-            public RefineryBlueprint CurrentWorkBluePrint = null, NextWorkBluePrint = null;
-            public float CurrentWorkOreAmount = 0, NexWorkOreAmount = 0;
 
             public Refinery(IMyRefinery refinery)
             {
@@ -89,10 +87,19 @@ namespace IngameScript
             }
 
 
+            /// <summary>
+            /// Phase 1 of the refinery handling (FindingRefinerysJob): what is the same for every refinery type.
+            /// The type specific part is done by the manager (Manager.Refresh here, Manager.DoManage in RefineryManagerJob).
+            /// </summary>
             public void Refresh()
             {
                 if (IsClosed) return;
 
+                var wasPimControlled = IsPimControlled;
+                var pimControlled = Parameter.ParseArgs(RefineryBlock.CustomName, true);
+                if (wasPimControlled && !pimControlled) Release();
+
+                // for every refinery, also the ones without tag:
                 // only the own lists: the stock (Lists.Data.Inventory) already contains the refinery
                 // inventories, GridScanningJob counts every inventory of the grid
                 RefreshInventoryLists();
@@ -100,37 +107,27 @@ namespace IngameScript
                 ClearInventory(OutputInventory);
                 SetErrorByCondition(RefError.OutputNotEmpty, OutputInventory.CurrentVolume > 0);
 
-                if (!Parameter.ParseArgs(RefineryBlock.CustomName, true)) return;
+                if (!pimControlled) return;
 
                 SetRefineryErrors();
+                Manager.Refresh();
+                if (Manager.IsFilledByPim) SetRefineryStatus();
+            }
 
-                if (RefineryType.IsUnknowType() || RefineryType.IsType(RefreshType.NoAutofill))
-                {
-                    return;
-                }
-
-                if (RefineryType.IsVanillaManagment())
-                {
-                    if (!ingotprio.ContainsKey(BlockSubType)) ingotprio.Add(BlockSubType, new List<IPrio>());
-                    if (!refineryTypesAcceptedBlueprintsList.ContainsKey(BlockSubType)) refineryTypesAcceptedBlueprintsList.Add(BlockSubType, AcceptedBlueprints);
-                }
-
-                CalculateWorkAmount();
-                SetRefineryStatus();
+            /// <summary>
+            /// The tag was removed: give the block back to the player. PIM switched the conveyor off (and the
+            /// block off while idle) for its own filling, and its errors are no longer refreshed.
+            /// </summary>
+            void Release()
+            {
+                ErrorList.Clear();
+                if (!Manager.IsFilledByPim) return;
+                RefineryBlock.UseConveyorSystem = true;
+                RefineryBlock.Enabled = true;
             }
 
             private void SetRefineryErrors()
             {
-                if (RefineryType.IsType(RefreshType.NoAutofill))
-                {
-                    AddRefineryError(RefError.NoAutofill);
-                }
-
-                if (RefineryType.IsUnknowType())
-                {
-                    SetWarning(Warning.ID.REFINERYNOTSUPPORTED, BlockSubType);
-                }
-
                 SetErrorByCondition(RefError.Damaged, !RefineryBlock.IsFunctional);
 
                 if (RefineryBlock.IsFunctional && (InputInventory.ItemCount == 0 || InputInventory.CurrentVolume > 0))
@@ -185,67 +182,6 @@ namespace IngameScript
                 }
             }
 
-
-            void CalculateRefineryAmount(string bluePrintName)
-            {
-                if (Lists.Data.BluePrints_Active.ContainsKey(bluePrintName))
-                {
-                    var b = Lists.Data.BluePrints_Active[bluePrintName];
-                    var u = b.MaximumItemAmount - b.CurrentItemAmount;
-                    if (b.MaximumItemAmount > 0 && u > 0) b.RefineryAmount = u;
-                    else b.RefineryAmount = 0;
-                }
-            }
-
-            private void GetVanillaWorkItems()
-            {
-                string ws = "----";
-                string nws = ws;
-                float waf = 0f;
-                float nwaf = 0f;
-                var inhalt = new List<MyInventoryItem>();
-
-                InputInventory.GetItems(inhalt);
-
-                if (inhalt.Count() > 0)
-                {
-                    ws = ItemTypesConverter.ToPimId(inhalt[0].Type);
-                    waf = (float)inhalt[0].Amount;
-                    if (inhalt.Count() > 1)
-                    {
-                        nws = ItemTypesConverter.ToPimId(inhalt[1].Type);
-                        nwaf = (float)inhalt[1].Amount;
-                    }
-                }
-
-                CurrentWorkBluePrint = AcceptedBlueprints.Find(b => b.InputID == ws);
-                CurrentWorkOreAmount = waf;
-                NextWorkBluePrint = AcceptedBlueprints.Find(b => b.InputID == nws);
-                NexWorkOreAmount = nwaf;
-            }
-
-            void CalculateWorkAmount()
-            {
-                switch (RefineryType.GetTypeID())
-                {
-                    case RefreshType.HydrophonicsFarm:
-                        CalculateRefineryAmount(Ingot.SubFresh);
-                        break;
-
-                    case RefreshType.WaterRecyclingSystem:
-                        CalculateRefineryAmount(Ingot.WaterFood);
-                        break;
-
-                    case RefreshType.Reprocessor:
-                        CalculateRefineryAmount(Ingot.SpentFuelReprocessing);
-                        break;
-
-                    case RefreshType.VanillaRefinery:
-                        GetVanillaWorkItems();
-                        break;
-
-                }
-            }
         }
     }
 }

@@ -47,6 +47,11 @@ namespace IngameScript
                 _InputInventory = new HydrophonicsInputInventory(Refinery.InputInventory);
             }
 
+            public override void Refresh()
+            {
+                CalculateRefineryAmount(Ingot.SubFresh);
+            }
+
             public override void DoManage()
             {
                 LCD_DebugString.Append("HydroManager: Starting management.\n");

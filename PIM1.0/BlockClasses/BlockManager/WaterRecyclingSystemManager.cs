@@ -12,6 +12,11 @@ namespace IngameScript
             {
             }
 
+            public override void Refresh()
+            {
+                CalculateRefineryAmount(Ingot.WaterFood);
+            }
+
             public override void DoManage()
             {
                 LCD_DebugString.Append("\nWRSManager: Starting management.\n");

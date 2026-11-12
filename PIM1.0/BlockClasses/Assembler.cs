@@ -75,21 +75,48 @@ namespace IngameScript
                     return;
                 }
 
-                var proditem_list = new List<MyProductionItem>();
-                var bprint_list = new List<AssemblerBluePrint>();
+                var queue = new List<MyProductionItem>();
+                var queueBluePrints = new List<AssemblerBluePrint>();
 
+                RefreshState(queue, queueBluePrints);
+
+                if (!Parameter.ParseArgs(AssemblerBlock.CustomName, true) || !AssemblerBlock.IsFunctional)
+                {
+                    return;
+                }
+
+                if (AssemblerBlock.IsQueueEmpty)
+                {
+                    SetIdle();
+                }
+                else
+                {
+                    AssemblerBlock.Enabled = true;
+
+                    if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
+                    {
+                        ManageQueue(queue, queueBluePrints);
+                    }
+                }
+            }
+
+            /// <summary>
+            /// For every assembler, also the ones without tag: count the queue as "in production" and unload.
+            /// </summary>
+            void RefreshState(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)
+            {
                 if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
                 {
                     var outInventory = AssemblerBlock.GetInventory(1);
                     ClearInventory(outInventory);
                     outputInventoryNotEmpty = outInventory.CurrentVolume > 0;
-                    AssemblerBlock.GetQueue(proditem_list);
-                    for (int i = proditem_list.Count - 1; i >= 0; i--)
+                    AssemblerBlock.GetQueue(queue);
+                    for (int i = queue.Count - 1; i >= 0; i--)
                     {
-                        var bprint = Program.MyProgram.AddProductionAmount(proditem_list[i]);
+                        var bprint = Program.MyProgram.AddProductionAmount(queue[i]);
                         if (bprint != null)
                         {
-                            bprint_list.Add(bprint);
+                            queueBluePrints.Add(bprint);
                         }
                     }
                 }
@@ -97,82 +124,68 @@ namespace IngameScript
                 {
                     ClearInventory(AssemblerBlock.GetInventory(0));
                 }
+            }
 
-                if (!Parameter.ParseArgs(AssemblerBlock.CustomName, true))
+            /// <summary>Empty queue: switch off (config) and empty the inventory that is not unloaded while working.</summary>
+            void SetIdle()
+            {
+                if (!IsSurvivalKit)
                 {
-                    return;
+                    AssemblerBlock.Enabled = !Config.Instance.assemblers_off || Parameter.IsParameter("Nooff");
                 }
 
-                if (AssemblerBlock.IsFunctional)
-                {
-                    if (AssemblerBlock.IsQueueEmpty)
-                    {
-                        if (!IsSurvivalKit)
-                        {
-                            AssemblerBlock.Enabled = !Config.Instance.assemblers_off || Parameter.IsParameter("Nooff");
-                        }
+                ClearInventory(AssemblerBlock.GetInventory(AssemblerBlock.Mode == MyAssemblerMode.Disassembly ? 1 : 0));
+            }
 
-                        if (AssemblerBlock.Mode == MyAssemblerMode.Disassembly)
+            /// <summary>Alternates between removing items that reached their maximum and moving the most important one to the front.</summary>
+            void ManageQueue(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)
+            {
+                RemoveItemMode = !RemoveItemMode;
+                if (RemoveItemMode)
+                {
+                    MoveMostImportantToFront(queue);
+                }
+                else if (Config.Instance.delete_queueItem_if_max)
+                {
+                    RemoveItemsAtMaximum(queue, queueBluePrints);
+                }
+            }
+
+            void RemoveItemsAtMaximum(List<MyProductionItem> queue, List<AssemblerBluePrint> queueBluePrints)
+            {
+                for (int i = queue.Count - 1; i >= 0; i--)
+                {
+                    var productionItem = queue[i];
+                    foreach (var bprint in queueBluePrints)
+                    {
+                        if (bprint.definition_id.SubtypeName == productionItem.BlueprintId.SubtypeName
+                            && bprint.MaximumItemAmount != 0
+                            && bprint.MaximumItemAmount <= bprint.CurrentItemAmount)
                         {
-                            ClearInventory(AssemblerBlock.GetInventory(1));
-                        }
-                        else
-                        {
-                            ClearInventory(AssemblerBlock.GetInventory(0));
+                            AssemblerBlock.RemoveQueueItem(i, productionItem.Amount);
+                            queue.RemoveAt(i);
+                            // the item is gone: without the break a blueprint that is in the queue
+                            // twice (and so twice in queueBluePrints) would remove index i again
+                            break;
                         }
                     }
-                    else
+                }
+            }
+
+            void MoveMostImportantToFront(List<MyProductionItem> queue)
+            {
+                var firstBlueprint = queue.Count > 1 ? Program.MyProgram.GetBluePrintByProductionItem(queue[0]) : null;
+                if (firstBlueprint == null) return;
+
+                for (int i = queue.Count - 1; i > 0; i--)
+                {
+                    var productionItemBlueprint = Program.MyProgram.GetBluePrintByProductionItem(queue[i]);
+                    if (productionItemBlueprint != null
+                        && productionItemBlueprint.MaximumItemAmount != 0
+                        && productionItemBlueprint.ItemPriority > firstBlueprint.ItemPriority)
                     {
-                        AssemblerBlock.Enabled = true;
-
-                        if (AssemblerBlock.Mode == MyAssemblerMode.Assembly)
-                        {
-                            if (RemoveItemMode)
-                            {
-                                RemoveItemMode = false;
-                                if (Config.Instance.delete_queueItem_if_max)
-                                {
-                                    for (int i = proditem_list.Count - 1; i >= 0; i--)
-                                    {
-                                        var productionItem = proditem_list[i];
-                                        foreach (var bprint in bprint_list)
-                                        {
-                                            if (bprint.definition_id.SubtypeName == productionItem.BlueprintId.SubtypeName
-                                                && bprint.MaximumItemAmount != 0
-                                                && bprint.MaximumItemAmount <= bprint.CurrentItemAmount)
-                                            {
-                                                AssemblerBlock.RemoveQueueItem(i, productionItem.Amount);
-                                                proditem_list.RemoveAt(i);
-                                                // the item is gone: without the break a blueprint that is in the queue
-                                                // twice (and so twice in bprint_list) would remove index i again
-                                                break;
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                RemoveItemMode = true;
-                                AssemblerBluePrint firstBlueprint = proditem_list.Count > 1 ? Program.MyProgram.GetBluePrintByProductionItem(proditem_list[0]) : null;
-                                if (firstBlueprint != null)
-                                {
-                                    for (int i = proditem_list.Count - 1; i > 0; i--)
-                                    {
-                                        var productionItemBlueprint = Program.MyProgram.GetBluePrintByProductionItem(proditem_list[i]);
-                                        if (productionItemBlueprint != null
-                                            && productionItemBlueprint.MaximumItemAmount != 0
-                                            && productionItemBlueprint.ItemPriority > firstBlueprint.ItemPriority)
-                                        {
-                                            // Move
-                                            AssemblerBlock.MoveQueueItemRequest(proditem_list[i].ItemId, 0);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        AssemblerBlock.MoveQueueItemRequest(queue[i].ItemId, 0);
+                        break;
                     }
                 }
             }

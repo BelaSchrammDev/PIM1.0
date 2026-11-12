@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using VRage;
 using VRage.Game.ModAPI.Ingame;
 using static IngameScript.Program;
-using static IngameScript.Program.Refinery;
 
 namespace IngameScript
 {
@@ -18,8 +17,36 @@ namespace IngameScript
 
             ManagerState CurrentRefineryState = ManagerState.CLEAR_INPUT;
 
+            // the ore that is refined right now (first input item) and the next one (second input item)
+            RefineryBlueprint CurrentWorkBluePrint, NextWorkBluePrint;
+            float CurrentWorkOreAmount, NextWorkOreAmount;
+
             public VanillaRefineryManager(ManageableBlock block) : base(block)
             {
+            }
+
+            public override void Refresh()
+            {
+                if (!ingotprio.ContainsKey(Refinery.BlockSubType)) ingotprio.Add(Refinery.BlockSubType, new List<IPrio>());
+                if (!Refinery.refineryTypesAcceptedBlueprintsList.ContainsKey(Refinery.BlockSubType)) Refinery.refineryTypesAcceptedBlueprintsList.Add(Refinery.BlockSubType, Refinery.AcceptedBlueprints);
+                GetWorkItems();
+            }
+
+            void GetWorkItems()
+            {
+                var items = new List<MyInventoryItem>();
+                Refinery.InputInventory.GetItems(items);
+
+                CurrentWorkBluePrint = items.Count > 0 ? FindBlueprint(items[0]) : null;
+                CurrentWorkOreAmount = items.Count > 0 ? (float)items[0].Amount : 0f;
+                NextWorkBluePrint = items.Count > 1 ? FindBlueprint(items[1]) : null;
+                NextWorkOreAmount = items.Count > 1 ? (float)items[1].Amount : 0f;
+            }
+
+            RefineryBlueprint FindBlueprint(MyInventoryItem item)
+            {
+                var ore = ItemTypesConverter.ToPimId(item.Type);
+                return Refinery.AcceptedBlueprints.Find(b => b.InputID == ore);
             }
 
             public override void DoManage()
@@ -163,8 +190,8 @@ namespace IngameScript
             bool OreStealing(RefineryBlueprint blueprint)
             {
                 var oamount = 0f;
-                if (blueprint == Refinery.CurrentWorkBluePrint) oamount = Refinery.CurrentWorkOreAmount;
-                else if (blueprint == Refinery.NextWorkBluePrint) oamount = Refinery.NexWorkOreAmount;
+                if (blueprint == CurrentWorkBluePrint) oamount = CurrentWorkOreAmount;
+                else if (blueprint == NextWorkBluePrint) oamount = NextWorkOreAmount;
                 if (Refinery.InputInventory.CurrentVolume.RawValue < 100)
                 {
                     foreach (Refinery refinery in Lists.Data.RefineryList)
@@ -195,7 +222,7 @@ namespace IngameScript
                 int op = 0;
                 foreach (IPrio p in ingotprio[Refinery.BlockSubType])
                 {
-                    if (p.refineryBP == Refinery.CurrentWorkBluePrint || p.refineryBP == Refinery.NextWorkBluePrint) op = op < p.prio ? (int)(p.prio * 1.5) : op;
+                    if (p.refineryBP == CurrentWorkBluePrint || p.refineryBP == NextWorkBluePrint) op = op < p.prio ? (int)(p.prio * 1.5) : op;
                     else if (wp100 == 0 && Accept(p.refineryBP)) wp100 = p.prio;
                 }
                 return op < wp100;

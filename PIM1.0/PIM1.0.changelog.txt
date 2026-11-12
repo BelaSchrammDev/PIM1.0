@@ -70,6 +70,9 @@ Fix:
   gone, and it flickered or disappeared if one item of a type had a cargo and another one had none
   (a hint that was set again after it had been cleared in the same cycle was lost)
 - hint "please define cargo for Ammo" also names the armory: "...(sms,ammo) or ...(sms,armory)"
+- removing the (sms) tag from a refinery left it as PIM had set it: conveyor system off, and switched
+  off while empty. Now conveyor and power are switched on again (not for blocks PIM does not fill,
+  e.g. incinerator), and its hints disappear from the PB display
 
 Changes:
 
