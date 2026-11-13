@@ -2,19 +2,10 @@
 {
     partial class Program
     {
+        // commands of the player (run argument); the scripts talk via IGC (NetWorkingIgc)
         public static class CommandDispatcher
         {
             public static bool Dispatch(string commandLine)
-            {
-                if (NetWorkingDispatcher.Instance.Dispatch(commandLine))
-                {
-                    return true;
-                }
-
-                return DispatchOtherCommands(commandLine);
-            }
-
-            public static bool DispatchOtherCommands(string commandLine)
             {
                 switch (NetWorkingParser.ParseCommandName(commandLine))
                 {

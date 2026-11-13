@@ -21,8 +21,9 @@
              Link="Linked\StringBuilderExtended.cs" />
     <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingParser.cs"
              Link="Linked\NetWorkingParser.cs" />
-    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingDispatcher.cs"
-             Link="Linked\NetWorkingDispatcher.cs" />
+    <!-- networking core only: NetWorkingIgc.cs needs the game's IGC -->
+    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingNode.cs"
+             Link="Linked\NetWorkingNode.cs" />
     <Compile Include="..\PIM1.0\Tools\StorageAmounts.cs"
              Link="Linked\StorageAmounts.cs" />
     <Compile Include="..\PIM1.0\Tools\AmmoPriority.cs"

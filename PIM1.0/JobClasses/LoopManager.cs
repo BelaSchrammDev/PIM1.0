@@ -8,12 +8,9 @@ namespace IngameScript
     {
         public class LoopManager : Job
         {
-            private static IMyProgrammableBlock Master = null;
-
-            public static bool IsMaster
-            {
-                get { return Master == MyProgram.Me; }
-            }
+            // decided by the networking (lowest address of all PIMs on the construct); true until the first decision,
+            // so the startup job runs with the full budget
+            public static bool IsMaster = true;
 
             // while this job is active (blueprint loading at script start) the maximum budget is used
             public static Job StartupJob;
@@ -43,24 +40,31 @@ namespace IngameScript
 
             public override RunJobResult RunJob()
             {
+                var wasMaster = IsMaster;
+                IsMaster = Net.IsMaster;
+                if (!IsMaster)
+                {
+                    // standby runs are no real cycle either: the first cycle as master is not measured
+                    _cycleHadStartup = true;
+                    SetSlaveBehavior();
+                    MyProgram.SetStandbyStatus();
+                    return RunJobResult.Continue;
+                }
+
                 var runs = _runsInCycle;
                 var measured = !_cycleHadStartup;
                 _runsInCycle = 0;
                 _cycleHadStartup = false;
                 // a cycle with startup runs is no real cycle: stays 0 ("measuring...")
-                if (measured) Properties.Data.CurrentCycleInSec = InstructionBudget.CycleSeconds(runs);
+                if (measured)
+                {
+                    Properties.Data.CurrentCycleInSec = InstructionBudget.CycleSeconds(runs);
+                    CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, runs);
+                }
 
-                if (IfMeIsMaster())
-                {
-                    SetMasterBehavior();
-                    if (measured) CurrentInstructionAmount = InstructionBudget.Adjust(CurrentInstructionAmount, runs);
-                    return RunJobResult.Finished;
-                }
-                else
-                {
-                    SetSlaveBehavior();
-                    return RunJobResult.Continue;
-                }
+                if (!wasMaster) MyProgram.PimStatus = " starting...\n";
+                SetMasterBehavior();
+                return RunJobResult.Finished;
             }
 
             public static void Init()
@@ -79,33 +83,6 @@ namespace IngameScript
             {
                 MyProgram.Runtime.UpdateFrequency = UpdateFrequency.Update100;
                 CurrentInstructionAmount = InstructionBudget.INSTRUCTION_MIN;
-            }
-
-            private static bool IfMeIsMaster()
-            {
-                Master = MyProgram.Me;
-                return true;
-
-                // TODO: detecting other PIM PRGs; with block.TryRun();
-                // ============================================================================
-                //MyProgram.GridTerminalSystem.GetBlocksOfType(Lists.Data.ProgrammableBlocks, block => block.IsMainConstruct());
-                //Program.Instance.Echo("prg.count = " + Lists.Data.ProgrammableBlocks.Count);
-                //Program.Instance.Echo("myself.entityID = " + MySelf.EntityId);
-
-                //Master = null;
-
-                //foreach (var p in Lists.Data.ProgrammableBlocks)
-                //{
-                //    if (p.Enabled && p.DetailedInfo.StartsWith(SI1))
-                //    {
-                //        Program.Instance.Echo("found.entity = " + p.EntityId);
-                //        if (MySelf.EntityId <= p.EntityId)
-                //        {
-                //            Master = p;
-                //        }
-                //    }
-                //}
-                //return Master == MySelf;
             }
         }
     }

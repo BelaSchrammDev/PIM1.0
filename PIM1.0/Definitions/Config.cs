@@ -24,6 +24,7 @@ namespace IngameScript
             }
 
             public bool ShowInfoPBLcd = true;
+            public bool ShowNetwork = true;
             public bool delete_queueItem_if_max = true;
             public bool always_recycle_greywater = true;
             public bool assemblers_off = true;
@@ -61,6 +62,8 @@ namespace IngameScript
                     + "  / to activate changes, please restart script\n"
                     + Strings.X_Line + "\n  / show info on programmable blocks LCD\n"
                     + "ShowInfoPBLcd=" + ShowInfoPBLcd.ToString() + "\n\n"
+                    + "  / show the scripts in the network and the master\n  / (only if there is more than this one)\n"
+                    + "ShowNetwork=" + ShowNetwork.ToString() + "\n\n"
                     + "  / delete item from the production list (Assemblers)\n  / when the maximum value is reached.\n"
                     + "delete_queueItem_if_max=" + delete_queueItem_if_max.ToString() + "\n\n"
                     + "  / always recycle grey water on the Water Recycling System Block\n  / (only Daily Needs Survival Mod)\n"
@@ -133,6 +136,7 @@ namespace IngameScript
                         switch (cs[0])
                         {
                             case "ShowInfoPBLcd": ShowInfoPBLcd = ParseBoolean(cs[1], ShowInfoPBLcd); break;
+                            case "ShowNetwork": ShowNetwork = ParseBoolean(cs[1], ShowNetwork); break;
                             case "delete_queueItem_if_max": delete_queueItem_if_max = ParseBoolean(cs[1], delete_queueItem_if_max); break;
                             case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1], always_recycle_greywater); break;
                             case "assemblers_off": assemblers_off = ParseBoolean(cs[1], assemblers_off); break;

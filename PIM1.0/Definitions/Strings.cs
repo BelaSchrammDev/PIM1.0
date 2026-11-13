@@ -8,8 +8,8 @@
         {
             public const string
                 // PIM Strings
-                PimVersion = "PIM v1.1",
-                PimCopyright = "d (c) BelaOkuma\n",
+                PimScriptType = "PIM", // networking: master election among the scripts of this type
+                PimVersion = "PIM v1.1d", // also sent to the other scripts (networking hello)
                 SmsVersion = "SMS v1.4",
 
                 // General

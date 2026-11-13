@@ -23,14 +23,21 @@ namespace IngameScript
         // singleton Program Instance
         public static Program MyProgram;
 
+        // script-to-script networking (other PIMs: master/standby)
+        private readonly NetWorkingIgc _netIgc;
+        public static NetWorkingNode Net;
+
         public Program()
         {
             MyProgram = this;
-            
+            _netIgc = new NetWorkingIgc(IGC, Strings.PimScriptType, Strings.PimVersion);
+            Net = _netIgc.Node;
+
             viewList.Add(new AmmoManagerInfo());
             viewList.Add(new StorageManagerInfo());
             viewList.Add(new RefineryManagerInfo());
             viewList.Add(new AssemblerManagerInfo());
+            viewList.Add(networkInfo);
 
             LoopManager.Init();
             LoopManager.StartupJob = new BluePrintLoadJob(new BluePrintSet(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints));
@@ -77,6 +84,8 @@ namespace IngameScript
 
         void Main(string argument, UpdateType updateSource)
         {
+            _netIgc.Poll(Runtime.TimeSinceLastRun);
+
             if (argument != "")
             {
                 if (!CommandDispatcher.Dispatch(argument))
@@ -104,7 +113,8 @@ namespace IngameScript
                     }
                 }
             }
-            while (!LoopManager.IsMaxInstructionsArrived());
+            // standby: only the LoopManager, once per run (it checks whether this PB became master)
+            while (LoopManager.IsMaster && !LoopManager.IsMaxInstructionsArrived());
 
             WritePimRunInfo();
         }
@@ -112,7 +122,7 @@ namespace IngameScript
         // every run: only the running sign changes, the status (PimStatus) is built once per cycle by CalculateInfos
         void WritePimRunInfo()
         {
-            var s = Strings.PimVersion + Strings.PimCopyright + RunSign.Next() + PimStatus;
+            var s = Strings.PimVersion + " (c) BelaOkuma\n" + RunSign.Next() + PimStatus;
 
             Echo(s);
 

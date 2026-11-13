@@ -1,4 +1,7 @@
-﻿namespace IngameScript
+﻿using Sandbox.ModAPI.Ingame;
+using System.Collections.Generic;
+
+namespace IngameScript
 {
     // Manager infos and the text of the PB display. The infos and hints themselves are in StatusViews.cs.
     partial class Program
@@ -51,6 +54,38 @@
         }
 
 
+        // all scripts of the network (sorted by address), with their master; nothing if this PB is alone
+        class NetworkInfo : View
+        {
+            static readonly List<long> addresses = new List<long>();
+
+            public override StringBuilderExtended GetInfoText()
+            {
+                if (!Config.Instance.ShowNetwork || Net.Peers.Count == 0 || Net.IsDiscovering) return null;
+
+                addresses.Clear();
+                addresses.Add(Net.Me);
+                addresses.AddRange(Net.Peers.Keys);
+                addresses.Sort();
+
+                InfoString.SetText("------------------- Network -------------------\n");
+                foreach (var a in addresses)
+                {
+                    NetWorkingPeer peer;
+                    Net.Peers.TryGetValue(a, out peer);
+                    var block = MyProgram.GridTerminalSystem.GetBlockWithId(a) as IMyTerminalBlock;
+                    InfoString.Append(block != null ? block.CustomName : a.ToString());
+                    InfoString.Append(": " + (peer != null ? peer.Version : Strings.PimVersion));
+                    if (Net.MasterOf(peer != null ? peer.ScriptType : Net.ScriptType) == a) InfoString.Append(" (master)");
+                    if (peer == null) InfoString.Append(" (this PB)");
+                    InfoString.Append('\n');
+                }
+                return InfoString;
+            }
+        }
+
+        readonly NetworkInfo networkInfo = new NetworkInfo();
+
         StringBuilderExtended infoString = new StringBuilderExtended(2000);
         StringBuilderExtended warnungstring = new StringBuilderExtended(1000);
 
@@ -75,9 +110,19 @@
                 infoString.Append("\n--------------------- Hints ---------------------\n");
                 infoString.Append(warnungstring);
             }
-            PimStatus = LoopManager.IsMaster
-                ? " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + (Properties.Data.CurrentCycleInSec > 0 ? Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" : "measuring...\n") + infoString
-                : "Standby\nMaster: " + Me.CustomName;
+            PimStatus = " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + (Properties.Data.CurrentCycleInSec > 0 ? Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" : "measuring...\n") + infoString;
+        }
+
+        // in standby the jobs (and CalculateInfos) do not run: the LoopManager sets the status every run
+        void SetStandbyStatus()
+        {
+            if (Net.IsDiscovering)
+            {
+                PimStatus = " Standby\nsearching other PIMs...";
+                return;
+            }
+            var master = GridTerminalSystem.GetBlockWithId(Net.MasterAddress) as IMyTerminalBlock;
+            PimStatus = " Standby\nMaster: " + (master != null ? master.CustomName : Net.MasterAddress.ToString()) + "\n\n" + networkInfo.GetInfoText();
         }
     }
 }
