@@ -15,6 +15,7 @@
                 // General
                 SmsStorageTag = "(sms,storage)",
                 X_UseConveyor = "UseConveyor",
+                X_Keep = "Keep", // (sms,keep): the container is not emptied
                 AC_ToolsAndGuns = "Tools&Guns",
                 X_Autocrafting_threshold = "Autocrafting_threshold",
                 AutoCraftingTypeStringName = "AutocraftingTypes",

@@ -6,6 +6,12 @@ only compatible with SMS v1.4!
 
 new in update 1.1d:
  - massive code overhaul
+ - several PIMs on one grid: one works, the others wait
+   in standby and take over if it is gone
+ - option ShowNetwork: shows the PIM scripts of the grid on the PB
+ - all items are collected from untagged containers and
+   connectors (options collect_all_... removed),
+   use (sms,keep) to keep the items in a container
  - vanilla fixes:
    - pistols and rocket launchers are counted correctly
    - flare gun and fireworks can be autocrafted again

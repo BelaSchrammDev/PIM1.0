@@ -137,6 +137,8 @@ namespace IngameScript
         {
             foreach (var tag in tags.Keys)
             {
+                // "Keep" is an option, no cargo type (ToIngame returns unknown tags unchanged)
+                if (tag == Strings.X_Keep) continue;
                 var ingame = ItemTypesConverter.ToIngame(tag);
                 if (ingame != "")
                 {

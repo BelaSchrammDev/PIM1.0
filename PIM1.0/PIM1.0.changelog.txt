@@ -78,6 +78,8 @@ Fix:
 - removing the (sms) tag from an assembler left it switched off if PIM had switched it off while
   idle (assemblers_off), now it is switched on again
 - the hint "assembler is damaged" also appeared for assemblers without (sms) tag
+- (sms,keep) was registered as a cargo of the type "Keep": a full keep container showed the hint
+  "cargo Keep is full", and SMS got a cargo use line for "Keep"
 - the hint "assembler cannot unload output items" was not updated while disassembling: it stayed
   from the last assembling, and the disassembled components that could not be unloaded were not reported
 - refinerys were not filled by the ore priority: the list was sorted by the calculated priority only
@@ -140,6 +142,22 @@ Changes:
   (budget scaled by measured / target cycle length, 60% of the way, at most x0.7 / x1.6 per cycle,
   no change within 3.5 .. 4.5 s). The cycle length is counted in runs (game time) instead of
   DateTime.Now, so a low sim speed does not raise the budget; cycles with blueprint loading are not used
+- networking between the scripts via IGC (Share/NetWorking, can be linked into other scripts, e.g. SMS):
+  NetWorkingNode (pure, tested) and NetWorkingIgc (transport, current construct only, read at the start
+  of every run, no message callback). Handshake: "hello" at start, answered with "ack", then "alive"
+  every 3 s; a script without message for 10 s is removed. Message: (protocol, type, body "key=value;...")
+- master/standby: of several PIMs on the same construct the one with the lowest EntityId works, the
+  others wait in standby (Update100) and take over when it is gone; replaces the unfinished detection
+  in LoopManager. Standby shows the master on the PB display and runs only the LoopManager once per run,
+  the first cycle after standby is not used for the instruction budget
+- NetWorkingDispatcher (say_hello via run argument) removed, run arguments are only player commands
+- PimVersion and PimCopyright merged, the version is also sent to the other scripts
+- config (custom data): no introduction text and no "### Config ###" markers anymore, the whole custom
+  data is read; old configs are read as before and written in the new form
+- options collect_all_Ore, collect_all_Ingot and collect_all_Component removed: untagged containers and
+  connectors are always emptied completely (all item types, before only ore, ingots and components).
+  One InventoryClearingJob and one list, ClearInventory without type filter.
+  Containers with (sms,keep) keep their items as before ((sms,storage) is not emptied either, but filled)
 
 New:
 
@@ -156,7 +174,9 @@ New:
   (check, update, new, scan, status, download), status and titles via the Steam Web API
 - test project (MSTest) with CI: Parameter, StringBuilderExtended, Jobs, Filter, CargoUse, TypeDefinitions,
   InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool,
-  LCD pages golden snapshot and read-back tests
+  LCD pages golden snapshot and read-back tests, NetWorkingNode, NetWorkingParser.GetValue
+- config option ShowNetwork: the scripts of the network with their master on the PB display
+  (only if there is more than this PB)
 
 
 Version 1.1c:

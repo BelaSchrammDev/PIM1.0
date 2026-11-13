@@ -40,7 +40,7 @@ namespace IngameScript
                 if (pm.ParseArgs(t.CustomName))
                 {
                     isSmsBlock = true;
-                    isNoKeep = !pm.IsParameter("Keep");
+                    isNoKeep = !pm.IsParameter(Strings.X_Keep);
                 }
 
                 for (int i = 0; i < inventoryOwner.InventoryCount; i++)
