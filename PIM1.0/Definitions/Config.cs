@@ -51,13 +51,7 @@ namespace IngameScript
             void WriteConfig()
             {
                 var configstr =
-                      "  / attention!!!\n"
-                    + "  / autocraftingconfig now via LCD Display,\n"
-                    + "  / place a LCD and add '..(sms,autocrafting) to the name.\n"
-                    + "  / follow the instructions, multiple lcds are possible'\n\n"
-                    + Strings.X_Config
-                    + "\n\n"
-                    + Strings.X_Line
+                      Strings.X_Line
                     + "  / options set to 'True' or 'False'.\n"
                     + "  / to activate changes, please restart script\n"
                     + Strings.X_Line + "\n  / show info on programmable blocks LCD\n"
@@ -94,7 +88,6 @@ namespace IngameScript
                     configstr += mod + "=" + usedMods[mod].ToString() + "\n";
                 }
 
-                configstr += "\n" + Strings.X_Config_end + "\n";
                 MyProgram.Me.CustomData = configstr;
             }
 
@@ -106,7 +99,7 @@ namespace IngameScript
                     if (m != Strings.M_Vanilla) usedMods.Add(m, false);
                 }
 
-                bool config = false;
+                // the whole CustomData is the config (the "### Config ###" markers of older versions are skipped: no '=')
                 foreach (var s1 in MyProgram.Me.CustomData.Split('\n'))
                 {
                     var s = s1.Trim();
@@ -115,41 +108,27 @@ namespace IngameScript
                     {
                         continue;
                     }
-                    else if (s == Strings.X_Config)
+
+                    var cs = s.Split('=');
+                    if (cs.Length < 2)
                     {
-                        config = true;
                         continue;
                     }
-                    else if (s == Strings.X_Config_end)
+
+                    switch (cs[0])
                     {
-                        break;
-                    }
-
-                    if (config)
-                    {
-                        var cs = s.Split('=');
-                        if (cs.Length < 2)
-                        {
-                            continue;
-                        }
-
-                        switch (cs[0])
-                        {
-                            case "ShowInfoPBLcd": ShowInfoPBLcd = ParseBoolean(cs[1], ShowInfoPBLcd); break;
-                            case "ShowNetwork": ShowNetwork = ParseBoolean(cs[1], ShowNetwork); break;
-                            case "delete_queueItem_if_max": delete_queueItem_if_max = ParseBoolean(cs[1], delete_queueItem_if_max); break;
-                            case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1], always_recycle_greywater); break;
-                            case "assemblers_off": assemblers_off = ParseBoolean(cs[1], assemblers_off); break;
-                            case "refinerys_off": refinerys_off = ParseBoolean(cs[1], refinerys_off); break;
-                            case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1], collect_all_Ore); break;
-                            case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1], collect_all_Ingot); break;
-                            case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1], collect_all_Component); break;
-                            case "stacking_cycle": stacking_cycle = ParseInt(cs[1], stacking_cycle); break;
-                            case "PIM_controlled_Weapons": Properties.Data.CurrentGunGroupName = cs[1]; break;
-                            default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1], usedMods[cs[0]]); break;
-                        }
-
-                        continue;
+                        case "ShowInfoPBLcd": ShowInfoPBLcd = ParseBoolean(cs[1], ShowInfoPBLcd); break;
+                        case "ShowNetwork": ShowNetwork = ParseBoolean(cs[1], ShowNetwork); break;
+                        case "delete_queueItem_if_max": delete_queueItem_if_max = ParseBoolean(cs[1], delete_queueItem_if_max); break;
+                        case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1], always_recycle_greywater); break;
+                        case "assemblers_off": assemblers_off = ParseBoolean(cs[1], assemblers_off); break;
+                        case "refinerys_off": refinerys_off = ParseBoolean(cs[1], refinerys_off); break;
+                        case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1], collect_all_Ore); break;
+                        case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1], collect_all_Ingot); break;
+                        case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1], collect_all_Component); break;
+                        case "stacking_cycle": stacking_cycle = ParseInt(cs[1], stacking_cycle); break;
+                        case "PIM_controlled_Weapons": Properties.Data.CurrentGunGroupName = cs[1]; break;
+                        default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1], usedMods[cs[0]]); break;
                     }
                 }
 
