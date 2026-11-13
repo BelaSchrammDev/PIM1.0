@@ -46,6 +46,8 @@ namespace IngameScript
                 {
                     // standby runs are no real cycle either: the first cycle as master is not measured
                     _cycleHadStartup = true;
+                    // at start, while the other PIMs answer: no standby yet, the status stays "starting..." (Update10)
+                    if (Net.IsDiscovering) return RunJobResult.Continue;
                     SetSlaveBehavior();
                     MyProgram.SetStandbyStatus();
                     return RunJobResult.Continue;
