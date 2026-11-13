@@ -42,10 +42,6 @@ namespace IngameScript
             LoopManager.Init();
             LoopManager.StartupJob = new BluePrintLoadJob(new BluePrintSet(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints));
 
-            if (Config.Instance.collect_all_Ore) Lists.Data.collectAll_List.Add(IG_ + "Ore");
-            if (Config.Instance.collect_all_Ingot) Lists.Data.collectAll_List.Add(IG_ + IG_I);
-            if (Config.Instance.collect_all_Component) Lists.Data.collectAll_List.Add(IG_ + IG_Component);
-
             _jobs = new Job[]
             {
                 LoopManager.StartupJob,   // must be first: all other jobs need the blueprints
@@ -65,8 +61,7 @@ namespace IngameScript
                     new StackingSwapJob()),
                 new RefreshBlockListJob<IMyRefinery, Refinery>(Lists.Data.Refinerys, Lists.Data.RefineryList, b => new Refinery(b)),
                 new RefreshBlockListJob<IMyAssembler, Assembler>(Lists.Data.Assemblers, Lists.Data.AssemblerList, b => new Assembler(b)),
-                new InventoryClearingJob(Lists.Data.SmsFlaggedInventoryList),
-                new InventoryClearingJob(Lists.Data.NonSmsFlaggedInventoryList, Lists.Data.collectAll_List),
+                new InventoryClearingJob(Lists.Data.ClearingInventoryList),
                 new StorageInventoryRefreshJob(),
                 new FindingRefinerysJob(),
                 new RefineryManagerJob(),

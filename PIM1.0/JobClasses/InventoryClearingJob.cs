@@ -9,11 +9,9 @@ namespace IngameScript
         public class InventoryClearingJob : CountingJob
         {
             private List<IMyInventory> _invList;
-            private List<string> _collectList;
-            public InventoryClearingJob(List<IMyInventory> invList, List<string> collect = null)
+            public InventoryClearingJob(List<IMyInventory> invList)
             {
                 _invList = invList;
-                _collectList = collect;
             }
 
             protected override void ConfigureCountingBounds(out int startIndex, out int endIndex)
@@ -24,7 +22,7 @@ namespace IngameScript
 
             protected override void ProcessingIndex(int index)
             {
-                ClearInventory(_invList[index], _collectList);
+                ClearInventory(_invList[index]);
             }
         }
     }

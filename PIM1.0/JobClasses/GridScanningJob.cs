@@ -50,14 +50,15 @@ namespace IngameScript
 
                     if (isStorage || !isProcessingValid) continue;
 
+                    // emptied: storage cargos without "Keep" (items of other types leave), untagged containers and connectors
                     if (isSmsBlock)
                     {
-                        if (isNoKeep) Lists.Data.SmsFlaggedInventoryList.Add(inv);
+                        if (isNoKeep) Lists.Data.ClearingInventoryList.Add(inv);
                         MyProgram.AddInventoryToInventoryManagerList(inv, pm.ParameterList);
                     }
                     else if (isContainerOrConnector)
                     {
-                        Lists.Data.NonSmsFlaggedInventoryList.Add(inv);
+                        Lists.Data.ClearingInventoryList.Add(inv);
                     }
                 }
             }

@@ -18,16 +18,14 @@ namespace IngameScript
             SetWarning(Warning.ID.CARGOMISSING, ItemTypesConverter.ToTag(itemType) ?? itemType, ItemTypesConverter.Category(itemType));
         }
 
-        static void ClearInventory(IMyInventory quelle, List<string> typeID_l = null)
+        static void ClearInventory(IMyInventory quelle)
         {
             var von = new List<MyInventoryItem>();
             quelle.GetItems(von);
             if (von.Count() == 0) return;
             for (int j = von.Count() - 1; j >= 0; j--)
             {
-                var vcon = von[j].Type;
-                if (typeID_l != null && !typeID_l.Contains(vcon.TypeId)) continue;
-                var id = ItemTypesConverter.ToPimId(vcon);
+                var id = ItemTypesConverter.ToPimId(von[j].Type);
                 var found = false;
                 // the next cargo is tried if the item could not be moved into the more specific one
                 foreach (var ziele in ItemTypesConverter.CargoFor(Lists.Data.InventoryManagerList, id))

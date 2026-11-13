@@ -43,9 +43,8 @@ namespace IngameScript
             public Dictionary<string, List<IMyInventory>> InventoryManagerList = new Dictionary<string, List<IMyInventory>>();
             public Dictionary<string, CargoUse> CargoUseList = new Dictionary<string, CargoUse>();
 
-            public List<IMyInventory> NonSmsFlaggedInventoryList = new List<IMyInventory>();
-            public List<IMyInventory> SmsFlaggedInventoryList = new List<IMyInventory>();
-            public List<string> collectAll_List = new List<string>();
+            // inventories that are emptied completely into the storage cargos (see GridScanningJob)
+            public List<IMyInventory> ClearingInventoryList = new List<IMyInventory>();
 
             public List<StorageCargo> StorageCargos = new List<StorageCargo>();
             public List<StorageInventory> storageinvs = new List<StorageInventory>();

@@ -29,9 +29,6 @@ namespace IngameScript
             public bool always_recycle_greywater = true;
             public bool assemblers_off = true;
             public bool refinerys_off = true;
-            public bool collect_all_Ore = true;
-            public bool collect_all_Ingot = true;
-            public bool collect_all_Component = true;
             public int stacking_cycle = 10;
             public Dictionary<string, bool> usedMods = new Dictionary<string, bool>();
 
@@ -66,12 +63,6 @@ namespace IngameScript
                     + "assemblers_off=" + assemblers_off.ToString() + "\n\n"
                     + "  / turn all refinerys off when inbound inventory is empty\n"
                     + "refinerys_off=" + refinerys_off.ToString() + "\n\n"
-                    + "  / collect all ore\n"
-                    + "collect_all_Ore=" + collect_all_Ore.ToString() + "\n\n"
-                    + "  / collect all ingot\n"
-                    + "collect_all_Ingot=" + collect_all_Ingot.ToString() + "\n\n"
-                    + "  / collect all component\n"
-                    + "collect_all_Component=" + collect_all_Component.ToString() + "\n\n"
                     + "  / stackingcycle in seconds, 0 = stacking off\n"
                     + "stacking_cycle=" + stacking_cycle.ToString() + "\n\n"
                     + "  / group of PIM controlled Weapons\n"
@@ -123,9 +114,6 @@ namespace IngameScript
                         case "always_recycle_greywater": always_recycle_greywater = ParseBoolean(cs[1], always_recycle_greywater); break;
                         case "assemblers_off": assemblers_off = ParseBoolean(cs[1], assemblers_off); break;
                         case "refinerys_off": refinerys_off = ParseBoolean(cs[1], refinerys_off); break;
-                        case "collect_all_Ore": collect_all_Ore = ParseBoolean(cs[1], collect_all_Ore); break;
-                        case "collect_all_Ingot": collect_all_Ingot = ParseBoolean(cs[1], collect_all_Ingot); break;
-                        case "collect_all_Component": collect_all_Component = ParseBoolean(cs[1], collect_all_Component); break;
                         case "stacking_cycle": stacking_cycle = ParseInt(cs[1], stacking_cycle); break;
                         case "PIM_controlled_Weapons": Properties.Data.CurrentGunGroupName = cs[1]; break;
                         default: if (usedMods.ContainsKey(cs[0])) usedMods[cs[0]] = ParseBoolean(cs[1], usedMods[cs[0]]); break;
