@@ -83,7 +83,10 @@ namespace IngameScript
         {
             bool ifdock = false;
             public IMyShipConnector connector;
+            // the connected connector of a ship (not of a station), these grids belong to the ship in SHIP mode (òb)
             public IMyShipConnector docked_connector = null;
+            // the connected grid, ship or station: the grid shown by the dock filter "[dock:name]"
+            public IMyCubeGrid dockedGrid = null;
             public string dockName;
             public dyConnector(IMyTerminalBlock t)
             {
@@ -102,10 +105,12 @@ namespace IngameScript
             {
                 readInventarList(pv);
                 sT("@fSct", gCT());
-                var ocon = docked_connector;
+                var previousDockedConnector = docked_connector;
+                dockedGrid = null;
                 if (connector.Status == MyShipConnectorStatus.Connected)
                 {
-                    if (connector.OtherConnector.CubeGrid.IsStatic)
+                    dockedGrid = connector.OtherConnector.CubeGrid;
+                    if (dockedGrid.IsStatic)
                     {
                         docked_connector = null;
                         sT("@fSt", "Connected to Station", 30);
@@ -139,11 +144,12 @@ namespace IngameScript
                         changeNeed(ChangeType.Dockings_name);
                         sT("@fDN", dockName);
                     }
-                    if (ocon != docked_connector)
+                    if (previousDockedConnector != docked_connector)
                     {
-                        if (òb.Contains(ocon)) òb.Remove(ocon);
-                        else if (docked_connector != null) òb.Add(docked_connector);
-                        changeNeed(ChangeType.Dockings_add); // get noch besser
+                        // also when another ship docks without a cycle in between: remove the old one and add the new one
+                        if (previousDockedConnector != null) òb.Remove(previousDockedConnector);
+                        if (docked_connector != null) òb.Add(docked_connector);
+                        changeNeed(ChangeType.Dockings_add);
                     }
                 }
                 else

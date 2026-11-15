@@ -66,42 +66,19 @@ namespace IngameScript
             }
             return true;
         }
-        bool parseMultiBlock()
+        // one ForEachJob per block type in Bf; fS/fW read BlockSubtypeFilter
+        Job MultiBlockJob()
         {
-            do
+            var jobs = new List<Job>();
+            foreach (var k in Bf.Keys)
             {
-                switch (m1)
-                {
-                    case 0:
-                        s3 = new List<string>(Bf.Keys);
-                        m3 = -1;
-                        m1 = 3;
-                        break;
-                    case 1:
-                        BlockSubtypeFilter = s3[m3];
-                        GridTerminalSystem.GetBlocksOfType<IMyTerminalBlock>(listTerminalBlock, BlockSutypeCheck);
-                        m2 = 0;
-                        m1++;
-                        break;
-                    case 2:
-                        var f = Bf[s3[m3]];
-                        for (int i = m2; i < listTerminalBlock.Count; i++, m2++)
-                        {
-                            if (cI()) return true;
-                            if (BlockConstructDockingCheck(listTerminalBlock[i])) f(listTerminalBlock[i]);
-                        }
-                        m1++;
-                        break;
-                    case 3:
-                        m3++;
-                        if (Bf.Count > m3) m1 = 1;
-                        else m1++;
-                        break;
-                    default:
-                        m1 = 0;
-                        return false;
-                }
-            } while (!cI()); return true;
+                var f = Bf[k];
+                var l = new List<IMyTerminalBlock>();
+                jobs.Add(new ForEachJob<IMyTerminalBlock>(
+                    () => { BlockSubtypeFilter = k; GridTerminalSystem.GetBlocksOfType(l, BlockSutypeCheck); return l; },
+                    b => { if (BlockConstructDockingCheck(b)) f(b); }));
+            }
+            return new SequentialJob(jobs.ToArray());
         }
     }
 }

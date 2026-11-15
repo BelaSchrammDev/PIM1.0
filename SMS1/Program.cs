@@ -34,7 +34,7 @@ namespace IngameScript
         const string X_Scriptmode = "ScriptMode", X_M_Vanilla = "Vanilla", X_M_Daily = "DailyNeedsSurvivalMod", X_M_AziThrust = "AzimuthThrusterMod", X_M_SG_Gates = "StarGateMod_Gates", X_M_SG_Ores = "StarGateMod_Ores";
         const string X_M_NorthWindWeapons = "NorthWindWeaponsMod", X_M_HSR = "HSR_Mod", X_M_AryxEpsteinDrive = "AryxEpsteinDriveMod", X_M_PlantAndCook = "PlantAndCookMod", X_M_EatDrinkSleepRepeat = "EatDrinkSleepRepeatMod", X_M_IndustrialOverhaulWater = "IndustrialOverhaulWaterMod", X_M_IndustrialOverhaul = "IndustrialOverhaulMod", X_M_Paintgun = "PaintGunMod", X_M_DeuteriumReactor = "DeuteriumReactorMod", X_M_Shield = "DefenseShieldMod", X_M_MCRNRailgun = "MCRN_RailGunMod", X_M_MWIHoming = "MWI_HomingWeaponryMod";
         static MyItemType IG_Magnesium = new MyItemType(IG_ + "Ingot", "Magnesium");
-        ST lcim = new ST(5), main = new ST(1); IMyProgrammableBlock master = null; static IMyCubeGrid Mgrid; static IMyGridProgramRuntimeInfo rti; static IMyGridTerminalSystem gts;
+        IMyProgrammableBlock master = null; static IMyCubeGrid Mgrid; static IMyGridProgramRuntimeInfo rti; static IMyGridTerminalSystem gts;
         static List<TextSurfaceDisplay> sms_sf = new List<TextSurfaceDisplay>(); static List<TextRenderEngine> sms_disp = new List<TextRenderEngine>(); static List<LCD_Terminal> LCDts = new List<LCD_Terminal>(); static List<LCD_Infolcd> infolcds = new List<LCD_Infolcd>();
         static Dictionary<string, MDI> allMDIs = new Dictionary<string, MDI>();
         static Dictionary<char, float> FCS = new Dictionary<char, float>();
@@ -75,11 +75,10 @@ namespace IngameScript
         static String iss = "", castTypeName = "", css = "", ccs = "", BlockSubtypeFilter = "", oldMeCustomData = "";
         DateTime lastStart = DateTime.Now;
         static double tsm = 0, brn = 0, mss = 0, rsp = 0, ss = 1.5f;
-        int msm = 0, lastst = 0, m1 = 0;
+        int msm = 0, lastst = 0;
         //static float menuWithGlobal;
         bool nomaster, prgblocklarge;
         static IMyCubeGrid gg;
-        List<MyItemType> t3 = new List<MyItemType>();
         static smsItemType GetSMSItemType(MyItemType t)
         {
             if (!smsItemTypeDefinitions.ContainsKey(t)) smsItemTypeDefinitions.Add(t, new smsItemType(t));
@@ -118,6 +117,7 @@ namespace IngameScript
             òb.Add(Me);
             runPB = Me;
             addBlockParseFunction();
+            InitJobs();
             MAXIC = maxIC;
             rti = Runtime;
             gts = GridTerminalSystem;
@@ -194,9 +194,9 @@ namespace IngameScript
                             case 5: if (refreshBlockList(BlockType.Cargocontainer, "Cargo")) msm--; break;
                             case 6: break;
                             case 7: loadCustomData(Me.CustomData); css = ss.ToString("0.0"); ss = 0; break;
-                            case 8: if (getTextPanels()) msm--; break;
+                            case 8: if (Step(textPanelsJob)) msm--; break;
                             case 9: if (refreshBlockList(BlockType.Battery, "BatteryBlock")) msm--; break;
-                            case 10: if (parseMultiBlock()) msm--; break;
+                            case 10: if (Step(multiBlockJob)) msm--; break;
                             case 11: if (refreshBlockList(BlockType.Tank, "OxygenTank")) msm--; break;
                             case 12: if (refreshBlockList(BlockType.Hydrogenengine, "HydrogenEngine")) msm--; break;
                             case 13: if (refreshBlockList(BlockType.Reactor, "Reactor")) msm--; break;
@@ -207,9 +207,9 @@ namespace IngameScript
                             case 18: if (refreshBlockList(BlockType.Gasgenerator, "OxygenGenerator")) msm--; break;
                             case 19: if (cm == ScriptMode.STATION) msm += 2; break;
                             case 20: if (refreshBlockList(BlockType.Jumpdrive, "JumpDrive")) msm--; break;
-                            case 21: if (getThrust()) msm--; break;
+                            case 21: if (Step(thrustJob)) msm--; break;
                             case 22: if (refreshBlockList(BlockType.Damage, "", BlockDamageCheck)) msm--; break;
-                            case 23: if (initInventoryItems()) msm--; break;
+                            case 23: if (Step(inventoryInitJob)) msm--; break;
                             case 24:
                                 foreach (IMyCubeGrid grid in dict_inv.Keys)
                                 {
@@ -231,7 +231,7 @@ namespace IngameScript
                                     }
                                 }
                                 break;
-                            case 25: if (refreshInventoryItems()) msm--; break;
+                            case 25: if (Step(inventoryRefreshJob)) msm--; break;
                             case 26:
                                 foreach (var pv in pvl)
                                     if (pv.Name == "Damageblocks")
@@ -365,59 +365,41 @@ namespace IngameScript
             }
         }
         List<IMyThrust> th = new List<IMyThrust>();
-        bool getThrust()
+        List<IMyThrust> CollectThrusters()
+        {
+            gg = Mgrid;
+            GridTerminalSystem.GetBlocksOfType<IMyThrust>(th, BlockGridCheck);
+            foreach (VC v in dyDisplayableVariable.getPV(null, "WtoT").vcl) v.sF(Fm);
+            return th;
+        }
+        void ProcessThruster(IMyThrust thrustBlock)
         {
             var typAzimuth = "Azimuth";
             var typHydro = "Hydro";
-            do
+            var maxThrust = thrustBlock.MaxEffectiveThrust;
+            var curThrust = thrustBlock.CurrentThrust;
+            var blockDef = thrustBlock.BlockDefinition.ToString();
+            var typThrust = "Ion";
+            var a = blockDef.Contains(typAzimuth) ? typAzimuth : "";
+            if (blockDef.Contains("Atmo")) typThrust = "Atmo";
+            else if (blockDef.Contains(typHydro)) typThrust = typHydro;
+            dyDisplayableVariable p = dyDisplayableVariable.getPV(null, "Thrust Summary", true, "xXyYzZ");
+            dyDisplayableVariable pv = dyDisplayableVariable.getPV(null, a + typThrust + "Thrust", true, "xXyYzZ");
+            dyDisplayableVariable pvw = dyDisplayableVariable.getPV(null, a + typThrust + "Thrusters");
+            char o = ' ';
+            var O = thrustBlock.GridThrustDirection;
+            if (O.X != 0) o = O.X == 1 ? 'X' : 'x';
+            else if (O.Y != 0) o = O.Y == 1 ? 'Y' : 'y';
+            else if (O.Z != 0) o = O.Z == 1 ? 'Z' : 'z';
+            pv.aV(o, maxThrust, curThrust);
+            p.aV(o, maxThrust, curThrust);
+            pvw.aV('t', thrustBlock.MaxThrust, maxThrust);
+            if (typThrust != typHydro)
             {
-                switch (m1)
-                {
-                    case 0:
-                        gg = Mgrid;
-                        GridTerminalSystem.GetBlocksOfType<IMyThrust>(th, BlockGridCheck);
-                        foreach (VC v in dyDisplayableVariable.getPV(null, "WtoT").vcl) v.sF(Fm);
-                        m1++;
-                        break;
-                    case 1:
-                        if (th.Count > 0)
-                        {
-                            var thrustBlock = th[0];
-                            th.Remove(thrustBlock);
-                            var maxThrust = thrustBlock.MaxEffectiveThrust;
-                            var curThrust = thrustBlock.CurrentThrust;
-                            var blockDef = thrustBlock.BlockDefinition.ToString();
-                            var typThrust = "Ion";
-                            var a = blockDef.Contains(typAzimuth) ? typAzimuth : "";
-                            if (blockDef.Contains("Atmo")) typThrust = "Atmo";
-                            else if (blockDef.Contains(typHydro)) typThrust = typHydro;
-                            dyDisplayableVariable p = dyDisplayableVariable.getPV(null, "Thrust Summary", true, "xXyYzZ");
-                            dyDisplayableVariable pv = dyDisplayableVariable.getPV(null, a + typThrust + "Thrust", true, "xXyYzZ");
-                            dyDisplayableVariable pvw = dyDisplayableVariable.getPV(null, a + typThrust + "Thrusters");
-                            char o = ' ';
-                            var O = thrustBlock.GridThrustDirection;
-                            if (O.X != 0) o = O.X == 1 ? 'X' : 'x';
-                            else if (O.Y != 0) o = O.Y == 1 ? 'Y' : 'y';
-                            else if (O.Z != 0) o = O.Z == 1 ? 'Z' : 'z';
-                            pv.aV(o, maxThrust, curThrust);
-                            p.aV(o, maxThrust, curThrust);
-                            pvw.aV('t', thrustBlock.MaxThrust, maxThrust);
-                            if (typThrust != typHydro)
-                            {
-                                var maxPowerusage = gP(thrustBlock);
-                                var curPowerusage = maxThrust == 0 ? 0.000002 : (maxPowerusage * (curThrust / maxThrust));
-                                pvw.aV('I', maxPowerusage, thrustBlock.Enabled ? curPowerusage : 0);
-                            }
-                        }
-                        else m1++;
-                        break;
-                    default:
-                        m1 = 0;
-                        return false;
-                }
+                var maxPowerusage = gP(thrustBlock);
+                var curPowerusage = maxThrust == 0 ? 0.000002 : (maxPowerusage * (curThrust / maxThrust));
+                pvw.aV('I', maxPowerusage, thrustBlock.Enabled ? curPowerusage : 0);
             }
-            while (!cI());
-            return true;
         }
         int gn(IMyCubeGrid g) { gg = g; GridTerminalSystem.GetBlocksOfType<IMyTerminalBlock>(listTerminalBlock, BlockGridCheck); return listTerminalBlock.Count; }
         bool BlockGridCheck(IMyTerminalBlock t) { if (gg == t.CubeGrid) return true; return false; }
@@ -428,84 +410,30 @@ namespace IngameScript
         bool BlockDamageCheck(IMyTerminalBlock t) { if (BlockConstructCheck(t)) return !t.CubeGrid.GetCubeBlock(t.Position).IsFullIntegrity; return false; }
         bool BlockWeaponsCheck(IMyTerminalBlock t) { if (BlockConstructCheck(t)) return (t is IMyUserControllableGun); return false; }
 
-        List<IMyTerminalBlock> listTerminalBlock = new List<IMyTerminalBlock>(); int m2 = 0; int m3 = 0; List<IMyCubeGrid> s2; List<string> s3;
+        List<IMyTerminalBlock> listTerminalBlock = new List<IMyTerminalBlock>();
+        // transition to the Job loop: the msm switch schedules the jobs one step at a time
+        // (Step true = not finished yet, the switch calls again after the budget check)
+        static bool Step(Job job) { return job.Schedule() == Job.ScheduleResult.InProgress; }
+        Job thrustJob, multiBlockJob, inventoryInitJob, inventoryRefreshJob, textPanelsJob;
+        void InitJobs()
+        {
+            thrustJob = new ForEachJob<IMyThrust>(CollectThrusters, ProcessThruster);
+            multiBlockJob = MultiBlockJob();
+            inventoryInitJob = new ForEachJob<IMyCubeGrid>(CollectInventoryGrids, InitGridInventoryItems);
+            inventoryRefreshJob = new ForEachJob<dyInventory>(CollectInventoryItems, i => i.Refresh(true));
+            textPanelsJob = new SequentialJob(new ForEachJob<IMyTerminalBlock>(CollectTextPanels, ProcessTextPanel), new ActionJob(RemoveObsoleteDisplays));
+        }
+        // one job per BlockType
+        readonly Dictionary<BlockType, Job> refreshJobs = new Dictionary<BlockType, Job>();
         bool refreshBlockList(BlockType type, string subtypeText = "", Func<IMyTerminalBlock, bool> checkFunction = null)
         {
-            var d = getDyBlockList(type);
-            do
+            Job job;
+            if (!refreshJobs.TryGetValue(type, out job))
             {
-                switch (m1)
-                {
-                    case 0:
-                        BlockSubtypeFilter = subtypeText;
-                        GridTerminalSystem.GetBlocksOfType<IMyTerminalBlock>(listTerminalBlock, (checkFunction == null ? BlockSutypeCheck : checkFunction));
-                        m1++;
-                        break;
-                    case 1:
-                        s2 = new List<IMyCubeGrid>(d.Keys);
-                        m2 = 0;
-                        m3 = -2;
-                        m1++;
-                        break;
-                    case 2:
-                        for (int x = m2; x < s2.Count; x++, m2++)
-                        {
-                            var g = s2[x];
-                            if (m3 < -1) m3 = d[g].Count - 1;
-                            for (int i = m3; i >= 0; i--)
-                            {
-                                var fb = d[g][i].tb;
-                                if (listTerminalBlock.Contains(fb)) listTerminalBlock.Remove(fb);
-                                else
-                                {
-                                    d[g][i].remove();
-                                    d[g].Remove(d[g][i]);
-                                }
-                                m3--;
-                                if (cI()) return true;
-                            }
-                            m3 = -2;
-                        }
-                        m1++;
-                        break;
-                    case 3:
-                        if (listTerminalBlock.Count > 0)
-                        {
-                            var b = listTerminalBlock[0];
-                            listTerminalBlock.Remove(b);
-                            if (!BlockConstructDockingCheck(b)) break;
-                            if (!d.ContainsKey(b.CubeGrid)) d.Add(b.CubeGrid, new List<dyBlock>());
-                            d[b.CubeGrid].Add(newDyBlock(b, type));
-                        }
-                        else m1++;
-                        break;
-                    case 4:
-                        s2 = new List<IMyCubeGrid>(d.Keys);
-                        m2 = 0;
-                        m3 = 0;
-                        m1++;
-                        break;
-                    case 5:
-                        for (int x = m2; x < s2.Count; x++, m2++)
-                        {
-                            var g = s2[x];
-                            for (int i = m3; i <= d[g].Count - 1; i++)
-                            {
-                                d[g][i].InitRefresh();
-                                m3++;
-                                if (cI()) return true;
-                            }
-                            m3 = 0;
-                        }
-                        m1++;
-                        break;
-                    default:
-                        m1 = 0;
-                        return false;
-                }
+                job = new RefreshDyBlockListJob(this, type, subtypeText, checkFunction);
+                refreshJobs.Add(type, job);
             }
-            while (!cI());
-            return true;
+            return Step(job);
         }
 
     }

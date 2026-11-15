@@ -102,9 +102,9 @@ namespace IngameScript
                     var d = getDock(dock);
                     if (d != null)
                     {
-                        if (d.docked_connector != null)
+                        if (d.dockedGrid != null)
                         {
-                            if (d.docked_connector.CubeGrid == ig) return true;
+                            if (d.dockedGrid == ig) return true;
                         }
                         else error = 3;
                     }
@@ -113,7 +113,8 @@ namespace IngameScript
                 ;
                 return false;
             }
-            dyConnector getDock(string n) { foreach (var d in docks) if (d.dockName == n) return d; return null; }
+            // the connector tag is normalized by ToArgStr ("dock:FakeShip" -> "Fakeship"), the filter is not: ignore the case
+            dyConnector getDock(string name) { foreach (var d in docks) if (string.Equals(d.dockName, name, StringComparison.OrdinalIgnoreCase)) return d; return null; }
             public bool ifOption(string key) { if (options.Contains(key)) return true; else return false; }
             public bool checkChangeStats(DateTime c) { foreach (changeStat u in udt) if (u.ifUpdateNeed(c)) return true; return false; }
             public void addBlockChangeTypes(ChangeType add_ct, ChangeType name_ct)

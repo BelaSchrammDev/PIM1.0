@@ -52,82 +52,26 @@ namespace IngameScript
             }
         }
         //InvMan
-        bool refreshInventoryItems()
+        // all dyInventorys: first per grid, then the totals
+        List<dyInventory> CollectInventoryItems()
         {
-            do
-            {
-                switch (m1)
-                {
-                    case 0:
-                        s2 = new List<IMyCubeGrid>(gridInventoryItems.Keys);
-                        m2 = 0;
-                        m3 = 0;
-                        m1++;
-                        break;
-                    case 1:
-                        for (int i = m2; i < s2.Count; i++, m2++)
-                        {
-                            t3 = new List<MyItemType>(gridInventoryItems[s2[i]].Keys);
-                            for (int x = m3; x < t3.Count; x++, m3++)
-                            {
-                                if (cI()) return true;
-                                gridInventoryItems[s2[i]][t3[x]].Refresh(true);
-                            }
-                            m3 = 0;
-                        }
-                        m1++;
-                        break;
-                    case 2:
-                        t3 = new List<MyItemType>(invitemsg.Keys);
-                        m3 = 0;
-                        m1++;
-                        break;
-                    case 3:
-                        for (int i = m3; i < t3.Count; i++, m3++)
-                        {
-                            if (cI()) return true;
-                            invitemsg[t3[i]].Refresh(true);
-                        }
-                        m1++;
-                        break;
-                    default:
-                        m1 = 0;
-                        return false;
-                }
-            }
-            while (!cI()); return true;
+            var l = new List<dyInventory>();
+            foreach (var g in gridInventoryItems.Values) l.AddRange(g.Values);
+            l.AddRange(invitemsg.Values);
+            return l;
         }
-        bool initInventoryItems()
+        List<IMyCubeGrid> CollectInventoryGrids()
         {
-            do
+            if (invitemsg.Count == 0) InitInventoryItemsList(invitemsg);
+            return new List<IMyCubeGrid>(dict_inv.Keys);
+        }
+        void InitGridInventoryItems(IMyCubeGrid g)
+        {
+            if (!gridInventoryItems.ContainsKey(g))
             {
-                switch (m1)
-                {
-                    case 0:
-                        if (invitemsg.Count == 0) InitInventoryItemsList(invitemsg);
-                        s2 = new List<IMyCubeGrid>(dict_inv.Keys);
-                        m2 = 0;
-                        m1++;
-                        break;
-                    case 1:
-                        for (int i = m2; i < s2.Count; i++, m2++)
-                        {
-                            if (cI()) return true;
-                            if (!gridInventoryItems.ContainsKey(s2[i]))
-                            {
-                                gridInventoryItems.Add(s2[i], new Dictionary<MyItemType, dyInventory>());
-                                InitInventoryItemsList(gridInventoryItems[s2[i]], s2[i]);
-                            }
-                        }
-                        m1++;
-                        break;
-                    default:
-                        m1 = 0;
-                        return false;
-                }
+                gridInventoryItems.Add(g, new Dictionary<MyItemType, dyInventory>());
+                InitInventoryItemsList(gridInventoryItems[g], g);
             }
-            while (!cI());
-            return true;
         }
         void InitInventoryItemsList(Dictionary<MyItemType, dyInventory> l, IMyCubeGrid g = null)
         {
