@@ -11,6 +11,8 @@ namespace IngameScript
             public long Address;
             public string ScriptType, Version;
             public double LastSeen;
+            /// <summary>Only set in Incompatible: the protocol of its messages.</summary>
+            public int Protocol;
             /// <summary>Same construct as me: only these count for the master and may send application messages.</summary>
             public bool SameConstruct;
         }
@@ -34,6 +36,8 @@ namespace IngameScript
             public readonly long Me;
             public readonly string ScriptType;
             public readonly Dictionary<long, NetWorkingPeer> Peers = new Dictionary<long, NetWorkingPeer>();
+            /// <summary>Scripts that send another Protocol: their messages are ignored, only listed for a hint. Same timeout as Peers.</summary>
+            public readonly Dictionary<long, NetWorkingPeer> Incompatible = new Dictionary<long, NetWorkingPeer>();
 
             // transport: (type, body) to all, (address, type, body) to one
             readonly Action<string, string> _broadcast;
@@ -115,14 +119,33 @@ namespace IngameScript
                     _broadcast(Alive, _helloBody);
                 }
 
+                RemoveTimedOut(Peers);
+                RemoveTimedOut(Incompatible);
+            }
+
+            void RemoveTimedOut(Dictionary<long, NetWorkingPeer> peers)
+            {
                 _timedOut.Clear();
-                foreach (var p in Peers.Values) if (now - p.LastSeen > TimeoutSeconds) _timedOut.Add(p.Address);
-                foreach (var a in _timedOut) Peers.Remove(a);
+                foreach (var p in peers.Values) if (_now - p.LastSeen > TimeoutSeconds) _timedOut.Add(p.Address);
+                foreach (var a in _timedOut) peers.Remove(a);
             }
 
             public void Receive(long source, int protocol, string type, string body)
             {
-                if (protocol != Protocol || source == Me) return;
+                if (source == Me) return;
+                if (protocol != Protocol)
+                {
+                    // the envelope (protocol, type, body) is the same in every protocol, so at least this can be reported
+                    NetWorkingPeer other;
+                    if (!Incompatible.TryGetValue(source, out other))
+                    {
+                        other = new NetWorkingPeer { Address = source };
+                        Incompatible[source] = other;
+                    }
+                    other.Protocol = protocol;
+                    other.LastSeen = _now;
+                    return;
+                }
 
                 switch (type)
                 {

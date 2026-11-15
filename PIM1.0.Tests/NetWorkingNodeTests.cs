@@ -93,6 +93,17 @@ namespace IngameScript.Tests
         }
 
         [TestMethod]
+        public void OtherProtocol_IsListedAsIncompatibleAndTimesOut()
+        {
+            _node.Update(0);
+            _node.Receive(400, Program.NetWorkingNode.Protocol + 1, "alive", SmsHello);
+            Assert.AreEqual(Program.NetWorkingNode.Protocol + 1, _node.Incompatible[400].Protocol);
+            Assert.AreEqual(0, _node.Peers.Count);
+            _node.Update(Program.NetWorkingNode.TimeoutSeconds + 0.1);
+            Assert.AreEqual(0, _node.Incompatible.Count);
+        }
+
+        [TestMethod]
         public void OwnMessage_IsIgnored()
         {
             _node.Update(0);

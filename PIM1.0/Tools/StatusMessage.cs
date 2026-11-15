@@ -87,6 +87,27 @@ namespace IngameScript
 
         readonly NetworkInfo networkInfo = new NetworkInfo();
 
+        // scripts with another network protocol: they do not see each other (e.g. two PIMs both work as master)
+        class NetworkProtocolHint : View
+        {
+            public NetworkProtocolHint() : base(ViewType.WARNING) { }
+
+            public override StringBuilderExtended GetInfoText()
+            {
+                if (Net.Incompatible.Count == 0) return null;
+                InfoString.Clear();
+                foreach (var p in Net.Incompatible.Values)
+                {
+                    var block = MyProgram.GridTerminalSystem.GetBlockWithId(p.Address) as IMyTerminalBlock;
+                    InfoString.Append("!! PB '" + (block != null ? block.CustomName : p.Address.ToString()) + "' uses network protocol " + p.Protocol
+                        + ", this PB " + NetWorkingNode.Protocol + ":\n   update the script on " + (p.Protocol > NetWorkingNode.Protocol ? "this PB" : "that PB") + "\n");
+                }
+                return InfoString;
+            }
+        }
+
+        readonly NetworkProtocolHint networkProtocolHint = new NetworkProtocolHint();
+
         StringBuilderExtended infoString = new StringBuilderExtended(2000);
         StringBuilderExtended warnungstring = new StringBuilderExtended(1000);
 
@@ -118,7 +139,7 @@ namespace IngameScript
         void SetStandbyStatus()
         {
             var master = GridTerminalSystem.GetBlockWithId(Net.MasterAddress) as IMyTerminalBlock;
-            PimStatus = " Standby\nMaster: " + (master != null ? master.CustomName : Net.MasterAddress.ToString()) + "\n\n" + networkInfo.GetInfoText();
+            PimStatus = " Standby\nMaster: " + (master != null ? master.CustomName : Net.MasterAddress.ToString()) + "\n\n" + networkInfo.GetInfoText() + networkProtocolHint.GetInfoText();
         }
     }
 }

@@ -38,6 +38,7 @@ namespace IngameScript
             viewList.Add(new RefineryManagerInfo());
             viewList.Add(new AssemblerManagerInfo());
             viewList.Add(networkInfo);
+            viewList.Add(networkProtocolHint);
 
             LoopManager.Init();
             LoopManager.StartupJob = new BluePrintLoadJob(new BluePrintSet(Config.Instance.usedMods, Lists.Data.BluePrints_Inactive, RefineryBlueprints));

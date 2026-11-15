@@ -179,6 +179,7 @@ New:
   (only if there is more than this PB), scripts on other constructs (docked) marked "(other construct)"
 - networking: hello/alive reach the connected constructs (connectors), only scripts on the same
   construct count for the master and may send messages
+- hint on the PB display if a script on the network uses another network protocol
 
 
 Version 1.1c:
