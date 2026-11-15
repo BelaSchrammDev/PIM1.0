@@ -1,0 +1,13 @@
+﻿StationManagmentSystem v1.5
+c BelaOkuma 2017-2026
+only compatible with PIM v1.2!
+
+ ### developed with MDK ###
+
+attention:
+the configuration is now located in the customdata,
+change only between '### config ###' and '### config end ###'.
+
+itemdefinitions:
+here you can change the maximum quantity for the fillbar display
+PIMs autocrafting.max override this value if there running on the same grid.

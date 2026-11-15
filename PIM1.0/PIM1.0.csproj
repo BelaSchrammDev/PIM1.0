@@ -25,6 +25,11 @@
     <AdditionalFiles Include="thumb.png" />
   </ItemGroup>
 
+  <!-- Code shared with SMS1 (repo root /Share) -->
+  <ItemGroup>
+    <Compile Include="..\Share\**\*.cs" LinkBase="Share" />
+  </ItemGroup>
+
   <!-- Blueprint data: BluePrintData/*.txt -> BluePrintsClasses/Generated/BluePrintData.g.cs
        The generator only runs if one of the inputs changed (stamp file in obj) and only
        rewrites the .g.cs if its content changed. The .g.cs is committed, so the test project

@@ -17,12 +17,12 @@
        would drag in the Space Engineers assemblies. Keep this list free of any
        file that touches Sandbox.ModAPI, VRage or Program.Instance. -->
   <ItemGroup>
-    <Compile Include="..\PIM1.0\Share\Common\StringBuilderExtended.cs"
+    <Compile Include="..\Share\Common\StringBuilderExtended.cs"
              Link="Linked\StringBuilderExtended.cs" />
-    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingParser.cs"
+    <Compile Include="..\Share\NetWorking\NetWorkingParser.cs"
              Link="Linked\NetWorkingParser.cs" />
     <!-- networking core only: NetWorkingIgc.cs needs the game's IGC -->
-    <Compile Include="..\PIM1.0\Share\NetWorking\NetWorkingNode.cs"
+    <Compile Include="..\Share\NetWorking\NetWorkingNode.cs"
              Link="Linked\NetWorkingNode.cs" />
     <Compile Include="..\PIM1.0\Tools\StorageAmounts.cs"
              Link="Linked\StorageAmounts.cs" />
@@ -32,7 +32,7 @@
              Link="Linked\ItemTypesConverter.cs" />
     <Compile Include="..\PIM1.0\Tools\StatusViews.cs"
              Link="Linked\StatusViews.cs" />
-    <Compile Include="..\PIM1.0\Tools\RunningSign.cs"
+    <Compile Include="..\Share\Common\RunningSign.cs"
              Link="Linked\RunningSign.cs" />
     <Compile Include="..\PIM1.0\Tools\Parameter.cs"
 			Link="Linked\Parameter.cs" />
@@ -44,7 +44,7 @@
 			Link="Linked\CargoUse.cs" />
 	<Compile Include="..\PIM1.0\Tools\Filter.cs"
 	        Link="Linked\Filter.cs" />
-	<Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs"
+	<Compile Include="..\Share\JobBase\Jobs.cs"
 	        Link="Linked\Jobs.cs" />
 	<Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs"
 	        Link="Linked\InstructionBudget.cs" />
@@ -62,7 +62,7 @@
             Link="Linked\AssemblerBluePrint.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\RefineryBlueprint.cs"
             Link="Linked\RefineryBlueprint.cs" />
-    <Compile Include="..\PIM1.0\Share\JobBase\SequentialJob.cs"
+    <Compile Include="..\Share\JobBase\SequentialJob.cs"
             Link="Linked\SequentialJob.cs" />
     <Compile Include="..\PIM1.0\JobClasses\Stacking\StackingJob.cs"
             Link="Linked\StackingJob.cs" />
@@ -78,7 +78,7 @@
             Link="Linked\LcdPages.cs" />
 
     <!-- Add once Job no longer inherits from Tools: -->
-    <!-- <Compile Include="..\PIM1.0\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
+    <!-- <Compile Include="..\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
 
     <!-- Add once the budget arithmetic is extracted from LoopManager: -->
     <!-- <Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs" Link="Linked\InstructionBudget.cs" /> -->

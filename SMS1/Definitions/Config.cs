@@ -1,0 +1,149 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using Sandbox.ModAPI.Ingame;
+using SpaceEngineers.Game.ModAPI.Ingame;
+using VRage.Game.GUI.TextPanel;
+using VRage.Game.ModAPI.Ingame;
+using VRageMath;
+
+namespace IngameScript
+{
+    partial class Program
+    {
+        static Dictionary<string, bool> usemods = new Dictionary<string, bool>();
+        string[] modlist = new string[]
+        {
+            X_M_Daily,
+            X_M_AziThrust,
+            X_M_DeuteriumReactor,
+            X_M_MCRNRailgun,
+            X_M_MWIHoming,
+            X_M_Paintgun,
+            X_M_SG_Gates,
+            X_M_SG_Ores,
+            X_M_Shield,
+            X_M_IndustrialOverhaul,
+            X_M_IndustrialOverhaulWater,
+            X_M_EatDrinkSleepRepeat,
+            X_M_PlantAndCook,
+            X_M_AryxEpsteinDrive,
+            X_M_NorthWindWeapons,
+            X_M_HSR,
+        };
+        public void loadConfig()
+        {
+            foreach (var s in modlist) usemods.Add(s, false);
+            var configteil = false;
+            var mainpageteil = false;
+            var itemdefsteil = false;
+            Dictionary<MyItemType, int> curModItemDef = null;
+            foreach (var cline in Me.CustomData.Split('\n'))
+            {
+                var cstr = cline.Trim();
+                if (cstr.Length == 0 || cstr[0] == '/') continue;
+                else if (cstr[0] == '@') continue;
+                else if (cstr.Contains(X_Config)) { configteil = true; continue; }
+                else if (cstr.Contains(X_Config_end)) { configteil = false; continue; }
+                else if (cstr.Contains(X_tItemDefs)) { itemdefsteil = true; continue; }
+                else if (cstr.Contains(X_tItemdefsEnd)) { itemdefsteil = false; continue; }
+                else if (itemdefsteil)
+                {
+                    var cs = new List<string>(cstr.Split('=', '(', ')'));
+                    if (cs.Count < 2) continue;
+                    if (cs[0] == X_tNewMod)
+                    {
+                        if (!modItemDefsList.ContainsKey(cs[1]))
+                        {
+                            modItemDefsList.Add(cs[1], new Dictionary<MyItemType, int>());
+                        }
+                        curModItemDef = modItemDefsList[cs[1]];
+                        continue;
+                    }
+                    if (curModItemDef != null)
+                    {
+                        var types = cs[0].Split('/');
+                        if (types.Length > 1)
+                        {
+                            var t = new MyItemType(types[0], types[1]);
+                            int amount = 0;
+                            int.TryParse(cs[1], out amount);
+                            if (!curModItemDef.ContainsKey(t)) curModItemDef.Add(t, amount);
+                            if (cs.Count > 2 && cs[2] != "" && !itemAlterNameList.ContainsKey(t)) itemAlterNameList.Add(t, cs[2]);
+                        }
+                        continue;
+                    }
+                }
+                else if (configteil)
+                {
+                    if (mainpageteil)
+                    {
+                        tMainPage += cstr + "\n";
+                        continue;
+                    }
+                    var cs = cstr.Split('=');
+                    if (cs.Length < 2) continue;
+                    switch (cs[0])
+                    {
+                        case X_ShowInfoPBLcd: ShowInfoPBLcd = if_true(cs[1]); break;
+                        case X_ShowDamageBlockHUD: ShowDamageBlockOnHUD = if_true(cs[1]); break;
+                        case X_KeepMenu: int.TryParse(cs[1], out KEEPMENU); break;
+                        case X_MinIC: int.TryParse(cs[1], out minIC); break;
+                        case X_MaxIC: int.TryParse(cs[1], out maxIC); break;
+                        case X_tHeadLine: tHeadLine = cs[1]; break;
+                        case X_tMainPage: mainpageteil = true; break;
+                        case X_tMainPageEnd: mainpageteil = false; break;
+                        case X_tItemDefs: itemdefsteil = true; break;
+                        case X_tItemdefsEnd: itemdefsteil = false; break;
+                        case X_Scriptmode:
+                            var mode = cs[1].ToUpper();
+                            if (mode == "SHIP") s_mode = ScriptMode.SHIP;
+                            else if (mode == "SHIP_PLUS") s_mode = ScriptMode.SHIP_PLUS;
+                            else if (mode == "STATION") s_mode = ScriptMode.STATION;
+                            else s_mode = ScriptMode.AUTO;
+                            break;
+                        default:
+                            if (if_true(cs[1]) && usemods.ContainsKey(cs[0])) usemods[cs[0]] = true;
+                            break;
+                    }
+                }
+            }
+            writeconfig();
+        }
+        void writeconfig()
+        {
+            var customstr = X_Config + "\n\n" + X_Line + "  / to activate changes, please restart script\n" + X_Line + "\n  / Instructions per run (min,max)\n  / recommended MaxInstruction for\n  /  - singleplayer = 10000\n  /  - multiplayer/server = 5000\n"
+                + "  / please be careful, too high a value can lead to mistakes\n  / 'Script is too complex' error or slowing down your DS!\n"
+                + X_MinIC + "=" + minIC.ToString() + "\n" + X_MaxIC + "=" + maxIC.ToString() + "\n\n"
+                + "  / Scriptmode: AUTO, SHIP, SHIP_PLUS, STATION\n"
+                + X_Scriptmode + "=" + s_mode.ToString() + "\n\n"
+                + "  / show info on the lcd of the programmable block\n"
+                + X_ShowInfoPBLcd + "=" + ShowInfoPBLcd.ToString() + "\n\n"
+                + "  / show damaged blocks on HUD (need antenna on the grid)\n"
+                + X_ShowDamageBlockHUD + "=" + ShowDamageBlockOnHUD + "\n\n"
+                + "  / time to return terminals to the mainmenu (global) in sec.\n  / 0 = never return\n"
+                + X_KeepMenu + "=" + KEEPMENU.ToString() + "\n\n"
+                + "  / terminal headline\n"
+                + X_tHeadLine + "=" + tHeadLine + "\n\n"
+                + "  / terminal mainpage body\n"
+                + X_tMainPage + "\n" + tMainPage + "\n" + X_tMainPageEnd + "\n\n"
+            + X_Line + "  / mods that can be used.\n  /     is there a mod missing? \n  /           write it in the comments of SMS or PIM\n\n";
+            foreach (var mod in usemods.Keys) customstr += mod + "=" + usemods[mod].ToString() + "\n";
+            customstr += "\n" + X_Line + X_tItemDefs + "\n  / maximumamount for the fillbar in the inventory command\n  / it is possible to specify an alternative name of the item\n  / write it in brackets after the amount, like\n  / MyObjectBuilder_Component/Explosives=500 (Kawumm)\n";
+            foreach (var mod in modItemDefsList.Keys)
+            {
+                if (mod == X_M_Vanilla || (usemods.ContainsKey(mod) && usemods[mod]))
+                {
+                    customstr += "\n" + X_Line + X_tNewMod + "=" + mod + "\n" + X_Line2;
+                    foreach (var i in modItemDefsList[mod].Keys)
+                    {
+                        customstr += i + "=" + modItemDefsList[mod][i] + (itemAlterNameList.ContainsKey(i) ? " (" + itemAlterNameList[i] + ")" : "") + "\n";
+                    }
+                }
+            }
+            customstr += "\n" + X_tItemdefsEnd + "\n";
+            Me.CustomData = customstr + X_Line + "\n" + X_Config_end + "\n\n";
+        }
+    }
+}
