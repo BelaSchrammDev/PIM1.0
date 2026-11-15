@@ -135,8 +135,8 @@ Vanilla | ConsumableItem | MammalMeatCooked | 5 | Mammal Meat (Cooked) | Food | 
 Vanilla | ConsumableItem | InsectMeatRaw | 5 | Insect Meat (Raw) | Food | 0
 Vanilla | ConsumableItem | InsectMeatCooked | 5 | Insect Meat (Cooked) | Food | 0
 Vanilla | Ore | Organic | 1000 | @ |  | 0
-Vanilla | PhysicalObject | Algae | 100 |  |  | 0
-Vanilla | PhysicalObject | Grain | 100 |  |  | 0
+Vanilla | PhysicalObject | Algae | 100 |  | Food | 0
+Vanilla | PhysicalObject | Grain | 100 |  | Food | 0
 Vanilla | SeedItem | Fruit | 10 | Fruit Seeds |  | 0
 Vanilla | SeedItem | Grain | 10 | Grain Seeds |  | 0
 Vanilla | SeedItem | Mushrooms | 10 | Mushroom Spores |  | 0

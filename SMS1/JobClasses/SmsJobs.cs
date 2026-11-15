@@ -1,4 +1,4 @@
-using Sandbox.ModAPI.Ingame;
+﻿using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using VRage.Game.ModAPI.Ingame;
@@ -142,7 +142,7 @@ namespace IngameScript
                 if (_index >= sms_disp.Count) return RunJobResult.Finished;
                 var display = sms_disp[_index];
                 var instructionsBefore = IC();
-                if (display.c()) _index++;
+                if (display.RenderStep()) _index++;
                 display.icount += IC() - instructionsBefore;
                 return RunJobResult.Continue;
             }

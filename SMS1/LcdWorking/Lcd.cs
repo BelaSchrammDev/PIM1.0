@@ -39,8 +39,8 @@ namespace IngameScript
             }
             public void Calc(P pm)
             {
-                if (cds != lcd.CustomData) cds = lcd.CustomData;
-                if (cds == "") cds = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
+                if (displayDefinition != lcd.CustomData) displayDefinition = lcd.CustomData;
+                if (displayDefinition == "") displayDefinition = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
                 setName(pm.Name);
                 setMML();
                 if (pm.isPM("Maxlines")) maxl = getIntegerWithBounds(pm.getPM("Maxlines"), maxlines);
@@ -59,7 +59,7 @@ namespace IngameScript
             public bool RemoveELCD(IMyTextPanel elcd) { if (extlcds.Contains(elcd)) { ClearELCDs(); return true; } return false; }
             public void ClearELCDs() { extlcds.Clear(); pnum = 1; linkpos = getUpP(lcd); }
             public void AddPanel(IMyTextPanel np) { if (ly == getPanelSubtype(np) && !extlcds.Contains(np)) { extlcds.Add(np); pnum++; linkpos = getUpP(np); np.WriteText("Init Linklcd....", false); } }
-            public override void writeToPanel() { int cos = 0; w2lcd(lcd, ostrl.Count > cos ? ostrl[cos++] : "", fontsize); foreach (IMyTextPanel t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; w2lcd(t, ostrl.Count > cos ? ostrl[cos++] : "", fontsize); } }
+            public override void writeToPanel() { int cos = 0; w2lcd(lcd, pages.Count > cos ? pages[cos++] : "", fontsize); foreach (IMyTextPanel t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; w2lcd(t, pages.Count > cos ? pages[cos++] : "", fontsize); } }
         }
         //terminalLCD
         public class LCD_Terminal : LCD
@@ -216,16 +216,16 @@ namespace IngameScript
             void setNewTerminalSite(TerminalSite tsite)
             {
                 if (tsite == null) return;
-                DM = 0;
+                renderPhase = RenderPhase.ReadCommands;
                 mkdt.UD();
                 curSite = tsite;
                 tsite.setMenu(maxlines);
-                cds = "writex_i(" + (menu == null ? tHeadLine : tsite.titleline) + ")\nwritex_i(@*(filled))\n" + tsite.siteBody;
+                displayDefinition = "writex_i(" + (menu == null ? tHeadLine : tsite.titleline) + ")\nwritex_i(@*(filled))\n" + tsite.siteBody;
             }
-            public override void checkWriteToPanel() { if (nmdls.Count < maxlines) for (int i = nmdls.Count; i < maxlines; i++) writeX("(filled)"); }
-            public override void writeToPanel() { w2lcd(lcd, ostrl.Count > 0 ? ostrl[0] : "", fontsize); curml = 0; }
+            public override void checkWriteToPanel() { if (displayLines.Count < maxlines) for (int i = displayLines.Count; i < maxlines; i++) writeX("(filled)"); }
+            public override void writeToPanel() { w2lcd(lcd, pages.Count > 0 ? pages[0] : "", fontsize); curml = 0; }
             public override void clearWriteValues() { curml = 0; }
-            public override void addEndOfLineStr() { if (curSite != null && curml < curSite.mel.Count) ostr += curSite.mel[curml++]; else ostr += "\n"; }
+            public override void addEndOfLineStr() { if (curSite != null && curml < curSite.mel.Count) pageText += curSite.mel[curml++]; else pageText += "\n"; }
         }
     }
 }

@@ -16,6 +16,7 @@
   <ItemGroup>
     <Compile Include="..\SMS1\Definitions\ItemDataParser.cs" Link="Linked\ItemDataParser.cs" />
     <Compile Include="..\SMS1\Definitions\ItemNames.cs" Link="Linked\ItemNames.cs" />
+    <Compile Include="..\SMS1\LcdWorking\BlockTemplates.cs" Link="Linked\BlockTemplates.cs" />
     <Compile Include="..\SMS1\Definitions\Generated\ItemData.g.cs" Link="Linked\ItemData.g.cs" />
   </ItemGroup>
 

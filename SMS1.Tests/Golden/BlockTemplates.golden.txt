@@ -1,0 +1,89 @@
+# Default field templates per block type and style, from the switch in TextRenderEngine.addFieldTemplates_Block (SMS 1.4):
+# Type | Style | Line (head = headLineString) | Template; update with SMS_UPDATE_GOLDEN=1.
+Damage | 1 | 1 | @fN,,@fH_R
+Damage | 2 | 1 | @fN,,@fH_B(35%),@fH_R
+Damage | 3 | 1 | @fN,,@fBs
+Damage | 3 | 2 | @fH_B(filled),@fH_R
+Damage | 4 | 1 | @fN,,@fH_B(35%),@fH_R
+Tank | 1 | 1 | @fN,,@fV_M,@fSP,@fV_R
+Tank | 2 | 1 | @fN,,@fV_M(0),@fE,@fSP,@fV_B(25%),@fV_R
+Tank | 3 | 1 | @fN,,@fE,@fV,@fV_M,(18)
+Tank | 3 | 2 | @fSP,@fV_B(filled),@fV_R
+Tank | 4 | 1 | @fN,@fE, ,@fSP
+Tank | 4 | 2 | Stored:,@fV,,Capacity:,@fV_M
+Tank | 4 | 3 | @fV_B(filled),@fV_R
+Hydrogenengine | 1 | 1 | @fN,,@fE,@fO
+Hydrogenengine | 2 | 1 | @fN,,@fO,@fChT,@fVH_B,@fVH_R
+Hydrogenengine | 3 | 1 | @fN,,@fE,@fO,@fO_B(20%),@fO_R
+Hydrogenengine | 3 | 2 | @fChT,@fVH,@fVH_B(filled),@fVH_R
+Hydrogenengine | 4 | 1 | @fN,,@fO_M,/,@fE
+Hydrogenengine | 4 | 2 | Stored:(15),@fS(30),,@fChT
+Hydrogenengine | 4 | 3 | Output:(15),@fO(30),@fO_B(filled),@fO_R
+Hydrogenengine | 4 | 4 | Tank:(15),@fVH(30),@fVH_B(filled),@fVH_R
+Gasgenerator | 1 | 1 | @fN,,Ice:,@fIa,@fE
+Gasgenerator | 2 | 1 | @fN,,@fE,/ O2:,@fOB(left),/ H2:,@fHB(left),Ice:,@fIa,@fF0_B(30%),@fF0_R
+Gasgenerator | 3 | 1 | @fN,,@fE,/ Bottles - O2:,@fOB(left),/ H2:,@fHB(left),Ice:,@fIa,(13)
+Gasgenerator | 3 | 2 | Cargo:(22),@fF0_M,@fF0_B(filled),@fF0_R
+Gasgenerator | 4 | 1 | @fN,,@fE
+Gasgenerator | 4 | 2 | Ice:(15),@fIa(13),Bottles:,@fOB,O2 / ,@fHB,H2,
+Gasgenerator | 4 | 3 | Cargo:(22),@fF0_M,@fF0_B(filled),@fF0_R
+Airvent | 1 | 1 | @fN,,@fPz,/,@fAt,@fV_R
+Airvent | 2 | 1 | @fN,,@fPz,/,@fAt,@fV_B(40%),@fV_R
+Airvent | 3 | 1 | @fN,,Mode:,@fPz,/,@fAt,(13)
+Airvent | 3 | 2 | ,@fV_B(60%),@fV_R
+Airvent | 4 | 1 | Air Vent,@fE,,Mode:,@fPz(left)
+Airvent | 4 | 2 | @fAt,@fV_B(filled),@fV_R
+Assembler | 1 | 1 | @fC,@fWM,@fN, ,@fW,@fWa(left)
+Assembler | 2 | 1 | @fC,@fN, ,@fWa(0),@fW(left),@fWM
+Assembler | 3 | 1 | @fC,@fN, ,@fWa,@fW(left)
+Assembler | 3 | 2 | @fWM, ,Next:,@fNWa,@fNW(left)
+Assembler | 4 | 1 | @fN, ,@fWM
+Assembler | 4 | 2 | ,Now:,@fWa,@fW(left)
+Assembler | 4 | 3 | ,Next:,@fNWa,@fNW(left)
+Battery | 1 | 1 | @fN,,@fS_B(30%),@fS_R
+Battery | 2 | 1 | @fN, ,@fChT,@fChM,@fS_B(20%),@fS_R
+Battery | 3 | 1 | @fN,,@fChT,@fS,@fS_M,(20)
+Battery | 3 | 2 | (20),@fChM,@fS_B(filled),@fS_R
+Battery | 4 | 1 | @fN,@fS_M(0),,@fChT
+Battery | 4 | 2 | @fChM,,In:,@fI,Out:,@fO
+Battery | 4 | 3 | @fS,@fS_B(filled),@fS_R
+Reactor | 1 | 1 | @fN,,@fE,/,@fO
+Reactor | 2 | 1 | @fN, ,@fChT,@fO,@fO_B(20%),@fO_R
+Reactor | 3 | 1 | @fN, ,Ingots:,@fIG,@fChT,@fE,(13)
+Reactor | 3 | 2 | @fO,@fO_B(filled),@fO_R
+Reactor | 4 | 1 | @fN,@fE, ,Time:,@fChT
+Reactor | 4 | 2 | Stored:,@fS,,Ingots:,@fIG(24)
+Reactor | 4 | 3 | @fO,@fO_B(filled),@fO_R
+Refinery | 1 | 1 | @fC,@fN, ,@fE,/,@fW(28)
+Refinery | 2 | 1 | @fC,@fN, ,@fWa(0),@fW(27 Left),@fV_B(20%),@fV_R
+Refinery | 3 | 1 | @fC,@fN,,@fW(27),@fWa(23),Next:,@fNW(27),@fNWa(23),(13)
+Refinery | 3 | 2 | ,@fV_B(60%),@fV_R
+Refinery | 4 | 1 | @fN,,@fW(27),@fWa(23)
+Refinery | 4 | 2 | ,Next:,@fNW(27),@fNWa(23)
+Refinery | 4 | 3 | @fWM(25),@fV_B(filled),@fV_R
+Jumpdrive | 1 | 1 | @fN,,@fSt,@fS_R
+Jumpdrive | 2 | 1 | @fN,,Status:,@fSt,/,@fChT,(20)
+Jumpdrive | 2 | 2 | (20),@fS_B(filled),@fS_R
+Jumpdrive | 3 | 1 | @fN,,@fSt,/,@fChT,(20)
+Jumpdrive | 3 | 2 | Input:(20),@fI,@fI_B(filled),@fI_R
+Jumpdrive | 3 | 3 | Stored:(20),@fS,@fS_B(filled),@fS_R
+Jumpdrive | 4 | 1 | @fN,,Status:,@fSt,/,@fChT,(20)
+Jumpdrive | 4 | 2 | (20),@fS_B(filled),@fS_R
+Cargocontainer | 1 | 1 | @fN,,@fF0_R
+Cargocontainer | 2 | 1 | @fN,,@fF0_M(0),@fF0_B(40%),@fF0_R
+Cargocontainer | 3 | 1 | @fN,,@fF0_M,(20)
+Cargocontainer | 3 | 2 | @fF0,@fF0_B(filled),@fF0_R
+Cargocontainer | 4 | 1 | @fN,,@fF0_M(0),@fF0_B(40%),@fF0_R
+Connector | 1 | 1 | @fN,,@fSh
+Connector | 2 | 1 | @fN,@fE,,@fSct,@fSt(0),@fSh
+Connector | 3 | 1 | @fN,,[,@fE,],@fDN(40)
+Connector | 3 | 2 | @fSt(50),=>,@fSh,,@fSct
+Connector | 4 | 1 | @fN,@fE,,@fSct,@fSt(0),@fSh
+Weapon | 1 | 1 | @fN,,@fE,/,@fWt
+Weapon | 2 | head | ,Type,(20),Shots(15)
+Weapon | 2 | 1 | @fN,,@fE,@fWt,@fAc
+Weapon | 3 | 1 | @fN,,@fE,/,@fWt
+Weapon | 3 | 2 | Ammo:(25 right),@fAo,,Shots:,@fAc
+Weapon | 4 | 1 | @fN,,@fE,/,@fWt
+Weapon | 4 | 2 | Inventory:(30 right),@fAa,x,@fAo,,Shots:,@fAc
+Weapon | 4 | 3 | Cargo:(30 right),@fF0,@fF0_M,@fF0_B(filled),@fF0_R

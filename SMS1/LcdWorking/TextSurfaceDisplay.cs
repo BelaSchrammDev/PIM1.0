@@ -59,8 +59,8 @@ namespace IngameScript
             {
                 sMM();
                 obs = false;
-                cds = ncds;
-                if (cds == "") cds = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
+                displayDefinition = ncds;
+                if (displayDefinition == "") displayDefinition = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
                 setName((pm.Name.StartsWith("@dis") ? tb.CustomName : pm.Name) + " (" + ts.DisplayName + ")");
                 if (pm.isPM("Maxlines")) maxl = getIntegerWithBounds(pm.getPM("Maxlines"), maxlines);
                 if (pm.isPM("Minlines")) minl = getIntegerWithBounds(pm.getPM("Minlines"), maxlines);
@@ -75,7 +75,7 @@ namespace IngameScript
                     newlines = maxlines;
                 }
             }
-            public override void writeToPanel() { w2ts(ts, (ostrl.Count > 0 ? ostrl[0] : ""), fontsize, xp); }
+            public override void writeToPanel() { w2ts(ts, (pages.Count > 0 ? pages[0] : ""), fontsize, xp); }
         }
     }
 }

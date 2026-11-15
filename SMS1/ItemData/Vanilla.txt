@@ -165,7 +165,7 @@ InsectMeatCooked | 5 | Insect Meat (Cooked)
 [Ore]
 Organic | 1000 | @
 
-[PhysicalObject]
+[PhysicalObject | Food]
 Algae | 100
 Grain | 100
 

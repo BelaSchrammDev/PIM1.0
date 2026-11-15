@@ -28,7 +28,7 @@ namespace IngameScript
         static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date";
         static string tMainPage = "\ninvman(sort,style 3,nomessage)";
         ScriptMode cm; const int zW = 20, pW = 31;
-        const String SI1 = "SMS v1.4", SI2 = "a (c) BelaOkuma\n", Cfilled = "@-(filled)", HSS = "\u00AD", oMG = "MAINGRID", oLG = "LCDGRID", oGN = "GRIDNAME", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_Cash = "PhysicalObject", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_";
+        const String SI1 = "SMS v1.5", SI2 = "a (c) BelaOkuma\n", Cfilled = "@-(filled)", HSS = "\u00AD", oMG = "MAINGRID", oLG = "LCDGRID", oGN = "GRIDNAME", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_Cash = "PhysicalObject", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_ShowInfoPBLcd = "ShowInfoOnPBLcd", X_ShowDamageBlockHUD = "ShowDamageBlocksOnHud", X_Line = "  / =================================\n", X_LineNewSite = X_Line + "@newsite(", X_Line2 = "  / ------------\n";
         const string X_KeepMenu = "KeepMenuToReturn", X_TargetCycleTime = "TargetCycleTime", X_tHeadLine = "TerminalHeadLine", X_tMainPage = "TerminalMainPageBody", X_tMainPageEnd = X_tMainPage + "End", X_tItemDefs = "### ItemDefinitions ###", X_tItemdefsEnd = "### ItemDefinitionsEnd ###", X_tNewMod = "### MOD";
         const string X_Scriptmode = "ScriptMode", X_M_Vanilla = "Vanilla";
@@ -39,7 +39,6 @@ namespace IngameScript
         static Dictionary<float, List<BarRatio>> GPL = new Dictionary<float, List<BarRatio>>();
         static List<SP> SPL = new List<SP>();
         static IMyProgrammableBlock runPB;
-        enum BlockType { Damage, Tank, Hydrogenengine, Gasgenerator, Airvent, Assembler, Battery, Reactor, Refinery, Jumpdrive, Cargocontainer, Connector, Weapon, };
         static Dictionary<BlockType, Dictionary<IMyCubeGrid, List<dyBlock>>> _D = new Dictionary<BlockType, Dictionary<IMyCubeGrid, List<dyBlock>>>();
         static Dictionary<IMyCubeGrid, List<dyBlock>> getDyBlockList(BlockType type) { if (!_D.ContainsKey(type)) _D.Add(type, new Dictionary<IMyCubeGrid, List<dyBlock>>()); return _D[type]; }
         dyBlock newDyBlock(IMyTerminalBlock b, BlockType type)
