@@ -1,0 +1,364 @@
+# Expanded item definitions per mod, in call order: Mod | Type | Subtype | Max | Name | Category | Capacity
+# Created once from the hand-written SMS1/Definitions/ItemDefinitions.cs (SMS 1.4); update with SMS_UPDATE_GOLDEN=1.
+Vanilla | Ore | Uranium | 5000 |  |  | 0
+Vanilla | Ingot | Uranium | 15000 |  |  | 0
+Vanilla | Ore | Platinum | 5000 |  |  | 0
+Vanilla | Ingot | Platinum | 20000 |  |  | 0
+Vanilla | Ore | Silicon | 20000 |  |  | 0
+Vanilla | Ingot | Silicon | 100000 |  |  | 0
+Vanilla | Ore | Iron | 300000 |  |  | 0
+Vanilla | Ingot | Iron | 300000 |  |  | 0
+Vanilla | Ore | Cobalt | 50000 |  |  | 0
+Vanilla | Ingot | Cobalt | 70000 |  |  | 0
+Vanilla | Ore | Nickel | 100000 |  |  | 0
+Vanilla | Ingot | Nickel | 100000 |  |  | 0
+Vanilla | Ore | Silver | 10000 |  |  | 0
+Vanilla | Ingot | Silver | 50000 |  |  | 0
+Vanilla | Ore | Gold | 10000 |  |  | 0
+Vanilla | Ingot | Gold | 50000 |  |  | 0
+Vanilla | Ore | Magnesium | 50000 |  |  | 0
+Vanilla | Ingot | Magnesium | 50000 | @powder |  | 0
+Vanilla | Ore | Stone | 40000 | @ |  | 0
+Vanilla | Ingot | Stone | 20000 | Gravel |  | 0
+Vanilla | Ore | Ice | 100000 | @ |  | 0
+Vanilla | Ore | Scrap | 1000 | @Metal |  | 0
+Vanilla | Component | Construction | 50000 |  |  | 0
+Vanilla | Component | MetalGrid | 15500 |  |  | 0
+Vanilla | Component | InteriorPlate | 55000 |  |  | 0
+Vanilla | Component | SteelPlate | 300000 |  |  | 0
+Vanilla | Component | Girder | 3500 |  |  | 0
+Vanilla | Component | SmallTube | 26000 |  |  | 0
+Vanilla | Component | LargeTube | 6000 |  |  | 0
+Vanilla | Component | Motor | 16000 |  |  | 0
+Vanilla | Component | Display | 500 |  |  | 0
+Vanilla | Component | BulletproofGlass | 12000 |  |  | 0
+Vanilla | Component | Computer | 6500 |  |  | 0
+Vanilla | Component | Reactor | 10000 |  |  | 0
+Vanilla | Component | Thrust | 16000 |  |  | 0
+Vanilla | Component | GravityGenerator | 250 | GravityParts |  | 0
+Vanilla | Component | Medical | 120 |  |  | 0
+Vanilla | Component | RadioCommunication | 250 | RadioParts |  | 0
+Vanilla | Component | Detector | 400 |  |  | 0
+Vanilla | Component | Explosives | 500 |  |  | 0
+Vanilla | Component | SolarCell | 2800 |  |  | 0
+Vanilla | Component | PowerCell | 2800 |  |  | 0
+Vanilla | Component | Superconductor | 3000 |  |  | 0
+Vanilla | Component | Canvas | 300 |  |  | 0
+Vanilla | Component | ZoneChip | 50 |  |  | 0
+Vanilla | PhysicalGunObject | WelderItem | 2 | Welder |  | 0
+Vanilla | PhysicalGunObject | Welder2Item | 2 | Welder MK2 |  | 0
+Vanilla | PhysicalGunObject | Welder3Item | 2 | Welder MK3 |  | 0
+Vanilla | PhysicalGunObject | Welder4Item | 2 | Welder MK4 |  | 0
+Vanilla | PhysicalGunObject | HandDrillItem | 2 | HandDrill |  | 0
+Vanilla | PhysicalGunObject | HandDrill2Item | 2 | HandDrill MK2 |  | 0
+Vanilla | PhysicalGunObject | HandDrill3Item | 2 | HandDrill MK3 |  | 0
+Vanilla | PhysicalGunObject | HandDrill4Item | 2 | HandDrill MK4 |  | 0
+Vanilla | PhysicalGunObject | AngleGrinderItem | 2 | Grinder |  | 0
+Vanilla | PhysicalGunObject | AngleGrinder2Item | 2 | Grinder MK2 |  | 0
+Vanilla | PhysicalGunObject | AngleGrinder3Item | 2 | Grinder MK3 |  | 0
+Vanilla | PhysicalGunObject | AngleGrinder4Item | 2 | Grinder MK4 |  | 0
+Vanilla | PhysicalGunObject | AutomaticRifleItem | 2 | Assault Rifle | Weapons | 0
+Vanilla | PhysicalGunObject | RapidFireAutomaticRifleItem | 2 | RapidFire Rifle | Weapons | 0
+Vanilla | PhysicalGunObject | PreciseAutomaticRifleItem | 2 | Precise Rifle | Weapons | 0
+Vanilla | PhysicalGunObject | UltimateAutomaticRifleItem | 2 | Ultimate Rifle | Weapons | 0
+Vanilla | PhysicalGunObject | SemiAutoPistolItem | 2 | SemiAuto Pistol | Weapons | 0
+Vanilla | PhysicalGunObject | FullAutoPistolItem | 2 | FullAuto Pistol | Weapons | 0
+Vanilla | PhysicalGunObject | ElitePistolItem | 2 | Elite Pistol | Weapons | 0
+Vanilla | PhysicalGunObject | BasicHandHeldLauncherItem | 2 | Basic RocketLauncher | Weapons | 0
+Vanilla | PhysicalGunObject | AdvancedHandHeldLauncherItem | 2 | Advanced RocketLauncher | Weapons | 0
+Vanilla | AmmoMagazine | Missile200mm | 50 | Missile 200mm |  | 1
+Vanilla | AmmoMagazine | NATO_5p56x45mm | 1000 | Magazine 5.56x45mm |  | 30
+Vanilla | AmmoMagazine | NATO_25x184mm | 100 | Ammobox 25x184mm |  | 140
+Vanilla | AmmoMagazine | SemiAutoPistolMagazine | 100 |  |  | 10
+Vanilla | AmmoMagazine | FullAutoPistolMagazine | 100 |  |  | 20
+Vanilla | AmmoMagazine | ElitePistolMagazine | 100 |  |  | 10
+Vanilla | AmmoMagazine | AutomaticRifleGun_Mag_20rd | 100 | AssaultRifleMagazine |  | 20
+Vanilla | AmmoMagazine | RapidFireAutomaticRifleGun_Mag_50rd | 100 | RapidFireRifleMagazine |  | 50
+Vanilla | AmmoMagazine | PreciseAutomaticRifleGun_Mag_5rd | 100 | PreciseRifleMagazine |  | 8
+Vanilla | AmmoMagazine | UltimateAutomaticRifleGun_Mag_30rd | 10 | UltimateRifleMagazine |  | 30
+Vanilla | AmmoMagazine | AutocannonClip | 100 |  |  | 16
+Vanilla | AmmoMagazine | LargeCalibreAmmo | 50 | Big Calibre |  | 1
+Vanilla | AmmoMagazine | MediumCalibreAmmo | 30 | Medium Calibre |  | 1
+Vanilla | AmmoMagazine | LargeRailgunAmmo | 20 | Big Railgun Spike |  | 1
+Vanilla | AmmoMagazine | SmallRailgunAmmo | 20 | Small Railgun Spike |  | 1
+Vanilla | ConsumableItem | Powerkit | 5 |  |  | 0
+Vanilla | ConsumableItem | Medkit | 5 |  |  | 0
+Vanilla | GasContainerObject | HydrogenBottle | 5 |  |  | 0
+Vanilla | OxygenContainerObject | OxygenBottle | 5 |  |  | 0
+Vanilla | PhysicalObject | SpaceCredit | 10000 |  |  | 0
+Vanilla | Datapad | Datapad | 5 |  |  | 0
+Vanilla | AmmoMagazine | FlareClip | 100 | Flare Gun Magazine |  | 4
+Vanilla | AmmoMagazine | FireworksBoxBlue | 100 | Fireworks Blue |  | 9
+Vanilla | AmmoMagazine | FireworksBoxGreen | 100 | Fireworks Green |  | 9
+Vanilla | AmmoMagazine | FireworksBoxRed | 100 | Fireworks Red |  | 9
+Vanilla | AmmoMagazine | FireworksBoxPink | 100 | Fireworks Pink |  | 9
+Vanilla | AmmoMagazine | FireworksBoxYellow | 100 | Fireworks Yellow |  | 9
+Vanilla | AmmoMagazine | FireworksBoxRainbow | 100 | Fireworks Rainbow |  | 9
+Vanilla | Component | EngineerPlushie | 100 | Engineer Plushie |  | 0
+Vanilla | Component | EngineerPlushieSE2 | 100 | Almagest Engineer Plushie |  | 0
+Vanilla | Component | SabiroidPlushie | 100 | Sabiroid Plushie |  | 0
+Vanilla | Component | PrototechFrame | 100 | Prototech Frame |  | 0
+Vanilla | Component | PrototechPanel | 100 | Prototech Panel |  | 0
+Vanilla | Component | PrototechCapacitor | 100 | Prototech Capacitor |  | 0
+Vanilla | Component | PrototechPropulsionUnit | 100 | Prototech Propulsion Unit |  | 0
+Vanilla | Component | PrototechMachinery | 100 | Prototech Machinery |  | 0
+Vanilla | Component | PrototechCircuitry | 100 | Prototech Circuitry |  | 0
+Vanilla | Component | PrototechCoolingUnit | 100 | Prototech Cooling Unit |  | 0
+Vanilla | Ingot | PrototechScrap | 1000 | Prototech Scrap |  | 0
+Vanilla | PhysicalGunObject | FlareGunItem | 2 | Flare Gun |  | 0
+Vanilla | ConsumableItem | RadiationKit | 5 | Anti-Radiation Medkit |  | 0
+Vanilla | ConsumableItem | ClangCola | 5 | Clang Kola | Food | 0
+Vanilla | ConsumableItem | CosmicCoffee | 5 | Cosmic Coffee | Food | 0
+Vanilla | ConsumableItem | MealPack_KelpCrisp | 5 | Meal Pack (Kelp Crisp) | Food | 0
+Vanilla | ConsumableItem | MealPack_FruitBar | 5 | Meal Pack (Fruit Bar) | Food | 0
+Vanilla | ConsumableItem | MealPack_GardenSlaw | 5 | Meal Pack (Garden Slaw) | Food | 0
+Vanilla | ConsumableItem | MealPack_RedPellets | 5 | Meal Pack (Red Pellets) | Food | 0
+Vanilla | ConsumableItem | MealPack_Chili | 5 | Meal Pack (Chili) | Food | 0
+Vanilla | ConsumableItem | MealPack_Ramen | 5 | Meal Pack (Ramen) | Food | 0
+Vanilla | ConsumableItem | MealPack_Flatbread | 5 | Meal Pack (Flatbread) | Food | 0
+Vanilla | ConsumableItem | MealPack_FruitPastry | 5 | Meal Pack (Fruit Pastry) | Food | 0
+Vanilla | ConsumableItem | MealPack_VeggieBurger | 5 | Meal Pack (Veggie Burger) | Food | 0
+Vanilla | ConsumableItem | MealPack_GreenPellets | 5 | Meal Pack (Green Pellets) | Food | 0
+Vanilla | ConsumableItem | MealPack_Curry | 5 | Meal Pack (Curry) | Food | 0
+Vanilla | ConsumableItem | MealPack_Dumplings | 5 | Meal Pack (Dumplings) | Food | 0
+Vanilla | ConsumableItem | MealPack_Spaghetti | 5 | Meal Pack (Spaghetti) | Food | 0
+Vanilla | ConsumableItem | MealPack_Lasagna | 5 | Meal Pack (Lasagna) | Food | 0
+Vanilla | ConsumableItem | MealPack_Burrito | 5 | Meal Pack (Burrito) | Food | 0
+Vanilla | ConsumableItem | MealPack_FrontierStew | 5 | Meal Pack (Frontier Stew) | Food | 0
+Vanilla | ConsumableItem | MealPack_SearedSabiroid | 5 | Meal Pack (Seared Sabiroid) | Food | 0
+Vanilla | ConsumableItem | MealPack_SteakDinner | 5 | Meal Pack (Steak Dinner) | Food | 0
+Vanilla | ConsumableItem | Fruit | 5 |  | Food | 0
+Vanilla | ConsumableItem | Mushrooms | 5 |  | Food | 0
+Vanilla | ConsumableItem | Vegetables | 5 |  | Food | 0
+Vanilla | ConsumableItem | MammalMeatRaw | 5 | Mammal Meat (Raw) | Food | 0
+Vanilla | ConsumableItem | MammalMeatCooked | 5 | Mammal Meat (Cooked) | Food | 0
+Vanilla | ConsumableItem | InsectMeatRaw | 5 | Insect Meat (Raw) | Food | 0
+Vanilla | ConsumableItem | InsectMeatCooked | 5 | Insect Meat (Cooked) | Food | 0
+Vanilla | Ore | Organic | 1000 | @ |  | 0
+Vanilla | PhysicalObject | Algae | 100 |  |  | 0
+Vanilla | PhysicalObject | Grain | 100 |  |  | 0
+Vanilla | SeedItem | Fruit | 10 | Fruit Seeds |  | 0
+Vanilla | SeedItem | Grain | 10 | Grain Seeds |  | 0
+Vanilla | SeedItem | Mushrooms | 10 | Mushroom Spores |  | 0
+Vanilla | SeedItem | Vegetables | 10 | Vegetable Seeds |  | 0
+DailyNeedsSurvivalMod | Ore | Organic | 10000 | @ |  | 0
+DailyNeedsSurvivalMod | Ore | Carbon | 2000 |  |  | 0
+DailyNeedsSurvivalMod | Ingot | Carbon | 500 | @ |  | 0
+DailyNeedsSurvivalMod | Ore | Phosphorus | 2000 |  |  | 0
+DailyNeedsSurvivalMod | Ingot | Phosphorus | 500 | @powder |  | 0
+DailyNeedsSurvivalMod | Ore | Potassium | 2000 |  |  | 0
+DailyNeedsSurvivalMod | Ingot | Potassium | 500 | @powder |  | 0
+DailyNeedsSurvivalMod | Ingot | ArtificialFood | 100 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SpaceMealBar | 10 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | EmergencyFood | 10 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | WaterFood | 500 | Water Packets | Food | 0
+DailyNeedsSurvivalMod | Ingot | Nutrients | 200 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SubFresh | 200 | Algae-Soy Product | Food | 0
+DailyNeedsSurvivalMod | Ingot | GreyWater | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | CleanWater | 100 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | LuxuryMeal | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SabiroidSteak | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | VeganFood | 20 | Tofu | Food | 0
+DailyNeedsSurvivalMod | Ingot | WolfSteak | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | WolfBouillon | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SabiroidBouillon | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | CoffeeFood | 20 | Coffee | Food | 0
+DailyNeedsSurvivalMod | Ingot | HotChocolate | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Fertilizer | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Potatoes | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | PotatoSeeds | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Tomatoes | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | TomatoSeeds | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Cucumbers | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | CucumberSeeds | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Carrots | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | CarrotSeeds | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | Ketchup | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | MartianSpecial | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ore | WolfMeat | 10 | @ | Food | 0
+DailyNeedsSurvivalMod | Ore | SabiroidMeat | 10 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | NotBeefBurger | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | ToFurkey | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SpacersBreakfast | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | ProteinShake | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | ProcessedMeat | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | ProcessedSabiroid | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | ProcessedEgg | 20 | @ | Food | 0
+DailyNeedsSurvivalMod | Ingot | SabiroidOmelette | 20 | @ | Food | 0
+AzimuthThrusterMod | Component | AzimuthSupercharger | 1600 | Supercharger |  | 0
+DeuteriumReactorMod | Component | MagnetronComponent | 10000 | MagnetronParts |  | 0
+DeuteriumReactorMod | Ingot | DeuteriumContainer | 20000 | Deuteriumparts |  | 0
+DeuteriumReactorMod | Ore | Deuterium | 10000 |  |  | 0
+DeuteriumReactorMod | Ingot | DTFuelCapsule | 1000 | Deuterium Container |  | 0
+DeuteriumReactorMod | Ingot | UpgradePartMk1 | 1000 | Upgrade Mk1 Part |  | 0
+DeuteriumReactorMod | Ingot | UpgradePartMk2 | 1000 | Upgrade Mk2 Part |  | 0
+DeuteriumReactorMod | Ingot | UpgradePartMk3 | 1000 | Upgrade Mk3 Part |  | 0
+DeuteriumReactorMod | Ingot | UpgradePartMk4 | 1000 | Upgrade Mk4 Part |  | 0
+DeuteriumReactorMod | Ingot | UpgradePartMk5 | 1000 | Upgrade Mk5 Part |  | 0
+MCRN_RailGunMod | AmmoMagazine | RailGunAmmoMag | 100 | RailGun Spike |  | 1
+MWI_HomingWeaponryMod | AmmoMagazine | TorpedoMk1 | 100 |  |  | 1
+MWI_HomingWeaponryMod | AmmoMagazine | SwarmMissile50mm | 100 |  |  | 12
+MWI_HomingWeaponryMod | AmmoMagazine | DestroyerMissileX | 100 |  |  | 8
+MWI_HomingWeaponryMod | AmmoMagazine | DestroyerMissileMk1 | 100 |  |  | 2
+MWI_HomingWeaponryMod | AmmoMagazine | Blank | 100 |  |  | 1
+PaintGunMod | PhysicalGunObject | PhysicalPaintGun | 5 | PaintGun |  | 0
+PaintGunMod | AmmoMagazine | PaintGunMag | 100 |  |  | 1
+StarGateMod_Gates | Component | Naquadah | 500 | @parts |  | 0
+StarGateMod_Ores | Ore | Trinium | 5000 |  |  | 0
+StarGateMod_Ores | Ingot | Trinium | 20000 |  |  | 0
+StarGateMod_Ores | Ore | Neutronium | 5000 |  |  | 0
+StarGateMod_Ores | Ingot | Neutronium | 30000 |  |  | 0
+StarGateMod_Ores | Ore | Naquadah | 5000 |  |  | 0
+StarGateMod_Ores | Ingot | Naquadah | 40000 |  |  | 0
+StarGateMod_Ores | Component | Trinium | 500 | @ Plate |  | 0
+StarGateMod_Ores | Component | Neutronium | 500 | @ Crate |  | 0
+StarGateMod_Ores | Component | Naquadah | 500 | @parts |  | 0
+DefenseShieldMod | Component | ShieldComponent | 1000 | Field Emitter |  | 0
+IndustrialOverhaulMod | Ingot | Magnesium | 50000 | Gunpowder |  | 0
+IndustrialOverhaulMod | Ore | Heat | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Coal | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Sulfur | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Sulfur | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Copper | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Copper | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Lithium | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Lithium | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Bauxite | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Titanium | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Titanium | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Tantalum | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Tantalum | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Niter | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Niter | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Polymer | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Aluminum | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Carbon | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | Uranium | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | Uranium | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | NuclearWaste | 100 |  |  | 0
+IndustrialOverhaulMod | Ingot | DepletedUranium | 100 |  |  | 0
+IndustrialOverhaulMod | Ore | CrushedSulfur | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedCopper | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedLithium | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedBauxite | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedTitanium | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedTantalum | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedIron | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedNickel | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedCobalt | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedSilicon | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedSilver | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedGold | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedPlatinum | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | CrushedUranium | 100 | @ | Crushed | 0
+IndustrialOverhaulMod | Ore | PurifiedSulfur | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedCopper | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedLithium | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedBauxite | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedTitanium | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedTantalum | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedNiter | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedIron | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedNickel | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedCobalt | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedSilicon | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedSilver | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedGold | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedPlatinum | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | PurifiedUranium | 100 | @ | Purified | 0
+IndustrialOverhaulMod | Ore | OilSand | 100 | Oil Sand | Oil | 0
+IndustrialOverhaulMod | Ore | CrudeOil | 100 | @ | Oil | 0
+IndustrialOverhaulMod | Ingot | FuelOil | 100 | @ | Oil | 0
+IndustrialOverhaulMod | Ingot | SpentFuel | 100 | @ | Oil | 0
+IndustrialOverhaulMod | Component | FSSolarCell | 100 | Full-Spectrum Solar Cell |  | 0
+IndustrialOverhaulMod | Component | ElectronMatrix | 100 | Electron-Matrix Cell |  | 0
+IndustrialOverhaulMod | Component | Capacitor | 100 | Capacitor Cell |  | 0
+IndustrialOverhaulMod | Component | CompositeArmor | 100 | Composite Plate |  | 0
+IndustrialOverhaulMod | Component | TokamakBlanket | 100 | Tokamak Blanket Plate |  | 0
+IndustrialOverhaulMod | Component | SuperMagnet | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Cryocooler | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Thermocouple | 100 |  |  | 0
+IndustrialOverhaulMod | Component | ArmorGlass | 100 |  |  | 0
+IndustrialOverhaulMod | Component | CopperWire | 100 |  |  | 0
+IndustrialOverhaulMod | Component | GoldWire | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Fabric | 100 | Synthetic Fabric |  | 0
+IndustrialOverhaulMod | Component | Rubber | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Plastic | 100 |  |  | 0
+IndustrialOverhaulMod | Component | AdvancedComputer | 100 |  |  | 0
+IndustrialOverhaulMod | Component | QuantumComputer | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Concrete | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Asphalt | 100 |  |  | 0
+IndustrialOverhaulMod | Component | TitaniumPlate | 100 |  |  | 0
+IndustrialOverhaulMod | Component | ArmoredPlate | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Electromagnet | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Lightbulb | 100 |  |  | 0
+IndustrialOverhaulMod | Component | AcidPowerCell | 100 |  |  | 0
+IndustrialOverhaulMod | Component | AlkalinePowerCell | 100 |  |  | 0
+IndustrialOverhaulMod | Component | Ceramic | 100 |  |  | 0
+IndustrialOverhaulMod | Component | LaserEmitter | 100 |  |  | 0
+IndustrialOverhaulMod | Component | HeatingElement | 100 |  |  | 0
+IndustrialOverhaulMod | Component | BulletproofGlass | 100 | Glass |  | 0
+IndustrialOverhaulMod | Component | InteriorPlate | 100 | Aluminum Plate |  | 0
+IndustrialOverhaulMod | Component | Computer | 100 | Basic Computer |  | 0
+IndustrialOverhaulMod | Component | Detector | 100 | Sensor Cluster |  | 0
+IndustrialOverhaulMod | Component | PowerCell | 100 | Lithium Power Cell |  | 0
+IndustrialOverhaulMod | AmmoMagazine | DUNATO_25x184mm | 10 |  |  | 140
+IndustrialOverhaulMod | AmmoMagazine | InteriorTurret_Mag_50rd | 10 |  |  | 50
+IndustrialOverhaulMod | AmmoMagazine | AutocannonClipDUAP | 10 |  |  | 16
+IndustrialOverhaulMod | AmmoMagazine | LargeCalibreAmmoHE | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | LargeCalibreAmmoDUAP | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | MediumCalibreAmmoHE | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | MediumCalibreAmmoDUAP | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | LargeRailgunAmmoDUAP | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | SmallRailgunAmmoDUAP | 10 |  |  | 1
+IndustrialOverhaulMod | AmmoMagazine | HEMissile200mm | 100 | HE Rocket |  | 1
+EatDrinkSleepRepeatMod | ConsumableItem | ClangCola | 5 |  | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | CosmicCoffee | 5 |  | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | SparklingWater | 5 |  | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | InterBeer | 5 |  | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | LaysChips | 5 |  | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | PrlnglesChips | 5 | PringlesChips | Food | 0
+EatDrinkSleepRepeatMod | ConsumableItem | Emergency_Ration | 5 | Emergency Ration | Food | 0
+PlantAndCookMod | Component | EmptyTinCan | 100 |  |  | 0
+PlantAndCookMod | Ore | Organic | 100 |  |  | 0
+PlantAndCookMod | Ingot | Wheat | 100 | @ | Food | 0
+PlantAndCookMod | Ingot | Pumpkin | 100 | @ | Food | 0
+PlantAndCookMod | Ingot | Cabbage | 100 | @ | Food | 0
+PlantAndCookMod | Ingot | Soya | 100 | @ | Food | 0
+PlantAndCookMod | Ingot | Herbs | 100 | @ | Food | 0
+PlantAndCookMod | ConsumableItem | EuropaTea | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Apple | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | AppleJuice | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | ApplePie | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Bread | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Burger | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Meat | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | MeatRoasted | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Soup | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | MushroomSoup | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | TofuSoup | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Tofu | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | Mushrooms | 5 |  | Food | 0
+PlantAndCookMod | ConsumableItem | ShroomSteak | 5 |  | Food | 0
+AryxEpsteinDriveMod | Component | AryxLynxon_FusionComponent | 100 | Fusion Coil |  | 0
+NorthWindWeaponsMod | Component | C100ShellCasing | 100 | 100mm Casing Scrap |  | 0
+NorthWindWeaponsMod | AmmoMagazine | R75ammo | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | R150ammo | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | R250ammo | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | H203Ammo | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | H203AmmoAP | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | C30Ammo | 10 |  |  | 120
+NorthWindWeaponsMod | AmmoMagazine | C30DUammo | 10 |  |  | 120
+NorthWindWeaponsMod | AmmoMagazine | CRAM30mmAmmo | 10 |  |  | 120
+NorthWindWeaponsMod | AmmoMagazine | C100mmAmmo | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | C300AmmoAP | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | C300AmmoHE | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | C300AmmoG | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | C400AmmoAP | 10 |  |  | 2
+NorthWindWeaponsMod | AmmoMagazine | C400AmmoHE | 10 |  |  | 2
+NorthWindWeaponsMod | AmmoMagazine | C400AmmoCluster | 10 |  |  | 2
+NorthWindWeaponsMod | AmmoMagazine | C500AmmoAP | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | C500AmmoHE | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | C500AmmoCasaba | 10 |  |  | 3
+NorthWindWeaponsMod | AmmoMagazine | PlasmaCell10MJ | 10 |  |  | 1
+NorthWindWeaponsMod | AmmoMagazine | Blank | 100 |  |  | 1

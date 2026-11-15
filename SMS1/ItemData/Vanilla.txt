@@ -1,0 +1,176 @@
+﻿# SMS item data for mod 'Vanilla'.
+# Converted into SMS1/Definitions/Generated/ItemData.g.cs by SMS1.ItemDataGenerator (on build).
+#
+# Section:  [ItemType] or [ItemType | Category]   (Category: grouping other than the item type, e.g. Food)
+# Row:      Subtype | Max [| DisplayName] [| AmmoCapacity]
+#           [Resource]: ore and ingot of the subtype: Subtype | OreMax | IngotMax [| OreName] [| IngotName]
+#           Max: amount for the fillbar of the inventory command (can be changed by the user in the CustomData)
+#           DisplayName: empty = derived (Iron -> Ironore / Ironingot), @ = the subtype, _ = space,
+#                        e.g. "@ Plate" -> "Trinium Plate"
+#           AmmoCapacity: rounds per magazine (AmmoMagazine only)
+#           Subtype*: tools MK1..MK4 (Subtype + Item, 2Item, 3Item, 4Item; name + MK2..MK4)
+# The order matters: it is the order in the item lists and the CustomData; a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+
+[Resource]
+Uranium | 5000 | 15000
+Platinum | 5000 | 20000
+Silicon | 20000 | 100000
+Iron | 300000 | 300000
+Cobalt | 50000 | 70000
+Nickel | 100000 | 100000
+Silver | 10000 | 50000
+Gold | 10000 | 50000
+Magnesium | 50000 | 50000 |  | @powder
+Stone | 40000 | 20000 | @ | Gravel
+
+[Ore]
+Ice | 100000 | @
+Scrap | 1000 | @Metal
+
+[Component]
+Construction | 50000
+MetalGrid | 15500
+InteriorPlate | 55000
+SteelPlate | 300000
+Girder | 3500
+SmallTube | 26000
+LargeTube | 6000
+Motor | 16000
+Display | 500
+BulletproofGlass | 12000
+Computer | 6500
+Reactor | 10000
+Thrust | 16000
+GravityGenerator | 250 | GravityParts
+Medical | 120
+RadioCommunication | 250 | RadioParts
+Detector | 400
+Explosives | 500
+SolarCell | 2800
+PowerCell | 2800
+Superconductor | 3000
+Canvas | 300
+ZoneChip | 50
+
+[PhysicalGunObject]
+Welder* | 2
+HandDrill* | 2
+AngleGrinder* | 2 | Grinder
+
+[PhysicalGunObject | Weapons]
+AutomaticRifleItem | 2 | Assault Rifle
+RapidFireAutomaticRifleItem | 2 | RapidFire Rifle
+PreciseAutomaticRifleItem | 2 | Precise Rifle
+UltimateAutomaticRifleItem | 2 | Ultimate Rifle
+SemiAutoPistolItem | 2 | SemiAuto Pistol
+FullAutoPistolItem | 2 | FullAuto Pistol
+ElitePistolItem | 2 | Elite Pistol
+BasicHandHeldLauncherItem | 2 | Basic RocketLauncher
+AdvancedHandHeldLauncherItem | 2 | Advanced RocketLauncher
+
+[AmmoMagazine]
+Missile200mm | 50 | Missile 200mm | 1
+NATO_5p56x45mm | 1000 | Magazine 5.56x45mm | 30
+NATO_25x184mm | 100 | Ammobox 25x184mm | 140
+SemiAutoPistolMagazine | 100 |  | 10
+FullAutoPistolMagazine | 100 |  | 20
+ElitePistolMagazine | 100 |  | 10
+AutomaticRifleGun_Mag_20rd | 100 | AssaultRifleMagazine | 20
+RapidFireAutomaticRifleGun_Mag_50rd | 100 | RapidFireRifleMagazine | 50
+PreciseAutomaticRifleGun_Mag_5rd | 100 | PreciseRifleMagazine | 8
+UltimateAutomaticRifleGun_Mag_30rd | 10 | UltimateRifleMagazine | 30
+AutocannonClip | 100 |  | 16
+LargeCalibreAmmo | 50 | Big Calibre | 1
+MediumCalibreAmmo | 30 | Medium Calibre | 1
+LargeRailgunAmmo | 20 | Big Railgun Spike | 1
+SmallRailgunAmmo | 20 | Small Railgun Spike | 1
+
+[ConsumableItem]
+Powerkit | 5
+Medkit | 5
+
+[GasContainerObject]
+HydrogenBottle | 5
+
+[OxygenContainerObject]
+OxygenBottle | 5
+
+[PhysicalObject]
+SpaceCredit | 10000
+
+[Datapad]
+Datapad | 5
+
+# added by SMS1.ItemDataTool 2026-11-15 (new vanilla items since SMS 1.4)
+[AmmoMagazine]
+FlareClip | 100 | Flare Gun Magazine | 4
+FireworksBoxBlue | 100 | Fireworks Blue | 9
+FireworksBoxGreen | 100 | Fireworks Green | 9
+FireworksBoxRed | 100 | Fireworks Red | 9
+FireworksBoxPink | 100 | Fireworks Pink | 9
+FireworksBoxYellow | 100 | Fireworks Yellow | 9
+FireworksBoxRainbow | 100 | Fireworks Rainbow | 9
+
+[Component]
+EngineerPlushie | 100 | Engineer Plushie
+EngineerPlushieSE2 | 100 | Almagest Engineer Plushie
+SabiroidPlushie | 100 | Sabiroid Plushie
+PrototechFrame | 100 | Prototech Frame
+PrototechPanel | 100 | Prototech Panel
+PrototechCapacitor | 100 | Prototech Capacitor
+PrototechPropulsionUnit | 100 | Prototech Propulsion Unit
+PrototechMachinery | 100 | Prototech Machinery
+PrototechCircuitry | 100 | Prototech Circuitry
+PrototechCoolingUnit | 100 | Prototech Cooling Unit
+
+[Ingot]
+PrototechScrap | 1000 | Prototech Scrap
+
+[PhysicalGunObject]
+FlareGunItem | 2 | Flare Gun
+
+[ConsumableItem]
+RadiationKit | 5 | Anti-Radiation Medkit
+
+[ConsumableItem | Food]
+ClangCola | 5 | Clang Kola
+CosmicCoffee | 5 | Cosmic Coffee
+MealPack_KelpCrisp | 5 | Meal Pack (Kelp Crisp)
+MealPack_FruitBar | 5 | Meal Pack (Fruit Bar)
+MealPack_GardenSlaw | 5 | Meal Pack (Garden Slaw)
+MealPack_RedPellets | 5 | Meal Pack (Red Pellets)
+MealPack_Chili | 5 | Meal Pack (Chili)
+MealPack_Ramen | 5 | Meal Pack (Ramen)
+MealPack_Flatbread | 5 | Meal Pack (Flatbread)
+MealPack_FruitPastry | 5 | Meal Pack (Fruit Pastry)
+MealPack_VeggieBurger | 5 | Meal Pack (Veggie Burger)
+MealPack_GreenPellets | 5 | Meal Pack (Green Pellets)
+MealPack_Curry | 5 | Meal Pack (Curry)
+MealPack_Dumplings | 5 | Meal Pack (Dumplings)
+MealPack_Spaghetti | 5 | Meal Pack (Spaghetti)
+MealPack_Lasagna | 5 | Meal Pack (Lasagna)
+MealPack_Burrito | 5 | Meal Pack (Burrito)
+MealPack_FrontierStew | 5 | Meal Pack (Frontier Stew)
+MealPack_SearedSabiroid | 5 | Meal Pack (Seared Sabiroid)
+MealPack_SteakDinner | 5 | Meal Pack (Steak Dinner)
+Fruit | 5
+Mushrooms | 5
+Vegetables | 5
+MammalMeatRaw | 5 | Mammal Meat (Raw)
+MammalMeatCooked | 5 | Mammal Meat (Cooked)
+InsectMeatRaw | 5 | Insect Meat (Raw)
+InsectMeatCooked | 5 | Insect Meat (Cooked)
+
+[Ore]
+Organic | 1000 | @
+
+[PhysicalObject]
+Algae | 100
+Grain | 100
+
+[SeedItem]
+Fruit | 10 | Fruit Seeds
+Grain | 10 | Grain Seeds
+Mushrooms | 10 | Mushroom Spores
+Vegetables | 10 | Vegetable Seeds

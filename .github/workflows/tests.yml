@@ -9,5 +9,6 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      # Only the test project: the script project needs a Space Engineers install
+      # Only the test projects: the script projects need a Space Engineers install
       - run: dotnet test PIM1.0.Tests/PIM1.0.Tests.csproj
+      - run: dotnet test SMS1.Tests/SMS1.Tests.csproj

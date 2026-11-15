@@ -1,0 +1,20 @@
+﻿# Load order of the SMS item data files (one mod per line, file ItemData/<Mod>.txt).
+# Vanilla is always loaded, the other mods if enabled in the config (the mod name is the config key).
+# The order matters: it is the order of the mods in the config, a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+# Optional after '|': Steam workshop id(s) of the mod (for the item data check tool).
+Vanilla
+DailyNeedsSurvivalMod | 1608841667
+AzimuthThrusterMod | 472087570
+DeuteriumReactorMod | 1259182705
+MCRN_RailGunMod | 1824058403
+MWI_HomingWeaponryMod | 1919062467
+PaintGunMod | 500818376
+StarGateMod_Gates | 2362151943
+StarGateMod_Ores | 2362164390
+DefenseShieldMod | 3154379105
+IndustrialOverhaulMod | 2344068716
+EatDrinkSleepRepeatMod | 2547246713
+PlantAndCookMod | 2570427696
+AryxEpsteinDriveMod | 2394430829
+NorthWindWeaponsMod | 2016817336

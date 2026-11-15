@@ -1,0 +1,16 @@
+﻿# SMS item data for mod 'DefenseShieldMod'.
+# Converted into SMS1/Definitions/Generated/ItemData.g.cs by SMS1.ItemDataGenerator (on build).
+#
+# Section:  [ItemType] or [ItemType | Category]   (Category: grouping other than the item type, e.g. Food)
+# Row:      Subtype | Max [| DisplayName] [| AmmoCapacity]
+#           [Resource]: ore and ingot of the subtype: Subtype | OreMax | IngotMax [| OreName] [| IngotName]
+#           Max: amount for the fillbar of the inventory command (can be changed by the user in the CustomData)
+#           DisplayName: empty = derived (Iron -> Ironore / Ironingot), @ = the subtype, _ = space,
+#                        e.g. "@ Plate" -> "Trinium Plate"
+#           AmmoCapacity: rounds per magazine (AmmoMagazine only)
+#           Subtype*: tools MK1..MK4 (Subtype + Item, 2Item, 3Item, 4Item; name + MK2..MK4)
+# The order matters: it is the order in the item lists and the CustomData; a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+
+[Component]
+ShieldComponent | 1000 | Field Emitter

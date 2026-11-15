@@ -13,28 +13,10 @@ namespace IngameScript
     partial class Program
     {
         static Dictionary<string, bool> usemods = new Dictionary<string, bool>();
-        string[] modlist = new string[]
-        {
-            X_M_Daily,
-            X_M_AziThrust,
-            X_M_DeuteriumReactor,
-            X_M_MCRNRailgun,
-            X_M_MWIHoming,
-            X_M_Paintgun,
-            X_M_SG_Gates,
-            X_M_SG_Ores,
-            X_M_Shield,
-            X_M_IndustrialOverhaul,
-            X_M_IndustrialOverhaulWater,
-            X_M_EatDrinkSleepRepeat,
-            X_M_PlantAndCook,
-            X_M_AryxEpsteinDrive,
-            X_M_NorthWindWeapons,
-            X_M_HSR,
-        };
         public void loadConfig()
         {
-            foreach (var s in modlist) usemods.Add(s, false);
+            // the mods of the item data (Vanilla is always used)
+            for (var i = 1; i < ItemDataMods.Length; i++) usemods.Add(ItemDataMods[i], false);
             var configteil = false;
             var mainpageteil = false;
             var itemdefsteil = false;

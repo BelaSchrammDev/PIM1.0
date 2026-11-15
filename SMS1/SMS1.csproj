@@ -29,4 +29,23 @@
   <ItemGroup>
     <Compile Include="..\Share\**\*.cs" LinkBase="Share" />
   </ItemGroup>
+
+  <!-- Item data: ItemData/*.txt -> Definitions/Generated/ItemData.g.cs
+       The generator only runs if one of the inputs changed (stamp file in obj) and only
+       rewrites the .g.cs if its content changed. The .g.cs is committed, so the test project
+       (and CI without Space Engineers) can use it without running the generator. -->
+  <PropertyGroup>
+    <ItemDataGeneratorProject>$(MSBuildProjectDirectory)\..\SMS1.ItemDataGenerator\SMS1.ItemDataGenerator.csproj</ItemDataGeneratorProject>
+    <ItemDataDir>$(MSBuildProjectDirectory)\ItemData</ItemDataDir>
+    <ItemDataOutput>$(MSBuildProjectDirectory)\Definitions\Generated\ItemData.g.cs</ItemDataOutput>
+    <ItemDataStamp>$(BaseIntermediateOutputPath)ItemData.stamp</ItemDataStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <ItemDataInput Include="ItemData\*.txt" />
+    <ItemDataInput Include="..\SMS1.ItemDataGenerator\*.cs;..\SMS1.ItemDataGenerator\*.csproj;Definitions\ItemDataParser.cs" />
+  </ItemGroup>
+  <Target Name="GenerateItemData" BeforeTargets="CoreCompile" Inputs="@(ItemDataInput)" Outputs="$(ItemDataStamp)">
+    <Exec Command="dotnet run --project &quot;$(ItemDataGeneratorProject)&quot; -c Release -- &quot;$(ItemDataDir)&quot; &quot;$(ItemDataOutput)&quot;" />
+    <Touch Files="$(ItemDataStamp)" AlwaysCreate="true" />
+  </Target>
 </Project>

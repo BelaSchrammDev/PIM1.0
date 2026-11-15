@@ -1,0 +1,64 @@
+﻿# SMS item data for mod 'DailyNeedsSurvivalMod'.
+# Converted into SMS1/Definitions/Generated/ItemData.g.cs by SMS1.ItemDataGenerator (on build).
+#
+# Section:  [ItemType] or [ItemType | Category]   (Category: grouping other than the item type, e.g. Food)
+# Row:      Subtype | Max [| DisplayName] [| AmmoCapacity]
+#           [Resource]: ore and ingot of the subtype: Subtype | OreMax | IngotMax [| OreName] [| IngotName]
+#           Max: amount for the fillbar of the inventory command (can be changed by the user in the CustomData)
+#           DisplayName: empty = derived (Iron -> Ironore / Ironingot), @ = the subtype, _ = space,
+#                        e.g. "@ Plate" -> "Trinium Plate"
+#           AmmoCapacity: rounds per magazine (AmmoMagazine only)
+#           Subtype*: tools MK1..MK4 (Subtype + Item, 2Item, 3Item, 4Item; name + MK2..MK4)
+# The order matters: it is the order in the item lists and the CustomData; a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+
+[Ore]
+Organic | 10000 | @
+
+[Resource]
+Carbon | 2000 | 500 |  | @
+Phosphorus | 2000 | 500 |  | @powder
+Potassium | 2000 | 500 |  | @powder
+
+[Ingot | Food]
+ArtificialFood | 100 | @
+SpaceMealBar | 10 | @
+EmergencyFood | 10 | @
+WaterFood | 500 | Water Packets
+Nutrients | 200 | @
+SubFresh | 200 | Algae-Soy Product
+GreyWater | 20 | @
+CleanWater | 100 | @
+LuxuryMeal | 20 | @
+SabiroidSteak | 20 | @
+VeganFood | 20 | Tofu
+WolfSteak | 20 | @
+WolfBouillon | 20 | @
+SabiroidBouillon | 20 | @
+CoffeeFood | 20 | Coffee
+HotChocolate | 20 | @
+Fertilizer | 20 | @
+Potatoes | 20 | @
+PotatoSeeds | 20 | @
+Tomatoes | 20 | @
+TomatoSeeds | 20 | @
+Cucumbers | 20 | @
+CucumberSeeds | 20 | @
+Carrots | 20 | @
+CarrotSeeds | 20 | @
+Ketchup | 20 | @
+MartianSpecial | 20 | @
+
+[Ore | Food]
+WolfMeat | 10 | @
+SabiroidMeat | 10 | @
+
+[Ingot | Food]
+NotBeefBurger | 20 | @
+ToFurkey | 20 | @
+SpacersBreakfast | 20 | @
+ProteinShake | 20 | @
+ProcessedMeat | 20 | @
+ProcessedSabiroid | 20 | @
+ProcessedEgg | 20 | @
+SabiroidOmelette | 20 | @

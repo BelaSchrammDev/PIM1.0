@@ -1,0 +1,140 @@
+# SMS item data for mod 'IndustrialOverhaulMod'.
+# Converted into SMS1/Definitions/Generated/ItemData.g.cs by SMS1.ItemDataGenerator (on build).
+#
+# Section:  [ItemType] or [ItemType | Category]   (Category: grouping other than the item type, e.g. Food)
+# Row:      Subtype | Max [| DisplayName] [| AmmoCapacity]
+#           [Resource]: ore and ingot of the subtype: Subtype | OreMax | IngotMax [| OreName] [| IngotName]
+#           Max: amount for the fillbar of the inventory command (can be changed by the user in the CustomData)
+#           DisplayName: empty = derived (Iron -> Ironore / Ironingot), @ = the subtype, _ = space,
+#                        e.g. "@ Plate" -> "Trinium Plate"
+#           AmmoCapacity: rounds per magazine (AmmoMagazine only)
+#           Subtype*: tools MK1..MK4 (Subtype + Item, 2Item, 3Item, 4Item; name + MK2..MK4)
+# The order matters: it is the order in the item lists and the CustomData; a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+
+# Magnesium powder is gunpowder in this mod (max as in Vanilla, only the name changes)
+[Ingot]
+Magnesium | 50000 | Gunpowder
+
+[Ore]
+Heat | 100
+Coal | 100
+
+[Resource]
+Sulfur | 100 | 100
+Copper | 100 | 100
+Lithium | 100 | 100
+
+[Ore]
+Bauxite | 100
+
+[Resource]
+Titanium | 100 | 100
+Tantalum | 100 | 100
+Niter | 100 | 100
+
+[Ingot]
+Polymer | 100
+
+[Ingot]
+Aluminum | 100
+
+[Ingot]
+Carbon | 100
+
+[Resource]
+Uranium | 100 | 100
+
+[Ingot]
+NuclearWaste | 100
+DepletedUranium | 100
+
+[Ore | Crushed]
+CrushedSulfur | 100 | @
+CrushedCopper | 100 | @
+CrushedLithium | 100 | @
+CrushedBauxite | 100 | @
+CrushedTitanium | 100 | @
+CrushedTantalum | 100 | @
+CrushedIron | 100 | @
+CrushedNickel | 100 | @
+CrushedCobalt | 100 | @
+CrushedSilicon | 100 | @
+CrushedSilver | 100 | @
+CrushedGold | 100 | @
+CrushedPlatinum | 100 | @
+CrushedUranium | 100 | @
+
+[Ore | Purified]
+PurifiedSulfur | 100 | @
+PurifiedCopper | 100 | @
+PurifiedLithium | 100 | @
+PurifiedBauxite | 100 | @
+PurifiedTitanium | 100 | @
+PurifiedTantalum | 100 | @
+PurifiedNiter | 100 | @
+PurifiedIron | 100 | @
+PurifiedNickel | 100 | @
+PurifiedCobalt | 100 | @
+PurifiedSilicon | 100 | @
+PurifiedSilver | 100 | @
+PurifiedGold | 100 | @
+PurifiedPlatinum | 100 | @
+PurifiedUranium | 100 | @
+
+[Ore | Oil]
+OilSand | 100 | Oil Sand
+CrudeOil | 100 | @
+
+[Ingot | Oil]
+FuelOil | 100 | @
+SpentFuel | 100 | @
+
+[Component]
+FSSolarCell | 100 | Full-Spectrum Solar Cell
+ElectronMatrix | 100 | Electron-Matrix Cell
+Capacitor | 100 | Capacitor Cell
+CompositeArmor | 100 | Composite Plate
+TokamakBlanket | 100 | Tokamak Blanket Plate
+SuperMagnet | 100
+Cryocooler | 100
+Thermocouple | 100
+ArmorGlass | 100
+CopperWire | 100
+GoldWire | 100
+Fabric | 100 | Synthetic Fabric
+Rubber | 100
+Plastic | 100
+AdvancedComputer | 100
+QuantumComputer | 100
+Concrete | 100
+Asphalt | 100
+TitaniumPlate | 100
+ArmoredPlate | 100
+Electromagnet | 100
+Lightbulb | 100
+AcidPowerCell | 100
+AlkalinePowerCell | 100
+Ceramic | 100
+LaserEmitter | 100
+HeatingElement | 100
+BulletproofGlass | 100 | Glass
+InteriorPlate | 100 | Aluminum Plate
+Computer | 100 | Basic Computer
+Detector | 100 | Sensor Cluster
+PowerCell | 100 | Lithium Power Cell
+
+[AmmoMagazine]
+DUNATO_25x184mm | 10 |  | 140
+InteriorTurret_Mag_50rd | 10 |  | 50
+AutocannonClipDUAP | 10 |  | 16
+LargeCalibreAmmoHE | 10 |  | 1
+LargeCalibreAmmoDUAP | 10 |  | 1
+MediumCalibreAmmoHE | 10 |  | 1
+MediumCalibreAmmoDUAP | 10 |  | 1
+LargeRailgunAmmoDUAP | 10 |  | 1
+SmallRailgunAmmoDUAP | 10 |  | 1
+
+# added by SMS1.ItemDataTool 2026-11-15: check max, names and categories
+[AmmoMagazine]
+HEMissile200mm | 100 | HE Rocket | 1

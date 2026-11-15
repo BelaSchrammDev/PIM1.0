@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build-time tool: converts SMS1/ItemData/*.txt into
+       SMS1/Definitions/Generated/ItemData.g.cs (compact strings for the script).
+       Arguments: <dataDir> <outputFile>
+       It is started automatically by the GenerateItemData target in SMS1.csproj. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>SmsItemDataGenerator</RootNamespace>
+  </PropertyGroup>
+
+  <!-- the script's parser: the generator uses its type codes, so both always match -->
+  <ItemGroup>
+    <Compile Include="..\SMS1\Definitions\ItemDataParser.cs" Link="Script\ItemDataParser.cs" />
+  </ItemGroup>
+
+</Project>

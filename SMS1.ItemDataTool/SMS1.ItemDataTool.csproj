@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Developer tool: compares SMS1/ItemData/*.txt with the item definitions (.sbc) of the game
+       and the workshop mods and adds missing items to the data files. Not part of the build.
+       Run: dotnet run - -project SMS1.ItemDataTool - - check   (see EntryPoint.cs) -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>SmsItemDataTool</RootNamespace>
+  </PropertyGroup>
+
+  <!-- data file reader and encoder of the generator -->
+  <ItemGroup>
+    <ProjectReference Include="..\SMS1.ItemDataGenerator\SMS1.ItemDataGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- the script's parser and name rule (Program is internal, so the tool links its own copy, like PIM1.0.BluePrintTool):
+         the data items are counted exactly as the script reads them; a proposed name is left out if the script derives the same -->
+    <Compile Include="..\SMS1\Definitions\ItemDataParser.cs" Link="Script\ItemDataParser.cs" />
+    <Compile Include="..\SMS1\Definitions\ItemNames.cs" Link="Script\ItemNames.cs" />
+    <!-- game and workshop folders: the same detection as PIM1.0.BluePrintTool (linked, unchanged) -->
+    <Compile Include="..\PIM1.0.BluePrintTool\GamePaths.cs" Link="Shared\GamePaths.cs" />
+  </ItemGroup>
+
+</Project>

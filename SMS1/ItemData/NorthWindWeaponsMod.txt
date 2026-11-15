@@ -1,0 +1,41 @@
+# SMS item data for mod 'NorthWindWeaponsMod'.
+# Converted into SMS1/Definitions/Generated/ItemData.g.cs by SMS1.ItemDataGenerator (on build).
+#
+# Section:  [ItemType] or [ItemType | Category]   (Category: grouping other than the item type, e.g. Food)
+# Row:      Subtype | Max [| DisplayName] [| AmmoCapacity]
+#           [Resource]: ore and ingot of the subtype: Subtype | OreMax | IngotMax [| OreName] [| IngotName]
+#           Max: amount for the fillbar of the inventory command (can be changed by the user in the CustomData)
+#           DisplayName: empty = derived (Iron -> Ironore / Ironingot), @ = the subtype, _ = space,
+#                        e.g. "@ Plate" -> "Trinium Plate"
+#           AmmoCapacity: rounds per magazine (AmmoMagazine only)
+#           Subtype*: tools MK1..MK4 (Subtype + Item, 2Item, 3Item, 4Item; name + MK2..MK4)
+# The order matters: it is the order in the item lists and the CustomData; a later mod overrides max and (if given) name;
+# the CustomData of the player overrides both (max: section of the mod, name: any section).
+
+[Component]
+C100ShellCasing | 100 | 100mm Casing Scrap
+
+[AmmoMagazine]
+R75ammo | 10 |  | 1
+R150ammo | 10 |  | 1
+R250ammo | 10 |  | 1
+H203Ammo | 10 |  | 1
+H203AmmoAP | 10 |  | 1
+C30Ammo | 10 |  | 120
+C30DUammo | 10 |  | 120
+CRAM30mmAmmo | 10 |  | 120
+C100mmAmmo | 10 |  | 1
+C300AmmoAP | 10 |  | 3
+C300AmmoHE | 10 |  | 3
+C300AmmoG | 10 |  | 3
+C400AmmoAP | 10 |  | 2
+C400AmmoHE | 10 |  | 2
+C400AmmoCluster | 10 |  | 2
+C500AmmoAP | 10 |  | 3
+C500AmmoHE | 10 |  | 3
+C500AmmoCasaba | 10 |  | 3
+PlasmaCell10MJ | 10 |  | 1
+
+# added by SMS1.ItemDataTool 2026-11-15: check max, names and categories
+[AmmoMagazine]
+Blank | 100 |  | 1

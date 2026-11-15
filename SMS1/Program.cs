@@ -31,9 +31,7 @@ namespace IngameScript
         const String SI1 = "SMS v1.4", SI2 = "a (c) BelaOkuma\n", Cfilled = "@-(filled)", HSS = "\u00AD", oMG = "MAINGRID", oLG = "LCDGRID", oGN = "GRIDNAME", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_Cash = "PhysicalObject", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_ShowInfoPBLcd = "ShowInfoOnPBLcd", X_ShowDamageBlockHUD = "ShowDamageBlocksOnHud", X_Line = "  / =================================\n", X_LineNewSite = X_Line + "@newsite(", X_Line2 = "  / ------------\n";
         const string X_KeepMenu = "KeepMenuToReturn", X_TargetCycleTime = "TargetCycleTime", X_tHeadLine = "TerminalHeadLine", X_tMainPage = "TerminalMainPageBody", X_tMainPageEnd = X_tMainPage + "End", X_tItemDefs = "### ItemDefinitions ###", X_tItemdefsEnd = "### ItemDefinitionsEnd ###", X_tNewMod = "### MOD";
-        const string X_Scriptmode = "ScriptMode", X_M_Vanilla = "Vanilla", X_M_Daily = "DailyNeedsSurvivalMod", X_M_AziThrust = "AzimuthThrusterMod", X_M_SG_Gates = "StarGateMod_Gates", X_M_SG_Ores = "StarGateMod_Ores";
-        const string X_M_NorthWindWeapons = "NorthWindWeaponsMod", X_M_HSR = "HSR_Mod", X_M_AryxEpsteinDrive = "AryxEpsteinDriveMod", X_M_PlantAndCook = "PlantAndCookMod", X_M_EatDrinkSleepRepeat = "EatDrinkSleepRepeatMod", X_M_IndustrialOverhaulWater = "IndustrialOverhaulWaterMod", X_M_IndustrialOverhaul = "IndustrialOverhaulMod", X_M_Paintgun = "PaintGunMod", X_M_DeuteriumReactor = "DeuteriumReactorMod", X_M_Shield = "DefenseShieldMod", X_M_MCRNRailgun = "MCRN_RailGunMod", X_M_MWIHoming = "MWI_HomingWeaponryMod";
-        static MyItemType IG_Magnesium = new MyItemType(IG_ + "Ingot", "Magnesium");
+        const string X_Scriptmode = "ScriptMode", X_M_Vanilla = "Vanilla";
         IMyProgrammableBlock master = null; static IMyCubeGrid Mgrid; static IMyGridProgramRuntimeInfo rti; static IMyGridTerminalSystem gts;
         static List<TextSurfaceDisplay> sms_sf = new List<TextSurfaceDisplay>(); static List<TextRenderEngine> sms_disp = new List<TextRenderEngine>(); static List<LCD_Terminal> LCDts = new List<LCD_Terminal>(); static List<LCD_Infolcd> infolcds = new List<LCD_Infolcd>();
         static Dictionary<string, MDI> allMDIs = new Dictionary<string, MDI>();
@@ -116,8 +114,7 @@ namespace IngameScript
             MAXIC = InstructionBudget.INSTRUCTION_MIN;
             rti = Runtime;
             gts = GridTerminalSystem;
-            itemdefinitionen();
-            loadModsItemDefs();
+            LoadItemDefinitions();
             if (writeNewItemDefs) writeconfig();
             Mgrid = Me.CubeGrid;
             prgblocklarge = Me.BlockDefinition.SubtypeId.Contains("Large");
