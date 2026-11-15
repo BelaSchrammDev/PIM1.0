@@ -132,7 +132,7 @@ namespace IngameScript
                 infoString.Append("\n--------------------- Hints ---------------------\n");
                 infoString.Append(warnungstring);
             }
-            PimStatus = " Running / " + LoopManager.CurrentInstructionAmount + " inst. per run\ncurrent cycle: " + (Properties.Data.CurrentCycleInSec > 0 ? Properties.Data.CurrentCycleInSec.ToString("0.0") + " sec.\n" : "measuring...\n") + infoString;
+            PimStatus = RunStatus.Running(LoopManager.CurrentInstructionAmount, Properties.Data.CurrentCycleInSec) + infoString;
         }
 
         // in standby the jobs (and CalculateInfos) do not run: the LoopManager sets the status every run

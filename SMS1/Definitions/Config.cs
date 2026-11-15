@@ -89,8 +89,7 @@ namespace IngameScript
                         case X_ShowInfoPBLcd: ShowInfoPBLcd = if_true(cs[1]); break;
                         case X_ShowDamageBlockHUD: ShowDamageBlockOnHUD = if_true(cs[1]); break;
                         case X_KeepMenu: int.TryParse(cs[1], out KEEPMENU); break;
-                        case X_MinIC: int.TryParse(cs[1], out minIC); break;
-                        case X_MaxIC: int.TryParse(cs[1], out maxIC); break;
+                        case X_TargetCycleTime: double.TryParse(cs[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out targetCycleTime); break;
                         case X_tHeadLine: tHeadLine = cs[1]; break;
                         case X_tMainPage: mainpageteil = true; break;
                         case X_tMainPageEnd: mainpageteil = false; break;
@@ -113,9 +112,8 @@ namespace IngameScript
         }
         void writeconfig()
         {
-            var customstr = X_Config + "\n\n" + X_Line + "  / to activate changes, please restart script\n" + X_Line + "\n  / Instructions per run (min,max)\n  / recommended MaxInstruction for\n  /  - singleplayer = 10000\n  /  - multiplayer/server = 5000\n"
-                + "  / please be careful, too high a value can lead to mistakes\n  / 'Script is too complex' error or slowing down your DS!\n"
-                + X_MinIC + "=" + minIC.ToString() + "\n" + X_MaxIC + "=" + maxIC.ToString() + "\n\n"
+            var customstr = X_Config + "\n\n" + X_Line + "  / to activate changes, please restart script\n" + X_Line + "\n  / target cycle time in seconds: how often the displays are updated\n  / smaller = more up to date, larger = less load on the server\n  / 0 = automatic: ship 1 s, station 3 s\n"
+                + X_TargetCycleTime + "=" + targetCycleTime.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n\n"
                 + "  / Scriptmode: AUTO, SHIP, SHIP_PLUS, STATION\n"
                 + X_Scriptmode + "=" + s_mode.ToString() + "\n\n"
                 + "  / show info on the lcd of the programmable block\n"

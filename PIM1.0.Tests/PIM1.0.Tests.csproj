@@ -19,6 +19,8 @@
   <ItemGroup>
     <Compile Include="..\Share\Common\StringBuilderExtended.cs"
              Link="Linked\StringBuilderExtended.cs" />
+    <Compile Include="..\Share\Common\RunStatus.cs"
+             Link="Linked\RunStatus.cs" />
     <Compile Include="..\Share\NetWorking\NetWorkingParser.cs"
              Link="Linked\NetWorkingParser.cs" />
     <!-- networking core only: NetWorkingIgc.cs needs the game's IGC -->
@@ -46,7 +48,7 @@
 	        Link="Linked\Filter.cs" />
 	<Compile Include="..\Share\JobBase\Jobs.cs"
 	        Link="Linked\Jobs.cs" />
-	<Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs"
+	<Compile Include="..\Share\Common\InstructionBudget.cs"
 	        Link="Linked\InstructionBudget.cs" />
 	<Compile Include="..\PIM1.0\BlockClasses\Refinerys\RefreshType.cs"
 	        Link="Linked\RefreshType.cs" />
@@ -81,7 +83,7 @@
     <!-- <Compile Include="..\Share\JobBase\Jobs.cs" Link="Linked\Jobs.cs" /> -->
 
     <!-- Add once the budget arithmetic is extracted from LoopManager: -->
-    <!-- <Compile Include="..\PIM1.0\JobClasses\InstructionBudget.cs" Link="Linked\InstructionBudget.cs" /> -->
+    <!-- <Compile Include="..\Share\Common\InstructionBudget.cs" Link="Linked\InstructionBudget.cs" /> -->
   </ItemGroup>
 
   <ItemGroup>

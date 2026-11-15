@@ -84,5 +84,48 @@ namespace IngameScript.Tests
         {
             Assert.AreEqual(4.0, Program.InstructionBudget.CycleSeconds(24), 1e-9);
         }
+
+        // --- target runs as parameter (SMS: TargetCycleTime) ---
+
+        [TestMethod]
+        public void Adjust_DefaultTargetIs24Runs()
+        {
+            foreach (var runs in new[] { 0, 18, 20, 21, 24, 27, 28, 36, 240 })
+                Assert.AreEqual(
+                    Program.InstructionBudget.Adjust(1000, runs, 24),
+                    Program.InstructionBudget.Adjust(1000, runs),
+                    "runs " + runs);
+        }
+
+        [TestMethod]
+        public void Adjust_SmallTarget_ToleratesOneRun()
+        {
+            // target 6 runs (1 s): 5 .. 7 runs leave the budget unchanged
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(1000, 5, 6));
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(1000, 7, 6));
+            // 4 runs: ratio 2/3, 60% of the way -> 800
+            Assert.AreEqual(800, Program.InstructionBudget.Adjust(1000, 4, 6));
+            // 9 runs: ratio 1.5 -> 1300
+            Assert.AreEqual(1300, Program.InstructionBudget.Adjust(1000, 9, 6));
+        }
+
+        [TestMethod]
+        public void Adjust_LargeTarget_ToleratesOneEighth()
+        {
+            // target 18 runs (3 s): tolerance 2 -> 16 .. 20
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(1000, 16, 18));
+            Assert.AreEqual(1000, Program.InstructionBudget.Adjust(1000, 20, 18));
+            Assert.AreNotEqual(1000, Program.InstructionBudget.Adjust(1000, 15, 18));
+            Assert.AreNotEqual(1000, Program.InstructionBudget.Adjust(1000, 21, 18));
+        }
+
+        [TestMethod]
+        public void RunsForSeconds_RoundsAndIsAtLeastOne()
+        {
+            Assert.AreEqual(6, Program.InstructionBudget.RunsForSeconds(1));
+            Assert.AreEqual(18, Program.InstructionBudget.RunsForSeconds(3));
+            Assert.AreEqual(3, Program.InstructionBudget.RunsForSeconds(0.5));
+            Assert.AreEqual(1, Program.InstructionBudget.RunsForSeconds(0));
+        }
     }
 }

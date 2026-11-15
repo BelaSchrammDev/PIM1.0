@@ -18,8 +18,8 @@ namespace IngameScript
         enum MenuMode { Default, Custom, MenuClone, }
         #endregion
         static Dictionary<MyItemType, smsItemType> smsItemTypeDefinitions = new Dictionary<MyItemType, smsItemType>();
-        int minIC = 500;
-        int maxIC = 5000;
+        // TargetCycleTime from the config, 0 = automatic (ship 1 s, station 3 s)
+        double targetCycleTime = 0;
         ScriptMode s_mode = ScriptMode.AUTO;
         bool ShowInfoPBLcd = true;
         static TerminalMenu defaultMenu = null;
@@ -30,7 +30,7 @@ namespace IngameScript
         ScriptMode cm; const int zW = 20, pW = 31;
         const String SI1 = "SMS v1.4", SI2 = "a (c) BelaOkuma\n", Cfilled = "@-(filled)", HSS = "\u00AD", oMG = "MAINGRID", oLG = "LCDGRID", oGN = "GRIDNAME", IG_Datas = "Datapad", IG_Kits = "ConsumableItem", IG_Cash = "PhysicalObject", IG_Tools = "PhysicalGunObject", IG_HBottles = "GasContainerObject", IG_OBottles = "OxygenContainerObject", IG_Ammo = "AmmoMagazine", IG_ = "MyObjectBuilder_";
         const string X_Config = "### Config ###", X_Config_end = "### Config End ###", X_ShowInfoPBLcd = "ShowInfoOnPBLcd", X_ShowDamageBlockHUD = "ShowDamageBlocksOnHud", X_Line = "  / =================================\n", X_LineNewSite = X_Line + "@newsite(", X_Line2 = "  / ------------\n";
-        const string X_KeepMenu = "KeepMenuToReturn", X_MinIC = "MinInstruction", X_MaxIC = "MaxInstruction", X_tHeadLine = "TerminalHeadLine", X_tMainPage = "TerminalMainPageBody", X_tMainPageEnd = X_tMainPage + "End", X_tItemDefs = "### ItemDefinitions ###", X_tItemdefsEnd = "### ItemDefinitionsEnd ###", X_tNewMod = "### MOD";
+        const string X_KeepMenu = "KeepMenuToReturn", X_TargetCycleTime = "TargetCycleTime", X_tHeadLine = "TerminalHeadLine", X_tMainPage = "TerminalMainPageBody", X_tMainPageEnd = X_tMainPage + "End", X_tItemDefs = "### ItemDefinitions ###", X_tItemdefsEnd = "### ItemDefinitionsEnd ###", X_tNewMod = "### MOD";
         const string X_Scriptmode = "ScriptMode", X_M_Vanilla = "Vanilla", X_M_Daily = "DailyNeedsSurvivalMod", X_M_AziThrust = "AzimuthThrusterMod", X_M_SG_Gates = "StarGateMod_Gates", X_M_SG_Ores = "StarGateMod_Ores";
         const string X_M_NorthWindWeapons = "NorthWindWeaponsMod", X_M_HSR = "HSR_Mod", X_M_AryxEpsteinDrive = "AryxEpsteinDriveMod", X_M_PlantAndCook = "PlantAndCookMod", X_M_EatDrinkSleepRepeat = "EatDrinkSleepRepeatMod", X_M_IndustrialOverhaulWater = "IndustrialOverhaulWaterMod", X_M_IndustrialOverhaul = "IndustrialOverhaulMod", X_M_Paintgun = "PaintGunMod", X_M_DeuteriumReactor = "DeuteriumReactorMod", X_M_Shield = "DefenseShieldMod", X_M_MCRNRailgun = "MCRN_RailGunMod", X_M_MWIHoming = "MWI_HomingWeaponryMod";
         static MyItemType IG_Magnesium = new MyItemType(IG_ + "Ingot", "Magnesium");
@@ -72,10 +72,11 @@ namespace IngameScript
         static Dictionary<string, dyResourceOreIngot> oiil = new Dictionary<string, dyResourceOreIngot>();
         static Dictionary<IMyCubeGrid, Dictionary<MyItemType, float>> dict_inv = new Dictionary<IMyCubeGrid, Dictionary<MyItemType, float>>();
         static MDIs pt = new MDIs(55), sMb = new MDIs(20), sMt = new MDIs(20), sMc = new MDIs(20), grn = new MDIs(20), gra = new MDIs(20), mdi_time = new MDIs(), mdi_date = new MDIs(), mdi_dateGER = new MDIs(), mdi_mgrid = new MDIs();
-        static String iss = "", castTypeName = "", css = "", ccs = "", BlockSubtypeFilter = "", oldMeCustomData = "";
-        DateTime lastStart = DateTime.Now;
-        static double tsm = 0, brn = 0, mss = 0, rsp = 0, ss = 1.5f;
-        int msm = 0, lastst = 0;
+        static String iss = "", castTypeName = "", ccs = "", BlockSubtypeFilter = "", oldMeCustomData = "";
+        static double tsm = 0, brn = 0, mss = 0, rsp = 0;
+        Job[] jobs;
+        int jobIndex = 0;
+        bool isNewCycle = true;
         //static float menuWithGlobal;
         bool nomaster, prgblocklarge;
         static IMyCubeGrid gg;
@@ -94,19 +95,13 @@ namespace IngameScript
             {
                 ccs = "Standby, no Pilot in Ship";
                 rti.UpdateFrequency = UpdateFrequency.Update100;
-                MAXIC = minIC;
+                MAXIC = InstructionBudget.INSTRUCTION_MIN;
             }
             else
             {
                 ccs = "";
+                // the budget is adjusted at the end of every cycle (EndCycle)
                 rti.UpdateFrequency = UpdateFrequency.Update10;
-                if (ss < 1) MAXIC -= (int)((1.5 - ss) * 500);
-                else if (ss > 3) MAXIC += (int)ss * 500;
-                else MAXIC = MAXIC - (int)(200 * (1.5 - ss));
-
-                if (MAXIC < minIC) MAXIC = minIC;
-                else if (MAXIC > maxIC) MAXIC = maxIC;
-                else MAXIC = (int)(Math.Round(MAXIC / 100d) * 100);
             }
         }
         bool if_true(string s) { return (s == "True" || s == "true"); }
@@ -118,7 +113,7 @@ namespace IngameScript
             runPB = Me;
             addBlockParseFunction();
             InitJobs();
-            MAXIC = maxIC;
+            MAXIC = InstructionBudget.INSTRUCTION_MIN;
             rti = Runtime;
             gts = GridTerminalSystem;
             itemdefinitionen();
@@ -165,114 +160,72 @@ namespace IngameScript
                 }
                 else
                 {
+                    cycleRuns++;
                     do
                     {
-                        switch (msm)
+                        if (isNewCycle)
                         {
-                            case 0: if (isStandby()) { writeInfo(); return; } break;
-                            case 1:
-                                gg = Mgrid;
-                                rsp = 0;
-                                mdi_time.sT(DateTime.Now.ToString("HH:mm"));
-                                mdi_date.sT(DateTime.Now.ToString(" MM-dd-yy"));
-                                mdi_dateGER.sT(DateTime.Now.ToString("dd.MM.yyyy"));
-                                mdi_mgrid.sT(Mgrid.CustomName);
-                                foreach (dyDisplayableVariable pv in pvl) pv.clearAllVCs();
+                            // the last cycle was faster than the target cycle time: wait
+                            if (isCycleMeasured && cycleRuns <= TargetRuns()) break;
+                            // at the start of every cycle: master/standby and the script mode (cm) are determined
+                            if (isStandby())
+                            {
+                                // standby runs (Update100) are no cycle: the next cycle is not measured
+                                isCycleMeasured = false;
+                                cycleSeconds = 0;
                                 break;
-                            case 2:
-                                var iik = new List<MyItemType>(inventar.Keys);
-                                for (int i = 0; i < iik.Count; i++) inventar[iik[i]] = 0;
-                                foreach (IMyCubeGrid grid in dict_inv.Keys)
-                                {
-                                    var ik = new List<MyItemType>(dict_inv[grid].Keys);
-                                    for (int i = 0; i < ik.Count; i++)
-                                        dict_inv[grid][ik[i]] = 0;
-                                }
-                                break;
-                            case 3: if (refreshBlockList(BlockType.Connector, "ShipConnector")) msm--; break;
-                            case 4: if (refreshBlockList(BlockType.Weapon, "", BlockWeaponsCheck)) msm--; break;
-                            case 5: if (refreshBlockList(BlockType.Cargocontainer, "Cargo")) msm--; break;
-                            case 6: break;
-                            case 7: loadCustomData(Me.CustomData); css = ss.ToString("0.0"); ss = 0; break;
-                            case 8: if (Step(textPanelsJob)) msm--; break;
-                            case 9: if (refreshBlockList(BlockType.Battery, "BatteryBlock")) msm--; break;
-                            case 10: if (Step(multiBlockJob)) msm--; break;
-                            case 11: if (refreshBlockList(BlockType.Tank, "OxygenTank")) msm--; break;
-                            case 12: if (refreshBlockList(BlockType.Hydrogenengine, "HydrogenEngine")) msm--; break;
-                            case 13: if (refreshBlockList(BlockType.Reactor, "Reactor")) msm--; break;
-                            case 14: if (refreshBlockList(BlockType.Assembler, "Assembler")) msm--; break;
-                            case 15: foreach (dyResourceOreIngot o in oiil.Values) o.of = 0; break;
-                            case 16: if (refreshBlockList(BlockType.Refinery, "Refinery")) msm--; break;
-                            case 17: if (refreshBlockList(BlockType.Airvent, "AirVent")) msm--; break;
-                            case 18: if (refreshBlockList(BlockType.Gasgenerator, "OxygenGenerator")) msm--; break;
-                            case 19: if (cm == ScriptMode.STATION) msm += 2; break;
-                            case 20: if (refreshBlockList(BlockType.Jumpdrive, "JumpDrive")) msm--; break;
-                            case 21: if (Step(thrustJob)) msm--; break;
-                            case 22: if (refreshBlockList(BlockType.Damage, "", BlockDamageCheck)) msm--; break;
-                            case 23: if (Step(inventoryInitJob)) msm--; break;
-                            case 24:
-                                foreach (IMyCubeGrid grid in dict_inv.Keys)
-                                {
-                                    foreach (var key in dict_inv[grid].Keys)
-                                    {
-                                        if (!gridInventoryItems[grid].ContainsKey(key)) gridInventoryItems[grid].Add(key, new dyInventory(key, grid));
-                                    }
-                                }
-                                foreach (var k in inventar.Keys)
-                                    if (!invitemsg.ContainsKey(k)) invitemsg.Add(k, new dyInventory(k));
-                                foreach (var k in invitemsg.Keys)
-                                {
-                                    var y = GetSMSItemType(k);
-                                    if (y.IsItemResource())
-                                    {
-                                        var tks = y.GetResourceName();
-                                        if (oiil.ContainsKey(tks)) oiil[tks].Refresh();
-                                        else oiil.Add(tks, new dyResourceOreIngot(tks));
-                                    }
-                                }
-                                break;
-                            case 25: if (Step(inventoryRefreshJob)) msm--; break;
-                            case 26:
-                                foreach (var pv in pvl)
-                                    if (pv.Name == "Damageblocks")
-                                    {
-                                        VC v = pv.getVC('h');
-                                        v.C = v.M;
-                                        v.M = gn(pv.pcg);
-                                    }
-                                dyDisplayableVariable.RefreshVar();
-                                PT();
-                                lastst = 0;
-                                gg = Mgrid;
-                                break;
-                            default:
-                                if (sms_disp.Count > 0 && (msm - 27) < sms_disp.Count)
-                                {
-                                    int curic = IC();
-                                    bool scpu = sms_disp[lastst].c();
-                                    sms_disp[lastst].icount += (IC() - curic);
-                                    if (scpu) lastst++;
-                                    else msm--;
-                                }
-                                else
-                                {
-                                    ss = (DateTime.Now - lastStart).TotalSeconds;
-                                    lastStart = DateTime.Now;
-                                    msm = -1;
-                                }
-                                break;
+                            }
+                            StartCycleMeasuring();
                         }
-                        msm++;
+                        if (jobs[jobIndex].Schedule() == Job.ScheduleResult.Done && ++jobIndex >= jobs.Length)
+                        {
+                            EndCycle();
+                            // the next cycle starts with the next run: within the same run the jobs would still be cooling down
+                            break;
+                        }
                     } while (!cI());
                 }
             }
-            catch (NullReferenceException ex) { msm = 0; }
+            catch (NullReferenceException) { jobIndex = 0; isNewCycle = true; isCycleMeasured = false; cycleSeconds = 0; }
             writeInfo();
+        }
+
+        // runs since the start of the current cycle, the current run included
+        int cycleRuns;
+        // the last cycle ran completely: its runs are used for the budget and the waiting
+        bool isCycleMeasured;
+        // start to start of the last measured cycle, 0 = measuring
+        double cycleSeconds;
+
+        int TargetRuns()
+        {
+            return InstructionBudget.RunsForSeconds(targetCycleTime > 0 ? targetCycleTime : (cm == ScriptMode.STATION ? 3 : 1));
+        }
+
+        void StartCycleMeasuring()
+        {
+            // start to start, the waiting included (the current run is the first of the new cycle)
+            if (isCycleMeasured) cycleSeconds = InstructionBudget.CycleSeconds(cycleRuns - 1);
+            // first cycle (script start, after standby or an error): maximum budget, so the displays show up fast;
+            // the measured cycles then lower it
+            else MAXIC = InstructionBudget.INSTRUCTION_MAX;
+            cycleRuns = 1;
+            isNewCycle = false;
+        }
+
+        void EndCycle()
+        {
+            // the runs with work, without waiting: a cycle faster than the target lowers the budget,
+            // so the work spreads over the target time with less instructions per run
+            if (isCycleMeasured) MAXIC = InstructionBudget.Adjust(MAXIC, cycleRuns, TargetRuns());
+            isCycleMeasured = true;
+            jobIndex = 0;
+            isNewCycle = true;
         }
         readonly RunningSign RunSign = new RunningSign();
         void writeInfo()
         {
-            var s = SI1 + SI2 + RunSign.Next() +(master == null ? ((ccs == "" ? "Running in " + getMode() : ccs) + "\ncurrent cycle: " + css + " sec.\nInstructions per run: " + MAXIC) : "Standby\nMaster: " + master.CustomName + "\nat Grid: " + master.CubeGrid.CustomName);
+            var s = SI1 + SI2 + RunSign.Next() +(master != null ? " Standby\nMaster: " + master.CustomName + "\nat Grid: " + master.CubeGrid.CustomName : ccs != "" ? " " + ccs : RunStatus.Running(MAXIC, cycleSeconds) + getMode());
             Echo(s);
             if (ShowInfoPBLcd)
             {
@@ -411,31 +364,6 @@ namespace IngameScript
         bool BlockWeaponsCheck(IMyTerminalBlock t) { if (BlockConstructCheck(t)) return (t is IMyUserControllableGun); return false; }
 
         List<IMyTerminalBlock> listTerminalBlock = new List<IMyTerminalBlock>();
-        // transition to the Job loop: the msm switch schedules the jobs one step at a time
-        // (Step true = not finished yet, the switch calls again after the budget check)
-        static bool Step(Job job) { return job.Schedule() == Job.ScheduleResult.InProgress; }
-        Job thrustJob, multiBlockJob, inventoryInitJob, inventoryRefreshJob, textPanelsJob;
-        void InitJobs()
-        {
-            thrustJob = new ForEachJob<IMyThrust>(CollectThrusters, ProcessThruster);
-            multiBlockJob = MultiBlockJob();
-            inventoryInitJob = new ForEachJob<IMyCubeGrid>(CollectInventoryGrids, InitGridInventoryItems);
-            inventoryRefreshJob = new ForEachJob<dyInventory>(CollectInventoryItems, i => i.Refresh(true));
-            textPanelsJob = new SequentialJob(new ForEachJob<IMyTerminalBlock>(CollectTextPanels, ProcessTextPanel), new ActionJob(RemoveObsoleteDisplays));
-        }
-        // one job per BlockType
-        readonly Dictionary<BlockType, Job> refreshJobs = new Dictionary<BlockType, Job>();
-        bool refreshBlockList(BlockType type, string subtypeText = "", Func<IMyTerminalBlock, bool> checkFunction = null)
-        {
-            Job job;
-            if (!refreshJobs.TryGetValue(type, out job))
-            {
-                job = new RefreshDyBlockListJob(this, type, subtypeText, checkFunction);
-                refreshJobs.Add(type, job);
-            }
-            return Step(job);
-        }
-
     }
 }
 
