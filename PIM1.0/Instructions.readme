@@ -6,8 +6,9 @@ only compatible with SMS v1.4!
 
 new in update 1.1d:
  - massive code overhaul
- - option ShowNetwork (default off): shows the scripts of the
-   connected grids on the PB
+ - option ShowNetwork (default off): Show all scripts
+   connected grids on the PB belong to the SMS Script family,
+   starting with PIM version 1.1d and later.
  - all items are collected from untagged containers and
    connectors (options collect_all_... removed),
    use (sms,keep) to keep the items in a container

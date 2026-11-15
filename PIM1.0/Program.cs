@@ -124,13 +124,26 @@ namespace IngameScript
             if (Config.Instance.ShowInfoPBLcd)
             {
                 var tp = Me.GetSurface(0);
-                if (tp.ContentType != ContentType.TEXT_AND_IMAGE)
+                if (IsPbLcdNotInitialized(tp))
                 {
-                    tp.Alignment = TextAlignment.LEFT;
-                    tp.ContentType = ContentType.TEXT_AND_IMAGE;
+                    InitPbLcd(tp);
                 }
                 tp.WriteText(s);
             }
+        }
+
+        bool IsPbLcdNotInitialized(IMyTextSurface tp)
+        {
+            return tp.ContentType != ContentType.TEXT_AND_IMAGE;
+        }
+
+        void InitPbLcd(IMyTextSurface tp)
+        {
+            tp.Alignment = TextAlignment.LEFT;
+            tp.ContentType = ContentType.TEXT_AND_IMAGE;
+            tp.TextPadding = 2f;
+            tp.FontSize = 0.45f;
+            tp.FontColor = new VRageMath.Color(180, 100, 45);
         }
     }
 }
