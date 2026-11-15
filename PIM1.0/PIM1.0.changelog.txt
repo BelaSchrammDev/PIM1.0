@@ -175,8 +175,10 @@ New:
 - test project (MSTest) with CI: Parameter, StringBuilderExtended, Jobs, Filter, CargoUse, TypeDefinitions,
   InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool,
   LCD pages golden snapshot and read-back tests, NetWorkingNode, NetWorkingParser.GetValue
-- config option ShowNetwork: the scripts of the network with their master on the PB display
-  (only if there is more than this PB)
+- config option ShowNetwork (default off): the scripts of the network with their master on the PB display
+  (only if there is more than this PB), scripts on other constructs (docked) marked "(other construct)"
+- networking: hello/alive reach the connected constructs (connectors), only scripts on the same
+  construct count for the master and may send messages
 
 
 Version 1.1c:

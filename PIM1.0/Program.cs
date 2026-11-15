@@ -30,7 +30,7 @@ namespace IngameScript
         public Program()
         {
             MyProgram = this;
-            _netIgc = new NetWorkingIgc(IGC, Strings.PimScriptType, Strings.PimVersion);
+            _netIgc = new NetWorkingIgc(IGC, GridTerminalSystem, Me, Strings.PimScriptType, Strings.PimVersion);
             Net = _netIgc.Node;
 
             viewList.Add(new AmmoManagerInfo());

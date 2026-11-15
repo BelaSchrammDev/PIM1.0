@@ -11,13 +11,16 @@ namespace IngameScript
             public long Address;
             public string ScriptType, Version;
             public double LastSeen;
+            /// <summary>Same construct as me: only these count for the master and may send application messages.</summary>
+            public bool SameConstruct;
         }
 
         /// <summary>
         /// Script-to-script networking without any game dependency (the transport is NetWorkingIgc).
         /// Handshake: "hello" (broadcast at start, everyone answers with "ack" by unicast),
         /// then "alive" every HeartbeatSeconds; a peer silent for TimeoutSeconds is removed.
-        /// Master: after DiscoverySeconds the script with the lowest address of its type.
+        /// Master: after DiscoverySeconds the script with the lowest address of its type on my construct.
+        /// Peers on other constructs are listed (Peers), but their application messages are ignored.
         /// Shared with other scripts: no references to PIM code here.
         /// </summary>
         public class NetWorkingNode
@@ -35,6 +38,7 @@ namespace IngameScript
             // transport: (type, body) to all, (address, type, body) to one
             readonly Action<string, string> _broadcast;
             readonly Func<long, string, string, bool> _send;
+            readonly Func<long, bool> _isSameConstruct;
             readonly string _helloBody;
             readonly Dictionary<string, Action<long, string>> _handlers = new Dictionary<string, Action<long, string>>();
             readonly List<long> _timedOut = new List<long>();
@@ -42,12 +46,13 @@ namespace IngameScript
             double _now, _startedAt, _nextBeat;
             bool _started;
 
-            public NetWorkingNode(long me, string scriptType, string version, Action<string, string> broadcast, Func<long, string, string, bool> send)
+            public NetWorkingNode(long me, string scriptType, string version, Action<string, string> broadcast, Func<long, string, string, bool> send, Func<long, bool> isSameConstruct)
             {
                 Me = me;
                 ScriptType = scriptType;
                 _broadcast = broadcast;
                 _send = send;
+                _isSameConstruct = isSameConstruct;
                 _helloBody = KeyType + "=" + scriptType + ";" + KeyVersion + "=" + version;
             }
 
@@ -57,17 +62,17 @@ namespace IngameScript
                 get { return !_started || _now - _startedAt < DiscoverySeconds; }
             }
 
-            /// <summary>The lowest address of my script type (me included).</summary>
+            /// <summary>The lowest address of my script type on my construct (me included).</summary>
             public long MasterAddress
             {
                 get { return MasterOf(ScriptType); }
             }
 
-            /// <summary>The lowest address of a script type (me included if it is my type), 0 if none is known.</summary>
+            /// <summary>The lowest address of a script type on my construct (me included if it is my type), 0 if none is known.</summary>
             public long MasterOf(string scriptType)
             {
                 var master = scriptType == ScriptType ? Me : long.MaxValue;
-                foreach (var p in Peers.Values) if (p.ScriptType == scriptType && p.Address < master) master = p.Address;
+                foreach (var p in Peers.Values) if (p.SameConstruct && p.ScriptType == scriptType && p.Address < master) master = p.Address;
                 return master == long.MaxValue ? 0 : master;
             }
 
@@ -133,6 +138,8 @@ namespace IngameScript
 
                 NetWorkingPeer peer;
                 if (Peers.TryGetValue(source, out peer)) peer.LastSeen = _now;
+                // other constructs: only listed, no talking (yet)
+                if (!_isSameConstruct(source)) return;
 
                 Action<long, string> handler;
                 if (_handlers.TryGetValue(type, out handler)) handler(source, body);
@@ -149,6 +156,8 @@ namespace IngameScript
                 peer.ScriptType = NetWorkingParser.GetValue(body, KeyType);
                 peer.Version = NetWorkingParser.GetValue(body, KeyVersion);
                 peer.LastSeen = _now;
+                // checked again with every alive: docking/undocking changes it
+                peer.SameConstruct = _isSameConstruct(address);
             }
         }
     }

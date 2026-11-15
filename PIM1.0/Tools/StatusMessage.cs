@@ -78,6 +78,7 @@ namespace IngameScript
                     InfoString.Append(": " + (peer != null ? peer.Version : Strings.PimVersion));
                     if (Net.MasterOf(peer != null ? peer.ScriptType : Net.ScriptType) == a) InfoString.Append(" (master)");
                     if (peer == null) InfoString.Append(" (this PB)");
+                    else if (!peer.SameConstruct) InfoString.Append(" (other construct)");
                     InfoString.Append('\n');
                 }
                 return InfoString;

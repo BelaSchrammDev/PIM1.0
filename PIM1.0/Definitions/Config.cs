@@ -24,7 +24,7 @@ namespace IngameScript
             }
 
             public bool ShowInfoPBLcd = true;
-            public bool ShowNetwork = true;
+            public bool ShowNetwork = false;
             public bool delete_queueItem_if_max = true;
             public bool always_recycle_greywater = true;
             public bool assemblers_off = true;

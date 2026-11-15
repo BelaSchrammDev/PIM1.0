@@ -7,7 +7,8 @@ namespace IngameScript
     partial class Program
     {
         /// <summary>
-        /// IGC transport for NetWorkingNode, limited to the current construct.
+        /// IGC transport for NetWorkingNode: broadcasts reach the connected constructs (connectors too),
+        /// "same construct" means the sender PB is mechanically connected to mine (rotors, pistons, ...).
         /// Every message: tag NetWorkingNode.Tag, data (protocol, type, body).
         /// No message callback: Poll at the start of every run, so the messages cause no extra runs.
         /// </summary>
@@ -18,13 +19,18 @@ namespace IngameScript
             readonly IMyBroadcastListener _listener;
             double _now;
 
-            public NetWorkingIgc(IMyIntergridCommunicationSystem igc, string scriptType, string version)
+            public NetWorkingIgc(IMyIntergridCommunicationSystem igc, IMyGridTerminalSystem gts, IMyTerminalBlock me, string scriptType, string version)
             {
                 _igc = igc;
                 _listener = igc.RegisterBroadcastListener(NetWorkingNode.Tag);
                 Node = new NetWorkingNode(igc.Me, scriptType, version,
-                    (type, body) => igc.SendBroadcastMessage(NetWorkingNode.Tag, Envelope(type, body), TransmissionDistance.CurrentConstruct),
-                    (address, type, body) => igc.SendUnicastMessage(address, NetWorkingNode.Tag, Envelope(type, body)));
+                    (type, body) => igc.SendBroadcastMessage(NetWorkingNode.Tag, Envelope(type, body), TransmissionDistance.ConnectedConstructs),
+                    (address, type, body) => igc.SendUnicastMessage(address, NetWorkingNode.Tag, Envelope(type, body)),
+                    address =>
+                    {
+                        var block = gts.GetBlockWithId(address);
+                        return block != null && block.IsSameConstructAs(me);
+                    });
             }
 
             static MyTuple<int, string, string> Envelope(string type, string body)

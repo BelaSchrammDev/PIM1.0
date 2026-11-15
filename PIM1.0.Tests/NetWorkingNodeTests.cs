@@ -16,6 +16,7 @@ namespace IngameScript.Tests
 
         readonly List<string> _broadcasts = new List<string>();
         readonly List<string> _sent = new List<string>();
+        readonly HashSet<long> _otherConstruct = new HashSet<long>();
         Program.NetWorkingNode _node;
 
         [TestInitialize]
@@ -23,7 +24,8 @@ namespace IngameScript.Tests
         {
             _node = new Program.NetWorkingNode(Me, "PIM", "PIM v1.1",
                 (type, body) => _broadcasts.Add(type + "|" + body),
-                (address, type, body) => { _sent.Add(address + "|" + type + "|" + body); return true; });
+                (address, type, body) => { _sent.Add(address + "|" + type + "|" + body); return true; },
+                address => !_otherConstruct.Contains(address));
         }
 
         void Receive(long source, string type, string body)
@@ -201,6 +203,42 @@ namespace IngameScript.Tests
             Receive(400, "ack", SmsHello);
             Assert.AreEqual(Me, _node.MasterOf("PIM"));
             Assert.AreEqual(0, _node.MasterOf("XYZ"));
+        }
+
+        [TestMethod]
+        public void OtherConstruct_IsListedButNotMaster()
+        {
+            _otherConstruct.Add(400);
+            _node.Update(0);
+            Receive(400, "hello", PimHello);
+            _node.Update(Beat);
+
+            Assert.IsFalse(_node.Peers[400].SameConstruct);
+            CollectionAssert.AreEqual(new[] { "400|ack|" + PimHello }, _sent);
+            Assert.IsTrue(_node.IsMaster);
+        }
+
+        [TestMethod]
+        public void OtherConstruct_AppMessageIsIgnored()
+        {
+            var called = false;
+            _node.Register("infos", (s, b) => called = true);
+            _otherConstruct.Add(400);
+            _node.Update(0);
+            Receive(400, "alive", SmsHello);
+            Receive(400, "infos", "x=1");
+            Assert.IsFalse(called);
+        }
+
+        [TestMethod]
+        public void SameConstruct_IsCheckedAgainWithEveryAlive()
+        {
+            _node.Update(0);
+            Receive(400, "alive", PimHello);
+            Assert.IsTrue(_node.Peers[400].SameConstruct);
+            _otherConstruct.Add(400); // undocked
+            Receive(400, "alive", PimHello);
+            Assert.IsFalse(_node.Peers[400].SameConstruct);
         }
 
         [TestMethod]
