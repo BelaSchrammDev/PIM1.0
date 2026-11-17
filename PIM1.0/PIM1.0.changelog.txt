@@ -17,9 +17,7 @@ Fix:
     Anti-Personnel Turret Magazine
 - refinery blueprints with the same input keep their definition order (stable sort);
   before, the order depended on the unstable List.Sort
-- blueprint initialisation could only run once (curmod was left at "" after the first run)
-- duplicate blueprint definitions removed (Sigma Draconis refinery, Industrial Overhaul assembler)
-- debug Echo removed from GetPositionString (the method was removed later)
+- duplicate Industrial Overhaul assembler blueprint removed
 - the debug text grew forever without debug panel (now a StringBuilder, cleared every cycle)
 - LCD cell cache (DisplayBox) grew forever, shortened texts were never found in the cache
 - masses below 1 kg are shown in g (missing return)
@@ -28,36 +26,18 @@ Fix:
 - autocrafting threshold line without '=' crashed the script
 - several autocrafting LCDs with different thresholds reset each other every cycle
 - StringBuilderExtended fixed
-- stacking only ran for components, ore and ingots were never stacked; every stacking cycle now
-  runs one strategy on one item type (all strategies on components, then ore, then ingots)
-- run argument "flushrefinerys_all" never worked, and unknown arguments without brackets
-  were ignored silently instead of being reported as "unknown command"
 - Water Recycling System: grey water and clean water are put at the intended position of the
   input inventory (the position was not passed on to the transfer)
-- refining LCD: the number of refinerys was counted for the first ore a refinery ever had
-  instead of the ore it is refining now
-- possible script stop "divide by zero" when a refinery was filled with an ore that no refinery
-  was refining yet
 - a typo in a True/False option of the config (custom data) stopped the script at start,
   now the option keeps its value
-- the hint "refinery is damaged" stayed on the PB display after the refinery was repaired
 - autocrafting: items with a max amount of 1 were never crafted (the threshold was rounded down
-  to 0, it is rounded up now), and nothing was queued if fewer items were missing than there
-  are assemblers for them
-- weapons that accept several ammo types were never loaded (the priorities came from the
-  ammoprio LCD that was removed). Without configuration the first accepted type is preferred;
-  a type is used if there is at least one magazine per weapon in stock, otherwise the next one
+  to 0, it is rounded up now)
 - removing a weapon with several ammo types from the PIM group only removed it from one of
   its ammo types
 - stacking: an item that fits completely into one of its containers was not gathered there if it
   was in only two containers, with more containers the last stack was left behind
-- stacking: exchanging the contents of two containers (item in exactly two containers) is
-  repeated until it is finished, at most 10 rounds; before, the number of rounds depended on
-  the number of other items
 - assembler queue: if a blueprint at its max amount was in the queue twice, removing it deleted
   a wrong queue item or stopped the script
-- ore and ingots inside refinerys were counted twice (by the grid scan and again by the
-  refinery), which distorted the stock on the LCDs and the ore priorities
 - storage containers, weapons and farms: the wanted amount of an item was compared with every
   stack separately. Two stacks of one item that cannot be merged (e.g. bottles) stopped the script
   if items were still missing; now the stacks are added up
@@ -77,8 +57,6 @@ Fix:
 - removing the (sms) tag from a refinery left it as PIM had set it: conveyor system off, and switched
   off while empty. Now conveyor and power are switched on again (not for blocks PIM does not fill,
   e.g. incinerator), and its hints disappear from the PB display
-- autocrafting also queued items in assemblers without (sms) tag if a tagged assembler of the same
-  type existed, and split the amount between them
 - removing the (sms) tag from an assembler left it switched off if PIM had switched it off while
   idle (assemblers_off), now it is switched on again
 - the hint "assembler is damaged" also appeared for assemblers without (sms) tag
@@ -95,13 +73,17 @@ Fix:
   emptied again for every further ore. Now one ore per filling, the next one follows when the
   refinery is nearly empty
 - a higher prioritised ore emptied the refinery and filled it with the same ore again if that ore
-  came first in the priority list- refinerys took ore from refinerys without (sms) tag
+  came first in the priority list
+- refinerys took ore from refinerys without (sms) tag
 - the priority of the current ores was not weighted with 1.5 if the second ore had a higher one
 - only the third item was moved out of a refinery, not a fourth or more
 
 Changes:
 
 - rewrite WaterRecyclerManager
+- the (sms,ammoprio) LCD was removed: weapons that accept several ammo types use them in the order
+  of the accepted types; a type is used if there is at least one magazine per weapon in stock,
+  otherwise the next one, otherwise any type that is in stock
 - blueprint definitions moved from C# calls to data files: PIM1.0/BluePrintData/<Mod>.txt,
   load order and workshop ids in Mods.txt. The build generates BluePrintsClasses/Generated/BluePrintData.g.cs
   (one compact string per mod), about 4,000 characters less script
@@ -112,7 +94,7 @@ Changes:
 - refinery blueprint duplicate check via HashSet instead of List.Find
 - ConvertAutoCraftingName split into DeriveAutoCraftingType / DeriveAutoCraftingName, dead rules removed
   (no change of the generated names)
-- RefreshType.Incinerator renamed to NoAutofill, Composter added: shows "cannot filled by PIM" with (sms)
+- RefreshType.Incinerator renamed to NoAutofill, Composter added: shows "cannot be filled by PIM" with (sms)
 - the mod list of the config is taken from the blueprint data (order of Mods.txt)
 - removed mod support: Sigma Draconis Core (deleted on Steam), HSR (discontinued),
   Industrial Overhaul Water (no blueprints anymore); HSR refinery type and name rule removed
@@ -122,14 +104,14 @@ Changes:
   rendered in parts (header, one block per type) within the instruction budget; a panel changed by the
   player while it is rendered is not overwritten
 - PB info: the status is built once per cycle, every run only adds the running sign;
-  RunningSign simplified (no Tools base, no StringBuilder, tested); shows "starting..." instead of
+  RunningSign simplified (no StringBuilder, tested); shows "starting..." instead of
   "Standby" until the first cycle is done
 - LCD pages and debug panel: only panels of the same construct (subgrids via rotors/pistons, no docked ships)
 - parsing and rendering of the LCD pages moved to LcdPages.cs (pure, testable); ore priorities of the
   oreprio LCDs are applied after every priority calculation
 - Ingot.DeuteriumContainer renamed to Ingot.DTFuelCapsule
 - unused Config.mods and mod name constants removed
-- Tools.* helpers replaced by extension methods, TypeDefinitions moved to its own file
+- helper methods as extension methods, TypeDefinitions moved to its own file
 - Instructions.readme only contains the news of the current version, older ones are in this file
 - ItemTypesConverter (pure, tested; SE parts in ItemTypesConverterIngame.cs): container tags to
   InventoryManagerList keys and back (one table instead of a dictionary and a switch), cargo categories
@@ -147,14 +129,14 @@ Changes:
   no change within 3.5 .. 4.5 s). The cycle length is counted in runs (game time) instead of
   DateTime.Now, so a low sim speed does not raise the budget; cycles with blueprint loading are not used
 - networking between the scripts via IGC (Share/NetWorking, can be linked into other scripts, e.g. SMS):
-  NetWorkingNode (pure, tested) and NetWorkingIgc (transport, current construct only, read at the start
-  of every run, no message callback). Handshake: "hello" at start, answered with "ack", then "alive"
+  NetWorkingNode (pure, tested) and NetWorkingIgc (transport, read at the start of every run,
+  no message callback). Handshake: "hello" at start, answered with "ack", then "alive"
   every 3 s; a script without message for 10 s is removed. Message: (protocol, type, body "key=value;...")
 - master/standby: of several PIMs on the same construct the one with the lowest EntityId works, the
   others wait in standby (Update100) and take over when it is gone; replaces the unfinished detection
   in LoopManager. Standby shows the master on the PB display and runs only the LoopManager once per run,
   the first cycle after standby is not used for the instruction budget
-- NetWorkingDispatcher (say_hello via run argument) removed, run arguments are only player commands
+- run arguments are matched by the command name, with or without brackets, e.g. "flushrefinerys_all()"
 - PimVersion and PimCopyright merged, the version is also sent to the other scripts
 - config (custom data): no introduction text and no "### Config ###" markers anymore, the whole custom
   data is read; old configs are read as before and written in the new form
@@ -187,10 +169,11 @@ New:
   InstructionBudget, blueprint golden snapshot over the full pipeline, generator, load job and tool,
   LCD pages golden snapshot and read-back tests, NetWorkingNode, NetWorkingParser.GetValue
 - config option ShowNetwork (default off): the scripts of the network with their master on the PB display
-  (only if there is more than this PB), scripts on other constructs (docked) marked "(other construct)"
+  (only if there is more than this PB), scripts on other constructs (docked) show their grid name
 - networking: hello/alive reach the connected constructs (connectors), only scripts on the same
   construct count for the master and may send messages
 - hint on the PB display if a script on the network uses another network protocol
+- the PB display is set up on the first start (text mode, left aligned, font size 0.45, padding, orange text)
 
 
 Version 1.1c:
