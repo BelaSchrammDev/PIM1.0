@@ -2,15 +2,19 @@ Version 1.1d:
 
 Fix:
 
-- vanilla blueprint data checked against the game definitions (Content/Data/Blueprints.sbc):
+- vanilla blueprint data checked against the game definitions of the Warfare 3 update
+  (Content/Data/Blueprints.sbc):
   - pistols and rocket launchers had wrong item names (missing "Item"), their stock was never counted
-  - flare gun, flare gun magazine and fireworks had outdated blueprint ids
-    (renumbered by the game to Position0050/0051/0060-0065), they could not be activated
+  - flare gun, flare gun magazine, fireworks, canvas and datapad had outdated blueprint ids
+    (renumbered by the game), they could not be activated
   - StoneOreToIngotBasic removed (no longer in the game)
 - Deuterium Fusion Reactors mod: the data came from a workshop version that was deleted,
   now taken from the current mod 1259182705 (item DTFuelCapsule, component MagnetronComponent;
   the LCD key of the magnetron changed)
-- Industrial Overhaul mod: bauxite refinery blueprints output Ingot Aluminum
+- Industrial Overhaul mod, checked against v1.7.8:
+  - bauxite refinery blueprints output Ingot Aluminum
+  - the interior turret magazine blueprint (POInteriorTurret_Mag_50rd) produces the
+    Anti-Personnel Turret Magazine
 - refinery blueprints with the same input keep their definition order (stable sort);
   before, the order depended on the unstable List.Sort
 - blueprint initialisation could only run once (curmod was left at "" after the first run)
@@ -161,10 +165,17 @@ Changes:
 
 New:
 
-- vanilla: Medkit and Powerkit
+- vanilla:
+  - Medkit and Powerkit
+  - Warfare 3 ammo: Countermeasure Flares, Anti-Personnel Turret Magazine, Homing Missile,
+    Torpedo, Light Torpedo, Heavy Torpedo and Armor Piercing Torpedo
+- Industrial Overhaul mod:
+  - base ammo (POHEMissile200mm, AutocannonClip, MediumCalibreAmmo, LargeCalibreAmmo,
+    LargeRailgunAmmo, LargeRailgunAmmoDUAP, SmallRailgunAmmo)
+  - Warfare 3 ammo of v1.7.8 from the munitions factory: Homing Missile, HE Homing Missile and
+    the four torpedoes (IO hides the vanilla blueprints of these; Countermeasure Flares keep the
+    vanilla blueprint)
 - PlantAndCook: EmptyTinCan; DailyNeedsSurvival: CleanToCleanWater
-- Industrial Overhaul: base ammo (POHEMissile200mm, AutocannonClip, MediumCalibreAmmo, LargeCalibreAmmo,
-  LargeRailgunAmmo, LargeRailgunAmmoDUAP, SmallRailgunAmmo)
 - [Ignore] section in the data files: blueprints that are deliberately not used
   (not generated, not proposed by the tool), e.g. the PlantAndCook composter recipes,
   the Industrial Overhaul disposal and starting recipes

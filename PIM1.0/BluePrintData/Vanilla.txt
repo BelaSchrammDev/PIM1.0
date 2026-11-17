@@ -41,12 +41,12 @@ Component | PrototechCoolingUnit
 # Equipment
 OxygenContainerObject | Position0010_OxygenBottle
 GasContainerObject | Position0020_HydrogenBottle
-Component | Position0030_Canvas
-Datapad | Position0040_Datapad
+Component | Position0040_Canvas
+Datapad | Position0030_Datapad
 ConsumableItem | Position0021_Medkit
 ConsumableItem | Position0022_Powerkit
-PhysicalGunObject | Position0050_FlareGun | FlareGunItem
-AmmoMagazine | Position0051_FlareGunMagazine | FlareClip
+PhysicalGunObject | Position0000_FlareGun | FlareGunItem
+AmmoMagazine | Position0000_FlareGunMagazine | FlareClip
 AmmoMagazine | Position0060_FireworksBoxBlue
 AmmoMagazine | Position0061_FireworksBoxGreen
 AmmoMagazine | Position0062_FireworksBoxRed
@@ -134,3 +134,16 @@ UraniumOreToIngot | Ore Uranium | Ingot Uranium
 
 [Refinery if !IndustrialOverhaulMod]
 MagnesiumOreToIngot | Ore Magnesium | Ingot Magnesium
+
+[Assembler]
+# new (BluePrintTool); IndustrialOverhaulMod uses FlareBox too
+AmmoMagazine | Position0071_FlareBox | FlareBox | Countermeasure Flares
+
+[Assembler if !IndustrialOverhaulMod]
+# new (BluePrintTool); IndustrialOverhaulMod hides these and has its own PO... blueprints
+AmmoMagazine | Position0075_AntiPersonnelTurretMagazine | AntiPersonnelTurret_Mag | Anti-Personnel Turret Magazine
+AmmoMagazine | Position0101_Missile200mmHoming | Missile200mmHoming | Homing Missile
+AmmoMagazine | Position0200_Torpedo | Torpedo | Torpedo
+AmmoMagazine | Position0210_Torpedo_Seeking | Torpedo_Seeking | Light Torpedo
+AmmoMagazine | Position0220_Torpedo_Heavy | Torpedo_Heavy | Heavy Torpedo
+AmmoMagazine | Position0230_Torpedo_Piercing | Torpedo_Piercing | Armor Piercing Torpedo

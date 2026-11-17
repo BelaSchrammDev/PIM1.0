@@ -71,7 +71,7 @@ Component | FSSolarCell
 # MunitionsFactory
 Component | POExplosivesComponent | Explosives
 Ingot | Gunpowder | Magnesium
-AmmoMagazine | POInteriorTurret_Mag_50rd | InteriorTurret_Mag_50rd
+AmmoMagazine | POInteriorTurret_Mag_50rd | AntiPersonnelTurret_Mag
 AmmoMagazine | PONATO_25x184mmMagazine | NATO_25x184mm
 AmmoMagazine | DUNATO_25x184mmMagazine | DUNATO_25x184mm
 AmmoMagazine | POMissile200mm | Missile200mm
@@ -129,6 +129,13 @@ AmmoMagazine | LargeCalibreAmmo
 AmmoMagazine | LargeRailgunAmmo
 AmmoMagazine | LargeRailgunAmmoDUAP
 AmmoMagazine | SmallRailgunAmmo
+# new (BluePrintTool)
+AmmoMagazine | POMissile200mmHoming | Missile200mmHoming | Homing Missile
+AmmoMagazine | POHEMissile200mmHoming | HEMissile200mmHoming | HE Homing Missile
+AmmoMagazine | POTorpedo | Torpedo | Torpedo
+AmmoMagazine | POTorpedo_Seeking | Torpedo_Seeking | Light Torpedo
+AmmoMagazine | POTorpedo_Heavy | Torpedo_Heavy | Heavy Torpedo
+AmmoMagazine | POTorpedo_Piercing | Torpedo_Piercing | Armor Piercing Torpedo
 
 [Refinery]
 # SmelterIngots & RefineryIngots
@@ -234,6 +241,7 @@ LithiumOreDisposal
 BauxiteOreDisposal
 TitaniumOreDisposal
 TantalumOreDisposal
+NiterOreDisposal
 StoneIngotDisposal
 IronIngotDisposal
 NickelIngotDisposal

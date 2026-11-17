@@ -28,12 +28,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -99,6 +99,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
 R|GoldOreToIngot|Ore Gold|Ore Gold|Ingot Gold|Ingot Gold|False
@@ -112,6 +119,7 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## all
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
 A|Ingot SubFresh|SubFresh|Ingot SubFresh|Food|Algae-Soy Product|DailyNeedsSurvivalMod|0|0
 A|Ingot WaterFood|WaterFood|Ingot WaterFood|Food|Drinking Water Packet|DailyNeedsSurvivalMod|0|0
 A|Ingot OrganicToNutrients|OrganicToNutrients|Ingot Nutrients|Food|Nutrients|DailyNeedsSurvivalMod|0|0
@@ -209,7 +217,7 @@ A|Component POGravityGeneratorComponent|POGravityGeneratorComponent|Component Gr
 A|Component FSSolarCell|FSSolarCell|Component FSSolarCell|Component|FSSolarCell|IndustrialOverhaulMod|0|0
 A|Component POExplosivesComponent|POExplosivesComponent|Component Explosives|Component|Explosives|IndustrialOverhaulMod|0|0
 A|Ingot Gunpowder|Gunpowder|Ingot Magnesium|Ingot|Magnesium|IndustrialOverhaulMod|0|0
-A|AmmoMagazine POInteriorTurret_Mag_50rd|POInteriorTurret_Mag_50rd|AmmoMagazine InteriorTurret_Mag_50rd|AmmoMagazine|InteriorTurret Mag 50rd|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POInteriorTurret_Mag_50rd|POInteriorTurret_Mag_50rd|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|AntiPersonnelTurret Mag|IndustrialOverhaulMod|0|0
 A|AmmoMagazine PONATO_25x184mmMagazine|PONATO_25x184mmMagazine|AmmoMagazine NATO_25x184mm|AmmoMagazine|NATO 25x184mm|IndustrialOverhaulMod|0|0
 A|AmmoMagazine DUNATO_25x184mmMagazine|DUNATO_25x184mmMagazine|AmmoMagazine DUNATO_25x184mm|AmmoMagazine|DUNATO 25x184mm|IndustrialOverhaulMod|0|0
 A|AmmoMagazine POMissile200mm|POMissile200mm|AmmoMagazine Missile200mm|AmmoMagazine|Missile200mm|IndustrialOverhaulMod|0|0
@@ -260,6 +268,12 @@ A|AmmoMagazine LargeCalibreAmmo|LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|A
 A|AmmoMagazine LargeRailgunAmmo|LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|IndustrialOverhaulMod|0|0
 A|AmmoMagazine LargeRailgunAmmoDUAP|LargeRailgunAmmoDUAP|AmmoMagazine LargeRailgunAmmoDUAP|AmmoMagazine|LargeRailgunAmmoDUAP|IndustrialOverhaulMod|0|0
 A|AmmoMagazine SmallRailgunAmmo|SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POMissile200mmHoming|POMissile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POHEMissile200mmHoming|POHEMissile200mmHoming|AmmoMagazine HEMissile200mmHoming|AmmoMagazine|HE Homing Missile|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo|POTorpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Seeking|POTorpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Heavy|POTorpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Piercing|POTorpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|IndustrialOverhaulMod|0|0
 A|AmmoMagazine GravelMag|GravelMag|AmmoMagazine GravelMag|AmmoMagazine|GravelMag|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine GravelMagBig|GravelMagBig|AmmoMagazine GravelMagBig|AmmoMagazine|GravelMagBig|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine 155mmAPShell|155mmAPShell|AmmoMagazine 155mmAPShell|AmmoMagazine|155mmAPShell|IndustrialOverhaulLockLoadMod|0|0
@@ -438,12 +452,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -509,6 +523,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Ingot SubFresh|SubFresh|Ingot SubFresh|Food|Algae-Soy Product|DailyNeedsSurvivalMod|0|0
 A|Ingot WaterFood|WaterFood|Ingot WaterFood|Food|Drinking Water Packet|DailyNeedsSurvivalMod|0|0
 A|Ingot OrganicToNutrients|OrganicToNutrients|Ingot Nutrients|Food|Nutrients|DailyNeedsSurvivalMod|0|0
@@ -660,12 +681,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -731,6 +752,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component AryxLynxon_FusionComponentBP|AryxLynxon_FusionComponentBP|Component AryxLynxon_FusionComponent|Component|Fusion Coil|AryxEpsteinDriveMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -774,12 +802,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -845,6 +873,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component AzimuthSuperchargerComponent|AzimuthSuperchargerComponent|Component AzimuthSupercharger|Component|AzimuthSupercharger|AzimuthThrusterMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -888,12 +923,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -959,6 +994,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Ingot SubFresh|SubFresh|Ingot SubFresh|Food|Algae-Soy Product|DailyNeedsSurvivalMod|0|0
 A|Ingot WaterFood|WaterFood|Ingot WaterFood|Food|Drinking Water Packet|DailyNeedsSurvivalMod|0|0
 A|Ingot OrganicToNutrients|OrganicToNutrients|Ingot Nutrients|Food|Nutrients|DailyNeedsSurvivalMod|0|0
@@ -1038,12 +1080,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1109,6 +1151,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component ShieldComponentBP|ShieldComponentBP|Component ShieldComponent|Component|Field Emitter|DefenseShieldMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -1152,12 +1201,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1223,6 +1272,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component MagnetronComponent|MagnetronComponent|Component MagnetronComponent|Component|Magnetron|DeuteriumReactorMod|0|0
 A|Ingot DeuteriumOreToIngot|DeuteriumOreToIngot|Ingot DTFuelCapsule|Deuterium|Deuterium|DeuteriumReactorMod|0|0
 A|Ingot StonetoDeuterium|StonetoDeuterium|Ingot DTFuelCapsule|Deuterium|Deuterium (Stone)|DeuteriumReactorMod|0|0
@@ -1272,12 +1328,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1343,6 +1399,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|ConsumableItem SparklingWater|SparklingWater|ConsumableItem SparklingWater|Food|SparklingWater|EatDrinkSleepRepeatMod|0|0
 A|ConsumableItem Emergency_Ration|Emergency_Ration|ConsumableItem Emergency_Ration|Food|Emergency Ration|EatDrinkSleepRepeatMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
@@ -1387,12 +1450,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1458,6 +1521,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|AmmoMagazine GravelMag|GravelMag|AmmoMagazine GravelMag|AmmoMagazine|GravelMag|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine GravelMagBig|GravelMagBig|AmmoMagazine GravelMagBig|AmmoMagazine|GravelMagBig|IndustrialOverhaulLockLoadMod|0|0
 A|AmmoMagazine 155mmAPShell|155mmAPShell|AmmoMagazine 155mmAPShell|AmmoMagazine|155mmAPShell|IndustrialOverhaulLockLoadMod|0|0
@@ -1482,6 +1552,7 @@ R|SilverOreToIngot|Ore Silver|Ore Silver|Ingot Silver|Ingot Silver|False
 R|UraniumOreToIngot|Ore Uranium|Ore Uranium|Ingot Uranium|Ingot Uranium|False
 R|StoneOreToIngot|Ore Stone|Stone|Ingot Stone|Gravel|False
 ## only-IndustrialOverhaulMod
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
 A|Ingot SpentFuelReprocessing|SpentFuelReprocessing|Ingot Uranium|Reprocessing|Nuclear Fuel|IndustrialOverhaulMod|0|0
 A|Component CopperWire|CopperWire|Component CopperWire|Component|CopperWire|IndustrialOverhaulMod|0|0
 A|Component Electromagnet|Electromagnet|Component Electromagnet|Component|Electromagnet|IndustrialOverhaulMod|0|0
@@ -1530,7 +1601,7 @@ A|Component POGravityGeneratorComponent|POGravityGeneratorComponent|Component Gr
 A|Component FSSolarCell|FSSolarCell|Component FSSolarCell|Component|FSSolarCell|IndustrialOverhaulMod|0|0
 A|Component POExplosivesComponent|POExplosivesComponent|Component Explosives|Component|Explosives|IndustrialOverhaulMod|0|0
 A|Ingot Gunpowder|Gunpowder|Ingot Magnesium|Ingot|Magnesium|IndustrialOverhaulMod|0|0
-A|AmmoMagazine POInteriorTurret_Mag_50rd|POInteriorTurret_Mag_50rd|AmmoMagazine InteriorTurret_Mag_50rd|AmmoMagazine|InteriorTurret Mag 50rd|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POInteriorTurret_Mag_50rd|POInteriorTurret_Mag_50rd|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|AntiPersonnelTurret Mag|IndustrialOverhaulMod|0|0
 A|AmmoMagazine PONATO_25x184mmMagazine|PONATO_25x184mmMagazine|AmmoMagazine NATO_25x184mm|AmmoMagazine|NATO 25x184mm|IndustrialOverhaulMod|0|0
 A|AmmoMagazine DUNATO_25x184mmMagazine|DUNATO_25x184mmMagazine|AmmoMagazine DUNATO_25x184mm|AmmoMagazine|DUNATO 25x184mm|IndustrialOverhaulMod|0|0
 A|AmmoMagazine POMissile200mm|POMissile200mm|AmmoMagazine Missile200mm|AmmoMagazine|Missile200mm|IndustrialOverhaulMod|0|0
@@ -1581,6 +1652,12 @@ A|AmmoMagazine LargeCalibreAmmo|LargeCalibreAmmo|AmmoMagazine LargeCalibreAmmo|A
 A|AmmoMagazine LargeRailgunAmmo|LargeRailgunAmmo|AmmoMagazine LargeRailgunAmmo|AmmoMagazine|LargeRailgunAmmo|IndustrialOverhaulMod|0|0
 A|AmmoMagazine LargeRailgunAmmoDUAP|LargeRailgunAmmoDUAP|AmmoMagazine LargeRailgunAmmoDUAP|AmmoMagazine|LargeRailgunAmmoDUAP|IndustrialOverhaulMod|0|0
 A|AmmoMagazine SmallRailgunAmmo|SmallRailgunAmmo|AmmoMagazine SmallRailgunAmmo|AmmoMagazine|SmallRailgunAmmo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POMissile200mmHoming|POMissile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POHEMissile200mmHoming|POHEMissile200mmHoming|AmmoMagazine HEMissile200mmHoming|AmmoMagazine|HE Homing Missile|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo|POTorpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Seeking|POTorpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Heavy|POTorpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|IndustrialOverhaulMod|0|0
+A|AmmoMagazine POTorpedo_Piercing|POTorpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|IndustrialOverhaulMod|0|0
 R|BauxiteOreToIngot|Ore Bauxite|Bauxite|Ingot Aluminum|Ingot Aluminum|False
 R|CrushBauxiteOre|Ore Bauxite|Bauxite|Ore CrushedBauxite|Crushed Bauxite|False
 R|CoalToCarbonBasic|Ore Coal|Coal|Ingot Carbon|Carbon|False
@@ -1694,12 +1771,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1765,6 +1842,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|AmmoMagazine RailGunAmmoMag|RailGunAmmoMag|AmmoMagazine RailGunAmmoMag|AmmoMagazine|RailGunAmmoMag|MCRN_RailGunMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -1808,12 +1892,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1879,6 +1963,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|AmmoMagazine TorpedoMk1_Blueprint|TorpedoMk1_Blueprint|AmmoMagazine TorpedoMk1|AmmoMagazine|TorpedoMk1|MWI_HomingWeaponryMod|0|0
 A|AmmoMagazine SwarmMissileMk1_Blueprint|SwarmMissileMk1_Blueprint|AmmoMagazine SwarmMissile50mm|AmmoMagazine|SwarmMissile50mm|MWI_HomingWeaponryMod|0|0
 A|AmmoMagazine DestroyerMissileX_Blueprint|DestroyerMissileX_Blueprint|AmmoMagazine DestroyerMissileX|AmmoMagazine|DestroyerMissileX|MWI_HomingWeaponryMod|0|0
@@ -1925,12 +2016,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -1996,6 +2087,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|AmmoMagazine R75ammo|R75ammo|AmmoMagazine R75ammo|AmmoMagazine|75mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R150ammo|R150ammo|AmmoMagazine R150ammo|AmmoMagazine|150mm Railgun Ammo|NorthWindWeaponsMod|0|0
 A|AmmoMagazine R250ammo|R250ammo|AmmoMagazine R250ammo|AmmoMagazine|250mm Railgun Ammo|NorthWindWeaponsMod|0|0
@@ -2057,12 +2155,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -2128,6 +2226,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|PhysicalGunObject Blueprint_PaintGun|Blueprint_PaintGun|PhysicalGunObject PhysicalPaintGun|Tools&Guns|PhysicalPaintGun|PaintGunMod|0|0
 A|AmmoMagazine Blueprint_PaintGunMag|Blueprint_PaintGunMag|AmmoMagazine PaintGunMag|AmmoMagazine|PaintGunMag|PaintGunMod|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
@@ -2172,12 +2277,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -2243,6 +2348,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Ingot Soya|Soya|Ingot Soya|Food|Soya|PlantAndCookMod|0|0
 A|Ingot Herbs|Herbs|Ingot Herbs|Food|Herbs|PlantAndCookMod|0|0
 A|ConsumableItem AppleJuice|AppleJuice|ConsumableItem AppleJuice|Food|AppleJuice|PlantAndCookMod|0|0
@@ -2307,12 +2419,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -2378,6 +2490,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component Naquadah|Naquadah|Component Naquadah|Component|Naquadah Bars|StarGateMod_Gates|0|0
 R|ScrapIngotToIronIngot|Ingot Scrap|Ingot Scrap|Ingot Iron|Ingot Iron|True
 R|CobaltOreToIngot|Ore Cobalt|Ore Cobalt|Ingot Cobalt|Ingot Cobalt|False
@@ -2421,12 +2540,12 @@ A|Component PrototechCircuitry|PrototechCircuitry|Component PrototechCircuitry|C
 A|Component PrototechCoolingUnit|PrototechCoolingUnit|Component PrototechCoolingUnit|Component|PrototechCoolingUnit|Vanilla|0|0
 A|OxygenContainerObject OxygenBottle|Position0010_OxygenBottle|OxygenContainerObject OxygenBottle|Tools&Guns|OxygenBottle|Vanilla|0|0
 A|GasContainerObject HydrogenBottle|Position0020_HydrogenBottle|GasContainerObject HydrogenBottle|Tools&Guns|HydrogenBottle|Vanilla|0|0
-A|Component Canvas|Position0030_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
-A|Datapad Datapad|Position0040_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
+A|Component Canvas|Position0040_Canvas|Component Canvas|Component|Canvas|Vanilla|0|0
+A|Datapad Datapad|Position0030_Datapad|Datapad Datapad|Tools&Guns|Datapad|Vanilla|0|0
 A|ConsumableItem Medkit|Position0021_Medkit|ConsumableItem Medkit|ConsumableItem|Medkit|Vanilla|0|0
 A|ConsumableItem Powerkit|Position0022_Powerkit|ConsumableItem Powerkit|ConsumableItem|Powerkit|Vanilla|0|0
-A|PhysicalGunObject FlareGun|Position0050_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
-A|AmmoMagazine FlareGunMagazine|Position0051_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
+A|PhysicalGunObject FlareGun|Position0000_FlareGun|PhysicalGunObject FlareGunItem|Tools&Guns|FlareGun|Vanilla|0|0
+A|AmmoMagazine FlareGunMagazine|Position0000_FlareGunMagazine|AmmoMagazine FlareClip|AmmoMagazine|FlareClip|Vanilla|0|0
 A|AmmoMagazine FireworksBoxBlue|Position0060_FireworksBoxBlue|AmmoMagazine FireworksBoxBlue|AmmoMagazine|FireworksBoxBlue|Vanilla|0|0
 A|AmmoMagazine FireworksBoxGreen|Position0061_FireworksBoxGreen|AmmoMagazine FireworksBoxGreen|AmmoMagazine|FireworksBoxGreen|Vanilla|0|0
 A|AmmoMagazine FireworksBoxRed|Position0062_FireworksBoxRed|AmmoMagazine FireworksBoxRed|AmmoMagazine|FireworksBoxRed|Vanilla|0|0
@@ -2492,6 +2611,13 @@ A|SeedItem Seeds_Fruit|Position0010_Seeds_Fruit|SeedItem Fruit|Seeds|Fruit Seeds
 A|SeedItem Seeds_Grain|Position0020_Seeds_Grain|SeedItem Grain|Seeds|Grain Seeds|Vanilla|0|0
 A|SeedItem Seeds_Vegetables|Position0030_Seeds_Vegetables|SeedItem Vegetables|Seeds|Vegetables Seeds|Vanilla|0|0
 A|SeedItem Spores_Mushrooms|Position0040_Spores_Mushrooms|SeedItem Mushrooms|Seeds|Mushrooms Seeds|Vanilla|0|0
+A|AmmoMagazine FlareBox|Position0071_FlareBox|AmmoMagazine FlareBox|AmmoMagazine|Countermeasure Flares|Vanilla|0|0
+A|AmmoMagazine AntiPersonnelTurretMagazine|Position0075_AntiPersonnelTurretMagazine|AmmoMagazine AntiPersonnelTurret_Mag|AmmoMagazine|Anti-Personnel Turret Magazine|Vanilla|0|0
+A|AmmoMagazine Missile200mmHoming|Position0101_Missile200mmHoming|AmmoMagazine Missile200mmHoming|AmmoMagazine|Homing Missile|Vanilla|0|0
+A|AmmoMagazine Torpedo|Position0200_Torpedo|AmmoMagazine Torpedo|AmmoMagazine|Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Seeking|Position0210_Torpedo_Seeking|AmmoMagazine Torpedo_Seeking|AmmoMagazine|Light Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Heavy|Position0220_Torpedo_Heavy|AmmoMagazine Torpedo_Heavy|AmmoMagazine|Heavy Torpedo|Vanilla|0|0
+A|AmmoMagazine Torpedo_Piercing|Position0230_Torpedo_Piercing|AmmoMagazine Torpedo_Piercing|AmmoMagazine|Armor Piercing Torpedo|Vanilla|0|0
 A|Component Naquadah|Naquadah|Component Naquadah|Component|Naquadah Bars|StarGateMod_Ores|0|0
 A|Component Trinium|Trinium|Component Trinium|Component|Trinium Plate|StarGateMod_Ores|0|0
 A|Component Neutronium|Neutronium|Component Neutronium|Component|Neutronium Crate|StarGateMod_Ores|0|0
