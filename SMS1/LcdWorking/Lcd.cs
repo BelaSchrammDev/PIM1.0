@@ -188,8 +188,9 @@ namespace IngameScript
             }
             void writeCustomData()
             {
-                var menustr = (mmode == MenuMode.Custom ? (menu != null ? (mmode == MenuMode.MenuClone ? "menu cloned from other Terminal.\n" : menu.oldMenuDef) : "no menu connected\n") : "\n");
-                lcd.CustomData = "  / Menu:\n  / default - the defaultmenu is used\n  / custom - specify your own menu structure\n  / copydefault - copies the defaultmenu as custom\n  / or the ID from other terminal to clone the menu\nmenu=" + mmode.ToString() + (mmode == MenuMode.MenuClone ? " from terminal " + lcdclonemenu + "\n" : "\n") + mDefBegin + "\n" + menustr;
+                var menustr = mmode != MenuMode.Custom ? "\n" : menu == null ? "no menu connected\n" : menu.oldMenuDef;
+                // custom menu: the errors of the definition as comment lines before the definition
+                lcd.CustomData = "  / Menu:\n  / default - the defaultmenu is used\n  / custom - specify your own menu structure\n  / copydefault - copies the defaultmenu as custom\n  / or the ID from other terminal to clone the menu\nmenu=" + mmode.ToString() + (mmode == MenuMode.MenuClone ? " from terminal " + lcdclonemenu + "\n" : "\n") + (mmode == MenuMode.Custom && menu != null ? menu.def.Errors : "") + mDefBegin + "\n" + menustr;
                 oldCustomData = lcd.CustomData;
             }
             public void Calc(P pm)
@@ -211,7 +212,7 @@ namespace IngameScript
                     case "3": comnum = 2; break;
                     case "4": comnum = 3; break;
                 }
-                if (comnum != -1 && curSite.commands[comnum] != null) setNewTerminalSite(curSite.commands[comnum].scheduleCommand());
+                if (comnum != -1 && comnum < curSite.commands.Count && curSite.commands[comnum] != null) setNewTerminalSite(curSite.commands[comnum].scheduleCommand());
             }
             void setNewTerminalSite(TerminalSite tsite)
             {
@@ -220,7 +221,8 @@ namespace IngameScript
                 mkdt.UD();
                 curSite = tsite;
                 tsite.setMenu(maxlines);
-                displayDefinition = "writex_i(" + (menu == null ? tHeadLine : tsite.titleline) + ")\nwritex_i(@*(filled))\n" + tsite.siteBody;
+                // errors in the menu definition: a hint in the title line (the errors are in the CustomData)
+                displayDefinition = "writex_i(" + (menu == null ? tHeadLine : menu.def.Errors != "" ? "!! Menu error - see CustomData !!" : tsite.Def.TitleLine) + ")\nwritex_i(@*(filled))\n" + tsite.Def.Body;
             }
             public override void checkWriteToPanel() { if (displayLines.Count < maxlines) for (int i = displayLines.Count; i < maxlines; i++) writeX("(filled)"); }
             public override void writeToPanel() { w2lcd(lcd, pages.Count > 0 ? pages[0] : "", fontsize); curml = 0; }

@@ -15,8 +15,8 @@ namespace IngameScript
         //PM
         public class P
         {
-            Dictionary<string, string> pml = new Dictionary<string, string>(); string bcn = ""; IMyTerminalBlock block = null; public string Name = ""; public bool smscontrol;
-            public bool ParseArgs(IMyTerminalBlock tb) { if (tb == null) return false; block = tb; return ParseArgs(tb.CustomName); }
+            Dictionary<string, string> pml = new Dictionary<string, string>(); string bcn = ""; public string Name = ""; public bool smscontrol;
+            public bool ParseArgs(IMyTerminalBlock tb) { if (tb == null) return false; return ParseArgs(tb.CustomName); }
             public bool ParseArgs(string newa)
             {
                 if (newa == bcn) return smscontrol;
@@ -48,25 +48,6 @@ namespace IngameScript
                 smscontrol = false;
                 return false;
             }
-            public string UpdatePMString()
-            {
-                if (bcn == null) return "";
-                string smsstr = Name;
-                if (smscontrol)
-                {
-                    smsstr += " (sms";
-                    foreach (string kstr in pml.Keys)
-                    {
-                        smsstr += "," + kstr;
-                        if (pml[kstr] != "") smsstr += ":" + pml[kstr];
-                    }
-                    smsstr += ")";
-                }
-                if (block != null) block.CustomName = smsstr;
-                return smsstr;
-            }
-            public void TakeControl() { smscontrol = true; UpdatePMString(); }
-            public void EraseControl() { smscontrol = false; UpdatePMString(); }
             public void addPM(string key, string value = "") { if (!isPM(key)) pml.Add(key, value); }
             public bool isPM(string tag) { return pml.ContainsKey(tag); }
             public string getPM(string tag) { if (pml.ContainsKey(tag)) return pml[tag]; else return ""; }

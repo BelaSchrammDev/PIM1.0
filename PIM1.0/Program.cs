@@ -32,6 +32,8 @@ namespace IngameScript
             MyProgram = this;
             _netIgc = new NetWorkingIgc(IGC, GridTerminalSystem, Me, NetWorkingScripts.Pim, Strings.PimVersion);
             Net = _netIgc.Node;
+            // menu actions of SMS: PIM control on/off of the refineries and assemblers
+            Net.Register(NetWorkingScripts.RunAction, (source, action) => ControlActions.Run(action));
 
             viewList.Add(new AmmoManagerInfo());
             viewList.Add(new StorageManagerInfo());

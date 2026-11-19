@@ -18,7 +18,10 @@ namespace IngameScript
             PimData = "pimdata",
 
             // SMS standby -> SMS master: a run argument (trigger of a button panel etc.) for the master
-            Command = "command";
+            Command = "command",
+
+            // SMS master -> master of another script (PIM, later BAS): a menu action, the body is its name (e.g. ctrl_ref)
+            RunAction = "action";
         }
     }
 }

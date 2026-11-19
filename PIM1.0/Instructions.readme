@@ -10,4 +10,5 @@ An old SMS v1.4 gets no PIM data (PIM shows a warning).
 new in update 1.2a:
  - PIM sends its data to SMS over the network (IGC), no longer into the CustomData of SMS
  - hint if a PB still runs SMS v1.4
+ - SMS terminal menu "Control (no) Refinerys/Assemblers": PIM sets/removes the (sms) tag
 ----------------------------------------------------------------------------------------------------------------

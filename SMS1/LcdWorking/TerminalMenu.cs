@@ -17,79 +17,43 @@ namespace IngameScript
             public List<LCD_Terminal> terminals = new List<LCD_Terminal>();
             // alle menuIDs sind GROSS, #timer bleibt so
             public string oldMenuDef = "nix";
-            public TerminalSite mainmenu = null;
-            public string headline = tHeadLine;
+            public TerminalSite mainmenu;
             public float maxMenuWith;
-            public Dictionary<string, MenuPunkt> menuCommands = new Dictionary<string, MenuPunkt>();
+            // the parsed definition (errors: hint in the title line, comment lines in the CustomData)
+            public MenuDef def;
             public Dictionary<string, TerminalSite> terminalSites = new Dictionary<string, TerminalSite>();
-            public bool parseMenuDefinition(string def)
+            public bool parseMenuDefinition(string definition)
             {
-                if (def == "") return false;
-                if (def == oldMenuDef) return true;
-                oldMenuDef = def;
+                if (definition.Trim() == "") return false;
+                if (definition == oldMenuDef) return true;
+                oldMenuDef = definition;
                 terminalSites.Clear();
-                menuCommands.Clear();
                 mainmenu = null;
                 maxMenuWith = 0;
-                var menulist = def.Split('\n');
-                TerminalSite curTerminalmenu = null;
-                bool sitebody = false;
-                foreach (var s in menulist)
+                def = ParseMenu(definition, tHeadLine);
+                foreach (var s in def.Sites)
                 {
-                    var line = s.Trim();
-                    if (line.StartsWith("menu=")) continue;
-                    else if (line.StartsWith("/")) continue;
-                    else if (line.StartsWith("@newsite"))
-                    {
-                        var kstring = getKlammerOptions(line);
-                        var termID = kstring[0] == "" ? "Unknow" : kstring[0].ToUpper();
-                        if (termID != "" && !terminalSites.ContainsKey(termID))
-                        {
-                            curTerminalmenu = new TerminalSite(this, termID, kstring[1]);
-                            terminalSites.Add(termID, curTerminalmenu);
-                            curTerminalmenu.titleline = headline;
-                            if (mainmenu == null) mainmenu = curTerminalmenu;
-                        }
-                    }
-                    else if (line.StartsWith("@endsite")) { curTerminalmenu = null; sitebody = false; }
-                    else if (line.StartsWith("@titleline"))
-                    {
-                        var sline1 = line.Split('(', ')');
-                        var sline = sline1.Length > 1 ? sline1[1] : " ";
-                        if (curTerminalmenu == null) headline = sline;
-                        else curTerminalmenu.titleline = sline;
-                    }
-                    else if (line.StartsWith("@alternativ") && curTerminalmenu != null)
-                    {
-                        var kstring = getKlammerOptions(line);
-                        var termID = kstring[0] == "" ? "Unknow" : kstring[0].ToUpper();
-                        if (!menuCommands.ContainsKey(termID)) menuCommands.Add(termID, new MenuSite(this, termID, kstring[1], curTerminalmenu.siteID));
-                    }
-                    else if (line.StartsWith("@command"))
-                    {
-                        var kstring = getKlammerOptions(line);
-                        var termID = kstring[0].ToUpper();
-                        if (!menuCommands.ContainsKey(termID)) menuCommands.Add(termID, new MenuCommand(this, termID, kstring[1], kstring[2], kstring[3]));
-                    }
-                    else if (line.StartsWith("@body")) sitebody = true;
-                    else if (line.StartsWith("@menu") && curTerminalmenu != null) curTerminalmenu.setMenuPunkte(getKlammerOptions(line));
-                    else if (sitebody && curTerminalmenu != null) curTerminalmenu.siteBody += s + "\n";
+                    var site = new TerminalSite(this, s);
+                    terminalSites[s.Id] = site;
+                    if (mainmenu == null) mainmenu = site;
                 }
-                // menucommands setzen
-                foreach (var term in terminalSites.Values) term.setMenuCommands();
+                // the menu entries: "L" links to a site, "A" actions
+                var entries = new Dictionary<string, MenuPunkt>();
+                foreach (var t in def.Targets) entries[t.Key] = t.Key[0] == 'L' ? (MenuPunkt)new MenuSite(this, t.Value[0], t.Value[1]) : new MenuCommand(this, t.Value[0], t.Value[1], t.Value[2]);
+                MenuPunkt entry;
+                foreach (var site in terminalSites.Values)
+                    foreach (var e in site.Def.Entries) site.commands.Add(entries.TryGetValue(e, out entry) ? entry : null);
                 maxMenuWith += 2.58332f;
                 return mainmenu != null;
             }
         }
         public abstract class MenuPunkt
         {
-            public string commandID = "";
-            public TerminalMenu menuObject = null;
+            public TerminalMenu menuObject;
             public float maxWith;
-            public List<string> menuStrings = null;
-            public MenuPunkt(TerminalMenu menu, string id, string text)
+            public List<string> menuStrings;
+            public MenuPunkt(TerminalMenu menu, string text)
             {
-                commandID = id;
                 menuObject = menu;
                 menuStrings = new List<string>(text.Split(' '));
                 foreach (var s in menuStrings)
@@ -103,29 +67,35 @@ namespace IngameScript
         }
         public class MenuSite : MenuPunkt
         {
-            public string siteID = "";
-            public MenuSite(TerminalMenu mid, string id, string text, string sID) : base(mid, id, text)
+            string siteID;
+            public MenuSite(TerminalMenu mid, string text, string sID) : base(mid, text)
             {
                 siteID = sID;
             }
             public override TerminalSite scheduleCommand()
             {
-                if (menuObject.terminalSites.ContainsKey(siteID)) return menuObject.terminalSites[siteID];
-                return null;
+                TerminalSite site;
+                return menuObject.terminalSites.TryGetValue(siteID, out site) ? site : null;
             }
         }
         public class MenuCommand : MenuPunkt
         {
-            string command = "", blocks = "";
-            public MenuCommand(TerminalMenu mid, string id, string text, string com, string iblocks) : base(mid, id, text)
+            string command, blocks;
+            public MenuCommand(TerminalMenu mid, string text, string com, string iblocks) : base(mid, text)
             {
                 command = com;
                 blocks = iblocks;
             }
             public override TerminalSite scheduleCommand()
             {
-                var d = getDyBlockList(BlockType.Refinery);
-                var o = getDyBlockList(BlockType.Assembler);
+                // an action of another script ("PIM:ctrl_ref"): to the master of that script type (nothing without it)
+                var colon = command.IndexOf(':');
+                if (colon > 0)
+                {
+                    var master = Net.MasterOf(command.Substring(0, colon).ToUpper());
+                    if (master != 0) Net.Send(master, NetWorkingScripts.RunAction, command.Substring(colon + 1));
+                    return null;
+                }
                 switch (command)
                 {
                     // block on
@@ -144,14 +114,6 @@ namespace IngameScript
                     case "#timer_start#":
                         foreach (var b in getBlockList(blocks)) { if (b is IMyTimerBlock) { var t = b as IMyTimerBlock; t.StartCountdown(); } }
                         break;
-                    case "#ctrl_all#":
-                        if (d.ContainsKey(Mgrid)) foreach (Ofen ofen in d[Mgrid]) ofen.pms.TakeControl();
-                        if (o.ContainsKey(Mgrid)) foreach (Okuma oku in o[Mgrid]) oku.pms.TakeControl();
-                        break;
-                    case "#ctrl_ref#": if (d.ContainsKey(Mgrid)) foreach (Ofen ofen in d[Mgrid]) ofen.pms.TakeControl(); break;
-                    case "#ctrl_ass#": if (o.ContainsKey(Mgrid)) foreach (Okuma oku in o[Mgrid]) oku.pms.TakeControl(); break;
-                    case "#noctrl_ref#": if (d.ContainsKey(Mgrid)) foreach (Ofen ofen in d[Mgrid]) ofen.pms.EraseControl(); break;
-                    case "#noctrl_ass#": if (o.ContainsKey(Mgrid)) foreach (Okuma oku in o[Mgrid]) oku.pms.EraseControl(); break;
                 }
                 return null;
             }
@@ -182,39 +144,18 @@ namespace IngameScript
                 return bl;
             }
         }
-        static string[] getKlammerOptions(string line)
-        {
-            var klammerstrings = new string[4];
-            var linestring = new List<string>(line.Split('(', ')', ','));
-            for (int i = 0; i < 4; i++)
-            {
-                if (linestring.Count > i + 1) klammerstrings[i] = linestring[i + 1];
-            }
-            return klammerstrings;
-        }
         public class TerminalSite
         {
-            public string siteID = "", titleline, siteBody = "";
-            TerminalMenu menuObject = null;
-            public string[] menupunktStrings = new string[4];
-            public MenuPunkt[] commands = new MenuPunkt[4];
+            // the parsed site: id, title line, body, entries
+            public SiteDef Def;
+            TerminalMenu menuObject;
+            // the menu entries (null = gap), the first 4 are on the buttons 1-4
+            public List<MenuPunkt> commands = new List<MenuPunkt>();
             public List<string> mel = new List<string>();
-            public TerminalSite(TerminalMenu menu, string id, string text)
+            public TerminalSite(TerminalMenu menu, SiteDef def)
             {
                 menuObject = menu;
-                siteID = id;
-                if (!menuObject.menuCommands.ContainsKey(id)) menuObject.menuCommands.Add(id, new MenuSite(menu, id, text, id));
-            }
-            public void setMenuCommands()
-            {
-                for (int i = 0; i < menupunktStrings.Length; i++)
-                {
-                    if (menuObject.menuCommands.ContainsKey(menupunktStrings[i])) commands[i] = menuObject.menuCommands[menupunktStrings[i]];
-                }
-            }
-            public void setMenuPunkte(string[] mpunkte)
-            {
-                for (int i = 0; (i < mpunkte.Length && i < 4); i++) menupunktStrings[i] = mpunkte[i] == null ? "" : mpunkte[i].ToUpper();
+                Def = def;
             }
             public void setMenu(int maxlines)
             {
@@ -229,7 +170,7 @@ namespace IngameScript
                     if (seg >= 1 && seg <= 4)
                     {
                         var mp = seg - 1;
-                        if (commands[mp] != null && commands[mp].menuStrings.Count > 0)
+                        if (mp < commands.Count && commands[mp] != null && commands[mp].menuStrings.Count > 0)
                         {
                             int offset = (int)((git * (mp + 1)) + ((git - commands[mp].menuStrings.Count) / 2));
                             if (i >= offset && i <= (offset + commands[mp].menuStrings.Count - 1)) ams = commands[mp].menuStrings[i - offset];
@@ -237,12 +178,6 @@ namespace IngameScript
                     }
                     mel.Add(fmstr(menuObject.maxMenuWith, ams) + "\n");
                 }
-            }
-            public TerminalSite getAction(int num)
-            {
-                if (num < 0 || num > 3) return null;
-                if (commands[num] == null) return null;
-                return commands[num].scheduleCommand();
             }
         }
     }

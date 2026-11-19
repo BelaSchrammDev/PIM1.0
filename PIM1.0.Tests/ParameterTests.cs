@@ -241,5 +241,21 @@ namespace IngameScript.Tests
         {
             Assert.AreEqual(new Program.Parameter().ParseArgs(name), Program.HasSmsTag(name));
         }
+
+        // the menu actions of SMS (ControlActions): PIM control on/off by the tag in the name
+        [TestMethod]
+        [DataRow("Refinery 1", true, "Refinery 1 (sms)")]
+        [DataRow("Refinery 1 ", true, "Refinery 1 (sms)")]
+        [DataRow("Refinery 1 (sms)", true, "Refinery 1 (sms)")]
+        [DataRow("Refinery 1 (SMS,keep)", true, "Refinery 1 (SMS,keep)")]
+        [DataRow("Refinery 1 (sms)", false, "Refinery 1")]
+        [DataRow("Refinery 1 (SMS,nocraft)", false, "Refinery 1")]
+        [DataRow("Refinery 1 (sms) left", false, "Refinery 1 left")]
+        [DataRow("Refinery 1", false, "Refinery 1")]
+        public void WithSmsTag_SetsOrRemovesTheTag(string name, bool on, string expected)
+        {
+            Assert.AreEqual(expected, Program.WithSmsTag(name, on));
+            Assert.AreEqual(on, Program.HasSmsTag(Program.WithSmsTag(name, on)));
+        }
     }
 }

@@ -18,6 +18,11 @@
     <Compile Include="..\SMS1\Definitions\ItemNames.cs" Link="Linked\ItemNames.cs" />
     <Compile Include="..\SMS1\LcdWorking\BlockTemplates.cs" Link="Linked\BlockTemplates.cs" />
     <Compile Include="..\SMS1\Definitions\Generated\ItemData.g.cs" Link="Linked\ItemData.g.cs" />
+    <!-- the menu parser, and the default menu for a test with the old syntax -->
+    <Compile Include="..\SMS1\LcdWorking\MenuParser.cs" Link="Linked\MenuParser.cs" />
+    <Compile Include="..\SMS1\Definitions\DefaultMenu.cs" Link="Linked\DefaultMenu.cs" />
+    <Compile Include="..\SMS1\Definitions\Strings.cs" Link="Linked\Strings.cs" />
+    <Compile Include="..\Share\NetWorking\NetWorkingScripts.cs" Link="Linked\NetWorkingScripts.cs" />
   </ItemGroup>
 
   <ItemGroup>

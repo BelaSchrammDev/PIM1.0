@@ -11,5 +11,8 @@ new in update 1.5a:
  - the SMS on a construct find each other over the network (IGC): one is master, the others are standby
    (a PB on a large grid is preferred); buttons on a standby SMS are passed to the master
  - the PIM data comes over the network; PIM gone: the PIM values are cleared after ~10 s
+ - terminal menus: new syntax @site/@link/@action/@body/@end (the old one still works),
+   errors are shown in the title line and listed in the CustomData
+ - menu action "PIM:ctrl_ref" goes to PIM; "Control Refinerys/Assemblers" is done by PIM now
 
 ----------------------------------------------------------------------------------------------------------------
