@@ -138,8 +138,7 @@ namespace IngameScript
         // in standby the jobs (and CalculateInfos) do not run: the LoopManager sets the status every run
         void SetStandbyStatus()
         {
-            var master = GridTerminalSystem.GetBlockWithId(Net.MasterAddress) as IMyTerminalBlock;
-            PimStatus = " Standby\nMaster: " + (master != null ? master.CustomName : Net.MasterAddress.ToString()) + "\n\n" + networkInfo.GetInfoText() + networkProtocolHint.GetInfoText();
+            PimStatus = PbInfo.Standby(Net, GridTerminalSystem) + "\n" + networkInfo.GetInfoText() + networkProtocolHint.GetInfoText();
         }
     }
 }

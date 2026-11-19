@@ -55,8 +55,8 @@ namespace IngameScript
 
         void StartCycle()
         {
-            shipOnlyJobs.Active = cm != ScriptMode.STATION;
-            gg = Mgrid;
+            shipOnlyJobs.Active = currentMode != ScriptMode.STATION;
+            filterGrid = Mgrid;
             rsp = 0;
             mdi_time.sT(DateTime.Now.ToString("HH:mm"));
             mdi_date.sT(DateTime.Now.ToString(" MM-dd-yy"));
@@ -76,10 +76,11 @@ namespace IngameScript
             }
         }
 
-        // the data PIM writes into the CustomData of SMS
+        // the data the PIM master sends (NetWorkingScripts.PimData); PIM gone: the PIM values are cleared
         void ReadPimData()
         {
-            loadCustomData(Me.CustomData);
+            if (Net.MasterOf(NetWorkingScripts.Pim) == 0) pimData = "";
+            LoadPimData(pimData);
         }
 
         void ResetOreIngotAmounts()
@@ -122,7 +123,7 @@ namespace IngameScript
                 }
             dyDisplayableVariable.RefreshVar();
             PT();
-            gg = Mgrid;
+            filterGrid = Mgrid;
         }
 
         /// <summary>
@@ -141,9 +142,9 @@ namespace IngameScript
             {
                 if (_index >= sms_disp.Count) return RunJobResult.Finished;
                 var display = sms_disp[_index];
-                var instructionsBefore = IC();
+                var instructionsBefore = InstructionCount();
                 if (display.RenderStep()) _index++;
-                display.icount += IC() - instructionsBefore;
+                display.icount += InstructionCount() - instructionsBefore;
                 return RunJobResult.Continue;
             }
         }

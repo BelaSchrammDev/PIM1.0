@@ -11,7 +11,9 @@ namespace IngameScript.Tests
     public class NetWorkingNodeTests
     {
         const long Me = 500;
-        const string PimHello = "type=PIM;version=PIM v1.1", SmsHello = "type=SMS;version=SMS v1.5";
+        // SmsHello without prio: a hello of a script without master priority (e.g. PIM 1.1d) counts as priority 0
+        const string PimHello = "type=PIM;version=PIM v1.1;prio=0", SmsHello = "type=SMS;version=SMS v1.5",
+            SmsLargeHello = "type=SMS;version=SMS v1.5;prio=1";
         const double Beat = Program.NetWorkingNode.HeartbeatSeconds;
 
         readonly List<string> _broadcasts = new List<string>();
@@ -22,7 +24,7 @@ namespace IngameScript.Tests
         [TestInitialize]
         public void Init()
         {
-            _node = new Program.NetWorkingNode(Me, "PIM", "PIM v1.1",
+            _node = new Program.NetWorkingNode(Me, "PIM", "PIM v1.1", 0,
                 (type, body) => _broadcasts.Add(type + "|" + body),
                 (address, type, body) => { _sent.Add(address + "|" + type + "|" + body); return true; },
                 address => !_otherConstruct.Contains(address));
@@ -214,6 +216,37 @@ namespace IngameScript.Tests
             Receive(400, "ack", SmsHello);
             Assert.AreEqual(Me, _node.MasterOf("PIM"));
             Assert.AreEqual(0, _node.MasterOf("XYZ"));
+        }
+
+        [TestMethod]
+        public void Hello_ReadsThePriority_MissingIsZero()
+        {
+            _node.Update(0);
+            Receive(400, "hello", SmsLargeHello);
+            Receive(600, "hello", SmsHello);
+            Assert.AreEqual(1, _node.Peers[400].Priority);
+            Assert.AreEqual(0, _node.Peers[600].Priority);
+        }
+
+        [TestMethod]
+        public void MasterOf_HigherPriorityWinsOverLowerAddress()
+        {
+            _node.Update(0);
+            Receive(400, "ack", SmsHello);
+            Receive(800, "ack", SmsLargeHello);
+            Receive(700, "ack", SmsLargeHello);
+            // among the same priority: the lowest address
+            Assert.AreEqual(700, _node.MasterOf("SMS"));
+        }
+
+        [TestMethod]
+        public void IsMaster_NotWhenAPeerOfMyTypeHasAHigherPriority()
+        {
+            _node.Update(0);
+            Receive(900, "ack", "type=PIM;version=PIM v1.2;prio=1");
+            _node.Update(Beat);
+            Assert.IsFalse(_node.IsMaster);
+            Assert.AreEqual(900, _node.MasterAddress);
         }
 
         [TestMethod]

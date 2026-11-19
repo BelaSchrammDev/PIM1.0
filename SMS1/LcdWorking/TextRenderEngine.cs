@@ -36,7 +36,7 @@ namespace IngameScript
                 foreach (var c in "Gkm")
                 {
                     VC v = getVC(c);
-                    if (v != null) v.C = mss;
+                    if (v != null) v.C = shipSpeed;
                 }
                 base.Display();
             }
@@ -74,7 +74,7 @@ namespace IngameScript
             public abstract void writeToPanel();
             public virtual void addEndOfLineStr() { pageText += "\n"; }
             void setOneCol(DP command, bool ns = true) { command.with = with; command.c = 1; if (ns == true && command.is_Sort) command.is_Sort = false; }
-            void sort_ifTrue(DP command) { if (command.is_Sort) { iss = command.sortMode; command.listDy.Sort(); } }
+            void sort_ifTrue(DP command) { if (command.is_Sort) { sortColumn = command.sortMode; command.listDy.Sort(); } }
             public void writeX(string arg, float i = 1)
             {
                 if (arg == "") return;
@@ -106,7 +106,7 @@ namespace IngameScript
                         case RenderPhase.BuildLines:
                             for (int c = stepIndex; c < displayCommands.Count; c++, stepIndex++)
                             {
-                                if (cI()) return false; DP command = displayCommands[c]; iss = command.sortMode; command.dyn = 0; int y = command.style;
+                                if (IsBudgetUsedUp()) return false; DP command = displayCommands[c]; sortColumn = command.sortMode; command.dyn = 0; int y = command.style;
                                 switch (command.cm)
                                 {
                                     case "Displays": command.addBlockChangeTypes(ChangeType.Display_add, ChangeType.Display_name); foreach (var d in sms_disp) if (command.ifFilter(d.Name)) command.listDy.Add(d); writeTitle_ifTrue(command, "Displays"); sort_ifTrue(command); command.headLineString = "Load(15% left),Name,,Lines,Instr.(31)"; command.FieldTemplates.Add("@fIC_B(15%),@fN,,@fCL,@fIC"); WriteList(command); break;
@@ -217,7 +217,7 @@ namespace IngameScript
                         case RenderPhase.RenderLines:
                             for (int i = stepIndex; i < displayLines.Count; i++, stepIndex++)
                             {
-                                if (cI()) return false;
+                                if (IsBudgetUsedUp()) return false;
                                 float cfx = 10000;
                                 foreach (dyMultiDisplayLine ndl in displayLines[i])
                                 {
@@ -250,9 +250,9 @@ namespace IngameScript
                             if (pageText != "") pages.Add(pageText);
                             renderPhase++;
                             break;
-                        case RenderPhase.Finish: run_count++; if (AdjustWith()) { renderPhase = RenderPhase.ReadCommands; return true; } writeToPanel(); dif_wp = 0; dif_wm = 0; ic.C = icount; ic.M = MAXIC; icount = 0; curlines.sD(maxlines); stepIndex = 0; renderPhase = RenderPhase.ResetPages; Refresh(); foreach (DP w in displayCommands) if (w.checkChangeStats(cdsdt)) { renderPhase = RenderPhase.ReadCommands; } return true;
+                        case RenderPhase.Finish: run_count++; if (AdjustWith()) { renderPhase = RenderPhase.ReadCommands; return true; } writeToPanel(); dif_wp = 0; dif_wm = 0; ic.C = icount; ic.M = instructionLimit; icount = 0; curlines.sD(maxlines); stepIndex = 0; renderPhase = RenderPhase.ResetPages; Refresh(); foreach (DP w in displayCommands) if (w.checkChangeStats(cdsdt)) { renderPhase = RenderPhase.ReadCommands; } return true;
                     }
-                } while (!cI()); return true;
+                } while (!IsBudgetUsedUp()); return true;
             }
             void AddValueTemplates(DP command, string sC, string s = "@fN,@fG,")
             {
@@ -437,11 +437,11 @@ namespace IngameScript
                             if (command.ifFilter(dl.Name) && (F == null ? true : F(command, dl)))
                                 command.listDy.Add(dl);
                         if (command.FieldTemplates.Count == 0 && command.listDy.Count > 0) AddBlockTemplates(command, command.listDy[0], type);
-                        if (command.ifOption(oGN))
+                        if (command.ifOption(OptGridName))
                         {
                             if (command.listDy.Count > 0)
                             {
-                                if (command.ifOption(oGN) && command.is_Title) writeX(g.CustomName + " :, ");
+                                if (command.ifOption(OptGridName) && command.is_Title) writeX(g.CustomName + " :, ");
                                 command.dyn += command.listDy.Count;
                                 WriteList(command);
                             }
@@ -492,7 +492,7 @@ namespace IngameScript
                 if (!command.is_Title && !command.FieldTemplates[0].StartsWith(gty)) command.FieldTemplates[0] = gty + "," + command.FieldTemplates[0];
                 WriteVariables(gty, tty, command);
             }
-            void WriteVariableGroup(DP command, string gty, string sty, string tty) { addFieldTemplates_NonBlock(command, sty); if (!command.ifOption(oGN)) command.is_Title = false; if (!command.is_Title && !command.FieldTemplates[0].StartsWith(gty)) command.FieldTemplates[0] = gty + "," + command.FieldTemplates[0]; WriteVariables(gty, tty, command); }
+            void WriteVariableGroup(DP command, string gty, string sty, string tty) { addFieldTemplates_NonBlock(command, sty); if (!command.ifOption(OptGridName)) command.is_Title = false; if (!command.is_Title && !command.FieldTemplates[0].StartsWith(gty)) command.FieldTemplates[0] = gty + "," + command.FieldTemplates[0]; WriteVariables(gty, tty, command); }
             void ENERGYP(DP command)
             {
                 var s = "SolarPanels,WindTurbines,HydrogenEngines,Reactors,Batterys,Total";
@@ -593,7 +593,7 @@ namespace IngameScript
                 writeTitle_ifTrue(command);
                 writeHeadLine_ifTrue(command);
                 writeLine_ifTrue(command);
-                var s1 = ((command.ifOption(oGN) && powerValueList.Count > 1) ? ("@fG,") : "") + ",@fN";
+                var s1 = ((command.ifOption(OptGridName) && powerValueList.Count > 1) ? ("@fG,") : "") + ",@fN";
                 foreach (dyDisplayableVariable p in powerValueList)
                 {
                     addSingleLine(command, p, s1 + PowerTableRow(command, p, o));

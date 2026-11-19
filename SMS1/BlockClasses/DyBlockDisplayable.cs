@@ -16,7 +16,7 @@ namespace IngameScript
         public abstract class dyBlockDisplayable : IComparable<dyBlockDisplayable>
         {
             int refcount = 10; public string Name = ""; public bool del = false; public ChangeType addChangeType = ChangeType.Empty, nameChangeType = ChangeType.Empty; DateTime curdt = DateTime.Now; public List<VC> vcl = new List<VC>(); public Dictionary<string, MDI> MDIs = new Dictionary<string, MDI>(); List<dyMultiDisplayLine> mdls = new List<dyMultiDisplayLine>();
-            public virtual int CompareTo(dyBlockDisplayable other) { int ct = string.Compare(Name, other.Name); if (iss.Contains("BACK")) { if (ct < 0) ct = 1; else if (ct > 0) ct = -1; return ct; } return ct; }
+            public virtual int CompareTo(dyBlockDisplayable other) { int ct = string.Compare(Name, other.Name); if (sortColumn.Contains("BACK")) { if (ct < 0) ct = 1; else if (ct > 0) ct = -1; return ct; } return ct; }
             public dyMultiDisplayLine getMDLo(TextRenderEngine sd, float with, string mode)
             {
                 dyMultiDisplayLine dls = null;

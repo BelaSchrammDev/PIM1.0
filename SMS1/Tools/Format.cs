@@ -43,7 +43,7 @@ namespace IngameScript
         static string Fv(double fv) { return F_(fv, pV); }
         static string Fm(double d) { return F_(d, pM); }
         static string[]
-            pD = new string[] { " 0.# m  " + HSS, " 0.#    " + HSS, " 0.# k " + HSS, " 0.# M" + HSS },
+            pD = new string[] { " 0.# m  " + SoftHyphen, " 0.#    " + SoftHyphen, " 0.# k " + SoftHyphen, " 0.# M" + SoftHyphen },
             pM = new string[] { " 0.0 g  ", " 0.0 kg", " 0.0 T  ", " 0.0 kT" },
             pV = new string[] { " 0.# mL", " 0.# L  ", " 0.# kL", " 0.# Ml" },
             pN = new string[] { " 0.# mN ", " 0.# N   ", " 0.# kN ", " 0.# MN" },
@@ -93,6 +93,6 @@ namespace IngameScript
         static Vector3I getUpP(IMyCubeBlock cb) { int difp = (cb.Max.Y - cb.Min.Y) + 1; Vector3I upp = new Vector3I { }; upp.X = cb.Position.X; upp.Y = cb.Position.Y; upp.Z = cb.Position.Z; switch (B6C(cb.Orientation.Up).ToString()) { case "U": upp.Y -= difp; break; case "D": upp.Y += difp; break; case "F": upp.Z += difp; break; case "B": upp.Z -= difp; break; case "R": upp.X -= difp; break; case "L": upp.X += difp; break; } return upp; }
         static void w2lcd(IMyTextPanel tp, string text, float fs) { w2ts(tp, text, fs, tp.BlockDefinition.SubtypeName.Contains("SmallTextPanel") ? 1.5f : 0); }
         static void w2ts(IMyTextSurface tp, string text, float fs, float xp) { tp.TextPadding = xp; tp.FontSize = fs; tp.Alignment = TextAlignment.LEFT; tp.ContentType = ContentType.TEXT_AND_IMAGE; tp.WriteText(text); }
-        static string ToArgStr(string qstr) { var zstr = ""; var tc = true; foreach (var ctr in qstr) { if (tc) { tc = false; zstr += Char.ToUpper(ctr); continue; } if (ctr == HSS[0] | ctr == ' ' | ctr == ',' | ctr == '-' | ctr == '_' | ctr == '&' | ctr == ':') { tc = true; zstr += ctr; continue; } zstr += Char.ToLower(ctr); } return zstr; }
+        static string ToArgStr(string qstr) { var zstr = ""; var tc = true; foreach (var ctr in qstr) { if (tc) { tc = false; zstr += Char.ToUpper(ctr); continue; } if (ctr == SoftHyphen[0] | ctr == ' ' | ctr == ',' | ctr == '-' | ctr == '_' | ctr == '&' | ctr == ':') { tc = true; zstr += ctr; continue; } zstr += Char.ToLower(ctr); } return zstr; }
     }
 }

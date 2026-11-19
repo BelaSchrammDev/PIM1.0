@@ -136,8 +136,8 @@ namespace IngameScript
 
                 foreach (VC v in wp.vcl)
                 {
-                    v.C = brn == 0 ? 0 : v.M / brn;
-                    v.M = tsm == 0 ? 1 : tsm;
+                    v.C = naturalGravity == 0 ? 0 : v.M / naturalGravity;
+                    v.M = shipTotalMass == 0 ? 1 : shipTotalMass;
                 }
 
                 foreach (dyDisplayableVariable pv in pvl) pv.Refresh();

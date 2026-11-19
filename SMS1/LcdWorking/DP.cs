@@ -30,7 +30,7 @@ namespace IngameScript
 
             public DP(float iw, string args, IMyCubeGrid lcdGrid)
             {
-                if (args == "") return; iss = "";
+                if (args == "") return; sortColumn = "";
                 var argtrim = args.Trim().ToUpper();
                 if (argtrim.StartsWith("WRITEX"))
                 {
@@ -56,7 +56,7 @@ namespace IngameScript
                     for (int i = 0; i < argl.Count; i++)
                     {
                         string astr = argl[i].Trim().ToUpper();
-                        if (astr.StartsWith("SORT")) { is_Sort = true; var colstr = astr.Split(' ', ':'); if (colstr.Length > 1) { iss = colstr[1]; sortMode = iss; } }
+                        if (astr.StartsWith("SORT")) { is_Sort = true; var colstr = astr.Split(' ', ':'); if (colstr.Length > 1) { sortColumn = colstr[1]; sortMode = sortColumn; } }
                         else if (astr.StartsWith("MAXSPEED")) { var cs = astr.Split(' ', ':'); if (cs.Length > 1) ms = getIntegerWithBounds(cs[1], 100, 1, 9999); }
                         else if (astr.StartsWith("COL")) { var cs = astr.Split(' ', ':'); if (cs.Length > 1) c = getIntegerWithBounds(cs[1], 1, 1, 4); }
                         else if (astr.StartsWith("STYLE")) { var colstr = astr.Split(' ', ':'); if (colstr.Length > 1) style = getIntegerWithBounds(colstr[1], 2, 1, 4); }
@@ -67,8 +67,8 @@ namespace IngameScript
                         else if (astr == "NOLINE") is_Line = false;
                         else if (astr == "NOTITLE") is_Title = false;
                         else if (astr == "NOHEADLINE") is_HeadLine = false;
-                        else if (astr == oMG) grid = Mgrid;
-                        else if (astr == oLG) grid = lcdGrid;
+                        else if (astr == OptMainGrid) grid = Mgrid;
+                        else if (astr == OptLcdGrid) grid = lcdGrid;
                         options.Add(astr);
                     }
                 }
@@ -87,7 +87,7 @@ namespace IngameScript
             }
             public void sF(string nf) { filter = nf; fwl.Clear(); fwl.Add(nf); }
             public bool ifFilter() { return filter != "" && filter != "*"; }
-            public bool ifGridOption() { if (ifOption("GRID") || ifOption(oGN)) return true; else return false; }
+            public bool ifGridOption() { if (ifOption("GRID") || ifOption(OptGridName)) return true; else return false; }
             public bool ifFilter(string s1)
             {
                 foreach (string s in fbl) if (s1.Contains(s)) return false;

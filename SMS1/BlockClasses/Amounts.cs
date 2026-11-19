@@ -17,7 +17,7 @@ namespace IngameScript
         {
             public VC amountVC;
             public void addAmountVC(Func<double, string> f, string field = "@fAm") { amountVC = new VC('A', field, f); amountVC.addm(MDIs); vcl.Add(amountVC); }
-            public override int CompareTo(dyBlockDisplayable other) { if (iss.StartsWith("AMOUNT")) { dyAmount oi = other as dyAmount; if (oi.amountVC.C == amountVC.C) return 0; if (iss.EndsWith("BACK")) return oi.amountVC.C > amountVC.C ? -1 : 1; else return oi.amountVC.C > amountVC.C ? 1 : -1; } return base.CompareTo(other); }
+            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith("AMOUNT")) { dyAmount oi = other as dyAmount; if (oi.amountVC.C == amountVC.C) return 0; if (sortColumn.EndsWith("BACK")) return oi.amountVC.C > amountVC.C ? -1 : 1; else return oi.amountVC.C > amountVC.C ? 1 : -1; } return base.CompareTo(other); }
         }
         static List<dyCargouse> cargouseList = new List<dyCargouse>();
         public class dyCargouse : dyAmount
@@ -109,7 +109,7 @@ namespace IngameScript
                     changeNeed(ChangeType.Inventar_change_amount);
                 }
             }
-            public override int CompareTo(dyBlockDisplayable other) { if (iss.StartsWith("VOLUME") || iss.StartsWith("MASS")) { dyInventory oi = other as dyInventory; double x = 0, xo = 0; if (iss.StartsWith("VOLUME")) { x = av; xo = oi.av; } else { x = am; xo = oi.am; } if (xo == x) return 0; if (iss.EndsWith("BACK")) return xo > x ? -1 : 1; else return xo > x ? 1 : -1; } return base.CompareTo(other); }
+            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith("VOLUME") || sortColumn.StartsWith("MASS")) { dyInventory oi = other as dyInventory; double x = 0, xo = 0; if (sortColumn.StartsWith("VOLUME")) { x = av; xo = oi.av; } else { x = am; xo = oi.am; } if (xo == x) return 0; if (sortColumn.EndsWith("BACK")) return xo > x ? -1 : 1; else return xo > x ? 1 : -1; } return base.CompareTo(other); }
         }
         //Ip
         public class IPrio : dyAmount

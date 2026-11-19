@@ -83,7 +83,7 @@ namespace IngameScript
         {
             bool ifdock = false;
             public IMyShipConnector connector;
-            // the connected connector of a ship (not of a station), these grids belong to the ship in SHIP mode (òb)
+            // the connected connector of a ship (not of a station), these grids belong to the ship in SHIP mode (shipConstructBlocks)
             public IMyShipConnector docked_connector = null;
             // the connected grid, ship or station: the grid shown by the dock filter "[dock:name]"
             public IMyCubeGrid dockedGrid = null;
@@ -147,8 +147,8 @@ namespace IngameScript
                     if (previousDockedConnector != docked_connector)
                     {
                         // also when another ship docks without a cycle in between: remove the old one and add the new one
-                        if (previousDockedConnector != null) òb.Remove(previousDockedConnector);
-                        if (docked_connector != null) òb.Add(docked_connector);
+                        if (previousDockedConnector != null) shipConstructBlocks.Remove(previousDockedConnector);
+                        if (docked_connector != null) shipConstructBlocks.Add(docked_connector);
                         changeNeed(ChangeType.Dockings_add);
                     }
                 }

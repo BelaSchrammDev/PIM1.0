@@ -12,16 +12,16 @@ namespace IngameScript
 {
     partial class Program
     {
-        public static void loadCustomData(string curMeCustomData)
+        // the PIM data lines (see PIM SendInfosToSMS); "" clears the PIM values (IngotPrio, CargoUse, max/queue)
+        public static void LoadPimData(string data)
         {
-            if (curMeCustomData == "") return;
-            if (curMeCustomData == oldMeCustomData) return;
-            oldMeCustomData = curMeCustomData;
+            if (data == lastPimData) return;
+            lastPimData = data;
             foreach (var t in ingotprio.Keys) foreach (IPrio ip in ingotprio[t]) ip.del = true;
             foreach (var s in smsItemTypeDefinitions.Values) { s.pmax = 0; s.max = s.imax; s.ass = 0; }
             foreach (dyCargouse cuse in cargouseList) cuse.del = true;
             var nipl = "";
-            var sl = curMeCustomData.Split('\n');
+            var sl = data.Split('\n');
             var max = 0;
             List<IPrio> cpl = null;
             foreach (var x in sl)

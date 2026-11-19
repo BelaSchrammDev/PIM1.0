@@ -8,9 +8,9 @@
         {
             public const string
                 // PIM Strings
-                PimScriptType = "PIM", // networking: master election among the scripts of this type
-                PimVersion = "PIM v1.1d", // also sent to the other scripts (networking hello)
-                SmsVersion = "SMS v1.4",
+                PimVersion = "PIM v1.2a", // also sent to the other scripts (networking hello)
+                // SMS before the networking (it read the PIM data from its CustomData): only for a hint
+                OldSmsVersion = "SMS v1.4",
 
                 // General
                 SmsStorageTag = "(sms,storage)",
@@ -21,11 +21,9 @@
                 AutoCraftingTypeStringName = "AutocraftingTypes",
 
                 // configstrings
-                X_Config = "### Config ###", 
-                X_Config_end = "### Config End ###",
                 X_Line = "  / =================================\n",
 
-                // SMS Networking
+                // PIM data for SMS (NetWorkingScripts.PimData)
                 AssemblerQueueNameSemicolon = "@ASSEMBLERQUEUE;",
                 ItemMaxNameSemicolon = "@ITEMMAX;",
 

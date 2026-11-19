@@ -10,6 +10,8 @@ namespace IngameScript
         {
             public long Address;
             public string ScriptType, Version;
+            /// <summary>Master election: the highest priority wins (0 if the hello has none, e.g. PIM 1.1d).</summary>
+            public int Priority;
             public double LastSeen;
             /// <summary>Only set in Incompatible: the protocol of its messages.</summary>
             public int Protocol;
@@ -21,20 +23,22 @@ namespace IngameScript
         /// Script-to-script networking without any game dependency (the transport is NetWorkingIgc).
         /// Handshake: "hello" (broadcast at start, everyone answers with "ack" by unicast),
         /// then "alive" every HeartbeatSeconds; a peer silent for TimeoutSeconds is removed.
-        /// Master: after DiscoverySeconds the script with the lowest address of its type on my construct.
+        /// Master: after DiscoverySeconds the script with the highest priority of its type on my construct,
+        /// among those the lowest address.
         /// Peers on other constructs are listed (Peers), but their application messages are ignored.
         /// Shared with other scripts: no references to PIM code here.
         /// </summary>
         public class NetWorkingNode
         {
             // only constants, never type or member names: minify=full renames those
-            public const string Tag = "BelaOkuma.Net", Hello = "hello", Ack = "ack", Alive = "alive", KeyType = "type", KeyVersion = "version";
+            public const string Tag = "BelaOkuma.Net", Hello = "hello", Ack = "ack", Alive = "alive", KeyType = "type", KeyVersion = "version", KeyPriority = "prio";
             public const int Protocol = 1;
             // a PB in standby (Update100) runs every ~1.67 s, so its alive comes every ~3.3 s: the timeout covers 3 of them
             public const double HeartbeatSeconds = 3, TimeoutSeconds = 10, DiscoverySeconds = HeartbeatSeconds;
 
             public readonly long Me;
             public readonly string ScriptType;
+            public readonly int Priority;
             public readonly Dictionary<long, NetWorkingPeer> Peers = new Dictionary<long, NetWorkingPeer>();
             /// <summary>Scripts that send another Protocol: their messages are ignored, only listed for a hint. Same timeout as Peers.</summary>
             public readonly Dictionary<long, NetWorkingPeer> Incompatible = new Dictionary<long, NetWorkingPeer>();
@@ -50,14 +54,15 @@ namespace IngameScript
             double _now, _startedAt, _nextBeat;
             bool _started;
 
-            public NetWorkingNode(long me, string scriptType, string version, Action<string, string> broadcast, Func<long, string, string, bool> send, Func<long, bool> isSameConstruct)
+            public NetWorkingNode(long me, string scriptType, string version, int priority, Action<string, string> broadcast, Func<long, string, string, bool> send, Func<long, bool> isSameConstruct)
             {
                 Me = me;
                 ScriptType = scriptType;
+                Priority = priority;
                 _broadcast = broadcast;
                 _send = send;
                 _isSameConstruct = isSameConstruct;
-                _helloBody = KeyType + "=" + scriptType + ";" + KeyVersion + "=" + version;
+                _helloBody = KeyType + "=" + scriptType + ";" + KeyVersion + "=" + version + ";" + KeyPriority + "=" + priority;
             }
 
             /// <summary>Waiting for the answers to the first hello: no master decision yet.</summary>
@@ -66,18 +71,32 @@ namespace IngameScript
                 get { return !_started || _now - _startedAt < DiscoverySeconds; }
             }
 
-            /// <summary>The lowest address of my script type on my construct (me included).</summary>
+            /// <summary>The master of my script type on my construct (me included).</summary>
             public long MasterAddress
             {
                 get { return MasterOf(ScriptType); }
             }
 
-            /// <summary>The lowest address of a script type on my construct (me included if it is my type), 0 if none is known.</summary>
+            /// <summary>
+            /// The master of a script type on my construct (me included if it is my type): the highest priority,
+            /// among those the lowest address; 0 if none is known.
+            /// </summary>
             public long MasterOf(string scriptType)
             {
-                var master = scriptType == ScriptType ? Me : long.MaxValue;
-                foreach (var p in Peers.Values) if (p.SameConstruct && p.ScriptType == scriptType && p.Address < master) master = p.Address;
-                return master == long.MaxValue ? 0 : master;
+                long master = 0;
+                var priority = int.MinValue;
+                if (scriptType == ScriptType)
+                {
+                    master = Me;
+                    priority = Priority;
+                }
+                foreach (var p in Peers.Values)
+                    if (p.SameConstruct && p.ScriptType == scriptType && (p.Priority > priority || p.Priority == priority && p.Address < master))
+                    {
+                        master = p.Address;
+                        priority = p.Priority;
+                    }
+                return master;
             }
 
             public bool IsMaster
@@ -178,6 +197,7 @@ namespace IngameScript
                 }
                 peer.ScriptType = NetWorkingParser.GetValue(body, KeyType);
                 peer.Version = NetWorkingParser.GetValue(body, KeyVersion);
+                int.TryParse(NetWorkingParser.GetValue(body, KeyPriority), out peer.Priority);
                 peer.LastSeen = _now;
                 // checked again with every alive: docking/undocking changes it
                 peer.SameConstruct = _isSameConstruct(address);

@@ -57,7 +57,7 @@ namespace IngameScript
             }
             public override void Display()
             {
-                sT("@fSP", tank.Stockpile ? "[S]" : ("[" + HSS + HSS + "]"), 7);
+                sT("@fSP", tank.Stockpile ? "[S]" : ("[" + SoftHyphen + SoftHyphen + "]"), 7);
                 base.Display();
             }
             public override void getPCvar(dyDisplayableVariable pv)

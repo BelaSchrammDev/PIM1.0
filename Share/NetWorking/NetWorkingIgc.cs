@@ -19,11 +19,11 @@ namespace IngameScript
             readonly IMyBroadcastListener _listener;
             double _now;
 
-            public NetWorkingIgc(IMyIntergridCommunicationSystem igc, IMyGridTerminalSystem gts, IMyTerminalBlock me, string scriptType, string version)
+            public NetWorkingIgc(IMyIntergridCommunicationSystem igc, IMyGridTerminalSystem gts, IMyTerminalBlock me, string scriptType, string version, int priority = 0)
             {
                 _igc = igc;
                 _listener = igc.RegisterBroadcastListener(NetWorkingNode.Tag);
-                Node = new NetWorkingNode(igc.Me, scriptType, version,
+                Node = new NetWorkingNode(igc.Me, scriptType, version, priority,
                     (type, body) => igc.SendBroadcastMessage(NetWorkingNode.Tag, Envelope(type, body), TransmissionDistance.ConnectedConstructs),
                     (address, type, body) => igc.SendUnicastMessage(address, NetWorkingNode.Tag, Envelope(type, body)),
                     address =>

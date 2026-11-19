@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IngameScript.Tests
 {
     /// <summary>
-    /// Tests for RunStatus.Running: the PB info line of PIM and SMS.
+    /// Tests for RunStatus: the PB info texts of PIM and SMS (header, running, standby).
     /// </summary>
     [TestClass]
     public class RunStatusTests
@@ -24,6 +24,24 @@ namespace IngameScript.Tests
         public void Running_NotMeasuredYet_ShowsMeasuring()
         {
             Assert.AreEqual(" Running / 5000 inst. per run\ncurrent cycle: measuring...\n", Program.RunStatus.Running(5000, 0));
+        }
+
+        [TestMethod]
+        public void Header_IsVersionAndCopyright()
+        {
+            Assert.AreEqual("SMS v1.5a (c) BelaOkuma\n", Program.RunStatus.Header("SMS v1.5a"));
+        }
+
+        [TestMethod]
+        public void Standby_ShowsMasterAndGrid()
+        {
+            Assert.AreEqual(" Standby\nMaster: PB SMS\nat Grid: Station\n", Program.RunStatus.Standby("PB SMS", "Station"));
+        }
+
+        [TestMethod]
+        public void Standby_MasterPbNotFound_NoGridLine()
+        {
+            Assert.AreEqual(" Standby\nMaster: 12345\n", Program.RunStatus.Standby("12345", null));
         }
     }
 }

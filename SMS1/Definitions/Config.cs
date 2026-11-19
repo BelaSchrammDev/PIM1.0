@@ -12,6 +12,7 @@ namespace IngameScript
 {
     partial class Program
     {
+        bool if_true(string s) { return (s == "True" || s == "true"); }
         static Dictionary<string, bool> usemods = new Dictionary<string, bool>();
         public void loadConfig()
         {
@@ -71,7 +72,7 @@ namespace IngameScript
                         case X_ShowInfoPBLcd: ShowInfoPBLcd = if_true(cs[1]); break;
                         case X_ShowDamageBlockHUD: ShowDamageBlockOnHUD = if_true(cs[1]); break;
                         case X_KeepMenu: int.TryParse(cs[1], out KEEPMENU); break;
-                        case X_TargetCycleTime: double.TryParse(cs[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out targetCycleTime); break;
+                        case X_TargetCycleTime: double.TryParse(cs[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out configuredCycleSeconds); break;
                         case X_tHeadLine: tHeadLine = cs[1]; break;
                         case X_tMainPage: mainpageteil = true; break;
                         case X_tMainPageEnd: mainpageteil = false; break;
@@ -79,10 +80,10 @@ namespace IngameScript
                         case X_tItemdefsEnd: itemdefsteil = false; break;
                         case X_Scriptmode:
                             var mode = cs[1].ToUpper();
-                            if (mode == "SHIP") s_mode = ScriptMode.SHIP;
-                            else if (mode == "SHIP_PLUS") s_mode = ScriptMode.SHIP_PLUS;
-                            else if (mode == "STATION") s_mode = ScriptMode.STATION;
-                            else s_mode = ScriptMode.AUTO;
+                            if (mode == "SHIP") configuredMode = ScriptMode.SHIP;
+                            else if (mode == "SHIP_PLUS") configuredMode = ScriptMode.SHIP_PLUS;
+                            else if (mode == "STATION") configuredMode = ScriptMode.STATION;
+                            else configuredMode = ScriptMode.AUTO;
                             break;
                         default:
                             if (if_true(cs[1]) && usemods.ContainsKey(cs[0])) usemods[cs[0]] = true;
@@ -95,9 +96,9 @@ namespace IngameScript
         void writeconfig()
         {
             var customstr = X_Config + "\n\n" + X_Line + "  / to activate changes, please restart script\n" + X_Line + "\n  / target cycle time in seconds: how often the displays are updated\n  / smaller = more up to date, larger = less load on the server\n  / 0 = automatic: ship 1 s, station 3 s\n"
-                + X_TargetCycleTime + "=" + targetCycleTime.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n\n"
+                + X_TargetCycleTime + "=" + configuredCycleSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n\n"
                 + "  / Scriptmode: AUTO, SHIP, SHIP_PLUS, STATION\n"
-                + X_Scriptmode + "=" + s_mode.ToString() + "\n\n"
+                + X_Scriptmode + "=" + configuredMode.ToString() + "\n\n"
                 + "  / show info on the lcd of the programmable block\n"
                 + X_ShowInfoPBLcd + "=" + ShowInfoPBLcd.ToString() + "\n\n"
                 + "  / show damaged blocks on HUD (need antenna on the grid)\n"

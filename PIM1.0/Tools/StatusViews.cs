@@ -57,7 +57,8 @@ namespace IngameScript
                 CARGOUSEFULL,
                 CARGOMISSING,
                 CARGORECOMMENDED,
-                REFINERYNOTSUPPORTED
+                REFINERYNOTSUPPORTED,
+                OLDSMS
             }
 
             // the current cycle, advanced by SweepViews
@@ -85,6 +86,9 @@ namespace IngameScript
             {
                 switch (WarningID)
                 {
+                    case ID.OLDSMS:
+                        InfoString.SetText("!! PB '", subType, "' runs ", Strings.OldSmsVersion, ": PIM 1.2 needs SMS 1.5.");
+                        break;
                     case ID.REFINERYNOTSUPPORTED:
                         InfoString.SetText("! refinery '", subType, "' not supported.");
                         break;

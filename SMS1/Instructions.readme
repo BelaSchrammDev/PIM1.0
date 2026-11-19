@@ -1,10 +1,12 @@
-﻿StationManagmentSystem v1.5
+﻿StationManagmentSystem v1.5a
 c BelaOkuma 2017-2026
 only compatible with PIM v1.2!
 
  ### developed with MDK ###
 
 new in update 1.5a:
- -
+ - the SMS on a construct find each other over the network (IGC): one is master, the others are standby
+   (a PB on a large grid is preferred); buttons on a standby SMS are passed to the master
+ - the PIM data comes over the network; PIM gone: the PIM values are cleared after ~10 s
 
 ----------------------------------------------------------------------------------------------------------------

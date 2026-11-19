@@ -9,39 +9,31 @@ namespace IngameScript
 {
     partial class Program
     {
+        /// <summary>
+        /// Sends the PIM data to the SMS master on my construct (IGC, NetWorkingScripts.PimData), one line per value.
+        /// SMS before the networking (v1.4) read it from its CustomData: such PBs only get a hint.
+        /// </summary>
         void SendInfosToSMS()
         {
-            var comp = new List<IMyProgrammableBlock>();
-            GridTerminalSystem.GetBlocksOfType(comp, block => block.IsMainConstruct());
-            foreach (var p in comp)
+            var pbs = new List<IMyProgrammableBlock>();
+            GridTerminalSystem.GetBlocksOfType(pbs, block => block.IsMainConstruct());
+            foreach (var p in pbs) if (p.Enabled && p.DetailedInfo.StartsWith(Strings.OldSmsVersion)) SetWarning(Warning.ID.OLDSMS, p.CustomName);
+
+            var sms = Net.MasterOf(NetWorkingScripts.Sms);
+            if (sms == 0) return;
+
+            var s = "";
+            foreach (var sx in ingotprio.Keys)
             {
-                if (p.Enabled && p.DetailedInfo.StartsWith(Strings.SmsVersion))
-                {
-                    var s = "";
-                    bool configteil = false;
-
-                    foreach (var cstr in p.CustomData.Split('\n'))
-                    {
-                        if (cstr.Contains(Strings.X_Config)) configteil = true;
-                        if (configteil) s += cstr + '\n';
-                        if (cstr.Contains(Strings.X_Config_end)) configteil = false;
-                    }
-
-                    if (s != "") s += "\n\n";
-
-                    foreach (var sx in ingotprio.Keys)
-                    {
-                        s += "@INGOTPRIOLIST;" + sx + "\n";
-                        foreach (var i in ingotprio[sx]) if (i.initp > 0) s += "@INGOTPRIO;" + i.refineryBP.OutputIDName + ";" + i.initp + "\n";
-                    }
-
-                    foreach (var c in Lists.Data.CargoUseList.Values) s += "@CARGOUSE;" + c.Type + ";" + c.CurrentCapacity + ";" + c.MaximumCapacity + "\n";
-
-                    s += BluePrintInfos(Lists.Data.BluePrints_Active.Values) + BluePrintInfos(Lists.Data.BluePrints_Inactive.Values);
-
-                    p.CustomData = s;
-                }
+                s += "@INGOTPRIOLIST;" + sx + "\n";
+                foreach (var i in ingotprio[sx]) if (i.initp > 0) s += "@INGOTPRIO;" + i.refineryBP.OutputIDName + ";" + i.initp + "\n";
             }
+
+            foreach (var c in Lists.Data.CargoUseList.Values) s += "@CARGOUSE;" + c.Type + ";" + c.CurrentCapacity + ";" + c.MaximumCapacity + "\n";
+
+            s += BluePrintInfos(Lists.Data.BluePrints_Active.Values) + BluePrintInfos(Lists.Data.BluePrints_Inactive.Values);
+
+            Net.Send(sms, NetWorkingScripts.PimData, s);
         }
 
         /// <summary>Max amount and amount in production of the blueprints, one line each (for SMS).</summary>

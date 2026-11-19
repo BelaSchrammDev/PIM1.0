@@ -23,14 +23,14 @@ namespace IngameScript
         // singleton Program Instance
         public static Program MyProgram;
 
-        // script-to-script networking (other PIMs: master/standby)
+        // script-to-script networking (other PIMs: master/standby; the PIM data for the SMS master)
         private readonly NetWorkingIgc _netIgc;
         public static NetWorkingNode Net;
 
         public Program()
         {
             MyProgram = this;
-            _netIgc = new NetWorkingIgc(IGC, GridTerminalSystem, Me, Strings.PimScriptType, Strings.PimVersion);
+            _netIgc = new NetWorkingIgc(IGC, GridTerminalSystem, Me, NetWorkingScripts.Pim, Strings.PimVersion);
             Net = _netIgc.Node;
 
             viewList.Add(new AmmoManagerInfo());
@@ -72,9 +72,10 @@ namespace IngameScript
                 // LCD pages: after the amounts are counted, before autocrafting uses the max amounts
                 new SequentialJob(new AutocraftingPage(), new OrePrioPage(), new RefiningPage()),
                 new AutoCraftingJob(),
+                // reports the old-SMS hint: before ViewManagerJob
+                new SendInfosToSmsJob(),
                 // after every job that reports hints (SetWarning): it removes the hints not reported in this cycle
-                new ViewManagerJob(),
-                new SendInfosToSmsJob()
+                new ViewManagerJob()
             };
         }
 
@@ -118,33 +119,8 @@ namespace IngameScript
         // every run: only the running sign changes, the status (PimStatus) is built once per cycle by CalculateInfos
         void WritePimRunInfo()
         {
-            var s = Strings.PimVersion + " (c) BelaOkuma\n" + RunSign.Next() + PimStatus;
-
-            Echo(s);
-
-            if (Config.Instance.ShowInfoPBLcd)
-            {
-                var tp = Me.GetSurface(0);
-                if (IsPbLcdNotInitialized(tp))
-                {
-                    InitPbLcd(tp);
-                }
-                tp.WriteText(s);
-            }
-        }
-
-        bool IsPbLcdNotInitialized(IMyTextSurface tp)
-        {
-            return tp.ContentType != ContentType.TEXT_AND_IMAGE;
-        }
-
-        void InitPbLcd(IMyTextSurface tp)
-        {
-            tp.Alignment = TextAlignment.LEFT;
-            tp.ContentType = ContentType.TEXT_AND_IMAGE;
-            tp.TextPadding = 2f;
-            tp.FontSize = 0.45f;
-            tp.FontColor = new VRageMath.Color(180, 100, 45);
+            PbInfo.Write(Echo, Me.GetSurface(0), Config.Instance.ShowInfoPBLcd, new VRageMath.Color(180, 100, 45),
+                RunStatus.Header(Strings.PimVersion) + RunSign.Next() + PimStatus);
         }
     }
 }

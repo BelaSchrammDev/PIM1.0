@@ -101,7 +101,7 @@ namespace IngameScript
             {
                 with = wi;
                 curdt = DateTime.Now;
-                var i = (int)(wi / FCS[c]);
+                var i = (int)(wi / fontCharWidths[c]);
                 return new String(c, i > 0 ? i : 1);
             }
         }

@@ -12,6 +12,12 @@ namespace IngameScript
 {
     partial class Program
     {
+        static Dictionary<MyItemType, smsItemType> smsItemTypeDefinitions = new Dictionary<MyItemType, smsItemType>();
+        static smsItemType GetSMSItemType(MyItemType t)
+        {
+            if (!smsItemTypeDefinitions.ContainsKey(t)) smsItemTypeDefinitions.Add(t, new smsItemType(t));
+            return smsItemTypeDefinitions[t];
+        }
         // the item definitions of Vanilla and the enabled mods, from SMS1/ItemData/*.txt (Generated/ItemData.g.cs)
         void LoadItemDefinitions()
         {

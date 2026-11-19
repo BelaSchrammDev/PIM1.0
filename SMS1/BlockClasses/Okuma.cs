@@ -33,7 +33,7 @@ namespace IngameScript
             }
             public override void Display()
             {
-                sT("@fWM", AssemblerBlock.Mode == MyAssemblerMode.Disassembly ? "[DisA]" : ("[Ass" + HSS + "]"));
+                sT("@fWM", AssemblerBlock.Mode == MyAssemblerMode.Disassembly ? "[DisA]" : ("[Ass" + SoftHyphen + "]"));
                 string firstQueueItemName = "----", firstQueueItemAmount = "0", secondQueueItemName = "----", secondQueueItemAmount = "0";
                 if (!AssemblerBlock.IsQueueEmpty)
                 {
