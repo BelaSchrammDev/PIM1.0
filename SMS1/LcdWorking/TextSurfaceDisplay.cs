@@ -15,13 +15,12 @@ namespace IngameScript
         //SF
         public class TextSurfaceDisplay : TextRenderEngine
         {
-            int imaxl = 22;
-            int iminl = 2;
-            float xp = 0;
+            int imaxl = 22, iminl = 2;
+            float xp;
             string bt = "";
             public IMyTextSurface ts = null;
             IMyTerminalBlock tb;
-            public bool obs = false;
+            public bool obs;
             public TextSurfaceDisplay(IMyTextSurface nts, IMyTerminalBlock p) { tsg = p.CubeGrid; ts = nts; sMM(); tb = p; bt = p.BlockDefinition.ToString(); sWF(); setLinesBounds(5); }
             public void sMM() { maxl = imaxl; minl = iminl; }
             void sC(float f, float w, int m, float ixp = 0) { fconst = f; wconst = w; imaxl = m; xp = ixp; }

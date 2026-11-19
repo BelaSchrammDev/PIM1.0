@@ -17,7 +17,7 @@ namespace IngameScript
         {
             static int SPLrc = 700;
             int live = 5;
-            public float with = 0;
+            public float with;
             string fuels = "";
             public SP(float iw)
             {
@@ -59,8 +59,7 @@ namespace IngameScript
         public class BarRatio
         {
             public int live = 10;
-            int gswert;
-            int spaces;
+            int gswert, spaces;
             public string bstr;
             public static int GPLrc = 10;
             public BarRatio(float wi, int w)

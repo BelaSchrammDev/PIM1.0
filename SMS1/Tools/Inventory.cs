@@ -77,9 +77,9 @@ namespace IngameScript
         {
             foreach (var s in smsItemTypeDefinitions.Keys) if (!l.ContainsKey(s)) l.Add(s, new dyInventory(s, g));
         }
-        static MyItemType gIT(string s) { var i = s.IndexOf(' '); return new MyItemType(IG_ + s.Substring(0, i), s.Substring(i + 1)); }
-        static MyItemType gITo(string s) { return new MyItemType(IG_ + "Ore", s); }
-        static MyItemType gITi(string s) { return new MyItemType(IG_ + "Ingot", s); }
+        static MyItemType gIT(string s) { var i = s.IndexOf(' '); return new MyItemType(TypeObjectBuilder + s.Substring(0, i), s.Substring(i + 1)); }
+        static MyItemType gITo(string s) { return new MyItemType(TypeObjectBuilder + TypeOre, s); }
+        static MyItemType gITi(string s) { return new MyItemType(TypeObjectBuilder + TypeIngot, s); }
         static void AddItemsToInventoryDictionary(IMyCubeGrid g, Dictionary<MyItemType, float> il)
         {
             var invl = GetInventoryDictionaryByGrid(g);

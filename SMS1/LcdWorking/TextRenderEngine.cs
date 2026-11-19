@@ -23,11 +23,11 @@ namespace IngameScript
             DateTime cdsdt = DateTime.Now;
             public string pageText = "", displayDefinition = "", lastDisplayDefinition = "";
             public List<string> pages = new List<string>();
-            public float with, iwith, dif_wm = 0, dif_wp = 0, fontsize, wconst = 0, fconst = 17.82f;
+            public float with, iwith, dif_wm, dif_wp, fontsize, wconst, fconst = 17.82f;
             // the phases of RenderStep, in this order (renderPhase++ goes to the next one)
             public enum RenderPhase { Start, ReadCommands, BuildLines, CheckPanel, ResetPages, RenderLines, Finish }
             public RenderPhase renderPhase = RenderPhase.Start;
-            public int icount = 0, stepIndex = 0, run_count = 0, maxlines = 1, newlines, pnum = 1, plines = 0, slines = 0, maxl = 40, minl = 5;
+            public int icount, stepIndex, run_count, maxlines = 1, newlines, pnum = 1, plines, slines, maxl = 40, minl = 5;
             public bool booting = true, lfix = true;
             public TextRenderEngine() { addChangeType = ChangeType.Display_add; nameChangeType = ChangeType.Display_name; curlines.sD(0); MDIs.Add("@fCL", curlines); ic.addm(MDIs); vcl.Add(ic); addChange(); }
             public override void Display()
@@ -646,8 +646,8 @@ namespace IngameScript
             bool IsCategoryShown(DP command, string s, string s1) { if (command.options.Contains("-" + s1)) return false; if (command.is_All || s == s1) return true; return false; }
             // inventory categories: option = title [= tag (typeString of the item, default: the title)], in display order
             const string InventoryCategories = "ORE=Ore;INGOT=Ingot;CRUSHED=Crushed Materials=Crushed;PURIFIED=Purified Materials=Purified;COMPONENT=Components=Component;TOOLS=Tools="
-                + IG_Tools + ";WEAPONS=Weapons;AMMO=Ammo=" + IG_Ammo + ";OIL=Oilproducts=Oil;DATAPADS=Data Pads=" + IG_Datas + ";H-BOTTLES=Hydrogen Bottles=" + IG_HBottles
-                + ";O-BOTTLES=Oxygen Bottles=" + IG_OBottles + ";KITS=Consumable Kits=" + IG_Kits + ";FOOD=Foodproducts=Food;SEEDS=Seeds=SeedItem;CASH=Space Credits=" + IG_Cash;
+                + TypeTool + ";WEAPONS=Weapons;AMMO=Ammo=" + TypeAmmo + ";OIL=Oilproducts=Oil;DATAPADS=Data Pads=" + TypeDatapad + ";H-BOTTLES=Hydrogen Bottles=" + TypeHBottle
+                + ";O-BOTTLES=Oxygen Bottles=" + TypeOBottle + ";KITS=Consumable Kits=" + TypeKit + ";FOOD=Foodproducts=Food;SEEDS=Seeds=SeedItem;CASH=Space Credits=" + TypePhysicalObject;
             void INVENTORY(DP command, Dictionary<MyItemType, dyInventory> invl)
             {
                 List<inventoryDisplayItems> idil = new List<inventoryDisplayItems>();
@@ -664,8 +664,8 @@ namespace IngameScript
                 }
                 foreach (string bs in command.options)
                 {
-                    if (bs == "UTILS") { inventoryDisplayItems idix = new inventoryDisplayItems("Utils", IG_Tools); idix.AddTag("Weapons"); idix.AddTag(IG_Datas); idix.AddTag(IG_HBottles); idix.AddTag(IG_OBottles); idix.AddTag(IG_Kits); idil.Add(idix); }
-                    if (bs == "BOTTLES") { inventoryDisplayItems idix = new inventoryDisplayItems("Bottles", IG_HBottles); idix.AddTag(IG_OBottles); idil.Add(idix); }
+                    if (bs == "UTILS") { inventoryDisplayItems idix = new inventoryDisplayItems("Utils", TypeTool); idix.AddTag("Weapons"); idix.AddTag(TypeDatapad); idix.AddTag(TypeHBottle); idix.AddTag(TypeOBottle); idix.AddTag(TypeKit); idil.Add(idix); }
+                    if (bs == "BOTTLES") { inventoryDisplayItems idix = new inventoryDisplayItems("Bottles", TypeHBottle); idix.AddTag(TypeOBottle); idil.Add(idix); }
                     foreach (var category in InventoryCategories.Split(';'))
                     {
                         var fields = category.Split('=');

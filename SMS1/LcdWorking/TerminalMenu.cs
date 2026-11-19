@@ -19,7 +19,7 @@ namespace IngameScript
             public string oldMenuDef = "nix";
             public TerminalSite mainmenu = null;
             public string headline = tHeadLine;
-            public float maxMenuWith = 0;
+            public float maxMenuWith;
             public Dictionary<string, MenuPunkt> menuCommands = new Dictionary<string, MenuPunkt>();
             public Dictionary<string, TerminalSite> terminalSites = new Dictionary<string, TerminalSite>();
             public bool parseMenuDefinition(string def)
@@ -85,7 +85,7 @@ namespace IngameScript
         {
             public string commandID = "";
             public TerminalMenu menuObject = null;
-            public float maxWith = 0;
+            public float maxWith;
             public List<string> menuStrings = null;
             public MenuPunkt(TerminalMenu menu, string id, string text)
             {
@@ -116,8 +116,7 @@ namespace IngameScript
         }
         public class MenuCommand : MenuPunkt
         {
-            string command = "";
-            string blocks = "";
+            string command = "", blocks = "";
             public MenuCommand(TerminalMenu mid, string id, string text, string com, string iblocks) : base(mid, id, text)
             {
                 command = com;
@@ -195,9 +194,7 @@ namespace IngameScript
         }
         public class TerminalSite
         {
-            public string siteID = "";
-            public string titleline;
-            public string siteBody = "";
+            public string siteID = "", titleline, siteBody = "";
             TerminalMenu menuObject = null;
             public string[] menupunktStrings = new string[4];
             public MenuPunkt[] commands = new MenuPunkt[4];

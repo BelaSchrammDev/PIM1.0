@@ -21,11 +21,11 @@ namespace IngameScript
             public string titleString = "", dock = "", headLineString = "", filter = "*", sortMode = "", cm = "";
             private string fgrid = "";
             public IMyCubeGrid grid = null;
-            public int dyn = 0, error = 0, c = -1, style = 2;
-            public bool is_Line = true, is_HeadLine = true, is_Title = true, is_All = false, is_Table = false, is_Fillbar = false, is_Sort = false, is_Zero = false;
+            public int dyn, error, c = -1, style = 2;
+            public bool is_Line = true, is_HeadLine = true, is_Title = true, is_All, is_Table, is_Fillbar, is_Sort, is_Zero;
             public List<string> options = new List<string>(), FieldTemplates = new List<string>();
             List<string> fwl = new List<string>(), fbl = new List<string>();
-            public float with = 0.0f;
+            public float with;
             List<changeStat> udt = new List<changeStat>();
 
             public DP(float iw, string args, IMyCubeGrid lcdGrid)

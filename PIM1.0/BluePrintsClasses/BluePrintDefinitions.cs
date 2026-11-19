@@ -29,7 +29,7 @@ namespace IngameScript
     partial class Program
     {
         const string BpTypeCodes = "CATKOHDSIE", BpDefaultTemplate = "*OreToIngot=Ore *=Ingot *";
-        static readonly string[] BpTypeNames = { IG_Component, IG_Ammo, IG_Tools, IG_Kits, IG_OBottles, IG_HBottles, IG_Datas, IG_Seeds, IG_I, "Ore" };
+        static readonly string[] BpTypeNames = { TypeComponent, TypeAmmo, TypeTool, TypeKit, TypeOBottle, TypeHBottle, TypeDatapad, TypeSeed, TypeIngot, TypeOre };
 
         static bool IsModEnabled(Dictionary<string, bool> usedMods, string mod)
         {

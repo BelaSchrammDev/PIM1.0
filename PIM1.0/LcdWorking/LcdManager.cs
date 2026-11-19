@@ -112,7 +112,7 @@ namespace IngameScript
 
             protected override void Read(LcdPanel p, string text)
             {
-                p.Types = IG_Component + "," + IG_Ammo;
+                p.Types = TypeComponent + "," + TypeAmmo;
                 p.Filters.Clear();
                 if (ParseAutocrafting(text, Lists.Data.BluePrints_Active, ref p.Types, p.Filters)) MyProgram.SetAutocraftingThresholdNew();
             }

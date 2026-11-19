@@ -13,7 +13,7 @@ namespace IngameScript
 
         public partial class AssemblerBluePrint : IComparable<AssemblerBluePrint>
         {
-            static readonly string[] ToolsAndGunsTypes = { IG_Tools, IG_Datas, IG_HBottles, IG_OBottles, };
+            static readonly string[] ToolsAndGunsTypes = { TypeTool, TypeDatapad, TypeHBottle, TypeOBottle, };
 
             public long ItemPriority = 0;
             public bool valid = true;
@@ -38,19 +38,19 @@ namespace IngameScript
             /// <summary>Item name derived from the blueprint subtype, e.g. "Component ConstructionComponent" -> "Component Construction".</summary>
             public static string BluePrintNameToItemName(string t, string s)
             {
-                var cs = IngameStrings.RComponent;
+                var cs = TypeComponent;
                 // components: "...Component" suffix removed
                 if (t == cs && s.EndsWith(cs)) return t + " " + s.Substring(0, s.Length - cs.Length);
                 // NATO magazines: "Magazine" suffix removed
-                if (s.StartsWith(IngameStrings.RNATO_25)) return t + " " + s.Substring(0, s.Length - IngameStrings.RMagazine.Length);
+                if (s.StartsWith(SubtypeNATO_25)) return t + " " + s.Substring(0, s.Length - SubtypeMagazine.Length);
                 // hand tools and rifles: "Item" added
-                if (t == IG_Tools && (s.Contains("Drill") || s.Contains("Grinder") || s.Contains("Welder") || s.Contains("Rifle"))) return t + " " + s + "Item";
+                if (t == TypeTool && (s.Contains("Drill") || s.Contains("Grinder") || s.Contains("Welder") || s.Contains("Rifle"))) return t + " " + s + "Item";
                 return t + " " + s;
             }
 
             public bool IfRefineryBluePrint()
             {
-                return BlueprintID == Ingot.SubFresh || BlueprintID == (Ingot.SpentFuelReprocessing);
+                return BlueprintID == IngotSubFresh || BlueprintID == (IngotSpentFuelReprocessing);
             }
 
             void ConvertAutoCraftingName()
@@ -62,10 +62,10 @@ namespace IngameScript
             string DeriveAutoCraftingType()
             {
                 if (ToolsAndGunsTypes.Contains(type)) return Strings.AC_ToolsAndGuns;
-                if (ItemTypesConverter.SeedItems.Contains(ItemName)) return IngameStrings.RSeeds;
-                if (ItemTypesConverter.FoodItems.Contains(ItemName)) return IG_Food;
-                if (subtype == IngameStrings.RSpentFuelReprocessing) return IngameStrings.RReprocessing;
-                if (subtype.Contains(IngameStrings.RDeuterium)) return IngameStrings.RDeuterium;
+                if (ItemTypesConverter.SeedItems.Contains(ItemName)) return SubtypeSeeds;
+                if (ItemTypesConverter.FoodItems.Contains(ItemName)) return ItemTypesConverter.Food;
+                if (subtype == SubtypeSpentFuelReprocessing) return SubtypeReprocessing;
+                if (subtype.Contains(SubtypeDeuterium)) return SubtypeDeuterium;
                 return type;
             }
 
@@ -74,17 +74,17 @@ namespace IngameScript
             {
                 var name = ItemTypesConverter.SubtypeOf(ItemName);
                 if (name.StartsWith("MealPack")) name = name.Substring(9);   // "MealPack_Chili" -> "Chili"
-                else if (name.Contains(IngameStrings.RAutomaticRifleGunMag))
+                else if (name.Contains(SubtypeAutomaticRifleGunMag))
                 {
                     // "AutomaticRifleGun_Mag_20rd" -> "AutoRifleGunMag", "PreciseAutomaticRifleGun_Mag_5rd" -> "PreciseRifleGunMag"
-                    var i = name.IndexOf(IngameStrings.RAutomaticRifleGunMag);
-                    name = i == 0 ? IngameStrings.RAutoRifleGunMagazine : name.Substring(0, i) + IngameStrings.RRifleGunMagazine;
+                    var i = name.IndexOf(SubtypeAutomaticRifleGunMag);
+                    name = i == 0 ? SubtypeAutoRifleGunMagazine : name.Substring(0, i) + SubtypeRifleGunMagazine;
                 }
-                else if (type == IG_Seeds) name += " " + IngameStrings.RSeeds;
-                else if (type == IG_Tools && ModName == Strings.M_Vanilla) name = VanillaToolName(name);
+                else if (type == TypeSeed) name += " " + SubtypeSeeds;
+                else if (type == TypeTool && ModName == Strings.M_Vanilla) name = VanillaToolName(name);
 
                 // "...Magazine" -> "...Mag"
-                return name.EndsWith(IngameStrings.RMagazine) ? name.Substring(0, name.Length - 5) : name;
+                return name.EndsWith(SubtypeMagazine) ? name.Substring(0, name.Length - 5) : name;
             }
 
             static readonly string[] VanillaTools = { "HandDrill", "Grinder", "Welder" };

@@ -10,13 +10,13 @@ namespace IngameScript
         {
             static readonly Dictionary<string, string> recommendedItems = new Dictionary<string, string>
             {
-                { Ore.Stone, IngameStrings.RStone },
-                { Ingot.Stone, "Gravel" },
-                { Ore.Ice, "Ice" },
-                { Ingot.WaterFood, "Water" },
-                { Ingot.GreyWater, "Greywater" },
-                { Ingot.DTFuelCapsule, "Deuterium" },
-                { Ore.Organic, "Organic" },
+                { OreStone, SubtypeStone },
+                { IngotStone, "Gravel" },
+                { OreIce, "Ice" },
+                { IngotWaterFood, "Water" },
+                { IngotGreyWater, "Greywater" },
+                { IngotDTFuelCapsule, "Deuterium" },
+                { OreOrganic, "Organic" },
             };
 
             // a recommendation is only a hint: shown for a while, then hidden until the script restarts

@@ -31,7 +31,7 @@ namespace IngameScript
 
         // the connectors with a dock port (",DOCK:")
         static List<dyConnector> docks = new List<dyConnector>();
-        static double rsp = 0;
+        static double rsp;
         // the last PIM data loaded (PimDataParser)
         static string lastPimData = "";
     }

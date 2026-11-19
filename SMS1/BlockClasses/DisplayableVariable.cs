@@ -18,11 +18,7 @@ namespace IngameScript
             Func<double, string> F;
             public char id = '#';
             public string mS = "#";
-            public double R = 0;
-            public double M = 0;
-            public double C = 0;
-            public double m = -1;
-            public double c = -1;
+            public double R, M, C, m = -1, c = -1;
             public MDIs mC = new MDIs(pW);
             public MDIs mM = new MDIs(pW, false, "()");
             MDIbar mB = new MDIbar();

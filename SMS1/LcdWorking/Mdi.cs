@@ -16,10 +16,10 @@ namespace IngameScript
         //Box
         public class MDIbox
         {
-            public bool fuell = false;
+            public bool fuell;
             public MDI mdio;
             public string btext = "";
-            public float mdi_w = 0;
+            public float mdi_w;
             BoxAlign ba = BoxAlign.Right;
             enum BoxAlign { Left, Right };
             public MDIbox(float gw, string fk, Dictionary<string, MDI> ml)
@@ -78,11 +78,11 @@ namespace IngameScript
         //MDI
         public abstract class MDI
         {
-            public float defw = 0;
+            public float defw;
             public string text = "";
             public DateTime curdt;
             public MDItype type = MDItype.Space;
-            public float with = 0.0f;
+            public float with;
             public virtual string SetWI(float wi)
             {
                 return "";

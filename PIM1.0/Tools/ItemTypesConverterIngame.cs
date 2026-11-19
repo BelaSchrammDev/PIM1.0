@@ -16,7 +16,7 @@ namespace IngameScript
             /// <summary>Item type of a PIM item id: "Component SteelPlate" -> MyObjectBuilder_Component/SteelPlate.</summary>
             public static MyItemType ToItemType(string id)
             {
-                return MyItemType.Parse(IG_ + TypeOf(id) + "/" + SubtypeOf(id));
+                return MyItemType.Parse(TypeObjectBuilder + TypeOf(id) + "/" + SubtypeOf(id));
             }
         }
     }

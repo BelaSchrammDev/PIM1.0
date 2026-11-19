@@ -160,7 +160,7 @@ namespace IngameScript
         //    {
         //        DebugText += $"WaterFood Item: {item.Key.SubtypeId} / Amount: {item.Value}\n";
         //    }
-        //    var waterFoodBP = Lists.Data.BluePrints_Active.GetValueOrDefault(Ingot.WaterFood);
+        //    var waterFoodBP = Lists.Data.BluePrints_Active.GetValueOrDefault(IngotWaterFood);
         //    if (waterFoodBP != null)
         //    {
         //        DebugText += $"WaterFood BP - Current: {waterFoodBP.CurrentItemAmount} / Max: {waterFoodBP.MaximumItemAmount}\n";
@@ -169,7 +169,7 @@ namespace IngameScript
         //    {
         //        DebugText += "No active WaterFood Blueprint found.\n";
         //    }
-        //    var waterfoodBPinactive = Lists.Data.BluePrints_Inactive.GetValueOrDefault(Ingot.WaterFood);
+        //    var waterfoodBPinactive = Lists.Data.BluePrints_Inactive.GetValueOrDefault(IngotWaterFood);
         //    if (waterfoodBPinactive != null)
         //    {
         //        DebugText += $"Inactive WaterFood BP - Current: {waterfoodBPinactive.CurrentItemAmount} / Max: {waterfoodBPinactive.MaximumItemAmount}\n";

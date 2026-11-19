@@ -114,7 +114,7 @@ namespace IngameScript.Tests
             Assert.AreEqual("", C.Category("PhysicalGunObject HandDrillItem"));
             Assert.AreEqual(C.Seeds, C.Category("SeedItem Fruit"));
             Assert.AreEqual(C.Food, C.Category("ConsumableItem MealPack_Chili"));
-            Assert.AreEqual(C.Waste, C.Category(Program.Ore.Organic));
+            Assert.AreEqual(C.Waste, C.Category("Ore Organic"));
             Assert.AreEqual("", C.Category(Plate));
         }
 

@@ -38,12 +38,12 @@ namespace IngameScript
 
         static Dictionary<string, Dictionary<MyItemType, int>> modItemDefsList = new Dictionary<string, Dictionary<MyItemType, int>>();
         static Dictionary<MyItemType, string> itemAlterNameList = new Dictionary<MyItemType, string>();
-        static bool writeNewItemDefs = false;
+        static bool writeNewItemDefs;
         static string curMod = "Vanilla";
         // returns the new smsItemType, null if the item type exists already (defined by an earlier mod)
         smsItemType addItemType(string typeName, string subtypeName, int maximumAmount, string displayName = "")
         {
-            var itemType = new MyItemType(IG_ + typeName, subtypeName);
+            var itemType = new MyItemType(TypeObjectBuilder + typeName, subtypeName);
 
             // the CustomData overrides the item data: the max of the section of the current mod
             // (missing entries are added and written), the name of any section
@@ -76,8 +76,8 @@ namespace IngameScript
             public MyItemType type;
             public MyItemInfo info;
             public string name, typeString, subtypeString, blueprintName;
-            public int max, imax, pmax = 0, ammocapacity = 0;
-            public float ass = 0;
+            public int max, imax, pmax, ammocapacity;
+            public float ass;
             public smsItemType(MyItemType _type, int amount = -1, string alternativname = "", string s = "")
             {
                 type = _type;
@@ -109,7 +109,7 @@ namespace IngameScript
             public double GetVolume(double a) { return a * info.Volume * 1000; }
             public bool IsItemMasstype() { return info.Mass == 1; }
             public bool IsItemVolumetype() { return info.Volume == 0.001f; }
-            public bool IsItemResource() { return (typeString == "Ore" || typeString == "Ingot") && (subtypeString != "Ice" && subtypeString != "Organic" && !subtypeString.StartsWith("K_HSR_")); }
+            public bool IsItemResource() { return (typeString == TypeOre || typeString == TypeIngot) && (subtypeString != "Ice" && subtypeString != "Organic" && !subtypeString.StartsWith("K_HSR_")); }
             public string GetResourceName() { return subtypeString.Contains("Deuterium") ? "Deuterium" : subtypeString; }
         }
     }

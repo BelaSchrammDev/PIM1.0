@@ -1,6 +1,9 @@
 ﻿Production Inventory Manager v1.2a
 c BelaOkuma 2017-2026
-only compatible with SMS v1.5!
+
+!! IMPORTANT: update PIM and SMS together !!
+PIM v1.2 only works with SMS v1.5: the data goes over the network now.
+An old SMS v1.4 gets no PIM data (PIM shows a warning).
 
 ### developed with MDK2 and claude ###
 

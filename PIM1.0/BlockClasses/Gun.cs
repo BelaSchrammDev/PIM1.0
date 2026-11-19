@@ -33,9 +33,9 @@ namespace IngameScript
 
                 foreach (var a in ammotypes)
                 {
-                    if (a.TypeId.EndsWith(IG_Ammo) && a.SubtypeId != "Energy")
+                    if (a.TypeId.EndsWith(TypeAmmo) && a.SubtypeId != "Energy")
                     {
-                        var mtype = IG_Ammo + ' ' + a.SubtypeId;
+                        var mtype = TypeAmmo + ' ' + a.SubtypeId;
                         var newadef = AmmoDefs.GetAmmoDefs(mtype);
                         newadef.guns.Add(this);
                         var amax = (int)((float)inv.MaxVolume / a.GetItemInfo().Volume);

@@ -19,10 +19,9 @@ namespace IngameScript
         #endregion
         bool ShowInfoPBLcd = true;
         static TerminalMenu defaultMenu = null;
-        static bool ShowDamageBlockOnHUD = false;
+        static bool ShowDamageBlockOnHUD;
         static int KEEPMENU = 120;
-        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date";
-        static string tMainPage = "\ninvman(sort,style 3,nomessage)";
+        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date", tMainPage = "\ninvman(sort,style 3,nomessage)";
         // script-to-script networking: master/standby among the SMS, the PIM data from the PIM master
         NetWorkingIgc netIgc; static NetWorkingNode Net;
         // the last PIM data received ("" = none or PIM is gone), read by the job ReadPimData
@@ -30,7 +29,7 @@ namespace IngameScript
         static IMyCubeGrid Mgrid; static IMyGridProgramRuntimeInfo rti; static IMyGridTerminalSystem gts;
         static IMyProgrammableBlock runPB;
         Job[] jobs;
-        int jobIndex = 0;
+        int jobIndex;
         bool nomaster;
         public Program()
         {

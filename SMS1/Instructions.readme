@@ -1,6 +1,9 @@
 ﻿StationManagmentSystem v1.5a
 c BelaOkuma 2017-2026
-only compatible with PIM v1.2!
+
+!! IMPORTANT: update SMS and PIM together !!
+SMS v1.5 only works with PIM v1.2: the data goes over the network now.
+An old PIM v1.1 sends no data to SMS v1.5.
 
  ### developed with MDK ###
 

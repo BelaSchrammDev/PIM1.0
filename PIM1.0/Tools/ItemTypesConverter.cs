@@ -17,39 +17,39 @@ namespace IngameScript
             // container tag (as written by ToArgStr) -> item id or item type, the key in InventoryManagerList
             static readonly Dictionary<string, string> TagToIngame = new Dictionary<string, string>
             {
-                { "Ammo", IG_Ammo },
-                { IngameStrings.RStone, Ore.Stone },
-                { "Gravel", Ingot.Stone },
-                { "Tools", IG_Tools },
-                { "Kits", IG_Kits },
-                { "Cash", IG_Phys },
-                { "Datapads", IG_Datas },
-                { "H-Bottles", IG_HBottles },
-                { "O-Bottles", IG_OBottles },
-                { "Ice", Ore.Ice },
-                { "Water", Ingot.WaterFood },
-                { "Greywater", Ingot.GreyWater },
-                { "Deuterium", Ingot.DTFuelCapsule },
-                { "Organic", Ore.Organic },
-                { "Seeds", IG_Seeds },
-                { "Steelplate", IG_Com + "SteelPlate" },
-                { "Metalgrid", IG_Com + "MetalGrid" },
-                { "Interiorplate", IG_Com + "InteriorPlate" },
-                { "Smalltube", IG_Com + "SmallTube" },
-                { "Largetube", IG_Com + "LargeTube" },
-                { "Glass", IG_Com + "BulletproofGlass" },
-                { "Gravity", IG_Com + "GravityGenerator" },
-                { "Radio", IG_Com + "RadioCommunication" },
-                { "Solar", IG_Com + "SolarCell" },
-                { "Power", IG_Com + "PowerCell" },
-                { "Zonechip", IG_Com + "ZoneChip" },
+                { "Ammo", TypeAmmo },
+                { SubtypeStone, OreStone },
+                { "Gravel", IngotStone },
+                { "Tools", TypeTool },
+                { "Kits", TypeKit },
+                { "Cash", TypePhysicalObject },
+                { "Datapads", TypeDatapad },
+                { "H-Bottles", TypeHBottle },
+                { "O-Bottles", TypeOBottle },
+                { "Ice", OreIce },
+                { "Water", IngotWaterFood },
+                { "Greywater", IngotGreyWater },
+                { "Deuterium", IngotDTFuelCapsule },
+                { "Organic", OreOrganic },
+                { "Seeds", TypeSeed },
+                { "Steelplate", ComponentPrefix + "SteelPlate" },
+                { "Metalgrid", ComponentPrefix + "MetalGrid" },
+                { "Interiorplate", ComponentPrefix + "InteriorPlate" },
+                { "Smalltube", ComponentPrefix + "SmallTube" },
+                { "Largetube", ComponentPrefix + "LargeTube" },
+                { "Glass", ComponentPrefix + "BulletproofGlass" },
+                { "Gravity", ComponentPrefix + "GravityGenerator" },
+                { "Radio", ComponentPrefix + "RadioCommunication" },
+                { "Solar", ComponentPrefix + "SolarCell" },
+                { "Power", ComponentPrefix + "PowerCell" },
+                { "Zonechip", ComponentPrefix + "ZoneChip" },
             };
 
             static ItemTypesConverter()
             {
                 // components whose tag is their subtype
                 foreach (var c in new[] { "Reactor", "Thrust", "Medical", "Detector", "Explosives", "Construction", "Motor", "Display", "Girder", "Computer", "Canvas" })
-                    TagToIngame.Add(c, IG_Com + c);
+                    TagToIngame.Add(c, ComponentPrefix + c);
             }
 
             /// <summary>
@@ -76,7 +76,7 @@ namespace IngameScript
             /// </summary>
             public static string Category(string id)
             {
-                if (id.Contains("RifleItem") || id.Contains(IG_Ammo) || id.Contains("PistolItem") || id.Contains("LauncherItem") || id.Contains("FlareGunItem")) return Armory;
+                if (id.Contains("RifleItem") || id.Contains(TypeAmmo) || id.Contains("PistolItem") || id.Contains("LauncherItem") || id.Contains("FlareGunItem")) return Armory;
                 if (SeedItems.Contains(id)) return Seeds;
                 if (FoodItems.Contains(id)) return Food;
                 if (WasteItems.Contains(id)) return Waste;

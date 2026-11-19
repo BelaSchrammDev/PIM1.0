@@ -21,7 +21,7 @@ namespace IngameScript
         double configuredCycleSeconds;
         bool shipControlled;
         // values of the ship controller for the displays (ReadShipController)
-        static double shipTotalMass = 0, naturalGravity = 0, shipSpeed = 0;
+        static double shipTotalMass, naturalGravity, shipSpeed;
 
         double TargetCycleSeconds()
         {

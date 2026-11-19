@@ -20,7 +20,8 @@
   <!-- the item name rules of the script: the tool checks the item name the script really derives -->
   <ItemGroup>
     <Compile Include="..\PIM1.0\Definitions\Strings.cs" Link="Script\Strings.cs" />
-    <Compile Include="..\PIM1.0\Definitions\IngameResources\IngameStrings.cs" Link="Script\IngameStrings.cs" />
+    <Compile Include="..\Share\Common\IngameStrings.cs" Link="Script\IngameStrings.cs" />
+    <Compile Include="..\Share\Common\ItemTypes.cs" Link="Script\ItemTypes.cs" />
     <Compile Include="..\PIM1.0\Definitions\ItemCasts.cs" Link="Script\ItemCasts.cs" />
     <Compile Include="..\PIM1.0\Tools\ItemTypesConverter.cs" Link="Script\ItemTypesConverter.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs" Link="Script\AssemblerBluePrint.cs" />

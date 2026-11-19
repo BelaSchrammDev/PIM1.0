@@ -44,7 +44,7 @@
     <BluePrintDataInput Include="BluePrintData\*.txt" />
     <BluePrintDataInput Include="..\PIM1.0.BluePrintGenerator\*.cs;..\PIM1.0.BluePrintGenerator\*.csproj" />
     <!-- script files the generator uses for the item name rules -->
-    <BluePrintDataInput Include="BluePrintsClasses\AssemblerBluePrint.cs;Definitions\Strings.cs;Definitions\IngameResources\IngameStrings.cs;Definitions\ItemCasts.cs" />
+    <BluePrintDataInput Include="BluePrintsClasses\AssemblerBluePrint.cs;Definitions\Strings.cs;..\Share\Common\IngameStrings.cs;..\Share\Common\ItemTypes.cs;Tools\ItemTypesConverter.cs;Definitions\ItemCasts.cs" />
   </ItemGroup>
   <Target Name="GenerateBluePrintData" BeforeTargets="CoreCompile" Inputs="@(BluePrintDataInput)" Outputs="$(BluePrintDataStamp)">
     <Exec Command="dotnet run --project &quot;$(BluePrintGeneratorProject)&quot; -c Release -- &quot;$(BluePrintDataDir)&quot; &quot;$(BluePrintDataOutput)&quot;" />

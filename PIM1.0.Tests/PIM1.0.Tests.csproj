@@ -56,8 +56,10 @@
 	        Link="Linked\TypeDefinitions.cs" />
 
     <!-- Blueprints: only the pure parts (the *Ingame.cs files need Sandbox/VRage) -->
-    <Compile Include="..\PIM1.0\Definitions\IngameResources\IngameStrings.cs"
+    <Compile Include="..\Share\Common\IngameStrings.cs"
             Link="Linked\IngameStrings.cs" />
+    <Compile Include="..\Share\Common\ItemTypes.cs"
+            Link="Linked\ItemTypes.cs" />
     <Compile Include="..\PIM1.0\Definitions\ItemCasts.cs"
             Link="Linked\ItemCasts.cs" />
     <Compile Include="..\PIM1.0\BluePrintsClasses\AssemblerBluePrint.cs"

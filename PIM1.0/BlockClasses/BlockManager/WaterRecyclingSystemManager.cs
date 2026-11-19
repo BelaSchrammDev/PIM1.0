@@ -13,7 +13,7 @@ namespace IngameScript
 
             public override void Refresh()
             {
-                CalculateRefineryAmount(Ingot.WaterFood);
+                CalculateRefineryAmount(IngotWaterFood);
             }
 
             public override void DoManage()
@@ -25,11 +25,11 @@ namespace IngameScript
 
                 AssemblerBluePrint waterBluePrint;
 
-                if (TryGetActiveAssemblerBluePrint(Ingot.WaterFood, out waterBluePrint))
+                if (TryGetActiveAssemblerBluePrint(IngotWaterFood, out waterBluePrint))
                 {
                     if (!waterBluePrint.IfMax() && Refinery.Success > 90)
                     {
-                        if(IsInventoryItemExists(Ingot.CleanWater))
+                        if(IsInventoryItemExists(IngotCleanWater))
                         {
                             ProcessingCleanWater();
                         }
@@ -47,24 +47,24 @@ namespace IngameScript
 
             private void ProcessingIce()
             {
-                SendItemByType(Ore.Ice, 1000, Refinery.InputInventory);
+                SendItemByType(OreIce, 1000, Refinery.InputInventory);
             }
 
             private void ProcessingCleanWater()
             {
-                SendItemByType(Ingot.CleanWater, 1000, Refinery.InputInventory, (!Refinery.InputInventoryItems.ContainsKey(Ingot.CleanWater) || Refinery.InputInventoryItems[Ingot.CleanWater] == 0 ? 0 : 1));
+                SendItemByType(IngotCleanWater, 1000, Refinery.InputInventory, (!Refinery.InputInventoryItems.ContainsKey(IngotCleanWater) || Refinery.InputInventoryItems[IngotCleanWater] == 0 ? 0 : 1));
             }
 
             private bool ProcessingGreyWater()
             {
-                if (IsInventoryItemExists(Ingot.GreyWater))
+                if (IsInventoryItemExists(IngotGreyWater))
                 {
-                    if (Refinery.Success > 90 || IsInventoryItemEmpty(Ingot.GreyWater, Refinery.InputInventoryItems))
+                    if (Refinery.Success > 90 || IsInventoryItemEmpty(IngotGreyWater, Refinery.InputInventoryItems))
                     {
-                        SendItemByType(Ingot.GreyWater, 1000, Refinery.InputInventory, 0);
+                        SendItemByType(IngotGreyWater, 1000, Refinery.InputInventory, 0);
                     }
 
-                    Refinery.PushItemToFront(Refinery.InputInventory, Ingot.GreyWater);
+                    Refinery.PushItemToFront(Refinery.InputInventory, IngotGreyWater);
                     return true;
                 }
 

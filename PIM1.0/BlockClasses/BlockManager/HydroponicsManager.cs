@@ -6,11 +6,11 @@ namespace IngameScript
     {
         public class HydroponicsManager : RecipeManager
         {
-            public HydroponicsManager(ManageableBlock block) : base(block, Ingot.SubFresh, new Dictionary<string, float>
+            public HydroponicsManager(ManageableBlock block) : base(block, IngotSubFresh, new Dictionary<string, float>
             {
-                { Ingot.Stone, 16.428f },
-                { Ingot.WaterFood, 5f },
-                { Ingot.Nutrients, 15f },
+                { IngotStone, 16.428f },
+                { IngotWaterFood, 5f },
+                { IngotNutrients, 15f },
             })
             {
             }

@@ -15,7 +15,7 @@ namespace IngameScript
         //O2Gen
         public class dyGasgenerator : dyBlockPowerConsumer
         {
-            static MyItemType ice = new MyItemType(IG_ + "Ore", "Ice"), hb = new MyItemType(IG_ + IG_HBottles, "HydrogenBottle"), ob = new MyItemType(IG_ + IG_OBottles, "OxygenBottle"); float icea = 0; IMyGasGenerator gg; ST wz = new ST(5);
+            static MyItemType ice = new MyItemType(TypeObjectBuilder + TypeOre, "Ice"), hb = new MyItemType(TypeObjectBuilder + TypeHBottle, "HydrogenBottle"), ob = new MyItemType(TypeObjectBuilder + TypeOBottle, "OxygenBottle"); float icea = 0; IMyGasGenerator gg; ST wz = new ST(5);
             public dyGasgenerator(IMyTerminalBlock igg) { addChangeType = ChangeType.Gasgenerator_add; nameChangeType = ChangeType.Gasgenerator_name; tb = igg; gg = (IMyGasGenerator)igg; getBlockDefinition(); setBlockTypeFields(); addChange(); sT("@fRf", "", 20); sM("@fIa", 0, 24); sD("@fHB", 0, 6, true); sD("@fOB", 0, 6, true); }
             public override void Display() { sT("@fRf", "AutoRefill " + (gg.AutoRefill ? "on" : "off"), 20); var ggi = getInventarList(0); sM("@fIa", ggi.gA(ice), 24); sD("@fHB", ggi.gA(hb), 6, true); sD("@fOB", ggi.gA(ob), 6, true); base.Display(); }
             public override void getPCvar(dyDisplayableVariable pv) { var gi = readInventarList(pv); if (wz.ifS()) { var ia = gi.gA(ice); IsW = icea <= ia ? false : true; icea = ia; } sI(pv); }

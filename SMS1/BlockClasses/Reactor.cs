@@ -16,8 +16,8 @@ namespace IngameScript
         public class Reactor : dyBlockPowerStorage
         {
             public IMyReactor m;
-            float mq = 0.052f, brennstoff = 0.0f, eff = 1;
-            double ms = 0;
+            float mq = 0.052f, brennstoff, eff = 1;
+            double ms;
             public Reactor(IMyTerminalBlock b)
             {
                 addChangeType = ChangeType.Reactor_add;

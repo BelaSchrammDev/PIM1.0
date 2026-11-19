@@ -13,23 +13,23 @@ namespace IngameScript
 
         static Dictionary<string, string> ResourcesNameCastList = new Dictionary<string, string>
             {
-                { Ore.Stone, IngameStrings.RStone },
-                { Ingot.Magnesium, Ingot.Magnesiumpowder },
-                { Ingot.Stone, "Gravel" },
-                { Ingot.DTFuelCapsule, IngameStrings.RDeuterium },
-                { Ore.Ice, "Ice"},
-                { Ingot.Carbon, IngameStrings.RCarbon },
+                { OreStone, SubtypeStone },
+                { IngotMagnesium, SubtypeMagnesiumpowder },
+                { IngotStone, "Gravel" },
+                { IngotDTFuelCapsule, SubtypeDeuterium },
+                { OreIce, "Ice"},
+                { IngotCarbon, SubtypeCarbon },
             };
         static Dictionary<string, string> ResourcesNameCastListIOMod = new Dictionary<string, string>
             {
-                { Ore.Coal, IngameStrings.RCoal },
-                { Ore.Bauxite, IngameStrings.RBauxite },
-                { Ore.Niter, IngameStrings.RNiter },
-                { Ingot.Lithium, IngameStrings.RLithium + " Paste" },
-                { Ingot.Sulfur, IngameStrings.RSulfur },
-                { Ingot.Niter, IngameStrings.RPotassium + " Nitrate" },
-                { Ore.Magnesium, "Crushed Niter" },
-                { Ingot.Magnesium, Ingot.Gunpowder},
+                { OreCoal, SubtypeCoal },
+                { OreBauxite, SubtypeBauxite },
+                { OreNiter, SubtypeNiter },
+                { IngotLithium, SubtypeLithium + " Paste" },
+                { IngotSulfur, SubtypeSulfur },
+                { IngotNiter, SubtypePotassium + " Nitrate" },
+                { OreMagnesium, "Crushed Niter" },
+                { IngotMagnesium, SubtypeGunpowder},
             };
 
         static string CastResourceName(string name, bool ioMod)
@@ -130,7 +130,7 @@ namespace IngameScript
 
         public partial class RefineryBlueprint
         {
-            static string[] ScrapTypeBlueprintNames = { "Component C100ShellCasing", Ore.Scrap, Ingot.Scrap };
+            static string[] ScrapTypeBlueprintNames = { "Component C100ShellCasing", OreScrap, IngotScrap };
 
             public string Name = "";
             public string InputID = "";

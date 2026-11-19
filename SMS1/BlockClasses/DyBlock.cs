@@ -81,7 +81,7 @@ namespace IngameScript
         //Dock
         public class dyConnector : dyBlockFunctional
         {
-            bool ifdock = false;
+            bool ifdock;
             public IMyShipConnector connector;
             // the connected connector of a ship (not of a station), these grids belong to the ship in SHIP mode (shipConstructBlocks)
             public IMyShipConnector docked_connector = null;

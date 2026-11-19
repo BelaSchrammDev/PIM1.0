@@ -4,10 +4,7 @@
     {
         public abstract class CountingJob : Job
         {
-            private int _index;
-            private int _startIndex;
-            private int _endIndex;
-            private int _step;
+            private int _index, _startIndex, _endIndex, _step;
 
             protected CountingJob(int cooldownSeconds = 0)
                 : base(cooldownSeconds)
