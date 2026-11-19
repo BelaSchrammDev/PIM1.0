@@ -84,12 +84,15 @@ namespace IngameScript
             netIgc.Poll(Runtime.TimeSinceLastRun);
             try
             {
-                if ((updateSource & UpdateType.Trigger) != 0)
+                var isTrigger = (updateSource & UpdateType.Trigger) != 0;
+                if (isTrigger)
                 {
                     if (Net.MasterAddress == Net.Me) RunLcdCommand(argument);
                     else Net.Send(Net.MasterAddress, NetWorkingScripts.Command, argument);
                 }
-                else
+                // the clicked terminals first (also clicks of a standby SMS, they came in with Poll)
+                RenderUrgentTerminals();
+                if (!isTrigger)
                 {
                     cycleRuns++;
                     do

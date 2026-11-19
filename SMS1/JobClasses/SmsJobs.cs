@@ -55,6 +55,7 @@ namespace IngameScript
 
         void StartCycle()
         {
+            scanRunning = true;
             shipOnlyJobs.Active = currentMode != ScriptMode.STATION;
             filterGrid = Mgrid;
             rsp = 0;
@@ -114,6 +115,7 @@ namespace IngameScript
 
         void FinishBlockScan()
         {
+            scanRunning = false;
             foreach (var pv in pvl)
                 if (pv.Name == "Damageblocks")
                 {

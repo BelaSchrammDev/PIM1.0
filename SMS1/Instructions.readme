@@ -13,6 +13,7 @@ new in update 1.5a:
  - the PIM data comes over the network; PIM gone: the PIM values are cleared after ~10 s
  - terminal menus: new syntax @site/@link/@action/@body/@end (the old one still works),
    errors are shown in the title line and listed in the CustomData
+ - terminals react at once to a click (after the block scan, if it is running)
  - menu action "PIM:ctrl_ref" goes to PIM; "Control Refinerys/Assemblers" is done by PIM now
 
 ----------------------------------------------------------------------------------------------------------------

@@ -66,6 +66,9 @@ namespace IngameScript
         {
             const string mDefBegin = "  / Menudefinition for custommenus:";
             public string lcd_id = "";
+            // clicked: the number of the click (the smallest waits longest), 0 = not waiting
+            public int urgent;
+            static int clickNumber;
             ST mkdt = new ST(KEEPMENU);
             MenuMode mmode = MenuMode.Default;
             public TerminalMenu menu = null;
@@ -212,7 +215,12 @@ namespace IngameScript
                     case "3": comnum = 2; break;
                     case "4": comnum = 3; break;
                 }
-                if (comnum != -1 && comnum < curSite.commands.Count && curSite.commands[comnum] != null) setNewTerminalSite(curSite.commands[comnum].scheduleCommand());
+                if (comnum == -1 || comnum >= curSite.commands.Count || curSite.commands[comnum] == null) return;
+                var site = curSite.commands[comnum].scheduleCommand();
+                if (site == null) return;
+                setNewTerminalSite(site);
+                // a new site: rendered before the cycle goes on (RenderUrgentTerminals), in the order of the clicks
+                urgent = ++clickNumber;
             }
             void setNewTerminalSite(TerminalSite tsite)
             {
