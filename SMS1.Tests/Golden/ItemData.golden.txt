@@ -81,6 +81,13 @@ Vanilla | AmmoMagazine | LargeCalibreAmmo | 50 | Big Calibre |  | 1
 Vanilla | AmmoMagazine | MediumCalibreAmmo | 30 | Medium Calibre |  | 1
 Vanilla | AmmoMagazine | LargeRailgunAmmo | 20 | Big Railgun Spike |  | 1
 Vanilla | AmmoMagazine | SmallRailgunAmmo | 20 | Small Railgun Spike |  | 1
+Vanilla | AmmoMagazine | FlareBox | 100 | Countermeasure Flares |  | 12
+Vanilla | AmmoMagazine | AntiPersonnelTurret_Mag | 100 | Anti-Personnel Turret Magazine |  | 200
+Vanilla | AmmoMagazine | Missile200mmHoming | 50 | Homing Missile |  | 1
+Vanilla | AmmoMagazine | Torpedo | 20 |  |  | 1
+Vanilla | AmmoMagazine | Torpedo_Heavy | 20 | Heavy Torpedo |  | 1
+Vanilla | AmmoMagazine | Torpedo_Seeking | 20 | Light Torpedo |  | 1
+Vanilla | AmmoMagazine | Torpedo_Piercing | 20 | Armor Piercing Torpedo |  | 1
 Vanilla | ConsumableItem | Powerkit | 5 |  |  | 0
 Vanilla | ConsumableItem | Medkit | 5 |  |  | 0
 Vanilla | GasContainerObject | HydrogenBottle | 5 |  |  | 0
@@ -312,6 +319,19 @@ IndustrialOverhaulMod | AmmoMagazine | MediumCalibreAmmoDUAP | 10 |  |  | 1
 IndustrialOverhaulMod | AmmoMagazine | LargeRailgunAmmoDUAP | 10 |  |  | 1
 IndustrialOverhaulMod | AmmoMagazine | SmallRailgunAmmoDUAP | 10 |  |  | 1
 IndustrialOverhaulMod | AmmoMagazine | HEMissile200mm | 100 | HE Rocket |  | 1
+IndustrialOverhaulMod | AmmoMagazine | HEMissile200mmHoming | 100 | HE Homing Missile |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | GravelMag | 100 | Light Compressed Gravel Rounds |  | 50
+IndustrialOverhaulLockLoadMod | AmmoMagazine | GravelMagBig | 10 | Heavy Compressed Gravel Round |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | CLGG | 100 | CLG Autocannon Magazine |  | 25
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 155mmAPShell | 10 | 155mm AP Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 155mmDUAPShell | 10 | 155mm DUAP Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 155mmHEShell | 10 | 155mm HE Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 305mmAPShell | 10 | 305mm AP Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 305mmDUAPShell | 10 | 305mm DUAP Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | 305mmHEShell | 10 | 305mm HE Shell |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | APCoilgunShell | 10 | AP Coilgun Sabot |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | DUAPCoilgunShell | 10 | DUAP Coilgun Sabot |  | 1
+IndustrialOverhaulLockLoadMod | AmmoMagazine | PDLaserCharge | 100 | PD Laser Charge |  | 1
 EatDrinkSleepRepeatMod | ConsumableItem | ClangCola | 5 |  | Food | 0
 EatDrinkSleepRepeatMod | ConsumableItem | CosmicCoffee | 5 |  | Food | 0
 EatDrinkSleepRepeatMod | ConsumableItem | SparklingWater | 5 |  | Food | 0

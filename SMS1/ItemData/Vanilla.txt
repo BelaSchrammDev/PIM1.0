@@ -85,6 +85,14 @@ LargeCalibreAmmo | 50 | Big Calibre | 1
 MediumCalibreAmmo | 30 | Medium Calibre | 1
 LargeRailgunAmmo | 20 | Big Railgun Spike | 1
 SmallRailgunAmmo | 20 | Small Railgun Spike | 1
+# added by SMS1.ItemDataTool 2026-11-19: check max, names and categories
+FlareBox | 100 | Countermeasure Flares | 12
+AntiPersonnelTurret_Mag | 100 | Anti-Personnel Turret Magazine | 200
+Missile200mmHoming | 50 | Homing Missile | 1
+Torpedo | 20 |  | 1
+Torpedo_Heavy | 20 | Heavy Torpedo | 1
+Torpedo_Seeking | 20 | Light Torpedo | 1
+Torpedo_Piercing | 20 | Armor Piercing Torpedo | 1
 
 [ConsumableItem]
 Powerkit | 5

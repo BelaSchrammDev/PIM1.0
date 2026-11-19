@@ -134,7 +134,9 @@ options: --data dir  --game dir  --workshop dir");
                 }
 
                 var dataKeys = new HashSet<string>();
-                ItemDataParser.Parse(ItemDataEncoder.EncodeMod(mod), (type, subtype, max, n, category, capacity) => dataKeys.Add(type + "/" + subtype));
+                var encoded = ItemDataEncoder.EncodeMod(mod);
+                // a new mod's data file has no items yet (the in-game parser does not expect empty data)
+                if (encoded.Length > 0) ItemDataParser.Parse(encoded, (type, subtype, max, n, category, capacity) => dataKeys.Add(type + "/" + subtype));
 
                 // mod items that are vanilla items too (a mod changes them) are no new items of the mod
                 var missing = sbc.Items.Where(i => !i.Hidden && !dataKeys.Contains(i.Key) && (mod.Name == "Vanilla" || !vanillaKeys.Contains(i.Key))).ToList();
@@ -157,9 +159,12 @@ options: --data dir  --game dir  --workshop dir");
                 {
                     var text = File.ReadAllText(mod.File).TrimEnd('\r', '\n');
                     var nl = text.Contains("\r\n") ? "\r\n" : "\n";
+                    // ReadAllText drops a UTF-8 BOM, WriteAllText would not write it again: keep the file's encoding
+                    var bytes = File.ReadAllBytes(mod.File);
+                    var hasBom = bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF;
                     File.WriteAllText(mod.File, text + nl + nl
                         + "# added by SMS1.ItemDataTool " + DateTime.Now.ToString("yyyy-MM-dd") + ": check max, names and categories" + nl
-                        + string.Join(nl, rows) + nl);
+                        + string.Join(nl, rows) + nl, new System.Text.UTF8Encoding(hasBom));
                 }
             }
             if (result == 1 && !(o.Command == "update" && o.Write)) Console.WriteLine("add the missing items with: update [mod ...] --write");

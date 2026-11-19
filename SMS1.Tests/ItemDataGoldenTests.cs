@@ -81,7 +81,7 @@ namespace IngameScript.Tests
             {
                 "Vanilla", "DailyNeedsSurvivalMod", "AzimuthThrusterMod", "DeuteriumReactorMod", "MCRN_RailGunMod",
                 "MWI_HomingWeaponryMod", "PaintGunMod", "StarGateMod_Gates", "StarGateMod_Ores", "DefenseShieldMod",
-                "IndustrialOverhaulMod", "EatDrinkSleepRepeatMod", "PlantAndCookMod",
+                "IndustrialOverhaulMod", "IndustrialOverhaulLockLoadMod", "EatDrinkSleepRepeatMod", "PlantAndCookMod",
                 "AryxEpsteinDriveMod", "NorthWindWeaponsMod",
             }, Program.ItemDataMods);
         }

@@ -4,10 +4,7 @@ only compatible with PIM v1.2!
 
  ### developed with MDK ###
 
-attention:
-the configuration is now located in the customdata,
-change only between '### config ###' and '### config end ###'.
+new in update 1.5a:
+ -
 
-itemdefinitions:
-here you can change the maximum quantity for the fillbar display
-PIMs autocrafting.max override this value if there running on the same grid.
+----------------------------------------------------------------------------------------------------------------

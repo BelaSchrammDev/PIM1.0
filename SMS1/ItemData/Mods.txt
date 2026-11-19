@@ -14,6 +14,7 @@ StarGateMod_Gates | 2362151943
 StarGateMod_Ores | 2362164390
 DefenseShieldMod | 3154379105
 IndustrialOverhaulMod | 2344068716
+IndustrialOverhaulLockLoadMod | 2616181591
 EatDrinkSleepRepeatMod | 2547246713
 PlantAndCookMod | 2570427696
 AryxEpsteinDriveMod | 2394430829
