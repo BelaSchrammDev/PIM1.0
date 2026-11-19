@@ -13,7 +13,7 @@ namespace IngameScript
     partial class Program
     {
         // the PIM data lines (see PIM SendInfosToSMS); "" clears the PIM values (IngotPrio, CargoUse, max/queue)
-        public static void LoadPimData(string data)
+        static void LoadPimData(string data)
         {
             if (data == lastPimData) return;
             lastPimData = data;
@@ -90,6 +90,6 @@ namespace IngameScript
                     }
             }
         }
-        public static Dictionary<string, List<IPrio>> ingotprio = new Dictionary<string, List<IPrio>>();
+        static Dictionary<string, List<IPrio>> ingotprio = new Dictionary<string, List<IPrio>>();
     }
 }

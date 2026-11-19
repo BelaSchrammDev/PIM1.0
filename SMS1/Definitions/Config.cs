@@ -14,7 +14,7 @@ namespace IngameScript
     {
         bool if_true(string s) { return (s == "True" || s == "true"); }
         static Dictionary<string, bool> usemods = new Dictionary<string, bool>();
-        public void loadConfig()
+        void loadConfig()
         {
             // the mods of the item data (Vanilla is always used)
             for (var i = 1; i < ItemDataMods.Length; i++) usemods.Add(ItemDataMods[i], false);

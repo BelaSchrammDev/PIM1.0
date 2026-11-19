@@ -74,7 +74,7 @@ namespace IngameScript
         public class smsItemType
         {
             public MyItemType type;
-            public MyItemInfo info;
+            MyItemInfo info;
             public string name, typeString, subtypeString, blueprintName;
             public int max, imax, pmax, ammocapacity;
             public float ass;

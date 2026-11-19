@@ -89,7 +89,7 @@ namespace IngameScript
             }
         }
         //Line
-        public class MDIline : MDI
+        class MDIline : MDI
         {
             char c;
             public MDIline(char C)
@@ -106,7 +106,7 @@ namespace IngameScript
             }
         }
         //Space
-        public class MDIspace : MDI
+        class MDIspace : MDI
         {
             public override string SetWI(float wi)
             {
@@ -116,7 +116,7 @@ namespace IngameScript
             }
         }
         //Bar
-        public class MDIbar : MDI
+        class MDIbar : MDI
         {
             int we = -1;
             public MDIbar()
@@ -150,6 +150,6 @@ namespace IngameScript
             public void sZ(double d) { if (iNW(d)) sT(Fs(d, "0.#", " %")); }
         }
         //NMDL
-        public class dyMultiDisplayLine { public int live; string Text = ""; public float cfx = 0; public float with; public string mode; public DateTime curdt; List<MDIbox> mdis; public dyMultiDisplayLine(float iwith, string imode, ref List<MDIbox> imdis) { live = 10; with = iwith; mode = imode; mdis = imdis; } public string getText(TextRenderEngine sd) { bool ns = false; bool nxs = false; var fixsize = 0f; int fuelcount = 0; var fuelsize = 0f; foreach (var memdi in mdis) { if (memdi.mdio.curdt > curdt) { ns = true; if (memdi.mdi_w == 0) nxs = true; if (!memdi.fuell) memdi.calcBox(); } if (memdi.fuell) fuelcount++; else { if (memdi.mdi_w == 0) fixsize += memdi.mdio.with; else fixsize += memdi.mdi_w; } } if (Text == "") ns = nxs = true; if (ns) { fixsize += 1.29166f + (1.29166f * mdis.Count); fuelsize = (with - fixsize) / fuelcount; Text = " "; foreach (MDIbox memdi in mdis) { if (memdi.fuell && (nxs || memdi.btext == "")) memdi.calcBox(fuelsize); Text += memdi.btext + " "; } cfx = fuelcount == 0 ? with - fixsize : fuelsize * fuelcount; if (float.IsNaN(cfx)) cfx = 0; curdt = DateTime.Now; } live = 20; return Text; } }
+        public class dyMultiDisplayLine { public int live; string Text = ""; public float cfx = 0; public float with; public string mode; public DateTime curdt; List<MDIbox> mdis; public dyMultiDisplayLine(float iwith, string imode, ref List<MDIbox> imdis) { live = 10; with = iwith; mode = imode; mdis = imdis; } public string getText(TextRenderEngine sd) { var ns = false; bool nxs = false; var fixsize = 0f; int fuelcount = 0; var fuelsize = 0f; foreach (var memdi in mdis) { if (memdi.mdio.curdt > curdt) { ns = true; if (memdi.mdi_w == 0) nxs = true; if (!memdi.fuell) memdi.calcBox(); } if (memdi.fuell) fuelcount++; else { if (memdi.mdi_w == 0) fixsize += memdi.mdio.with; else fixsize += memdi.mdi_w; } } if (Text == "") ns = nxs = true; if (ns) { fixsize += 1.29166f + (1.29166f * mdis.Count); fuelsize = (with - fixsize) / fuelcount; Text = " "; foreach (MDIbox memdi in mdis) { if (memdi.fuell && (nxs || memdi.btext == "")) memdi.calcBox(fuelsize); Text += memdi.btext + " "; } cfx = fuelcount == 0 ? with - fixsize : fuelsize * fuelcount; if (float.IsNaN(cfx)) cfx = 0; curdt = DateTime.Now; } live = 20; return Text; } }
     }
 }

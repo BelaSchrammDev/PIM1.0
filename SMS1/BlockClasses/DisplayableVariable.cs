@@ -20,7 +20,7 @@ namespace IngameScript
             public string mS = "#";
             public double R, M, C, m = -1, c = -1;
             public MDIs mC = new MDIs(pW);
-            public MDIs mM = new MDIs(pW, false, "()");
+            MDIs mM = new MDIs(pW, false, "()");
             MDIbar mB = new MDIbar();
             MDIs mR = new MDIs(zW);
             public VC(char iid)
@@ -69,8 +69,7 @@ namespace IngameScript
         {
             static dyDisplayableVariable tp = null;
             static dyDisplayableVariable wp = null;
-            public char tc = 'g';
-            public IMyTerminalBlock cb = null;
+            char tc = 'g';
             public IMyCubeGrid pcg = null;
             public dyDisplayableVariable(string ts, IMyCubeGrid g)
             {
@@ -84,8 +83,8 @@ namespace IngameScript
                 else changeNeed(ChangeType.PV_add);
             }
             public bool isID(string i, char t) { if (t != tc) return false; foreach (VC v in vcl) if (i.Contains(v.id)) return true; return false; }
-            public void AddCopy(dyDisplayableVariable opv) { foreach (VC v in opv.vcl) aV(v.id, v.M, v.C); }
-            public void AddCopy(dyDisplayableVariable opv, string f) { foreach (VC v in opv.vcl) if (f.Contains(v.id)) aV(v.id, v.M, v.C); }
+            void AddCopy(dyDisplayableVariable opv) { foreach (VC v in opv.vcl) aV(v.id, v.M, v.C); }
+            void AddCopy(dyDisplayableVariable opv, string f) { foreach (VC v in opv.vcl) if (f.Contains(v.id)) aV(v.id, v.M, v.C); }
             public override void Display() { if (pcg != null) sT("fG", pcg.CustomName); base.Display(); }
             public static dyDisplayableVariable getPV(IMyCubeGrid cg, string bt, bool create = true, string v = "")
             {

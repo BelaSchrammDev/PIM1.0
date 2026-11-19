@@ -50,7 +50,7 @@ namespace IngameScript
         public abstract class MenuPunkt
         {
             public TerminalMenu menuObject;
-            public float maxWith;
+            float maxWith;
             public List<string> menuStrings;
             public MenuPunkt(TerminalMenu menu, string text)
             {
@@ -65,7 +65,7 @@ namespace IngameScript
             }
             public abstract TerminalSite scheduleCommand();
         }
-        public class MenuSite : MenuPunkt
+        class MenuSite : MenuPunkt
         {
             string siteID;
             public MenuSite(TerminalMenu mid, string text, string sID) : base(mid, text)
@@ -78,7 +78,7 @@ namespace IngameScript
                 return menuObject.terminalSites.TryGetValue(siteID, out site) ? site : null;
             }
         }
-        public class MenuCommand : MenuPunkt
+        class MenuCommand : MenuPunkt
         {
             string command, blocks;
             public MenuCommand(TerminalMenu mid, string text, string com, string iblocks) : base(mid, text)
@@ -163,7 +163,7 @@ namespace IngameScript
                 var git = Math.Round((double)maxlines / 6.0);
                 for (int i = 0; i < maxlines; i++)
                 {
-                    string ams = "";
+                    var ams = "";
                     if (i == 3) ams = "Menu";
                     else if (i == 4) ams = "\\/      ";
                     int seg = (int)(i / git);

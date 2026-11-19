@@ -13,9 +13,9 @@ namespace IngameScript
     partial class Program
     {
         //HEngine
-        public class HydrogenEngine : dyBlockPowerStorage
+        class HydrogenEngine : dyBlockPowerStorage
         {
-            public IMyPowerProducer he; float capa = 0;
+            IMyPowerProducer he; float capa = 0;
             public HydrogenEngine(IMyTerminalBlock b) { addChangeType = ChangeType.Hydrogenengine_add; nameChangeType = ChangeType.Hydrogenengine_name; tb = b; he = (IMyPowerProducer)b; getBlockDefinition(); setBlockTypeFields(); InitRefresh(); addChange(); }
             public override void getPCvar(dyDisplayableVariable pv)
             {
@@ -35,7 +35,7 @@ namespace IngameScript
                 sV('H', capa, fill, pv);
                 sV('S', (capa * 0.005f) / 3600, mwh, pv);
                 aRS(mwh);
-                sT("@fChT", (he.Enabled && he.CurrentOutput > 0 && frt < 100) ? "empty in " + fT(mwh / he.CurrentOutput) : "---", 35);
+                sT(FieldChargeTime, (he.Enabled && he.CurrentOutput > 0 && frt < 100) ? "empty in " + fT(mwh / he.CurrentOutput) : "---", 35);
                 base.getPCvar(pv);
             }
         }

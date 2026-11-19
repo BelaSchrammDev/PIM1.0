@@ -41,6 +41,19 @@
             X_tMainPage = "TerminalMainPageBody",
             X_tMainPageEnd = X_tMainPage + "End",
 
+            // help text of an LCD without commands
+            EmptyLcdHelp = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)",
+            // LCD name options
+            OptMaxlines = "Maxlines",
+            OptMinlines = "Minlines",
+            OptFillbar = "FILLBAR",
+            // sort modes
+            SortAmount = "AMOUNT",
+            SortBack = "BACK",
+            // display fields and variable names used in several places
+            FieldChargeTime = "@fChT",
+            DamageBlocks = "Damageblocks",
+
             // CustomData config: comment lines
             X_Line = "  / =================================\n",
             X_LineNewSite = X_Line + "@newsite(",

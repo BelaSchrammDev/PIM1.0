@@ -31,7 +31,7 @@ namespace IngameScript
         Job[] jobs;
         int jobIndex;
         bool nomaster;
-        public Program()
+        Program()
         {
             // master priority: a PB on a large grid is preferred (it is the SMS of the station or of the mother ship)
             netIgc = new NetWorkingIgc(IGC, GridTerminalSystem, Me, NetWorkingScripts.Sms, SmsVersion, Me.BlockDefinition.SubtypeId.Contains("Large") ? 1 : 0);
@@ -54,7 +54,7 @@ namespace IngameScript
             defaultMenu = new TerminalMenu();
             defaultMenu.parseMenuDefinition(defMenu);
             allMDIs.Add("@fgA", gra);
-            allMDIs.Add("@fChT", pt);
+            allMDIs.Add(FieldChargeTime, pt);
             allMDIs.Add("@fgN", grn);
             allMDIs.Add("@fsMc", sMc);
             allMDIs.Add("@fsMt", sMt);

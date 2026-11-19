@@ -18,7 +18,7 @@ namespace IngameScript
             MyItemType leer = new MyItemType();
             const int TPMax = 2;
             public int id;
-            public IMyInventory inv;
+            IMyInventory inv;
             public VC volume = null;
             public Dictionary<MyItemType, float> items = new Dictionary<MyItemType, float>();
             MyItemType[] tp = new MyItemType[TPMax];

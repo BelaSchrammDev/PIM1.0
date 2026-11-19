@@ -48,7 +48,7 @@ namespace IngameScript
                 smscontrol = false;
                 return false;
             }
-            public void addPM(string key, string value = "") { if (!isPM(key)) pml.Add(key, value); }
+            void addPM(string key, string value = "") { if (!isPM(key)) pml.Add(key, value); }
             public bool isPM(string tag) { return pml.ContainsKey(tag); }
             public string getPM(string tag) { if (pml.ContainsKey(tag)) return pml[tag]; else return ""; }
         }

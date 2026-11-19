@@ -82,7 +82,7 @@ namespace IngameScript
             Display_name,
         };
         static Dictionary<ChangeType, changeStat> changeStatObjects = new Dictionary<ChangeType, changeStat>();
-        public class changeStat
+        class changeStat
         {
             DateTime dt;
             public changeStat(ChangeType type = ChangeType.Empty)

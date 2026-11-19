@@ -13,9 +13,9 @@ namespace IngameScript
     partial class Program
     {
         //DP
-        public class DP
+        class DP
         {
-            public enum Options { AllTanks, Hydrogen, Oxygen, Table, Name, };
+            enum Options { AllTanks, Hydrogen, Oxygen, Table, Name, };
             public List<dyBlockDisplayable> listDy = new List<dyBlockDisplayable>();
             public double ms = 100;
             public string titleString = "", dock = "", headLineString = "", filter = "*", sortMode = "", cm = "";
@@ -44,15 +44,15 @@ namespace IngameScript
                         return;
                     }
                 }
-                List<string> fls = new List<string>(args.Split('{'));
-                List<string> alo = new List<string>(fls[0].Split('(', ')'));
-                List<string> alf = new List<string>(alo[0].Split('[', ']'));
+                var fls = new List<string>(args.Split('{'));
+                var alo = new List<string>(fls[0].Split('(', ')'));
+                var alf = new List<string>(alo[0].Split('[', ']'));
                 cm = ToArgStr(alf[0].Trim().ToLower());
                 if (fls.Count > 1) for (int i = 1; i < fls.Count; i++) FieldTemplates.Add(fls[i].Split('}')[0]);
                 if (alf.Count > 1) filter = alf[1].Trim();
                 if (alo.Count > 1)
                 {
-                    List<string> argl = new List<string>(alo[1].Split(','));
+                    var argl = new List<string>(alo[1].Split(','));
                     for (int i = 0; i < argl.Count; i++)
                     {
                         string astr = argl[i].Trim().ToUpper();
@@ -62,7 +62,7 @@ namespace IngameScript
                         else if (astr.StartsWith("STYLE")) { var colstr = astr.Split(' ', ':'); if (colstr.Length > 1) style = getIntegerWithBounds(colstr[1], 2, 1, 4); }
                         else if (astr == "ALL") is_All = true;
                         else if (astr == "ZERO") is_Zero = true;
-                        else if (astr == "FILLBAR") is_Fillbar = true;
+                        else if (astr == OptFillbar) is_Fillbar = true;
                         else if (astr == "TABLE") is_Table = true;
                         else if (astr == "NOLINE") is_Line = false;
                         else if (astr == "NOTITLE") is_Title = false;
@@ -74,7 +74,7 @@ namespace IngameScript
                 }
                 if (c == -1) { if (cm == "Inventory" && !is_Fillbar && !is_Table) c = 2; else c = 1; }
                 fls = new List<string>(filter.Split(','));
-                foreach (String s in fls)
+                foreach (var s in fls)
                 {
                     args = s.Trim();
                     if (args.Length > 0 && args[0] == '-') fbl.Add(args.Substring(1));
@@ -90,8 +90,8 @@ namespace IngameScript
             public bool ifGridOption() { if (ifOption("GRID") || ifOption(OptGridName)) return true; else return false; }
             public bool ifFilter(string s1)
             {
-                foreach (string s in fbl) if (s1.Contains(s)) return false;
-                foreach (string s in fwl) if (s == "*" || s1.Contains(s)) return true;
+                foreach (var s in fbl) if (s1.Contains(s)) return false;
+                foreach (var s in fwl) if (s == "*" || s1.Contains(s)) return true;
                 return false;
             }
             public bool ifDisplayGrid(IMyCubeGrid ig)

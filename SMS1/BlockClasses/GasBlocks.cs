@@ -13,7 +13,7 @@ namespace IngameScript
     partial class Program
     {
         //O2Gen
-        public class dyGasgenerator : dyBlockPowerConsumer
+        class dyGasgenerator : dyBlockPowerConsumer
         {
             static MyItemType ice = new MyItemType(TypeObjectBuilder + TypeOre, "Ice"), hb = new MyItemType(TypeObjectBuilder + TypeHBottle, "HydrogenBottle"), ob = new MyItemType(TypeObjectBuilder + TypeOBottle, "OxygenBottle"); float icea = 0; IMyGasGenerator gg; ST wz = new ST(5);
             public dyGasgenerator(IMyTerminalBlock igg) { addChangeType = ChangeType.Gasgenerator_add; nameChangeType = ChangeType.Gasgenerator_name; tb = igg; gg = (IMyGasGenerator)igg; getBlockDefinition(); setBlockTypeFields(); addChange(); sT("@fRf", "", 20); sM("@fIa", 0, 24); sD("@fHB", 0, 6, true); sD("@fOB", 0, 6, true); }
@@ -21,17 +21,17 @@ namespace IngameScript
             public override void getPCvar(dyDisplayableVariable pv) { var gi = readInventarList(pv); if (wz.ifS()) { var ia = gi.gA(ice); IsW = icea <= ia ? false : true; icea = ia; } sI(pv); }
         }
         //AirVent
-        public class Luefter : dyBlockPowerConsumer
+        class Luefter : dyBlockPowerConsumer
         {
-            float ox = 0; public IMyAirVent av;
+            float ox = 0; IMyAirVent av;
             public Luefter(IMyTerminalBlock b) { addChangeType = ChangeType.Airvent_add; nameChangeType = ChangeType.Airvent_name; tb = b; av = (IMyAirVent)b; getBlockDefinition(); setBlockTypeFields(); addChange(); sT("@fAt", ""); sT("@fPz", "", 35); }
             public override void Display() { sT("@fAt", av.CanPressurize ? "AirTight" : "Leaking"); sT("@fPz", av.Depressurize ? "Depressurize" : "Pressurize", 35); base.Display(); }
             public override void getPCvar(dyDisplayableVariable pv) { float olev = av.GetOxygenLevel(); IsW = (olev == ox) ? false : true; ox = olev; sV('V', 1f, olev); sI(pv); }
         }
         //Tanks
-        public class GasTank : dyBlockPowerConsumer
+        class GasTank : dyBlockPowerConsumer
         {
-            public IMyGasTank tank; public string medium = "#";
+            IMyGasTank tank; public string medium = "#";
             public GasTank(IMyTerminalBlock b)
             {
                 tb = b;

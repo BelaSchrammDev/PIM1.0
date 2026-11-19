@@ -19,7 +19,7 @@ namespace IngameScript
             MDIs curlines = new MDIs(12);
             public IMyCubeGrid tsg;
             public List<List<dyMultiDisplayLine>> displayLines = new List<List<dyMultiDisplayLine>>();
-            public List<DP> displayCommands = new List<DP>();
+            List<DP> displayCommands = new List<DP>();
             DateTime cdsdt = DateTime.Now;
             public string pageText = "", displayDefinition = "", lastDisplayDefinition = "";
             public List<string> pages = new List<string>();
@@ -51,7 +51,7 @@ namespace IngameScript
             {
                 if ((command.ifOption("NOERROR") && command.error < 0) || (command.ifOption("NOMESSAGE") && command.error > 0)) command.error = 0;
                 if (command.cm.Contains("Damag")) command.error = 40;
-                string et = "";
+                var et = "";
                 switch (command.error)
                 {
                     case 0: return;
@@ -78,7 +78,7 @@ namespace IngameScript
             public void writeX(string arg, float i = 1)
             {
                 if (arg == "") return;
-                List<dyMultiDisplayLine> nnmdll = new List<dyMultiDisplayLine>();
+                var nnmdll = new List<dyMultiDisplayLine>();
                 for (int x = 0; x < (i <= 4 ? i : 1); x++) nnmdll.Add(getMDLo(this, i <= 4 ? with / i : i, arg));
                 displayLines.Add(nnmdll);
             }
@@ -117,7 +117,7 @@ namespace IngameScript
                                     case "Icload": setOneCol(command, false); writeX("ICLoad:,,@fIC"); break;
                                     case "Writex": writeX(command.FieldTemplates[0], command.with); break;
                                     case "Writex_I":
-                                        List<dyMultiDisplayLine> nnmdll = new List<dyMultiDisplayLine>();
+                                        var nnmdll = new List<dyMultiDisplayLine>();
                                         nnmdll.Add(getMDLo(this, iwith, command.FieldTemplates[0]));
                                         displayLines.Add(nnmdll);
                                         break;
@@ -133,11 +133,11 @@ namespace IngameScript
                                     case "Inventory":
                                         command.addChangeType(ChangeType.Inventar_add);
                                         if (!command.is_Zero) command.addChangeType(ChangeType.Inventar_change_null);
-                                        if (command.is_Sort && command.sortMode != "BACK" && command.sortMode != "") command.addChangeType(ChangeType.Inventar_change_amount);
+                                        if (command.is_Sort && command.sortMode != SortBack && command.sortMode != "") command.addChangeType(ChangeType.Inventar_change_amount);
                                         addFieldTemplates_NonBlock(command, "INV");
                                         if (command.ifOption("GRID"))
                                         {
-                                            foreach (IMyCubeGrid g in gridInventoryItems.Keys)
+                                            foreach (var g in gridInventoryItems.Keys)
                                                 if (command.ifDisplayGrid(g))
                                                 {
                                                     command.titleString = g.CustomName;
@@ -159,7 +159,7 @@ namespace IngameScript
                                     case "Wind": command.addChangeType(ChangeType.PV_add); command.sF("Wind"); WriteVariableGroup(command, "WindTurbines", "SOLAR", "E"); break;
                                     case "Invman":
                                         command.addChangeType(ChangeType.Cargouse_add);
-                                        if (command.is_Sort && command.sortMode != "BACK" && command.sortMode != "") command.addChangeType(ChangeType.Cargouse_change_amount);
+                                        if (command.is_Sort && command.sortMode != SortBack && command.sortMode != "") command.addChangeType(ChangeType.Cargouse_change_amount);
                                         addFieldTemplates_NonBlock(command, "HOXY");
                                         foreach (dyCargouse cuse in cargouseList) if (command.ifFilter(cuse.Name)) command.listDy.Add(cuse);
                                         writeTitle_ifTrue(command, "Inventorymanager");
@@ -183,9 +183,9 @@ namespace IngameScript
                                         if (!command.is_Sort)
                                         {
                                             command.is_Sort = true;
-                                            command.sortMode = "AMOUNT";
+                                            command.sortMode = SortAmount;
                                         }
-                                        if (command.is_Sort && command.sortMode != "BACK" && command.sortMode != "") command.addChangeType(ChangeType.Ingotprio_change_amount);
+                                        if (command.is_Sort && command.sortMode != SortBack && command.sortMode != "") command.addChangeType(ChangeType.Ingotprio_change_amount);
                                         addFieldTemplates_NonBlock(command, "INV");
                                         var opls = ingotprio.Keys.ToArray();
                                         for (int i = 0; i < opls.Length; i++)
@@ -325,8 +325,8 @@ namespace IngameScript
             {
                 "NAME", ",", "@fN,",
                 "MAX", "Max(31)", "@fAm_M",
-                "AMOUNT", "Current(31)", "@fAm",
-                "FILLBAR", "(31)", "@fAm_B(31)",
+                SortAmount, "Current(31)", "@fAm",
+                OptFillbar, "(31)", "@fAm_B(31)",
                 "RATIO", "(20)", "@fAm_R",
                 "ASSEMBLY", "Assembly(31)", "@fQ(31)",
                 "VOLUME", "Volume(31)", "@fAmV",
@@ -351,10 +351,10 @@ namespace IngameScript
             void addFieldTemplates_InvFillbar(DP command)
             {
                 List<string> d;
-                if (command.style == 4) d = new List<string> { "NAME", "AMOUNT", "FILLBAR", "MAX" };
+                if (command.style == 4) d = new List<string> { "NAME", SortAmount, OptFillbar, "MAX" };
                 else
                 {
-                    d = new List<string> { "FILLBAR", "NAME", "AMOUNT" };
+                    d = new List<string> { OptFillbar, "NAME", SortAmount };
                     // was "Max" before: never found in templateInv, so style 2 had no max column
                     if (command.style == 2) d.Add("MAX");
                     if (command.style == 3) d.Add("RATIO");
@@ -388,7 +388,7 @@ namespace IngameScript
                     if (checkError(command, 0)) return;
                 }
                 sort_ifTrue(command);
-                List<List<dyMultiDisplayLine>> nnmdll = new List<List<dyMultiDisplayLine>>();
+                var nnmdll = new List<List<dyMultiDisplayLine>>();
                 var fos = true;
                 int dpr = command.listDy.Count / command.c;
                 if (dpr < 1) dpr = 1;
@@ -454,14 +454,14 @@ namespace IngameScript
             {
                 command.listDy.Clear();
                 setOneCol(command, false);
-                foreach (dyConnector d in docks) if (command.ifFilter(d.dockName)) command.listDy.Add(d); if (checkError(command, command.listDy.Count)) return; writeTitle_ifTrue(command, "Dockstations"); sort_ifTrue(command); foreach (dyConnector dc in command.listDy) { addSingleLine(command, dc, "@fDN" + (command.is_Line ? "," + Cfilled : ",")); addSingleLine(command, dc, "docked:(24),@fSh,,@fSct,@fSt(0)"); if (dc.docked_connector != null) { var g = dc.docked_connector.CubeGrid; dyDisplayableVariable pv = dyDisplayableVariable.getPV(g, "Damageblocks", false); if (pv != null) addSingleLine(command, pv, "Damage:(24),@fH,@fH_B(filled),@fH_R"); pv = dyDisplayableVariable.getPV(g, "Batterys", false); if (pv != null) addSingleLine(command, pv, "Batterys:(24),@fS,@fS_B(filled),@fS_R"); pv = dyDisplayableVariable.getPV(g, "Containers", false); if (pv != null) addSingleLine(command, pv, "Cargo:(24),@fVC,@fVC_B(filled),@fVC_R"); pv = dyDisplayableVariable.getPV(g, "OxygenTanks", false); if (pv != null) addSingleLine(command, pv, "Oxygen:(24),@fVO,@fVO_B(filled),@fVO_R"); pv = dyDisplayableVariable.getPV(g, "HydrogenTanks", false); if (pv != null) addSingleLine(command, pv, "Hydrogen:(24),@fVH,@fVH_B(filled),@fVH_R"); } }
+                foreach (dyConnector d in docks) if (command.ifFilter(d.dockName)) command.listDy.Add(d); if (checkError(command, command.listDy.Count)) return; writeTitle_ifTrue(command, "Dockstations"); sort_ifTrue(command); foreach (dyConnector dc in command.listDy) { addSingleLine(command, dc, "@fDN" + (command.is_Line ? "," + Cfilled : ",")); addSingleLine(command, dc, "docked:(24),@fSh,,@fSct,@fSt(0)"); if (dc.docked_connector != null) { var g = dc.docked_connector.CubeGrid; dyDisplayableVariable pv = dyDisplayableVariable.getPV(g, DamageBlocks, false); if (pv != null) addSingleLine(command, pv, "Damage:(24),@fH,@fH_B(filled),@fH_R"); pv = dyDisplayableVariable.getPV(g, "Batterys", false); if (pv != null) addSingleLine(command, pv, "Batterys:(24),@fS,@fS_B(filled),@fS_R"); pv = dyDisplayableVariable.getPV(g, "Containers", false); if (pv != null) addSingleLine(command, pv, "Cargo:(24),@fVC,@fVC_B(filled),@fVC_R"); pv = dyDisplayableVariable.getPV(g, "OxygenTanks", false); if (pv != null) addSingleLine(command, pv, "Oxygen:(24),@fVO,@fVO_B(filled),@fVO_R"); pv = dyDisplayableVariable.getPV(g, "HydrogenTanks", false); if (pv != null) addSingleLine(command, pv, "Hydrogen:(24),@fVH,@fVH_B(filled),@fVH_R"); } }
                 if (command.listDy.Count > 0) writeLine_ifTrue(command);
             }
             void WriteVariables(string title, string type, DP command, string sty = "", char tidx = ' ', string fla = "")
             {
                 char tc = command.ifGridOption() ? 'g' : 's';
                 if (tidx != ' ') tc = tidx;
-                bool hw = false;
+                var hw = false;
                 if (sty != "" && command.FieldTemplates.Count == 0)
                 {
                     addFieldTemplates_NonBlock(command, sty);
@@ -515,7 +515,7 @@ namespace IngameScript
                     return;
                 }
                 command.dyn = 1;
-                foreach (char c in getPowerCargoOptions(command))
+                foreach (var c in getPowerCargoOptions(command))
                 {
                     if (c == 'S') WriteVariables("Power stored", "S", command, "PCS");
                     if (c == 'M') WriteVariables("Power available", "M", command, "PCA");
@@ -531,8 +531,8 @@ namespace IngameScript
             }
             string getPowerCargoOptions(DP command)
             {
-                string o = "";
-                foreach (string s in command.options)
+                var o = "";
+                foreach (var s in command.options)
                 {
                     if (s == "STORED") o += 'S';
                     else if (s == "AVAILABLE") o += 'M';
@@ -542,8 +542,8 @@ namespace IngameScript
                 }
                 return o == "" ? "SMEI" : o;
             }
-            string PowerTableHeadline(DP command, string os, bool gn) { var sr = gn ? "Grid," : ""; sr += ",Type"; foreach (char c in os) { sr += ",|,"; if (c == 'S') sr += "Stored"; else if (c == 'M') sr += "Avali."; else if (c == 'E') sr += "Output"; else if (c == 'I') sr += "Input"; switch (command.style) { case 1: sr += "(" + zW + ")"; break; case 2: sr += "(" + pW + ")"; break; case 3: sr += "(" + pW + "),(" + zW + ")"; break; default: sr += "(" + pW + "),(" + pW + ")"; break; } } return sr; }
-            string PowerTableRow(DP command, dyDisplayableVariable p, string os) { var sr = ""; var ls = new List<string> { ",|,(" + zW + ")", ",|,(" + pW + ")", ",|,(" + pW + "),(" + zW + ")", ",|,(" + pW + "),(" + pW + ")" }; foreach (char c in os) { var s2 = ""; if (p.getVC(c, false) != null) { if (c == 'S') s2 = "@fS"; else if (c == 'M') s2 = "@fM"; else if (c == 'E') s2 = "@fO"; else if (c == 'I') s2 = "@fI"; switch (command.style) { case 1: sr += ",|," + s2 + "_R"; break; case 2: sr += ",|," + s2; break; case 3: sr += ",|," + s2 + "," + s2 + "_R"; break; default: sr += ",|," + s2 + "," + s2 + "_M"; break; } } else sr += ls[command.style - 1]; } return sr; }
+            string PowerTableHeadline(DP command, string os, bool gn) { var sr = gn ? "Grid," : ""; sr += ",Type"; foreach (var c in os) { sr += ",|,"; if (c == 'S') sr += "Stored"; else if (c == 'M') sr += "Avali."; else if (c == 'E') sr += "Output"; else if (c == 'I') sr += "Input"; switch (command.style) { case 1: sr += "(" + zW + ")"; break; case 2: sr += "(" + pW + ")"; break; case 3: sr += "(" + pW + "),(" + zW + ")"; break; default: sr += "(" + pW + "),(" + pW + ")"; break; } } return sr; }
+            string PowerTableRow(DP command, dyDisplayableVariable p, string os) { var sr = ""; var ls = new List<string> { ",|,(" + zW + ")", ",|,(" + pW + ")", ",|,(" + pW + "),(" + zW + ")", ",|,(" + pW + "),(" + pW + ")" }; foreach (var c in os) { var s2 = ""; if (p.getVC(c, false) != null) { if (c == 'S') s2 = "@fS"; else if (c == 'M') s2 = "@fM"; else if (c == 'E') s2 = "@fO"; else if (c == 'I') s2 = "@fI"; switch (command.style) { case 1: sr += ",|," + s2 + "_R"; break; case 2: sr += ",|," + s2; break; case 3: sr += ",|," + s2 + "," + s2 + "_R"; break; default: sr += ",|," + s2 + "," + s2 + "_M"; break; } } else sr += ls[command.style - 1]; } return sr; }
             string gTD(string s) { switch (s) { case "Z+": return "Forward"; case "Z-": return "Backward"; case "X+": return "Right"; case "X-": return "Left"; case "Y+": return "Upward"; case "Y-": return "Downward"; } return "-?-"; }
             void aTD(DP command, string t = "", string f = "")
             {
@@ -641,7 +641,7 @@ namespace IngameScript
                         if (fs) sp.Add(",Stored:(18)" + aPL4("@fS"));
                         break;
                 }
-                foreach (string s in sp) addSingleLine(command, p, s);
+                foreach (var s in sp) addSingleLine(command, p, s);
             }
             bool IsCategoryShown(DP command, string s, string s1) { if (command.options.Contains("-" + s1)) return false; if (command.is_All || s == s1) return true; return false; }
             // inventory categories: option = title [= tag (typeString of the item, default: the title)], in display order
@@ -650,7 +650,7 @@ namespace IngameScript
                 + ";O-BOTTLES=Oxygen Bottles=" + TypeOBottle + ";KITS=Consumable Kits=" + TypeKit + ";FOOD=Foodproducts=Food;SEEDS=Seeds=SeedItem;CASH=Space Credits=" + TypePhysicalObject;
             void INVENTORY(DP command, Dictionary<MyItemType, dyInventory> invl)
             {
-                List<inventoryDisplayItems> idil = new List<inventoryDisplayItems>();
+                var idil = new List<inventoryDisplayItems>();
                 inventoryDisplayItems blockItemList = null;
                 if (command.ifOption("BLOCK"))
                 {
@@ -662,7 +662,7 @@ namespace IngameScript
                     command.options.Add("ALL");
                     command.is_All = true;
                 }
-                foreach (string bs in command.options)
+                foreach (var bs in command.options)
                 {
                     if (bs == "UTILS") { inventoryDisplayItems idix = new inventoryDisplayItems("Utils", TypeTool); idix.AddTag("Weapons"); idix.AddTag(TypeDatapad); idix.AddTag(TypeHBottle); idix.AddTag(TypeOBottle); idix.AddTag(TypeKit); idil.Add(idix); }
                     if (bs == "BOTTLES") { inventoryDisplayItems idix = new inventoryDisplayItems("Bottles", TypeHBottle); idix.AddTag(TypeOBottle); idil.Add(idix); }

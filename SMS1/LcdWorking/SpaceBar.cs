@@ -13,7 +13,7 @@ namespace IngameScript
     partial class Program
     {
         //Space
-        public class SP
+        class SP
         {
             static int SPLrc = 700;
             int live = 5;
@@ -56,12 +56,12 @@ namespace IngameScript
         static SP fspm(float with) { foreach (SP osp in SPL) { if (osp.with == with) return osp; } SP nsp = new SP(with); SPL.Add(nsp); return nsp; }
         static string fSm(float with) { return fspm(with).getFStr(); }
         //Bar
-        public class BarRatio
+        class BarRatio
         {
             public int live = 10;
             int gswert, spaces;
             public string bstr;
-            public static int GPLrc = 10;
+            static int GPLrc = 10;
             public BarRatio(float wi, int w)
             {
                 spaces = (int)(wi / 1.43076f) - 2;
@@ -75,11 +75,11 @@ namespace IngameScript
                 if (((spaces * (w > 100 ? 100 : w)) / 100) == gswert) return true;
                 else return false;
             }
-            public static void Refresh()
+            static void Refresh()
             {
                 if (--GPLrc < 1)
                 {
-                    foreach (float gw in GPL.Keys)
+                    foreach (var gw in GPL.Keys)
                     {
                         for (int i = GPL[gw].Count - 1; i > 0; i--)
                         {

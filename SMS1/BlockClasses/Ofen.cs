@@ -13,16 +13,16 @@ namespace IngameScript
     partial class Program
     {
         //Ofen
-        public class Ofen : dyBlockPowerConsumer
+        class Ofen : dyBlockPowerConsumer
         {
-            static ST lsch = new ST(3); Dictionary<string, bool> ores = new Dictionary<string, bool>(); ST schc = new ST(5); public IMyRefinery raff; public int fertig;
+            static ST lsch = new ST(3); Dictionary<string, bool> ores = new Dictionary<string, bool>(); ST schc = new ST(5); IMyRefinery raff; int fertig;
             public Ofen(IMyTerminalBlock r) { addChangeType = ChangeType.Refinery_add; nameChangeType = ChangeType.Refinery_name; tb = r; raff = (IMyRefinery)r; getBlockDefinition(); setBlockTypeFields(); addChange(); }
             public override void getPCvar(dyDisplayableVariable pv)
             {
                 var gi = readInventarList(pv, 0, '0');
                 readInventarList(pv, 1, '1');
                 string ws;
-                string nws = "";
+                var nws = "";
                 float waf;
                 float nwaf = 0;
                 if (bs.Contains("Hydroponics"))

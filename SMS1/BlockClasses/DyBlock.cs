@@ -15,7 +15,7 @@ namespace IngameScript
         //B
         public abstract class dyBlock : dyBlockDisplayable
         {
-            public P pms = new P(); public IMyCubeGrid mcg = null; string sdi = ""; public IMyTerminalBlock tb; public string bt = "xxx"; public string bs = "xxx"; public List<inventarList> invs = new List<inventarList>();
+            public P pms = new P(); IMyCubeGrid mcg = null; string sdi = ""; public IMyTerminalBlock tb; public string bt = "xxx"; public string bs = "xxx"; List<inventarList> invs = new List<inventarList>();
             public inventarList readInventarList(dyDisplayableVariable p, int i = 0, char c = 'F') { inventarList iv = getInventarList(i); if (iv == null) { var niv = tb.GetInventory(i); if (niv == null) return null; iv = new inventarList(i, niv, new VC(c, "@fF" + i, Fv)); invs.Add(iv); add_to_VC(iv.volume); } iv.RefreshInventoryItems(mcg, p); return iv; }
             public inventarList getInventarList(int i = 0) { foreach (var x in invs) if (x.id == i) return x; return null; }
             public string[] getDetailedInfo() { if (sdi != tb.DetailedInfo) { return tb.DetailedInfo.Split('\n'); } return new string[] { }; }
@@ -27,16 +27,16 @@ namespace IngameScript
             public override void Refresh(bool f = false) { if (mcg == null) { mcg = tb.CubeGrid; sT("@fG", mcg.CustomName); }; getPCvar(dyDisplayableVariable.getPV(mcg, bt)); base.Refresh(); }
         }
         // Cargo
-        public class dyCargoContainer : dyBlock
+        class dyCargoContainer : dyBlock
         {
             public dyCargoContainer(IMyTerminalBlock t) { addChangeType = ChangeType.Cargo_add; nameChangeType = ChangeType.Cargo_name; tb = t; getBlockDefinition(); bt = "Container"; setBlockTypeFields(); addChange(); }
             public override void getPCvar(dyDisplayableVariable pv) { readInventarList(pv); }
         }
         //Damageblocks
-        public class dyDamageBlock : dyBlock
+        class dyDamageBlock : dyBlock
         {
             VC h;
-            public dyDamageBlock(IMyTerminalBlock t) { addChangeType = ChangeType.Damage_add; nameChangeType = ChangeType.Damage_name; if (ShowDamageBlockOnHUD) t.ShowOnHUD = true; tb = t; getBlockDefinition(); setBlockTypeFields(); bt = "Damageblocks"; addChange(); h = getVC('h'); h.M = 1f; }
+            public dyDamageBlock(IMyTerminalBlock t) { addChangeType = ChangeType.Damage_add; nameChangeType = ChangeType.Damage_name; if (ShowDamageBlockOnHUD) t.ShowOnHUD = true; tb = t; getBlockDefinition(); setBlockTypeFields(); bt = DamageBlocks; addChange(); h = getVC('h'); h.M = 1f; }
             public override void remove() { addChange(); tb.ShowOnHUD = false; }
             float gH() { IMySlimBlock s = tb.CubeGrid.GetCubeBlock(tb.Position); return (s.BuildIntegrity - s.CurrentDamage) / s.MaxIntegrity; }
             public override void getPCvar(dyDisplayableVariable pv) { h.C = gH(); sV('h', 1, h.C, pv); }
@@ -50,7 +50,7 @@ namespace IngameScript
         //Mi
         public abstract class dyBlockPowerConsumer : dyBlockFunctional
         {
-            public VC vci; public bool IsW = true;
+            VC vci; public bool IsW = true;
             public dyBlockPowerConsumer() { vci = getVC('I'); }
             public void sI(dyDisplayableVariable pv, float f = 0.001f) { var u = getPstr(getDetailedInfo()[1]); sV('I', u, iEF() ? (IsW ? u : f) : 0, pv); }
             public override void getPCvar(dyDisplayableVariable pv)
@@ -79,10 +79,10 @@ namespace IngameScript
             public void aRS(double t) { if (iEF()) rsp += t; }
         }
         //Dock
-        public class dyConnector : dyBlockFunctional
+        class dyConnector : dyBlockFunctional
         {
             bool ifdock;
-            public IMyShipConnector connector;
+            IMyShipConnector connector;
             // the connected connector of a ship (not of a station), these grids belong to the ship in SHIP mode (shipConstructBlocks)
             public IMyShipConnector docked_connector = null;
             // the connected grid, ship or station: the grid shown by the dock filter "[dock:name]"

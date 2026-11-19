@@ -22,9 +22,9 @@ namespace IngameScript
             IMyTerminalBlock tb;
             public bool obs;
             public TextSurfaceDisplay(IMyTextSurface nts, IMyTerminalBlock p) { tsg = p.CubeGrid; ts = nts; sMM(); tb = p; bt = p.BlockDefinition.ToString(); sWF(); setLinesBounds(5); }
-            public void sMM() { maxl = imaxl; minl = iminl; }
+            void sMM() { maxl = imaxl; minl = iminl; }
             void sC(float f, float w, int m, float ixp = 0) { fconst = f; wconst = w; imaxl = m; xp = ixp; }
-            public void sWF()
+            void sWF()
             {
                 var Y = ts.SurfaceSize.Y; var X = ts.SurfaceSize.X;
                 if (bt.Contains("Med") && X == 512f && Y > 307f && Y < 308f) sC(10f, 88.5f, 8, 3);
@@ -59,10 +59,10 @@ namespace IngameScript
                 sMM();
                 obs = false;
                 displayDefinition = ncds;
-                if (displayDefinition == "") displayDefinition = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
+                if (displayDefinition == "") displayDefinition = EmptyLcdHelp;
                 setName((pm.Name.StartsWith("@dis") ? tb.CustomName : pm.Name) + " (" + ts.DisplayName + ")");
-                if (pm.isPM("Maxlines")) maxl = getIntegerWithBounds(pm.getPM("Maxlines"), maxlines);
-                if (pm.isPM("Minlines")) minl = getIntegerWithBounds(pm.getPM("Minlines"), maxlines);
+                if (pm.isPM(OptMaxlines)) maxl = getIntegerWithBounds(pm.getPM(OptMaxlines), maxlines);
+                if (pm.isPM(OptMinlines)) minl = getIntegerWithBounds(pm.getPM(OptMinlines), maxlines);
                 if (pm.isPM("Lines"))
                 {
                     newlines = getIntegerWithBounds(pm.getPM("Lines"), maxlines, minl, maxl);

@@ -17,14 +17,14 @@ namespace IngameScript
         {
             public bool obs = false; public IMyTextPanel lcd = null; public string ly = "";
             public void InitLCD(IMyTextPanel p, int nl = 0) { lcd = p; ly = getPanelSubtype(p); tsg = lcd.CubeGrid; setWFConst(); setLinesBounds(nl); }
-            public void setWFConst() { wconst = 94.5f; if (ly.EndsWith("Wide")) wconst = 188.8f; else if (ly.StartsWith("Small")) { wconst = 188.8f; if (ly.Contains("Flat")) fconst = 13.8f; else if (ly.Contains("_LCD")) fconst = 11.0f; else { fconst = 17.2854f; wconst = 91.66f; } } else { if (ly.Contains("_LCD_")) { wconst = 375.8f; fconst = 9.5f; } else if (ly.Contains("Text") || ly.Contains("5x3")) fconst = 10.4f; } }
+            void setWFConst() { wconst = 94.5f; if (ly.EndsWith("Wide")) wconst = 188.8f; else if (ly.StartsWith("Small")) { wconst = 188.8f; if (ly.Contains("Flat")) fconst = 13.8f; else if (ly.Contains("_LCD")) fconst = 11.0f; else { fconst = 17.2854f; wconst = 91.66f; } } else { if (ly.Contains("_LCD_")) { wconst = 375.8f; fconst = 9.5f; } else if (ly.Contains("Text") || ly.Contains("5x3")) fconst = 10.4f; } }
         }
         //infoLCD
-        public class LCD_Infolcd : LCD
+        class LCD_Infolcd : LCD
         {
             public Vector3I linkpos; public List<IMyTextPanel> extlcds = new List<IMyTextPanel>();
             public LCD_Infolcd(IMyTextPanel panel) { linkpos = getUpP(panel); InitLCD(panel); }
-            public void setMML()
+            void setMML()
             {
                 if (ly.Contains("Corner"))
                 {
@@ -40,11 +40,11 @@ namespace IngameScript
             public void Calc(P pm)
             {
                 if (displayDefinition != lcd.CustomData) displayDefinition = lcd.CustomData;
-                if (displayDefinition == "") displayDefinition = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)";
+                if (displayDefinition == "") displayDefinition = EmptyLcdHelp;
                 setName(pm.Name);
                 setMML();
-                if (pm.isPM("Maxlines")) maxl = getIntegerWithBounds(pm.getPM("Maxlines"), maxlines);
-                if (pm.isPM("Minlines")) minl = getIntegerWithBounds(pm.getPM("Minlines"), maxlines);
+                if (pm.isPM(OptMaxlines)) maxl = getIntegerWithBounds(pm.getPM(OptMaxlines), maxlines);
+                if (pm.isPM(OptMinlines)) minl = getIntegerWithBounds(pm.getPM(OptMinlines), maxlines);
                 if (pm.isPM("Lines"))
                 {
                     newlines = getIntegerWithBounds(pm.getPM("Lines"), maxlines, minl, maxl);
@@ -59,7 +59,7 @@ namespace IngameScript
             public bool RemoveELCD(IMyTextPanel elcd) { if (extlcds.Contains(elcd)) { ClearELCDs(); return true; } return false; }
             public void ClearELCDs() { extlcds.Clear(); pnum = 1; linkpos = getUpP(lcd); }
             public void AddPanel(IMyTextPanel np) { if (ly == getPanelSubtype(np) && !extlcds.Contains(np)) { extlcds.Add(np); pnum++; linkpos = getUpP(np); np.WriteText("Init Linklcd....", false); } }
-            public override void writeToPanel() { int cos = 0; w2lcd(lcd, pages.Count > cos ? pages[cos++] : "", fontsize); foreach (IMyTextPanel t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; w2lcd(t, pages.Count > cos ? pages[cos++] : "", fontsize); } }
+            public override void writeToPanel() { int cos = 0; w2lcd(lcd, pages.Count > cos ? pages[cos++] : "", fontsize); foreach (var t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; w2lcd(t, pages.Count > cos ? pages[cos++] : "", fontsize); } }
         }
         //terminalLCD
         public class LCD_Terminal : LCD
@@ -71,11 +71,11 @@ namespace IngameScript
             static int clickNumber;
             ST mkdt = new ST(KEEPMENU);
             MenuMode mmode = MenuMode.Default;
-            public TerminalMenu menu = null;
+            TerminalMenu menu = null;
             string lcdclonemenu = "";
             TerminalSite curSite = null;
             string oldCustomData = "nix";
-            public int curml;
+            int curml;
             public LCD_Terminal(IMyTextPanel tp)
             {
                 lfix = true;

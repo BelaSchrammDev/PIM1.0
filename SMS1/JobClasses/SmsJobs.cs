@@ -117,7 +117,7 @@ namespace IngameScript
         {
             scanRunning = false;
             foreach (var pv in pvl)
-                if (pv.Name == "Damageblocks")
+                if (pv.Name == DamageBlocks)
                 {
                     VC v = pv.getVC('h');
                     v.C = v.M;

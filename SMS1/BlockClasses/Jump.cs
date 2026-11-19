@@ -13,7 +13,7 @@ namespace IngameScript
     partial class Program
     {
         //Jump
-        public class Jump : dyBlockPowerConsumer
+        class Jump : dyBlockPowerConsumer
         {
             IMyJumpDrive jumpDrive;
             public Jump(IMyTerminalBlock b) { addChangeType = ChangeType.Jumpdrive_add; nameChangeType = ChangeType.Jumpdrive_name; tb = b; jumpDrive = (IMyJumpDrive)b; getBlockDefinition(); bt = "JumpDrive"; setBlockTypeFields(); addChange(); getVC('S'); }
@@ -36,7 +36,7 @@ namespace IngameScript
                 sD("@fMJ", mjd, 20);
                 sV('I', iEF() ? mi : 0, ci, pv);
                 sV('S', jumpDrive.MaxStoredPower, jumpDrive.CurrentStoredPower, pv);
-                sT("@fChT", ci > 0 ? fT((jumpDrive.MaxStoredPower - jumpDrive.CurrentStoredPower) / ci) : " ", 20);
+                sT(FieldChargeTime, ci > 0 ? fT((jumpDrive.MaxStoredPower - jumpDrive.CurrentStoredPower) / ci) : " ", 20);
                 sT("@fSt", iEF() ? jumpDrive.Status.ToString() : "Offline", 20);
             }
         }

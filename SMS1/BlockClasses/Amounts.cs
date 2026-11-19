@@ -17,10 +17,10 @@ namespace IngameScript
         {
             public VC amountVC;
             public void addAmountVC(Func<double, string> f, string field = "@fAm") { amountVC = new VC('A', field, f); amountVC.addm(MDIs); vcl.Add(amountVC); }
-            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith("AMOUNT")) { dyAmount oi = other as dyAmount; if (oi.amountVC.C == amountVC.C) return 0; if (sortColumn.EndsWith("BACK")) return oi.amountVC.C > amountVC.C ? -1 : 1; else return oi.amountVC.C > amountVC.C ? 1 : -1; } return base.CompareTo(other); }
+            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith(SortAmount)) { dyAmount oi = other as dyAmount; if (oi.amountVC.C == amountVC.C) return 0; if (sortColumn.EndsWith(SortBack)) return oi.amountVC.C > amountVC.C ? -1 : 1; else return oi.amountVC.C > amountVC.C ? 1 : -1; } return base.CompareTo(other); }
         }
         static List<dyCargouse> cargouseList = new List<dyCargouse>();
-        public class dyCargouse : dyAmount
+        class dyCargouse : dyAmount
         {
             public dyCargouse(String name)
             {
@@ -65,7 +65,7 @@ namespace IngameScript
             Func<double, string> aF;
             double am, av;
             MDIs q = new MDIs(pW, true);
-            public IMyCubeGrid ig = null;
+            IMyCubeGrid ig = null;
             public smsItemType sy;
             public dyInventory(MyItemType tstr, IMyCubeGrid iig = null, int xsd = 0)
             {
@@ -109,13 +109,13 @@ namespace IngameScript
                     changeNeed(ChangeType.Inventar_change_amount);
                 }
             }
-            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith("VOLUME") || sortColumn.StartsWith("MASS")) { dyInventory oi = other as dyInventory; double x = 0, xo = 0; if (sortColumn.StartsWith("VOLUME")) { x = av; xo = oi.av; } else { x = am; xo = oi.am; } if (xo == x) return 0; if (sortColumn.EndsWith("BACK")) return xo > x ? -1 : 1; else return xo > x ? 1 : -1; } return base.CompareTo(other); }
+            public override int CompareTo(dyBlockDisplayable other) { if (sortColumn.StartsWith("VOLUME") || sortColumn.StartsWith("MASS")) { dyInventory oi = other as dyInventory; double x = 0, xo = 0; if (sortColumn.StartsWith("VOLUME")) { x = av; xo = oi.av; } else { x = am; xo = oi.am; } if (xo == x) return 0; if (sortColumn.EndsWith(SortBack)) return xo > x ? -1 : 1; else return xo > x ? 1 : -1; } return base.CompareTo(other); }
         }
         //Ip
-        public class IPrio : dyAmount
+        class IPrio : dyAmount
         {
             public string type;
-            public IPrio(string tstr, int pr = 0) { setName(tstr); type = tstr; addAmountVC(Fd); amountVC.C = pr; amountVC.M = 100; changeNeed(ChangeType.Ingotprio_add); }
+            IPrio(string tstr, int pr = 0) { setName(tstr); type = tstr; addAmountVC(Fd); amountVC.C = pr; amountVC.M = 100; changeNeed(ChangeType.Ingotprio_add); }
             public void setPrio(int newIngotprio)
             {
                 del = false;
@@ -128,7 +128,7 @@ namespace IngameScript
             public static IPrio getPrio(List<IPrio> pl, string pt) { foreach (IPrio ip in pl) { if (ip.type == pt) return ip; } IPrio np = new IPrio(pt); pl.Add(np); return np; }
         }
         //OII
-        public class dyResourceOreIngot : dyBlockDisplayable
+        class dyResourceOreIngot : dyBlockDisplayable
         {
             smsItemType sto, sti; public int of = 0; public double oa = -1, ia = -1;
             public dyResourceOreIngot(string ist)

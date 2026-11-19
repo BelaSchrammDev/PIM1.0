@@ -13,9 +13,9 @@ namespace IngameScript
     partial class Program
     {
         //Okuma
-        public class Okuma : dyBlockPowerConsumer
+        class Okuma : dyBlockPowerConsumer
         {
-            public IMyAssembler AssemblerBlock;
+            IMyAssembler AssemblerBlock;
             public Okuma(IMyTerminalBlock b)
             {
                 addChangeType = ChangeType.Assembler_add;
@@ -37,7 +37,7 @@ namespace IngameScript
                 string firstQueueItemName = "----", firstQueueItemAmount = "0", secondQueueItemName = "----", secondQueueItemAmount = "0";
                 if (!AssemblerBlock.IsQueueEmpty)
                 {
-                    List<MyProductionItem> pitem = new List<MyProductionItem>();
+                    var pitem = new List<MyProductionItem>();
                     AssemblerBlock.GetQueue(pitem);
                     firstQueueItemName = getCoNa(pitem[0].BlueprintId.SubtypeName);
                     firstQueueItemAmount = pitem[0].Amount.ToString();

@@ -13,9 +13,9 @@ namespace IngameScript
     partial class Program
     {
         //Reactors
-        public class Reactor : dyBlockPowerStorage
+        class Reactor : dyBlockPowerStorage
         {
-            public IMyReactor m;
+            IMyReactor m;
             float mq = 0.052f, brennstoff, eff = 1;
             double ms;
             public Reactor(IMyTerminalBlock b)
@@ -30,7 +30,7 @@ namespace IngameScript
                 setBlockTypeFields();
                 addChange();
                 sM("@fIG", 0, 23);
-                sT("@fChT", "", 25);
+                sT(FieldChargeTime, "", 25);
             }
             public override void getPCvar(dyDisplayableVariable pv)
             {
@@ -44,7 +44,7 @@ namespace IngameScript
             public override void Display()
             {
                 sM("@fIG", brennstoff, 23);
-                sT("@fChT", m.CurrentOutput > 0 ? fT((brennstoff * eff) / m.CurrentOutput) : "----", 25);
+                sT(FieldChargeTime, m.CurrentOutput > 0 ? fT((brennstoff * eff) / m.CurrentOutput) : "----", 25);
                 base.Display();
             }
         }

@@ -13,9 +13,9 @@ namespace IngameScript
     partial class Program
     {
         // Weapons
-        public class Weapon : dyBlockPowerConsumer
+        class Weapon : dyBlockPowerConsumer
         {
-            public IMyUserControllableGun gun;
+            IMyUserControllableGun gun;
             string ammoname;
             int ammonum, ammoamount;
             public Weapon(IMyTerminalBlock b)

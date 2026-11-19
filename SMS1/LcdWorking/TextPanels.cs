@@ -196,7 +196,7 @@ namespace IngameScript
                     sms_disp.Remove(ilcd);
                     infolcds.Remove(ilcd);
                 }
-                foreach (IMyTextPanel xlcd in ilcd.extlcds)
+                foreach (var xlcd in ilcd.extlcds)
                 {
                     if (!textPanelBlocks.Contains(xlcd))
                     {
