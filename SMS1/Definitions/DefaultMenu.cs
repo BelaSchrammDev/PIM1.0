@@ -16,7 +16,7 @@
             X_Line + "@command(ctrl_ref,Control_all Refinerys,#ctrl_ref#)\n@command(ctrl_ass,Control_all Assemblers,#ctrl_ass#)\n@command(ctrl_all,Control_all Production,#ctrl_all#)\n@command(noctrl_ref,Control_no Refinerys,#noctrl_ref#)\n@command(noctrl_ass,Control_no Assemblers,#noctrl_ass#)\n\n" +
             X_Line + "@titleline(" + tHeadLine + ")\n\n" +
             // the main page: its body is the TerminalMainPageBody of the config (not indented, may contain '|')
-            X_LineNewSite + "main,MainMenu)\n  @titleline(@maingridname,,< Terminal Mainpage >,,@time,@date)\n  @menu(inv_dock,production,energy,hoxy)\n  @body\n" + tMainPage + "\n  @endsite\n\n" +
+            X_LineNewSite + "main,MainMenu)\n  @titleline(@maingridname,,< Terminal Mainpage >,,@time,@date)\n  @menu(inv_dock,production,energy,hoxy)\n  @body\n\ninvman(sort,style 3,nomessage)\n  @endsite\n\n" +
             DefaultSite("inv_comp,Components)\n  @alternative(inv_dock,Inventory Dockings", "inv_ore_ingot,inv_tool,docking,main", "\n|inventory(component,sort,zero,fillbar,noline,style 2)") +
             DefaultSite("damage,Damage", ",prod_ref,prod_ass,main", "|damage_b(style 3)") +
             DefaultSite("production,Production Damage", "damage,prod_ref,prod_ass,main", "\n|refinerys\n|assemblers") +

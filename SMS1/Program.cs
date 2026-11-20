@@ -21,7 +21,7 @@ namespace IngameScript
         static TerminalMenu defaultMenu = null;
         static bool ShowDamageBlockOnHUD;
         static int KEEPMENU = 120;
-        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date", tMainPage = "\ninvman(sort,style 3,nomessage)";
+        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date";
         // script-to-script networking: master/standby among the SMS, the PIM data from the PIM master
         NetWorkingIgc netIgc; static NetWorkingNode Net;
         // the last PIM data received ("" = none or PIM is gone), read by the job ReadPimData

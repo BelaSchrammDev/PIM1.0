@@ -22,11 +22,7 @@
             Cfilled = "@-(filled)",
             // (item types: Share/Common/ItemTypes.cs)
 
-            // CustomData config: section markers
-            X_Config = "### Config ###",
-            X_Config_end = "### Config End ###",
-            X_tItemDefs = "### ItemDefinitions ###",
-            X_tItemdefsEnd = "### ItemDefinitionsEnd ###",
+            // CustomData config: starts the item definitions of a mod ("### MOD=Vanilla")
             X_tNewMod = "### MOD",
 
             // CustomData config: keys
@@ -37,8 +33,6 @@
             X_Scriptmode = "ScriptMode",
             X_M_Vanilla = "Vanilla",
             X_tHeadLine = "TerminalHeadLine",
-            X_tMainPage = "TerminalMainPageBody",
-            X_tMainPageEnd = X_tMainPage + "End",
 
             // help text of an LCD without commands
             EmptyLcdHelp = "writex(write commands to LCDs 'CustomData' ,)\nwritex(for example 'batterys' or 'energy',)",
@@ -55,7 +49,6 @@
 
             // CustomData config: comment lines
             X_Line = "  / =================================\n",
-            X_LineNewSite = X_Line + "@newsite(",
-            X_Line2 = "  / ------------\n";
+            X_LineNewSite = X_Line + "@newsite(";
     }
 }

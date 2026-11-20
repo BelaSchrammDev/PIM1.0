@@ -6,7 +6,7 @@ namespace IngameScript
     // test access to the private members of the script (only in the test assembly)
     partial class Program
     {
-        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date", tMainPage = "\ninvman(sort,style 3,nomessage)";
+        static string tHeadLine = "@maingridname,,<,Welcome to SMS Terminal,>,,@time,/,@date";
         public static MenuDef Parse(string definition) { return ParseMenu(definition, "HEAD"); }
         public static string[] Params(string line, int count) { return MenuParams(line, count); }
         public static string DefaultMenuDefinition { get { return new Program().defMenu; } }

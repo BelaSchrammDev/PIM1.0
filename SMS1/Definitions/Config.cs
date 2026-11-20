@@ -18,53 +18,35 @@ namespace IngameScript
         {
             // the mods of the item data (Vanilla is always used)
             for (var i = 1; i < ItemDataMods.Length; i++) usemods.Add(ItemDataMods[i], false);
-            var configteil = false;
-            var mainpageteil = false;
-            var itemdefsteil = false;
+            // set by the first "### MOD=..." line: from there on the lines are item definitions
             Dictionary<MyItemType, int> curModItemDef = null;
             foreach (var cline in Me.CustomData.Split('\n'))
             {
                 var cstr = cline.Trim();
-                if (cstr.Length == 0 || cstr[0] == '/') continue;
-                else if (cstr[0] == '@') continue;
-                else if (cstr.Contains(X_Config)) { configteil = true; continue; }
-                else if (cstr.Contains(X_Config_end)) { configteil = false; continue; }
-                else if (cstr.Contains(X_tItemDefs)) { itemdefsteil = true; continue; }
-                else if (cstr.Contains(X_tItemdefsEnd)) { itemdefsteil = false; continue; }
-                else if (itemdefsteil)
+                // comments, and the section markers of older versions ("### Config ###" ..., no '=')
+                if (cstr.Length == 0 || cstr[0] == '/' || cstr[0] == '@') continue;
+                if (cstr.StartsWith(X_tNewMod) || curModItemDef != null)
                 {
-                    var cs = new List<string>(cstr.Split('=', '(', ')'));
-                    if (cs.Count < 2) continue;
+                    var cs = cstr.Split('=', '(', ')');
+                    if (cs.Length < 2) continue;
                     if (cs[0] == X_tNewMod)
                     {
-                        if (!modItemDefsList.ContainsKey(cs[1]))
-                        {
-                            modItemDefsList.Add(cs[1], new Dictionary<MyItemType, int>());
-                        }
+                        if (!modItemDefsList.ContainsKey(cs[1])) modItemDefsList.Add(cs[1], new Dictionary<MyItemType, int>());
                         curModItemDef = modItemDefsList[cs[1]];
                         continue;
                     }
-                    if (curModItemDef != null)
+                    var types = cs[0].Split('/');
+                    if (types.Length > 1)
                     {
-                        var types = cs[0].Split('/');
-                        if (types.Length > 1)
-                        {
-                            var t = new MyItemType(types[0], types[1]);
-                            int amount = 0;
-                            int.TryParse(cs[1], out amount);
-                            if (!curModItemDef.ContainsKey(t)) curModItemDef.Add(t, amount);
-                            if (cs.Count > 2 && cs[2] != "" && !itemAlterNameList.ContainsKey(t)) itemAlterNameList.Add(t, cs[2]);
-                        }
-                        continue;
+                        var t = new MyItemType(types[0], types[1]);
+                        int amount;
+                        int.TryParse(cs[1], out amount);
+                        if (!curModItemDef.ContainsKey(t)) curModItemDef.Add(t, amount);
+                        if (cs.Length > 2 && cs[2] != "" && !itemAlterNameList.ContainsKey(t)) itemAlterNameList.Add(t, cs[2]);
                     }
                 }
-                else if (configteil)
+                else
                 {
-                    if (mainpageteil)
-                    {
-                        tMainPage += cstr + "\n";
-                        continue;
-                    }
                     var cs = cstr.Split('=');
                     if (cs.Length < 2) continue;
                     switch (cs[0])
@@ -74,10 +56,6 @@ namespace IngameScript
                         case X_KeepMenu: int.TryParse(cs[1], out KEEPMENU); break;
                         case X_TargetCycleTime: double.TryParse(cs[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out configuredCycleSeconds); break;
                         case X_tHeadLine: tHeadLine = cs[1]; break;
-                        case X_tMainPage: mainpageteil = true; break;
-                        case X_tMainPageEnd: mainpageteil = false; break;
-                        case X_tItemDefs: itemdefsteil = true; break;
-                        case X_tItemdefsEnd: itemdefsteil = false; break;
                         case X_Scriptmode:
                             var mode = cs[1].ToUpper();
                             if (mode == "SHIP") configuredMode = ScriptMode.SHIP;
@@ -95,36 +73,33 @@ namespace IngameScript
         }
         void writeconfig()
         {
-            var customstr = X_Config + "\n\n" + X_Line + "  / to activate changes, please restart script\n" + X_Line + "\n  / target cycle time in seconds: how often the displays are updated\n  / smaller = more up to date, larger = less load on the server\n  / 0 = automatic: ship 1 s, station 3 s\n"
-                + X_TargetCycleTime + "=" + configuredCycleSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n\n"
-                + "  / Scriptmode: AUTO, SHIP, SHIP_PLUS, STATION\n"
-                + X_Scriptmode + "=" + configuredMode.ToString() + "\n\n"
-                + "  / show info on the lcd of the programmable block\n"
-                + X_ShowInfoPBLcd + "=" + ShowInfoPBLcd.ToString() + "\n\n"
-                + "  / show damaged blocks on HUD (need antenna on the grid)\n"
-                + X_ShowDamageBlockHUD + "=" + ShowDamageBlockOnHUD + "\n\n"
-                + "  / time to return terminals to the mainmenu (global) in sec.\n  / 0 = never return\n"
-                + X_KeepMenu + "=" + KEEPMENU.ToString() + "\n\n"
-                + "  / terminal headline\n"
+            // one short comment per setting, the details are in the Steam guide
+            var customstr = "  / SMS config (details: Steam guide), restart the script after changes\n\n"
+                + "  / display update in s, 0 = auto (ship 1, station 3)\n"
+                + X_TargetCycleTime + "=" + configuredCycleSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n"
+                + "  / AUTO, SHIP, SHIP_PLUS, STATION\n"
+                + X_Scriptmode + "=" + configuredMode + "\n"
+                + X_ShowInfoPBLcd + "=" + ShowInfoPBLcd + "\n"
+                + "  / needs an antenna\n"
+                + X_ShowDamageBlockHUD + "=" + ShowDamageBlockOnHUD + "\n"
+                + "  / s until terminals return to the main menu, 0 = never\n"
+                + X_KeepMenu + "=" + KEEPMENU + "\n"
                 + X_tHeadLine + "=" + tHeadLine + "\n\n"
-                + "  / terminal mainpage body\n"
-                + X_tMainPage + "\n" + tMainPage + "\n" + X_tMainPageEnd + "\n\n"
-            + X_Line + "  / mods that can be used.\n  /     is there a mod missing? \n  /           write it in the comments of SMS or PIM\n\n";
-            foreach (var mod in usemods.Keys) customstr += mod + "=" + usemods[mod].ToString() + "\n";
-            customstr += "\n" + X_Line + X_tItemDefs + "\n  / maximumamount for the fillbar in the inventory command\n  / it is possible to specify an alternative name of the item\n  / write it in brackets after the amount, like\n  / MyObjectBuilder_Component/Explosives=500 (Kawumm)\n";
+                + "  / mods\n";
+            foreach (var mod in usemods.Keys) customstr += mod + "=" + usemods[mod] + "\n";
+            customstr += "\n  / items: type=max amount of the fillbar (alternative name)\n";
             foreach (var mod in modItemDefsList.Keys)
             {
                 if (mod == X_M_Vanilla || (usemods.ContainsKey(mod) && usemods[mod]))
                 {
-                    customstr += "\n" + X_Line + X_tNewMod + "=" + mod + "\n" + X_Line2;
+                    customstr += "\n" + X_tNewMod + "=" + mod + "\n";
                     foreach (var i in modItemDefsList[mod].Keys)
                     {
                         customstr += i + "=" + modItemDefsList[mod][i] + (itemAlterNameList.ContainsKey(i) ? " (" + itemAlterNameList[i] + ")" : "") + "\n";
                     }
                 }
             }
-            customstr += "\n" + X_tItemdefsEnd + "\n";
-            Me.CustomData = customstr + X_Line + "\n" + X_Config_end + "\n\n";
+            Me.CustomData = customstr;
         }
     }
 }
