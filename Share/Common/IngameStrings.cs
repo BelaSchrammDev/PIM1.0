@@ -8,6 +8,9 @@ namespace IngameScript
 
         const string
 
+        // soft hyphen: an invisible character, as padding in texts (can also come with texts copied from an LCD)
+        SoftHyphen = "\u00AD",
+
         // subtypes (and parts of subtype names)
         SubtypeReprocessing = "Reprocessing",
         SubtypeSpentFuel = "SpentFuel",

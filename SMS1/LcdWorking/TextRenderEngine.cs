@@ -102,13 +102,13 @@ namespace IngameScript
                 readableLines = Math.Max(1, (int)(size.Y * linesPer512 / 512));
             }
             // the display definition (empty: help text) and the options Maxlines, Minlines, Lines; call after setting maxl/minl
-            public void ApplyDisplayOptions(P options, string definition)
+            public void ApplyDisplayOptions(Parameter options, string definition)
             {
                 displayDefinition = definition == "" ? EmptyLcdHelp : definition;
-                if (options.isPM(OptMaxlines)) maxl = getIntegerWithBounds(options.getPM(OptMaxlines), maxlines);
-                if (options.isPM(OptMinlines)) minl = getIntegerWithBounds(options.getPM(OptMinlines), maxlines);
-                lfix = options.isPM("Lines");
-                newlines = lfix ? getIntegerWithBounds(options.getPM("Lines"), maxlines, minl, maxl) : maxlines;
+                if (options.IsParameter(OptMaxlines)) maxl = getIntegerWithBounds(options.GetParameter(OptMaxlines), maxlines);
+                if (options.IsParameter(OptMinlines)) minl = getIntegerWithBounds(options.GetParameter(OptMinlines), maxlines);
+                lfix = options.IsParameter("Lines");
+                newlines = lfix ? getIntegerWithBounds(options.GetParameter("Lines"), maxlines, minl, maxl) : maxlines;
             }
             // writes the text with the current font size and padding
             public void WriteSurface(IMyTextSurface surface, string text) { w2ts(surface, text, fontsize, padding); }

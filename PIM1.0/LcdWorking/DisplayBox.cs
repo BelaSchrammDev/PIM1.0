@@ -49,8 +49,6 @@ namespace IngameScript
         // add DisplayPool Class
         class DisplayBox
         {
-            const char HSS = '\u00AD';
-
             static List<SP> SpacePoolList = new List<SP>();
             static Dictionary<char, float> CharWidthList = new Dictionary<char, float>();
 
@@ -87,7 +85,7 @@ namespace IngameScript
                     }
                     else spnum -= hsnum;
                     FillString += new String(' ', spnum);
-                    FillString += new String(HSS, hsnum);
+                    FillString += new String(SoftHyphen[0], hsnum);
                 }
                 public string GetFillString()
                 {
@@ -181,7 +179,7 @@ namespace IngameScript
                 SetCharWidth("M", 3.875f);
                 SetCharWidth("æœmw", 4.04347f);
                 SetCharWidth("WÆŒ", 4.65f);
-                CharWidthList.Add(HSS, 1.578695f);
+                CharWidthList.Add(SoftHyphen[0], 1.578695f);
             }
 
             static void SetCharWidth(string s, float z)

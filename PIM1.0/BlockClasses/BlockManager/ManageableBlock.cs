@@ -19,7 +19,7 @@ namespace IngameScript
 
             public bool IsClosed => FunctionalBlock != null && FunctionalBlock.Closed;
 
-            public bool IsPimControlled => Parameter.PIMcontrolled;
+            public bool IsPimControlled => Parameter.Tagged;
 
             public virtual bool RunManager()
             {

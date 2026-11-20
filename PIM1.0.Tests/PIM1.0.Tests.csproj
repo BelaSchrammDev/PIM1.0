@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -36,7 +36,9 @@
              Link="Linked\StatusViews.cs" />
     <Compile Include="..\Share\Common\RunningSign.cs"
              Link="Linked\RunningSign.cs" />
-    <Compile Include="..\PIM1.0\Tools\Parameter.cs"
+    <Compile Include="..\PIM1.0\Tools\SmsTag.cs"
+			Link="Linked\SmsTag.cs" />
+    <Compile Include="..\Share\Common\Parameter.cs"
 			Link="Linked\Parameter.cs" />
     <Compile Include="..\PIM1.0\Definitions\Properties.cs"
 	        Link="Linked\Properties.cs" />

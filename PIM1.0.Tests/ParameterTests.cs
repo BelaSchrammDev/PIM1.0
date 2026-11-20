@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IngameScript.Tests
 {
@@ -31,7 +31,7 @@ namespace IngameScript.Tests
             var result = _parameter.ParseArgs("Large Cargo Container");
 
             Assert.IsFalse(result);
-            Assert.IsFalse(_parameter.PIMcontrolled);
+            Assert.IsFalse(_parameter.Tagged);
             Assert.AreEqual(0, _parameter.ParameterList.Count);
         }
 
@@ -53,7 +53,7 @@ namespace IngameScript.Tests
             var result = _parameter.ParseArgs("Box (sms,food)");
 
             Assert.IsTrue(result);
-            Assert.IsTrue(_parameter.PIMcontrolled);
+            Assert.IsTrue(_parameter.Tagged);
         }
 
         [TestMethod]
@@ -128,15 +128,35 @@ namespace IngameScript.Tests
             var result = _parameter.ParseArgs("Box");
 
             Assert.IsFalse(result);
-            Assert.IsFalse(_parameter.PIMcontrolled);
+            Assert.IsFalse(_parameter.Tagged);
             Assert.AreEqual(0, _parameter.ParameterList.Count);
             Assert.AreEqual("Box", _parameter.Name.ToString());
         }
 
         [TestMethod]
+        public void GetParameter_ReturnsTheValueOrEmpty()
+        {
+            // SMS style: values after ':' and spaces after the commas
+            _parameter.ParseArgs("Panel (sms, infolcd:2, lines:10)");
+
+            Assert.AreEqual("2", _parameter.GetParameter("Infolcd"));
+            Assert.AreEqual("10", _parameter.GetParameter("Lines"));
+            Assert.AreEqual("", _parameter.GetParameter("Maxlines"));
+        }
+
+        [TestMethod]
+        public void ParseArgs_SoftHyphen_SeparatesWords()
+        {
+            // the soft hyphen can come with texts copied from an LCD
+            _parameter.ParseArgs("Panel (sms,max­lines:5)");
+
+            Assert.IsTrue(_parameter.IsParameter("Max­Lines"));
+        }
+
+        [TestMethod]
         public void ParseArgs_BecomingControlled_InvalidatesAutocraftingSettings()
         {
-            _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
+            Program.ParseProductionTag(_parameter, "Box (sms,food)");
 
             Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInvalid);
         }
@@ -144,10 +164,10 @@ namespace IngameScript.Tests
         [TestMethod]
         public void ParseArgs_LosingControl_InvalidatesAutocraftingSettings()
         {
-            _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
+            Program.ParseProductionTag(_parameter, "Box (sms,food)");
             Program.Properties.Data.AutoCraftingSettingsInvalid = false;
 
-            _parameter.ParseArgs("Box", canChangeAutocraftingStatus: true);
+            Program.ParseProductionTag(_parameter, "Box");
 
             Assert.IsTrue(Program.Properties.Data.AutoCraftingSettingsInvalid);
         }
@@ -155,10 +175,10 @@ namespace IngameScript.Tests
         [TestMethod]
         public void ParseArgs_UnchangedName_DoesNotInvalidateAutocraftingSettings()
         {
-            _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
+            Program.ParseProductionTag(_parameter, "Box (sms,food)");
             Program.Properties.Data.AutoCraftingSettingsInvalid = false;
 
-            _parameter.ParseArgs("Box (sms,food)", canChangeAutocraftingStatus: true);
+            Program.ParseProductionTag(_parameter, "Box (sms,food)");
 
             Assert.IsFalse(Program.Properties.Data.AutoCraftingSettingsInvalid,
                 "an unchanged name must not force a settings rebuild");

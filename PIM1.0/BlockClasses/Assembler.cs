@@ -78,7 +78,7 @@ namespace IngameScript
                 }
 
                 var wasPimControlled = IsPimControlled;
-                var pimControlled = Parameter.ParseArgs(AssemblerBlock.CustomName, true);
+                var pimControlled = ParseProductionTag(Parameter, AssemblerBlock.CustomName);
                 if (wasPimControlled && !pimControlled) Release();
 
                 var queue = new List<MyProductionItem>();

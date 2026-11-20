@@ -14,7 +14,7 @@ namespace IngameScript
     {
         // the text panels and surface providers of the construct, the known displays are marked obsolete until found again
         readonly List<IMyTerminalBlock> textPanelBlocks = new List<IMyTerminalBlock>();
-        readonly P textPanelArgs = new P();
+        readonly Parameter textPanelArgs = new Parameter();
         List<IMyTerminalBlock> CollectTextPanels()
         {
             GridTerminalSystem.GetBlocksOfType<IMyTextSurfaceProvider>(textPanelBlocks, b => b.IsSameConstructAs(Me));
@@ -33,7 +33,7 @@ namespace IngameScript
                 var t = (IMyTextPanel)ts;
                 if (pm.ParseArgs(t.CustomName))
                 {
-                    if (pm.isPM("Infolcd"))
+                    if (pm.IsParameter("Infolcd"))
                     {
                         LCD_Infolcd il = null;
                         foreach (var l in infolcds) if (t == l.lcd)
@@ -51,7 +51,7 @@ namespace IngameScript
                         RemoveFromLinkLcds(t);
                         il.Calc(pm);
                     }
-                    else if (pm.isPM("Terminal"))
+                    else if (pm.IsParameter("Terminal"))
                     {
                         LCD_Terminal newTerminal = null;
                         foreach (var l in LCDts)
@@ -70,7 +70,7 @@ namespace IngameScript
                         RemoveFromLinkLcds(t);
                         newTerminal.Calc(pm);
                     }
-                    else if (pm.isPM("Linklcd"))
+                    else if (pm.IsParameter("Linklcd"))
                     {
                         nomaster = true;
                         foreach (var llcd in infolcds)
@@ -125,7 +125,7 @@ namespace IngameScript
                         var su = s.Trim().ToUpper();
                         if (su.Contains("@DISPLAY"))
                         {
-                            if (pm.ParseArgs(s)) sfn = pm.isPM("Infolcd") ? getIntegerWithBounds(pm.getPM("Infolcd"), 0, 0, p.SurfaceCount - 1) : -1;
+                            if (pm.ParseArgs(s)) sfn = pm.IsParameter("Infolcd") ? getIntegerWithBounds(pm.GetParameter("Infolcd"), 0, 0, p.SurfaceCount - 1) : -1;
                         }
                         else if (su.Contains("@ENDDISPLAY"))
                         {

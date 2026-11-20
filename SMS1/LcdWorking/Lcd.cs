@@ -30,7 +30,7 @@ namespace IngameScript
                 maxl = readableLines;
                 minl = maxl < 10 ? 1 : 5;
             }
-            public void Calc(P pm)
+            public void Calc(Parameter pm)
             {
                 setName(pm.Name);
                 setMML();
@@ -176,13 +176,13 @@ namespace IngameScript
                 lcd.CustomData = "  / Menu:\n  / default - the defaultmenu is used\n  / custom - specify your own menu structure\n  / copydefault - copies the defaultmenu as custom\n  / or the ID from other terminal to clone the menu\nmenu=" + mmode.ToString() + (mmode == MenuMode.MenuClone ? " from terminal " + lcdclonemenu + "\n" : "\n") + (mmode == MenuMode.Custom && menu != null ? menu.def.Errors : "") + mDefBegin + "\n" + menustr;
                 oldCustomData = lcd.CustomData;
             }
-            public void Calc(P pm)
+            public void Calc(Parameter pm)
             {
                 if (!ifNewCustomData() && mkdt.ifS()) setNewTerminalSite(menu.mainmenu);
                 setName(pm.Name);
-                if (pm.isPM("Terminal")) lcd_id = pm.getPM("Terminal");
+                if (pm.IsParameter("Terminal")) lcd_id = pm.GetParameter("Terminal");
                 else lcd_id = "xxx";
-                if (pm.isPM("Keepmenu")) mkdt.sec = getIntegerWithBounds(pm.getPM("Keepmenu"));
+                if (pm.IsParameter("Keepmenu")) mkdt.sec = getIntegerWithBounds(pm.GetParameter("Keepmenu"));
             }
             public void Action(string command)
             {

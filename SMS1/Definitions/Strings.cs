@@ -18,8 +18,7 @@
             OptLcdGrid = "LCDGRID",
             OptGridName = "GRIDNAME",
 
-            // soft hyphen: an invisible character (as padding in short texts)
-            SoftHyphen = "­",
+            // (SoftHyphen: Share/Common/IngameStrings.cs)
             Cfilled = "@-(filled)",
             // (item types: Share/Common/ItemTypes.cs)
 

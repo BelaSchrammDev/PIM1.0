@@ -106,7 +106,7 @@ namespace IngameScript
                 if (IsClosed) return;
 
                 var wasPimControlled = IsPimControlled;
-                var pimControlled = Parameter.ParseArgs(RefineryBlock.CustomName, true);
+                var pimControlled = ParseProductionTag(Parameter, RefineryBlock.CustomName);
                 if (wasPimControlled && !pimControlled) Release();
 
                 // for every refinery, also the ones without tag:

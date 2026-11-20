@@ -15,13 +15,13 @@ namespace IngameScript
         //B
         public abstract class dyBlock : dyBlockDisplayable
         {
-            public P pms = new P(); IMyCubeGrid mcg = null; string sdi = ""; public IMyTerminalBlock tb; public string bt = "xxx"; public string bs = "xxx"; List<inventarList> invs = new List<inventarList>();
+            public Parameter pms = new Parameter(); IMyCubeGrid mcg = null; string sdi = ""; public IMyTerminalBlock tb; public string bt = "xxx"; public string bs = "xxx"; List<inventarList> invs = new List<inventarList>();
             public inventarList readInventarList(dyDisplayableVariable p, int i = 0, char c = 'F') { inventarList iv = getInventarList(i); if (iv == null) { var niv = tb.GetInventory(i); if (niv == null) return null; iv = new inventarList(i, niv, new VC(c, "@fF" + i, Fv)); invs.Add(iv); add_to_VC(iv.volume); } iv.RefreshInventoryItems(mcg, p); return iv; }
             public inventarList getInventarList(int i = 0) { foreach (var x in invs) if (x.id == i) return x; return null; }
             public string[] getDetailedInfo() { if (sdi != tb.DetailedInfo) { return tb.DetailedInfo.Split('\n'); } return new string[] { }; }
             public void getBlockDefinition() { bs = tb.BlockDefinition.SubtypeName; bt = tb.BlockDefinition.TypeIdString; bt = bt.Substring(bt.IndexOf("_") + 1); }
             public void setBlockTypeFields() { sT("@fBt", bt); sT("@fBs", bs); bt += "s"; }
-            public void InitRefresh() { pms.ParseArgs(tb); setName(pms.Name); Refresh(); }
+            public void InitRefresh() { pms.ParseArgs(tb.CustomName); setName(pms.Name); Refresh(); }
             public virtual void getPCvar(dyDisplayableVariable pv) { }
             public virtual void remove() { addChange(); }
             public override void Refresh(bool f = false) { if (mcg == null) { mcg = tb.CubeGrid; sT("@fG", mcg.CustomName); }; getPCvar(dyDisplayableVariable.getPV(mcg, bt)); base.Refresh(); }
@@ -45,7 +45,7 @@ namespace IngameScript
         public abstract class dyBlockFunctional : dyBlock
         {
             public bool iEF() { return tb.IsWorking; }
-            public override void Refresh(bool f = false) { sT("@fC", pms.smscontrol ? "[c]" : "[  ]"); sT("@fE", (tb as IMyFunctionalBlock).Enabled ? "On" : "Off", 7.1f); base.Refresh(); }
+            public override void Refresh(bool f = false) { sT("@fC", pms.Tagged ? "[c]" : "[  ]"); sT("@fE", (tb as IMyFunctionalBlock).Enabled ? "On" : "Off", 7.1f); base.Refresh(); }
         }
         //Mi
         public abstract class dyBlockPowerConsumer : dyBlockFunctional
@@ -129,7 +129,7 @@ namespace IngameScript
                     sT("@fSt", connector.Status == MyShipConnectorStatus.Connectable ? "ready to connect" : "Clear", 30);
                     sT("@fSh", "---");
                 }
-                if (pms.isPM("Dock") && runPB.IsSameConstructAs(connector))
+                if (pms.IsParameter("Dock") && runPB.IsSameConstructAs(connector))
                 {
                     if (!ifdock)
                     {
@@ -137,7 +137,7 @@ namespace IngameScript
                         docks.Add(this);
                         changeNeed(ChangeType.Dockings_add);
                     }
-                    var newDockName = pms.getPM("Dock");
+                    var newDockName = pms.GetParameter("Dock");
                     if (dockName != newDockName)
                     {
                         dockName = newDockName;

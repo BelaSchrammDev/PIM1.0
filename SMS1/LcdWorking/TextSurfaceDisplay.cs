@@ -37,7 +37,7 @@ namespace IngameScript
                 minl = 2;
             }
             // called on every scan that finds the surface; the name is the tag's name or, for @display, the block's name
-            public void Configure(P options, string definition)
+            public void Configure(Parameter options, string definition)
             {
                 Obsolete = false;
                 SetLineLimits();
