@@ -284,26 +284,14 @@ namespace IngameScript
                     }
                 } while (!IsBudgetUsedUp()); return true;
             }
-            void AddValueTemplates(DP command, string sC, string s = "@fN,@fG,")
+            // the template lines of the command's style: field templates, a line starting with '^' is the head line (see ValueTemplates.cs)
+            void AddStyleTemplates(DP command, string templates, string field = "", string prefix = "")
             {
-                switch (command.style)
-                {
-                    case 1:
-                        command.FieldTemplates.Add(s + "," + sC + "(0)," + sC + "_R");
-                        break;
-                    default:
-                        command.FieldTemplates.Add(s + "," + sC + "(0)," + sC + "_M," + sC + "_B(20%)," + sC + "_R");
-                        break;
-                    case 3:
-                        command.FieldTemplates.Add(s + "," + sC + "(0)," + sC + "_M,(19)");
-                        command.FieldTemplates.Add("," + sC + "_B(60%)," + sC + "_R");
-                        break;
-                    case 4:
-                        command.FieldTemplates.Add(s + "," + sC + "(0)," + sC + "_R");
-                        command.FieldTemplates.Add("," + sC + "_B(70%)");
-                        break;
-                }
+                foreach (var line in StyleLines(templates, command.style, field, prefix))
+                    if (line.StartsWith("^")) command.headLineString = line.Substring(1);
+                    else command.FieldTemplates.Add(line);
             }
+            void AddValueTemplates(DP command, string field, string prefix = "@fN,@fG,") { AddStyleTemplates(command, ValueTemplate, field, prefix); }
             void AddValueTemplates(string t, DP command, string sC, string s = "@fN,@fG,") { if (command.FieldTemplates.Count > 0) return; writeTitle_ifTrue(command, t); AddValueTemplates(command, sC, s); }
             Dictionary<char, string> Y = new Dictionary<char, string> { { 'F', "Cargo" }, { '0', "Cargo in" }, { '1', "Cargo out" }, { 'S', "Stored" }, { 'M', "Available" }, { 'E', "Output" }, { 'I', "Input" } };
             void AddPowerCargoTemplate(DP command, dyBlockDisplayable d, char c) { VC v = d.getVC(c, false); if (v != null) { var sv = v.gFs(); command.FieldTemplates.Add(Y[c] + ":(30)," + sv + "," + sv + "_B(filled)," + sv + "_R"); } }
@@ -311,13 +299,7 @@ namespace IngameScript
             {
                 var c = command.cm[0];
                 if (c == 'I') c = 'C';
-                switch (command.style)
-                {
-                    case (1): command.FieldTemplates.Add("@fG,,@fV" + c + "(0),@fV" + c + "_M(0),@fV" + c + "_R"); break;
-                    case (2): command.FieldTemplates.Add("@fG,,@fV" + c + ",@fV" + c + "_M,@fV" + c + "_B(28%),@fV" + c + "_R"); break;
-                    case (4): command.FieldTemplates.Add("@fG,,@fV" + c + "(0)"); command.FieldTemplates.Add("@fV" + c + "_B(filled),@fV" + c + "_R"); break;
-                    default: command.FieldTemplates.Add("@fG,,@fV" + c + "(0),@fV" + c + "_M,(" + zW + ")"); command.FieldTemplates.Add(",@fV" + c + "_B(60%),@fV" + c + "_R"); break;
-                }
+                AddStyleTemplates(command, HoxyTemplate, "@fV" + c);
             }
             void addFieldTemplates_NonBlock(DP command, string mode)
             {
@@ -342,13 +324,13 @@ namespace IngameScript
                 }
                 switch (mode)
                 {
-                    case "SOLAR": switch (command.style) { case (1): command.FieldTemplates.Add("@fG,@fM(0),,@fO(0),@fO_R"); break; case (3): command.FieldTemplates.Add("@fM,,Max:,@fM_M,@fM_B(30%),@fM_R"); command.FieldTemplates.Add("@fG,,Out:,@fO,@fO_B(30%),@fO_R"); break; default: command.FieldTemplates.Add("@fG,@fM(0),,@fO(0),@fO_M,@fO_B(18%),@fO_R"); break; } break;
+                    case "SOLAR": AddStyleTemplates(command, SolarTemplate); break;
                     case "PCS": AddValueTemplates(command, "@fS"); break;
                     case "PCA": AddValueTemplates(command, "@fM"); break;
                     case "PCO": AddValueTemplates(command, "@fO"); break;
                     case "PCC": AddValueTemplates(command, "@fI"); break;
-                    case "INV": switch (command.style) { case (1): command.FieldTemplates.Add("@fN,,@fAm(0)"); break; case (2): command.FieldTemplates.Add("@fAm(40%),@fN,"); break; case (3): command.FieldTemplates.Add(",@fN,@fAm"); break; default: command.FieldTemplates.Add("@fAm,,@fN"); break; } break;
-                    case "RES": switch (command.style) { case 1: command.headLineString = ",Ingot,(21),Ore,(7)"; command.FieldTemplates.Add(",@fN,:,@fRi,/,@fRo"); break; default: command.headLineString = ",(40),Ore ,(6),Ref.,(5),Ingot,"; command.FieldTemplates.Add(",@fN(30),@fRo,@fRr,@fRi,"); break; } break;
+                    case "INV": AddStyleTemplates(command, InventoryTemplate); break;
+                    case "RES": AddStyleTemplates(command, ResourcesTemplate); break;
                 }
             }
             string[] templateInv = new string[]
@@ -400,10 +382,7 @@ namespace IngameScript
             {
                 if (command.ifOption("ONOFF")) command.FieldTemplates.Add("@fN,,@fE");
                 if (command.FieldTemplates.Count > 0) return;
-                // the default templates of the style, a line starting with '^' is the head line
-                foreach (var line in BlockTemplates.For(type, command.style))
-                    if (line.StartsWith("^")) command.headLineString = line.Substring(1);
-                    else command.FieldTemplates.Add(line);
+                AddStyleTemplates(command, BlockTemplates.Templates[(int)type]);
             }
             void addSingleLine(DP command, dyBlockDisplayable d, string s) { List<dyMultiDisplayLine> nmol; displayLines.Add(nmol = new List<dyMultiDisplayLine>()); nmol.Add(d.getMDLo(this, command.with, s)); }
             void writeTitle_ifTrue(DP command, string tu = "") { if (command.is_Title) writeX(" ,<<<," + (tu == "" ? command.titleString : tu) + ",>>>, "); }
@@ -572,8 +551,6 @@ namespace IngameScript
                 }
                 return o == "" ? "SMEI" : o;
             }
-            string PowerTableHeadline(DP command, string os, bool gn) { var sr = gn ? "Grid," : ""; sr += ",Type"; foreach (var c in os) { sr += ",|,"; if (c == 'S') sr += "Stored"; else if (c == 'M') sr += "Avali."; else if (c == 'E') sr += "Output"; else if (c == 'I') sr += "Input"; switch (command.style) { case 1: sr += "(" + zW + ")"; break; case 2: sr += "(" + pW + ")"; break; case 3: sr += "(" + pW + "),(" + zW + ")"; break; default: sr += "(" + pW + "),(" + pW + ")"; break; } } return sr; }
-            string PowerTableRow(DP command, dyDisplayableVariable p, string os) { var sr = ""; var ls = new List<string> { ",|,(" + zW + ")", ",|,(" + pW + ")", ",|,(" + pW + "),(" + zW + ")", ",|,(" + pW + "),(" + pW + ")" }; foreach (var c in os) { var s2 = ""; if (p.getVC(c, false) != null) { if (c == 'S') s2 = "@fS"; else if (c == 'M') s2 = "@fM"; else if (c == 'E') s2 = "@fO"; else if (c == 'I') s2 = "@fI"; switch (command.style) { case 1: sr += ",|," + s2 + "_R"; break; case 2: sr += ",|," + s2; break; case 3: sr += ",|," + s2 + "," + s2 + "_R"; break; default: sr += ",|," + s2 + "," + s2 + "_M"; break; } } else sr += ls[command.style - 1]; } return sr; }
             string gTD(string s) { switch (s) { case "Z+": return "Forward"; case "Z-": return "Backward"; case "X+": return "Right"; case "X-": return "Left"; case "Y+": return "Upward"; case "Y-": return "Downward"; } return "-?-"; }
             void aTD(DP command, string t = "", string f = "")
             {
@@ -618,7 +595,7 @@ namespace IngameScript
                     }
                 }
                 if (checkError(command, powerValueList.Count)) return;
-                command.headLineString = PowerTableHeadline(command, o, t == 'g');
+                command.headLineString = PowerTableHeadline(command.style, o, t == 'g');
                 if (powerValueList.Count < 2 && powerValueList[0].pcg != null) command.titleString += " " + powerValueList[0].pcg.CustomName;
                 writeTitle_ifTrue(command);
                 writeHeadLine_ifTrue(command);
@@ -626,52 +603,20 @@ namespace IngameScript
                 var s1 = ((command.ifOption(OptGridName) && powerValueList.Count > 1) ? ("@fG,") : "") + ",@fN";
                 foreach (dyDisplayableVariable p in powerValueList)
                 {
-                    addSingleLine(command, p, s1 + PowerTableRow(command, p, o));
+                    addSingleLine(command, p, s1 + PowerTableRow(command.style, o, c => p.getVC(c, false) != null));
                 }
                 writeLine_ifTrue(command);
                 if (powerTotal != null)
                 {
-                    addSingleLine(command, powerTotal, s1 + PowerTableRow(command, powerTotal, o));
+                    addSingleLine(command, powerTotal, s1 + PowerTableRow(command.style, o, c => powerTotal.getVC(c, false) != null));
                     writeLine_ifTrue(command, '=');
                 }
             }
-            string aPL1(string s) { return "," + s + ",/," + s + "_M"; }
-            string aPL2(string s) { return "," + s + "," + s + "_M," + s + "_R"; }
-            string aPL3(string s) { return "," + s + "," + s + "_B(20%)," + s + "_R"; }
-            string aPL4(string s) { return "," + s + "," + s + "_M," + s + "_B(20%)," + s + "_R"; }
             void AddPowerLines(DP command, dyDisplayableVariable p)
             {
-                if (p == null) return;
-                var sp = new List<string>();
-                var fi = false;
-                var fs = false;
-                if (null != p.getVC('I', false)) fi = true;
-                if (null != p.getVC('S', false)) fs = true;
-                switch (command.style)
-                {
-                    case 1:
-                        sp.Add("@fN,,out:" + aPL1("@fO"));
-                        if (fi) sp.Add(",in:" + aPL1("@fI"));
-                        if (fs) sp.Add(",stored:" + aPL1("@fS"));
-                        break;
-                    case 2:
-                        sp.Add("@fN,,Output:(18)" + aPL3("@fO"));
-                        if (fi) sp.Add(",Input:(18)" + aPL3("@fI"));
-                        if (fs) sp.Add(",Stored:(18)" + aPL3("@fS"));
-                        break;
-                    case 3:
-                        sp.Add("@fN,,Output:(18)" + aPL2("@fO"));
-                        if (fi) sp.Add(",Input:(18)" + aPL2("@fI"));
-                        if (fs) sp.Add(",Stored:(18)" + aPL2("@fS"));
-                        break;
-                    default:
-                        sp.Add("@fN" + (command.is_Line ? "," + Cfilled : ","));
-                        sp.Add(",Output:(18)" + aPL4("@fO"));
-                        if (fi) sp.Add(",Input:(18)" + aPL4("@fI"));
-                        if (fs) sp.Add(",Stored:(18)" + aPL4("@fS"));
-                        break;
-                }
-                foreach (var s in sp) addSingleLine(command, p, s);
+                if (p != null)
+                    foreach (var line in PowerLines(command.style, p.getVC('I', false) != null, p.getVC('S', false) != null, command.is_Line))
+                        addSingleLine(command, p, line);
             }
             bool IsCategoryShown(DP command, string s, string s1) { if (command.options.Contains("-" + s1)) return false; if (command.is_All || s == s1) return true; return false; }
             // inventory categories: option = title [= tag (typeString of the item, default: the title)], in display order

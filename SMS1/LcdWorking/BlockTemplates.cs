@@ -1,4 +1,4 @@
-namespace IngameScript
+﻿namespace IngameScript
 {
     partial class Program
     {
@@ -15,7 +15,7 @@ namespace IngameScript
         /// </summary>
         public static class BlockTemplates
         {
-            static readonly string[] Templates =
+            public static readonly string[] Templates =
             {
                 // Damage
                 "@fN,,@fH_R|@fN,,@fH_B(35%),@fH_R|@fN,,@fBs;@fH_B(filled),@fH_R|",
@@ -45,12 +45,10 @@ namespace IngameScript
                 "@fN,,@fE,/,@fWt|^,Type,(20),Shots(15);@fN,,@fE,@fWt,@fAc|@fN,,@fE,/,@fWt;Ammo:(25 right),@fAo,,Shots:,@fAc|@fN,,@fE,/,@fWt;Inventory:(30 right),@fAa,x,@fAo,,Shots:,@fAc;Cargo:(30 right),@fF0,@fF0_M,@fF0_B(filled),@fF0_R",
             };
 
-            // the lines of the style (1..4) of the block type
+            // the lines of the style (1..4) of the block type (for the tests; the script uses Templates with AddStyleTemplates)
             public static string[] For(BlockType type, int style)
             {
-                var styles = Templates[(int)type].Split('|');
-                var lines = styles[style - 1];
-                return (lines == "" ? styles[1] : lines).Split(';');
+                return StyleLines(Templates[(int)type], style);
             }
         }
     }

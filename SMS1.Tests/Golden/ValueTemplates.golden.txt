@@ -1,0 +1,226 @@
+# Field templates of the value/power commands per style (from SMS 1.5a); update with SMS_UPDATE_GOLDEN=1.
+Value 1 @fS @fN,@fG, | 1 | @fN,@fG,,@fS(0),@fS_R
+Value 1 @fH @fG, | 1 | @fG,,@fH(0),@fH_R
+Value 1 @X+THRUST Right(30),[X+], | 1 | Right(30),[X+],,@X+THRUST(0),@X+THRUST_R
+Hoxy 1 H | 1 | @fG,,@fVH(0),@fVH_M(0),@fVH_R
+Hoxy 1 O | 1 | @fG,,@fVO(0),@fVO_M(0),@fVO_R
+Hoxy 1 C | 1 | @fG,,@fVC(0),@fVC_M(0),@fVC_R
+Solar 1 | 1 | @fG,@fM(0),,@fO(0),@fO_R
+Inventory 1 | 1 | @fN,,@fAm(0)
+Resources 1 | 1 | ^,Ingot,(21),Ore,(7)
+Resources 1 | 2 | ,@fN,:,@fRi,/,@fRo
+PowerLines 1 in=False stored=False line=False | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=False stored=False line=True | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=False stored=True line=False | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=False stored=True line=False | 2 | ,stored:,@fS,/,@fS_M
+PowerLines 1 in=False stored=True line=True | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=False stored=True line=True | 2 | ,stored:,@fS,/,@fS_M
+PowerLines 1 in=True stored=False line=False | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=True stored=False line=False | 2 | ,in:,@fI,/,@fI_M
+PowerLines 1 in=True stored=False line=True | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=True stored=False line=True | 2 | ,in:,@fI,/,@fI_M
+PowerLines 1 in=True stored=True line=False | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=True stored=True line=False | 2 | ,in:,@fI,/,@fI_M
+PowerLines 1 in=True stored=True line=False | 3 | ,stored:,@fS,/,@fS_M
+PowerLines 1 in=True stored=True line=True | 1 | @fN,,out:,@fO,/,@fO_M
+PowerLines 1 in=True stored=True line=True | 2 | ,in:,@fI,/,@fI_M
+PowerLines 1 in=True stored=True line=True | 3 | ,stored:,@fS,/,@fS_M
+PowerTableHead 1 SMEI grid=False | 1 | ,Type,|,Stored(20),|,Avali.(20),|,Output(20),|,Input(20)
+PowerTableHead 1 SMEI grid=True | 1 | Grid,,Type,|,Stored(20),|,Avali.(20),|,Output(20),|,Input(20)
+PowerTableRow 1 SMEI present=SMEIF01 | 1 | ,|,@fS_R,|,@fM_R,|,@fO_R,|,@fI_R
+PowerTableRow 1 SMEI present= | 1 | ,|,(20),|,(20),|,(20),|,(20)
+PowerTableRow 1 SMEI present=SE | 1 | ,|,@fS_R,|,(20),|,@fO_R,|,(20)
+PowerTableHead 1 S grid=False | 1 | ,Type,|,Stored(20)
+PowerTableHead 1 S grid=True | 1 | Grid,,Type,|,Stored(20)
+PowerTableRow 1 S present=SMEIF01 | 1 | ,|,@fS_R
+PowerTableRow 1 S present= | 1 | ,|,(20)
+PowerTableRow 1 S present=SE | 1 | ,|,@fS_R
+PowerTableHead 1 EI grid=False | 1 | ,Type,|,Output(20),|,Input(20)
+PowerTableHead 1 EI grid=True | 1 | Grid,,Type,|,Output(20),|,Input(20)
+PowerTableRow 1 EI present=SMEIF01 | 1 | ,|,@fO_R,|,@fI_R
+PowerTableRow 1 EI present= | 1 | ,|,(20),|,(20)
+PowerTableRow 1 EI present=SE | 1 | ,|,@fO_R,|,(20)
+PowerTableHead 1 F01 grid=False | 1 | ,Type,|,(20),|,(20),|,(20)
+PowerTableHead 1 F01 grid=True | 1 | Grid,,Type,|,(20),|,(20),|,(20)
+PowerTableRow 1 F01 present=SMEIF01 | 1 | ,|,_R,|,_R,|,_R
+PowerTableRow 1 F01 present= | 1 | ,|,(20),|,(20),|,(20)
+PowerTableRow 1 F01 present=SE | 1 | ,|,(20),|,(20),|,(20)
+PowerTableHead 1 SMEIF01 grid=False | 1 | ,Type,|,Stored(20),|,Avali.(20),|,Output(20),|,Input(20),|,(20),|,(20),|,(20)
+PowerTableHead 1 SMEIF01 grid=True | 1 | Grid,,Type,|,Stored(20),|,Avali.(20),|,Output(20),|,Input(20),|,(20),|,(20),|,(20)
+PowerTableRow 1 SMEIF01 present=SMEIF01 | 1 | ,|,@fS_R,|,@fM_R,|,@fO_R,|,@fI_R,|,_R,|,_R,|,_R
+PowerTableRow 1 SMEIF01 present= | 1 | ,|,(20),|,(20),|,(20),|,(20),|,(20),|,(20),|,(20)
+PowerTableRow 1 SMEIF01 present=SE | 1 | ,|,@fS_R,|,(20),|,@fO_R,|,(20),|,(20),|,(20),|,(20)
+Value 2 @fS @fN,@fG, | 1 | @fN,@fG,,@fS(0),@fS_M,@fS_B(20%),@fS_R
+Value 2 @fH @fG, | 1 | @fG,,@fH(0),@fH_M,@fH_B(20%),@fH_R
+Value 2 @X+THRUST Right(30),[X+], | 1 | Right(30),[X+],,@X+THRUST(0),@X+THRUST_M,@X+THRUST_B(20%),@X+THRUST_R
+Hoxy 2 H | 1 | @fG,,@fVH,@fVH_M,@fVH_B(28%),@fVH_R
+Hoxy 2 O | 1 | @fG,,@fVO,@fVO_M,@fVO_B(28%),@fVO_R
+Hoxy 2 C | 1 | @fG,,@fVC,@fVC_M,@fVC_B(28%),@fVC_R
+Solar 2 | 1 | @fG,@fM(0),,@fO(0),@fO_M,@fO_B(18%),@fO_R
+Inventory 2 | 1 | @fAm(40%),@fN,
+Resources 2 | 1 | ^,(40),Ore ,(6),Ref.,(5),Ingot,
+Resources 2 | 2 | ,@fN(30),@fRo,@fRr,@fRi,
+PowerLines 2 in=False stored=False line=False | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=False stored=False line=True | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=False stored=True line=False | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=False stored=True line=False | 2 | ,Stored:(18),@fS,@fS_B(20%),@fS_R
+PowerLines 2 in=False stored=True line=True | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=False stored=True line=True | 2 | ,Stored:(18),@fS,@fS_B(20%),@fS_R
+PowerLines 2 in=True stored=False line=False | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=True stored=False line=False | 2 | ,Input:(18),@fI,@fI_B(20%),@fI_R
+PowerLines 2 in=True stored=False line=True | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=True stored=False line=True | 2 | ,Input:(18),@fI,@fI_B(20%),@fI_R
+PowerLines 2 in=True stored=True line=False | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=True stored=True line=False | 2 | ,Input:(18),@fI,@fI_B(20%),@fI_R
+PowerLines 2 in=True stored=True line=False | 3 | ,Stored:(18),@fS,@fS_B(20%),@fS_R
+PowerLines 2 in=True stored=True line=True | 1 | @fN,,Output:(18),@fO,@fO_B(20%),@fO_R
+PowerLines 2 in=True stored=True line=True | 2 | ,Input:(18),@fI,@fI_B(20%),@fI_R
+PowerLines 2 in=True stored=True line=True | 3 | ,Stored:(18),@fS,@fS_B(20%),@fS_R
+PowerTableHead 2 SMEI grid=False | 1 | ,Type,|,Stored(31),|,Avali.(31),|,Output(31),|,Input(31)
+PowerTableHead 2 SMEI grid=True | 1 | Grid,,Type,|,Stored(31),|,Avali.(31),|,Output(31),|,Input(31)
+PowerTableRow 2 SMEI present=SMEIF01 | 1 | ,|,@fS,|,@fM,|,@fO,|,@fI
+PowerTableRow 2 SMEI present= | 1 | ,|,(31),|,(31),|,(31),|,(31)
+PowerTableRow 2 SMEI present=SE | 1 | ,|,@fS,|,(31),|,@fO,|,(31)
+PowerTableHead 2 S grid=False | 1 | ,Type,|,Stored(31)
+PowerTableHead 2 S grid=True | 1 | Grid,,Type,|,Stored(31)
+PowerTableRow 2 S present=SMEIF01 | 1 | ,|,@fS
+PowerTableRow 2 S present= | 1 | ,|,(31)
+PowerTableRow 2 S present=SE | 1 | ,|,@fS
+PowerTableHead 2 EI grid=False | 1 | ,Type,|,Output(31),|,Input(31)
+PowerTableHead 2 EI grid=True | 1 | Grid,,Type,|,Output(31),|,Input(31)
+PowerTableRow 2 EI present=SMEIF01 | 1 | ,|,@fO,|,@fI
+PowerTableRow 2 EI present= | 1 | ,|,(31),|,(31)
+PowerTableRow 2 EI present=SE | 1 | ,|,@fO,|,(31)
+PowerTableHead 2 F01 grid=False | 1 | ,Type,|,(31),|,(31),|,(31)
+PowerTableHead 2 F01 grid=True | 1 | Grid,,Type,|,(31),|,(31),|,(31)
+PowerTableRow 2 F01 present=SMEIF01 | 1 | ,|,,|,,|,
+PowerTableRow 2 F01 present= | 1 | ,|,(31),|,(31),|,(31)
+PowerTableRow 2 F01 present=SE | 1 | ,|,(31),|,(31),|,(31)
+PowerTableHead 2 SMEIF01 grid=False | 1 | ,Type,|,Stored(31),|,Avali.(31),|,Output(31),|,Input(31),|,(31),|,(31),|,(31)
+PowerTableHead 2 SMEIF01 grid=True | 1 | Grid,,Type,|,Stored(31),|,Avali.(31),|,Output(31),|,Input(31),|,(31),|,(31),|,(31)
+PowerTableRow 2 SMEIF01 present=SMEIF01 | 1 | ,|,@fS,|,@fM,|,@fO,|,@fI,|,,|,,|,
+PowerTableRow 2 SMEIF01 present= | 1 | ,|,(31),|,(31),|,(31),|,(31),|,(31),|,(31),|,(31)
+PowerTableRow 2 SMEIF01 present=SE | 1 | ,|,@fS,|,(31),|,@fO,|,(31),|,(31),|,(31),|,(31)
+Value 3 @fS @fN,@fG, | 1 | @fN,@fG,,@fS(0),@fS_M,(19)
+Value 3 @fS @fN,@fG, | 2 | ,@fS_B(60%),@fS_R
+Value 3 @fH @fG, | 1 | @fG,,@fH(0),@fH_M,(19)
+Value 3 @fH @fG, | 2 | ,@fH_B(60%),@fH_R
+Value 3 @X+THRUST Right(30),[X+], | 1 | Right(30),[X+],,@X+THRUST(0),@X+THRUST_M,(19)
+Value 3 @X+THRUST Right(30),[X+], | 2 | ,@X+THRUST_B(60%),@X+THRUST_R
+Hoxy 3 H | 1 | @fG,,@fVH(0),@fVH_M,(20)
+Hoxy 3 H | 2 | ,@fVH_B(60%),@fVH_R
+Hoxy 3 O | 1 | @fG,,@fVO(0),@fVO_M,(20)
+Hoxy 3 O | 2 | ,@fVO_B(60%),@fVO_R
+Hoxy 3 C | 1 | @fG,,@fVC(0),@fVC_M,(20)
+Hoxy 3 C | 2 | ,@fVC_B(60%),@fVC_R
+Solar 3 | 1 | @fM,,Max:,@fM_M,@fM_B(30%),@fM_R
+Solar 3 | 2 | @fG,,Out:,@fO,@fO_B(30%),@fO_R
+Inventory 3 | 1 | ,@fN,@fAm
+Resources 3 | 1 | ^,(40),Ore ,(6),Ref.,(5),Ingot,
+Resources 3 | 2 | ,@fN(30),@fRo,@fRr,@fRi,
+PowerLines 3 in=False stored=False line=False | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=False stored=False line=True | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=False stored=True line=False | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=False stored=True line=False | 2 | ,Stored:(18),@fS,@fS_M,@fS_R
+PowerLines 3 in=False stored=True line=True | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=False stored=True line=True | 2 | ,Stored:(18),@fS,@fS_M,@fS_R
+PowerLines 3 in=True stored=False line=False | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=True stored=False line=False | 2 | ,Input:(18),@fI,@fI_M,@fI_R
+PowerLines 3 in=True stored=False line=True | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=True stored=False line=True | 2 | ,Input:(18),@fI,@fI_M,@fI_R
+PowerLines 3 in=True stored=True line=False | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=True stored=True line=False | 2 | ,Input:(18),@fI,@fI_M,@fI_R
+PowerLines 3 in=True stored=True line=False | 3 | ,Stored:(18),@fS,@fS_M,@fS_R
+PowerLines 3 in=True stored=True line=True | 1 | @fN,,Output:(18),@fO,@fO_M,@fO_R
+PowerLines 3 in=True stored=True line=True | 2 | ,Input:(18),@fI,@fI_M,@fI_R
+PowerLines 3 in=True stored=True line=True | 3 | ,Stored:(18),@fS,@fS_M,@fS_R
+PowerTableHead 3 SMEI grid=False | 1 | ,Type,|,Stored(31),(20),|,Avali.(31),(20),|,Output(31),(20),|,Input(31),(20)
+PowerTableHead 3 SMEI grid=True | 1 | Grid,,Type,|,Stored(31),(20),|,Avali.(31),(20),|,Output(31),(20),|,Input(31),(20)
+PowerTableRow 3 SMEI present=SMEIF01 | 1 | ,|,@fS,@fS_R,|,@fM,@fM_R,|,@fO,@fO_R,|,@fI,@fI_R
+PowerTableRow 3 SMEI present= | 1 | ,|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableRow 3 SMEI present=SE | 1 | ,|,@fS,@fS_R,|,(31),(20),|,@fO,@fO_R,|,(31),(20)
+PowerTableHead 3 S grid=False | 1 | ,Type,|,Stored(31),(20)
+PowerTableHead 3 S grid=True | 1 | Grid,,Type,|,Stored(31),(20)
+PowerTableRow 3 S present=SMEIF01 | 1 | ,|,@fS,@fS_R
+PowerTableRow 3 S present= | 1 | ,|,(31),(20)
+PowerTableRow 3 S present=SE | 1 | ,|,@fS,@fS_R
+PowerTableHead 3 EI grid=False | 1 | ,Type,|,Output(31),(20),|,Input(31),(20)
+PowerTableHead 3 EI grid=True | 1 | Grid,,Type,|,Output(31),(20),|,Input(31),(20)
+PowerTableRow 3 EI present=SMEIF01 | 1 | ,|,@fO,@fO_R,|,@fI,@fI_R
+PowerTableRow 3 EI present= | 1 | ,|,(31),(20),|,(31),(20)
+PowerTableRow 3 EI present=SE | 1 | ,|,@fO,@fO_R,|,(31),(20)
+PowerTableHead 3 F01 grid=False | 1 | ,Type,|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableHead 3 F01 grid=True | 1 | Grid,,Type,|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableRow 3 F01 present=SMEIF01 | 1 | ,|,,_R,|,,_R,|,,_R
+PowerTableRow 3 F01 present= | 1 | ,|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableRow 3 F01 present=SE | 1 | ,|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableHead 3 SMEIF01 grid=False | 1 | ,Type,|,Stored(31),(20),|,Avali.(31),(20),|,Output(31),(20),|,Input(31),(20),|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableHead 3 SMEIF01 grid=True | 1 | Grid,,Type,|,Stored(31),(20),|,Avali.(31),(20),|,Output(31),(20),|,Input(31),(20),|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableRow 3 SMEIF01 present=SMEIF01 | 1 | ,|,@fS,@fS_R,|,@fM,@fM_R,|,@fO,@fO_R,|,@fI,@fI_R,|,,_R,|,,_R,|,,_R
+PowerTableRow 3 SMEIF01 present= | 1 | ,|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20)
+PowerTableRow 3 SMEIF01 present=SE | 1 | ,|,@fS,@fS_R,|,(31),(20),|,@fO,@fO_R,|,(31),(20),|,(31),(20),|,(31),(20),|,(31),(20)
+Value 4 @fS @fN,@fG, | 1 | @fN,@fG,,@fS(0),@fS_R
+Value 4 @fS @fN,@fG, | 2 | ,@fS_B(70%)
+Value 4 @fH @fG, | 1 | @fG,,@fH(0),@fH_R
+Value 4 @fH @fG, | 2 | ,@fH_B(70%)
+Value 4 @X+THRUST Right(30),[X+], | 1 | Right(30),[X+],,@X+THRUST(0),@X+THRUST_R
+Value 4 @X+THRUST Right(30),[X+], | 2 | ,@X+THRUST_B(70%)
+Hoxy 4 H | 1 | @fG,,@fVH(0)
+Hoxy 4 H | 2 | @fVH_B(filled),@fVH_R
+Hoxy 4 O | 1 | @fG,,@fVO(0)
+Hoxy 4 O | 2 | @fVO_B(filled),@fVO_R
+Hoxy 4 C | 1 | @fG,,@fVC(0)
+Hoxy 4 C | 2 | @fVC_B(filled),@fVC_R
+Solar 4 | 1 | @fG,@fM(0),,@fO(0),@fO_M,@fO_B(18%),@fO_R
+Inventory 4 | 1 | @fAm,,@fN
+Resources 4 | 1 | ^,(40),Ore ,(6),Ref.,(5),Ingot,
+Resources 4 | 2 | ,@fN(30),@fRo,@fRr,@fRi,
+PowerLines 4 in=False stored=False line=False | 1 | @fN,
+PowerLines 4 in=False stored=False line=False | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=False stored=False line=True | 1 | @fN,@-(filled)
+PowerLines 4 in=False stored=False line=True | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=False stored=True line=False | 1 | @fN,
+PowerLines 4 in=False stored=True line=False | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=False stored=True line=False | 3 | ,Stored:(18),@fS,@fS_M,@fS_B(20%),@fS_R
+PowerLines 4 in=False stored=True line=True | 1 | @fN,@-(filled)
+PowerLines 4 in=False stored=True line=True | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=False stored=True line=True | 3 | ,Stored:(18),@fS,@fS_M,@fS_B(20%),@fS_R
+PowerLines 4 in=True stored=False line=False | 1 | @fN,
+PowerLines 4 in=True stored=False line=False | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=True stored=False line=False | 3 | ,Input:(18),@fI,@fI_M,@fI_B(20%),@fI_R
+PowerLines 4 in=True stored=False line=True | 1 | @fN,@-(filled)
+PowerLines 4 in=True stored=False line=True | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=True stored=False line=True | 3 | ,Input:(18),@fI,@fI_M,@fI_B(20%),@fI_R
+PowerLines 4 in=True stored=True line=False | 1 | @fN,
+PowerLines 4 in=True stored=True line=False | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=True stored=True line=False | 3 | ,Input:(18),@fI,@fI_M,@fI_B(20%),@fI_R
+PowerLines 4 in=True stored=True line=False | 4 | ,Stored:(18),@fS,@fS_M,@fS_B(20%),@fS_R
+PowerLines 4 in=True stored=True line=True | 1 | @fN,@-(filled)
+PowerLines 4 in=True stored=True line=True | 2 | ,Output:(18),@fO,@fO_M,@fO_B(20%),@fO_R
+PowerLines 4 in=True stored=True line=True | 3 | ,Input:(18),@fI,@fI_M,@fI_B(20%),@fI_R
+PowerLines 4 in=True stored=True line=True | 4 | ,Stored:(18),@fS,@fS_M,@fS_B(20%),@fS_R
+PowerTableHead 4 SMEI grid=False | 1 | ,Type,|,Stored(31),(31),|,Avali.(31),(31),|,Output(31),(31),|,Input(31),(31)
+PowerTableHead 4 SMEI grid=True | 1 | Grid,,Type,|,Stored(31),(31),|,Avali.(31),(31),|,Output(31),(31),|,Input(31),(31)
+PowerTableRow 4 SMEI present=SMEIF01 | 1 | ,|,@fS,@fS_M,|,@fM,@fM_M,|,@fO,@fO_M,|,@fI,@fI_M
+PowerTableRow 4 SMEI present= | 1 | ,|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableRow 4 SMEI present=SE | 1 | ,|,@fS,@fS_M,|,(31),(31),|,@fO,@fO_M,|,(31),(31)
+PowerTableHead 4 S grid=False | 1 | ,Type,|,Stored(31),(31)
+PowerTableHead 4 S grid=True | 1 | Grid,,Type,|,Stored(31),(31)
+PowerTableRow 4 S present=SMEIF01 | 1 | ,|,@fS,@fS_M
+PowerTableRow 4 S present= | 1 | ,|,(31),(31)
+PowerTableRow 4 S present=SE | 1 | ,|,@fS,@fS_M
+PowerTableHead 4 EI grid=False | 1 | ,Type,|,Output(31),(31),|,Input(31),(31)
+PowerTableHead 4 EI grid=True | 1 | Grid,,Type,|,Output(31),(31),|,Input(31),(31)
+PowerTableRow 4 EI present=SMEIF01 | 1 | ,|,@fO,@fO_M,|,@fI,@fI_M
+PowerTableRow 4 EI present= | 1 | ,|,(31),(31),|,(31),(31)
+PowerTableRow 4 EI present=SE | 1 | ,|,@fO,@fO_M,|,(31),(31)
+PowerTableHead 4 F01 grid=False | 1 | ,Type,|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableHead 4 F01 grid=True | 1 | Grid,,Type,|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableRow 4 F01 present=SMEIF01 | 1 | ,|,,_M,|,,_M,|,,_M
+PowerTableRow 4 F01 present= | 1 | ,|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableRow 4 F01 present=SE | 1 | ,|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableHead 4 SMEIF01 grid=False | 1 | ,Type,|,Stored(31),(31),|,Avali.(31),(31),|,Output(31),(31),|,Input(31),(31),|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableHead 4 SMEIF01 grid=True | 1 | Grid,,Type,|,Stored(31),(31),|,Avali.(31),(31),|,Output(31),(31),|,Input(31),(31),|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableRow 4 SMEIF01 present=SMEIF01 | 1 | ,|,@fS,@fS_M,|,@fM,@fM_M,|,@fO,@fO_M,|,@fI,@fI_M,|,,_M,|,,_M,|,,_M
+PowerTableRow 4 SMEIF01 present= | 1 | ,|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31)
+PowerTableRow 4 SMEIF01 present=SE | 1 | ,|,@fS,@fS_M,|,(31),(31),|,@fO,@fO_M,|,(31),(31),|,(31),(31),|,(31),(31),|,(31),(31)
