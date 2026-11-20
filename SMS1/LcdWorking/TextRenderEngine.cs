@@ -23,12 +23,18 @@ namespace IngameScript
             DateTime cdsdt = DateTime.Now;
             public string pageText = "", displayDefinition = "", lastDisplayDefinition = "";
             public List<string> pages = new List<string>();
-            public float with, iwith, dif_wm, dif_wp, fontsize, wconst, fconst = 17.82f;
+            public float with, iwith, dif_wm, dif_wp, fontsize, wconst, fconst,
+                // text padding in percent per side, set by SetSurfaceConstants, used by WriteSurface
+                padding;
             // the phases of RenderStep, in this order (renderPhase++ goes to the next one)
             public enum RenderPhase { Start, ReadCommands, BuildLines, CheckPanel, ResetPages, RenderLines, Finish }
             public RenderPhase renderPhase = RenderPhase.Start;
-            public int icount, stepIndex, run_count, maxlines = 1, newlines, pnum = 1, plines, slines, maxl = 40, minl = 5;
-            public bool booting = true, lfix = true;
+            public int icount, stepIndex, run_count, maxlines = 1, newlines, pnum = 1, plines, slines, maxl = 40, minl = 5,
+                // upper line limit for readability, from the surface height (see SetSurfaceConstants)
+                readableLines;
+            public bool booting = true, lfix = true,
+                // set before a scan, reset when the scan finds the display again
+                Obsolete;
             public TextRenderEngine() { addChangeType = ChangeType.Display_add; nameChangeType = ChangeType.Display_name; curlines.sD(0); MDIs.Add("@fCL", curlines); ic.addm(MDIs); vcl.Add(ic); addChange(); }
             public override void Display()
             {
@@ -82,6 +88,30 @@ namespace IngameScript
                 for (int x = 0; x < (i <= 4 ? i : 1); x++) nnmdll.Add(getMDLo(this, i <= 4 ? with / i : i, arg));
                 displayLines.Add(nnmdll);
             }
+            // Font and width constants from the surface itself, no list of block types needed (same idea as Automatic LCDs 2):
+            // SurfaceSize / Min(TextureSize) is the surface relative to its texture, padding is percent per side.
+            // fconst = font size for 1 line, wconst = line width at font size 1 (units of FontMetrics).
+            // readableLines: linesPer512 lines on a surface 512 px high, scaled by the real height.
+            public void SetSurfaceConstants(IMyTextSurface surface, float textPadding, int linesPer512)
+            {
+                padding = textPadding;
+                var size = surface.SurfaceSize;
+                var scale = (1 - padding / 50) / Math.Min(surface.TextureSize.X, surface.TextureSize.Y);
+                fconst = 17.8f * size.Y * scale;
+                wconst = 94.5f * size.X * scale;
+                readableLines = Math.Max(1, (int)(size.Y * linesPer512 / 512));
+            }
+            // the display definition (empty: help text) and the options Maxlines, Minlines, Lines; call after setting maxl/minl
+            public void ApplyDisplayOptions(P options, string definition)
+            {
+                displayDefinition = definition == "" ? EmptyLcdHelp : definition;
+                if (options.isPM(OptMaxlines)) maxl = getIntegerWithBounds(options.getPM(OptMaxlines), maxlines);
+                if (options.isPM(OptMinlines)) minl = getIntegerWithBounds(options.getPM(OptMinlines), maxlines);
+                lfix = options.isPM("Lines");
+                newlines = lfix ? getIntegerWithBounds(options.getPM("Lines"), maxlines, minl, maxl) : maxlines;
+            }
+            // writes the text with the current font size and padding
+            public void WriteSurface(IMyTextSurface surface, string text) { w2ts(surface, text, fontsize, padding); }
             public void setLinesBounds(int l)
             {
                 if (l < minl) l = minl;

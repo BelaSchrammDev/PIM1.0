@@ -12,69 +12,39 @@ namespace IngameScript
 {
     partial class Program
     {
-        //SF
+        // A display on a surface of a block that is no text panel: cockpits, button panels, projectors, the PB ...
+        // (text panels are LCD_Infolcd / LCD_Terminal).
         public class TextSurfaceDisplay : TextRenderEngine
         {
-            int imaxl = 22, iminl = 2;
-            float xp;
-            string bt = "";
-            public IMyTextSurface ts = null;
-            IMyTerminalBlock tb;
-            public bool obs;
-            public TextSurfaceDisplay(IMyTextSurface nts, IMyTerminalBlock p) { tsg = p.CubeGrid; ts = nts; sMM(); tb = p; bt = p.BlockDefinition.ToString(); sWF(); setLinesBounds(5); }
-            void sMM() { maxl = imaxl; minl = iminl; }
-            void sC(float f, float w, int m, float ixp = 0) { fconst = f; wconst = w; imaxl = m; xp = ixp; }
-            void sWF()
+            public IMyTextSurface Surface;
+            IMyTerminalBlock block;
+            // Line limit: lines on a full 512 px height, 36 matches the old per-type values (cockpit 22, strips 5-8);
+            // square surfaces are physically small: 20. Square ones (round frames) get some padding, the projector a bit more.
+            public TextSurfaceDisplay(IMyTextSurface surface, IMyTerminalBlock block)
             {
-                var Y = ts.SurfaceSize.Y; var X = ts.SurfaceSize.X;
-                if (bt.Contains("Med") && X == 512f && Y > 307f && Y < 308f) sC(10f, 88.5f, 8, 3);
-                else if (bt.Contains("OpenCockpitLarge") && X == 512 && Y == 307.2f) sC(10.2f, 93.4f, 22, 1.5f);
-                else if (X == 512 && Y == 307.2f) sC(10.4f, 94.4f, 22);
-                else if (X == 512 && Y == 320f) sC(10.4f, 94.4f, 22);
-                else if ((Y > 112f) && (Y < 114f)) sC(15.1f, 380.2f, 8);
-                else if ((Y > 203f) && (Y < 206f)) sC(13.5f, 189f, 20);
-                else if ((Y > 109f) && (Y < 110f)) sC(14.5f, 189f, 6);
-                else if (Y == 256 && X == 256) sC(17.5f, 95f, 14);
-                else if (Y == 512 && X == 512)
-                {
-                    if (bt.Contains("Projector")) sC(16f, 87f, 24, 4.5f);
-                    else sC(16.5f, 90f, 14, 2.5f);
-                }
-                else if ((Y > 191f) && (Y < 193f)) sC(13f, 95f, 8);
-                else if ((Y > 138f) && (Y < 140f)) sC(9.5f, 95f, 6);
-                else if (Y > 170 && Y < 171) sC(11.7f, 94f, 12);
-                else if (Y > 175.9 && Y < 178) sC(12f, 94f, 12);
-                else if (Y > 182 && Y < 183) sC(12.2f, 94f, 12);
-                else if (Y > 146 && Y < 147) sC(10f, 94f, 8);
-                else if (Y > 199 && Y < 200) sC(13.5f, 94f, 6);
-                else if (Y == 128f && X == 256) sC(17f, 189f, 8);
-                else if (Y == 128f) sC(17f, 75f, 8);
-                else if (Y == 153.6f) sC(10.5f, 94f, 10);
-                else if (Y > 179 && Y < 180) sC(12.2f, 94f, 10);
-                else if (Y == 256f && X == 204.8f) sC(17f, 75f, 6);
-                else if ((Y > 84f) && (Y < 86f)) sC(11.5f, 96, 5);
+                tsg = block.CubeGrid;
+                Surface = surface;
+                this.block = block;
+                var size = surface.SurfaceSize;
+                var square = size.X == size.Y;
+                SetSurfaceConstants(surface, block.BlockDefinition.ToString().Contains("Projector") ? 4.5f : square ? 2.5f : 0, square ? 20 : 36);
+                SetLineLimits();
+                setLinesBounds(5);
             }
-            public void Calc(P pm, int nts, string ncds)
+            void SetLineLimits()
             {
-                sMM();
-                obs = false;
-                displayDefinition = ncds;
-                if (displayDefinition == "") displayDefinition = EmptyLcdHelp;
-                setName((pm.Name.StartsWith("@dis") ? tb.CustomName : pm.Name) + " (" + ts.DisplayName + ")");
-                if (pm.isPM(OptMaxlines)) maxl = getIntegerWithBounds(pm.getPM(OptMaxlines), maxlines);
-                if (pm.isPM(OptMinlines)) minl = getIntegerWithBounds(pm.getPM(OptMinlines), maxlines);
-                if (pm.isPM("Lines"))
-                {
-                    newlines = getIntegerWithBounds(pm.getPM("Lines"), maxlines, minl, maxl);
-                    lfix = true;
-                }
-                else
-                {
-                    lfix = false;
-                    newlines = maxlines;
-                }
+                maxl = readableLines;
+                minl = 2;
             }
-            public override void writeToPanel() { w2ts(ts, (pages.Count > 0 ? pages[0] : ""), fontsize, xp); }
+            // called on every scan that finds the surface; the name is the tag's name or, for @display, the block's name
+            public void Configure(P options, string definition)
+            {
+                Obsolete = false;
+                SetLineLimits();
+                setName((options.Name.StartsWith("@dis") ? block.CustomName : options.Name) + " (" + Surface.DisplayName + ")");
+                ApplyDisplayOptions(options, definition);
+            }
+            public override void writeToPanel() { WriteSurface(Surface, pages.Count > 0 ? pages[0] : ""); }
         }
     }
 }

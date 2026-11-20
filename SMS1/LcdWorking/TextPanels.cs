@@ -19,10 +19,10 @@ namespace IngameScript
         {
             GridTerminalSystem.GetBlocksOfType<IMyTextSurfaceProvider>(textPanelBlocks, b => b.IsSameConstructAs(Me));
             nomaster = true;
-            foreach (var t in sms_sf) t.obs = true;
+            foreach (var t in sms_sf) t.Obsolete = true;
             // also Infolcd/Terminal: a panel whose tag changed (e.g. Infolcd -> Linklcd) is removed, not kept twice
-            foreach (var t in infolcds) t.obs = true;
-            foreach (var t in LCDts) t.obs = true;
+            foreach (var t in infolcds) t.Obsolete = true;
+            foreach (var t in LCDts) t.Obsolete = true;
             return textPanelBlocks;
         }
         void ProcessTextPanel(IMyTerminalBlock ts)
@@ -47,7 +47,7 @@ namespace IngameScript
                             infolcds.Add(il);
                             sms_disp.Add(il);
                         }
-                        il.obs = false;
+                        il.Obsolete = false;
                         RemoveFromLinkLcds(t);
                         il.Calc(pm);
                     }
@@ -66,7 +66,7 @@ namespace IngameScript
                             LCDts.Add(newTerminal);
                             sms_disp.Add(newTerminal);
                         }
-                        newTerminal.obs = false;
+                        newTerminal.Obsolete = false;
                         RemoveFromLinkLcds(t);
                         newTerminal.Calc(pm);
                     }
@@ -85,7 +85,7 @@ namespace IngameScript
                         }
                         if (nomaster)
                         {
-                            w2lcd(t, "No InfoLCD to link....", 1);
+                            w2ts(t, "No InfoLCD to link....", 1, 0);
                         }
                     }
                 }
@@ -95,7 +95,7 @@ namespace IngameScript
                     {
                         if (iflcd.lcd == t)
                         {
-                            iflcd.obs = true;
+                            iflcd.Obsolete = true;
                             break;
                         }
                         else iflcd.RemoveELCD(t);
@@ -103,7 +103,7 @@ namespace IngameScript
                     foreach (LCD_Terminal tlcd in LCDts)
                         if (tlcd.lcd == t)
                         {
-                            tlcd.obs = true;
+                            tlcd.Obsolete = true;
                             break;
                         }
                 }
@@ -113,21 +113,7 @@ namespace IngameScript
                 var p = (IMyTextSurfaceProvider)ts;
                 if (p.SurfaceCount == 1 && pm.ParseArgs(ts.CustomName))
                 {
-                    TextSurfaceDisplay nsf = null;
-                    var sf = p.GetSurface(0);
-                    foreach (var t in sms_sf)
-                        if (t.ts == sf)
-                        {
-                            nsf = t;
-                            break;
-                        }
-                    if (nsf == null)
-                    {
-                        nsf = new TextSurfaceDisplay(sf, ts);
-                        sms_sf.Add(nsf);
-                        sms_disp.Add(nsf);
-                    }
-                    nsf.Calc(pm, 0, ts.CustomData);
+                    GetSurfaceDisplay(p.GetSurface(0), ts).Configure(pm, ts.CustomData);
                 }
                 else
                 {
@@ -145,21 +131,7 @@ namespace IngameScript
                         {
                             if (sfn >= 0 && sfn < p.SurfaceCount)
                             {
-                                TextSurfaceDisplay nsf = null;
-                                var sf = p.GetSurface(sfn);
-                                foreach (var t in sms_sf)
-                                    if (t.ts == sf)
-                                    {
-                                        nsf = t;
-                                        break;
-                                    }
-                                if (nsf == null)
-                                {
-                                    nsf = new TextSurfaceDisplay(sf, ts);
-                                    sms_sf.Add(nsf);
-                                    sms_disp.Add(nsf);
-                                }
-                                nsf.Calc(pm, 0, ds);
+                                GetSurfaceDisplay(p.GetSurface(sfn), ts).Configure(pm, ds);
                             }
                             sfn = -1;
                             ds = "";
@@ -168,6 +140,16 @@ namespace IngameScript
                     }
                 }
             }
+        }
+        // the display of this surface: the known one or a new one
+        TextSurfaceDisplay GetSurfaceDisplay(IMyTextSurface surface, IMyTerminalBlock block)
+        {
+            foreach (var d in sms_sf)
+                if (d.Surface == surface) return d;
+            var display = new TextSurfaceDisplay(surface, block);
+            sms_sf.Add(display);
+            sms_disp.Add(display);
+            return display;
         }
         // a panel that is no Linklcd (anymore) must not stay linked to an Infolcd
         void RemoveFromLinkLcds(IMyTextPanel t)
@@ -180,7 +162,7 @@ namespace IngameScript
             for (int i = LCDts.Count - 1; i >= 0; i--)
             {
                 LCD_Terminal tlcd = LCDts[i];
-                if (!textPanelBlocks.Contains(tlcd.lcd) | tlcd.obs)
+                if (!textPanelBlocks.Contains(tlcd.lcd) | tlcd.Obsolete)
                 {
                     tlcd.addChange();
                     sms_disp.Remove(tlcd);
@@ -190,7 +172,7 @@ namespace IngameScript
             for (int i = infolcds.Count - 1; i >= 0; i--)
             {
                 var ilcd = infolcds[i];
-                if (!textPanelBlocks.Contains(ilcd.lcd) | ilcd.obs)
+                if (!textPanelBlocks.Contains(ilcd.lcd) | ilcd.Obsolete)
                 {
                     ilcd.addChange();
                     sms_disp.Remove(ilcd);
@@ -208,7 +190,7 @@ namespace IngameScript
             for (int i = sms_sf.Count - 1; i >= 0; i--)
             {
                 TextSurfaceDisplay sf = sms_sf[i];
-                if (sf.obs)
+                if (sf.Obsolete)
                 {
                     sf.addChange();
                     sms_disp.Remove(sf);

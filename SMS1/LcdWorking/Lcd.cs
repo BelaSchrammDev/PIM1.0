@@ -15,51 +15,31 @@ namespace IngameScript
         //LCD
         public abstract class LCD : TextRenderEngine
         {
-            public bool obs = false; public IMyTextPanel lcd = null; public string ly = "";
-            public void InitLCD(IMyTextPanel p, int nl = 0) { lcd = p; ly = getPanelSubtype(p); tsg = lcd.CubeGrid; setWFConst(); setLinesBounds(nl); }
-            void setWFConst() { wconst = 94.5f; if (ly.EndsWith("Wide")) wconst = 188.8f; else if (ly.StartsWith("Small")) { wconst = 188.8f; if (ly.Contains("Flat")) fconst = 13.8f; else if (ly.Contains("_LCD")) fconst = 11.0f; else { fconst = 17.2854f; wconst = 91.66f; } } else { if (ly.Contains("_LCD_")) { wconst = 375.8f; fconst = 9.5f; } else if (ly.Contains("Text") || ly.Contains("5x3")) fconst = 10.4f; } }
+            public IMyTextPanel lcd; public string ly = "";
+            // SmallTextPanel gets some padding; LCD panels: up to 40 lines on a full 512 px height
+            public void InitLCD(IMyTextPanel p, int nl = 0) { lcd = p; ly = getPanelSubtype(p); tsg = lcd.CubeGrid; SetSurfaceConstants(p, ly.Contains("SmallTextPanel") ? 1.5f : 0, 40); setLinesBounds(nl); }
         }
         //infoLCD
         class LCD_Infolcd : LCD
         {
             public Vector3I linkpos; public List<IMyTextPanel> extlcds = new List<IMyTextPanel>();
             public LCD_Infolcd(IMyTextPanel panel) { linkpos = getUpP(panel); InitLCD(panel); }
+            // low surfaces (corner LCDs) may go down to 1 line
             void setMML()
             {
-                if (ly.Contains("Corner"))
-                {
-                    maxl = ly.Contains("Small") ? 8 : 5;
-                    minl = 1;
-                }
-                else
-                {
-                    maxl = 40;
-                    minl = 5;
-                }
+                maxl = readableLines;
+                minl = maxl < 10 ? 1 : 5;
             }
             public void Calc(P pm)
             {
-                if (displayDefinition != lcd.CustomData) displayDefinition = lcd.CustomData;
-                if (displayDefinition == "") displayDefinition = EmptyLcdHelp;
                 setName(pm.Name);
                 setMML();
-                if (pm.isPM(OptMaxlines)) maxl = getIntegerWithBounds(pm.getPM(OptMaxlines), maxlines);
-                if (pm.isPM(OptMinlines)) minl = getIntegerWithBounds(pm.getPM(OptMinlines), maxlines);
-                if (pm.isPM("Lines"))
-                {
-                    newlines = getIntegerWithBounds(pm.getPM("Lines"), maxlines, minl, maxl);
-                    lfix = true;
-                }
-                else
-                {
-                    lfix = false;
-                    newlines = maxlines;
-                }
+                ApplyDisplayOptions(pm, lcd.CustomData);
             }
             public bool RemoveELCD(IMyTextPanel elcd) { if (extlcds.Contains(elcd)) { ClearELCDs(); return true; } return false; }
             public void ClearELCDs() { extlcds.Clear(); pnum = 1; linkpos = getUpP(lcd); }
             public void AddPanel(IMyTextPanel np) { if (ly == getPanelSubtype(np) && !extlcds.Contains(np)) { extlcds.Add(np); pnum++; linkpos = getUpP(np); np.WriteText("Init Linklcd....", false); } }
-            public override void writeToPanel() { int cos = 0; w2lcd(lcd, pages.Count > cos ? pages[cos++] : "", fontsize); foreach (var t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; w2lcd(t, pages.Count > cos ? pages[cos++] : "", fontsize); } }
+            public override void writeToPanel() { int cos = 0; WriteSurface(lcd, pages.Count > cos ? pages[cos++] : ""); foreach (var t in extlcds) { t.FontColor = lcd.FontColor; t.BackgroundColor = lcd.BackgroundColor; WriteSurface(t, pages.Count > cos ? pages[cos++] : ""); } }
         }
         //terminalLCD
         public class LCD_Terminal : LCD
@@ -233,7 +213,7 @@ namespace IngameScript
                 displayDefinition = "writex_i(" + (menu == null ? tHeadLine : menu.def.Errors != "" ? "!! Menu error - see CustomData !!" : tsite.Def.TitleLine) + ")\nwritex_i(@*(filled))\n" + tsite.Def.Body;
             }
             public override void checkWriteToPanel() { if (displayLines.Count < maxlines) for (int i = displayLines.Count; i < maxlines; i++) writeX("(filled)"); }
-            public override void writeToPanel() { w2lcd(lcd, pages.Count > 0 ? pages[0] : "", fontsize); curml = 0; }
+            public override void writeToPanel() { WriteSurface(lcd, pages.Count > 0 ? pages[0] : ""); curml = 0; }
             public override void clearWriteValues() { curml = 0; }
             public override void addEndOfLineStr() { if (curSite != null && curml < curSite.mel.Count) pageText += curSite.mel[curml++]; else pageText += "\n"; }
         }
