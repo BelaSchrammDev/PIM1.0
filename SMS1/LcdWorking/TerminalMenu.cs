@@ -58,7 +58,7 @@ namespace IngameScript
                 menuStrings = new List<string>(text.Split(' '));
                 foreach (var s in menuStrings)
                 {
-                    var menuCom = Sm(s);
+                    var menuCom = StringWidth(s);
                     if (menuCom > maxWith) maxWith = menuCom;
                 }
                 if (maxWith > menuObject.maxMenuWith) menuObject.maxMenuWith = maxWith;

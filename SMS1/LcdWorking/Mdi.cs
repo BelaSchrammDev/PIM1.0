@@ -66,9 +66,8 @@ namespace IngameScript
                 {
                     if (mdi_w != 0)
                     {
-                        SP sps = fspm(mdi_w - mdio.with);
-                        if (ba == BoxAlign.Left) btext = mdio.text + sps.getFStr();
-                        else btext = sps.getFStr() + mdio.text;
+                        var fill = SpaceFillText(mdi_w - mdio.with);
+                        btext = ba == BoxAlign.Left ? mdio.text + fill : fill + mdio.text;
                     }
                     else btext = mdio.text;
                 }
@@ -101,7 +100,7 @@ namespace IngameScript
             {
                 with = wi;
                 curdt = DateTime.Now;
-                var i = (int)(wi / fontCharWidths[c]);
+                var i = (int)(wi / CharWidth(c));
                 return new String(c, i > 0 ? i : 1);
             }
         }
@@ -112,7 +111,7 @@ namespace IngameScript
             {
                 with = wi;
                 curdt = DateTime.Now;
-                return fSm(wi);
+                return SpaceFillText(wi);
             }
         }
         //Bar
@@ -142,7 +141,7 @@ namespace IngameScript
             string kc = ""; double w = -2; bool nn = false;
             public MDIs(float dw = 0, bool n = false, string ikc = "") { nn = n; defw = dw; type = MDItype.String; kc = ikc; }
             public MDIs(string istr) { type = MDItype.String; sT(istr); }
-            public void sT(string s) { if (s.Contains("Infinity") || s.Contains("NaN")) s = "---"; var st = kc == "" ? s : kc[0] + s + kc[1]; if (text != st) { w = -2; text = st; with = Sm(st); curdt = DateTime.Now; } }
+            public void sT(string s) { if (s.Contains("Infinity") || s.Contains("NaN")) s = "---"; var st = kc == "" ? s : kc[0] + s + kc[1]; if (text != st) { w = -2; text = st; with = StringWidth(st); curdt = DateTime.Now; } }
             bool iNW(double d) { if (d == w) return false; w = d; return true; }
             public void sG(double d) { if (iNW(d)) sT(Fs((d / 9.81), "0.00", " g")); }
             public void sM(double d) { if (iNW(d)) sT((d == 0 && nn) ? " " : F_(d, pM)); }

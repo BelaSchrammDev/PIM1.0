@@ -15,10 +15,8 @@ namespace IngameScript
         static Dictionary<string, MDI> allMDIs = new Dictionary<string, MDI>();
         static List<dyDisplayableVariable> pvl = new List<dyDisplayableVariable>();
         static MDIs pt = new MDIs(55), sMb = new MDIs(20), sMt = new MDIs(20), sMc = new MDIs(20), grn = new MDIs(20), gra = new MDIs(20), mdi_time = new MDIs(), mdi_date = new MDIs(), mdi_dateGER = new MDIs(), mdi_mgrid = new MDIs();
-        // text layout: the widths of the font characters (FontMetrics), the fill bars and the space bars
-        static Dictionary<char, float> fontCharWidths = new Dictionary<char, float>();
+        // text layout: the fill bars (text widths and space fills: Share/Common/TextWidth.cs)
         static Dictionary<float, List<BarRatio>> GPL = new Dictionary<float, List<BarRatio>>();
-        static List<SP> SPL = new List<SP>();
         // the sort column of the list being rendered (sort option of the LCD command)
         static string sortColumn = "", castTypeName = "";
 

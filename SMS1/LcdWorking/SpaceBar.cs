@@ -12,49 +12,6 @@ namespace IngameScript
 {
     partial class Program
     {
-        //Space
-        class SP
-        {
-            static int SPLrc = 700;
-            int live = 5;
-            public float with;
-            string fuels = "";
-            public SP(float iw)
-            {
-                with = iw;
-                if (with < 0.6f) return;
-                int spnum = (int)(with / 1.29166f);
-                int hsnum = (int)((with - (spnum * 1.29166f)) / 0.287035f);
-                if (hsnum >= spnum)
-                {
-                    spnum += 1;
-                    hsnum = 0;
-                }
-                else spnum -= hsnum;
-                fuels += new String(' ', spnum);
-                fuels += new String('\u00AD', hsnum);
-            }
-            public string getFStr()
-            {
-                live = 5;
-                SPLRefresh();
-                return fuels;
-            }
-            static void SPLRefresh()
-            {
-                if (--SPLrc < 1)
-                {
-                    for (int i = SPL.Count - 1; i > 0; i--)
-                    {
-                        SP osp = SPL[i];
-                        if (--osp.live < 0) SPL.Remove(osp);
-                    }
-                    SPLrc = 500;
-                }
-            }
-        }
-        static SP fspm(float with) { foreach (SP osp in SPL) { if (osp.with == with) return osp; } SP nsp = new SP(with); SPL.Add(nsp); return nsp; }
-        static string fSm(float with) { return fspm(with).getFStr(); }
         //Bar
         class BarRatio
         {

@@ -50,7 +50,6 @@ namespace IngameScript
             if (writeNewItemDefs) writeconfig();
             Mgrid = Me.CubeGrid;
             IsStandby();
-            gFSD();
             defaultMenu = new TerminalMenu();
             defaultMenu.parseMenuDefinition(defMenu);
             allMDIs.Add("@fgA", gra);

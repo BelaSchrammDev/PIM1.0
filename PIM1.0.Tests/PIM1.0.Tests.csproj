@@ -80,6 +80,8 @@
     <!-- LCD pages: parsing and rendering (LcdManager.cs finds and writes the panels) -->
     <Compile Include="..\PIM1.0\LcdWorking\DisplayBox.cs"
             Link="Linked\DisplayBox.cs" />
+    <Compile Include="..\Share\Common\TextWidth.cs"
+            Link="Linked\TextWidth.cs" />
     <Compile Include="..\PIM1.0\LcdWorking\LcdPages.cs"
             Link="Linked\LcdPages.cs" />
 

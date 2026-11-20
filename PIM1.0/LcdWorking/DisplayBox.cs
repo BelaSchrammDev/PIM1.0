@@ -49,14 +49,6 @@ namespace IngameScript
         // add DisplayPool Class
         class DisplayBox
         {
-            static List<SP> SpacePoolList = new List<SP>();
-            static Dictionary<char, float> CharWidthList = new Dictionary<char, float>();
-
-            static DisplayBox()
-            {
-                InitCharWidthList();
-            }
-
             // Src1/Src2: last arguments (untrimmed), LeftText: Src1 shortened to the width
             string Src1, Src2, LeftText = "", SpaceString = "";
             float Width = 0;
@@ -66,53 +58,15 @@ namespace IngameScript
                 Width = iwidth;
             }
 
-            class SP
-            {
-                static int SpacePoolLifeCycle = 700;
-                int LifeCycle = 5;
-                public float Width = 0;
-                string FillString = "";
-                public SP(float iw)
-                {
-                    Width = iw;
-                    if (Width < 0.6f) return;
-                    int spnum = (int)(Width / 1.29166f);
-                    int hsnum = (int)((Width - (spnum * 1.29166f)) / 0.287035f);
-                    if (hsnum >= spnum)
-                    {
-                        spnum += 1;
-                        hsnum = 0;
-                    }
-                    else spnum -= hsnum;
-                    FillString += new String(' ', spnum);
-                    FillString += new String(SoftHyphen[0], hsnum);
-                }
-                public string GetFillString()
-                {
-                    LifeCycle = 5;
-                    RefreshSpacePoolList();
-                    return FillString;
-                }
-                static void RefreshSpacePoolList()
-                {
-                    if (--SpacePoolLifeCycle < 1)
-                    {
-                        for (int i = SpacePoolList.Count - 1; i >= 0; i--)
-                            if (--SpacePoolList[i].LifeCycle < 0) SpacePoolList.RemoveAt(i);
-                        SpacePoolLifeCycle = 500;
-                    }
-                }
-            }
-
             public string Get2StringWithSpaces(string arg1, string arg2)
             {
                 if (arg1 != Src1 || arg2 != Src2)
                 {
                     Src1 = arg1;
                     Src2 = arg2;
-                    var strLength2 = GetStringWidth(arg2);
+                    var strLength2 = StringWidth(arg2);
                     LeftText = TrimStringByWidth(arg1, Width - 2.6f - strLength2);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(LeftText) - strLength2);
+                    SpaceString = SpaceFillText(Width - StringWidth(LeftText) - strLength2);
                 }
                 return LeftText + SpaceString + Src2;
             }
@@ -123,7 +77,7 @@ namespace IngameScript
                 {
                     Src1 = arg;
                     LeftText = TrimStringByWidth(arg, Width - 2.6f);
-                    SpaceString = GetSpaceStringByWidth(Width - GetStringWidth(LeftText));
+                    SpaceString = SpaceFillText(Width - StringWidth(LeftText));
                 }
                 return leftAlignment ? LeftText + SpaceString : SpaceString + LeftText;
             }
@@ -132,75 +86,11 @@ namespace IngameScript
             /// Up to about 2 chars too long are tolerated (shortening would replace them by "...").</summary>
             static string TrimStringByWidth(string arg, float cutLength)
             {
-                if (GetStringWidth(arg) <= cutLength + 5f) return arg;
-                var w = GetCharWidth(arg[0]) + 3 * GetCharWidth('.');
+                if (StringWidth(arg) <= cutLength + 5f) return arg;
+                var w = CharWidth(arg[0]) + 3 * CharWidth('.');
                 var i = arg.Length;
-                while (i > 1 && w + GetCharWidth(arg[i - 1]) <= cutLength) w += GetCharWidth(arg[--i]);
+                while (i > 1 && w + CharWidth(arg[i - 1]) <= cutLength) w += CharWidth(arg[--i]);
                 return arg[0] + "..." + arg.Substring(i);
-            }
-
-            static SP GetSpaceStringObject(float with) 
-            {
-                SP nsp = SpacePoolList.Find(sp => sp.Width == with);
-
-                if (nsp == null)
-                {
-                    nsp = new SP(with);
-                    SpacePoolList.Add(nsp);
-                }
-
-                return nsp;
-            }
-
-            static string GetSpaceStringByWidth(float with) 
-            {
-                return GetSpaceStringObject(with).GetFillString(); 
-            }
-
-            static void InitCharWidthList()
-            {
-                SetCharWidth("\n", 0f);
-                SetCharWidth("'|ÎÏ", 1f);
-                SetCharWidth(" !`Iiîïjl", 1.29166f);
-                SetCharWidth("(),.:;[]{}1ft", 1.43076f);
-                SetCharWidth("\"-r", 1.57627f);
-                SetCharWidth("*", 1.72222f);
-                SetCharWidth("\\", 1.86f);
-                SetCharWidth("/", 2.16279f);
-                SetCharWidth("«»Lvx_ƒ", 2.325f);
-                SetCharWidth("?7Jcçz", 2.44736f); 
-                SetCharWidth("3FKTaäàâbdeèéêëghknoöôpqsuüùûßyÿ", 2.58333f); 
-                SetCharWidth("+<>=^~EÈÉÊË", 2.73529f); 
-                SetCharWidth("#0245689CÇXZ", 2.90625f); 
-                SetCharWidth("$&GHPUÜÙÛVYŸ", 3f);
-                SetCharWidth("AÄÀÂBDNOÖÔQRS", 3.20689f);
-                SetCharWidth("%", 3.57692f);
-                SetCharWidth("@", 3.72f);
-                SetCharWidth("M", 3.875f);
-                SetCharWidth("æœmw", 4.04347f);
-                SetCharWidth("WÆŒ", 4.65f);
-                CharWidthList.Add(SoftHyphen[0], 1.578695f);
-            }
-
-            static void SetCharWidth(string s, float z)
-            {
-                foreach (var c in s)
-                {
-                    CharWidthList.Add(c, z);
-                }
-            }
-
-            static float GetCharWidth(char c)
-            {
-                float w;
-                return CharWidthList.TryGetValue(c, out w) ? w : 2f;
-            }
-
-            static float GetStringWidth(string strData)
-            {
-                float fltTotal = 0;
-                foreach (var c in strData) fltTotal += GetCharWidth(c);
-                return fltTotal;
             }
 
             public static string GetMassString(double d)
